@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="1740" viewBox="0 0 1800 1740" role="img" aria-labelledby="title description">
+<title id="title">插件各系统的联合结构</title><desc id="description">实线与虚线展示实际持有 / 调用关系；该图展开组件、动作、效果、状态、数值与载具主链</desc>
+<defs>
+  <marker id="arrow" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="9" markerHeight="9" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="none" stroke="#52637a" stroke-width="1.4"/></marker>
+  <marker id="inherit" viewBox="0 0 16 16" refX="16" refY="8" markerWidth="13" markerHeight="13" orient="auto"><path d="M0 0L16 8L0 16Z" fill="white" stroke="#52637a" stroke-width="1.4"/></marker>
+  <marker id="owned" viewBox="-9 -7 18 14" refX="0" refY="0" markerWidth="13" markerHeight="11" orient="auto"><path d="M-8 0L0 -6L8 0L0 6Z" fill="#52637a" stroke="#52637a"/></marker>
+  <marker id="shared" viewBox="-9 -7 18 14" refX="0" refY="0" markerWidth="13" markerHeight="11" orient="auto"><path d="M-8 0L0 -6L8 0L0 6Z" fill="white" stroke="#52637a"/></marker>
+</defs>
+<style>
+  text{font-family:'Microsoft YaHei','Noto Sans CJK SC',Arial,sans-serif;fill:#243449}
+  .title{font-size:34px;font-weight:700}.subtitle{font-size:20px;fill:#53657c}
+  .name{font-family:Consolas,'Microsoft YaHei',monospace;font-size:22px;font-weight:700}
+  .type{font-size:16px;fill:#596c84}.body{font-family:Consolas,'Microsoft YaHei',monospace;font-size:18px}
+  .label{font-size:17px;paint-order:stroke;stroke:#fbfcff;stroke-width:6px;stroke-linejoin:round}
+  .note{font-size:19px;fill:#52637a}.step{font-size:22px;font-weight:700}
+  .edge{fill:none;stroke:#52637a;stroke-width:2}.dependency{stroke-dasharray:8 6}
+</style>
+<rect width="1800" height="1740" fill="#fbfcff"/>
+<text x="50" y="60" class="title" text-anchor="start">插件各系统的联合结构</text><text x="50" y="98" class="subtitle" text-anchor="start">实线与虚线展示实际持有 / 调用关系；该图展开组件、动作、效果、状态、数值与载具主链</text>
+<path d="M50 145H120" class="edge " marker-end="url(#inherit)"/><text x="135" y="151" class="note" text-anchor="start">继承（箭头指向基类）</text><path d="M480 145H550" class="edge " marker-start="url(#owned)"/><text x="565" y="151" class="note" text-anchor="start">拥有运行时对象</text><path d="M850 145H920" class="edge " marker-start="url(#shared)"/><text x="935" y="151" class="note" text-anchor="start">引用 / 聚合共享配置</text><path d="M1340 145H1410" class="edge dependency" marker-end="url(#arrow)"/><text x="1425" y="151" class="note" text-anchor="start">调用 / 创建依赖</text><a href="../scripts/components/gameplay_ability_component.gd"><title>components/gameplay_ability_component.gd</title><g><rect x="50" y="220" width="480" height="250" rx="10" fill="white" stroke="#8191a8" stroke-width="1.5"/>
+<path d="M60 220H520Q530 220 530 230V296H50V230Q50 220 60 220Z" fill="#e9f8f2"/>
+<text x="70" y="245" class="type" text-anchor="start">«Node»</text><text x="70" y="278" class="name" text-anchor="start">GameplayAbilityComponent</text>
+<path d="M50 296H530" stroke="#c4cdd9"/>
+<text x="70" y="327" class="body" text-anchor="start">技能实例 / Feature / BT 黑板</text>
+<path d="M50 340H530" stroke="#e0e5ee"/>
+<text x="70" y="367" class="body" text-anchor="start">激活检查 → 行为树 tick</text></g></a><a href="../scripts/components/gameplay_vital_attribute_component.gd"><title>components/gameplay_vital_attribute_component.gd</title><g><rect x="650" y="220" width="480" height="250" rx="10" fill="white" stroke="#8191a8" stroke-width="1.5"/>
+<path d="M660 220H1120Q1130 220 1130 230V296H650V230Q650 220 660 220Z" fill="#e9f8f2"/>
+<text x="670" y="245" class="type" text-anchor="start">«Node»</text><text x="670" y="278" class="name" text-anchor="start">GameplayVitalAttributeComponent</text>
+<path d="M650 296H1130" stroke="#c4cdd9"/>
+<text x="670" y="327" class="body" text-anchor="start">继承 GameplayAttributeComponent</text><text x="670" y="354" class="body" text-anchor="start">属性实例 + Health / Mana 实例</text>
+<path d="M650 367H1130" stroke="#e0e5ee"/>
+<text x="670" y="394" class="body" text-anchor="start">数值计算 / 消耗 / 恢复</text></g></a><a href="../scripts/components/gameplay_status_component.gd"><title>components/gameplay_status_component.gd</title><g><rect x="1250" y="220" width="480" height="250" rx="10" fill="white" stroke="#8191a8" stroke-width="1.5"/>
+<path d="M1260 220H1720Q1730 220 1730 230V296H1250V230Q1250 220 1260 220Z" fill="#e9f8f2"/>
+<text x="1270" y="245" class="type" text-anchor="start">«Node»</text><text x="1270" y="278" class="name" text-anchor="start">GameplayStatusComponent</text>
+<path d="M1250 296H1730" stroke="#c4cdd9"/>
+<text x="1270" y="327" class="body" text-anchor="start">活跃状态实例 / 策略 / Feature</text>
+<path d="M1250 340H1730" stroke="#e0e5ee"/>
+<text x="1270" y="367" class="body" text-anchor="start">堆叠 / 计时 / 事件 / 到期清理</text></g></a><a href="../scripts/abilities/ability_nodes/ability_node_base.gd"><title>abilities/ability_nodes/ability_node_base.gd</title><g><rect x="50" y="660" width="480" height="250" rx="10" fill="white" stroke="#8191a8" stroke-width="1.5"/>
+<path d="M60 660H520Q530 660 530 670V736H50V670Q50 660 60 660Z" fill="#eaf3ff"/>
+<text x="70" y="685" class="type" text-anchor="start">«abstract Resource»</text><text x="70" y="718" class="name" text-anchor="start">AbilityNodeBase</text>
+<path d="M50 736H530" stroke="#c4cdd9"/>
+<text x="70" y="767" class="body" text-anchor="start">选目标 / 冷却 / 消耗 / 发射节点</text>
+<path d="M50 780H530" stroke="#e0e5ee"/>
+<text x="70" y="807" class="body" text-anchor="start">通过上下文和黑板调用下层系统</text></g></a><a href="../scripts/effects/gameplay_effect.gd"><title>effects/gameplay_effect.gd</title><g><rect x="650" y="660" width="480" height="250" rx="10" fill="white" stroke="#8191a8" stroke-width="1.5"/>
+<path d="M660 660H1120Q1130 660 1130 670V736H650V670Q650 660 660 660Z" fill="#fff3df"/>
+<text x="670" y="685" class="type" text-anchor="start">«abstract Resource»</text><text x="670" y="718" class="name" text-anchor="start">GameplayEffect</text>
+<path d="M650 736H1130" stroke="#c4cdd9"/>
+<text x="670" y="767" class="body" text-anchor="start">九种具体操作 / 子效果 / 过滤</text>
+<path d="M650 780H1130" stroke="#e0e5ee"/>
+<text x="670" y="807" class="body" text-anchor="start">准入 → 逻辑 → Cue → 子效果</text></g></a><a href="../scripts/status/gameplay_status_instance.gd"><title>status/gameplay_status_instance.gd</title><g><rect x="1250" y="660" width="480" height="250" rx="10" fill="white" stroke="#8191a8" stroke-width="1.5"/>
+<path d="M1260 660H1720Q1730 660 1730 670V736H1250V670Q1250 660 1260 660Z" fill="#e9f8f2"/>
+<text x="1270" y="685" class="type" text-anchor="start">«RefCounted»</text><text x="1270" y="718" class="name" text-anchor="start">GameplayStatusInstance</text>
+<path d="M1250 736H1730" stroke="#c4cdd9"/>
+<text x="1270" y="767" class="body" text-anchor="start">apply / remove / 周期 / 事件效果</text><text x="1270" y="794" class="body" text-anchor="start">来源 ID 管理属性修改器</text>
+<path d="M1250 807H1730" stroke="#e0e5ee"/>
+<text x="1270" y="834" class="body" text-anchor="start">apply_effects(): 克隆并调用 Effect</text></g></a><g><rect x="50" y="1100" width="480" height="250" rx="10" fill="white" stroke="#8191a8" stroke-width="1.5"/>
+<path d="M60 1100H520Q530 1100 530 1110V1176H50V1110Q50 1100 60 1100Z" fill="#e9f8f2"/>
+<text x="70" y="1125" class="type" text-anchor="start">«Area3D»</text><text x="70" y="1158" class="name" text-anchor="start">ProjectileBase / MagicFieldBase</text>
+<path d="M50 1176H530" stroke="#c4cdd9"/>
+<text x="70" y="1207" class="body" text-anchor="start">两个独立 Area3D 载具</text><text x="70" y="1234" class="body" text-anchor="start">payload = 状态定义 → 层数</text>
+<path d="M50 1247H530" stroke="#e0e5ee"/>
+<text x="70" y="1274" class="body" text-anchor="start">命中 / Timer → 施加状态</text></g><a href="../scripts/attributes/vitals/health_vital.gd"><title>attributes/vitals/health_vital.gd</title><g><rect x="650" y="1100" width="480" height="250" rx="10" fill="white" stroke="#8191a8" stroke-width="1.5"/>
+<path d="M660 1100H1120Q1130 1100 1130 1110V1176H650V1110Q650 1100 660 1100Z" fill="#e9f8f2"/>
+<text x="670" y="1125" class="type" text-anchor="start">«Resource»</text><text x="670" y="1158" class="name" text-anchor="start">HealthVital</text>
+<path d="M650 1176H1130" stroke="#c4cdd9"/>
+<text x="670" y="1207" class="body" text-anchor="start">DamageInfo / current_value</text>
+<path d="M650 1220H1130" stroke="#e0e5ee"/>
+<text x="670" y="1247" class="body" text-anchor="start">同步受伤事件 → 扣值 → 死亡</text></g></a><a href="../scripts/singletons/gameplay_cue_manager.gd"><title>singletons/gameplay_cue_manager.gd</title><g><rect x="1250" y="1100" width="480" height="250" rx="10" fill="white" stroke="#8191a8" stroke-width="1.5"/>
+<path d="M1260 1100H1720Q1730 1100 1730 1110V1176H1250V1110Q1250 1100 1260 1100Z" fill="#f1edff"/>
+<text x="1270" y="1125" class="type" text-anchor="start">«autoload Node»</text><text x="1270" y="1158" class="name" text-anchor="start">GameplayCueManager</text>
+<path d="M1250 1176H1730" stroke="#c4cdd9"/>
+<text x="1270" y="1207" class="body" text-anchor="start">GameplayCue → 视觉组件</text>
+<path d="M1250 1220H1730" stroke="#e0e5ee"/>
+<text x="1270" y="1247" class="body" text-anchor="start">挂点定位 / execute / update / stop</text></g></a><path d="M290 470V660" class="edge dependency" marker-end="url(#arrow)"/><text x="310" y="565" class="label" text-anchor="start">实例驱动行为树</text><path d="M890 660V470" class="edge dependency" marker-end="url(#arrow)"/><text x="910" y="565" class="label" text-anchor="start">效果经组件读写属性 / Vital</text><path d="M1490 470V660" class="edge " marker-start="url(#owned)"/><text x="1510" y="565" class="label" text-anchor="start">活跃状态 0..*</text><path d="M530 785H650" class="edge dependency" marker-end="url(#arrow)"/><text x="555" y="765" class="label" text-anchor="start">apply()</text><path d="M1250 785H1130" class="edge dependency" marker-end="url(#arrow)"/><text x="1145" y="765" class="label" text-anchor="start">重复执行</text><path d="M290 910V1100" class="edge dependency" marker-end="url(#arrow)"/><text x="310" y="1000" class="label" text-anchor="start">生成载具</text><path d="M890 910V1100" class="edge dependency" marker-end="url(#arrow)"/><text x="910" y="1000" class="label" text-anchor="start">GE_ApplyDamage</text><path d="M1490 910V1100" class="edge dependency" marker-end="url(#arrow)"/><text x="1510" y="1000" class="label" text-anchor="start">状态自身 Cue</text><path d="M50 1225H25V595H1490V660" class="edge dependency" marker-end="url(#arrow)"/><text x="530" y="578" class="label" text-anchor="start">payload 进入状态实例</text><path d="M1130 825H1190V1040H1340V1100" class="edge dependency" marker-end="url(#arrow)"/><text x="1210" y="1023" class="label" text-anchor="start">效果 Cue</text><rect x="50" y="1450" width="1680" height="235" rx="12" fill="#f1edff" stroke="#8191a8" stroke-width="1.5"/>
+<text x="72" y="1486" class="step" text-anchor="start">跨系统桥梁与宿主接口</text><text x="72" y="1520" class="note" text-anchor="start">宿主实体持有顶部三个组件；Vital 已继承属性容器。GameplayAbilitySystem 按 getter / get_component / 节点名查询。</text><text x="72" y="1549" class="note" text-anchor="start">TagManager：状态添加标签；目标策略、过滤器和 Effect 查询标签。AbilityEventBus：同步通知状态 Feature 和宿主。</text><text x="72" y="1578" class="note" text-anchor="start">DamageCalculator：Effect 使用伤害策略读取属性；HealthVital 在扣血前让事件状态修改同一个 DamageInfo。</text><text x="72" y="1607" class="note" text-anchor="start">UI / 输入 / 预览位于入口；按钮与预览本身不会自动释放技能，宿主提供目标、动画、挂点及场景。</text><text x="72" y="1636" class="note" text-anchor="start">清理链：状态 remove → Effect.remove → 按 source_id 撤销修改器 → 属性信号 → Vital 上限刷新。</text>
+</svg>

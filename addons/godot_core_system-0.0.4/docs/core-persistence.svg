@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="2123" viewBox="0 0 1800 2123" role="img" aria-labelledby="title desc">
+  <title id="title">存档、IO 策略与线程执行</title><desc id="desc">基于当前导入源码；框中列出关键成员，完整接口见 source-index.md</desc>
+  <defs><marker id="arrow" viewBox="0 0 12 12" refX="11" refY="6" markerWidth="11" markerHeight="11" orient="auto"><path d="M1 1L11 6L1 11" fill="none" stroke="#536b89" stroke-width="1.7"/></marker>
+  <marker id="inherit" viewBox="0 0 14 14" refX="13" refY="7" markerWidth="13" markerHeight="13" orient="auto"><path d="M1 1L13 7L1 13Z" fill="#f9fbff" stroke="#536b89" stroke-width="1.5"/></marker></defs>
+  <style>text{font-family:'Microsoft YaHei','Noto Sans CJK SC',sans-serif;fill:#30445d}.title{font-size:32px;font-weight:600}.subtitle{font-size:19px}.name{font-family:Consolas,monospace;font-size:23px}.type{font-size:17px}.body{font-size:19px}.label{font-size:17px;paint-order:stroke;stroke:#f9fbff;stroke-width:8px;stroke-linejoin:round}.note{font-size:20px}.card{fill:#edf4ff;stroke:#91a6c1;stroke-width:1.6}.rule{stroke:#cbd8e8;fill:none}.edge{fill:none;stroke:#536b89;stroke-width:2;marker-end:url(#arrow)}.bridge{stroke-dasharray:8 6}.inherit{marker-end:url(#inherit)}</style>
+  <rect width="1800" height="2123" fill="#f9fbff"/>
+  <text x="50" y="55" class="title">存档、IO 策略与线程执行</text><text x="50" y="95" class="subtitle">基于当前导入源码；框中列出关键成员，完整接口见 source-index.md</text><text x="50" y="143" class="subtitle">实线：持有 / 调用；空心三角：继承；虚线：调用者需实现的适配；点击类框可打开源码</text><path d="M580 320H640" class="edge edge"/><text x="610" y="292" class="label" text-anchor="middle">委托</text><path d="M1220 320H1160" class="edge inherit"/><text x="1190" y="292" class="label" text-anchor="middle">继承</text><path d="M900 550V440" class="edge inherit"/><text x="912" y="495" class="label">继承</text><path d="M580 670H640" class="edge inherit"/><text x="610" y="642" class="label" text-anchor="middle">继承</text><path d="M1220 670H1160" class="edge inherit"/><text x="1190" y="642" class="label" text-anchor="middle">继承</text><path d="M900 790V900" class="edge edge"/><text x="912" y="845" class="label">持有</text><path d="M640 1020H580" class="edge edge"/><text x="610" y="992" class="label" text-anchor="middle">策略</text><path d="M1160 1020H1220" class="edge edge"/><text x="1190" y="992" class="label" text-anchor="middle">策略</text><path d="M900 1140V1250" class="edge edge"/><text x="912" y="1195" class="label">持有</text><path d="M1220 1370H1160" class="edge edge"/><text x="1190" y="1342" class="label" text-anchor="middle">管理</text><path d="M1480 440V480H1196V1885H320V1840" class="edge edge"/><text x="758" y="1877" class="label">构造保存数据</text><a href="../source/save_system/save_manager.gd"><g><rect x="60" y="200" width="520" height="240" rx="12" class="card"/>
+    <path d="M60 283H580" class="rule"/>
+    <text x="80" y="228" class="type">«Node»</text><text x="80" y="262" class="name">SaveManager</text>
+    <text x="80" y="319" class="body">saveable Group / pending states</text><text x="80" y="349" class="body">create_save() / load_save() / 自动存档</text>
+    </g></a><a href="../source/save_system/save_format_strategy/save_format_strategy.gd"><g><rect x="640" y="200" width="520" height="240" rx="12" class="card"/>
+    <path d="M640 283H1160" class="rule"/>
+    <text x="660" y="228" class="type">«RefCounted»</text><text x="660" y="262" class="name">SaveFormatStrategy</text>
+    <text x="660" y="319" class="body">文件扩展名、路径与基础文件操作</text><text x="660" y="349" class="body">save() / load_save() / load_metadata()</text>
+    </g></a><a href="../source/save_system/save_format_strategy/resource_save_strategy.gd"><g><rect x="1220" y="200" width="520" height="240" rx="12" class="card"/>
+    <path d="M1220 283H1740" class="rule"/>
+    <text x="1240" y="228" class="type">«SaveFormatStrategy»</text><text x="1240" y="262" class="name">ResourceSaveStrategy</text>
+    <text x="1240" y="319" class="body">.tres / GameStateData</text><text x="1240" y="349" class="body">ResourceSaver / ResourceLoader</text>
+    </g></a><a href="../source/save_system/save_format_strategy/json_save_strategy.gd"><g><rect x="60" y="550" width="520" height="240" rx="12" class="card"/>
+    <path d="M60 633H580" class="rule"/>
+    <text x="80" y="578" class="type">«AsyncIOStrategy»</text><text x="80" y="612" class="name">JSONSaveStrategy</text>
+    <text x="80" y="669" class="body">.json / JSON</text><text x="80" y="699" class="body">创建异步 IO 组合</text>
+    </g></a><a href="../source/save_system/save_format_strategy/async_io_strategy.gd"><g><rect x="640" y="550" width="520" height="240" rx="12" class="card"/>
+    <path d="M640 633H1160" class="rule"/>
+    <text x="660" y="578" class="type">«SaveFormatStrategy»</text><text x="660" y="612" class="name">AsyncIOStrategy</text>
+    <text x="660" y="669" class="body">Variant 类型标记 / 对象转换</text><text x="660" y="699" class="body">await io_completed / 按任务 ID 核对</text>
+    </g></a><a href="../source/save_system/save_format_strategy/binary_save_strategy.gd"><g><rect x="1220" y="550" width="520" height="240" rx="12" class="card"/>
+    <path d="M1220 633H1740" class="rule"/>
+    <text x="1240" y="578" class="type">«AsyncIOStrategy»</text><text x="1240" y="612" class="name">BinarySaveStrategy</text>
+    <text x="1240" y="669" class="body">.save / JSON → Gzip → XOR</text><text x="1240" y="699" class="body">set_encryption_key()</text>
+    </g></a><a href="../source/utils/io_strategies/serialization/serialization_strategy.gd"><g><rect x="60" y="900" width="520" height="240" rx="12" class="card"/>
+    <path d="M60 983H580" class="rule"/>
+    <text x="80" y="928" class="type">«RefCounted»</text><text x="80" y="962" class="name">SerializationStrategy</text>
+    <text x="80" y="1019" class="body">JSONSerializationStrategy 实现</text><text x="80" y="1049" class="body">serialize() / deserialize()</text>
+    </g></a><a href="../source/utils/async_io_manager.gd"><g><rect x="640" y="900" width="520" height="240" rx="12" class="card"/>
+    <path d="M640 983H1160" class="rule"/>
+    <text x="660" y="928" class="type">«RefCounted»</text><text x="660" y="962" class="name">AsyncIOManager</text>
+    <text x="660" y="1019" class="body">线程任务 ID → 公开 ID</text><text x="660" y="1049" class="body">read_file_async() / write_file_async()</text>
+    </g></a><a href="../source/utils/io_strategies/compression/compression_strategy.gd"><g><rect x="1220" y="900" width="520" height="240" rx="12" class="card"/>
+    <path d="M1220 983H1740" class="rule"/>
+    <text x="1240" y="928" class="type">«RefCounted»</text><text x="1240" y="962" class="name">CompressionStrategy</text>
+    <text x="1240" y="1019" class="body">NoCompression / Gzip 实现</text><text x="1240" y="1049" class="body">compress() / decompress()</text>
+    </g></a><a href="../source/utils/io_strategies/encryption/encryption_strategy.gd"><g><rect x="60" y="1250" width="520" height="240" rx="12" class="card"/>
+    <path d="M60 1333H580" class="rule"/>
+    <text x="80" y="1278" class="type">«RefCounted»</text><text x="80" y="1312" class="name">EncryptionStrategy</text>
+    <text x="80" y="1369" class="body">NoEncryption / XOR 实现</text><text x="80" y="1399" class="body">encrypt() / decrypt()</text>
+    </g></a><a href="../source/utils/threading/single_thread.gd"><g><rect x="640" y="1250" width="520" height="240" rx="12" class="card"/>
+    <path d="M640 1333H1160" class="rule"/>
+    <text x="660" y="1278" class="type">«RefCounted»</text><text x="660" y="1312" class="name">SingleThread</text>
+    <text x="660" y="1369" class="body">Thread / Mutex / Semaphore / FIFO</text><text x="660" y="1399" class="body">add_task(): int / task_completed</text>
+    </g></a><a href="../source/utils/threading/module_thread.gd"><g><rect x="1220" y="1250" width="520" height="240" rx="12" class="card"/>
+    <path d="M1220 1333H1740" class="rule"/>
+    <text x="1240" y="1278" class="type">«RefCounted»</text><text x="1240" y="1312" class="name">ModuleThread</text>
+    <text x="1240" y="1369" class="body">名字 → SingleThread / 聚合信号</text><text x="1240" y="1399" class="body">submit_task() / unload_thread()</text>
+    </g></a><a href="../source/save_system/game_state_data.gd"><g><rect x="60" y="1600" width="520" height="240" rx="12" class="card"/>
+    <path d="M60 1683H580" class="rule"/>
+    <text x="80" y="1628" class="type">«Resource»</text><text x="80" y="1662" class="name">GameStateData</text>
+    <text x="80" y="1719" class="body">metadata / nodes_state</text><text x="80" y="1749" class="body">Resource 格式存档容器</text>
+    </g></a><rect x="50" y="1940" width="1700" height="143" rx="12" fill="#f0edff" stroke="#91a6c1"/><text x="75" y="1978" class="note">写入：Variant 转换 → JSON → 可选压缩 → 可选加密 → 工作线程写文件；读取顺序相反。</text><text x="75" y="2009" class="note">EncryptionStrategy 与序列化/压缩策略并列，由 AsyncIOManager 调用；完整策略清单见源码索引。</text><text x="75" y="2040" class="note">异步存档需串行 await；当前默认格式、类型转换及任务等待边界见实现分析。</text></svg>

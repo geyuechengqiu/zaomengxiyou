@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="1530" viewBox="0 0 1800 1530" role="img" aria-labelledby="title description">
+<title id="title">技能核心类图</title><desc id="description">基于当前源码 · 展示容器、配置、实例、行为树与效果入口 · 点击类框可定位源码</desc>
+<defs>
+  <marker id="arrow" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="9" markerHeight="9" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="none" stroke="#52637a" stroke-width="1.4"/></marker>
+  <marker id="inherit" viewBox="0 0 16 16" refX="16" refY="8" markerWidth="13" markerHeight="13" orient="auto"><path d="M0 0L16 8L0 16Z" fill="white" stroke="#52637a" stroke-width="1.4"/></marker>
+  <marker id="owned" viewBox="-9 -7 18 14" refX="0" refY="0" markerWidth="13" markerHeight="11" orient="auto"><path d="M-8 0L0 -6L8 0L0 6Z" fill="#52637a" stroke="#52637a"/></marker>
+  <marker id="shared" viewBox="-9 -7 18 14" refX="0" refY="0" markerWidth="13" markerHeight="11" orient="auto"><path d="M-8 0L0 -6L8 0L0 6Z" fill="white" stroke="#52637a"/></marker>
+</defs>
+<style>
+  text{font-family:'Microsoft YaHei','Noto Sans CJK SC',Arial,sans-serif;fill:#243449}
+  .title{font-size:34px;font-weight:700}.subtitle{font-size:20px;fill:#53657c}
+  .name{font-family:Consolas,'Microsoft YaHei',monospace;font-size:22px;font-weight:700}
+  .type{font-size:16px;fill:#596c84}.body{font-family:Consolas,'Microsoft YaHei',monospace;font-size:18px}
+  .label{font-size:17px;paint-order:stroke;stroke:#fbfcff;stroke-width:6px;stroke-linejoin:round}
+  .note{font-size:19px;fill:#52637a}.step{font-size:22px;font-weight:700}
+  .edge{fill:none;stroke:#52637a;stroke-width:2}.dependency{stroke-dasharray:8 6}
+</style>
+<rect width="1800" height="1530" fill="#fbfcff"/>
+<text x="50" y="60" class="title" text-anchor="start">技能核心类图</text><text x="50" y="98" class="subtitle" text-anchor="start">基于当前源码 · 展示容器、配置、实例、行为树与效果入口 · 点击类框可定位源码</text>
+<path d="M50 145H120" class="edge " marker-end="url(#inherit)"/><text x="135" y="151" class="note" text-anchor="start">继承（箭头指向基类）</text><path d="M480 145H550" class="edge " marker-start="url(#owned)"/><text x="565" y="151" class="note" text-anchor="start">拥有运行时对象</text><path d="M850 145H920" class="edge " marker-start="url(#shared)"/><text x="935" y="151" class="note" text-anchor="start">引用 / 聚合共享配置</text><path d="M1340 145H1410" class="edge dependency" marker-end="url(#arrow)"/><text x="1425" y="151" class="note" text-anchor="start">调用 / 创建依赖</text><a href="../scripts/components/gameplay_ability_component.gd"><title>components/gameplay_ability_component.gd</title><g><rect x="50" y="200" width="480" height="230" rx="10" fill="white" stroke="#8191a8" stroke-width="1.5"/>
+<path d="M60 200H520Q530 200 530 210V276H50V210Q50 200 60 200Z" fill="#e9f8f2"/>
+<text x="70" y="225" class="type" text-anchor="start">«Node» 技能容器</text><text x="70" y="258" class="name" text-anchor="start">GameplayAbilityComponent</text>
+<path d="M50 276H530" stroke="#c4cdd9"/>
+<text x="70" y="307" class="body" text-anchor="start">_learned_abilities: Dictionary</text><text x="70" y="334" class="body" text-anchor="start">_current_casting_ability: Instance</text>
+<path d="M50 347H530" stroke="#e0e5ee"/>
+<text x="70" y="374" class="body" text-anchor="start">learn_ability(definition)</text><text x="70" y="401" class="body" text-anchor="start">try_activate_ability(id, context)</text></g></a><a href="../scripts/abilities/gameplay_ability_definition.gd"><title>abilities/gameplay_ability_definition.gd</title><g><rect x="650" y="200" width="480" height="230" rx="10" fill="white" stroke="#8191a8" stroke-width="1.5"/>
+<path d="M660 200H1120Q1130 200 1130 210V276H650V210Q650 200 660 200Z" fill="#eaf3ff"/>
+<text x="670" y="225" class="type" text-anchor="start">«Resource» 静态技能配置</text><text x="670" y="258" class="name" text-anchor="start">GameplayAbilityDefinition</text>
+<path d="M650 276H1130" stroke="#c4cdd9"/>
+<text x="670" y="307" class="body" text-anchor="start">execution_tree: BTNode</text><text x="670" y="334" class="body" text-anchor="start">features: Array</text>
+<path d="M650 347H1130" stroke="#e0e5ee"/>
+<text x="670" y="374" class="body" text-anchor="start">create_instance(owner): Instance</text></g></a><a href="../scripts/abilities/features/gameplay_ability_feature.gd"><title>abilities/features/gameplay_ability_feature.gd</title><g><rect x="1250" y="200" width="480" height="230" rx="10" fill="white" stroke="#8191a8" stroke-width="1.5"/>
+<path d="M1260 200H1720Q1730 200 1730 210V276H1250V210Q1250 200 1260 200Z" fill="#eaf3ff"/>
+<text x="1270" y="225" class="type" text-anchor="start">«abstract Resource» 技能扩展</text><text x="1270" y="258" class="name" text-anchor="start">GameplayAbilityFeature</text>
+<path d="M1250 276H1730" stroke="#c4cdd9"/>
+<text x="1270" y="307" class="body" text-anchor="start">feature_name: String</text>
+<path d="M1250 320H1730" stroke="#e0e5ee"/>
+<text x="1270" y="347" class="body" text-anchor="start">can_activate / on_activate</text><text x="1270" y="374" class="body" text-anchor="start">update / on_learned / on_forgotten</text></g></a><a href="../scripts/abilities/gameplay_ability_instance.gd"><title>abilities/gameplay_ability_instance.gd</title><g><rect x="50" y="580" width="480" height="230" rx="10" fill="white" stroke="#8191a8" stroke-width="1.5"/>
+<path d="M60 580H520Q530 580 530 590V656H50V590Q50 580 60 580Z" fill="#e9f8f2"/>
+<text x="70" y="605" class="type" text-anchor="start">«RefCounted» 每个实体的技能状态</text><text x="70" y="638" class="name" text-anchor="start">GameplayAbilityInstance</text>
+<path d="M50 656H530" stroke="#c4cdd9"/>
+<text x="70" y="687" class="body" text-anchor="start">_definition / _features</text><text x="70" y="714" class="body" text-anchor="start">_bt_instance / _blackboard</text>
+<path d="M50 727H530" stroke="#e0e5ee"/>
+<text x="70" y="754" class="body" text-anchor="start">try_activate(context)</text><text x="70" y="781" class="body" text-anchor="start">update(delta) / end_ability()</text></g></a><a href="../scripts/behavior_tree/bt_instance.gd"><title>behavior_tree/bt_instance.gd</title><g><rect x="650" y="580" width="480" height="230" rx="10" fill="white" stroke="#8191a8" stroke-width="1.5"/>
+<path d="M660 580H1120Q1130 580 1130 590V656H650V590Q650 580 660 580Z" fill="#e9f8f2"/>
+<text x="670" y="605" class="type" text-anchor="start">«RefCounted» 行为树执行状态</text><text x="670" y="638" class="name" text-anchor="start">BTInstance</text>
+<path d="M650 656H1130" stroke="#c4cdd9"/>
+<text x="670" y="687" class="body" text-anchor="start">tree_root: BTNode</text><text x="670" y="714" class="body" text-anchor="start">blackboard: BTBlackboard</text>
+<path d="M650 727H1130" stroke="#e0e5ee"/>
+<text x="670" y="754" class="body" text-anchor="start">tick(delta)</text><text x="670" y="781" class="body" text-anchor="start">reset_tree()</text></g></a><a href="../scripts/behavior_tree/bt_node.gd"><title>behavior_tree/bt_node.gd</title><g><rect x="1250" y="580" width="480" height="230" rx="10" fill="white" stroke="#8191a8" stroke-width="1.5"/>
+<path d="M1260 580H1720Q1730 580 1730 590V656H1250V590Q1250 580 1260 580Z" fill="#eaf3ff"/>
+<text x="1270" y="605" class="type" text-anchor="start">«abstract Resource» 行为树节点</text><text x="1270" y="638" class="name" text-anchor="start">BTNode</text>
+<path d="M1250 656H1730" stroke="#c4cdd9"/>
+<text x="1270" y="687" class="body" text-anchor="start">node_id: StringName</text><text x="1270" y="714" class="body" text-anchor="start">Status: RUNNING / SUCCESS / FAILURE</text>
+<path d="M1250 727H1730" stroke="#e0e5ee"/>
+<text x="1270" y="754" class="body" text-anchor="start">tick(instance, delta)</text><text x="1270" y="781" class="body" text-anchor="start">reset(instance)</text></g></a><a href="../scripts/behavior_tree/bt_blackboard.gd"><title>behavior_tree/bt_blackboard.gd</title><g><rect x="50" y="960" width="480" height="230" rx="10" fill="white" stroke="#8191a8" stroke-width="1.5"/>
+<path d="M60 960H520Q530 960 530 970V1036H50V970Q50 960 60 960Z" fill="#e9f8f2"/>
+<text x="70" y="985" class="type" text-anchor="start">«RefCounted» 共享执行数据</text><text x="70" y="1018" class="name" text-anchor="start">BTBlackboard</text>
+<path d="M50 1036H530" stroke="#c4cdd9"/>
+<text x="70" y="1067" class="body" text-anchor="start">_data / _node_memory: Dictionary</text>
+<path d="M50 1080H530" stroke="#e0e5ee"/>
+<text x="70" y="1107" class="body" text-anchor="start">get_var(key, default)</text><text x="70" y="1134" class="body" text-anchor="start">set_var(key, value)</text></g></a><a href="../scripts/abilities/ability_nodes/ability_node_base.gd"><title>abilities/ability_nodes/ability_node_base.gd</title><g><rect x="650" y="960" width="480" height="230" rx="10" fill="white" stroke="#8191a8" stroke-width="1.5"/>
+<path d="M660 960H1120Q1130 960 1130 970V1036H650V970Q650 960 660 960Z" fill="#eaf3ff"/>
+<text x="670" y="985" class="type" text-anchor="start">«abstract Resource» 技能动作节点</text><text x="670" y="1018" class="name" text-anchor="start">AbilityNodeBase</text>
+<path d="M650 1036H1130" stroke="#c4cdd9"/>
+<text x="670" y="1067" class="body" text-anchor="start">target_key: String</text>
+<path d="M650 1080H1130" stroke="#e0e5ee"/>
+<text x="670" y="1107" class="body" text-anchor="start">_get_context(instance)</text><text x="670" y="1134" class="body" text-anchor="start">_get_target_list(instance, fallback)</text></g></a><a href="../scripts/abilities/ability_nodes/ability_node_apply_effect.gd"><title>abilities/ability_nodes/ability_node_apply_effect.gd</title><g><rect x="1250" y="960" width="480" height="230" rx="10" fill="white" stroke="#8191a8" stroke-width="1.5"/>
+<path d="M1260 960H1720Q1730 960 1730 970V1036H1250V970Q1250 960 1260 960Z" fill="#fff3df"/>
+<text x="1270" y="985" class="type" text-anchor="start">«Resource» 效果执行动作</text><text x="1270" y="1018" class="name" text-anchor="start">AbilityNodeApplyEffect</text>
+<path d="M1250 1036H1730" stroke="#c4cdd9"/>
+<text x="1270" y="1067" class="body" text-anchor="start">target_key / effect_key</text><text x="1270" y="1094" class="body" text-anchor="start">effects: Array[GameplayEffect]</text>
+<path d="M1250 1107H1730" stroke="#e0e5ee"/>
+<text x="1270" y="1134" class="body" text-anchor="start">_tick(): 克隆并逐个 apply()</text></g></a><a href="../scripts/effects/gameplay_effect.gd"><title>effects/gameplay_effect.gd</title><g><rect x="1250" y="1300" width="480" height="180" rx="10" fill="white" stroke="#8191a8" stroke-width="1.5"/>
+<path d="M1260 1300H1720Q1730 1300 1730 1310V1376H1250V1310Q1250 1300 1260 1300Z" fill="#fff3df"/>
+<text x="1270" y="1325" class="type" text-anchor="start">«abstract Resource» 逻辑操作</text><text x="1270" y="1358" class="name" text-anchor="start">GameplayEffect</text>
+<path d="M1250 1376H1730" stroke="#c4cdd9"/>
+<text x="1270" y="1407" class="body" text-anchor="start">filters / sub_effects / cue</text>
+<path d="M1250 1420H1730" stroke="#e0e5ee"/>
+<text x="1270" y="1447" class="body" text-anchor="start">apply() / remove() / _apply()</text></g></a><path d="M530 270H650" class="edge dependency" marker-end="url(#arrow)"/><text x="550" y="253" class="label" text-anchor="start">学习配置</text><path d="M1130 270H1250" class="edge " marker-start="url(#shared)"/><text x="1137" y="253" class="label" text-anchor="start">features 0..*</text><path d="M290 430V580" class="edge " marker-start="url(#owned)"/><text x="305" y="505" class="label" text-anchor="start">实例 0..*</text><path d="M890 430V490H420V580" class="edge dependency" marker-end="url(#arrow)"/><text x="595" y="477" class="label" text-anchor="start">create_instance()</text><path d="M530 680H650" class="edge " marker-start="url(#owned)"/><text x="560" y="663" class="label" text-anchor="start">0..1</text><path d="M1130 680H1250" class="edge " marker-start="url(#shared)"/><text x="1138" y="663" class="label" text-anchor="start">tree_root 1</text><path d="M1040 430V515H1490V580" class="edge " marker-start="url(#shared)"/><text x="1270" y="502" class="label" text-anchor="start">execution_tree 0..1</text><path d="M290 810V960" class="edge " marker-start="url(#owned)"/><text x="305" y="888" class="label" text-anchor="start">blackboard 1</text><path d="M890 810V870H440V960" class="edge " marker-start="url(#shared)"/><text x="585" y="856" class="label" text-anchor="start">使用同一黑板</text><path d="M890 960V900H1400V810" class="edge " marker-end="url(#inherit)"/><text x="1060" y="885" class="label" text-anchor="start">经 BTAction 继承</text><path d="M1250 1045H1130" class="edge " marker-end="url(#inherit)"/><path d="M1490 1190V1300" class="edge " marker-start="url(#shared)"/><text x="1505" y="1245" class="label" text-anchor="start">effects 0..*</text><rect x="50" y="1290" width="1080" height="190" rx="10" fill="#f0f4fa"/>
+<text x="75" y="1328" class="step" text-anchor="start">阅读方式</text>
+<text x="75" y="1365" class="note" text-anchor="start">Resource 保存配置；RefCounted 保存一次技能 / 状态的执行数据。</text>
+<text x="75" y="1400" class="note" text-anchor="start">BTInstance 复用技能的 BTBlackboard；效果执行时 duplicate(true)。</text>
+<text x="75" y="1435" class="note" text-anchor="start">节点继承仅展示主路径；模板、策略及 Feature 子类详见 README。</text>
+</svg>

@@ -1,0 +1,126 @@
+[gd_scene load_steps=3 format=3 uid="uid://cefhe6w0nwjsu"]
+
+[ext_resource type="Script" uid="uid://bwd0sinsqevgs" path="res://addons/gameplay_abiltiy_system/ui/bt_debug_panel.gd" id="1_atopn"]
+[ext_resource type="Theme" path="res://addons/gameplay_abiltiy_system/assets/theme.tres" id="2_73cy5"]
+
+[node name="BtDebugPanel" type="Window"]
+oversampling_override = 1.0
+title = "行为树调试面板"
+initial_position = 1
+size = Vector2i(720, 405)
+script = ExtResource("1_atopn")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/MarginContainer/HBoxContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/MarginContainer/HBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_73cy5")
+text = "实体列表"
+
+[node name="EntityList" type="ItemList" parent="MarginContainer/MarginContainer/HBoxContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MarginContainer2" type="MarginContainer" parent="MarginContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/MarginContainer/HBoxContainer/MarginContainer2"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/MarginContainer/HBoxContainer/MarginContainer2/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_73cy5")
+text = "当前激活的行为树"
+
+[node name="TreeView" type="Tree" parent="MarginContainer/MarginContainer/HBoxContainer/MarginContainer2/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MarginContainer3" type="MarginContainer" parent="MarginContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/MarginContainer/HBoxContainer/MarginContainer3"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/MarginContainer/HBoxContainer/MarginContainer3/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Panel" type="Panel" parent="MarginContainer/MarginContainer/HBoxContainer/MarginContainer3/VBoxContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="BlackboardView" type="RichTextLabel" parent="MarginContainer/MarginContainer/HBoxContainer/MarginContainer3/VBoxContainer/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("2_73cy5")
+bbcode_enabled = true
+
+[node name="MarginContainer2" type="MarginContainer" parent="MarginContainer/MarginContainer/HBoxContainer/MarginContainer3/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Panel" type="Panel" parent="MarginContainer/MarginContainer/HBoxContainer/MarginContainer3/VBoxContainer/MarginContainer2"]
+layout_mode = 2
+
+[node name="ActiveNodesView" type="RichTextLabel" parent="MarginContainer/MarginContainer/HBoxContainer/MarginContainer3/VBoxContainer/MarginContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("2_73cy5")
+bbcode_enabled = true
+
+[node name="MarginContainer3" type="MarginContainer" parent="MarginContainer/MarginContainer/HBoxContainer/MarginContainer3/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Panel" type="Panel" parent="MarginContainer/MarginContainer/HBoxContainer/MarginContainer3/VBoxContainer/MarginContainer3"]
+layout_mode = 2
+
+[node name="ExecutionHistoryView" type="RichTextLabel" parent="MarginContainer/MarginContainer/HBoxContainer/MarginContainer3/VBoxContainer/MarginContainer3"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("2_73cy5")
+bbcode_enabled = true
+
+[node name="MarginContainer4" type="MarginContainer" parent="MarginContainer/MarginContainer/HBoxContainer/MarginContainer3/VBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/MarginContainer/HBoxContainer/MarginContainer3/VBoxContainer/MarginContainer4"]
+layout_mode = 2
+
+[node name="RefreshButton" type="Button" parent="MarginContainer/MarginContainer/HBoxContainer/MarginContainer3/VBoxContainer/MarginContainer4/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("2_73cy5")
+text = "刷新"
+
+[node name="ClearHistoryButton" type="Button" parent="MarginContainer/MarginContainer/HBoxContainer/MarginContainer3/VBoxContainer/MarginContainer4/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("2_73cy5")
+text = "清空历史"

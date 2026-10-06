@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://c6jo3h42ewlfm"]
+
+[ext_resource type="Script" path="res://addons/gameplay_abiltiy_system/examples/test_vital_system.gd" id="1"]
+[ext_resource type="Script" path="res://addons/gameplay_abiltiy_system/scripts/components/gameplay_vital_attribute_component.gd" id="2"]
+
+[node name="test_vital_system" type="Node3D"]
+script = ExtResource("1")
+
+[node name="GameplayVitalAttributeComponent" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("2")

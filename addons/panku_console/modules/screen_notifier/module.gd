@@ -1,0 +1,16 @@
+class_name PankuModuleScreenNotifier extends PankuModule 
+#region 配置与运行状态
+
+var notifier_layer := preload("./resident_logs.tscn").instantiate()
+#endregion
+#region 公共接口
+
+func notify(bbcode:String, id:=-1):
+	notifier_layer.add_log(bbcode, id)
+
+func init_module():
+	core.new_notification_created.connect(notify)
+
+	# setup ui
+	core.add_child(notifier_layer)
+#endregion

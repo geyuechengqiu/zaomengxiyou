@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="2473" viewBox="0 0 1800 2473" role="img" aria-labelledby="title desc">
+  <title id="title">输入、操作意图与逻辑状态机</title><desc id="desc">基于当前导入源码；框中列出关键成员，完整接口见 source-index.md</desc>
+  <defs><marker id="arrow" viewBox="0 0 12 12" refX="11" refY="6" markerWidth="11" markerHeight="11" orient="auto"><path d="M1 1L11 6L1 11" fill="none" stroke="#536b89" stroke-width="1.7"/></marker>
+  <marker id="inherit" viewBox="0 0 14 14" refX="13" refY="7" markerWidth="13" markerHeight="13" orient="auto"><path d="M1 1L13 7L1 13Z" fill="#f9fbff" stroke="#536b89" stroke-width="1.5"/></marker></defs>
+  <style>text{font-family:'Microsoft YaHei','Noto Sans CJK SC',sans-serif;fill:#30445d}.title{font-size:32px;font-weight:600}.subtitle{font-size:19px}.name{font-family:Consolas,monospace;font-size:23px}.type{font-size:17px}.body{font-size:19px}.label{font-size:17px;paint-order:stroke;stroke:#f9fbff;stroke-width:8px;stroke-linejoin:round}.note{font-size:20px}.card{fill:#edf4ff;stroke:#91a6c1;stroke-width:1.6}.rule{stroke:#cbd8e8;fill:none}.edge{fill:none;stroke:#536b89;stroke-width:2;marker-end:url(#arrow)}.bridge{stroke-dasharray:8 6}.inherit{marker-end:url(#inherit)}</style>
+  <rect width="1800" height="2473" fill="#f9fbff"/>
+  <text x="50" y="55" class="title">输入、操作意图与逻辑状态机</text><text x="50" y="95" class="subtitle">基于当前导入源码；框中列出关键成员，完整接口见 source-index.md</text><text x="50" y="143" class="subtitle">实线：持有 / 调用；空心三角：继承；虚线：调用者需实现的适配；点击类框可打开源码</text><path d="M580 320H640" class="edge edge"/><text x="610" y="292" class="label" text-anchor="middle">持有</text><path d="M320 440V550" class="edge edge"/><text x="332" y="495" class="label">持有</text><path d="M640 1020H580" class="edge edge"/><text x="610" y="992" class="label" text-anchor="middle">持有</text><path d="M1160 1020H1220" class="edge edge"/><text x="1190" y="992" class="label" text-anchor="middle">配置读</text><text x="1190" y="1014" class="label" text-anchor="middle">写</text><path d="M580 1370H640" class="edge edge"/><text x="610" y="1342" class="label" text-anchor="middle">弱引用</text><path d="M1160 1370H1220" class="edge edge"/><text x="1190" y="1342" class="label" text-anchor="middle">配置</text><path d="M580 1720H640" class="edge edge"/><text x="610" y="1692" class="label" text-anchor="middle">驱动</text><path d="M1160 1720H1220" class="edge inherit"/><text x="1190" y="1692" class="label" text-anchor="middle">继承</text><path d="M900 1490V1548H604V2253H900V2190" class="edge edge"/><text x="752" y="2245" class="label">生成事件</text><path d="M900 1950V1840" class="edge bridge"/><text x="912" y="1895" class="label">消费者转发</text><a href="../source/input_system/input_manager.gd"><g><rect x="60" y="200" width="520" height="240" rx="12" class="card"/>
+    <path d="M60 283H580" class="rule"/>
+    <text x="80" y="228" class="type">«Node»</text><text x="80" y="262" class="name">InputManager</text>
+    <text x="80" y="319" class="body">virtual_axis / input_buffer / input_state</text><text x="80" y="349" class="body">_input() / _process() / action_triggered</text>
+    </g></a><a href="../source/input_system/features/input_virtual_axis.gd"><g><rect x="640" y="200" width="520" height="240" rx="12" class="card"/>
+    <path d="M640 283H1160" class="rule"/>
+    <text x="660" y="228" class="type">«RefCounted»</text><text x="660" y="262" class="name">InputVirtualAxis</text>
+    <text x="660" y="319" class="body">x/y 正负动作、死区、灵敏度</text><text x="660" y="349" class="body">update_axis() / get_axis_value()</text>
+    </g></a><a href="../source/input_system/features/input_buffer.gd"><g><rect x="1220" y="200" width="520" height="240" rx="12" class="card"/>
+    <path d="M1220 283H1740" class="rule"/>
+    <text x="1240" y="228" class="type">«RefCounted»</text><text x="1240" y="262" class="name">InputBuffer</text>
+    <text x="1240" y="319" class="body">BufferData[] / 真实时间过期</text><text x="1240" y="349" class="body">add_buffer() / clear_buffer()</text>
+    </g></a><a href="../source/input_system/features/input_event_processor.gd"><g><rect x="60" y="550" width="520" height="240" rx="12" class="card"/>
+    <path d="M60 633H580" class="rule"/>
+    <text x="80" y="578" class="type">«RefCounted»</text><text x="80" y="612" class="name">InputEventProcessor</text>
+    <text x="80" y="669" class="body">Handler[] / Filter[]</text><text x="80" y="699" class="body">process_event() / add_handler()</text>
+    </g></a><a href="../source/input_system/features/input_recorder.gd"><g><rect x="640" y="550" width="520" height="240" rx="12" class="card"/>
+    <path d="M640 633H1160" class="rule"/>
+    <text x="660" y="578" class="type">«RefCounted»</text><text x="660" y="612" class="name">InputRecorder</text>
+    <text x="660" y="669" class="body">InputRecord[] / recording / playing</text><text x="660" y="699" class="body">get_playback_data() / 文件读写</text>
+    </g></a><a href="../source/input_system/input_state.gd"><g><rect x="1220" y="550" width="520" height="240" rx="12" class="card"/>
+    <path d="M1220 633H1740" class="rule"/>
+    <text x="1240" y="578" class="type">«RefCounted»</text><text x="1240" y="612" class="name">InputState</text>
+    <text x="1240" y="669" class="body">动作 → ActionState / 毫秒边沿防抖</text><text x="1240" y="699" class="body">update_action() / is_just_pressed()</text>
+    </g></a><a href="../source/input_system/config/input_config.gd"><g><rect x="60" y="900" width="520" height="240" rx="12" class="card"/>
+    <path d="M60 983H580" class="rule"/>
+    <text x="80" y="928" class="type">«Resource»</text><text x="80" y="962" class="name">InputConfig</text>
+    <text x="80" y="1019" class="body">动作/轴/设备映射 / 输入设置</text><text x="80" y="1049" class="body">config_changed / update_config()</text>
+    </g></a><a href="../source/input_system/config/input_config_adapter.gd"><g><rect x="640" y="900" width="520" height="240" rx="12" class="card"/>
+    <path d="M640 983H1160" class="rule"/>
+    <text x="660" y="928" class="type">«RefCounted»</text><text x="660" y="962" class="name">InputConfigAdapter</text>
+    <text x="660" y="1019" class="body">ConfigManager 的 input 配置段</text><text x="660" y="1049" class="body">save_config() / reset_to_default()</text>
+    </g></a><a href="../source/config_system/config_manager.gd"><g><rect x="1220" y="900" width="520" height="240" rx="12" class="card"/>
+    <path d="M1220 983H1740" class="rule"/>
+    <text x="1240" y="928" class="type">«Node»</text><text x="1240" y="962" class="name">ConfigManager</text>
+    <text x="1240" y="1019" class="body">ConfigFile / _modified</text><text x="1240" y="1049" class="body">get_section() / set_section()</text>
+    </g></a><a href="../source/operation_system/operation_manager.gd"><g><rect x="60" y="1250" width="520" height="240" rx="12" class="card"/>
+    <path d="M60 1333H580" class="rule"/>
+    <text x="80" y="1278" class="type">«Node»</text><text x="80" y="1312" class="name">CoreOperationManager</text>
+    <text x="80" y="1369" class="body">控制器 WeakRef 注册表</text><text x="80" y="1399" class="body">create_controller()</text><text x="80" y="1429" class="body">register_controller()</text>
+    </g></a><a href="../source/operation_system/operation_controller.gd"><g><rect x="640" y="1250" width="520" height="240" rx="12" class="card"/>
+    <path d="M640 1333H1160" class="rule"/>
+    <text x="660" y="1278" class="type">«Node»</text><text x="660" y="1312" class="name">CoreOperationController</text>
+    <text x="660" y="1369" class="body">来源强度聚合 / UI 优先 / 失焦清理</text><text x="660" y="1399" class="body">intent_emitted / submit_intent()</text>
+    </g></a><a href="../source/operation_system/operation_profile.gd"><g><rect x="1220" y="1250" width="520" height="240" rx="12" class="card"/>
+    <path d="M1220 1333H1740" class="rule"/>
+    <text x="1240" y="1278" class="type">«Resource»</text><text x="1240" y="1312" class="name">CoreOperationProfile</text>
+    <text x="1240" y="1369" class="body">bindings / axes</text><text x="1240" y="1399" class="body">bind_intent() / bind_axis()</text>
+    </g></a><a href="../source/state_machine/state_machine_manager.gd"><g><rect x="60" y="1600" width="520" height="240" rx="12" class="card"/>
+    <path d="M60 1683H580" class="rule"/>
+    <text x="80" y="1628" class="type">«Node»</text><text x="80" y="1662" class="name">StateMachineManager</text>
+    <text x="80" y="1719" class="body">SMRegistration / 驱动标志</text><text x="80" y="1749" class="body">register_state_machine() / 注销</text>
+    </g></a><a href="../source/state_machine/base_state_machine.gd"><g><rect x="640" y="1600" width="520" height="240" rx="12" class="card"/>
+    <path d="M640 1683H1160" class="rule"/>
+    <text x="660" y="1628" class="type">«RefCounted : BaseState»</text><text x="660" y="1662" class="name">BaseStateMachine</text>
+    <text x="660" y="1719" class="body">states / current_state / values</text><text x="660" y="1749" class="body">start() / transition_local() / stop()</text>
+    </g></a><a href="../source/state_machine/base_state.gd"><g><rect x="1220" y="1600" width="520" height="240" rx="12" class="card"/>
+    <path d="M1220 1683H1740" class="rule"/>
+    <text x="1240" y="1628" class="type">«RefCounted»</text><text x="1240" y="1662" class="name">BaseState</text>
+    <text x="1240" y="1719" class="body">agent / state_machine / is_active</text><text x="1240" y="1749" class="body">enter() / exit() / update()</text>
+    </g></a><a href="../source/operation_system/operation_intent.gd"><g><rect x="640" y="1950" width="520" height="240" rx="12" class="card"/>
+    <path d="M640 2033H1160" class="rule"/>
+    <text x="660" y="1978" class="type">«InputEventAction»</text><text x="660" y="2012" class="name">CoreOperationIntent</text>
+    <text x="660" y="2069" class="body">origin / payload / action / strength</text><text x="660" y="2099" class="body">is_intent_pressed() / is_intent_released()</text>
+    </g></a><rect x="50" y="2290" width="1700" height="143" rx="12" fill="#f0edff" stroke="#91a6c1"/><text x="75" y="2328" class="note">InputManager 轮询与 OperationController 语义意图是并列通道，没有自动连接。</text><text x="75" y="2359" class="note">控制器由角色挂树；状态机由管理器或角色驱动，须避免重复 update。</text><text x="75" y="2390" class="note">输入 Handler、配置适配器与层级切换的现有限制见实现分析。</text></svg>

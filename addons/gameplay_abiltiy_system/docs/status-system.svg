@@ -1,0 +1,100 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="2292" viewBox="0 0 1800 2292" role="img" aria-labelledby="title description">
+<title id="title">状态系统：容器、生命周期、Feature 与策略</title><desc id="description">当前源码类图 · 框内列出关键成员；«类型 : 基类»补充未连线的继承关系 · 点击类框可打开源码</desc>
+<defs>
+  <marker id="arrow" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="9" markerHeight="9" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="none" stroke="#52637a" stroke-width="1.4"/></marker>
+  <marker id="inherit" viewBox="0 0 16 16" refX="16" refY="8" markerWidth="13" markerHeight="13" orient="auto"><path d="M0 0L16 8L0 16Z" fill="white" stroke="#52637a" stroke-width="1.4"/></marker>
+  <marker id="owned" viewBox="-9 -7 18 14" refX="0" refY="0" markerWidth="13" markerHeight="11" orient="auto"><path d="M-8 0L0 -6L8 0L0 6Z" fill="#52637a" stroke="#52637a"/></marker>
+  <marker id="shared" viewBox="-9 -7 18 14" refX="0" refY="0" markerWidth="13" markerHeight="11" orient="auto"><path d="M-8 0L0 -6L8 0L0 6Z" fill="white" stroke="#52637a"/></marker>
+</defs>
+<style>
+  text{font-family:'Microsoft YaHei','Noto Sans CJK SC',Arial,sans-serif;fill:#243449}
+  .title{font-size:34px;font-weight:700}.subtitle{font-size:20px;fill:#53657c}
+  .name{font-family:Consolas,'Microsoft YaHei',monospace;font-size:22px;font-weight:700}
+  .type{font-size:16px;fill:#596c84}.body{font-family:Consolas,'Microsoft YaHei',monospace;font-size:18px}
+  .label{font-size:17px;paint-order:stroke;stroke:#fbfcff;stroke-width:6px;stroke-linejoin:round}
+  .note{font-size:19px;fill:#52637a}.step{font-size:22px;font-weight:700}
+  .edge{fill:none;stroke:#52637a;stroke-width:2}.dependency{stroke-dasharray:8 6}
+</style>
+<rect width="1800" height="2292" fill="#fbfcff"/>
+<text x="50" y="60" class="title" text-anchor="start">状态系统：容器、生命周期、Feature 与策略</text><text x="50" y="98" class="subtitle" text-anchor="start">当前源码类图 · 框内列出关键成员；«类型 : 基类»补充未连线的继承关系 · 点击类框可打开源码</text>
+<path d="M50 145H120" class="edge " marker-end="url(#inherit)"/><text x="135" y="151" class="note" text-anchor="start">继承（箭头指向基类）</text><path d="M480 145H550" class="edge " marker-start="url(#owned)"/><text x="565" y="151" class="note" text-anchor="start">拥有运行时对象</text><path d="M850 145H920" class="edge " marker-start="url(#shared)"/><text x="935" y="151" class="note" text-anchor="start">引用 / 聚合共享配置</text><path d="M1340 145H1410" class="edge dependency" marker-end="url(#arrow)"/><text x="1425" y="151" class="note" text-anchor="start">调用 / 创建依赖</text><path d="M530 335H650" class="edge " marker-start="url(#owned)"/><text x="590" y="296" class="label" text-anchor="middle">按状态 ID </text><text x="590" y="318" class="label" text-anchor="middle">保存</text><path d="M1130 335H1250" class="edge " marker-start="url(#shared)"/><text x="1190" y="296" class="label" text-anchor="middle">status_data</text><text x="1190" y="318" class="label" text-anchor="middle"> 1</text><path d="M890 460V590" class="edge " marker-start="url(#shared)"/><text x="905" y="520" class="label" text-anchor="start">features 0..*</text><path d="M1490 460V590" class="edge " marker-start="url(#shared)"/><text x="1505" y="520" class="label" text-anchor="start">堆叠策略 0..1</text><path d="M890 460V502H1150V865H290V840" class="edge " marker-start="url(#owned)"/><text x="305" y="855" class="label" text-anchor="start">持续时间策略副本</text><path d="M290 970V840" class="edge " marker-end="url(#inherit)"/><path d="M890 970V840" class="edge " marker-end="url(#inherit)"/><path d="M1490 970V840" class="edge " marker-end="url(#inherit)"/><path d="M890 1600V1664H1150V865H890V840" class="edge " marker-end="url(#inherit)"/><a href="../scripts/components/gameplay_status_component.gd"><title>components/gameplay_status_component.gd</title><g><rect x="50" y="210" width="480" height="250" rx="10" fill="white" stroke="#8191a8" stroke-width="1.5"/>
+<path d="M60 210H520Q530 210 530 220V286H50V220Q50 210 60 210Z" fill="#e9f8f2"/>
+<text x="70" y="235" class="type" text-anchor="start">«Node»</text><text x="70" y="268" class="name" text-anchor="start">GameplayStatusComponent</text>
+<path d="M50 286H530" stroke="#c4cdd9"/>
+<text x="70" y="317" class="body" text-anchor="start">_active_statuses: Dictionary</text><text x="70" y="344" class="body" text-anchor="start">_has_event_listening_statuses: bool</text>
+<path d="M50 357H530" stroke="#e0e5ee"/>
+<text x="70" y="384" class="body" text-anchor="start">apply_status() / remove_status()</text><text x="70" y="411" class="body" text-anchor="start">_process() / handle_event()</text></g></a><a href="../scripts/status/gameplay_status_instance.gd"><title>status/gameplay_status_instance.gd</title><g><rect x="650" y="210" width="480" height="250" rx="10" fill="white" stroke="#8191a8" stroke-width="1.5"/>
+<path d="M660 210H1120Q1130 210 1130 220V286H650V220Q650 210 660 210Z" fill="#e9f8f2"/>
+<text x="670" y="235" class="type" text-anchor="start">«RefCounted»</text><text x="670" y="268" class="name" text-anchor="start">GameplayStatusInstance</text>
+<path d="M650 286H1130" stroke="#c4cdd9"/>
+<text x="670" y="317" class="body" text-anchor="start">stacks / remaining_duration</text><text x="670" y="344" class="body" text-anchor="start">_cached_context / _feature_storage</text>
+<path d="M650 357H1130" stroke="#e0e5ee"/>
+<text x="670" y="384" class="body" text-anchor="start">apply() / update() / remove()</text><text x="670" y="411" class="body" text-anchor="start">add_stack() / apply_effects()</text></g></a><a href="../scripts/status/gameplay_status_data.gd"><title>status/gameplay_status_data.gd</title><g><rect x="1250" y="210" width="480" height="250" rx="10" fill="white" stroke="#8191a8" stroke-width="1.5"/>
+<path d="M1260 210H1720Q1730 210 1730 220V286H1250V220Q1250 210 1260 210Z" fill="#eaf3ff"/>
+<text x="1270" y="235" class="type" text-anchor="start">«Resource»</text><text x="1270" y="268" class="name" text-anchor="start">GameplayStatusData</text>
+<path d="M1250 286H1730" stroke="#c4cdd9"/>
+<text x="1270" y="317" class="body" text-anchor="start">apply_effects / remove_effects / tags</text><text x="1270" y="344" class="body" text-anchor="start">features / duration / max_stacks</text>
+<path d="M1250 357H1730" stroke="#e0e5ee"/>
+<text x="1270" y="384" class="body" text-anchor="start">duration_policy / stacking_policy</text></g></a><a href="../scripts/status/duration/status_duration_policy.gd"><title>status/duration/status_duration_policy.gd</title><g><rect x="50" y="590" width="480" height="250" rx="10" fill="white" stroke="#8191a8" stroke-width="1.5"/>
+<path d="M60 590H520Q530 590 530 600V666H50V600Q50 590 60 590Z" fill="#eaf3ff"/>
+<text x="70" y="615" class="type" text-anchor="start">«abstract Resource»</text><text x="70" y="648" class="name" text-anchor="start">StatusDurationPolicy</text>
+<path d="M50 666H530" stroke="#c4cdd9"/>
+
+<path d="M50 683H530" stroke="#e0e5ee"/>
+<text x="70" y="710" class="body" text-anchor="start">initialize() / update() / refresh()</text><text x="70" y="737" class="body" text-anchor="start">accumulate() / handle_event()</text></g></a><a href="../scripts/status/features/status_feature.gd"><title>status/features/status_feature.gd</title><g><rect x="650" y="590" width="480" height="250" rx="10" fill="white" stroke="#8191a8" stroke-width="1.5"/>
+<path d="M660 590H1120Q1130 590 1130 600V666H650V600Q650 590 660 590Z" fill="#eaf3ff"/>
+<text x="670" y="615" class="type" text-anchor="start">«Resource»</text><text x="670" y="648" class="name" text-anchor="start">StatusFeature</text>
+<path d="M650 666H1130" stroke="#c4cdd9"/>
+
+<path d="M650 683H1130" stroke="#e0e5ee"/>
+<text x="670" y="710" class="body" text-anchor="start">apply_feature() / update_feature()</text><text x="670" y="737" class="body" text-anchor="start">remove_feature() / handle_event()</text></g></a><a href="../scripts/status/stacking/status_stacking_policy.gd"><title>status/stacking/status_stacking_policy.gd</title><g><rect x="1250" y="590" width="480" height="250" rx="10" fill="white" stroke="#8191a8" stroke-width="1.5"/>
+<path d="M1260 590H1720Q1730 590 1730 600V666H1250V600Q1250 590 1260 590Z" fill="#eaf3ff"/>
+<text x="1270" y="615" class="type" text-anchor="start">«abstract Resource»</text><text x="1270" y="648" class="name" text-anchor="start">StatusStackingPolicy</text>
+<path d="M1250 666H1730" stroke="#c4cdd9"/>
+
+<path d="M1250 683H1730" stroke="#e0e5ee"/>
+<text x="1270" y="710" class="body" text-anchor="start">handle_stacking(old, new, stacks, ctx)</text></g></a><a href="../scripts/status/duration/duration_natural_time.gd"><title>status/duration/duration_natural_time.gd</title><g><rect x="50" y="970" width="480" height="250" rx="10" fill="white" stroke="#8191a8" stroke-width="1.5"/>
+<path d="M60 970H520Q530 970 530 980V1046H50V980Q50 970 60 970Z" fill="#eaf3ff"/>
+<text x="70" y="995" class="type" text-anchor="start">«Resource : StatusDurationPolicy»</text><text x="70" y="1028" class="name" text-anchor="start">DurationNaturalTime</text>
+<path d="M50 1046H530" stroke="#c4cdd9"/>
+<text x="70" y="1077" class="body" text-anchor="start">remaining_duration &gt; 0 才递减</text><text x="70" y="1104" class="body" text-anchor="start">负时长视为永久</text>
+<path d="M50 1117H530" stroke="#e0e5ee"/>
+<text x="70" y="1144" class="body" text-anchor="start">到期返回 true</text></g></a><a href="../scripts/status/features/feature_periodic_effects.gd"><title>status/features/feature_periodic_effects.gd</title><g><rect x="650" y="970" width="480" height="250" rx="10" fill="white" stroke="#8191a8" stroke-width="1.5"/>
+<path d="M660 970H1120Q1130 970 1130 980V1046H650V980Q650 970 660 970Z" fill="#eaf3ff"/>
+<text x="670" y="995" class="type" text-anchor="start">«Resource : StatusFeature»</text><text x="670" y="1028" class="name" text-anchor="start">FeaturePeriodicEffects</text>
+<path d="M650 1046H1130" stroke="#c4cdd9"/>
+<text x="670" y="1077" class="body" text-anchor="start">period / periodic_effects</text><text x="670" y="1104" class="body" text-anchor="start">timer 存在状态实例中</text>
+<path d="M650 1117H1130" stroke="#e0e5ee"/>
+<text x="670" y="1144" class="body" text-anchor="start">每次更新最多触发一次</text></g></a><a href="../scripts/status/stacking/stacking_refresh_duration.gd"><title>status/stacking/stacking_refresh_duration.gd</title><g><rect x="1250" y="970" width="480" height="250" rx="10" fill="white" stroke="#8191a8" stroke-width="1.5"/>
+<path d="M1260 970H1720Q1730 970 1730 980V1046H1250V980Q1250 970 1260 970Z" fill="#eaf3ff"/>
+<text x="1270" y="995" class="type" text-anchor="start">«Resource : StatusStackingPolicy»</text><text x="1270" y="1028" class="name" text-anchor="start">StackingRefreshDuration</text>
+<path d="M1250 1046H1730" stroke="#c4cdd9"/>
+
+<path d="M1250 1063H1730" stroke="#e0e5ee"/>
+<text x="1270" y="1090" class="body" text-anchor="start">仅刷新持续时间</text></g></a><a href="../scripts/status/stacking/stacking_intensity.gd"><title>status/stacking/stacking_intensity.gd</title><g><rect x="50" y="1350" width="480" height="250" rx="10" fill="white" stroke="#8191a8" stroke-width="1.5"/>
+<path d="M60 1350H520Q530 1350 530 1360V1426H50V1360Q50 1350 60 1350Z" fill="#eaf3ff"/>
+<text x="70" y="1375" class="type" text-anchor="start">«Resource : StatusStackingPolicy»</text><text x="70" y="1408" class="name" text-anchor="start">StackingIntensity</text>
+<path d="M50 1426H530" stroke="#c4cdd9"/>
+
+<path d="M50 1443H530" stroke="#e0e5ee"/>
+<text x="70" y="1470" class="body" text-anchor="start">add_stack(new, true)</text></g></a><a href="../scripts/status/features/feature_event_listener.gd"><title>status/features/feature_event_listener.gd</title><g><rect x="650" y="1350" width="480" height="250" rx="10" fill="white" stroke="#8191a8" stroke-width="1.5"/>
+<path d="M660 1350H1120Q1130 1350 1130 1360V1426H650V1360Q650 1350 660 1350Z" fill="#eaf3ff"/>
+<text x="670" y="1375" class="type" text-anchor="start">«Resource : StatusFeature»</text><text x="670" y="1408" class="name" text-anchor="start">FeatureEventListener</text>
+<path d="M650 1426H1130" stroke="#c4cdd9"/>
+<text x="670" y="1457" class="body" text-anchor="start">trigger_on_events</text><text x="670" y="1484" class="body" text-anchor="start">event_triggered_effects</text>
+<path d="M650 1497H1130" stroke="#e0e5ee"/>
+<text x="670" y="1524" class="body" text-anchor="start">事件匹配 → instance.apply_effects()</text></g></a><a href="../scripts/status/stacking/stacking_refresh_and_stack.gd"><title>status/stacking/stacking_refresh_and_stack.gd</title><g><rect x="1250" y="1350" width="480" height="250" rx="10" fill="white" stroke="#8191a8" stroke-width="1.5"/>
+<path d="M1260 1350H1720Q1730 1350 1730 1360V1426H1250V1360Q1250 1350 1260 1350Z" fill="#eaf3ff"/>
+<text x="1270" y="1375" class="type" text-anchor="start">«Resource : StatusStackingPolicy»</text><text x="1270" y="1408" class="name" text-anchor="start">StackingRefreshAndStack</text>
+<path d="M1250 1426H1730" stroke="#c4cdd9"/>
+
+<path d="M1250 1443H1730" stroke="#e0e5ee"/>
+<text x="1270" y="1470" class="body" text-anchor="start">refresh() → add_stack(new, false)</text></g></a><a href="../scripts/status/stacking/stacking_accumulate_duration.gd"><title>status/stacking/stacking_accumulate_duration.gd</title><g><rect x="1250" y="1730" width="480" height="250" rx="10" fill="white" stroke="#8191a8" stroke-width="1.5"/>
+<path d="M1260 1730H1720Q1730 1730 1730 1740V1806H1250V1740Q1250 1730 1260 1730Z" fill="#eaf3ff"/>
+<text x="1270" y="1755" class="type" text-anchor="start">«Resource : StatusStackingPolicy»</text><text x="1270" y="1788" class="name" text-anchor="start">StackingAccumulateDuration</text>
+<path d="M1250 1806H1730" stroke="#c4cdd9"/>
+
+<path d="M1250 1823H1730" stroke="#e0e5ee"/>
+<text x="1270" y="1850" class="body" text-anchor="start">仅累加时间，不增加层数</text></g></a><rect x="50" y="2090" width="1680" height="172" rx="12" fill="#f1edff" stroke="#8191a8" stroke-width="1.5"/>
+<text x="72" y="2126" class="step" text-anchor="start">实现要点</text><text x="72" y="2160" class="note" text-anchor="start">状态实例持有模板引用、独立持续时间策略副本和 Feature 私有存储；效果执行时逐个深复制。</text><text x="72" y="2189" class="note" text-anchor="start">优先级：高替换、低拒绝、相等交给堆叠策略。叠层会先清旧效果，再按新层数重施效果。</text><text x="72" y="2218" class="note" text-anchor="start">到期先移出活跃表，再执行移除效果、清理修改器 / Feature / 标签 / 状态 Cue。</text>
+</svg>

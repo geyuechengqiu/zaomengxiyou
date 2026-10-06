@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="2292" viewBox="0 0 1800 2292" role="img" aria-labelledby="title description">
+<title id="title">全部技能动作节点：行为树与运行系统的连接点</title><desc id="description">当前源码类图 · 框内列出关键成员；«类型 : 基类»补充未连线的继承关系 · 点击类框可打开源码</desc>
+<defs>
+  <marker id="arrow" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="9" markerHeight="9" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="none" stroke="#52637a" stroke-width="1.4"/></marker>
+  <marker id="inherit" viewBox="0 0 16 16" refX="16" refY="8" markerWidth="13" markerHeight="13" orient="auto"><path d="M0 0L16 8L0 16Z" fill="white" stroke="#52637a" stroke-width="1.4"/></marker>
+  <marker id="owned" viewBox="-9 -7 18 14" refX="0" refY="0" markerWidth="13" markerHeight="11" orient="auto"><path d="M-8 0L0 -6L8 0L0 6Z" fill="#52637a" stroke="#52637a"/></marker>
+  <marker id="shared" viewBox="-9 -7 18 14" refX="0" refY="0" markerWidth="13" markerHeight="11" orient="auto"><path d="M-8 0L0 -6L8 0L0 6Z" fill="white" stroke="#52637a"/></marker>
+</defs>
+<style>
+  text{font-family:'Microsoft YaHei','Noto Sans CJK SC',Arial,sans-serif;fill:#243449}
+  .title{font-size:34px;font-weight:700}.subtitle{font-size:20px;fill:#53657c}
+  .name{font-family:Consolas,'Microsoft YaHei',monospace;font-size:22px;font-weight:700}
+  .type{font-size:16px;fill:#596c84}.body{font-family:Consolas,'Microsoft YaHei',monospace;font-size:18px}
+  .label{font-size:17px;paint-order:stroke;stroke:#fbfcff;stroke-width:6px;stroke-linejoin:round}
+  .note{font-size:19px;fill:#52637a}.step{font-size:22px;font-weight:700}
+  .edge{fill:none;stroke:#52637a;stroke-width:2}.dependency{stroke-dasharray:8 6}
+</style>
+<rect width="1800" height="2292" fill="#fbfcff"/>
+<text x="50" y="60" class="title" text-anchor="start">全部技能动作节点：行为树与运行系统的连接点</text><text x="50" y="98" class="subtitle" text-anchor="start">当前源码类图 · 框内列出关键成员；«类型 : 基类»补充未连线的继承关系 · 点击类框可打开源码</text>
+<path d="M50 145H120" class="edge " marker-end="url(#inherit)"/><text x="135" y="151" class="note" text-anchor="start">继承（箭头指向基类）</text><path d="M480 145H550" class="edge " marker-start="url(#owned)"/><text x="565" y="151" class="note" text-anchor="start">拥有运行时对象</text><path d="M850 145H920" class="edge " marker-start="url(#shared)"/><text x="935" y="151" class="note" text-anchor="start">引用 / 聚合共享配置</text><path d="M1340 145H1410" class="edge dependency" marker-end="url(#arrow)"/><text x="1425" y="151" class="note" text-anchor="start">调用 / 创建依赖</text><path d="M890 590V460" class="edge " marker-end="url(#inherit)"/><text x="905" y="520" class="label" text-anchor="start">所有动作继承此基类</text><a href="../scripts/abilities/ability_nodes/ability_node_base.gd"><title>abilities/ability_nodes/ability_node_base.gd</title><g><rect x="650" y="210" width="480" height="250" rx="10" fill="white" stroke="#8191a8" stroke-width="1.5"/>
+<path d="M660 210H1120Q1130 210 1130 220V286H650V220Q650 210 660 210Z" fill="#eaf3ff"/>
+<text x="670" y="235" class="type" text-anchor="start">«abstract Resource : BTAction»</text><text x="670" y="268" class="name" text-anchor="start">AbilityNodeBase</text>
+<path d="M650 286H1130" stroke="#c4cdd9"/>
+<text x="670" y="317" class="body" text-anchor="start">target_key = targets</text>
+<path d="M650 330H1130" stroke="#e0e5ee"/>
+<text x="670" y="357" class="body" text-anchor="start">_get_context() / _get_target_list()</text><text x="670" y="384" class="body" text-anchor="start">_get_first_target() / _validate_context()</text></g></a><a href="../scripts/abilities/ability_nodes/ability_node_target_search.gd"><title>abilities/ability_nodes/ability_node_target_search.gd</title><g><rect x="50" y="590" width="480" height="250" rx="10" fill="white" stroke="#8191a8" stroke-width="1.5"/>
+<path d="M60 590H520Q530 590 530 600V666H50V600Q50 590 60 590Z" fill="#eaf3ff"/>
+<text x="70" y="615" class="type" text-anchor="start">«Resource : AbilityNodeBase»</text><text x="70" y="648" class="name" text-anchor="start">AbilityNodeTargetSearch</text>
+<path d="M50 666H530" stroke="#c4cdd9"/>
+<text x="70" y="697" class="body" text-anchor="start">strategy / input_target_key</text><text x="70" y="724" class="body" text-anchor="start">write_to_key / fail_if_empty</text>
+<path d="M50 737H530" stroke="#e0e5ee"/>
+<text x="70" y="764" class="body" text-anchor="start">策略查询 → 写黑板目标列表</text></g></a><a href="../scripts/abilities/ability_nodes/ability_node_commit_cooldown.gd"><title>abilities/ability_nodes/ability_node_commit_cooldown.gd</title><g><rect x="650" y="590" width="480" height="250" rx="10" fill="white" stroke="#8191a8" stroke-width="1.5"/>
+<path d="M660 590H1120Q1130 590 1130 600V666H650V600Q650 590 660 590Z" fill="#eaf3ff"/>
+<text x="670" y="615" class="type" text-anchor="start">«Resource : AbilityNodeBase»</text><text x="670" y="648" class="name" text-anchor="start">AbilityNodeCommitCooldown</text>
+<path d="M650 666H1130" stroke="#c4cdd9"/>
+<text x="670" y="697" class="body" text-anchor="start">cooldown_feature_name</text>
+<path d="M650 710H1130" stroke="#e0e5ee"/>
+<text x="670" y="737" class="body" text-anchor="start">取 Feature → start_cooldown()</text></g></a><a href="../scripts/abilities/ability_nodes/ability_node_commit_cost.gd"><title>abilities/ability_nodes/ability_node_commit_cost.gd</title><g><rect x="1250" y="590" width="480" height="250" rx="10" fill="white" stroke="#8191a8" stroke-width="1.5"/>
+<path d="M1260 590H1720Q1730 590 1730 600V666H1250V600Q1250 590 1260 590Z" fill="#eaf3ff"/>
+<text x="1270" y="615" class="type" text-anchor="start">«Resource : AbilityNodeBase»</text><text x="1270" y="648" class="name" text-anchor="start">AbilityNodeCommitCost</text>
+<path d="M1250 666H1730" stroke="#c4cdd9"/>
+<text x="1270" y="697" class="body" text-anchor="start">cost_feature_name</text>
+<path d="M1250 710H1730" stroke="#e0e5ee"/>
+<text x="1270" y="737" class="body" text-anchor="start">调用 try_pay()，未传递失败结果</text></g></a><a href="../scripts/abilities/ability_nodes/ability_node_apply_effect.gd"><title>abilities/ability_nodes/ability_node_apply_effect.gd</title><g><rect x="50" y="970" width="480" height="250" rx="10" fill="white" stroke="#8191a8" stroke-width="1.5"/>
+<path d="M60 970H520Q530 970 530 980V1046H50V980Q50 970 60 970Z" fill="#fff3df"/>
+<text x="70" y="995" class="type" text-anchor="start">«Resource : AbilityNodeBase»</text><text x="70" y="1028" class="name" text-anchor="start">AbilityNodeApplyEffect</text>
+<path d="M50 1046H530" stroke="#c4cdd9"/>
+<text x="70" y="1077" class="body" text-anchor="start">effects / effect_key</text>
+<path d="M50 1090H530" stroke="#e0e5ee"/>
+<text x="70" y="1117" class="body" text-anchor="start">逐目标克隆并 apply()</text></g></a><a href="../scripts/abilities/ability_nodes/ability_node_apply_status.gd"><title>abilities/ability_nodes/ability_node_apply_status.gd</title><g><rect x="650" y="970" width="480" height="250" rx="10" fill="white" stroke="#8191a8" stroke-width="1.5"/>
+<path d="M660 970H1120Q1130 970 1130 980V1046H650V980Q650 970 660 970Z" fill="#eaf3ff"/>
+<text x="670" y="995" class="type" text-anchor="start">«Resource : AbilityNodeBase»</text><text x="670" y="1028" class="name" text-anchor="start">AbilityNodeApplyStatus</text>
+<path d="M650 1046H1130" stroke="#c4cdd9"/>
+<text x="670" y="1077" class="body" text-anchor="start">statuses: Dictionary</text>
+<path d="M650 1090H1130" stroke="#e0e5ee"/>
+<text x="670" y="1117" class="body" text-anchor="start">逐目标 apply_status()</text></g></a><a href="../scripts/abilities/ability_nodes/ability_node_remove_status.gd"><title>abilities/ability_nodes/ability_node_remove_status.gd</title><g><rect x="1250" y="970" width="480" height="250" rx="10" fill="white" stroke="#8191a8" stroke-width="1.5"/>
+<path d="M1260 970H1720Q1730 970 1730 980V1046H1250V980Q1250 970 1260 970Z" fill="#eaf3ff"/>
+<text x="1270" y="995" class="type" text-anchor="start">«Resource : AbilityNodeBase»</text><text x="1270" y="1028" class="name" text-anchor="start">AbilityNodeRemoveStatus</text>
+<path d="M1250 1046H1730" stroke="#c4cdd9"/>
+<text x="1270" y="1077" class="body" text-anchor="start">status_ids: Array</text>
+<path d="M1250 1090H1730" stroke="#e0e5ee"/>
+<text x="1270" y="1117" class="body" text-anchor="start">按 ID 清理；空目标回退施法者</text></g></a><a href="../scripts/abilities/ability_nodes/ability_node_spawn_projectile.gd"><title>abilities/ability_nodes/ability_node_spawn_projectile.gd</title><g><rect x="50" y="1350" width="480" height="250" rx="10" fill="white" stroke="#8191a8" stroke-width="1.5"/>
+<path d="M60 1350H520Q530 1350 530 1360V1426H50V1360Q50 1350 60 1350Z" fill="#eaf3ff"/>
+<text x="70" y="1375" class="type" text-anchor="start">«Resource : AbilityNodeBase»</text><text x="70" y="1408" class="name" text-anchor="start">AbilityNodeSpawnProjectile</text>
+<path d="M50 1426H530" stroke="#c4cdd9"/>
+<text x="70" y="1457" class="body" text-anchor="start">projectile_data / count / spread</text>
+<path d="M50 1470H530" stroke="#e0e5ee"/>
+<text x="70" y="1497" class="body" text-anchor="start">散射 / 数据注入 / 弹头替换</text></g></a><a href="../scripts/abilities/ability_nodes/ability_node_spawn_magic_field.gd"><title>abilities/ability_nodes/ability_node_spawn_magic_field.gd</title><g><rect x="650" y="1350" width="480" height="250" rx="10" fill="white" stroke="#8191a8" stroke-width="1.5"/>
+<path d="M660 1350H1120Q1130 1350 1130 1360V1426H650V1360Q650 1350 660 1350Z" fill="#eaf3ff"/>
+<text x="670" y="1375" class="type" text-anchor="start">«Resource : AbilityNodeBase»</text><text x="670" y="1408" class="name" text-anchor="start">AbilityNodeSpawnMagicField</text>
+<path d="M650 1426H1130" stroke="#c4cdd9"/>
+<text x="670" y="1457" class="body" text-anchor="start">magic_field_data / position_key</text>
+<path d="M650 1470H1130" stroke="#e0e5ee"/>
+<text x="670" y="1497" class="body" text-anchor="start">位置回退 / 挂载 / 数据注入</text></g></a><a href="../scripts/abilities/ability_nodes/ability_node_face_target.gd"><title>abilities/ability_nodes/ability_node_face_target.gd</title><g><rect x="1250" y="1350" width="480" height="250" rx="10" fill="white" stroke="#8191a8" stroke-width="1.5"/>
+<path d="M1260 1350H1720Q1730 1350 1730 1360V1426H1250V1360Q1250 1350 1260 1350Z" fill="#eaf3ff"/>
+<text x="1270" y="1375" class="type" text-anchor="start">«Resource : AbilityNodeBase»</text><text x="1270" y="1408" class="name" text-anchor="start">AbilityNodeFaceTarget</text>
+<path d="M1250 1426H1730" stroke="#c4cdd9"/>
+<text x="1270" y="1457" class="body" text-anchor="start">instant / rotation_speed</text>
+<path d="M1250 1470H1730" stroke="#e0e5ee"/>
+<text x="1270" y="1497" class="body" text-anchor="start">转向视觉节点；插值时 RUNNING</text></g></a><a href="../scripts/abilities/ability_nodes/ability_node_apply_cost.gd"><title>abilities/ability_nodes/ability_node_apply_cost.gd</title><g><rect x="50" y="1730" width="480" height="250" rx="10" fill="white" stroke="#8191a8" stroke-width="1.5"/>
+<path d="M60 1730H520Q530 1730 530 1740V1806H50V1740Q50 1730 60 1730Z" fill="#eaf3ff"/>
+<text x="70" y="1755" class="type" text-anchor="start">«Resource : AbilityNodeBase»</text><text x="70" y="1788" class="name" text-anchor="start">AbilityNodeApplyCost</text>
+<path d="M50 1806H530" stroke="#c4cdd9"/>
+<text x="70" y="1837" class="body" text-anchor="start">vital_id / cost_amount</text><text x="70" y="1864" class="body" text-anchor="start">allow_overdraft / check_only</text>
+<path d="M50 1877H530" stroke="#e0e5ee"/>
+<text x="70" y="1904" class="body" text-anchor="start">首目标 Vital 检查与直接扣值</text></g></a><a href="../scripts/abilities/ability_nodes/ability_node_play_animation.gd"><title>abilities/ability_nodes/ability_node_play_animation.gd</title><g><rect x="650" y="1730" width="480" height="250" rx="10" fill="white" stroke="#8191a8" stroke-width="1.5"/>
+<path d="M660 1730H1120Q1130 1730 1130 1740V1806H650V1740Q650 1730 660 1730Z" fill="#eaf3ff"/>
+<text x="670" y="1755" class="type" text-anchor="start">«Resource : AbilityNodeBase»</text><text x="670" y="1788" class="name" text-anchor="start">AbilityNodePlayAnimation</text>
+<path d="M650 1806H1130" stroke="#c4cdd9"/>
+<text x="670" y="1837" class="body" text-anchor="start">animation_name / speed / method</text>
+<path d="M650 1850H1130" stroke="#e0e5ee"/>
+<text x="670" y="1877" class="body" text-anchor="start">_enter(): 调宿主动画方法</text><text x="670" y="1904" class="body" text-anchor="start">_tick(): 立即 SUCCESS</text></g></a><rect x="50" y="2090" width="1680" height="172" rx="12" fill="#f1edff" stroke="#8191a8" stroke-width="1.5"/>
+<text x="72" y="2126" class="step" text-anchor="start">实现要点</text><text x="72" y="2160" class="note" text-anchor="start">基类读取黑板 context 与目标键；目标既可以是单个 Node，也可以是数组。</text><text x="72" y="2189" class="note" text-anchor="start">动作按各自规则返回 SUCCESS / FAILURE / RUNNING；Effect.apply 返回 void，二者不共享成功协议。</text><text x="72" y="2218" class="note" text-anchor="start">空目标回退仅在各动作明确启用时生效；冷却、费用与已产生效果没有自动事务回滚。</text>
+</svg>

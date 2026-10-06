@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="1532" viewBox="0 0 1800 1532" role="img" aria-labelledby="title description">
+<title id="title">技能定义系统：五种模板如何构造执行树</title><desc id="description">当前源码类图 · 框内列出关键成员；«类型 : 基类»补充未连线的继承关系 · 点击类框可打开源码</desc>
+<defs>
+  <marker id="arrow" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="9" markerHeight="9" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="none" stroke="#52637a" stroke-width="1.4"/></marker>
+  <marker id="inherit" viewBox="0 0 16 16" refX="16" refY="8" markerWidth="13" markerHeight="13" orient="auto"><path d="M0 0L16 8L0 16Z" fill="white" stroke="#52637a" stroke-width="1.4"/></marker>
+  <marker id="owned" viewBox="-9 -7 18 14" refX="0" refY="0" markerWidth="13" markerHeight="11" orient="auto"><path d="M-8 0L0 -6L8 0L0 6Z" fill="#52637a" stroke="#52637a"/></marker>
+  <marker id="shared" viewBox="-9 -7 18 14" refX="0" refY="0" markerWidth="13" markerHeight="11" orient="auto"><path d="M-8 0L0 -6L8 0L0 6Z" fill="white" stroke="#52637a"/></marker>
+</defs>
+<style>
+  text{font-family:'Microsoft YaHei','Noto Sans CJK SC',Arial,sans-serif;fill:#243449}
+  .title{font-size:34px;font-weight:700}.subtitle{font-size:20px;fill:#53657c}
+  .name{font-family:Consolas,'Microsoft YaHei',monospace;font-size:22px;font-weight:700}
+  .type{font-size:16px;fill:#596c84}.body{font-family:Consolas,'Microsoft YaHei',monospace;font-size:18px}
+  .label{font-size:17px;paint-order:stroke;stroke:#fbfcff;stroke-width:6px;stroke-linejoin:round}
+  .note{font-size:19px;fill:#52637a}.step{font-size:22px;font-weight:700}
+  .edge{fill:none;stroke:#52637a;stroke-width:2}.dependency{stroke-dasharray:8 6}
+</style>
+<rect width="1800" height="1532" fill="#fbfcff"/>
+<text x="50" y="60" class="title" text-anchor="start">技能定义系统：五种模板如何构造执行树</text><text x="50" y="98" class="subtitle" text-anchor="start">当前源码类图 · 框内列出关键成员；«类型 : 基类»补充未连线的继承关系 · 点击类框可打开源码</text>
+<path d="M50 145H120" class="edge " marker-end="url(#inherit)"/><text x="135" y="151" class="note" text-anchor="start">继承（箭头指向基类）</text><path d="M480 145H550" class="edge " marker-start="url(#owned)"/><text x="565" y="151" class="note" text-anchor="start">拥有运行时对象</text><path d="M850 145H920" class="edge " marker-start="url(#shared)"/><text x="935" y="151" class="note" text-anchor="start">引用 / 聚合共享配置</text><path d="M1340 145H1410" class="edge dependency" marker-end="url(#arrow)"/><text x="1425" y="151" class="note" text-anchor="start">调用 / 创建依赖</text><path d="M530 335H650" class="edge dependency" marker-end="url(#arrow)"/><text x="590" y="318" class="label" text-anchor="middle">工厂创建实例</text><path d="M1130 335H1250" class="edge " marker-start="url(#shared)"/><text x="1190" y="296" class="label" text-anchor="middle">BTInstance </text><text x="1190" y="318" class="label" text-anchor="middle">引用树根</text><path d="M290 590V460" class="edge " marker-end="url(#inherit)"/><path d="M290 970V840" class="edge " marker-end="url(#inherit)"/><path d="M1490 970V840" class="edge " marker-end="url(#inherit)"/><a href="../scripts/abilities/gameplay_ability_definition.gd"><title>abilities/gameplay_ability_definition.gd</title><g><rect x="50" y="210" width="480" height="250" rx="10" fill="white" stroke="#8191a8" stroke-width="1.5"/>
+<path d="M60 210H520Q530 210 530 220V286H50V220Q50 210 60 210Z" fill="#eaf3ff"/>
+<text x="70" y="235" class="type" text-anchor="start">«Resource»</text><text x="70" y="268" class="name" text-anchor="start">GameplayAbilityDefinition</text>
+<path d="M50 286H530" stroke="#c4cdd9"/>
+<text x="70" y="317" class="body" text-anchor="start">ability_id / execution_tree / features</text><text x="70" y="344" class="body" text-anchor="start">preview_strategy / blackboard_defaults</text>
+<path d="M50 357H530" stroke="#e0e5ee"/>
+<text x="70" y="384" class="body" text-anchor="start">create_instance(owner)</text></g></a><a href="../scripts/abilities/gameplay_ability_instance.gd"><title>abilities/gameplay_ability_instance.gd</title><g><rect x="650" y="210" width="480" height="250" rx="10" fill="white" stroke="#8191a8" stroke-width="1.5"/>
+<path d="M660 210H1120Q1130 210 1130 220V286H650V220Q650 210 660 210Z" fill="#e9f8f2"/>
+<text x="670" y="235" class="type" text-anchor="start">«RefCounted»</text><text x="670" y="268" class="name" text-anchor="start">GameplayAbilityInstance</text>
+<path d="M650 286H1130" stroke="#c4cdd9"/>
+<text x="670" y="317" class="body" text-anchor="start">_definition / _features / _blackboard</text>
+<path d="M650 330H1130" stroke="#e0e5ee"/>
+<text x="670" y="357" class="body" text-anchor="start">try_activate() / update() / end_ability()</text></g></a><a href="../scripts/behavior_tree/bt_node.gd"><title>behavior_tree/bt_node.gd</title><g><rect x="1250" y="210" width="480" height="250" rx="10" fill="white" stroke="#8191a8" stroke-width="1.5"/>
+<path d="M1260 210H1720Q1730 210 1730 220V286H1250V220Q1250 210 1260 210Z" fill="#eaf3ff"/>
+<text x="1270" y="235" class="type" text-anchor="start">«abstract Resource»</text><text x="1270" y="268" class="name" text-anchor="start">BTNode</text>
+<path d="M1250 286H1730" stroke="#c4cdd9"/>
+<text x="1270" y="317" class="body" text-anchor="start">Resource 组成静态执行图</text>
+<path d="M1250 330H1730" stroke="#e0e5ee"/>
+<text x="1270" y="357" class="body" text-anchor="start">tick(instance, delta)</text></g></a><a href="../scripts/abilities/definitions/active_ability_definition.gd"><title>abilities/definitions/active_ability_definition.gd</title><g><rect x="50" y="590" width="480" height="250" rx="10" fill="white" stroke="#8191a8" stroke-width="1.5"/>
+<path d="M60 590H520Q530 590 530 600V666H50V600Q50 590 60 590Z" fill="#eaf3ff"/>
+<text x="70" y="615" class="type" text-anchor="start">«Resource : AbilityDefinition»</text><text x="70" y="648" class="name" text-anchor="start">ActiveAbilityDefinition</text>
+<path d="M50 666H530" stroke="#c4cdd9"/>
+<text x="70" y="697" class="body" text-anchor="start">effects / costs / targeting_strategy</text><text x="70" y="724" class="body" text-anchor="start">pre_cast_delay / post_cast_delay</text>
+<path d="M50 737H530" stroke="#e0e5ee"/>
+<text x="70" y="764" class="body" text-anchor="start">_build_default_behavior_tree()</text><text x="70" y="791" class="body" text-anchor="start">_inject_features_to_instance()</text></g></a><a href="../scripts/abilities/definitions/combo_ability_definition.gd"><title>abilities/definitions/combo_ability_definition.gd</title><g><rect x="650" y="590" width="480" height="250" rx="10" fill="white" stroke="#8191a8" stroke-width="1.5"/>
+<path d="M660 590H1120Q1130 590 1130 600V666H650V600Q650 590 660 590Z" fill="#eaf3ff"/>
+<text x="670" y="615" class="type" text-anchor="start">«Resource : AbilityDefinition»</text><text x="670" y="648" class="name" text-anchor="start">ComboAbilityDefinition</text>
+<path d="M650 666H1130" stroke="#c4cdd9"/>
+<text x="670" y="697" class="body" text-anchor="start">combo_steps: Array[ActiveDefinition]</text><text x="670" y="724" class="body" text-anchor="start">window_duration / costs / cooldown</text>
+<path d="M650 737H1130" stroke="#e0e5ee"/>
+<text x="670" y="764" class="body" text-anchor="start">_build_combo_tree()</text><text x="670" y="791" class="body" text-anchor="start">BTSwitch + BTWaitSignal + Repeat</text></g></a><a href="../scripts/abilities/definitions/toggle_ability_definition.gd"><title>abilities/definitions/toggle_ability_definition.gd</title><g><rect x="1250" y="590" width="480" height="250" rx="10" fill="white" stroke="#8191a8" stroke-width="1.5"/>
+<path d="M1260 590H1720Q1730 590 1730 600V666H1250V600Q1250 590 1260 590Z" fill="#eaf3ff"/>
+<text x="1270" y="615" class="type" text-anchor="start">«Resource : AbilityDefinition»</text><text x="1270" y="648" class="name" text-anchor="start">ToggleAbilityDefinition</text>
+<path d="M1250 666H1730" stroke="#c4cdd9"/>
+<text x="1270" y="697" class="body" text-anchor="start">toggle_statuses / icon_when_active</text><text x="1270" y="724" class="body" text-anchor="start">costs / cooldown / targeting_strategy</text>
+<path d="M1250 737H1730" stroke="#e0e5ee"/>
+<text x="1270" y="764" class="body" text-anchor="start">turn_on / keep_on / turn_off 分支</text></g></a><a href="../scripts/abilities/definitions/projectile_ability_definition.gd"><title>abilities/definitions/projectile_ability_definition.gd</title><g><rect x="50" y="970" width="480" height="250" rx="10" fill="white" stroke="#8191a8" stroke-width="1.5"/>
+<path d="M60 970H520Q530 970 530 980V1046H50V980Q50 970 60 970Z" fill="#eaf3ff"/>
+<text x="70" y="995" class="type" text-anchor="start">«Resource : ActiveAbilityDefinition»</text><text x="70" y="1028" class="name" text-anchor="start">ProjectileAbilityDefinition</text>
+<path d="M50 1046H530" stroke="#c4cdd9"/>
+<text x="70" y="1077" class="body" text-anchor="start">projectile_data / count / spread</text>
+<path d="M50 1090H530" stroke="#e0e5ee"/>
+<text x="70" y="1117" class="body" text-anchor="start">_build_effect_nodes(): 转身 → 发射</text></g></a><a href="../scripts/abilities/definitions/sacrifice_ability_definition.gd"><title>abilities/definitions/sacrifice_ability_definition.gd</title><g><rect x="1250" y="970" width="480" height="250" rx="10" fill="white" stroke="#8191a8" stroke-width="1.5"/>
+<path d="M1260 970H1720Q1730 970 1730 980V1046H1250V980Q1250 970 1260 970Z" fill="#eaf3ff"/>
+<text x="1270" y="995" class="type" text-anchor="start">«Resource : ToggleAbilityDefinition»</text><text x="1270" y="1028" class="name" text-anchor="start">SacrificeAbilityDefinition</text>
+<path d="M1250 1046H1730" stroke="#c4cdd9"/>
+<text x="1270" y="1077" class="body" text-anchor="start">periodic_health_cost / interval</text><text x="1270" y="1104" class="body" text-anchor="start">area_targeting_strategy / damage_effect</text>
+<path d="M1250 1117H1730" stroke="#e0e5ee"/>
+<text x="1270" y="1144" class="body" text-anchor="start">保持分支：扣血 → 区域目标 → 效果</text></g></a><rect x="50" y="1330" width="1680" height="172" rx="12" fill="#f1edff" stroke="#8191a8" stroke-width="1.5"/>
+<text x="72" y="1366" class="step" text-anchor="start">实现要点</text><text x="72" y="1400" class="note" text-anchor="start">模板优先使用显式 execution_tree，否则缓存默认树。节点资源共享，执行进度存于 BTInstance / Blackboard。</text><text x="72" y="1429" class="note" text-anchor="start">主动技能先提交冷却 / 消耗再效果；连击整体付费并等待后续输入；切换技能开启加状态、关闭移除状态。</text><text x="72" y="1458" class="note" text-anchor="start">组合模板仅生成节点和注入 Feature，不替代下层系统的成功检查或清理机制。</text>
+</svg>

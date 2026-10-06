@@ -1,0 +1,96 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="1730" viewBox="0 0 1800 1730" role="img" aria-labelledby="title description">
+<title id="title">效果与状态类图</title><desc id="description">效果负责一次逻辑操作；状态保存持续数据并重复调度效果 · 所有具体 GE_* 子类见 README</desc>
+<defs>
+  <marker id="arrow" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="9" markerHeight="9" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="none" stroke="#52637a" stroke-width="1.4"/></marker>
+  <marker id="inherit" viewBox="0 0 16 16" refX="16" refY="8" markerWidth="13" markerHeight="13" orient="auto"><path d="M0 0L16 8L0 16Z" fill="white" stroke="#52637a" stroke-width="1.4"/></marker>
+  <marker id="owned" viewBox="-9 -7 18 14" refX="0" refY="0" markerWidth="13" markerHeight="11" orient="auto"><path d="M-8 0L0 -6L8 0L0 6Z" fill="#52637a" stroke="#52637a"/></marker>
+  <marker id="shared" viewBox="-9 -7 18 14" refX="0" refY="0" markerWidth="13" markerHeight="11" orient="auto"><path d="M-8 0L0 -6L8 0L0 6Z" fill="white" stroke="#52637a"/></marker>
+</defs>
+<style>
+  text{font-family:'Microsoft YaHei','Noto Sans CJK SC',Arial,sans-serif;fill:#243449}
+  .title{font-size:34px;font-weight:700}.subtitle{font-size:20px;fill:#53657c}
+  .name{font-family:Consolas,'Microsoft YaHei',monospace;font-size:22px;font-weight:700}
+  .type{font-size:16px;fill:#596c84}.body{font-family:Consolas,'Microsoft YaHei',monospace;font-size:18px}
+  .label{font-size:17px;paint-order:stroke;stroke:#fbfcff;stroke-width:6px;stroke-linejoin:round}
+  .note{font-size:19px;fill:#52637a}.step{font-size:22px;font-weight:700}
+  .edge{fill:none;stroke:#52637a;stroke-width:2}.dependency{stroke-dasharray:8 6}
+</style>
+<rect width="1800" height="1730" fill="#fbfcff"/>
+<text x="50" y="60" class="title" text-anchor="start">效果与状态类图</text><text x="50" y="98" class="subtitle" text-anchor="start">效果负责一次逻辑操作；状态保存持续数据并重复调度效果 · 所有具体 GE_* 子类见 README</text>
+<path d="M50 145H120" class="edge " marker-end="url(#inherit)"/><text x="135" y="151" class="note" text-anchor="start">继承（箭头指向基类）</text><path d="M480 145H550" class="edge " marker-start="url(#owned)"/><text x="565" y="151" class="note" text-anchor="start">拥有运行时对象</text><path d="M850 145H920" class="edge " marker-start="url(#shared)"/><text x="935" y="151" class="note" text-anchor="start">引用 / 聚合共享配置</text><path d="M1340 145H1410" class="edge dependency" marker-end="url(#arrow)"/><text x="1425" y="151" class="note" text-anchor="start">调用 / 创建依赖</text><a href="../scripts/filters/gameplay_filter.gd"><title>filters/gameplay_filter.gd</title><g><rect x="50" y="220" width="480" height="190" rx="10" fill="white" stroke="#8191a8" stroke-width="1.5"/>
+<path d="M60 220H520Q530 220 530 230V296H50V230Q50 220 60 220Z" fill="#eaf3ff"/>
+<text x="70" y="245" class="type" text-anchor="start">«abstract Resource» 目标准入</text><text x="70" y="278" class="name" text-anchor="start">GameplayFilterData</text>
+<path d="M50 296H530" stroke="#c4cdd9"/>
+
+<path d="M50 313H530" stroke="#e0e5ee"/>
+<text x="70" y="340" class="body" text-anchor="start">check(target, instigator, context)</text></g></a><a href="../scripts/effects/gameplay_effect.gd"><title>effects/gameplay_effect.gd</title><g><rect x="650" y="220" width="480" height="250" rx="10" fill="white" stroke="#8191a8" stroke-width="1.5"/>
+<path d="M660 220H1120Q1130 220 1130 230V296H650V230Q650 220 660 220Z" fill="#fff3df"/>
+<text x="670" y="245" class="type" text-anchor="start">«abstract Resource» 效果模板</text><text x="670" y="278" class="name" text-anchor="start">GameplayEffect</text>
+<path d="M650 296H1130" stroke="#c4cdd9"/>
+<text x="670" y="327" class="body" text-anchor="start">filters / sub_effects: Array</text><text x="670" y="354" class="body" text-anchor="start">required_tags / blocked_tags / cue</text>
+<path d="M650 367H1130" stroke="#e0e5ee"/>
+<text x="670" y="394" class="body" text-anchor="start">apply(): 准入 → 逻辑 → Cue → 子效果</text><text x="670" y="421" class="body" text-anchor="start">remove(): _remove() → 子效果</text></g></a><a href="../scripts/cues/gameplay_cue.gd"><title>cues/gameplay_cue.gd</title><g><rect x="1250" y="220" width="480" height="190" rx="10" fill="white" stroke="#8191a8" stroke-width="1.5"/>
+<path d="M1260 220H1720Q1730 220 1730 230V296H1250V230Q1250 220 1260 220Z" fill="#eaf3ff"/>
+<text x="1270" y="245" class="type" text-anchor="start">«Resource» 表现组合</text><text x="1270" y="278" class="name" text-anchor="start">GameplayCue</text>
+<path d="M1250 296H1730" stroke="#c4cdd9"/>
+<text x="1270" y="327" class="body" text-anchor="start">cues: Array[GameplayCueBase]</text>
+<path d="M1250 340H1730" stroke="#e0e5ee"/>
+<text x="1270" y="367" class="body" text-anchor="start">由 GameplayCueManager 执行</text></g></a><a href="../scripts/effects/ge_apply_damage.gd"><title>effects/ge_apply_damage.gd</title><g><rect x="50" y="600" width="480" height="230" rx="10" fill="white" stroke="#8191a8" stroke-width="1.5"/>
+<path d="M60 600H520Q530 600 530 610V676H50V610Q50 600 60 600Z" fill="#fff3df"/>
+<text x="70" y="625" class="type" text-anchor="start">«Resource» 伤害操作</text><text x="70" y="658" class="name" text-anchor="start">GE_ApplyDamage</text>
+<path d="M50 676H530" stroke="#c4cdd9"/>
+<text x="70" y="707" class="body" text-anchor="start">damage_multiplier / damage_strategy</text><text x="70" y="734" class="body" text-anchor="start">vital_id = health</text>
+<path d="M50 747H530" stroke="#e0e5ee"/>
+<text x="70" y="774" class="body" text-anchor="start">_apply(): 计算并提交 DamageInfo</text></g></a><a href="../scripts/effects/ge_apply_status.gd"><title>effects/ge_apply_status.gd</title><g><rect x="650" y="600" width="480" height="230" rx="10" fill="white" stroke="#8191a8" stroke-width="1.5"/>
+<path d="M660 600H1120Q1130 600 1130 610V676H650V610Q650 600 660 600Z" fill="#fff3df"/>
+<text x="670" y="625" class="type" text-anchor="start">«Resource» 状态操作</text><text x="670" y="658" class="name" text-anchor="start">GE_ApplyStatus</text>
+<path d="M650 676H1130" stroke="#c4cdd9"/>
+<text x="670" y="707" class="body" text-anchor="start">status_data: GameplayStatusData</text><text x="670" y="734" class="body" text-anchor="start">stacks: int</text>
+<path d="M650 747H1130" stroke="#e0e5ee"/>
+<text x="670" y="774" class="body" text-anchor="start">_apply(): status_comp.apply_status()</text></g></a><a href="../scripts/effects/ge_attribute_modifier.gd"><title>effects/ge_attribute_modifier.gd</title><g><rect x="1250" y="600" width="480" height="230" rx="10" fill="white" stroke="#8191a8" stroke-width="1.5"/>
+<path d="M1260 600H1720Q1730 600 1730 610V676H1250V610Q1250 600 1260 600Z" fill="#fff3df"/>
+<text x="1270" y="625" class="type" text-anchor="start">«Resource» 属性操作</text><text x="1270" y="658" class="name" text-anchor="start">GE_AttributeModifier</text>
+<path d="M1250 676H1730" stroke="#c4cdd9"/>
+<text x="1270" y="707" class="body" text-anchor="start">modifiers: Array[AttributeModifier]</text><text x="1270" y="734" class="body" text-anchor="start">source_id: StringName</text>
+<path d="M1250 747H1730" stroke="#e0e5ee"/>
+<text x="1270" y="774" class="body" text-anchor="start">_apply() / _remove()</text></g></a><a href="../scripts/attributes/vitals/health_vital.gd"><title>attributes/vitals/health_vital.gd</title><g><rect x="50" y="960" width="480" height="210" rx="10" fill="white" stroke="#8191a8" stroke-width="1.5"/>
+<path d="M60 960H520Q530 960 530 970V1036H50V970Q50 960 60 960Z" fill="#e9f8f2"/>
+<text x="70" y="985" class="type" text-anchor="start">«Resource» 运行时生命值</text><text x="70" y="1018" class="name" text-anchor="start">HealthVital</text>
+<path d="M50 1036H530" stroke="#c4cdd9"/>
+<text x="70" y="1067" class="body" text-anchor="start">current_value / is_alive</text>
+<path d="M50 1080H530" stroke="#e0e5ee"/>
+<text x="70" y="1107" class="body" text-anchor="start">apply_damage(info, owner)</text><text x="70" y="1134" class="body" text-anchor="start">damage_received / damage_applied</text></g></a><a href="../scripts/components/gameplay_status_component.gd"><title>components/gameplay_status_component.gd</title><g><rect x="650" y="960" width="480" height="210" rx="10" fill="white" stroke="#8191a8" stroke-width="1.5"/>
+<path d="M660 960H1120Q1130 960 1130 970V1036H650V970Q650 960 660 960Z" fill="#e9f8f2"/>
+<text x="670" y="985" class="type" text-anchor="start">«Node» 活跃状态容器</text><text x="670" y="1018" class="name" text-anchor="start">GameplayStatusComponent</text>
+<path d="M650 1036H1130" stroke="#c4cdd9"/>
+<text x="670" y="1067" class="body" text-anchor="start">_active_statuses: Dictionary</text>
+<path d="M650 1080H1130" stroke="#e0e5ee"/>
+<text x="670" y="1107" class="body" text-anchor="start">apply_status() / remove_status()</text><text x="670" y="1134" class="body" text-anchor="start">_process(delta) / handle_event()</text></g></a><a href="../scripts/components/gameplay_attribute_component.gd"><title>components/gameplay_attribute_component.gd</title><g><rect x="1250" y="960" width="480" height="210" rx="10" fill="white" stroke="#8191a8" stroke-width="1.5"/>
+<path d="M1260 960H1720Q1730 960 1730 970V1036H1250V970Q1250 960 1260 960Z" fill="#e9f8f2"/>
+<text x="1270" y="985" class="type" text-anchor="start">«Node» 属性与修改器</text><text x="1270" y="1018" class="name" text-anchor="start">GameplayAttributeComponent</text>
+<path d="M1250 1036H1730" stroke="#c4cdd9"/>
+<text x="1270" y="1067" class="body" text-anchor="start">_attributes: Dictionary</text>
+<path d="M1250 1080H1730" stroke="#e0e5ee"/>
+<text x="1270" y="1107" class="body" text-anchor="start">add_modifier(mod)</text><text x="1270" y="1134" class="body" text-anchor="start">remove_modifiers_by_source(id)</text></g></a><a href="../scripts/singletons/damage_calculator.gd"><title>singletons/damage_calculator.gd</title><g><rect x="50" y="1300" width="480" height="210" rx="10" fill="white" stroke="#8191a8" stroke-width="1.5"/>
+<path d="M60 1300H520Q530 1300 530 1310V1376H50V1310Q50 1300 60 1300Z" fill="#f1edff"/>
+<text x="70" y="1325" class="type" text-anchor="start">«autoload Node» 策略调度</text><text x="70" y="1358" class="name" text-anchor="start">DamageCalculator</text>
+<path d="M50 1376H530" stroke="#c4cdd9"/>
+<text x="70" y="1407" class="body" text-anchor="start">_strategy: DamageLogicStrategy</text>
+<path d="M50 1420H530" stroke="#e0e5ee"/>
+<text x="70" y="1447" class="body" text-anchor="start">calculate_final_damage(...)</text></g></a><a href="../scripts/status/gameplay_status_instance.gd"><title>status/gameplay_status_instance.gd</title><g><rect x="650" y="1300" width="480" height="210" rx="10" fill="white" stroke="#8191a8" stroke-width="1.5"/>
+<path d="M660 1300H1120Q1130 1300 1130 1310V1376H650V1310Q650 1300 660 1300Z" fill="#e9f8f2"/>
+<text x="670" y="1325" class="type" text-anchor="start">«RefCounted» 状态生命周期</text><text x="670" y="1358" class="name" text-anchor="start">GameplayStatusInstance</text>
+<path d="M650 1376H1130" stroke="#c4cdd9"/>
+<text x="670" y="1407" class="body" text-anchor="start">status_data / stacks / context</text>
+<path d="M650 1420H1130" stroke="#e0e5ee"/>
+<text x="670" y="1447" class="body" text-anchor="start">apply() / update() / remove()</text><text x="670" y="1474" class="body" text-anchor="start">apply_effects(): 克隆后调用效果</text></g></a><a href="../scripts/status/gameplay_status_data.gd"><title>status/gameplay_status_data.gd</title><g><rect x="1250" y="1300" width="480" height="210" rx="10" fill="white" stroke="#8191a8" stroke-width="1.5"/>
+<path d="M1260 1300H1720Q1730 1300 1730 1310V1376H1250V1310Q1250 1300 1260 1300Z" fill="#eaf3ff"/>
+<text x="1270" y="1325" class="type" text-anchor="start">«Resource» 状态定义</text><text x="1270" y="1358" class="name" text-anchor="start">GameplayStatusData</text>
+<path d="M1250 1376H1730" stroke="#c4cdd9"/>
+<text x="1270" y="1407" class="body" text-anchor="start">apply_effects / remove_effects</text><text x="1270" y="1434" class="body" text-anchor="start">features / duration / stacking_policy</text>
+<path d="M1250 1447H1730" stroke="#e0e5ee"/>
+<text x="1270" y="1474" class="body" text-anchor="start">duration_policy / tags / cue</text></g></a><path d="M650 290H530" class="edge " marker-start="url(#shared)"/><text x="540" y="271" class="label" text-anchor="start">filters 0..*</text><path d="M1130 290H1250" class="edge " marker-start="url(#shared)"/><text x="1150" y="271" class="label" text-anchor="start">cue 0..1</text><path d="M1130 420H1180V510H1060V470" class="edge " marker-start="url(#shared)"/><text x="1210" y="480" class="label" text-anchor="start">sub_effects 0..*（递归）</text><path d="M290 600V550H1490V600" class="edge "/><path d="M890 600V470" class="edge " marker-end="url(#inherit)"/><text x="910" y="532" class="label" text-anchor="start">继承效果基类</text><path d="M290 830V960" class="edge dependency" marker-end="url(#arrow)"/><text x="305" y="900" class="label" text-anchor="start">经 Vital 组件定位</text><path d="M890 830V960" class="edge dependency" marker-end="url(#arrow)"/><text x="910" y="900" class="label" text-anchor="start">apply_status()</text><path d="M1490 830V960" class="edge dependency" marker-end="url(#arrow)"/><text x="1510" y="900" class="label" text-anchor="start">添加 / 按来源移除</text><path d="M50 710H25V1245H290V1300" class="edge dependency" marker-end="url(#arrow)"/><text x="90" y="1230" class="label" text-anchor="start">计算伤害</text><path d="M890 1170V1300" class="edge " marker-start="url(#owned)"/><text x="910" y="1240" class="label" text-anchor="start">活跃实例 0..*</text><path d="M1130 1380H1250" class="edge " marker-start="url(#shared)"/><text x="1160" y="1360" class="label" text-anchor="start">数据 1</text><rect x="50" y="1560" width="1680" height="125" rx="10" fill="#f0f4fa"/>
+<text x="75" y="1598" class="note" text-anchor="start">状态扩展：StatusFeature → FeaturePeriodicEffects / FeatureEventListener</text>
+<text x="75" y="1632" class="note" text-anchor="start">持续时间与堆叠分别交给 StatusDurationPolicy、StatusStackingPolicy。</text>
+<text x="75" y="1666" class="note" text-anchor="start">Cue、事件总线与标签管理器均为独立服务；图中仅展开三种典型效果。</text>
+</svg>

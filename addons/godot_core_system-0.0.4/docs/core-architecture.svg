@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="2240" viewBox="0 0 1800 2240" role="img" aria-labelledby="title desc">
+  <title id="title">Godot Core System：入口与全部模块</title><desc id="desc">实线箭头：入口创建并持有模块；框中名称为公开属性，非全部都是全局 class_name</desc>
+  <defs><marker id="arrow" viewBox="0 0 12 12" refX="11" refY="6" markerWidth="11" markerHeight="11" orient="auto"><path d="M1 1L11 6L1 11" fill="none" stroke="#536b89" stroke-width="1.7"/></marker>
+  <marker id="inherit" viewBox="0 0 14 14" refX="13" refY="7" markerWidth="13" markerHeight="13" orient="auto"><path d="M1 1L13 7L1 13Z" fill="#f9fbff" stroke="#536b89" stroke-width="1.5"/></marker></defs>
+  <style>text{font-family:'Microsoft YaHei','Noto Sans CJK SC',sans-serif;fill:#30445d}.title{font-size:32px;font-weight:600}.subtitle{font-size:19px}.name{font-family:Consolas,monospace;font-size:23px}.type{font-size:17px}.body{font-size:19px}.label{font-size:17px;paint-order:stroke;stroke:#f9fbff;stroke-width:8px;stroke-linejoin:round}.note{font-size:20px}.card{fill:#edf4ff;stroke:#91a6c1;stroke-width:1.6}.rule{stroke:#cbd8e8;fill:none}.edge{fill:none;stroke:#536b89;stroke-width:2;marker-end:url(#arrow)}.bridge{stroke-dasharray:8 6}.inherit{marker-end:url(#inherit)}</style>
+  <rect width="1800" height="2240" fill="#f9fbff"/>
+  <text x="50" y="55" class="title">Godot Core System：入口与全部模块</text><text x="50" y="95" class="subtitle">实线箭头：入口创建并持有模块；框中名称为公开属性，非全部都是全局 class_name</text><a href="../source/core_system.gd"><rect x="50" y="145" width="1700" height="220" rx="12" fill="#e7f6f0" stroke="#91a6c1"/>
+  <text x="80" y="183" class="type">«Autoload Node»</text><text x="80" y="221" class="name">CoreSystem</text>
+  <text x="80" y="262" class="body">_module_scripts: 模块脚本表     _modules: 实例表     _get_module() → _create_module() → add_child()</text>
+  <text x="80" y="302" class="body">@onready 属性在入口 ready 时初始化；getter 可再次按需查询；模块开关缺失时默认为启用</text>
+  <text x="80" y="341" class="body">工具常量：FrameSplitter / SingleThread / ModuleThread / RandomPicker / AsyncIOManager</text></a><path d="M900 365V415H35V1880" class="rule"/><path d="M900 365V415H615V1880" class="rule"/><path d="M900 365V415H1195V1560" class="rule"/><path d="M35 600H60" class="edge"/><a href="../source/logger/core_logger.gd"><g><rect x="60" y="480" width="520" height="240" rx="12" class="card"/>
+    <path d="M60 563H580" class="rule"/>
+    <text x="80" y="508" class="type">«Node · CoreLogger»</text><text x="80" y="542" class="name">logger</text>
+    <text x="80" y="599" class="body">LogLevel / _log_colors / 文件输出</text><text x="80" y="629" class="body">debug() / info() / warning() / error()</text>
+    </g></a><path d="M615 600H640" class="edge"/><a href="../source/resource_system/resource_manager.gd"><g><rect x="640" y="480" width="520" height="240" rx="12" class="card"/>
+    <path d="M640 563H1160" class="rule"/>
+    <text x="660" y="508" class="type">«Node · ResourceManager»</text><text x="660" y="542" class="name">resource_manager</text>
+    <text x="660" y="599" class="body">_resource_cache / _instance_pools</text><text x="660" y="629" class="body">load_resource() / recycle_instance()</text>
+    </g></a><path d="M1195 600H1220" class="edge"/><a href="../source/config_system/config_manager.gd"><g><rect x="1220" y="480" width="520" height="240" rx="12" class="card"/>
+    <path d="M1220 563H1740" class="rule"/>
+    <text x="1240" y="508" class="type">«Node · ConfigManager»</text><text x="1240" y="542" class="name">config_manager</text>
+    <text x="1240" y="599" class="body">ConfigFile / _modified</text><text x="1240" y="629" class="body">get_value() / set_value() / save_config()</text>
+    </g></a><path d="M35 920H60" class="edge"/><a href="../source/event_system/event_bus.gd"><g><rect x="60" y="800" width="520" height="240" rx="12" class="card"/>
+    <path d="M60 883H580" class="rule"/>
+    <text x="80" y="828" class="type">«Node · CoreEventBus»</text><text x="80" y="862" class="name">event_bus</text>
+    <text x="80" y="919" class="body">_event_metadata / 历史 / 订阅连接</text><text x="80" y="949" class="body">subscribe() / push_event() / unsubscribe()</text>
+    </g></a><path d="M615 920H640" class="edge"/><a href="../source/input_system/input_manager.gd"><g><rect x="640" y="800" width="520" height="240" rx="12" class="card"/>
+    <path d="M640 883H1160" class="rule"/>
+    <text x="660" y="828" class="type">«Node · InputManager»</text><text x="660" y="862" class="name">input_manager</text>
+    <text x="660" y="919" class="body">状态 / 虚拟轴 / 缓冲 / 录制 / Handler</text><text x="660" y="949" class="body">_input() / _process() / action_triggered</text>
+    </g></a><path d="M1195 920H1220" class="edge"/><a href="../source/operation_system/operation_manager.gd"><g><rect x="1220" y="800" width="520" height="240" rx="12" class="card"/>
+    <path d="M1220 883H1740" class="rule"/>
+    <text x="1240" y="828" class="type">«Node · CoreOperationManager»</text><text x="1240" y="862" class="name">operation_manager</text>
+    <text x="1240" y="919" class="body">ID → 控制器 WeakRef</text><text x="1240" y="949" class="body">create_controller() / get_controller()</text>
+    </g></a><path d="M35 1240H60" class="edge"/><a href="../source/audio_system/audio_manager.gd"><g><rect x="60" y="1120" width="520" height="240" rx="12" class="card"/>
+    <path d="M60 1203H580" class="rule"/>
+    <text x="80" y="1148" class="type">«Node · AudioManager»</text><text x="80" y="1182" class="name">audio_manager</text>
+    <text x="80" y="1239" class="body">播放器池 / 资源缓存 / 音量配置</text><text x="80" y="1269" class="body">play_music() / play_sound() / play_voice()</text>
+    </g></a><path d="M615 1240H640" class="edge"/><a href="../source/scene_system/scene_manager.gd"><g><rect x="640" y="1120" width="520" height="240" rx="12" class="card"/>
+    <path d="M640 1203H1160" class="rule"/>
+    <text x="660" y="1148" class="type">«Node · CoreSceneManager»</text><text x="660" y="1182" class="name">scene_manager</text>
+    <text x="660" y="1239" class="body">场景栈 / 遮罩 / Transition 策略</text><text x="660" y="1269" class="body">change_scene_async() / pop_scene_async()</text>
+    </g></a><path d="M1195 1240H1220" class="edge"/><a href="../source/time_system/time_manager.gd"><g><rect x="1220" y="1120" width="520" height="240" rx="12" class="card"/>
+    <path d="M1220 1203H1740" class="rule"/>
+    <text x="1240" y="1148" class="type">«Node · TimeManager»</text><text x="1240" y="1182" class="name">time_manager</text>
+    <text x="1240" y="1239" class="body">_timers / 模块内缩放与暂停</text><text x="1240" y="1269" class="body">create_timer() / set_time_scale()</text>
+    </g></a><path d="M35 1560H60" class="edge"/><a href="../source/save_system/save_manager.gd"><g><rect x="60" y="1440" width="520" height="240" rx="12" class="card"/>
+    <path d="M60 1523H580" class="rule"/>
+    <text x="80" y="1468" class="type">«Node · SaveManager»</text><text x="80" y="1502" class="name">save_manager</text>
+    <text x="80" y="1559" class="body">格式策略 / 自动存档 / 待加载节点状态</text><text x="80" y="1589" class="body">create_save() / load_save()</text>
+    </g></a><path d="M615 1560H640" class="edge"/><a href="../source/state_machine/state_machine_manager.gd"><g><rect x="640" y="1440" width="520" height="240" rx="12" class="card"/>
+    <path d="M640 1523H1160" class="rule"/>
+    <text x="660" y="1468" class="type">«Node · StateMachineManager»</text><text x="660" y="1502" class="name">state_machine_manager</text>
+    <text x="660" y="1559" class="body">SMRegistration / 三类驱动标志</text><text x="660" y="1589" class="body">register_state_machine()</text><text x="660" y="1619" class="body">transition_state_machine()</text>
+    </g></a><path d="M1195 1560H1220" class="edge"/><a href="../source/entity_system/entity_manager.gd"><g><rect x="1220" y="1440" width="520" height="240" rx="12" class="card"/>
+    <path d="M1220 1523H1740" class="rule"/>
+    <text x="1240" y="1468" class="type">«Node · EntityManager»</text><text x="1240" y="1502" class="name">entity_manager</text>
+    <text x="1240" y="1559" class="body">ID → 场景路径 / PackedScene</text><text x="1240" y="1589" class="body">load_entity() / create_entity()</text><text x="1240" y="1619" class="body">destroy_entity()</text>
+    </g></a><path d="M35 1880H60" class="edge"/><a href="../source/trigger_system/trigger_manager.gd"><g><rect x="60" y="1760" width="520" height="240" rx="12" class="card"/>
+    <path d="M60 1843H580" class="rule"/>
+    <text x="80" y="1788" class="type">«Node · TriggerManager»</text><text x="80" y="1822" class="name">trigger_manager</text>
+    <text x="80" y="1879" class="body">事件/周期触发器 / 条件工厂</text><text x="80" y="1909" class="body">handle_event() / create_condition()</text>
+    </g></a><path d="M615 1880H640" class="edge"/><a href="../source/tag_system/gameplay_tag_manager.gd"><g><rect x="640" y="1760" width="520" height="240" rx="12" class="card"/>
+    <path d="M640 1843H1160" class="rule"/>
+    <text x="660" y="1788" class="type">«Node · GameplayTagManager»</text><text x="660" y="1822" class="name">tag_manager</text>
+    <text x="660" y="1879" class="body">标签树 / 容器 / 对象 WeakRef 索引</text><text x="660" y="1909" class="body">get_tag() / get_objects_with_tag()</text>
+    </g></a><text x="65" y="450" class="subtitle">创建并持有以下 14 个 Node 子模块（类名通过 CoreSystem 的 preload 常量访问）</text><rect x="50" y="2080" width="1700" height="112" rx="12" fill="#f0edff" stroke="#91a6c1"/><text x="75" y="2118" class="note">模块间依赖：音频 → 配置；场景/实体 → 资源；触发器 → 事件；存档 → 配置和格式策略。</text><text x="75" y="2149" class="note">本插件的事件、标签、计时与 GAS 各自独立；模块初始化与设置 ID 边界见实现分析。</text></svg>
