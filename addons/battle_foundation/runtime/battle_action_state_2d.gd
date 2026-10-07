@@ -1,61 +1,97 @@
 extends RefCounted
 class_name BattleActionState2D
-#region 独立战斗状态
-enum State { IDLE, MOVE, JUMP, ATTACK, HURT, DEAD, RUN, TAKEOFF, LAND }
-var current: State = State.IDLE
-var elapsed: float = 0.0
-var grounded: bool = false
-var active_rules: Dictionary = {}
+#region 兼容入口：状态与时间只读取 Core 当前叶子
+const State = BattleActionLeafState2D.Kind
+var machine := BattleActionStateMachine2D.new()
+var registration_id: StringName = &""
+var _manager: WeakRef
+var _disposed: bool = false
+var current: State:
+	get:
+		var state := _get_leaf()
+		return state.kind if state != null else (State.DEAD if machine.is_terminal_dead() else State.IDLE)
+var elapsed: float:
+	get:
+		var state := _get_leaf()
+		return state.elapsed if state != null else 0.0
+var grounded: bool:
+	get:
+		return machine.grounded
+	set(value):
+		machine.grounded = value
+var active_rules: Dictionary:
+	get:
+		var state := _get_leaf()
+		return state.active_rules if state != null else {}
+	set(value):
+		var state := _get_leaf()
+		if state != null:
+			state.active_rules = value.duplicate(true)
 #endregion
-#region 状态规则
+#region Core 注册、查询与实例清理
+func bind(owner_entity: BattleEntity2D) -> void:
+	assert(registration_id.is_empty() and not _disposed, "动作状态机只能绑定一次")
+	registration_id = StringName("battle.actions.%s.%s" % [owner_entity.session.battle_id, owner_entity.entity_id])
+	machine.state_id = registration_id
+	machine.profile = owner_entity.action_profile
+	var manager := CoreSystem.state_machine_manager
+	assert(manager != null, "动作状态依赖 Core StateMachineManager")
+	_manager = weakref(manager)
+	# 仅登记与监控；combat delta 是状态机唯一更新源，原始输入交给 Core 操作控制器。
+	manager.register_state_machine(registration_id, machine, owner_entity, &"", {}, false, false, false)
+
+func dispose() -> void:
+	if _disposed:
+		return
+	_disposed = true
+	var manager: Variant = _manager.get_ref() if _manager != null else null
+	if is_instance_valid(manager) and manager.get_state_machine(registration_id) == machine:
+		manager.unregister_state_machine(registration_id)
+	else:
+		machine.stop()
+		machine.dispose()
+	registration_id = &""
+	_manager = null
+
+func _get_leaf() -> BattleActionLeafState2D:
+	return machine.current_state as BattleActionLeafState2D
+#endregion
+#region 委托当前 Core 叶子的战斗权限
 func can_attack(alive: bool) -> bool:
-	return alive and grounded and current in [State.IDLE, State.MOVE, State.RUN, State.LAND]
+	var state := _get_leaf()
+	return machine.is_active and state != null and state.can_attack(alive, grounded)
 
 func can_jump(alive: bool, profile: BattleActionProfile2D = null) -> bool:
 	return alive and current != State.DEAD and (get_permission(&"jump", profile) if profile != null else can_attack(alive))
 
 func get_permission(permission: StringName, profile: BattleActionProfile2D) -> bool:
-	if current == State.DEAD:
-		return false
-	var rules: Dictionary = profile.state_rules.get(StringName(State.keys()[current]), {})
-	return bool(active_rules.get(String(permission), rules.get(String(permission), false)))
+	var state := _get_leaf()
+	return machine.is_active and state != null and state.get_permission(permission, profile)
 
 func can_interrupt(kind: StringName, priority: int, armored: bool, profile: BattleActionProfile2D) -> bool:
-	if kind == &"death":
-		return true
-	if current == State.DEAD or (armored and kind == &"normal"):
-		return false
-	var rules: Dictionary = profile.state_rules.get(StringName(State.keys()[current]), {})
-	var allowed: Array = active_rules.get("interrupt_kinds", rules.get("interrupt_kinds", [&"normal", &"heavy", &"launch"]))
-	return allowed.has(kind) and priority >= int(active_rules.get("interrupt_priority", rules.get("interrupt_priority", 0)))
+	var state := _get_leaf()
+	return machine.is_active and state != null and state.can_interrupt(kind, priority, armored, profile)
+#endregion
+#region 语义命令与固定战斗时间
+func handle_operation(intent: CoreOperationIntent, slots: Dictionary = {}) -> BattleActionLeafState2D.OperationResult:
+	return machine.handle_operation(intent, slots)
 
-func enter(next: State) -> void:
-	## 死亡为终态，复位必须重新生成实体。
-	if current == State.DEAD:
-		return
-	current = next
-	elapsed = 0.0
-	active_rules = {}
+func clear_operation_state() -> void:
+	machine.clear_operation_state()
+
+func enter(next: State, rules: Dictionary = {}) -> void:
+	machine.transition_local(BattleActionLeafState2D.NAMES[next], {"action_rules": rules})
 
 func advance(delta: float, profile: BattleActionProfile2D, moving: bool, running: bool = false, just_landed: bool = false, attack_active: bool = false) -> void:
-	elapsed += delta
-	if current == State.DEAD:
+	if _disposed or not is_finite(delta) or delta < 0.0:
 		return
-	if current == State.ATTACK and attack_active:
-		return
-	if current == State.HURT and elapsed + 0.000000001 < profile.hurt_lock_frames / profile.source_fps:
-		return
-	if just_landed and grounded:
-		enter(State.LAND)
-		return
-	if current == State.TAKEOFF and not grounded and elapsed < profile.takeoff_frames / profile.source_fps:
-		return
-	if current == State.LAND and grounded and elapsed < profile.landing_frames / profile.source_fps:
-		return
-	var next: State = State.JUMP if not grounded else (State.RUN if moving and running else (State.MOVE if moving else State.IDLE))
-	if current != next:
-		enter(next)
+	machine.profile = profile
+	machine.moving = moving
+	machine.running = running
+	machine.just_landed = just_landed
+	machine.attack_active = attack_active
+	machine.physics_update(delta)
 
 func get_name() -> String:
-	return ["IDLE", "MOVE", "AIR", "ATTACK", "HURT", "DEAD", "RUN", "TAKEOFF", "LAND"][current]
+	return String(machine.get_current_state_name())
 #endregion

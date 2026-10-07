@@ -209,9 +209,7 @@ AsyncIOStrategy 直接 await 全局 io_completed，一旦先完成其他任务�
 
 示例是接口展示，部分会触及上述未完成路径。它们的全部脚本列于 [源码索引](source-index.md)，没有把运行成功与“存在示例文件”混为一谈。
 
-本次逐个加载 GDScript 时确认两处原有示例解析错误：[scene_demo.gd](../examples/scene_demo/scene_demo.gd) 引用不存在的 `CoreSystem.SceneManager`（入口实际提供 `CoreSceneManager`）；[issue44_push_stack_demo.gd](../examples/scene_demo/scene_push_stack_issue44/issue44_push_stack_demo.gd) 仍 preload 未带版本号的 `res://addons/godot_core_system/` 路径。它们的源码除折叠注释外保持原样；需要修正引用后才能运行这两个示例。
-
-资源检查还发现 [issue40_reset_to_default_demo.tscn](../examples/config_demo/issue40_reset_to_default/issue40_reset_to_default_demo.tscn) 引用了导入包中不存在的示例脚本，并使用旧目录名。这是第三处已确认的示例引用问题。
+已移除三个确认失效的历史示例入口：scene_demo 引用不存在的 `CoreSystem.SceneManager`；scene_push_stack_issue44 使用旧 preload 路径；issue40_reset_to_default 场景引用缺失脚本。前两者专用子场景一并删除。当前示例与插件资源通过 [插件验收](../../../examples/verify_plugins.gd) 的递归加载与编译检查；检查失败会传播到入口并返回失败码。
 
 | 示例目录 | 展示内容 |
 | --- | --- |
@@ -224,7 +222,6 @@ AsyncIOStrategy 直接 await 全局 io_completed，一旦先完成其他任务�
 | input_demo/edge_debounce_issue50 | 边沿防抖回归演示 |
 | random_picker_demo | 权重池、抽取与移除 |
 | save_demo | save()/load_data() 节点协议和存档列表 |
-| scene_demo、scene_push_stack_issue44 | 场景状态、转场、推栈与返回 |
 | state_machine | BaseStateMachine 扩展与事件驱动切换 |
 | tag_demo | 核心标签容器与对象查询 |
 | time_demo | 模块内计时、时间缩放与暂停 |

@@ -1,5 +1,9 @@
 # Battle Foundation · 战斗基础、动画与操作控制
 
+阶段 6 见 [单段普攻与战斗闭环](combat/README.md)：复用 Core/GAS，将物理体、受击区域和单一攻击框分开，加入每次施放独立的攻击实例与窗口去重、木桩、生命条和实际扣血飘字。交互入口 [single_attack_demo.tscn](../../examples/single_attack_demo.tscn)，自动验收 [verify_single_attack.tscn](../../examples/verify_single_attack.tscn)，结构与时序见 [联合类图](docs/single-attack-runtime.svg)。
+
+属性阶段见 [属性计算链说明](attributes/README.md)：复用 GAS 最终属性/Vital/Status/Effect、Simple Inventory 装备槽和 Core 通知，统一基础、成长、装备、临时来源。面板与伤害读取相同最终值；提供 [联合类图](docs/attribute-pipeline.svg) 和 [场景验收](../../examples/verify_attribute_pipeline.tscn)。
+
 本插件在 CoreSystem 与 GAS 之上建立项目的战斗基础入口，依赖 Godot 4.7+。Core 继续负责资源缓存、用户配置与事件总线；GAS 继续负责属性、Vital、技能、冷却、状态和效果。新增代码负责定义索引、运行实体编号、阵营、会话随机流、固定物理战斗时钟及原素材帧事件。
 
 运行 [交互演示](../../examples/stage_one_demo.tscn)：在 Godot 中打开场景，按 F6。A 与 B 使用同一角色定义；按钮可施放技能、添加减伤状态、暂停/恢复、切换慢动作、触发受击停顿及重新生成实例。界面同时显示生命、独立冷却、状态剩余时间和素材帧事件。
@@ -12,18 +16,22 @@
 
 失败返回非零退出码。验收包含真实固定物理更新和墙体碰撞，不依赖目测或仅检查资源是否存在。
 
-在项目根目录执行 `node tools/generate_battle_docs.mjs` 可重建阶段一、动画、操作与运动/连击的八张 SVG。
+在项目根目录执行 `node tools/generate_battle_docs.mjs` 可重建战斗基础、动画、操作、运动/连击、Core 状态机、攻击范围、属性链及单段攻击的 SVG。
 
 
 新增 [独立动画适配层](animation/README.md)，封装现有原生 Spine 运行时，接入孙悟空基础动作、组合换装、骨骼挂点和播放进度；[横版平台场景](../../examples/wukong_platform_demo.tscn) 复用统一战斗时钟、Core 事件和 GAS 运行实例。动画完成只通知，攻击许可、受击锁定及死亡由独立战斗状态管理。
+
+动画节点预置于 [独立表现场景](../../data/animation/sunwukong_visual.tscn)，参考 godot-spine-example 的主/原生 AnimationPlayer 结构。编辑器可拖动十四个动作时间轴，所有技能统一更新一个 CollisionShape2D；预览与实际命中均读取技能事件的矩形、正缩放和偏移。[编辑技能判定与新角色扩展](../../data/animation/README.md)。
 
 新增 [可扩展角色操作控制器](input/README.md)，复用 CoreOperationController 并补齐阶段、长按、双击、可消费缓存与真实改键。BattlePlayerOperations 提供公共操作、槽位配置和角色钩子，BattleOperationMenu 管理模态输入与设置。输入时间与战斗时间分开，菜单/失焦/暂停/死亡等控制权互不覆盖。平台场景按 Esc 设置键位，验收入口为 [verify_player_operations.tscn](../../examples/verify_player_operations.tscn)。
 
 ![操作系统联合类图](docs/player-operations.svg)
 
-阶段四新增 [运动、状态与五段普攻](movement/README.md)：独立扫掠运动控制器管理重力、平台、墙/顶、二段跳与落地预算；状态表管理移动/跳跃/转向、攻击种类、霸体与打断门槛。五段 GAS 技能按原素材时间线运行，当前段只预约一段，第四段位移经碰撞，第二击保留反向偏移。自动验收 [verify_stage_four.tscn](../../examples/verify_stage_four.tscn) 通过 132 项检查。
+阶段四新增 [运动、状态与五段普攻](movement/README.md)：独立扫掠运动控制器管理重力、平台、墙/顶、二段跳与落地预算；Core 当前叶子消费操作意图并按状态表管理移动/跳跃/转向、攻击种类、霸体与打断门槛。五段 GAS 技能按原素材时间线运行，当前段只预约一段，第四段位移经碰撞，第二击保留显示缩放与偏移。判定使用原素材五组 ABRect，不使用 AI 选敌范围。自动验收 [verify_stage_four.tscn](../../examples/verify_stage_four.tscn) 通过 222 项检查。
 
 ![运动与状态联合类图](docs/motion-state.svg)
+
+动作状态使用 Core `BaseStateMachine` / `BaseState` 实现；每实体登记真实机器和九个独立叶子，保持单一 combat delta。`BattleActionState2D` 是语义兼容入口，查询 Core 当前叶子，不再维护另一份状态。继承、生命周期、死亡守卫和注销说明见 [动作状态机接入](movement/README.md#动作状态接入-core-插件状态机)；验收入口 [verify_wukong_state_machine.tscn](../../examples/verify_wukong_state_machine.tscn)。
 
 ## 为什么需要补充插件
 
@@ -192,11 +200,16 @@ GAS `BTWait` 已改为累计传入 delta，消除真实毫秒时钟绕过战斗�
 | [BattleFrameTimelineFeature](gas/battle_frame_timeline_feature.gd) | GAS 素材帧更新与 Core 事件发布 |
 | [BattleGASBinding](runtime/battle_gas_binding.gd) | 2D/3D 实体共用 GAS 装配和清理 |
 | [BattleEntity2D](runtime/battle_entity_2d.gd) | 横版碰撞、动作命令、GAS 战斗入口、原版攻击镜像 |
-| [BattleActionState2D](runtime/battle_action_state_2d.gd) | 独立战斗状态：落地、攻击许可、受击锁定和死亡终态 |
+| [BattleActionState2D](runtime/battle_action_state_2d.gd) | 状态语义入口，委托 Core 当前叶子及注册生命周期 |
+| [BattleActionStateMachine2D](runtime/battle_action_state_machine_2d.gd) | Core BaseStateMachine 子类、九状态、更新上下文及死亡终态守卫 |
+| [BattleActionLeafState2D](runtime/battle_action_leaf_state_2d.gd) | Core BaseState 子类、进入/退出、状态计时与转换条件、权限 |
 | [BattleActionProfile2D](definitions/battle_action_profile_2d.gd) | 战斗规则时间、原攻击区域及平台样例运动配置 |
 | [BattleMotionController2D](runtime/battle_motion_controller_2d.gd) | 速度、扫掠碰撞、地面/墙/顶、跳跃预算 |
 | [BattleComboDefinition](definitions/battle_combo_definition.gd) / [BattleAttackStep2D](definitions/battle_attack_step_2d.gd) | 只读分段技能、时长、权限与位移配置 |
-| [BattleComboState](runtime/battle_combo_state.gd) | 独立连击段号、预约与命中去重 |
+| [BattleComboState](runtime/battle_combo_state.gd) | 独立连击段号、下一段预约与施放序号 |
+| [BattleAttackInstance](runtime/battle_attack_instance.gd) | 攻击编号、攻击者/阵营、持续窗口与每击目标去重 |
+| [BattleHurtbox2D](movement/battle_hurtbox_2d.gd) | 与移动物理体分开的可编辑受击区域 |
+| [BattleCombatFeedback2D](presentation/battle_combat_feedback_2d.gd) | 生命条、实际扣血飘字与战斗时钟推进 |
 | [CharacterAnimationProfile](animation/character_animation_profile.gd) | 只读动作映射、皮肤、脚底偏移和语义挂点 |
 | [CharacterAnimationAdapter](animation/character_animation_adapter.gd) | 独立抽象动画接口及通知，无战斗规则 |
 | [SpineAnimationAdapter](animation/spine_animation_adapter.gd) | 原生 Spine 手动播放、组合皮肤、镜像、挂点和调试查询 |

@@ -15,13 +15,45 @@
 | 脚本 | 责任与运行状态 |
 | --- | --- |
 | [BattleMotionController2D](../runtime/battle_motion_controller_2d.gd) | 每实体独立的速度、地面/墙/顶接触、跳跃预算、落地与起跳序号；使用 CharacterBody2D 做扫掠碰撞 |
-| [BattleActionState2D](../runtime/battle_action_state_2d.gd) | 当前战斗状态、状态时间、当前技能权限覆盖；死亡终态 |
+| [BattleActionState2D](../runtime/battle_action_state_2d.gd) | 兼容语义入口；状态、时间与权限委托 Core 当前叶子；绑定及注销 |
+| [BattleActionStateMachine2D](../runtime/battle_action_state_machine_2d.gd) | 继承 Core BaseStateMachine，持有九种动作状态及更新上下文、死亡守卫 |
+| [BattleActionLeafState2D](../runtime/battle_action_leaf_state_2d.gd) | 继承 Core BaseState；进入/退出、计时、状态转换和权限判定 |
 | [BattleActionProfile2D](../definitions/battle_action_profile_2d.gd) | 共享只读重力、跳跃、锁定时间、状态条件表、判定框与连击定义 |
 | [BattleComboDefinition](../definitions/battle_combo_definition.gd) / [BattleAttackStep2D](../definitions/battle_attack_step_2d.gd) | 共享只读五段 ID、动作名、时长、跳取消、霸体、打断强度与技能位移窗口 |
-| [BattleComboState](../runtime/battle_combo_state.gd) | 每实体独立段号、下一段预约、施放序号和每次命中的目标去重集合 |
+| [BattleComboState](../runtime/battle_combo_state.gd) | 每实体独立段号、下一段预约和施放序号 |
+| [BattleAttackInstance](../runtime/battle_attack_instance.gd) | 每次施放独立攻击者、阵营、攻击编号、窗口和每击命中目标集合 |
 | [BattleEntity2D](../runtime/battle_entity_2d.gd) | 将输入、运动、状态、GAS、动画与命中查询联合起来；不写共享配置 |
 
 Core 将按键转换为语义意图，BattlePlayerOperations 调用 `request_attack()` / `try_jump()`；运动控制器读取 GAS 的 `walkSpeed` / `runSpeed`，生命读取 HealthVital。GAS 技能实例和帧时间线拥有独立计时，状态组件仍接收统一战斗时间。霸体可来自实体开关、技能规则或 GAS 标签 `state.super_armor`。动画层只接收 `idle`、`run`、`jump_2`、`attack_5` 等动作名称；完成通知不会自行切换死亡、落地或攻击许可。
+
+## 动作状态接入 Core 插件状态机
+
+![Core 动作状态机继承与联合生命周期](../docs/action-state-machine.svg)
+
+每个实体创建一台 `BattleActionStateMachine2D : BaseStateMachine`，通过 Core `add_state()` 持有九个独立 `BattleActionLeafState2D : BaseState`，构造时 `start("IDLE")`。实体进入场景时登记到 `CoreSystem.state_machine_manager`，ID 为 `battle.actions.<battle_id>.<entity_id>`。Core 负责当前状态、历史、退出/进入调用和 `state_changed`；`BattleActionState2D.current` / `elapsed` 仅查询当前叶子，不再另存枚举状态或另一份计时。
+
+叶子 `_enter(msg)` 重置本段计时并复制 `action_rules`，`_exit()` 清覆盖规则，`_physics_update(delta)` 执行上面的转换条件。五段连击在同一个 ATTACK 叶子上进行 Core 退出/重入，每段重新计时；规则通过转换消息在进入时安装，观察者不会看到新段尚未配置权限的中间状态。Core `state_changed` 经宿主发布 `battle.action_state_changed`，包含场次/实体及 `from_state`、`to_state`、本段规则。
+
+注册时将管理器的 `run_update` / `run_physics` / `run_input` 全设为 false。唯一更新链为 `BattleSession → actor.advance_simulation(combat delta) → action_state.advance → machine.physics_update → 当前叶子`。战斗暂停/缩放仍调用 BattleSession，保持 GAS、运动和动画一致；原生输入由 Core 操作控制器转换意图，动作机不再处理一次原始按键。
+
+语义意图通过 `action_state.handle_operation()` 交给当前 Core 叶子：方向按下、持有、释放和强度变化更新机器中的聚合移动轴与奔跑状态；跳跃、普攻及技能槽依据当前许可调用实体执行。行走转换依据移动意图，不依据碰撞残余速度。地面移动状态释放方向时立即切到 IDLE 并播放待机；攻击中释放只清方向，待技能结束再返回待机。撤回控制同步清移动、奔跑与预约。
+
+死亡在 Core 机器层锁定。旧语义入口、Core 管理器跳转、叶子 `transition_to` 和机器 `transition_to` 都经过同一守卫；即使停止后再次启动也不能回到非死亡状态。Core 管理器的跳转返回值反映实际目标状态，受守卫拒绝的启动不会发出虚假 `state_machine_started` 通知。重生创建新实体及新动作机。
+
+```gdscript
+# Core 查询直接得到真实运行机器与当前叶子。
+var id := actor.action_state.registration_id
+var machine: BaseStateMachine = CoreSystem.state_machine_manager.get_state_machine(id)
+var state: BaseState = CoreSystem.state_machine_manager.get_current_state(id)
+print(state.state_id) # 例如 AIR；原兼容枚举仍可使用 State.JUMP。
+# 游戏操作继续走带运动/GAS 校验的语义入口。
+actor.request_attack()
+actor.try_jump()
+```
+
+实体清理/离树时注销机器，Core 调用 stop/dispose；战斗机器随后断开叶子的 `state_machine` / `agent` 所属引用并清空状态集合，避免 RefCounted 循环引用。脱离实体自行创建 `BattleActionState2D.new()` 时，拥有者同样必须在结束使用后调用 `dispose()`。
+
+[verify_wukong_state_machine.tscn](../../../examples/verify_wukong_state_machine.tscn) 已通过 46 项检查：真实 Core 状态对象、注册/agent 隔离、生命周期顺序、转换消息、单一时钟、连击重入、死亡守卫、拒绝通知及重复重生/直接释放的注销与引用清理；原有阶段四验收继续覆盖运动和完整五段连击。
 
 ## 运动与时间规则
 
@@ -63,9 +95,25 @@ BattleSession 在固定物理更新中先识别未缩放输入，再计算战斗
 
 首次按下发动第一段；当前段期间再次按下，只预约下一段，重复按下不会预约多段或跳过当前动画。GAS 当前段结束才推进一次；没有预约立即回运动状态，第五段结束不自动循环。长按不自动连击。已受理的预约保留至当前段结束，未受理的输入仍遵守 Core 的 0.2 秒缓存；菜单、失焦、暂停与死亡会撤销预约。受击和允许的跳取消会同时取消当前 GAS 技能、未来命中和后续预约。
 
-第四段前 16 素材帧按朝向施加 300 px/s 的技能位移（原单位 150 × 场景缩放 2），整段位移仍被墙挡住；玩家移动/转向输入不能覆盖它。第 8 帧的第二击保留原配置 `scaleX=-1`、偏移 `(-17,-4)`：先在角色局部计算反向区域及偏移，再整体按朝向镜像。其他段固定角色位置。帧 0 在激活后首个战斗 tick 发出，所有事件仍以 30 FPS 计时；例如第 8 帧为 0.267 秒，在 60 Hz 中对应约第 16 次物理更新。
+第四段前 16 素材帧按朝向施加 300 px/s 的技能位移（原单位 150 × 场景缩放 2），整段位移仍被墙挡住；玩家移动/转向输入不能覆盖它。第 8 帧的第二击保留原配置 `scaleX=-1`、偏移 `(-17,-4)`：负缩放只作用于显示，碰撞框不因此反转；局部添加偏移后按角色朝向整体镜像。其他段固定角色位置。帧 0 在激活后首个战斗 tick 发出，所有事件仍以 30 FPS 计时；例如第 8 帧为 0.267 秒，在 60 Hz 中对应约第 16 次物理更新。
 
-每次命中通过 Core `battle.attack.impact` 发出，宿主按阵营查询区域，按“当前施放 + hit_index + 目标 ID”去重，然后经 GAS DamageCalculator 与 HealthVital 扣血。第四段两次命中是不同 hit_index，可各伤害一次。`battle.combo.started` / `finished`、`battle.motion.jump` / `landed` 用于观察，均带场次/实体信息。普通攻击仍使用现有简单伤害公式 `max(1, atk-phyDef) × 倍率`；原版暴击、保护值、击退、持续 sensor 生命周期和额外特效尚未移植。
+### 原版实际碰撞范围
+
+![五段原版 ABRect 与坐标转换](../docs/attack-ranges.svg)
+
+原版 `Skill.atkRange` 用于 AI 和选敌。伤害 sensor 由 `SkillControl.getAbs() → ManResourceVO.getAbRects(shootAssetLink) → reBuilBodyBox()` 使用素材 ABRect 创建。数据从 [原版素材快照](../../../data/battle2d/attack_hitboxes_source.json) 提取并保存在各 GAS 技能的命中事件 payload 中；[表现场景](../../../data/animation/sunwukong_visual.tscn) 只保留一个 BattleHitbox2D / CollisionShape2D，每击读取对应技能数据更新。
+
+| 普攻 | ABRect 原单位：x、y、宽、高 | 右朝向横向覆盖 |
+| --- | --- | --- |
+| 1 | -114、-104.95、267、99.95 | -114 → 153 |
+| 2 | -42、-90.95、210.05、114.95 | -42 → 168.05 |
+| 3 | -171、-103.95、322、133.95 | -171 → 151 |
+| 4 | -94.85、-105.95、188.65、159.95 | -94.85 → 93.8；第二击另加偏移 |
+| 5 | -69、-159.95、324、184.95 | -69 → 255 |
+
+每击读取技能事件 hit_rect，仅正 hit_scale_x/y 缩放位置和尺寸，添加 hit_offset，按素材单位比例转换后整体朝向镜像，再转为世界坐标。第四段第二击更新同一形状，偏移只计算一次；形状实例独立，缺少有效数据时返回空范围。范围与皮肤、武器挂点及动画包围盒无关，实际查询和调试绘制使用同一多边形。详见 [编辑技能判定并预览](../../../data/animation/README.md)。
+
+每次命中通过 Core `battle.attack.impact` 发出，宿主按阵营查询独立受击区域，BattleAttackInstance 按“当前施放 + hit_index + 目标 ID”去重，然后经 GAS DamageCalculator 与 HealthVital 扣血。第四段两次命中是不同 hit_index，可各伤害一次。`battle.combo.started` / `finished`、`battle.motion.jump` / `landed` 用于观察，均带场次/实体信息。普通攻击仍使用现有简单伤害公式 `max(1, atk-phyDef) × 倍率`；阶段 6 已补充可配置持续窗口与反馈，见 [单段战斗闭环](../combat/README.md)。原版暴击、保护值、击退、完整 sensor 生命周期和额外特效尚未移植。
 
 原素材没有独立落地动画，LAND 映射 `idle`；第二跳映射原生 `jumpTwo`。五段原生 Spine 动作、附件层序和装备挂点继续由独立动画适配层维护，换装不修改战斗段时长或角色位置。
 
@@ -86,10 +134,11 @@ actor.receive_damage(10, attacker, &"heavy", 90)
 
 添加角色时建立其独立动作规则与连击 Resource，指定各段 GAS ID/动作名；实例状态由宿主新建。修改 `state_rules` / 每段规则即可调整移动、转向与跳取消，无需将按键写入角色代码。
 
-[verify_stage_four.tscn](../../../examples/verify_stage_four.tscn) 已通过 132 项真实 Godot PhysicsServer、GAS 和 Spine 检查：稳定支撑、行走/奔跑、二段跳预算、平台边缘、单向平台、顶头、大 delta 不穿墙、五段六事件、第四段位移/镜像及前后实际命中、优先级/霸体、跳取消、暂停/慢动作/死亡，以及五次短按、长按和菜单清预约。通过打印 PASS，失败退出码为 1。原有 [输入](../../../examples/verify_player_operations.tscn)、[动画](../../../examples/verify_wukong_animation.tscn)、[阶段一](../../../examples/verify_stage_one.tscn)、[属性](../../../examples/verify_base_attributes.tscn) 和 [Core 事件](../../../examples/verify_core_events.tscn) 验收继续运行。
+[verify_stage_four.tscn](../../../examples/verify_stage_four.tscn) 已通过 222 项真实 Godot PhysicsServer、GAS 和 Spine 检查：稳定支撑、行走/奔跑、二段跳预算、平台边缘、单向平台、顶头、大 delta 不穿墙、五段六事件、第四段位移/镜像、每段每击的原版几何与左右边界命中/框外不命中、阵营过滤、优先级/霸体、跳取消、暂停/慢动作/死亡，以及五次短按、长按和菜单清预约。[输入验收](../../../examples/verify_player_operations.tscn) 通过 145 项，新增松方向返回待机动画、相反方向释放、双击释放、CHANGED 强度、攻击中松键与菜单同步释放。通过打印 PASS，失败退出码为 1。原有 [动画](../../../examples/verify_wukong_animation.tscn)、[阶段一](../../../examples/verify_stage_one.tscn)、[属性](../../../examples/verify_base_attributes.tscn) 和 [Core 事件](../../../examples/verify_core_events.tscn) 验收继续运行。
 
 ```powershell
 # 在 Godot 项目根目录重建资源；仅生成时需要原版项目，游戏运行无需它。
+py tools/extract_wukong_hitboxes.py D:/UserData/Downloads/game/Speculum-4399-master
 node tools/import_wukong_combo.mjs D:/UserData/Downloads/game/Speculum-4399-master
 node tools/generate_battle_docs.mjs
 ```

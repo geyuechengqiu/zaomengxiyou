@@ -1,0 +1,9 @@
+{
+  "version": 1,
+  "definitions": {
+    "characters": {"孙悟空": "res://data/battle2d/single_attack/sunwukong.tres"},
+    "skills": {"sunwukong_attack1": "res://data/battle2d/single_attack/attack1.tres"},
+    "monsters": {"木桩": "res://data/battle2d/dummy/wooden_dummy.tres"},
+    "equipment": {}, "levels": {}, "statuses": {}
+  }
+}

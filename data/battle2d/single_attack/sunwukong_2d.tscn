@@ -1,0 +1,5 @@
+[gd_scene load_steps=3 format=3]
+[ext_resource type="PackedScene" path="res://data/battle2d/sunwukong_2d.tscn" id="base"]
+[ext_resource type="Resource" path="res://data/battle2d/single_attack/actions.tres" id="actions"]
+[node name="SunWukongSingle" instance=ExtResource("base")]
+action_profile = ExtResource("actions")

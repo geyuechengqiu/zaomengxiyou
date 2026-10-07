@@ -17,6 +17,8 @@ var operations: BattlePlayerOperations
 var operation_menu: BattleOperationMenu
 var last_operation: String = "等待操作意图"
 var _help: Label
+var attribute_info: Label
+var inventory: C_Inventory
 var _menu_was_paused: bool = false
 var _console_logger: Node
 var _console_overlay_mode: int = 0
@@ -80,6 +82,12 @@ func respawn() -> void:
 	right_target.animation.set_facing(-1)
 	left_target.animation.set_skins([&"套装/2", &"武器/weapon2"])
 	right_target.animation.set_skins([&"套装/7_7", &"武器/weapon7_7"])
+	inventory = C_Inventory.new()
+	inventory.name = "Inventory"
+	player.add_child(inventory)
+	player.attributes.bind_inventory(inventory)
+	player.attributes.snapshot_changed.connect(_on_attributes_changed)
+	_on_attributes_changed(player.attributes.get_snapshot())
 	if enable_player_controls:
 		operations = BattlePlayerOperations.new()
 		operations.operation_profile = load("res://data/controls/player_operations.tres") as CoreOperationProfile
@@ -136,7 +144,7 @@ func _unhandled_key_input(event: InputEvent) -> void:
 		KEY_F3: toggle_registration()
 
 func _process(_delta: float) -> void:
-	if player == null:
+	if not is_instance_valid(player):
 		return
 	var anim := player.animation
 	info.text = "战斗状态  %s     动作  %s     进度  %3.0f%% / %.3fs\n生命  %.0f / %.0f     脚底  (%0.1f, %0.1f)     朝向  %s     时钟  %.2fs  ×%.2f%s\n左靶生命  %.0f     右靶生命  %.0f     外观  %s" % [player.action_state.get_name(), anim.get_current_action(), anim.get_playback_progress() * 100, anim.get_action_duration(anim.get_current_action()), player.attributes.get_vital_value(&"health"), player.attributes.get_value(&"hpMax"), player.position.x, player.position.y, "右" if anim.get_facing() > 0 else "左", session.clock.elapsed, session.clock.time_scale, "（暂停）" if session.clock.paused else "", left_target.attributes.get_vital_value(&"health"), right_target.attributes.get_vital_value(&"health"), ", ".join(anim.get_skin_names())]
@@ -150,6 +158,30 @@ func cycle_outfit() -> void:
 	outfit_index = (outfit_index + 1) % OUTFITS.size()
 	## 套装只替换衣服/头盔；保留当前独立武器。
 	player.animation.set_equipment_skin(&"outfit", OUTFITS[outfit_index])
+
+func _on_attributes_changed(snapshot: Dictionary) -> void:
+	attribute_info.text = "等级 %d · 经验 %.0f / %.0f · 生命 %.0f / %.0f · 魔法 %.0f / %.0f · 攻击 %.0f · 防御 %.0f" % [snapshot.level, snapshot.exp, snapshot.expNext, snapshot.hp, snapshot.hpMax, snapshot.mp, snapshot.mpMax, snapshot.atk, snapshot.phyDef]
+
+func gm_change_level(offset: int) -> void:
+	player.attributes.set_base_value(&"level", player.attributes.get_level() + offset)
+
+func add_level_experience() -> void:
+	player.attributes.add_experience(player.attributes.progression.get_required_experience(player.attributes.get_level()))
+
+func toggle_attribute_equipment() -> void:
+	var item: Equip = inventory.equip_slots["weapon"][1]
+	if item != null:
+		inventory.unequip_item(item)
+	else:
+		var next := (load("res://data/battle2d/equipment/attribute_test_weapon.tres") as BattleInventoryEquipment).duplicate(true) as BattleInventoryEquipment
+		inventory.add_item(next)
+		inventory.equip_item(next)
+
+func toggle_attribute_buff() -> void:
+	if player.statuses.has_status(&"attribute_test_buff"):
+		player.statuses.remove_status(&"attribute_test_buff")
+	else:
+		player.apply_status_definition(&"attribute_test_buff")
 
 func cycle_weapon() -> void:
 	weapon_index = (weapon_index + 1) % WEAPONS.size()
@@ -224,6 +256,19 @@ func _build_ui() -> void:
 	info = Label.new()
 	info.add_theme_font_size_override("font_size", 17)
 	column.add_child(info)
+	attribute_info = Label.new()
+	attribute_info.add_theme_font_size_override("font_size", 17)
+	attribute_info.add_theme_color_override("font_color", Color("8ee0c3"))
+	column.add_child(attribute_info)
+	var attribute_row := HBoxContainer.new()
+	attribute_row.add_theme_constant_override("separation", 8)
+	column.add_child(attribute_row)
+	for entry in [["GM 等级 +1", func(): gm_change_level(1)], ["GM 等级 -1", func(): gm_change_level(-1)], ["获得一级经验", add_level_experience], ["穿 / 脱验收武器", toggle_attribute_equipment], ["添加 / 移除 Buff", toggle_attribute_buff], ["消耗 20 魔法", func(): player.attributes.modify_vital(&"mana", -20.0)]]:
+		var button := Button.new()
+		button.text = entry[0]
+		button.focus_mode = Control.FOCUS_NONE
+		button.pressed.connect(entry[1])
+		attribute_row.add_child(button)
 	var row := HBoxContainer.new()
 	row.add_theme_constant_override("separation", 8)
 	column.add_child(row)

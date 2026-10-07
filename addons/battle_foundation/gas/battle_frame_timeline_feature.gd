@@ -55,6 +55,10 @@ func _emit_marker(ability: GameplayAbilityInstance, marker: BattleFrameEvent) ->
 	payload["source_frame"] = marker.source_frame
 	payload["source_fps"] = source_fps
 	payload["skill_time"] = marker.source_frame / source_fps
+	if is_instance_valid(owner) and owner.has_method("get_attack_instance"):
+		var attack: BattleAttackInstance = owner.get_attack_instance()
+		if attack != null and attack.ability_id == ability.get_definition().ability_id:
+			payload["attack_id"] = attack.attack_id
 	if is_instance_valid(owner) and owner.has_method("publish_battle_event"):
 		owner.publish_battle_event(marker.event_id, payload)
 	else:

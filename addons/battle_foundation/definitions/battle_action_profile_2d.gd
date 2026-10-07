@@ -6,9 +6,7 @@ class_name BattleActionProfile2D
 @export var source_fps: float = 30.0
 @export var attack_lock_frames: int = 10
 @export var hurt_lock_frames: int = 8
-## 原版 Skill.atkRange，角色脚底局部坐标，右朝向。
-@export var attack_rect: Rect2 = Rect2(0, -200, 130, 300)
-@export var source_unit_scale: float = 2.0
+## 攻击范围在 GAS 技能命中事件中配置；角色场景只保留一个 BattleHitbox2D。
 ## 平台样例运动参数；原版 jumpSpeed 不能直接当作 Godot 像素/秒。
 @export var gravity: float = 1500.0
 @export var jump_velocity: float = -620.0

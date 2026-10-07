@@ -1,7 +1,7 @@
 extends Node
 class_name BattlePlayerOperations
 #region 公共角色操作接入
-enum Result { ACCEPTED, RETRY, UNAVAILABLE, NOT_HANDLED }
+const Result = BattleActionLeafState2D.OperationResult
 signal operation_observed(intent: CoreOperationIntent)
 @export var operation_profile: CoreOperationProfile
 ## skill_1..skill_5 / magic_weapon / wushuang 等语义槽位到 GAS 技能 ID。
@@ -39,15 +39,12 @@ func set_control_blocked(reason: StringName, blocked: bool) -> void:
 
 func _on_control_changed(available: bool, _reasons: Array) -> void:
 	if not available:
-		actor.move_axis = 0.0
-		actor.running = false
-		actor.cancel_operation_commands()
+		actor.action_state.clear_operation_state()
 		_phases.clear()
 
 func _exit_tree() -> void:
 	if is_instance_valid(actor):
-		actor.move_axis = 0.0
-		actor.running = false
+		actor.action_state.clear_operation_state()
 	if is_instance_valid(controller):
 		controller.reset(&"owner_exited")
 #endregion
@@ -55,15 +52,14 @@ func _exit_tree() -> void:
 func advance_simulation(_delta: float) -> void:
 	if not controller.has_control() or not actor.is_alive():
 		return
-	actor.move_axis = controller.get_axis(&"move")
-	actor.running = controller.is_pressed(&"run") or controller.get_double_tap_direction(&"move") != 0
 	var commands := controller.peek_buffered_intents()
 	commands.append_array(_phases)
 	_phases.clear()
-	# 短按也必须先分发 pressed，再分发 held/released，角色蓄力才不会倒序。
+	# 按序合并连续意图与缓存，短按必须先分发 pressed 再分发 released。
 	commands.sort_custom(func(left: CoreOperationIntent, right: CoreOperationIntent): return left.sequence < right.sequence)
 	for intent in commands:
 		if intent.phase != CoreOperationIntent.Phase.PRESSED:
+			actor.action_state.handle_operation(intent, ability_slots)
 			_handle_character_phase(intent)
 			continue
 		var result := _handle_common_intent(intent)
@@ -77,21 +73,7 @@ func advance_simulation(_delta: float) -> void:
 #endregion
 #region 公共操作与角色扩展钩子
 func _handle_common_intent(intent: CoreOperationIntent) -> Result:
-	match intent.action:
-		&"attack":
-			return Result.ACCEPTED if actor.request_attack() else Result.RETRY
-		&"jump":
-			if intent.payload.get("held_intents", []).has(&"move_down"):
-				return Result.NOT_HANDLED
-			return Result.ACCEPTED if actor.try_jump() else Result.RETRY
-	if ability_slots.has(intent.action):
-		var id: StringName = ability_slots[intent.action]
-		if id.is_empty() or not actor.abilities.has_ability(id):
-			return Result.UNAVAILABLE
-		if actor.action_state.current in [BattleActionState2D.State.ATTACK, BattleActionState2D.State.HURT, BattleActionState2D.State.DEAD]:
-			return Result.RETRY
-		return Result.ACCEPTED if actor.try_activate_skill(id, {"operation": intent.action}) else Result.RETRY
-	return Result.NOT_HANDLED
+	return actor.action_state.handle_operation(intent, ability_slots)
 
 ## 子类追加专属按下分支；不得读取按键或绕过 actor 的战斗许可。
 func _handle_character_intent(_intent: CoreOperationIntent) -> Result:
@@ -112,11 +94,14 @@ func _handle_cancelled_intent(_intent: CoreOperationIntent) -> void:
 #region 意图观察与 Core 发布
 func _on_intent(intent: CoreOperationIntent) -> void:
 	var snapshot := intent.copy_intent()
+	snapshot.payload["move_axis"] = controller.get_axis(&"move")
+	snapshot.payload["running"] = controller.is_pressed(&"run") or controller.get_double_tap_direction(&"move") != 0
 	operation_observed.emit(snapshot.copy_intent())
 	actor.publish_battle_event(&"battle.operation_intent", {"intent": snapshot.action, "phase": snapshot.get_phase_name(), "strength": snapshot.strength, "held_seconds": snapshot.held_seconds, "input_time": snapshot.input_time, "input_sequence": snapshot.sequence, "controller_id": controller.controller_id, "operation_payload": snapshot.payload})
 	if snapshot.payload.get("cancelled", false):
+		actor.action_state.handle_operation(snapshot, ability_slots)
 		_handle_cancelled_intent(snapshot)
-	elif snapshot.phase in [CoreOperationIntent.Phase.HELD, CoreOperationIntent.Phase.RELEASED]:
+	elif snapshot.phase != CoreOperationIntent.Phase.PRESSED or not controller.profile.buffered_intents.has(snapshot.action):
 		## 同一冻结期间仅保留最新 held，保持正常 release 的次序。
 		if snapshot.phase == CoreOperationIntent.Phase.HELD:
 			for index in range(_phases.size() - 1, -1, -1):

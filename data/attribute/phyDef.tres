@@ -8,6 +8,7 @@ attribute_id = &"phyDef"
 attribute_display_name = "防御"
 attribute_description = "基础物理防御，沿用 GAS 内置伤害策略读取的 phyDef。"
 min_value = 0.0
+round_final_value = true
 metadata/source_field = "phyDef"
 metadata/category = "core"
 metadata/unit = "点"

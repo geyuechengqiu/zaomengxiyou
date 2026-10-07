@@ -116,9 +116,12 @@ func update(delta: float) -> bool:
 	return false
 
 ## 增加层数
-## 注意：堆叠只影响移除生效、周期触发和事件触发的效果，不会重新触发应用时效果
+## 在一个属性事务中撤销旧层效果，再按新层数应用，避免残留与中间状态通知。
 func add_stack(amount: int = 1, is_refresh_duration: bool = true) -> void:
 	if stacks < status_data.max_stacks:
+		var attributes := _get_attribute_component()
+		if attributes != null:
+			attributes.begin_update()
 		# 1. 移除旧的效果
 		var context = _cached_context.duplicate()
 		context["source_id"] = _get_source_instance_id()
@@ -131,6 +134,8 @@ func add_stack(amount: int = 1, is_refresh_duration: bool = true) -> void:
 		# 3. 重新应用效果（使用新层数）
 		context["stacks"] = stacks
 		_apply_effects(status_data.apply_effects, context)
+		if attributes != null:
+			attributes.end_update()
 
 	# 4. 刷新持续时间
 	if is_refresh_duration:
@@ -192,6 +197,9 @@ func _apply_effects(effects: Array[GameplayEffect], context: Dictionary = {}) ->
 	# 在context中添加stacks信息
 	_cached_context["stacks"] = stacks
 	_cached_context["source_id"] = _get_source_instance_id()
+	var attributes := _get_attribute_component()
+	if attributes != null:
+		attributes.begin_update()
 
 	# 应用所有的果
 	for effect_template in effects:
@@ -205,6 +213,8 @@ func _apply_effects(effects: Array[GameplayEffect], context: Dictionary = {}) ->
 		
 		# 应用效果（瞬时操作，不存储）
 		effect_clone.apply(target, instigator, _cached_context)
+	if attributes != null:
+		attributes.end_update()
 
 ## 移除效果
 func _remove_effects(effects: Array[GameplayEffect], context: Dictionary) -> void:
@@ -217,6 +227,9 @@ func _remove_effects(effects: Array[GameplayEffect], context: Dictionary) -> voi
 	
 	# 在context中添加stacks信息
 	context["stacks"] = stacks
+	var attributes := _get_attribute_component()
+	if attributes != null:
+		attributes.begin_update()
 
 	# 应用所有的果
 	for effect_template in effects:
@@ -230,6 +243,13 @@ func _remove_effects(effects: Array[GameplayEffect], context: Dictionary) -> voi
 		
 		# 应用效果（瞬时操作，不存储）
 		effect_clone.remove(target, instigator, context)
+	if attributes != null:
+		attributes.end_update()
+
+func _get_attribute_component() -> GameplayAttributeComponent:
+	if not is_instance_valid(owner_component):
+		return null
+	return GameplayAbilitySystem.get_component_by_interface(owner_component.get_parent(), &"GameplayVitalAttributeComponent") as GameplayAttributeComponent
 
 ## 应用状态标签（标签系统集成）
 func _apply_status_tags() -> void:

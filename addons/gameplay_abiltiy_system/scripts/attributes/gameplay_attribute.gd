@@ -16,6 +16,8 @@ var attribute_description : String = &"" 				## 属性描述
 @export var is_percentage: bool = false 				## 是否百分比显示
 
 @export var scalable_value: ScalableValue = null		## 可扩展属性
+## 最终计算完成后取整；成长中间值保留小数。
+@export var round_final_value: bool = false
 #endregion
 #region 公共接口
 

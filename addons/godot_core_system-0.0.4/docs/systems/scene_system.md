@@ -166,8 +166,4 @@ func _do_end(duration: float) -> void
 
 ## Examples
 
-Check the `examples/scene_demo` directory for complete examples of:
-- Basic scene switching
-- Custom transition effects
-- Scene state management
-- Scene preloading
+The legacy scene demos were removed because they referenced obsolete APIs and paths. Use the API examples in this document; see the [implementation analysis](../implementation-analysis.md) for the cleanup record.

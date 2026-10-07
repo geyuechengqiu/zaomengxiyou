@@ -167,9 +167,4 @@ func _do_end(duration: float) -> void
 
 ## 示例
 
-查看 `examples/scene_demo` 目录获取完整示例：
-
-- 基本场景切换
-- 自定义转场效果
-- 场景状态管理
-- 场景预加载
+旧场景示例因使用失效 API 与旧资源路径已移除。使用本页中的接口示例；清理记录见 [实现分析](../implementation-analysis.md)。

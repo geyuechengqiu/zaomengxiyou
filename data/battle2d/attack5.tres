@@ -1,23 +1,31 @@
-[gd_resource type="Resource" script_class="GameplayAbilityDefinition" format=3]
-[ext_resource type="Script" path="res://addons/gameplay_abiltiy_system/scripts/abilities/gameplay_ability_definition.gd" id="definition"]
-[ext_resource type="Script" path="res://addons/gameplay_abiltiy_system/scripts/abilities/features/gameplay_ability_feature.gd" id="feature_type"]
-[ext_resource type="Script" path="res://addons/gameplay_abiltiy_system/scripts/abilities/features/cooldown_feature.gd" id="cooldown"]
-[ext_resource type="Script" path="res://addons/battle_foundation/gas/battle_frame_timeline_feature.gd" id="timeline"]
-[ext_resource type="Script" path="res://addons/battle_foundation/definitions/battle_frame_event.gd" id="event"]
+[gd_resource type="Resource" script_class="GameplayAbilityDefinition" format=3 uid="uid://dso6uy1klt4sb"]
+
+[ext_resource type="Script" uid="uid://cfho6ucrpkdn1" path="res://addons/gameplay_abiltiy_system/scripts/abilities/features/cooldown_feature.gd" id="cooldown"]
+[ext_resource type="Script" uid="uid://bm4h231fb21pv" path="res://addons/gameplay_abiltiy_system/scripts/abilities/gameplay_ability_definition.gd" id="definition"]
+[ext_resource type="Script" uid="uid://dm30yy8ucnbot" path="res://addons/battle_foundation/definitions/battle_frame_event.gd" id="event"]
+[ext_resource type="Script" uid="uid://cm0x3pewlrveo" path="res://addons/gameplay_abiltiy_system/scripts/abilities/features/gameplay_ability_feature.gd" id="feature_type"]
+[ext_resource type="Script" uid="uid://daneexb55k8ae" path="res://addons/battle_foundation/gas/battle_frame_timeline_feature.gd" id="timeline"]
 
 [sub_resource type="Resource" id="Cooldown"]
 script = ExtResource("cooldown")
-cooldown_duration = 0.0
 
 [sub_resource type="Resource" id="Impact0"]
 script = ExtResource("event")
 source_frame = 6
 event_id = &"battle.attack.impact"
-payload = {"action": &"attack_5", "combo_step": 5, "hit_index": 1, "damage_multiplier": 2, "hit_scale_x": 1, "hit_offset": Vector2(0, 0)}
+payload = {
+"action": &"attack_5",
+"combo_step": 5,
+"damage_multiplier": 2,
+"hit_index": 1,
+"hit_offset": Vector2(0, 0),
+"hit_rect": Rect2(-69, -159.95, 324, 184.95),
+"hit_scale_x": 1,
+"hit_scale_y": 1
+}
 
 [sub_resource type="Resource" id="Timeline"]
 script = ExtResource("timeline")
-source_fps = 30.0
 duration_frames = 20
 events = Array[ExtResource("event")]([SubResource("Impact0")])
 

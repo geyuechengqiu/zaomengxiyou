@@ -11,9 +11,13 @@
       "sunwukong_attack4": "res://data/battle2d/attack4.tres",
       "sunwukong_attack5": "res://data/battle2d/attack5.tres"
     },
-    "monsters": {},
+    "monsters": {
+      "属性验收怪物": "res://data/battle2d/attribute_test_monster.tres"
+    },
     "equipment": {},
     "levels": {},
-    "statuses": {}
+    "statuses": {
+      "attribute_test_buff": "res://data/battle2d/statuses/attribute_test_buff.tres"
+    }
   }
 }

@@ -5,7 +5,7 @@ var entity_id: StringName = &""
 var definition_id: StringName = &""
 var faction_id: StringName = &"neutral"
 var session: BattleSession
-var attributes: GameplayVitalAttributeComponent
+var attributes: BattleAttributeComponent
 var abilities: GameplayAbilityComponent
 var statuses: GameplayStatusComponent
 var _definition: BattleEntityDefinition

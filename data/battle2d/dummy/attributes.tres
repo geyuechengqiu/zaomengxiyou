@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="GameplayAttributeSet" format=3]
+[ext_resource type="Script" path="res://addons/gameplay_abiltiy_system/scripts/attributes/gameplay_attribute_set.gd" id="set"]
+[ext_resource type="Script" path="res://addons/gameplay_abiltiy_system/scripts/attributes/gameplay_attribute.gd" id="attr"]
+[ext_resource type="Resource" path="res://data/attribute/hpMax.tres" id="hp"]
+[ext_resource type="Resource" path="res://data/attribute/mpMax.tres" id="mp"]
+[ext_resource type="Resource" path="res://data/attribute/atk.tres" id="atk"]
+[ext_resource type="Resource" path="res://data/attribute/phyDef.tres" id="def"]
+[ext_resource type="Resource" path="res://data/attribute/reHP.tres" id="rehp"]
+[ext_resource type="Resource" path="res://data/attribute/reMP.tres" id="remp"]
+[ext_resource type="Resource" path="res://data/attribute/walkSpeed.tres" id="walk"]
+[ext_resource type="Resource" path="res://data/attribute/runSpeed.tres" id="run"]
+[resource]
+script = ExtResource("set")
+attributes = Dictionary[ExtResource("attr"), float]({ExtResource("hp"): 70.0, ExtResource("mp"): 0.0, ExtResource("atk"): 0.0, ExtResource("def"): 5.0, ExtResource("rehp"): 0.0, ExtResource("remp"): 0.0, ExtResource("walk"): 0.0, ExtResource("run"): 0.0})

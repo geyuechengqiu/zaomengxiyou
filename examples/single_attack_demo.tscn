@@ -1,0 +1,66 @@
+[gd_scene load_steps=3 format=3]
+[ext_resource type="Script" path="res://examples/single_attack_demo.gd" id="script"]
+[sub_resource type="RectangleShape2D" id="ground"]
+size = Vector2(2800, 150)
+[node name="SingleAttackDemo" type="Node2D"]
+script = ExtResource("script")
+[node name="Ground" type="StaticBody2D" parent="."]
+position = Vector2(1200, 725)
+collision_layer = 1
+collision_mask = 2
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground"]
+shape = SubResource("ground")
+[node name="HUD" type="CanvasLayer" parent="."]
+layer = 10
+[node name="Panel" type="PanelContainer" parent="HUD"]
+offset_left = 24.0
+offset_top = 20.0
+offset_right = 1256.0
+offset_bottom = 210.0
+[node name="Column" type="VBoxContainer" parent="HUD/Panel"]
+layout_mode = 2
+theme_override_constants/separation = 12
+[node name="Title" type="Label" parent="HUD/Panel/Column"]
+layout_mode = 2
+text = "阶段 6 · 悟空单段普攻与木桩战斗闭环"
+theme_override_font_sizes/font_size = 28
+[node name="Info" type="Label" parent="HUD/Panel/Column"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+[node name="Message" type="Label" parent="HUD/Panel/Column"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.84, 0.55, 1)
+theme_override_font_sizes/font_size = 18
+[node name="Buttons" type="HBoxContainer" parent="HUD/Panel/Column"]
+layout_mode = 2
+theme_override_constants/separation = 10
+[node name="Attack" type="Button" parent="HUD/Panel/Column/Buttons"]
+layout_mode = 2
+focus_mode = 0
+text = "单段攻击 [J]"
+[node name="Flip" type="Button" parent="HUD/Panel/Column/Buttons"]
+layout_mode = 2
+focus_mode = 0
+text = "翻转"
+[node name="Near" type="Button" parent="HUD/Panel/Column/Buttons"]
+layout_mode = 2
+focus_mode = 0
+text = "木桩靠近"
+[node name="Far" type="Button" parent="HUD/Panel/Column/Buttons"]
+layout_mode = 2
+focus_mode = 0
+text = "木桩远离 / 打空"
+[node name="Power" type="Button" parent="HUD/Panel/Column/Buttons"]
+layout_mode = 2
+focus_mode = 0
+text = "攻击 26 / 200"
+[node name="Reset" type="Button" parent="HUD/Panel/Column/Buttons"]
+layout_mode = 2
+focus_mode = 0
+text = "重新生成木桩"
+[node name="Pause" type="Button" parent="HUD/Panel/Column/Buttons"]
+layout_mode = 2
+focus_mode = 0
+text = "暂停 / 恢复"
+[node name="MenuLayer" type="CanvasLayer" parent="."]
+layer = 30

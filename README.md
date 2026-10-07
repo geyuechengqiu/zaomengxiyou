@@ -1,5 +1,7 @@
 # 插件效果演示
 
+孙悟空 [表现场景](data/animation/sunwukong_visual.tscn) 通过主 AnimationPlayer 预览十四个动作，所有技能统一使用一个 AttackHitbox / CollisionShape2D，判定范围读取当前 GAS 技能数据。修改技能事件的 hit_rect、缩放和偏移即可调整预览与实际命中。[编辑步骤、新角色接入与类图](data/animation/README.md)。
+
 使用 Godot 4.7 或更新版本打开 `project.godot`，按 F6 运行所选示例，或按 F5 运行主场景 `examples/plugin_showcase.tscn`。
 
 当前包含以下六套插件：
@@ -29,7 +31,11 @@
 
 已在现有 Battle Foundation 中增加独立运动控制器、状态权限表和连击运行实例，复用 Core 输入/事件与 GAS 属性/Vital/技能。完成待机、行走、奔跑、起跳、空中、落地、受击、死亡；支持重力、墙体、顶头、单向平台、二段跳和朝向限制。死亡优先于霸体与技能规则，动画完成只通知动作系统。
 
-孙悟空普通攻击使用 `sunwukong_attack1` 至 `sunwukong_attack5`，保留原素材 30 FPS 的段时长、六次命中事件、伤害倍率，以及第四段前移和第二击反向偏移。连按 J 在当前段预约下一段，长按不自动连击；攻击锁行走与转向，可按 K 跳取消。第四段位移经过碰撞，不穿墙。
+动作状态已接入插件的 Core `BaseStateMachine` / `BaseState`，九种状态在 Core 中进入、退出及转换，按实体登记到 StateMachineManager；旧语义入口读取当前 Core 叶子。管理器关闭默认驱动，状态仍统一接收战斗 delta；重生和离树注销机器。接入结构、查询 API 及生命周期见 [状态机说明](addons/battle_foundation/movement/README.md#动作状态接入-core-插件状态机) 和 [Core 状态机类图](addons/battle_foundation/docs/action-state-machine.svg)，验收入口为 [verify_wukong_state_machine.tscn](examples/verify_wukong_state_machine.tscn)。
+
+孙悟空普通攻击使用 `sunwukong_attack1` 至 `sunwukong_attack5`，保留原素材 30 FPS 的段时长、六次命中事件、伤害倍率，以及第四段前移和第二击偏移。攻击范围使用从原版素材提取的五组 ABRect；负显示缩放不反转碰撞框，朝向按脚底整体镜像。连按 J 在当前段预约下一段，长按不自动连击；攻击锁行走与转向，可按 K 跳取消。第四段位移经过碰撞，不穿墙。
+
+操作意图按顺序交给 Core 动作机当前叶子，覆盖按下、持有、松开和强度变化；方向松开后状态与动画返回待机，攻击期间释放方向不会打断攻击。菜单与失焦同步释放移动状态。已移除 Core 包内三个失效的历史示例入口及专用子场景，保留可运行示例；插件验收对资源编译失败返回失败码。
 
 打开 [平台场景](examples/wukong_platform_demo.tscn) 按 F6，A/D 行走、Shift/同方向双击奔跑、K 二段跳、J 五段普攻。面板显示支撑、跳跃预算及连击预约；Esc 菜单会清预约。完整条件表、原版来源、扩展 API 和迁移边界见 [阶段四 README](addons/battle_foundation/movement/README.md)。
 
@@ -37,7 +43,7 @@
 
 ![五段连击联合运行图](addons/battle_foundation/docs/combo-runtime.svg)
 
-验收 [verify_stage_four.tscn](examples/verify_stage_four.tscn) 已通过 132 项真实碰撞、平台、跳跃、连击、打断、时钟和输入检查；133 项输入检查及 903 项动画检查与阶段一、属性、Core 事件回归均通过。原版完整击退、暴击/保护公式、持续 sensor 和特效仍待后续接入。
+验收 [verify_stage_four.tscn](examples/verify_stage_four.tscn) 已通过 222 项真实碰撞、平台、跳跃、连击、原版攻击边界、打断、时钟和输入检查；145 项输入检查、903 项动画检查及 46 项 Core 状态机检查通过。插件资源、阶段一、属性、Core 事件回归均通过。原版完整击退、暴击/保护公式、持续 sensor 和特效仍待后续接入。
 
 ## 可扩展角色操作控制器
 
@@ -81,7 +87,21 @@
 
 [验收脚本](examples/verify_stage_one.gd) 覆盖双实体隔离、索引校验、Core 战斗事件、实体 ID/阵营、随机流/快照、素材帧、BTWait 战斗时间、实际固定物理调度与碰撞、暂停连续恢复、慢动作和受击停顿，失败返回非零退出码。样例配置用于接口验收，未冒充原版实体数值。
 
+## 阶段 6：单段普攻与最小战斗闭环
+
+阶段 6 已完成 [单段普攻与最小战斗闭环](addons/battle_foundation/combat/README.md)：Core 输入与动作状态 → GAS 命中窗口 → 独立受击区域 → 属性伤害/HealthVital 扣血 → 生命条与飘字 → 待机。每次施放保存攻击者、阵营、攻击编号和窗口命中集合，持续重叠只结算一次；单一攻击框继续读取技能数据并随朝向镜像。
+
+打开 [single_attack_demo.tscn](examples/single_attack_demo.tscn) 按 F6，J 单段普攻；按钮可翻转、让木桩靠近/远离、切换攻击值并重新生成木桩，演示打中、打空与击杀。Esc 菜单支持改键并阻断攻击。独立配置不改变原五连击。验收 [verify_single_attack.tscn](examples/verify_single_attack.tscn) 覆盖输入至待机、去重、镜像、死亡、打断及暂停；已查看实际 D3D12 命中与击杀画面。
+
+![单段攻击联合类图](addons/battle_foundation/docs/single-attack-runtime.svg)
+
 ## 业务共享基础属性
+
+已接入 [基础、成长、装备、临时和最终属性计算链](addons/battle_foundation/attributes/README.md)：GAS 管理最终值、Vital 和 Buff，Simple Inventory 装备槽事件替换来源，Core 发布完整属性通知。生命、魔法、攻击、防御、等级和经验在 [悟空平台场景](examples/wukong_platform_demo.tscn) 提供即时面板及测试按钮；升级、GM 调等级、换装和 Buff 共用属性入口。
+
+![属性链与插件联合类图](addons/battle_foundation/docs/attribute-pipeline.svg)
+
+升级按原版补充基础、成长及装备形成的生命/魔法上限；换装、Buff 和基础调整保留当前值，上限降低立即截断。当前值保存在独立 Vital。孙悟空逐级成长和 EXP 表已导入，[属性链验收](examples/verify_attribute_pipeline.tscn) 检查通知、面板/真实伤害、卸装清理和两只同类怪物隔离。人物不显示问题已修复，保留编辑后的二段跳组合时间轴。
 
 新增 [data/attribute](data/attribute/README.md)，依据 Speculum-4399-master 中的上古天帝篇本地配置和客户端源码创建 28 个 GAS 属性定义、5 个通用属性集及生命/魔法 Vital 模板。覆盖攻击、防御、生命/魔法上限、回血/回魔、命闪暴韧幸守、八系抗性、移动/跳跃及耐久/保护阈值。暴击和幸运保留评分语义，抗性和跳跃保留合法负数；共享模板使用中性初始值，各实体的具体数值与成长由业务另行配置。
 

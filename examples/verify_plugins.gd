@@ -5,7 +5,9 @@ extends Node
 func _ready() -> void:
 	assert(not DirAccess.dir_exists_absolute("res://scripts"))
 	assert(not DirAccess.dir_exists_absolute("res://ui"))
-	_check_resources("res://addons")
+	if not _check_resources("res://addons"):
+		get_tree().quit(1)
+		return
 	var demo := preload("res://examples/plugin_showcase.tscn").instantiate()
 	add_child(demo)
 	await get_tree().process_frame
@@ -80,13 +82,19 @@ func _ready() -> void:
 #endregion
 #region 内部实现
 
-func _check_resources(directory: String) -> void:
+func _check_resources(directory: String) -> bool:
 	for file in DirAccess.get_files_at(directory):
 		if file.get_extension() in ["tscn", "tres", "gd"]:
 			var resource := ResourceLoader.load(directory.path_join(file))
-			assert(resource != null, "资源应独立加载：" + file)
+			if resource == null:
+				push_error("资源无法独立加载：" + directory.path_join(file))
+				return false
 			if resource is GDScript and not resource.source_code.contains("@abstract"):
-				assert(resource.can_instantiate(), "脚本应可编译：" + file)
+				if not resource.can_instantiate():
+					push_error("脚本无法编译：" + directory.path_join(file))
+					return false
 	for subdirectory in DirAccess.get_directories_at(directory):
-		_check_resources(directory.path_join(subdirectory))
+		if not _check_resources(directory.path_join(subdirectory)):
+			return false
+	return true
 #endregion

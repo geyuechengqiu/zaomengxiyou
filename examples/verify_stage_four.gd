@@ -22,6 +22,8 @@ func _ready() -> void:
 	CoreSystem.event_bus.event_pushed.connect(_on_event)
 	await _fresh()
 	_verify_definitions_and_rules()
+	await _verify_attack_ranges()
+	await _fresh()
 	await _verify_motion()
 	await _verify_platforms()
 	await _verify_combo()
@@ -86,6 +88,46 @@ func _fixture(rect: Rect2, one_way: bool = false) -> StaticBody2D:
 	demo.add_child(body)
 	return body
 #endregion
+#region 五段原版 ABRect 与实际伤害边界
+func _verify_attack_ranges() -> void:
+	var original: Array[Rect2] = [Rect2(-114, -104.95, 267, 99.95), Rect2(-42, -90.95, 210.05, 114.95), Rect2(-171, -103.95, 322, 133.95), Rect2(-94.85, -105.95, 188.65, 159.95), Rect2(-69, -159.95, 324, 184.95)]
+	for index in range(5):
+		var id := StringName("sunwukong_attack%d" % (index + 1))
+		var definition := session.catalog.instantiate_definition("skills", id) as GameplayAbilityDefinition
+		var timeline := definition.features[1] as BattleFrameTimelineFeature
+		for marker in timeline.events:
+			_check(marker.payload.hit_rect.is_equal_approx(original[index]), "每次事件使用对应原版 ABRect，不复用 AI atkRange")
+			for facing in [1, -1]:
+				await _fresh()
+				player.animation.set_facing(facing)
+				_check(player.try_activate_skill(id), "边界验证通过真实 GAS 激活对应段")
+				var context: Dictionary = marker.payload.duplicate(true)
+				var expected := original[index]
+				expected.position += Vector2(context.hit_offset)
+				if facing < 0:
+					expected.position.x = -expected.end.x
+				expected = Rect2(expected.position * 2.0, expected.size * 2.0)
+				_check(player.get_attack_rect_local(context).is_equal_approx(expected), "缩放、偏移及左右镜像与原版 SkillControl 一致，负显示缩放不翻碰撞框")
+				var rect := player.global_transform * expected
+				var target: BattleEntity2D = demo.right_target
+				demo.left_target.faction_id = player.faction_id
+				var radius := target.get_body_rect_global().size.x / 2.0
+				var positions: Array[Vector2] = [Vector2(rect.end.x + radius - 1.0, player.position.y), Vector2(rect.end.x + radius + 1.0, player.position.y), Vector2(rect.position.x - radius + 1.0, player.position.y), Vector2(rect.get_center().x, rect.position.y - 1.0)]
+				for case_index in range(positions.size()):
+					target.position = positions[case_index]
+					player.attack_instance.hit_targets.clear()
+					player.attack_instance.windows.clear()
+					var before := hits.size()
+					context["ability_id"] = id
+					context["attack_id"] = player.attack_instance.attack_id
+					context["source_fps"] = 30.0
+					context["source_frame"] = marker.source_frame
+					context["skill_time"] = marker.source_frame / 30.0
+					player.publish_battle_event(&"battle.attack.impact", context)
+					var should_hit := case_index in [0, 2]
+					_check(hits.size() == before + (1 if should_hit else 0), "真实 Core→GAS 伤害验证前后边缘内命中、边缘外和框上方不命中")
+				_check(not hits.any(func(event): return event.target_entity_id == demo.left_target.entity_id), "覆盖身后仍遵守阵营过滤")
+#endregion
 #region 定义数据与状态条件表
 func _verify_definitions_and_rules() -> void:
 	var expected_frames := [10, 10, 12, 18, 20]
@@ -114,6 +156,7 @@ func _verify_definitions_and_rules() -> void:
 	state.active_rules = {"move": true, "jump": true, "turn": true}
 	state.enter(State.IDLE)
 	_check(state.current == State.DEAD and not state.get_permission(&"move", player.action_profile) and not state.can_jump(true, player.action_profile), "死亡终态和权限不能被技能覆盖")
+	state.dispose()
 #endregion
 #region 重力、行走、奔跑、朝向与二段跳
 func _verify_motion() -> void:
@@ -224,12 +267,13 @@ func _verify_combo() -> void:
 	_check(player.position.x <= 2128.2, "第四段技能位移仍被墙体限制")
 	await _fresh()
 	player.animation.set_facing(-1)
+	demo.left_target.position.x = 200.0
 	demo.right_target.position.x = 480.0
 	player.try_activate_skill(&"sunwukong_attack4")
 	await _step(17)
 	var second: Dictionary = impacts.back()
-	_check(hits.any(func(event): return event.hit_index == 1 and event.target_entity_id == demo.left_target.entity_id) and hits.any(func(event): return event.hit_index == 2 and event.target_entity_id == demo.right_target.entity_id), "第四段前后两击实际命中对应方向的目标")
-	_check(second.source_frame == 8 and second.hit_scale_x == -1 and second.hit_offset == Vector2(-17, -4), "第四段保留第二次反向攻击的原版偏移")
+	_check(hits.any(func(event): return event.hit_index == 1 and event.target_entity_id == demo.left_target.entity_id) and hits.any(func(event): return event.hit_index == 2 and event.target_entity_id == demo.right_target.entity_id), "第四段两击按原版覆盖身前身后并跟随角色位移")
+	_check(second.source_frame == 8 and second.hit_scale_x == -1 and second.hit_offset == Vector2(-17, -4), "第四段保留第二击的显示缩放和原版偏移")
 	var left_rect := player.get_attack_rect_local(second)
 	player.animation.set_facing(1)
 	var right_rect := player.get_attack_rect_local(second)

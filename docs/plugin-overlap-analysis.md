@@ -79,6 +79,8 @@ Core 状态机擅长角色“待机、移动、受击”等互斥逻辑，以及
 
 **取舍：角色逻辑用状态机、技能内部编排用 BT、增益/减益用 Status。** 高频移动更新更适合由角色自身驱动逻辑机；全局流程机可由 StateMachineManager 驱动。两者负责不同范围，只连接意图和技能接口。
 
+孙悟空现已按此方式接入：BattleActionStateMachine2D 继承 Core BaseStateMachine，九个独立 BaseState 叶子执行动作转换与权限判断；StateMachineManager 负责登记/查询/注销，三个默认驱动标志关闭，由 BattleSession 的 combat delta 唯一推进。五段攻击仍由 GAS 技能实例计时，Buff 仍由 GAS Status 管理。生命周期、死亡守卫和清理见 [接入文档](../addons/battle_foundation/movement/README.md#动作状态接入-core-插件状态机)。
+
 ## 触发器：Buff 用 GAS，通用规则用 Core
 
 源码：[GameplayTrigger](../addons/godot_core_system-0.0.4/source/trigger_system/gameplay_trigger.gd)、[TriggerManager](../addons/godot_core_system-0.0.4/source/trigger_system/trigger_manager.gd)、[FeatureEventListener](../addons/gameplay_abiltiy_system/scripts/status/features/feature_event_listener.gd)、[FeaturePeriodicEffects](../addons/gameplay_abiltiy_system/scripts/status/features/feature_periodic_effects.gd)。

@@ -5,6 +5,7 @@
 [resource]
 script = ExtResource("1_o0dl4")
 attribute_id = &"hpMax"
+round_final_value = true
 attribute_display_name = "最大生命"
 attribute_description = "生命上限。当前生命保存在 HealthVital，不作为普通属性重复维护。"
 min_value = 0.0

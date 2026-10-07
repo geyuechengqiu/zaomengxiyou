@@ -106,7 +106,7 @@
 
 | 文件 / 类型 | 基类 | 导出配置 | 公开方法 | 信号 |
 | --- | --- | --- | --- | --- |
-| [GameplayAttribute](../scripts/attributes/gameplay_attribute.gd) | `Resource` | `attribute_id`<br>`attribute_display_name`<br>`attribute_description`<br>`attribute_icon`<br>`min_value`<br>`max_value`<br>`is_hidden`<br>`is_percentage`<br>`scalable_value` | `get_id()` | — |
+| [GameplayAttribute](../scripts/attributes/gameplay_attribute.gd) | `Resource` | `attribute_id`<br>`attribute_display_name`<br>`attribute_description`<br>`attribute_icon`<br>`min_value`<br>`max_value`<br>`is_hidden`<br>`is_percentage`<br>`scalable_value`<br>`round_final_value` | `get_id()` | — |
 | [GameplayAttributeInstance](../scripts/attributes/gameplay_attribute_instance.gd) | `RefCounted` | — | `get_value()`<br>`set_scalable_value()`<br>`add_modifier()`<br>`remove_modifier()`<br>`remove_modifiers_by_source()` | `value_changed` |
 | [GameplayAttributeModifier](../scripts/attributes/gameplay_attribute_modifier.gd) | `Resource` | `attribute_id`<br>`value`<br>`modifier_type` | — | — |
 | [GameplayAttributeSet](../scripts/attributes/gameplay_attribute_set.gd) | `Resource` | `attributes`<br>`scalable_attributes` | `instantiate_attributes()`<br>`resolve_dependencies()`<br>`on_attribute_changed()` | — |
@@ -115,7 +115,7 @@
 
 | 文件 / 类型 | 基类 | 导出配置 | 公开方法 | 信号 |
 | --- | --- | --- | --- | --- |
-| [GameplayVital](../scripts/attributes/vitals/gameplay_vital.gd) | `Resource` | `vital_id`<br>`display_name`<br>`max_value_attribute`<br>`regen_rate_attribute` | `initialize()`<br>`create_instance()`<br>`process_regen()`<br>`modify_value()`<br>`get_max_value()`<br>`get_percent()` | `value_changed`<br>`depleted`<br>`full` |
+| [GameplayVital](../scripts/attributes/vitals/gameplay_vital.gd) | `Resource` | `vital_id`<br>`display_name`<br>`max_value_attribute`<br>`regen_rate_attribute` | `initialize()`<br>`create_instance()`<br>`process_regen()`<br>`modify_value()`<br>`get_max_value()`<br>`get_percent()`<br>`set_current_value()` | `value_changed`<br>`depleted`<br>`full` |
 | [HealthVital](../scripts/attributes/vitals/health_vital.gd) | `GameplayVital` | — | `modify_value()`<br>`apply_damage()`<br>`heal()` | `health_restored`<br>`health_depleted`<br>`damage_received`<br>`damage_applied` |
 | [ManaVital](../scripts/attributes/vitals/mana_vital.gd) | `GameplayVital` | — | `try_spend_mana()` | — |
 
@@ -165,7 +165,7 @@
 | 文件 / 类型 | 基类 | 导出配置 | 公开方法 | 信号 |
 | --- | --- | --- | --- | --- |
 | [GameplayAbilityComponent](../scripts/components/gameplay_ability_component.gd) | `Node` | `_initial_abilities`<br>`externally_driven` | `advance_simulation()`<br>`initialize()`<br>`match_input()`<br>`learn_ability()`<br>`forget_ability()`<br>`disable_ability()`<br>`enable_ability()`<br>`get_ability_instance()`<br>`get_all_ability_instances()`<br>`can_activate_ability()`<br>`try_activate_ability()`<br>`cancel_ability()`<br>`get_current_casting_ability()`<br>`get_all_ability_ids()`<br>`has_ability()`<br>`request_ability_preview()`<br>`cancel_ability_preview()`<br>`has_targeting_ability()`<br>`get_current_targeting_ability()` | `ability_learned`<br>`ability_forgotten`<br>`ability_activated`<br>`ability_completed` |
-| [GameplayAttributeComponent](../scripts/components/gameplay_attribute_component.gd) | `Node` | `_active_sets` | `initialize()`<br>`get_value()`<br>`get_attribute()`<br>`set_base_value()`<br>`has_attribute()`<br>`add_modifier()`<br>`remove_modifier()`<br>`remove_modifiers_by_source()`<br>`get_level()`<br>`set_level()` | `attribute_value_changed`<br>`level_changed` |
+| [GameplayAttributeComponent](../scripts/components/gameplay_attribute_component.gd) | `Node` | `_active_sets` | `initialize()`<br>`get_value()`<br>`get_attribute()`<br>`set_base_value()`<br>`has_attribute()`<br>`add_modifier()`<br>`remove_modifier()`<br>`remove_modifiers_by_source()`<br>`get_level()`<br>`set_level()`<br>`begin_update()`<br>`end_update()` | `attribute_value_changed`<br>`level_changed`<br>`attributes_recalculated` |
 | [GameplayStatusComponent](../scripts/components/gameplay_status_component.gd) | `Node` | `externally_driven`<br>`filter_events_by_owner` | `advance_simulation()`<br>`apply_status()`<br>`remove_status()`<br>`remove_statuses_by_tags()`<br>`get_active_statuses()`<br>`get_status()`<br>`has_status()`<br>`get_random_status()`<br>`handle_event()` | `status_applied`<br>`status_removed`<br>`status_stacked` |
 | [GameplayVitalAttributeComponent](../scripts/components/gameplay_vital_attribute_component.gd) | `GameplayAttributeComponent` | `_vitals`<br>`externally_driven` | `advance_simulation()`<br>`initialize()`<br>`has_vital()`<br>`get_vital()`<br>`get_vital_value()`<br>`has_sufficient_vital()`<br>`get_vital_percent()`<br>`modify_vital()` | `vital_value_changed`<br>`vital_depleted` |
 

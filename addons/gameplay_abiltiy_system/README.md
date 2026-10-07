@@ -1,5 +1,7 @@
 # Gameplay Ability System：完整实现分析
 
+业务层现已通过 [Battle Foundation 属性链](../battle_foundation/attributes/README.md) 连接基础、成长、装备和临时修改器，复用本插件最终属性、Vital、Status 与 Effect。属性组件新增可嵌套事务和完整重算通知，生命/魔法上限支持明确策略；业务原版成长、装备槽连接、升级补充规则见该说明。
+
 当前插件使用 **技能配置 → 技能实例 → 行为树 → 效果** 的执行结构。技能决定执行顺序，效果执行具体操作，状态负责持续时间与重复触发，Cue 负责表现。下面的分析以当前 `.gd` 实现为准；源码中部分注释描述的是设计意图，实际差异在文末列出。
 
 本文覆盖插件的全部模块。每节说明配置、运行状态、入口、更新及清理路径；类图列关键成员，完整字段和公开方法见 [全部源码索引](docs/source-index.md)。图内的 `AttributeComponent`、`AbilityDefinition`、`AbilityFeature`、`MovementStrategy` 等短名分别指带 `Gameplay` 或 `Projectile` 前缀的对应基类。图中的组合和聚合表示代码中的持有方式，不代表 Godot 会自动销毁所有引用。
@@ -311,6 +313,7 @@ heal.apply(target, target, {})
 ```text
 存在 OVERRIDE：final = 第一个 OVERRIDE.value
 否则：final = (base_value + ΣADD.value) × (1 + ΣMULTIPLY.value)
+可选 round_final_value：final = floor(final + 0.5)
 最后：final = clamp(final, attribute.min_value, attribute.max_value)
 ```
 
@@ -320,7 +323,7 @@ MULTIPLY 的 0.1 表示增加 10%，多条按加法合并。例如基础 100、A
 
 等级成长使用 `ScalableValue`：未开启或缺曲线取 fixed_value，否则 `Curve.sample(max(0, level-base_level))`。这是直接采样曲线的横坐标，不会把等级自动归一化到 0..1；应配置合适的 Curve 域。`get_max_value(max_level)` 只是指定等级的值，不是扫描整条曲线求最大值。组件等级至少 1，传递到所有实例；成长重新计算会覆盖之前手工设置的 base_value。
 
-属性信号链是 `Instance.value_changed → Component.attribute_value_changed → 每个 Set.on_attribute_changed`。外部 Vital 监听会先收到原始变化，之后才运行衍生依赖钩子。`initialize()` 不清空已注册实例，重复 ID 会拒绝新实例，不能作为彻底重置。直接改已添加 modifier.value 不会让属性缓存失效；`remove_modifier` 还没有同步清来源索引，随后按来源清理才能抹去这些残留引用。
+属性信号链是 `Instance.value_changed → Set.on_attribute_changed → 事务完成 → Component.attribute_value_changed → attributes_recalculated`。依赖即时计算，组件通知延迟到嵌套 begin_update/end_update 的最外层结束，Vital 在完整重算通知前同步。单项修改自动完成一次事务；多项效果、换装和 Buff 叠层可统一批次。`initialize()` 不清空已注册实例，重复 ID 会拒绝新实例；直接改 modifier.value 不会使缓存失效，使用组件添加、撤销和来源替换 API。remove_modifier 已同步清理来源索引，防止残留引用。
 
 ## Vital 与伤害系统
 
@@ -340,7 +343,7 @@ MULTIPLY 的 0.1 表示增加 10%，多条按加法合并。例如基础 100、A
 
 每帧恢复量为 `owner.get_value(regen_rate_attribute) × delta`。Health 和 Mana 的默认恢复键在源码中被注释，需显式配置；负恢复率也可以造成扣值。Health 的正向路径转到 heal 时未保留 is_regen，恢复事件可能被报告为普通治疗；活着但已满的 Health 仍可发 health_restored。
 
-上限属性变化时 Vital 刷新缓存：上限增加不补满、不按比例缩放，减少时把超过上限的当前值截断。缓存更新先发一次变化，随后截断再发一次，所以监听者可能先收到短暂超过 100% 的比例；该截断路径不发 depleted，不能假设“任意方式归零”都走死亡链。
+上限属性变化时默认 KEEP_CURRENT：保留当前值并立即截断到新上限，在完成调整后通知；归零会发 depleted。也可选择 KEEP_RATIO（保留比例）、FILL（回满）、ADD_DELTA（补充上限差额）。Battle Foundation 仍默认保留当前值，升级另按原版补充基础、成长和装备形成的上限，临时 Buff 不参与补充；当前资源改变继续使用 Vital 接口。
 
 三种扣值接口需要区分：组件 `modify_vital(-amount)` 不足时整次拒绝；直接 `vital.modify_value(-amount)` 钳到 0，但跳过 Health 伤害事件和 `_die`；`HealthVital.apply_damage()` 允许伤害大于剩余生命，依次发受伤事件、读可变 final_damage、扣值、发结算事件、加入 death 分组并发 health_depleted。组件修改返回 true 仅表示走了修改调用，死者治疗或上限钳制可能仍无数值变化。
 

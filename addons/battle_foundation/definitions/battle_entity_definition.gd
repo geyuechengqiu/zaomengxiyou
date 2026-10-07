@@ -7,6 +7,8 @@ class_name BattleEntityDefinition
 @export var faction_id: StringName = &"neutral"
 @export var scene: PackedScene
 @export var attribute_set: GameplayAttributeSet
+@export var progression: BattleAttributeProgression
+@export_range(1, 10000) var initial_level: int = 1
 @export var vitals: Array[GameplayVital] = []
 @export var ability_ids: Array[StringName] = []
 @export var initial_status_ids: Array[StringName] = []

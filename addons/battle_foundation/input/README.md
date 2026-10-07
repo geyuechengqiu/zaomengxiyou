@@ -14,7 +14,8 @@
 | 重映射 | [CoreOperationBindings](../../godot_core_system-0.0.4/source/operation_system/operation_bindings.gd) | 安装默认 InputMap、捕获新键、检查冲突/保留键、存储事件描述、恢复用户配置 |
 | 输入通道 | [CoreOperationController](../../godot_core_system-0.0.4/source/operation_system/operation_controller.gd) | 每个控制者的强度、来源、时间、阶段、双击、缓存和控制权阻断；不施放技能 |
 | 缓存 | [CoreOperationBuffer](../../godot_core_system-0.0.4/source/operation_system/operation_buffer.gd) | 缓存每一次按下，按 sequence 精确消费；容量和过期限制 |
-| 角色适配 | [BattlePlayerOperations](battle_player_operations.gd) | 公共移动/跳跃/攻击、技能槽→GAS ID；提供角色专属分支钩子 |
+| 角色适配 | [BattlePlayerOperations](battle_player_operations.gd) | 按序交付所有阶段的操作意图与技能槽映射；提供角色专属分支钩子 |
+| 状态消费 | [BattleActionStateMachine2D](../runtime/battle_action_state_machine_2d.gd)、[BattleActionLeafState2D](../runtime/battle_action_leaf_state_2d.gd) | 当前 Core 叶子受理移动、跳跃、普攻及技能意图，依据自身许可调用实体执行 |
 | 菜单 | [BattleOperationMenu](battle_operation_menu.gd) | 模态 UI、控制权占用、改键入口；宿主决定是否同时暂停战斗 |
 | 战斗与表现 | [BattleEntity2D](../runtime/battle_entity_2d.gd)、[BattleActionState2D](../runtime/battle_action_state_2d.gd)、GAS、动画适配 | 落地、受击、死亡与冷却决定是否允许操作；动画按动作名播放 |
 
@@ -57,6 +58,10 @@ Core 继续与旧 InputManager 并列。这个角色入口不轮询全局 `Input
 方向双击要求先释放再按同一语义方向，默认间隔严格小于 0.5 秒；第二次按住期间保持奔跑，松开立即结束。交替左右会重置另一方向的双击候选。这个窗口来自原版 KeyVO；原版 InputInstance 还有反向双击状态转移，本组件选择同方向识别，不复刻全部旧引擎的跨方向奔跑状态。
 
 ## 时间与控制权
+
+输入链为 `CoreOperationController → BattlePlayerOperations → BattleActionState2D.handle_operation → Core 当前叶子`。连续意图携带聚合后的 `move_axis` / `running` 快照，保留多键与后按优先规则；适配层不再每 tick 直接覆盖角色移动字段。移动字段读取动作机的运行数据。PRESSED 发动或预约操作，HELD / RELEASED / CHANGED 更新连续状态并交给角色扩展。当前叶子返回处理结果，RETRY 保持离散缓存。
+
+IDLE / MOVE / RUN 在地面接收方向意图时转换；全部方向释放后返回 IDLE，并立即发出 `idle` 动画命令。攻击/受击/空中收到释放只更新移动意图，不能跳过动作锁定。每 tick 的行走条件读取意图轴，避免碰撞残余速度或技能位移维持行走动画；攻击结束读取最新意图。菜单与失焦同步调用 `clear_operation_state()`，清移动、奔跑和预约，即使战斗暂停也能显示待机。
 
 ![输入时间与控制权](../docs/operation-control.svg)
 

@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="GameplayAbilityDefinition" format=3]
+[ext_resource type="Script" path="res://addons/gameplay_abiltiy_system/scripts/abilities/gameplay_ability_definition.gd" id="definition"]
+[ext_resource type="Script" path="res://addons/gameplay_abiltiy_system/scripts/abilities/features/gameplay_ability_feature.gd" id="feature"]
+[ext_resource type="Script" path="res://addons/battle_foundation/gas/battle_frame_timeline_feature.gd" id="timeline"]
+[ext_resource type="Script" path="res://addons/battle_foundation/definitions/battle_frame_event.gd" id="event"]
+[sub_resource type="Resource" id="impact"]
+script = ExtResource("event")
+source_frame = 4
+event_id = &"battle.attack.impact"
+payload = {"action": &"attack_1", "combo_step": 1, "hit_index": 1, "damage_multiplier": 1.0, "hit_rect": Rect2(-114, -104.95, 267, 99.95), "hit_scale_x": 1.0, "hit_scale_y": 1.0, "hit_offset": Vector2(0, 0), "hit_window_frames": 2}
+[sub_resource type="Resource" id="timeline"]
+script = ExtResource("timeline")
+duration_frames = 10
+events = Array[ExtResource("event")]([SubResource("impact")])
+[resource]
+script = ExtResource("definition")
+ability_id = &"sunwukong_attack1"
+ability_name = "悟空单段普攻（2帧验收窗口）"
+features = Array[ExtResource("feature")]([SubResource("timeline")])

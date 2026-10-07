@@ -1,5 +1,9 @@
 extends Resource
 class_name GameplayVital
+#region 上限变化策略
+enum MaxChangePolicy { KEEP_CURRENT, KEEP_RATIO, FILL, ADD_DELTA }
+var max_change_policy: MaxChangePolicy = MaxChangePolicy.KEEP_CURRENT
+#endregion
 #region 配置与运行状态
 
 ## 属性状态
@@ -73,6 +77,9 @@ func get_max_value() -> float:
 ## [return] float 百分比（0.0-1.0）
 func get_percent() -> float:
 	return current_value / _cached_max if _cached_max > 0 else 0.0
+
+func set_current_value(value: float) -> void:
+	_modify_value(value - current_value)
 #endregion
 #region 内部实现
 
@@ -105,11 +112,20 @@ func _modify_value(amount: float, is_regen: bool = false) -> void:
 ## 属性变化回调
 ## [param] attr_id: StringName 变化的属性ID
 ## [param] val: float 新值
-func _on_attribute_changed(attr_id: StringName, val: float) -> void:
+func _on_attribute_changed(attr_id: StringName, _val: float) -> void:
 	if attr_id != max_value_attribute: return
-	_update_cached_max()
-	# 策略：最大值变大时，保持当前值不变，但截断上限
-	if current_value > _cached_max:
-		current_value = _cached_max
-		value_changed.emit(current_value, _cached_max, get_percent(), false)
+	var previous_max := _cached_max
+	var previous_value := current_value
+	_cached_max = maxf(0.0, _owner_comp.get_value(max_value_attribute))
+	match max_change_policy:
+		MaxChangePolicy.KEEP_RATIO:
+			current_value = previous_value / previous_max * _cached_max if previous_max > 0.0 else 0.0
+		MaxChangePolicy.FILL:
+			current_value = _cached_max
+		MaxChangePolicy.ADD_DELTA:
+			current_value += _cached_max - previous_max
+	current_value = clampf(current_value, 0.0, _cached_max)
+	value_changed.emit(current_value, _cached_max, get_percent(), false)
+	if current_value <= 0.0 and previous_value > 0.0:
+		depleted.emit()
 #endregion

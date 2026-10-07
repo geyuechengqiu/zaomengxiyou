@@ -1,0 +1,30 @@
+{
+  "runtime_character_id": "孙悟空",
+  "source_role_id": 2001,
+  "growth": {
+    "hpMax": 55,
+    "mpMax": 20,
+    "atk": 5.25,
+    "phyDef": 1.05
+  },
+  "experience_semantics": "本级经验，升级逐级扣除 upgradeEXP",
+  "maximum_level": 220,
+  "maximum_level_note": "导入 EXP 表覆盖范围；产品等级上限可单独配置，不推定 CommonConfig.levelMax",
+  "files": [
+    {
+      "file": "Role.json",
+      "sha256": "cd3444fb3e21a6aba6e122c57aed382cde9873ea2451d3d288285c06d1c0cadd"
+    },
+    {
+      "file": "EXP.json",
+      "sha256": "a671e32fd2dc220aaf0a648652ce8915b42c4fdb9bfe50e2c7e512236dc401d8"
+    }
+  ],
+  "implementation": "exports/zmhj_damage_formulas/sources/models/vo/UserVO.as:451-513",
+  "policies": {
+    "level_up": "fill_base_growth_equipment_excluding_temporary",
+    "equipment": "keep_current_clamp",
+    "temporary": "keep_current_clamp",
+    "level_down": "keep_current_clamp"
+  }
+}

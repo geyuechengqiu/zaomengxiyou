@@ -142,7 +142,8 @@ func start_state_machine(
 		return
 
 	state_machine.start(initial_state, msg)
-	state_machine_started.emit(id)
+	if state_machine.is_active and state_machine.get_current_state_name() == initial_state:
+		state_machine_started.emit(id)
 
 
 ## 将已注册状态机切换到 [param state_id]（任意代码可通过管理器跳转，#14）。
@@ -163,7 +164,8 @@ func transition_state_machine(
 		start_state_machine(id, state_id, msg)
 	else:
 		state_machine.transition_local(state_id, msg)
-	return true
+	# 子类可以拒绝跳转（例如战斗死亡终态）；结果反映实际当前状态。
+	return state_machine.get_current_state_name() == state_id
 
 ## 停止状态机
 ## [param id] 状态机ID

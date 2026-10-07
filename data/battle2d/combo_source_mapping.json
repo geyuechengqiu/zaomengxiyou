@@ -14,6 +14,15 @@
       "damage_multiplier": 1,
       "can_walk": 0,
       "jump_cancel": "jumpNormal",
+      "hitbox": {
+        "name": "ab_attack10000",
+        "rect": [
+          -114,
+          -104.95,
+          267,
+          99.95
+        ]
+      },
       "impact_definitions": [
         {
           "collisionGroup": 1,
@@ -61,6 +70,15 @@
       "damage_multiplier": 1,
       "can_walk": 0,
       "jump_cancel": "jumpNormal",
+      "hitbox": {
+        "name": "ab_attack20000",
+        "rect": [
+          -42,
+          -90.95,
+          210.05,
+          114.95
+        ]
+      },
       "impact_definitions": [
         {
           "collisionGroup": 1,
@@ -108,6 +126,15 @@
       "damage_multiplier": 1.2,
       "can_walk": 0,
       "jump_cancel": "jumpNormal",
+      "hitbox": {
+        "name": "ab_attack30000",
+        "rect": [
+          -171,
+          -103.95,
+          322,
+          133.95
+        ]
+      },
       "impact_definitions": [
         {
           "collisionGroup": 1,
@@ -156,6 +183,15 @@
       "damage_multiplier": 0.45,
       "can_walk": 0,
       "jump_cancel": "jumpNormal",
+      "hitbox": {
+        "name": "ab_attack40000",
+        "rect": [
+          -94.85,
+          -105.95,
+          188.65,
+          159.95
+        ]
+      },
       "impact_definitions": [
         {
           "linkParentState": true,
@@ -233,6 +269,15 @@
       "damage_multiplier": 2,
       "can_walk": 0,
       "jump_cancel": "jumpNormal",
+      "hitbox": {
+        "name": "ab_attack50000",
+        "rect": [
+          -69,
+          -159.95,
+          324,
+          184.95
+        ]
+      },
       "impact_definitions": [
         {
           "linkParentState": true,
@@ -282,6 +327,18 @@
     {
       "path": "out/zmhj-equip-skill-diag/com/wdcgame/engine/entitys/CharEntity.as",
       "sha256": "6f85e91714f99dd9b629c640d62e1d9db46bb09bb5647451b01a4c1c5208ecb1"
+    },
+    {
+      "path": "games/zmhj-g5/cache/assets/man/2001/attackV427.swf",
+      "sha256": "400a84a8d4d763facd3089183d2aa5a595d2251dac576d12ad9704c4d7b05385"
+    },
+    {
+      "path": "out/zmhj-equip-skill-diag/com/wdcgame/engine/entitys/controls/skill/SkillControl.as",
+      "sha256": "8ed0bd833199a0a54bc61aef133cdbd2627efd3700a159d2baafaa1a155b0c72"
+    },
+    {
+      "path": "out/zmhj-equip-skill-diag/com/wdcgame/engine/model/ManResourceVO.as",
+      "sha256": "496d8643a9b21e7bf5f3b021810bf3accadb2bd33c69f0c33b328499a5c645fe"
     }
   ]
 }

@@ -21,6 +21,7 @@ func _apply(target: Node, instigator: Node, context: Dictionary) -> void:
 	# 确定 source_id
 	var final_source_id = context.get("source_id", "effect." + source_id)
 	var stacks = context.get("stacks", 1)
+	attr_comp.begin_update()
 
 	# 应用所有修改器
 	for mod_template in modifiers:
@@ -37,6 +38,7 @@ func _apply(target: Node, instigator: Node, context: Dictionary) -> void:
 	
 		# 应用修改器
 		attr_comp.add_modifier(mod)
+	attr_comp.end_update()
 
 ## 移除效果的具体实现
 ## 注意：Effect 保持无状态特性，通过 context 中的 source_id 来识别要移除的修改器

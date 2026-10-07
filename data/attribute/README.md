@@ -53,7 +53,7 @@
 
 这些是中性模板，初始值只有最大生命为 1、保护阈值为 -1，其余为 0。1 点生命便于 HealthVital 初始化为存活，-1 禁用保护阈值；它们不是原版某个角色的数值。不需要魔法的实体可保留 mpMax=0，静态实体可保留速度为 0；不需要完整集合时只组合所需分类集。
 
-完整集和分类集是两种初始化方式：不要把完整集与包含相同 ID 的分类集同时传入，GAS 会拒绝重复注册，不能把第二个属性集当作覆盖层。实体等级使用组件的 current_level，不再创建普通 level 属性；四项每级成长将来由实体自身的 `scalable_attributes` 配置，不复制成普通属性。身份、阵营、AI、霸体/无敌标志、技能 ID 和动作配置也不在数值属性中重复存储。
+完整集和分类集是两种初始化方式：不要把完整集与包含相同 ID 的分类集同时传入，GAS 会拒绝重复注册，不能把第二个属性集当作覆盖层。另新增 [progression_attributes](sets/progression_attributes.tres)，保存面板与通知使用的 level / exp；level 由组件 current_level 统一同步，禁止装备和 Buff 修改。四项成长由 [孙悟空成长资源](progression/sunwukong.tres) 形成 growth.level 修改器。身份、阵营、AI、霸体/无敌标志和动作配置不在数值属性中重复存储。
 
 ## Vital 接入与实体隔离
 
@@ -65,16 +65,16 @@ const HEALTH = preload("res://data/attribute/vitals/health.tres")
 const MANA = preload("res://data/attribute/vitals/mana.tres")
 
 func initialize_entity(component: GameplayVitalAttributeComponent) -> void:
-    # 本例数值仅演示接入，不是原版角色配置。
-    var initial_values := {
-        &"hpMax": 100.0, &"mpMax": 80.0,
-        &"atk": 20.0, &"phyDef": 5.0,
-    }
-    var entity_set := BASE_ATTRIBUTES.duplicate(true) as GameplayAttributeSet
-    for definition: GameplayAttribute in entity_set.attributes:
-        if initial_values.has(definition.attribute_id):
-            entity_set.attributes[definition] = initial_values[definition.attribute_id]
-    component.initialize([entity_set], [HEALTH, MANA])
+	# 本例数值仅演示接入，不是原版角色配置。
+	var initial_values := {
+		&"hpMax": 100.0, &"mpMax": 80.0,
+		&"atk": 20.0, &"phyDef": 5.0,
+	}
+	var entity_set := BASE_ATTRIBUTES.duplicate(true) as GameplayAttributeSet
+	for definition: GameplayAttribute in entity_set.attributes:
+		if initial_values.has(definition.attribute_id):
+			entity_set.attributes[definition] = initial_values[definition.attribute_id]
+	component.initialize([entity_set], [HEALTH, MANA])
 ```
 
 在 initialize 之前配置实体初始值，生命/魔法会按对应上限初始化。初始化后仅改上限不会自动补满当前值。装备和 Buff 通过 `GameplayAttributeModifier` 修改实例，移除时按 source_id 清理；避免修改共享模板来改变一个实体。组件创建的属性和 Vital 实例各自独立。
@@ -88,6 +88,8 @@ func initialize_entity(component: GameplayVitalAttributeComponent) -> void:
 GAS 现有 SimpleDamageLogic 只执行攻击减防御和上下文倍率；上述评分、抗性、移动和保护资源都已能存储并接受修改器，完整原版命闪、暴击、元素结算及保护行为仍需业务策略接入。资源存在不表示这些效果已自动进入伤害公式。
 
 ## 验证
+
+完整计算链、统一接口、原版生命规则及插件联合类图见 [属性链说明](../../addons/battle_foundation/attributes/README.md)。原28个通用定义保持原集合，等级和经验作为另2个定义组合使用。生命、魔法、攻击、防御最终取整，成长中间值保留小数。Role / EXP 的 SHA256 和导入口径见 [成长来源映射](progression/source_mapping.json)。重新导入：`node tools/import_attribute_progression.mjs <Speculum-4399-master路径>`；不覆盖动画编辑内容。
 
 ```powershell
 & '<Godot 可执行文件路径>' --headless --path . res://examples/verify_base_attributes.tscn

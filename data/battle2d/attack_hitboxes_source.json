@@ -1,0 +1,52 @@
+{
+  "source_path": "games/zmhj-g5/cache/assets/man/2001/attackV427.swf",
+  "sha256": "400a84a8d4d763facd3089183d2aa5a595d2251dac576d12ad9704c4d7b05385",
+  "rectangles": [
+    {
+      "name": "ab_attack10000",
+      "rect": [
+        -114,
+        -104.95,
+        267,
+        99.95
+      ]
+    },
+    {
+      "name": "ab_attack20000",
+      "rect": [
+        -42,
+        -90.95,
+        210.05,
+        114.95
+      ]
+    },
+    {
+      "name": "ab_attack30000",
+      "rect": [
+        -171,
+        -103.95,
+        322,
+        133.95
+      ]
+    },
+    {
+      "name": "ab_attack40000",
+      "rect": [
+        -94.85,
+        -105.95,
+        188.65,
+        159.95
+      ]
+    },
+    {
+      "name": "ab_attack50000",
+      "rect": [
+        -69,
+        -159.95,
+        324,
+        184.95
+      ]
+    }
+  ],
+  "coordinate_policy": "source foot origin; positive scale changes geometry; negative display scale does not mirror ABRect; parent direction mirrors rect and offset"
+}

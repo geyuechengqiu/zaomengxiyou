@@ -1,7 +1,12 @@
 extends CharacterAnimationAdapter
 class_name SpineAnimationAdapter
 #region Spine 私有播放状态
+@export var sprite_path: NodePath = ^"SpineVisual"
+@export var animation_player_path: NodePath = ^"AnimationPlayer"
+@export var spine_player_path: NodePath = ^"SpineVisual/SpineAnimationTrack/SpineVisual Track 0"
 var _sprite: SpineSprite
+var _player: AnimationPlayer
+var _spine_player: AnimationPlayer
 var _action: StringName = &""
 var _facing: int = 1
 var _entry: SpineTrackEntry
@@ -9,6 +14,7 @@ var _skins: Array[StringName] = []
 var _composite_skin: SpineSkin
 var _completed: bool = false
 var _initialized: bool = false
+var _track_time: float = 0.0
 #endregion
 #region 生命周期
 func _ready() -> void:
@@ -32,38 +38,114 @@ func initialize_adapter() -> bool:
 	for socket in profile.socket_bones:
 		if data.find_bone(String(profile.socket_bones[socket])) == null:
 			return _fail("Spine 缺少挂点骨骼：" + String(socket))
-	_sprite = SpineSprite.new()
-	_sprite.name = "SpineVisual"
+	_sprite = get_node_or_null(sprite_path) as SpineSprite
+	_player = get_node_or_null(animation_player_path) as AnimationPlayer
+	_spine_player = get_node_or_null(spine_player_path) as AnimationPlayer
+	if _sprite == null or _player == null or _spine_player == null:
+		return _fail("请在角色表现场景预置 SpineSprite、SpineAnimationTrack 和两个 AnimationPlayer")
+	if _sprite.get_skeleton_data_res() != data:
+		return _fail("场景 SpineSprite 与动画配置的骨架资源不一致")
+	for action in profile.animations:
+		if not _player.has_animation(action):
+			return _fail("AnimationPlayer 缺少语义动作：" + String(action))
+		# 编辑器允许用多个 Spine clip 编排语义动作；动作时长以主时间轴为准。
+		if _player.get_animation(action).length <= 0.0:
+			return _fail("AnimationPlayer 动作时长必须大于零：" + String(action))
+		if not _has_native_binding(action):
+			return _fail("AnimationPlayer 的原生动画轨道或循环配置不正确：" + String(action))
+	# 编辑器保留自动预览；游戏中两个播放器与 Spine 均只由战斗时钟驱动。
+	_player.callback_mode_process = AnimationMixer.ANIMATION_CALLBACK_MODE_PROCESS_MANUAL
+	_spine_player.callback_mode_process = AnimationMixer.ANIMATION_CALLBACK_MODE_PROCESS_MANUAL
 	_sprite.set_update_mode(SpineConstant.UpdateMode_Manual)
-	_sprite.scale = Vector2.ONE * profile.display_scale
-	_sprite.position = profile.skeleton_offset * profile.display_scale
-	add_child(_sprite)
-	_sprite.set_skeleton_data_res(data)
-	_sprite.animation_completed.connect(_on_spine_completed)
+	_player.animation_finished.connect(_on_animation_finished)
 	_initialized = true
 	if not set_skins([]):
 		return false
 	set_facing(_facing)
 	return true
+
+func _has_native_binding(action: StringName) -> bool:
+	var looping := profile.looping_actions.has(action)
+	var clip := _player.get_animation(action)
+	var native := String(profile.animations[action]) + ("_looped" if looping else "")
+	if not _spine_player.has_animation(native) or (clip.loop_mode != Animation.LOOP_NONE) != looping:
+		return false
+	var root_node := _player.get_node(_player.root_node)
+	for index in range(clip.get_track_count()):
+		if clip.track_get_type(index) == Animation.TYPE_ANIMATION and root_node.get_node_or_null(clip.track_get_path(index)) == _spine_player:
+			if clip.track_get_key_count(index) > 0 and is_zero_approx(clip.track_get_key_time(index, 0)) and String(clip.track_get_key_value(index, 0)) == native:
+				for key in range(clip.track_get_key_count(index)):
+					if not _spine_player.has_animation(clip.track_get_key_value(index, key)):
+						return false
+				return true
+	return false
 #endregion
 #region 动作与时间
 func play_action(action: StringName, restart: bool = false) -> bool:
-	if not _initialized or not profile.animations.has(action):
+	if not _initialized:
+		# 保留初始化的首个错误，以便未来资源配置问题可以直接诊断。
+		return false
+	if not profile.animations.has(action):
 		return _fail("动作未映射或适配层尚未初始化：" + String(action))
 	if action == _action and not restart:
 		return true
 	_action = action
 	_completed = false
-	## 零混合保留原版逐帧附件与层序切换，不修改共享 skeleton_data.default_mix。
-	_entry = _sprite.get_animation_state().set_animation(String(profile.animations[action]), profile.looping_actions.has(action), 0)
-	_entry.set_mix_duration(0.0)
-	_sprite.update_skeleton(0.0)
+	_track_time = 0.0
+	_player.stop()
+	_player.play(action)
+	_player.advance(0.0)
+	_apply_player_pose()
 	action_started.emit(action)
 	return true
 
 func advance_animation(delta: float) -> void:
 	if _initialized and is_finite(delta) and delta > 0.0:
-		_sprite.update_skeleton(delta)
+		var duration := get_action_duration(_action)
+		var previous := get_playback_time()
+		var looping := profile.looping_actions.has(_action)
+		if _player.is_playing():
+			_track_time += delta * _player.speed_scale
+			_player.advance(delta)
+			_apply_player_pose()
+			if looping and duration > 0.0:
+				for loop_index in range(int(floor((previous + delta * _player.speed_scale) / duration))):
+					action_looped.emit(_action)
+
+func _apply_player_pose() -> void:
+	# 手动模式的动画轨道只选择子 clip，不自动推进子播放器。
+	# 从主时间轴读取当前 key 与局部时间，保留编辑器编排的多个 clip。
+	var master := _player.get_animation(_action)
+	var time := get_playback_time()
+	for track in range(master.get_track_count()):
+		if master.track_get_type(track) != Animation.TYPE_ANIMATION or _player.get_node(_player.root_node).get_node_or_null(master.track_get_path(track)) != _spine_player:
+			continue
+		for key in range(master.track_get_key_count(track) - 1, -1, -1):
+			var start := master.track_get_key_time(track, key)
+			if start > time:
+				continue
+			var clip_name := StringName(master.track_get_key_value(track, key))
+			if not _spine_player.has_animation(clip_name):
+				continue
+			var clip := _spine_player.get_animation(clip_name)
+			var local_time := maxf(0.0, time - start)
+			local_time = fmod(local_time, clip.length) if clip.loop_mode != Animation.LOOP_NONE else minf(local_time, clip.length)
+			if _spine_player.current_animation != clip_name:
+				_spine_player.play(clip_name)
+			_spine_player.seek(local_time, true)
+			_spine_player.advance(0.0)
+			# 原生 SpineAnimationTrack 在骨架更新时提交 animation_name 的变化。
+			_sprite.update_skeleton(0.0)
+			_entry = _sprite.get_animation_state().get_track(0)
+			if _entry != null:
+				_entry.set_track_time(local_time)
+			break
+	_entry = _sprite.get_animation_state().get_track(0)
+	if _entry != null:
+		_sprite.update_skeleton(0.0)
+
+func get_animation_player() -> AnimationPlayer:
+	return _player
 
 func get_current_action() -> StringName:
 	return _action
@@ -71,17 +153,17 @@ func get_current_action() -> StringName:
 func get_action_duration(action: StringName) -> float:
 	if not _initialized or not profile.animations.has(action):
 		return 0.0
-	return (_sprite.get_skeleton_data_res().find_animation(String(profile.animations[action])) as SpineAnimation).get_duration()
+	return _player.get_animation(action).length
 
 func get_playback_time() -> float:
-	return _entry.get_animation_time() if _entry != null else 0.0
+	return _player.current_animation_position if _initialized and not _action.is_empty() else 0.0
 
 func get_playback_progress() -> float:
 	var duration := get_action_duration(_action)
 	return clampf(get_playback_time() / duration, 0.0, 1.0) if duration > 0.0 else 0.0
 
 func get_track_time() -> float:
-	return _entry.get_track_time() if _entry != null else 0.0
+	return _track_time
 #endregion
 #region 朝向与皮肤
 func set_facing(direction: int) -> void:
@@ -187,15 +269,11 @@ func get_visual_bounds_global() -> Rect2:
 		return Rect2()
 	return _sprite.global_transform * _sprite.get_skeleton().get_bounds()
 #endregion
-#region Spine 通知
-func _on_spine_completed(_sender: SpineSprite, _state: SpineAnimationState, entry: SpineTrackEntry) -> void:
-	if entry.get_track_index() != 0 or _action.is_empty():
+#region AnimationPlayer 通知
+func _on_animation_finished(action: StringName) -> void:
+	if action != _action:
 		return
-	if entry.get_animation().get_name() != String(profile.animations[_action]):
-		return
-	if profile.looping_actions.has(_action):
-		action_looped.emit(_action)
-	elif not _completed:
+	if not _completed:
 		_completed = true
 		action_completed.emit(_action)
 

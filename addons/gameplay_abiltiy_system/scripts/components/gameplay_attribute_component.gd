@@ -12,6 +12,10 @@ var _attributes: Dictionary[StringName, GameplayAttributeInstance] = {}
 
 ## 当前等级（用于计算 ScalableValue）
 var current_level: int = 1 : set = _set_current_level
+var _update_depth: int = 0
+var _pending_attributes: Dictionary[StringName, float] = {}
+var _pending_level_from: int = -1
+var _notifying_attributes: bool = false
 #endregion
 #region 信号
 
@@ -19,6 +23,8 @@ var current_level: int = 1 : set = _set_current_level
 signal attribute_value_changed(id: StringName, new_val: float)
 ## 等级变化信号
 signal level_changed(old_level: int, new_level: int)
+## 一次属性事务完成；所有读取已是最终值，Vital 也已同步。
+signal attributes_recalculated(changes: Dictionary)
 #endregion
 #region 公共接口
 
@@ -106,6 +112,39 @@ func get_level() -> int:
 ## [param] level: int 新等级
 func set_level(level: int) -> void:
 	_set_current_level(level)
+
+## 可嵌套：换装备、等级成长、Buff 多项修改只发布完成后的结果。
+func begin_update() -> void:
+	_update_depth += 1
+
+func end_update() -> void:
+	assert(_update_depth > 0, "属性事务必须成对结束")
+	_update_depth -= 1
+	if _update_depth != 0:
+		return
+	var changes := _pending_attributes.duplicate()
+	_pending_attributes.clear()
+	_notifying_attributes = true
+	for id in changes:
+		attribute_value_changed.emit(id, get_value(id))
+	_after_attribute_notifications()
+	_notifying_attributes = false
+	if _pending_level_from >= 0:
+		var previous := _pending_level_from
+		_pending_level_from = -1
+		changes[&"level"] = current_level
+		level_changed.emit(previous, current_level)
+	if not changes.is_empty():
+		attributes_recalculated.emit(changes)
+
+func _after_attribute_notifications() -> void:
+	pass
+
+func _on_instance_value_changed(_old: float, value: float, id: StringName) -> void:
+	begin_update()
+	_pending_attributes[id] = value
+	_handle_dependency(id, value)
+	end_update()
 #endregion
 #region 内部实现
 
@@ -118,11 +157,7 @@ func _register_instance(id: StringName, instance: GameplayAttributeInstance) -> 
 		return false
 	_attributes[id] = instance
 	# 转发信号：当实例值变化时，组件也发出信号
-	instance.value_changed.connect(
-		func(old, new) -> void: 
-			attribute_value_changed.emit(id, new)
-			_handle_dependency(id, new)
-	)
+	instance.value_changed.connect(_on_instance_value_changed.bind(id))
 	return true
 
 ## 处理依赖关系
@@ -135,14 +170,17 @@ func _handle_dependency(attr_id: StringName, new_val: float) -> void:
 
 ## 设置等级（会更新所有使用 ScalableValue 的属性）
 func _set_current_level(level: int) -> void:
-	if current_level == level: 
+	level = max(1, level)
+	if current_level == level:
 		return
-	var old_level = current_level
-	current_level = max(1, level)
+	begin_update()
+	if _pending_level_from < 0:
+		_pending_level_from = current_level
+	current_level = level
 
 	# 更新所有使用 ScalableValue 的属性实例
 	for instance in _attributes.values():
 		if is_instance_valid(instance):
 			instance.current_level = current_level
-	level_changed.emit(old_level, current_level)
+	end_update()
 #endregion

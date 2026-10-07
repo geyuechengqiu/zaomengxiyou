@@ -5,6 +5,7 @@
 [resource]
 script = ExtResource("1_a3cjc")
 attribute_id = &"mpMax"
+round_final_value = true
 attribute_display_name = "最大魔法"
 attribute_description = "魔法上限。当前魔法保存在 ManaVital。零表示实体不使用魔法。"
 min_value = 0.0

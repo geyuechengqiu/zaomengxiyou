@@ -85,6 +85,17 @@ func _validate_definition(category: String, id: String, data: Resource) -> bool:
 				if not is_finite(value):
 					return _fail("实体属性值必须有限：" + id)
 				attributes[attribute.attribute_id] = true
+			if data.progression != null:
+				if data.progression.attribute_set == null or not data.progression.is_configuration_valid(attributes):
+					return _fail("成长/经验配置无效：" + id)
+				if data.initial_level < 1 or data.initial_level > data.progression.maximum_level:
+					return _fail("初始等级超出成长范围：" + id)
+				for attribute: GameplayAttribute in data.progression.attribute_set.attributes:
+					if attribute == null or attribute.attribute_id.is_empty() or attributes.has(attribute.attribute_id):
+						return _fail("成长属性 ID 无效或重复：" + id)
+					attributes[attribute.attribute_id] = true
+				if not attributes.has(&"level") or not attributes.has(&"exp"):
+					return _fail("成长属性集必须包含 level / exp：" + id)
 			var vital_ids := {}
 			for vital: GameplayVital in data.vitals:
 				if vital == null or vital.vital_id.is_empty() or vital_ids.has(vital.vital_id):

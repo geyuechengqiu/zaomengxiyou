@@ -39,7 +39,7 @@ func _init(attr_res: GameplayAttribute = null, init_val: float = 0.0, p_scalable
 #endregion
 #region 公共接口
 
-## 获取最终值（当前实现：直接返回基础值，后续会加入 Modifier 计算）
+## 获取经过加法、倍率、覆盖、取整与范围约束的最终值。
 ## [return] float 最终值
 func get_value() -> float:
 	if _dirty:
@@ -77,6 +77,10 @@ func remove_modifier(mod: GameplayAttributeModifier) -> void:
 		push_warning("AttributeInstance: _modifiers not has mod: %s" %mod)
 		return
 	_modifiers[mod.modifier_type].erase(mod)
+	if _modifiers_by_source_id.has(mod.source_id):
+		_modifiers_by_source_id[mod.source_id].erase(mod)
+		if _modifiers_by_source_id[mod.source_id].is_empty():
+			_modifiers_by_source_id.erase(mod.source_id)
 	_on_data_changed()
 
 ## 根据 source_id 批量移除修改器
@@ -109,7 +113,7 @@ func remove_modifiers_by_source(source_id: StringName) -> void:
 #endregion
 #region 内部实现
 
-## 重新计算最终值（当前版本：只处理基础值和范围限制）
+## 按 GAS 修改器公式计算最终值，缓存结果供面板和战斗共同读取。
 func _recalculate_value() -> void:
 	var final := base_value
 	
@@ -134,6 +138,8 @@ func _recalculate_value() -> void:
 		
 	# 限制范围
 	if is_instance_valid(attribute_def):
+		if attribute_def.round_final_value:
+			final = floorf(final + 0.5)
 		final = clampf(final, attribute_def.min_value, attribute_def.max_value)
 	else:
 		push_warning("AttributeInstance: attribute def is not valid!")

@@ -1,6 +1,6 @@
 # CoreSystem 全部源码索引
 
-覆盖当前插件全部 87 个 GDScript，含编辑器入口、配置、模块、策略与示例。由 [文档生成工具](../../../tools/generate_core_docs.mjs) 重建。实现说明见 [完整分析](implementation-analysis.md)。
+覆盖当前插件全部 84 个 GDScript，含编辑器入口、配置、模块、策略与示例。由 [文档生成工具](../../../tools/generate_core_docs.mjs) 重建。实现说明见 [完整分析](implementation-analysis.md)。
 
 列表提取声明，不代表所有接口已验证；公开方法包含 ready/dispose 等自定义生命周期，内部回调也单独列出。无全局 class_name 的文件通过 CoreSystem preload 常量或路径使用。
 
@@ -84,24 +84,6 @@
 | --- | --- | --- | --- | --- | --- |
 | [player.gd](../examples/save_demo/player.gd) | `Node` | `player_name`<br>`player_level`<br>`player_exp`<br>`player_position` | `save()`<br>`load_data()` | `_ready()` | — |
 | [save_demo.gd](../examples/save_demo/save_demo.gd) | `Node2D` | `player`<br>`status_label`<br>`save_list`<br>`line_edit_name`<br>`line_edit_level`<br>`line_edit_exp`<br>`label`<br>`_test_issue51_button`<br>`_save_manager`<br>`_logger` | `save_game()`<br>`load_game()`<br>`delete()` | `_ready()`<br>`_update_save_list()`<br>`_update_player_display()`<br>`_on_name_text_changed()`<br>`_on_level_text_changed()`<br>`_on_exp_text_changed()`<br>`_on_create_button_pressed()`<br>`_on_load_button_pressed()`<br>`_on_delete_button_pressed()`<br>`_on_save_created()`<br>`_on_save_loaded()`<br>`_on_save_deleted()`<br>`_on_auto_save_created()`<br>`_on_auto_save_succeeded()`<br>`_on_test_issue51_pressed()` | — |
-
-## examples/scene_demo
-
-| 脚本 / 类型 | 基类 | 配置与字段 | 公开方法 | 内部方法与回调 | 信号 |
-| --- | --- | --- | --- | --- | --- |
-| [scene_demo.gd](../examples/scene_demo/scene_demo.gd) | `Node2D` | `scene_manager`<br>`status_label`<br>`buttons`<br>`preload_status`<br>`SCENE_PATHS`<br>`_preloaded_scenes` | — | `_ready()`<br>`_on_scene1_pressed()`<br>`_on_scene2_pressed()`<br>`_on_scene3_pressed()`<br>`_on_scene_loading_started()`<br>`_on_scene_changed()`<br>`_on_scene_loading_finished()`<br>`_on_scene_preloaded()` | — |
-
-## examples/scene_demo/scene_push_stack_issue44
-
-| 脚本 / 类型 | 基类 | 配置与字段 | 公开方法 | 内部方法与回调 | 信号 |
-| --- | --- | --- | --- | --- | --- |
-| [issue44_push_stack_demo.gd](../examples/scene_demo/scene_push_stack_issue44/issue44_push_stack_demo.gd) | `Control` | `_status` | — | `_ready()`<br>`_set_status()`<br>`_on_push_scene1_pressed()`<br>`_on_push_scene2_pressed()`<br>`_on_pop_pressed()` | — |
-
-## examples/scene_demo/scenes
-
-| 脚本 / 类型 | 基类 | 配置与字段 | 公开方法 | 内部方法与回调 | 信号 |
-| --- | --- | --- | --- | --- | --- |
-| [demo_scene.gd](../examples/scene_demo/scenes/demo_scene.gd) | `Control` | `scene_manager`<br>`label`<br>`source_label`<br>`_message`<br>`_source_scene` | `init_state()`<br>`save_state()`<br>`restore_state()` | `_on_back_button_pressed()` | — |
 
 ## examples/state_machine
 

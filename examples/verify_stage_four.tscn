@@ -1,4 +1,6 @@
-[gd_scene load_steps=2 format=3]
-[ext_resource type="Script" path="res://examples/verify_stage_four.gd" id="1"]
-[node name="VerifyStageFour" type="Node"]
+[gd_scene format=3 uid="uid://dm7jx8x1m1cf4"]
+
+[ext_resource type="Script" uid="uid://c0dw2j5pk541r" path="res://examples/verify_stage_four.gd" id="1"]
+
+[node name="VerifyStageFour" type="Node" unique_id=1255527092]
 script = ExtResource("1")
