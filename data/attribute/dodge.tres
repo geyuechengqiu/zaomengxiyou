@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="GameplayAttribute" format=3]
+
+[ext_resource type="Script" path="res://addons/gameplay_abiltiy_system/scripts/attributes/gameplay_attribute.gd" id="1_ddwfq"]
+
+[resource]
+script = ExtResource("1_ddwfq")
+attribute_id = &"dodge"
+attribute_display_name = "闪避"
+attribute_description = "闪避评分，须结合等级表与攻击者命中换算，不能直接作为概率。"
+min_value = 0.0
+metadata/source_field = "dodge"
+metadata/category = "core"
+metadata/unit = "评分"

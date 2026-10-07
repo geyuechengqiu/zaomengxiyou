@@ -18,7 +18,9 @@ const SETTING_INFO_DICT: Dictionary[StringName, Dictionary] = SETTING_SCRIPT.SET
 ## 在插件运行时添加项目设置
 func _enter_tree() -> void:
 	_add_project_settings()
-	add_autoload_singleton(SYSTEM_NAME, SYSTEM_PATH)
+	# 保留已配置的路径和 Autoload 顺序，避免编辑器重写有效入口。
+	if not ProjectSettings.has_setting("autoload/" + SYSTEM_NAME):
+		add_autoload_singleton(SYSTEM_NAME, SYSTEM_PATH)
 	ProjectSettings.save()
 
 ## 在禁用插件时恢复项目配置

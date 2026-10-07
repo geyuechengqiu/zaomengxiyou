@@ -1,0 +1,4 @@
+[gd_scene load_steps=2 format=3]
+[ext_resource type="Script" path="res://examples/verify_player_operations.gd" id="1"]
+[node name="VerifyPlayerOperations" type="Node"]
+script = ExtResource("1")

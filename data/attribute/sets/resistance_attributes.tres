@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="GameplayAttributeSet" format=3]
+
+[ext_resource type="Script" path="res://addons/gameplay_abiltiy_system/scripts/attributes/gameplay_attribute.gd" id="1_gwkvv"]
+[ext_resource type="Resource" path="res://data/attribute/lightResist.tres" id="2_l4ih3"]
+[ext_resource type="Resource" path="res://data/attribute/darkResist.tres" id="3_roe2c"]
+[ext_resource type="Resource" path="res://data/attribute/waterResist.tres" id="4_xfunk"]
+[ext_resource type="Resource" path="res://data/attribute/fireResist.tres" id="5_5ajlh"]
+[ext_resource type="Resource" path="res://data/attribute/woodResist.tres" id="6_qqe0f"]
+[ext_resource type="Resource" path="res://data/attribute/soilResist.tres" id="7_by83k"]
+[ext_resource type="Resource" path="res://data/attribute/windResist.tres" id="8_ocorl"]
+[ext_resource type="Resource" path="res://data/attribute/rayResist.tres" id="9_i75ew"]
+[ext_resource type="Script" path="res://addons/gameplay_abiltiy_system/scripts/utilties/scalable_value.gd" id="10_r234e"]
+[ext_resource type="Script" path="res://addons/gameplay_abiltiy_system/scripts/attributes/gameplay_attribute_set.gd" id="11_j2kht"]
+
+[resource]
+script = ExtResource("11_j2kht")
+attributes = Dictionary[ExtResource("1_gwkvv"), float]({
+ExtResource("2_l4ih3"): 0.0,
+ExtResource("3_roe2c"): 0.0,
+ExtResource("4_xfunk"): 0.0,
+ExtResource("5_5ajlh"): 0.0,
+ExtResource("6_qqe0f"): 0.0,
+ExtResource("7_by83k"): 0.0,
+ExtResource("8_ocorl"): 0.0,
+ExtResource("9_i75ew"): 0.0
+})

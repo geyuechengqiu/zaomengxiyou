@@ -1,15 +1,15 @@
 # 插件重复系统：取舍与接入建议
 
-基于本项目当前五套插件源码比较：Gameplay Ability System（下称 GAS）、Godot Core System（下称 Core）、Simple Inventory、Panku Console 与 DebugDraw。结论按实际能力、运行语义、已知缺陷和修改成本判断，没有运行性能基准，也不将插件功能数量当作质量评分。本次仅补充分析，未删除、关闭或替换模块。
+基于本项目当前五套插件源码比较：Gameplay Ability System（下称 GAS）、Godot Core System（下称 Core）、Simple Inventory、Panku Console 与 DebugDraw。结论按实际能力、运行语义、已知缺陷和修改成本判断，没有运行性能基准，也不将插件功能数量当作质量评分。最初仅补充分析；随后 GAS 事件已迁移到 Core，本文事件部分及类图已更新为迁移后的实现，其它系统仍为取舍建议。
 
-当前项目宜以 GAS 管战斗数据和效果，以 Core 中经过验证的模块补充基础服务。最值得统一的是战斗标签的权威来源和角色输入入口；事件先明确同步执行与实体作用域，再考虑统一底层。调试、状态机、背包等功能多数可以协作。
+当前项目以 GAS 管战斗数据和效果，以 Core 补充基础服务；全部 GAS 总线事件已共享 CoreEventBus，并保留同步减伤。战斗标签的权威来源、角色输入入口和事件实体作用域仍需明确。调试、状态机、背包等功能多数可以协作。
 
 ## 重叠程度与结论
 
 | 功能 | 涉及实现 | 实际重叠 | 当前项目建议 |
 | --- | --- | --- | --- |
 | 标签 | GAS TagManager / Core 标签树与容器 | 同一对象的标签保存与查询，语义不同 | 战斗统一用 GAS；Core 标签仅用于明确独立的对象分类 |
-| 事件 | AbilityEventBus / CoreEventBus | 都承担发布订阅 | 战斗暂留 GAS 同步链路；外围事件可用 Core；长期修复后统一底层 |
+| 事件 | GAS 发布方与状态监听 / CoreEventBus | 已合并为一条 Core 总线 | 全部事件使用 `[Dictionary]` 同步发布；保留状态统一监听和退出清理 |
 | 输入 | Core InputManager / OperationController / GAS AbilityInputFeature | 两个 Core 输入入口重叠，GAS 只匹配技能输入 | 角色入口优先 OperationController，技能匹配与快捷键显示保留 Feature |
 | 时间 | Core TimeManager / GAS 冷却、持续时间、周期效果与 BT 等待 | 都计时，但所有权和时钟不同 | 保留 GAS 实例计时；统一暂停/缩放协议，不改成全局同名 Timer |
 | 状态与流程 | BaseStateMachine / GAS BT 与 GameplayStatus | 部分流程控制重叠；逻辑状态与 Buff 不等价 | 状态机管角色，BT 管技能执行，Status 管增益/减益 |
@@ -33,17 +33,17 @@ GAS 用资源登记标签定义，用 Node 元数据保存引用计数，以 Gro
 
 **取舍：角色的免疫、控制、阵营、技能条件先使用 GAS 标签。需要 Core 查询世界分类对象时，可保留单独的分类容器；同一战斗标签不要同时维护两份。** 后续若统一，需要保留引用计数、明确单向继承、处理缓存失效及拥有者生命周期。
 
-## 事件：Core 功能更丰富，GAS 的战斗同步链路更直接
+## 事件：已统一使用 Core，保留 GAS 战斗同步链路
 
-源码：[AbilityEventBus](../addons/gameplay_abiltiy_system/scripts/singletons/ability_event_bus.gd)、[HealthVital](../addons/gameplay_abiltiy_system/scripts/attributes/vitals/health_vital.gd)、[GameplayStatusComponent](../addons/gameplay_abiltiy_system/scripts/components/gameplay_status_component.gd)、[CoreEventBus](../addons/godot_core_system-0.0.4/source/event_system/event_bus.gd)。
+源码：[HealthVital](../addons/gameplay_abiltiy_system/scripts/attributes/vitals/health_vital.gd)、[GameplayStatusComponent](../addons/gameplay_abiltiy_system/scripts/components/gameplay_status_component.gd)、[CoreEventBus](../addons/godot_core_system-0.0.4/source/event_system/event_bus.gd)、[事件回归验证](../examples/verify_core_events.gd)。
 
-GAS 只有一个 `game_event_occurred(type, context)` 信号，简单、同步、Dictionary 负载，状态组件会接入该信号。缺少按事件名订阅、显式优先级、一次订阅和历史；多个状态组件监听全局信号，当前分发未自动按受伤目标隔离。
+原 GAS 总线只有统一的同步 Dictionary 广播，功能简单。迁移后旧脚本、UID、自动加载及插件注册全部移除；技能、状态、生命值和技能栏全部 10 处发布直接调用 `CoreSystem.event_bus.push_event(name, [context], true)`。Core 的按名订阅回调获得一个 Dictionary，无需转发或同时维护两条总线。
 
-Core 具备按名字订阅、优先级、过滤器、once、延迟调用与历史，适合通用事件服务。但负载按 Array 拆参数；元数据键只区分对象和方法，不能准确区分全部 bind Callable；once 在回调后断开，递归发事件可能再次调用；延迟模式的 handled 表示调度结束，并不等于回调完成。两条总线都没有天然的角色作用域。
+状态组件使用 Core 的 `event_pushed(name, payload)` 接受单 Dictionary 负载，不限定事件名字，因此宿主自定义事件和自定义 StatusFeature 保持可用。入树订阅、离树退订、再入树恢复，每个组件只连接一次。状态监听先于 Core 按名订阅的优先级回调执行，不参与其优先级排序；实例仍把字段合并进自身上下文缓存。
 
-关键顺序：HealthVital 发出 `damage_received` → 监听状态修改同一个 DamageInfo → HealthVital 读取 final_damage → 扣血。Core 的同步模式理论上也能保留这条链路，并加入优先级；迁移到延迟模式则可能在减伤执行前扣血。因此并非“GAS 必须永远使用自己的总线”，而是迁移必须保持同步和共享伤害对象的语义。
+关键顺序：HealthVital 本地受伤前信号 → Core 同步推送 → GAS 状态监听修改 DamageInfo → Core 按名同步订阅者修改同一个对象 → HealthVital 读取 final_damage 并扣血。回归测试以两次 0.5 减伤验证 20 点只扣 5 点，并验证完全减伤、死亡及全部事件进入 Core 订阅/历史。GAS 发布始终显式使用 immediate=true；BT/属性/组件本地信号维持原接口。
 
-**取舍：现阶段保留 GAS 战斗事件；UI、任务或关卡事件可用 Core。长期如果只能选一个通用底层，优先考虑修复后的 CoreEventBus，并为 GAS 保留适配接口。** 应先补 target/actor 作用域，再定义受伤前同步阶段与伤害后通知阶段。两个方向无条件转发会产生事件回环，不应直接把所有事件双向广播。
+Core 的优先级、过滤、once 和历史适合通用服务，但现有元数据键只区分对象和方法，不完整区分 bind Callable；once 在回调后断开，递归推送仍可能重复；延迟 handled 只表示调度结束。迁移不依赖这些边界行为，也未修改它们。事件底层仍广播，伤害上下文已增加 entity 目标字段；新增 Battle Foundation 宿主开启状态事件过滤，普通 GAS 场景默认保留广播语义。
 
 ## 输入：OperationController 的角色输入设计更好
 
@@ -63,9 +63,9 @@ GAS AbilityInputFeature 只做输入匹配和快捷键显示，不是完整输�
 
 Core TimeManager 适合命名计时器、模块内时间缩放和暂停；GAS 在技能或状态实例中保存冷却、持续时间与周期计时，随所属实例更新。实例计时更符合“两个角色学了同一技能，却分别处于不同冷却”的语义，用一个全局 `skill_q` Timer 替换会冲突；即使给全局 ID 增加角色前缀，也要重新管理取消与清理。
 
-两者都有限制：Core 循环计时器把 elapsed 归零，丢弃周期余量；GAS 周期效果每帧至多执行一次。Core 的 time_scale 不控制 Engine、SceneTree 或 GAS；GAS 黑板在新激活时 clear，Feature 的持久数据与本轮执行数据共用黑板，需要避免重置不该重置的计时。BT 的部分等待使用真实时钟，又与 delta 倒计时不同。
+两者都有限制：Core 循环计时器把 elapsed 归零，丢弃周期余量；GAS 周期效果每帧至多执行一次。Core 的 time_scale 不控制 Engine、SceneTree 或 GAS；GAS 黑板在新激活时 clear，Feature 的持久数据与本轮执行数据共用黑板，需要避免重置不该重置的计时。BTWait 已改为累计传入 delta，可与其它 GAS 实例计时一起接受战斗时钟控制。
 
-**取舍：战斗冷却和 Buff 持续时间保留 GAS；通用通知可用 Core Timer。** 未来先定义游戏时间、真实时间和暂停时行为，再向更新入口提供一致的 delta。缩放问题不能通过简单删除一套计时器解决。
+**取舍：战斗冷却和 Buff 持续时间保留 GAS；通用通知可用 Core Timer。** 阶段一已通过 [Battle Foundation](../addons/battle_foundation/README.md) 定义暂停、慢动作和受击停顿规则，并向 GAS 提供一致的固定物理 delta。缩放问题不能通过简单删除一套计时器解决。
 
 ## 状态机、行为树、Status：分别适合不同问题
 

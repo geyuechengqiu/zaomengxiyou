@@ -1,0 +1,38 @@
+[gd_resource type="Resource" script_class="CoreOperationProfile" format=3]
+[ext_resource type="Script" path="res://addons/godot_core_system-0.0.4/source/operation_system/operation_profile.gd" id="script"]
+
+[resource]
+script = ExtResource("script")
+bindings = {
+&"move_left": [&"battle_player.left"], &"move_right": [&"battle_player.right"],
+&"move_up": [&"battle_player.up"], &"move_down": [&"battle_player.down"],
+&"run": [&"battle_player.run"], &"jump": [&"battle_player.jump"], &"attack": [&"battle_player.attack"],
+&"skill_1": [&"battle_player.skill_1"], &"skill_2": [&"battle_player.skill_2"], &"skill_3": [&"battle_player.skill_3"],
+&"skill_4": [&"battle_player.skill_4"], &"skill_5": [&"battle_player.skill_5"],
+&"magic_weapon": [&"battle_player.magic_weapon"], &"wushuang": [&"battle_player.wushuang"],
+&"wing_skill": [&"battle_player.wing_skill"], &"ultimate": [&"battle_player.ultimate"],
+&"item_1": [&"battle_player.item_1"], &"item_2": [&"battle_player.item_2"],
+&"pet_toggle": [&"battle_player.pet_toggle"], &"mount_toggle": [&"battle_player.mount_toggle"]
+}
+axes = {
+&"move": {"negative": &"move_left", "positive": &"move_right", "opposites": "last_pressed"},
+&"vertical": {"negative": &"move_up", "positive": &"move_down", "opposites": "last_pressed"}
+}
+default_keys = {
+&"battle_player.left": ["A", "Left"], &"battle_player.right": ["D", "Right"],
+&"battle_player.up": ["W", "Up"], &"battle_player.down": ["S", "Down"],
+&"battle_player.run": ["Shift"], &"battle_player.jump": ["K"], &"battle_player.attack": ["J"],
+&"battle_player.skill_1": ["Y"], &"battle_player.skill_2": ["U"], &"battle_player.skill_3": ["I"],
+&"battle_player.skill_4": ["O"], &"battle_player.skill_5": ["L"],
+&"battle_player.magic_weapon": ["H"], &"battle_player.wushuang": ["Space"],
+&"battle_player.wing_skill": ["R"], &"battle_player.ultimate": ["P"],
+&"battle_player.item_1": ["Q"], &"battle_player.item_2": ["E"],
+&"battle_player.pet_toggle": ["F"], &"battle_player.mount_toggle": ["Z"]
+}
+buffered_intents = Array[StringName]([&"jump", &"attack", &"skill_1", &"skill_2", &"skill_3", &"skill_4", &"skill_5", &"magic_weapon", &"wushuang", &"wing_skill", &"ultimate", &"item_1", &"item_2", &"pet_toggle", &"mount_toggle"])
+buffer_seconds = 0.2
+reserved_keys = Array[String](["Escape", "QuoteLeft", "1", "2", "F1", "F2", "F3", "F4", "F8", "F9", "F10", "F11"])
+buffer_capacity = 16
+long_press_seconds = 0.3
+double_tap_intents = Array[StringName]([&"move_left", &"move_right"])
+double_tap_seconds = 0.5

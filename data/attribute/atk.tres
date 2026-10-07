@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="GameplayAttribute" format=3]
+
+[ext_resource type="Script" path="res://addons/gameplay_abiltiy_system/scripts/attributes/gameplay_attribute.gd" id="1_vsbo7"]
+
+[resource]
+script = ExtResource("1_vsbo7")
+attribute_id = &"atk"
+attribute_display_name = "攻击"
+attribute_description = "基础攻击数值，沿用 GAS 内置伤害策略读取的 atk。"
+min_value = 0.0
+metadata/source_field = "atk"
+metadata/category = "core"
+metadata/unit = "点"

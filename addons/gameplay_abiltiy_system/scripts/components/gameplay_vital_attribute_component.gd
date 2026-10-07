@@ -8,6 +8,7 @@ class_name GameplayVitalAttributeComponent
 
 ## 如果传入的Vital不为空，则使用传入的Vital，否则使用默认的Vital
 @export var _vitals: Array[GameplayVital] = []
+@export var externally_driven: bool = false
 
 ## 活跃的 Vital 实例 { vital_id: GameplayVital }
 var _active_vitals: Dictionary[StringName, GameplayVital] = {}
@@ -24,6 +25,12 @@ func _ready() -> void:
 	set_process(true)
 
 func _process(delta: float) -> void:
+	if not externally_driven:
+		advance_simulation(delta)
+
+func advance_simulation(delta: float) -> void:
+	if delta <= 0.0:
+		return
 	# 统一驱动所有 Vital 的回复
 	for vital in _active_vitals.values():
 		if is_instance_valid(vital):

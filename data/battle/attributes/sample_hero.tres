@@ -1,0 +1,64 @@
+[gd_resource type="Resource" script_class="GameplayAttributeSet" format=3]
+
+[ext_resource type="Script" path="res://addons/gameplay_abiltiy_system/scripts/attributes/gameplay_attribute_set.gd" id="script"]
+[ext_resource type="Resource" path="res://data/attribute/atk.tres" id="atk"]
+[ext_resource type="Resource" path="res://data/attribute/phyDef.tres" id="phyDef"]
+[ext_resource type="Resource" path="res://data/attribute/hpMax.tres" id="hpMax"]
+[ext_resource type="Resource" path="res://data/attribute/mpMax.tres" id="mpMax"]
+[ext_resource type="Resource" path="res://data/attribute/reHP.tres" id="reHP"]
+[ext_resource type="Resource" path="res://data/attribute/reMP.tres" id="reMP"]
+[ext_resource type="Resource" path="res://data/attribute/hit.tres" id="hit"]
+[ext_resource type="Resource" path="res://data/attribute/dodge.tres" id="dodge"]
+[ext_resource type="Resource" path="res://data/attribute/critical.tres" id="critical"]
+[ext_resource type="Resource" path="res://data/attribute/toughness.tres" id="toughness"]
+[ext_resource type="Resource" path="res://data/attribute/lucky.tres" id="lucky"]
+[ext_resource type="Resource" path="res://data/attribute/guardian.tres" id="guardian"]
+[ext_resource type="Resource" path="res://data/attribute/lightResist.tres" id="lightResist"]
+[ext_resource type="Resource" path="res://data/attribute/darkResist.tres" id="darkResist"]
+[ext_resource type="Resource" path="res://data/attribute/waterResist.tres" id="waterResist"]
+[ext_resource type="Resource" path="res://data/attribute/fireResist.tres" id="fireResist"]
+[ext_resource type="Resource" path="res://data/attribute/woodResist.tres" id="woodResist"]
+[ext_resource type="Resource" path="res://data/attribute/soilResist.tres" id="soilResist"]
+[ext_resource type="Resource" path="res://data/attribute/windResist.tres" id="windResist"]
+[ext_resource type="Resource" path="res://data/attribute/rayResist.tres" id="rayResist"]
+[ext_resource type="Resource" path="res://data/attribute/walkSpeed.tres" id="walkSpeed"]
+[ext_resource type="Resource" path="res://data/attribute/runSpeed.tres" id="runSpeed"]
+[ext_resource type="Resource" path="res://data/attribute/jumpSpeed1.tres" id="jumpSpeed1"]
+[ext_resource type="Resource" path="res://data/attribute/jumpSpeed2.tres" id="jumpSpeed2"]
+[ext_resource type="Resource" path="res://data/attribute/enduranceMax.tres" id="enduranceMax"]
+[ext_resource type="Resource" path="res://data/attribute/reEndurance.tres" id="reEndurance"]
+[ext_resource type="Resource" path="res://data/attribute/reduceEndurance.tres" id="reduceEndurance"]
+[ext_resource type="Resource" path="res://data/attribute/protectPoint.tres" id="protectPoint"]
+
+[resource]
+script = ExtResource("script")
+attributes = {
+ExtResource("atk"): 20.0,
+ExtResource("phyDef"): 5.0,
+ExtResource("hpMax"): 100.0,
+ExtResource("mpMax"): 50.0,
+ExtResource("reHP"): 2.0,
+ExtResource("reMP"): 1.0,
+ExtResource("hit"): 0.0,
+ExtResource("dodge"): 0.0,
+ExtResource("critical"): 0.0,
+ExtResource("toughness"): 0.0,
+ExtResource("lucky"): 0.0,
+ExtResource("guardian"): 0.0,
+ExtResource("lightResist"): 0.0,
+ExtResource("darkResist"): 0.0,
+ExtResource("waterResist"): 0.0,
+ExtResource("fireResist"): 0.0,
+ExtResource("woodResist"): 0.0,
+ExtResource("soilResist"): 0.0,
+ExtResource("windResist"): 0.0,
+ExtResource("rayResist"): 0.0,
+ExtResource("walkSpeed"): 0.0,
+ExtResource("runSpeed"): 0.0,
+ExtResource("jumpSpeed1"): 0.0,
+ExtResource("jumpSpeed2"): 0.0,
+ExtResource("enduranceMax"): 0.0,
+ExtResource("reEndurance"): 0.0,
+ExtResource("reduceEndurance"): 0.0,
+ExtResource("protectPoint"): -1.0
+}

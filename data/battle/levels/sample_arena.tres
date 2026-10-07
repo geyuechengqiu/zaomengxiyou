@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="BattleLevelDefinition" format=3]
+[ext_resource type="Script" path="res://addons/battle_foundation/definitions/battle_level_definition.gd" id="definition"]
+[ext_resource type="Script" path="res://addons/battle_foundation/definitions/battle_spawn_definition.gd" id="spawn"]
+
+[sub_resource type="Resource" id="Hero"]
+script = ExtResource("spawn")
+category = "characters"
+entity_definition_id = &"sample_hero"
+position = Vector3(-2, 0, 0)
+
+[sub_resource type="Resource" id="Monster"]
+script = ExtResource("spawn")
+entity_definition_id = &"sample_monster"
+position = Vector3(2, 0, 0)
+
+[resource]
+script = ExtResource("definition")
+definition_id = &"sample_arena"
+display_name = "阶段一测试场地"
+spawns = Array[ExtResource("spawn")]([SubResource("Hero"), SubResource("Monster")])

@@ -1,0 +1,38 @@
+{
+  "source_project": "Speculum-4399-master",
+  "source_export": "exports/zmhj_character_state_control/sources",
+  "business_character_id": "孙悟空",
+  "business_attack_skill_id": "sunwukong_attack1",
+  "double_tap_seconds": 0.5,
+  "double_tap_comparison": "strictly less than",
+  "double_tap_policy": "same semantic direction; second press held; alternating opposite direction clears candidate",
+  "source_difference": "InputInstance.GetDuble can transfer double state from opposite direction; adapter uses same-direction recognition",
+  "added_controls": [
+    "arrow-key aliases",
+    "Shift run",
+    "Esc remapping menu"
+  ],
+  "runtime_implementation": "CoreOperationController + CoreOperationBindings + BattlePlayerOperations",
+  "sources": [
+    {
+      "path": "prefabs/controls/ManFrameControl.as",
+      "sha256": "9d8f7dbfbfba641f4ab598fb22606519a1d4cae37f779338f873416a3233bf7c"
+    },
+    {
+      "path": "models/vo/UserVO.as",
+      "sha256": "9290bdaf8d53ffb3dbf1bf7a76f66a24ebb1d2d442c7abeda56c98bc708839cd"
+    },
+    {
+      "path": "com/wdcgame/engine/ui/KeyboradInput.as",
+      "sha256": "1d598de919ccfef38adb045c727629e98ebf95e88a4ae7242e7e51912a136d8f"
+    },
+    {
+      "path": "com/wdcgame/engine/ui/KeyVO.as",
+      "sha256": "50017bb1cb52c00c20397d7d2f8b3b229fdbacfbf21490e6cc0a9721ffb0ae2b"
+    },
+    {
+      "path": "com/wdcgame/engine/ui/InputInstance.as",
+      "sha256": "f70d6e03bb9e90df9adfcf61ed31b85a1362164056cb813e081e72ef403fd805"
+    }
+  ]
+}

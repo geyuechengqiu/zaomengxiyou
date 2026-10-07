@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="GameplayAttribute" format=3]
+
+[ext_resource type="Script" path="res://addons/gameplay_abiltiy_system/scripts/attributes/gameplay_attribute.gd" id="1_cbjjm"]
+
+[resource]
+script = ExtResource("1_cbjjm")
+attribute_id = &"walkSpeed"
+attribute_display_name = "行走速度"
+attribute_description = "原始行走速度数值。宿主控制器负责转换到 Godot 场景单位。"
+min_value = 0.0
+metadata/source_field = "walkSpeed"
+metadata/category = "movement"
+metadata/unit = "原版速度单位"

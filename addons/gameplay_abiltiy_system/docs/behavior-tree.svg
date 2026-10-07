@@ -101,7 +101,7 @@
 <path d="M650 1806H1130" stroke="#c4cdd9"/>
 <text x="670" y="1837" class="body" text-anchor="start">duration / duration_key</text>
 <path d="M650 1850H1130" stroke="#e0e5ee"/>
-<text x="670" y="1877" class="body" text-anchor="start">按真实毫秒时钟等待</text></g></a><a href="../scripts/behavior_tree/decorators/bt_repeat_periodic.gd"><title>behavior_tree/decorators/bt_repeat_periodic.gd</title><g><rect x="1250" y="1730" width="480" height="250" rx="10" fill="white" stroke="#8191a8" stroke-width="1.5"/>
+<text x="670" y="1877" class="body" text-anchor="start">累计战斗 delta 等待</text></g></a><a href="../scripts/behavior_tree/decorators/bt_repeat_periodic.gd"><title>behavior_tree/decorators/bt_repeat_periodic.gd</title><g><rect x="1250" y="1730" width="480" height="250" rx="10" fill="white" stroke="#8191a8" stroke-width="1.5"/>
 <path d="M1260 1730H1720Q1730 1730 1730 1740V1806H1250V1740Q1250 1730 1260 1730Z" fill="#eaf3ff"/>
 <text x="1270" y="1755" class="type" text-anchor="start">«Resource : BTDecorator»</text><text x="1270" y="1788" class="name" text-anchor="start">BTRepeatPeriodic</text>
 <path d="M1250 1806H1730" stroke="#c4cdd9"/>
@@ -144,5 +144,5 @@
 
 <path d="M1250 2583H1730" stroke="#e0e5ee"/>
 <text x="1270" y="2610" class="body" text-anchor="start">交换成功 / 失败；保留 RUNNING</text></g></a><rect x="50" y="2850" width="1680" height="172" rx="12" fill="#f1edff" stroke="#8191a8" stroke-width="1.5"/>
-<text x="72" y="2886" class="step" text-anchor="start">实现要点</text><text x="72" y="2920" class="note" text-anchor="start">节点资源共享；每个实例独立保存节点状态、节点私有存储、观察者和最多 100 条执行历史。</text><text x="72" y="2949" class="note" text-anchor="start">BTWaitSignal 监听 Blackboard，不是 AbilityEventBus；重复输入通过黑板 true / false 切换送达。</text><text x="72" y="2978" class="note" text-anchor="start">观察者优先级判断和 active_nodes 维护未完整实现；Runner.reset() 调用不存在的 Instance.reset()。</text>
+<text x="72" y="2886" class="step" text-anchor="start">实现要点</text><text x="72" y="2920" class="note" text-anchor="start">节点资源共享；每个实例独立保存节点状态、节点私有存储、观察者和最多 100 条执行历史。</text><text x="72" y="2949" class="note" text-anchor="start">BTWaitSignal 监听 Blackboard，不是 CoreEventBus；重复输入通过黑板 true / false 切换送达。</text><text x="72" y="2978" class="note" text-anchor="start">观察者优先级判断和 active_nodes 维护未完整实现；Runner.reset() 调用不存在的 Instance.reset()。</text>
 </svg>

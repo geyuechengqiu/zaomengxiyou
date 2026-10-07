@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="GameplayAttribute" format=3]
+
+[ext_resource type="Script" path="res://addons/gameplay_abiltiy_system/scripts/attributes/gameplay_attribute.gd" id="1_ecwld"]
+
+[resource]
+script = ExtResource("1_ecwld")
+attribute_id = &"toughness"
+attribute_display_name = "韧性"
+attribute_description = "抗暴击评分，用于降低被暴击概率，不等同于霸体耐久值。"
+min_value = 0.0
+metadata/source_field = "toughness"
+metadata/category = "core"
+metadata/unit = "评分"

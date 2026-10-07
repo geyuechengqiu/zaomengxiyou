@@ -18,7 +18,7 @@
 | 目标选择、预览、物理命中 | [目标类图](docs/targeting-system.svg) | [目标选择与预览系统](#目标选择与预览系统) |
 | 投射物、移动与命中策略 | [投射物类图](docs/projectile-system.svg) | [投射物系统](#投射物系统) |
 | 魔法场、区域选择、计时器 | [魔法场类图](docs/magic-field-system.svg) | [魔法场系统](#魔法场系统) |
-| 标签、过滤器、事件及五个自动加载 | [服务类图](docs/services-system.svg) | [标签过滤器与事件服务](#标签过滤器与事件服务) |
+| 标签、过滤器、Core 事件及四个自动加载 | [服务类图](docs/services-system.svg) | [标签过滤器与事件服务](#标签过滤器与事件服务) |
 | Cue 与全部视觉组件 | [Cue 类图](docs/cue-system.svg) | [Cue 表现系统](#cue-表现系统) |
 | UI、调试、Shader 与素材 | [UI 类图](docs/ui-system.svg) | [UI 调试与配套资源](#ui-调试与配套资源) |
 | 各系统共同运行 | [联合结构](docs/systems-integration.svg)、[联合流程](docs/systems-runtime.svg) | [系统如何联合运行](#系统如何联合运行) |
@@ -56,7 +56,7 @@
 | 载具 | `ProjectileData` / `ProjectileBase` 与 `MagicFieldData` / `MagicFieldBase`；携带的 payload 是 `GameplayStatusData → 层数` 字典，命中或区域触发时施加状态，再由状态执行效果。 |
 | 表现与 UI | `GameplayCue` 组合 `CueParticle`、`CueAttachedParticle`、`CueTrail`；技能按钮/技能栏、状态图标和技能树/状态/标签调试面板。 |
 
-插件启用时注册五个自动加载服务：`GameplayAbilitySystem` 查询实体组件，`DamageCalculator` 调度伤害策略，`TagManager` 管理标签、继承、互斥和引用计数，`AbilityEventBus` 广播同步游戏事件，`GameplayCueManager` 执行及更新 Cue。近战调试绘制动态查找可选的 `DebugDraw`。
+插件启用时注册四个自动加载服务：`GameplayAbilitySystem` 查询实体组件，`DamageCalculator` 调度伤害策略，`TagManager` 管理标签、继承、互斥和引用计数，`GameplayCueManager` 执行及更新 Cue。总线事件直接依赖 [CoreSystem 的 event_bus](../godot_core_system-0.0.4/source/event_system/event_bus.gd)，需启用 Core 插件及该模块；项目先初始化 CoreSystem。近战调试绘制动态查找可选的 `DebugDraw`。
 
 ## 一次技能怎样执行
 
@@ -127,7 +127,7 @@
 当前默认 `SimpleDamageLogic` 的实际公式为：
 
 ```text
-候选伤害 = max(1, 施法者.phy_attack - 目标.defense)
+候选伤害 = max(1, 施法者.atk - 目标.phyDef)
          × 本效果 damage_multiplier × 输入 context.damage_multiplier
          × context.damage_multiplier_modifier × context.stacks
 ```
@@ -204,7 +204,7 @@ heal.apply(target, target, {})
 - `GameplayEffect.apply()` 返回 `void`，没有统一的“成功 / 失败”结果。子类 `_apply()` 因缺少组件或数据提前返回时，基类仍可能继续执行 Cue 与子效果；后续步骤不是事务式回滚。
 - `GE_ApplyDamage` 修改自身倍率，并把合并倍率写回共享 `context`。复用同一实例或同一字典，可能让多目标、多次周期及兄弟伤害效果意外累乘；深复制效果不等于隔离字典。
 - `GE_ModifyVital` 当前不读取 `heal_multiplier`；状态持续时间初始化读取 `status_data.duration`，也没有统一应用 `duration_multiplier` / `duration_add`。修改器写入这些字段并不保证效果落地。
-- `GameplayStatusComponent` 订阅全局事件，但未按目标实体过滤；`damage_received` 上下文也只携带 `DamageInfo`，其中没有目标字段。多个实体的事件状态可能响应同一次伤害，不能把全局广播当作实体专属事件。
+- `GameplayStatusComponent` 默认订阅全局事件；可开启 `filter_events_by_owner` 并由宿主实现 `accepts_status_event()`。伤害上下文现在包含 `entity=owner_entity` 和原始 DamageInfo；Battle Foundation 实体已开启宿主过滤，普通 GAS 示例默认仍保持广播行为。
 - `FeaturePeriodicEffects` 每次更新最多触发一次，没有用循环补齐一帧跨过多个周期的次数。`duration = 0` 或空 ID 状态不适合需要组件驱动的持续效果。
 - 效果自己的 `remove()` 不调用 `stop_cue()`；只有状态实例保存并停止自己的 Cue 副本。`GameplayCueManager` 也会把每次执行的组件加入持续更新列表，并不自动按“瞬时 / 持续”分类。
 - Cue 挂点查询依赖目标的 `get_attachment_point(name)`，返回的对象必须是 `Node3D`。未实现时位置返回 `Vector3.INF`，当前没有自动退回目标坐标的逻辑。
@@ -228,7 +228,7 @@ heal.apply(target, target, {})
 
 技能组件逐帧更新所有已学习实例，允许不同技能各自执行；`_current_casting_ability` 只记录最近一次激活，组件完成回调只对该指针发完成通知，不能把它当作所有活动技能的集合。实例的已激活分支会先发送黑板输入，即使 Feature 检查不通过也返回 `true`，这使连击能收到输入，但这个返回值不表示重新释放了效果。
 
-取消路径调用 `end_ability(FAILURE)`，实际执行的是 `on_completed()`；基类提供的 `on_cancel()` 当前没有被该路径调用，`final_status` 也没有传给完成信号。无参数取消还会直接读取当前施法实例，调用前应确认其有效。`can_activate_ability()` 检查 `disabled`，`try_activate_ability()` 没有相同检查；实例 `disabled` 仅定义了读取器，组件 enable/disable 方法不能视为已完善的禁用接口。
+取消路径调用 `end_ability(FAILURE)`，实际执行的是 `on_completed()`；基类提供的 `on_cancel()` 当前没有被该路径调用，`final_status` 也没有传给完成信号。无参数取消还会直接读取当前施法实例，调用前应确认其有效。`can_activate_ability()` 检查 `disabled`，`try_activate_ability()` 没有相同检查；实例 `disabled` 在创建时从定义复制，enable/disable 只修改该实例。BattleEntity 的技能入口先检查 can_activate_ability；直接调用 try_activate_ability 的宿主仍需自行检查禁用状态。
 
 ## Feature 与消耗系统
 
@@ -268,7 +268,7 @@ heal.apply(target, target, {})
 | `BTObserver` / `BTCheckVarDecorator` | 检查条件，并可订阅相关键变化请求 SELF 或 LOWER_PRIORITY 中断；具体装饰器支持等值/存在性。 |
 | `BTAction` / `BTCheckVar` | 动作扩展基类；变量检查不存在就失败，存在时按配置检查值或只检查存在。 |
 | `BTSetVar` / `BTModifyInt` | 前者写变量，value 为 null 时删键；后者对整数 SET、ADD、SUBTRACT，默认当前值 0。 |
-| `BTWait` | `_enter` 存真实毫秒时间的截止值，再按当前真实时间判断；`duration_key` 仅接受 float，未使用 delta 累积。 |
+| `BTWait` | `_enter` 保存等待秒数，`_tick` 累计传入 delta；`duration_key` 仅接受 float。外部战斗时钟可统一控制暂停、慢动作和停顿。 |
 | `BTWaitSignal` | 注册黑板观察者；匹配键变为真或入场时已为真即成功；可消费信号；超时按 delta 累积，负数无限等待；退出注销观察者。 |
 | `BTLog` | 输出 agent、文字与可选黑板值，支持 INFO/WARNING/ERROR；无论日志等级均返回成功。 |
 
@@ -326,16 +326,16 @@ MULTIPLY 的 0.1 表示增加 10%，多条按加法合并。例如基础 100、A
 
 ![Vital 与伤害系统独立类图](docs/vital-system.svg)
 
-`GameplayVitalAttributeComponent` **继承**属性组件，一个 Node 同时管理普通属性和 Vital。`max_health` 是可重算属性，`health.current_value` 是可消耗值：二者分别存放。初始化先建属性，再检查各 Vital 的 ID 与上限属性，深复制模板为实例，绑定 owner，初始化当前值为上限，并转发变化/耗尽信号。`_ready` 仅开启更新，不自动完成数值初始化；宿主需调用 initialize。
+`GameplayVitalAttributeComponent` **继承**属性组件，一个 Node 同时管理普通属性和 Vital。`hpMax` 是可重算属性，`health.current_value` 是可消耗值：二者分别存放。初始化先建属性，再检查各 Vital 的 ID 与上限属性，深复制模板为实例，绑定 owner，初始化当前值为上限，并转发变化/耗尽信号。`_ready` 仅开启更新，不自动完成数值初始化；宿主需调用 initialize。
 
 | 类型 | 数值和生命周期 |
 | --- | --- |
 | [GameplayVital](scripts/attributes/vitals/gameplay_vital.gd) | 保存 vital_id、current_value、上限属性键、恢复属性键及 owner。`_modify_value` 刷新上限，钳到 0..max，变化发信号，正值到 0 发 depleted，未满到满发 full。 |
-| [HealthVital](scripts/attributes/vitals/health_vital.gd) | 默认 health / max_health，存活判定为 current > 0。正向 modify 调用 heal，死后不接受普通治疗；伤害提交额外执行事件与死亡流程。 |
-| [ManaVital](scripts/attributes/vitals/mana_vital.gd) | 默认 mana / max_mana；`try_spend_mana` 经 owner 检查是否足够再扣除，恢复机制沿用基类。 |
+| [HealthVital](scripts/attributes/vitals/health_vital.gd) | 默认 health / hpMax，存活判定为 current > 0。正向 modify 调用 heal，死后不接受普通治疗；伤害提交额外执行事件与死亡流程。 |
+| [ManaVital](scripts/attributes/vitals/mana_vital.gd) | 默认 mana / mpMax；`try_spend_mana` 经 owner 检查是否足够再扣除，恢复机制沿用基类。 |
 | [DamageInfo](scripts/damage/damage_info.gd) | RefCounted，含 instigator、source_component、base_damage、final_damage 和 is_crit；构造器只设基础伤害，final_damage 默认 0，手工提交时需要显式赋值。 |
 | [DamageLogicStrategy](scripts/damage/damage_logic_strategy.gd) | 抽象 Resource，仅定义 `calculate(target, instigator, context)`；可替换公式。 |
-| [SimpleDamageLogic](scripts/damage/simple_damage_logic.gd) | 查询双方 Vital 属性组件，读取 phy_attack 和 defense，使用 `max(1, attack-defense)` 与上下文倍率；目前没有暴击分支。 |
+| [SimpleDamageLogic](scripts/damage/simple_damage_logic.gd) | 查询双方 Vital 属性组件，读取 atk 和 phyDef，使用 `max(1, attack-phyDef)` 与上下文倍率；目前没有暴击分支。 |
 | [DamageCalculator](scripts/singletons/damage_calculator.gd) | Autoload Node 选每次调用的覆盖策略，否则用全局策略，再将结果钳到非负；不负责扣血。 |
 
 每帧恢复量为 `owner.get_value(regen_rate_attribute) × delta`。Health 和 Mana 的默认恢复键在源码中被注释，需显式配置；负恢复率也可以造成扣值。Health 的正向路径转到 heal 时未保留 is_regen，恢复事件可能被报告为普通治疗；活着但已满的 Health 仍可发 health_restored。
@@ -344,7 +344,7 @@ MULTIPLY 的 0.1 表示增加 10%，多条按加法合并。例如基础 100、A
 
 三种扣值接口需要区分：组件 `modify_vital(-amount)` 不足时整次拒绝；直接 `vital.modify_value(-amount)` 钳到 0，但跳过 Health 伤害事件和 `_die`；`HealthVital.apply_damage()` 允许伤害大于剩余生命，依次发受伤事件、读可变 final_damage、扣值、发结算事件、加入 death 分组并发 health_depleted。组件修改返回 true 仅表示走了修改调用，死者治疗或上限钳制可能仍无数值变化。
 
-当前默认伤害公式和治疗入口见 [伤害与治疗怎样结算](#伤害与治疗怎样结算)。属性修改器影响 attack/defense，从而影响下一次策略读取；事件减伤修改 DamageInfo，从而影响当前一次扣血。这是两个不同阶段的扩展点。
+当前默认伤害公式和治疗入口见 [伤害与治疗怎样结算](#伤害与治疗怎样结算)。属性修改器影响 attack/phyDef，从而影响下一次策略读取；事件减伤修改 DamageInfo，从而影响当前一次扣血。这是两个不同阶段的扩展点。
 
 ## 状态系统的独立实现
 
@@ -423,7 +423,7 @@ MULTIPLY 的 0.1 表示增加 10%，多条按加法合并。例如基础 100、A
 
 ![自动加载、标签、过滤与事件类图](docs/services-system.svg)
 
-[plugin.gd](plugin.gd) 在编辑器启用时注册五个自动加载节点，退出时移除。`GameplayAbilitySystem` 只提供组件查询和全局 smart_cast：按 `get_<组件名snake_case>()`、`get_component(name)`、同名子节点顺序查找，第一个接口存在就直接返回结果，即使返回 null 也不继续尝试；不会遍历所有子节点按 class_name 自动发现。宿主可实现 getter 或确保组件节点名称一致。
+[plugin.gd](plugin.gd) 在编辑器启用时注册四个自动加载节点，退出时移除。CoreSystem 由 Core 插件管理。`GameplayAbilitySystem` 只提供组件查询和全局 smart_cast：按 `get_<组件名snake_case>()`、`get_component(name)`、同名子节点顺序查找，第一个接口存在就直接返回结果，即使返回 null 也不继续尝试；不会遍历所有子节点按 class_name 自动发现。宿主可实现 getter 或确保组件节点名称一致。
 
 `GameplayTag` 是资源定义，含 ID、显示信息、单个 parent_tag_id 和互斥 ID 数组。`TagManager` 管定义库、父链和互斥缓存、按实体 ID 的查询缓存。添加标签前要求注册；计数保存在目标 meta `tag_ref_<安全ID>`，第一次添加才进入 `tag_<ID>` 分组并发 added，最后一次移除退出分组并发 removed。多个状态引用相同标签可以保持计数。
 
@@ -433,18 +433,33 @@ MULTIPLY 的 0.1 表示增加 10%，多条按加法合并。例如基础 100、A
 
 `GameplayFilterData` 定义抽象 check；当前具体实现只有 `FilterTargetByTags`，全部 required 必须满足，任一 blocked 命中就拒绝，可控制是否包含父标签。它同时可供 TargetingStrategy、GameplayEffect 使用；Effect 自己还有额外 required/blocked 标签准入，因此目标查询通过不意味着最终效果一定通过。
 
-`AbilityEventBus.trigger_game_event` 立即 emit 信号，不排队、不深复制、不隔离实体。重要事件如下：
+全部总线发布使用 `CoreSystem.event_bus.push_event(event_name, [context], true)`。事件名为 String，单个 Dictionary 是 Core 的一个回调参数；显式 `true` 保持同步，字典及其中的 DamageInfo 不被总线复制。重要事件如下：
 
 | 来源 | 事件及字典 |
 | --- | --- |
 | 技能组件 | ability_learned / forgotten / activated / completed / cancelled，带 entity、ability_id。 |
 | 状态组件 | status_applied / status_removed 带 entity、status_id；本地 status_applied 信号另外携带实例，不能与总线字典混为一谈。 |
-| HealthVital | damage_received / damage_applied，当前只带 damage_info，没有受伤目标字段。 |
+| HealthVital | damage_received / damage_applied，携带 entity（受伤目标）与同一个 damage_info。 |
 | AbilityBar | ability_button_pressed，只带 ability_id，宿主需绑定自己控制的组件。 |
 
-状态组件订阅后把事件转给所有相关实例。同步可变 DamageInfo 使减伤能在当前扣血之前生效，同时也使多个目标状态误响应同一全局伤害成为真实限制。BTWaitSignal、属性信号和组件本地信号都是独立通知路径，不会自动被转成总线事件。
+状态组件在 `_enter_tree()` 连接 Core 的 `event_pushed`，只接受 `[Dictionary]` 形状的负载，转给相关状态实例；`_exit_tree()` 对原总线退订，再入树时恢复。统一信号支持未知的宿主事件及自定义 StatusFeature，无需固定事件名白名单。它在 Core 的按名订阅回调之前执行，不参与这些回调的优先级排序；Core 的 `subscribe(name, callback)` 则让宿主或 TriggerManager 直接接收同一事件，不需要跨总线转发。
 
-另外两个服务分别是 `DamageCalculator` 和 `GameplayCueManager`，详见 Vital 与 Cue 两节；可选 DebugDraw 是外部独立插件的调试辅助，不在这五个自动加载服务中。
+同步可变 DamageInfo 使状态效果和 Core 同步订阅者的减伤都能在当前扣血之前生效。事件底层继续广播；BattleEntity 开启 filter_events_by_owner，普通 GAS 宿主可实现 accepts_status_event 来明确作用域；GAS 状态实例仍会将事件字段合并到自己的上下文缓存。BTWaitSignal、属性信号和组件本地信号都是独立通知路径，不会自动被转成总线事件。
+
+```gdscript
+func _ready() -> void:
+    CoreSystem.event_bus.subscribe("damage_applied", _on_damage_applied)
+
+func _on_damage_applied(context: Dictionary) -> void:
+    print(context.damage_info.final_damage)
+
+func _exit_tree() -> void:
+    CoreSystem.event_bus.unsubscribe("damage_applied", _on_damage_applied)
+```
+
+事件迁移验证见 [回归场景](../../examples/verify_core_events.tscn)，覆盖全部 GAS 资源和 10 类事件，以及共享伤害对象、完全减伤、死亡、自定义事件、离树/销毁退订和再入树。无需保留旧事件脚本或注册旧单例。
+
+另外两个服务分别是 `DamageCalculator` 和 `GameplayCueManager`，详见 Vital 与 Cue 两节；可选 DebugDraw 是外部独立插件的调试辅助，不在这四个 GAS 自动加载服务中。
 
 ## Cue 表现系统
 
@@ -493,8 +508,8 @@ UI 对应 `.tscn` 负责控件层级和唯一节点名 `%Button`、`%Icon` 等�
 
 联合图用一个可配置的算例说明不同阶段：
 
-1. 目标基础防御 5，生命 100；持续增益的 apply_effects 放 GE_AttributeModifier(ADD +10 defense)。状态实例给修改器来源 ID，防御重算为 15；若修改的是 max_health，Vital 也会收到上限变化。
-2. 后续攻击者 phy_attack=30，普通伤害倍率和 stacks 均 1。行为树选中目标，GE_ApplyDamage 通过标签/过滤准入，DamageCalculator 读取当前属性得候选 15。
+1. 目标基础防御 5，生命 100；持续增益的 apply_effects 放 GE_AttributeModifier(ADD +10 phyDef)。状态实例给修改器来源 ID，防御重算为 15；若修改的是 hpMax，Vital 也会收到上限变化。
+2. 后续攻击者 atk=30，普通伤害倍率和 stacks 均 1。行为树选中目标，GE_ApplyDamage 通过标签/过滤准入，DamageCalculator 读取当前属性得候选 15。
 3. HealthVital 同步广播 damage_received。若配置了事件减伤状态，FeatureEventListener 执行 GE_ModifyIncomingDamage(0.5)，同一个 DamageInfo.final_damage 改为 7.5。此算例只按一个目标监听说明；当前全局事件未隔离实体，多个监听者场景需要额外作用域控制。
 4. HealthVital 回读数据扣血到 92.5、发送变化和伤害结算事件；Effect 写 context.final_damage 后播放 Cue，再执行子效果。没有事件减伤状态时本次直接扣 15。
 5. 持续增益到期，状态组件先移出实例，实例应用 remove_effects，再让原属性效果 remove 按 source_id 删除修改器，防御恢复 5；清理 Feature、标签和自己的 Cue。对下次攻击策略而言防御已经回到 5。
@@ -522,3 +537,7 @@ node addons/gameplay_abiltiy_system/docs/generate_diagrams.mjs
 ```
 
 这些图是按源码整理的手工布局；代码结构改变后，应同时更新生成器中的类框、连线和本文说明。目录原有 `.drawio` / `.png` 保留供历史参考，当前分析以本页 SVG 为准。
+
+## 阶段一外部战斗时钟接入
+
+[Battle Foundation](../battle_foundation/README.md) 在物理更新中统一驱动技能、状态和 Vital。三个组件新增 externally_driven / advance_simulation 接口，默认关闭外部驱动以保留独立示例。该插件同时提供配置与实例隔离、原素材帧 Feature、Core 战斗上下文、随机入口和目标事件过滤；完整规则与验收见对应 README。

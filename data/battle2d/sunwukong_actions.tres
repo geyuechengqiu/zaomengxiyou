@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="BattleActionProfile2D" format=3]
+[ext_resource type="Script" path="res://addons/battle_foundation/definitions/battle_action_profile_2d.gd" id="script"]
+[ext_resource type="Resource" path="res://data/battle2d/sunwukong_combo.tres" id="combo"]
+
+[resource]
+script = ExtResource("script")
+attack_skill_id = &"sunwukong_attack1"
+source_fps = 30.0
+attack_lock_frames = 10
+hurt_lock_frames = 8
+attack_rect = Rect2(0, -200, 130, 300)
+source_unit_scale = 2.0
+gravity = 1500.0
+jump_velocity = -620.0
+maximum_fall_speed = 900.0
+combo = ExtResource("combo")

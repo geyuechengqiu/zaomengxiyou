@@ -1,6 +1,6 @@
 # 全部源码与资源索引
 
-由 [generate_source_index.mjs](generate_source_index.mjs) 从当前文件生成。本文列出全部 135 个 GDScript 文件（含编辑器入口、示例和 UI），不是仅按关键词挑选核心类。实现行为与限制见 [插件 README](../README.md)；本索引只提取声明，不推断逻辑。
+由 [generate_source_index.mjs](generate_source_index.mjs) 从当前文件生成。本文列出全部 134 个 GDScript 文件（含编辑器入口、示例和 UI），不是仅按关键词挑选核心类。实现行为与限制见 [插件 README](../README.md)；本索引只提取声明，不推断逻辑。
 
 公开方法指名称不以下划线开头的方法；导出字段包含多行 export 注解的声明，运行时内部字段需进入源码查看。无 class_name 的脚本以文件名标识；Autoload 名称由 plugin.gd 注册。
 
@@ -73,7 +73,7 @@
 | 文件 / 类型 | 基类 | 导出配置 | 公开方法 | 信号 |
 | --- | --- | --- | --- | --- |
 | [GameplayAbilityDefinition](../scripts/abilities/gameplay_ability_definition.gd) | `Resource` | `ability_id`<br>`ability_name`<br>`description`<br>`icon`<br>`disabled`<br>`tags`<br>`preview_strategy`<br>`smart_cast`<br>`features`<br>`execution_tree`<br>`blackboard_defaults` | `create_instance()` | — |
-| [GameplayAbilityInstance](../scripts/abilities/gameplay_ability_instance.gd) | `RefCounted` | — | `get_definition()`<br>`try_activate()`<br>`update()`<br>`end_ability()`<br>`can_activate()`<br>`add_feature()`<br>`remove_feature()`<br>`get_feature()`<br>`has_feature()`<br>`handle_learned()`<br>`handle_forgotten()`<br>`get_bt_instance()`<br>`get_blackboard()`<br>`set_blackboard_var()`<br>`get_blackboard_var()`<br>`clear_blackboard()`<br>`has_targeting()`<br>`should_smart_cast()`<br>`start_targeting()`<br>`update_targeting()`<br>`confirm_targeting()`<br>`cancel_targeting()`<br>`get_current_icon()` | `ability_completed`<br>`ability_data_changed` |
+| [GameplayAbilityInstance](../scripts/abilities/gameplay_ability_instance.gd) | `RefCounted` | — | `get_definition()`<br>`get_owner_entity()`<br>`try_activate()`<br>`update()`<br>`end_ability()`<br>`can_activate()`<br>`add_feature()`<br>`remove_feature()`<br>`get_feature()`<br>`has_feature()`<br>`handle_learned()`<br>`handle_forgotten()`<br>`get_bt_instance()`<br>`get_blackboard()`<br>`set_blackboard_var()`<br>`get_blackboard_var()`<br>`clear_blackboard()`<br>`has_targeting()`<br>`should_smart_cast()`<br>`start_targeting()`<br>`update_targeting()`<br>`confirm_targeting()`<br>`cancel_targeting()`<br>`get_current_icon()` | `ability_completed`<br>`ability_data_changed` |
 
 ## scripts/abilities/targeting
 
@@ -164,10 +164,10 @@
 
 | 文件 / 类型 | 基类 | 导出配置 | 公开方法 | 信号 |
 | --- | --- | --- | --- | --- |
-| [GameplayAbilityComponent](../scripts/components/gameplay_ability_component.gd) | `Node` | `_initial_abilities` | `initialize()`<br>`match_input()`<br>`learn_ability()`<br>`forget_ability()`<br>`disable_ability()`<br>`enable_ability()`<br>`get_ability_instance()`<br>`get_all_ability_instances()`<br>`can_activate_ability()`<br>`try_activate_ability()`<br>`cancel_ability()`<br>`get_current_casting_ability()`<br>`get_all_ability_ids()`<br>`has_ability()`<br>`request_ability_preview()`<br>`cancel_ability_preview()`<br>`has_targeting_ability()`<br>`get_current_targeting_ability()` | `ability_learned`<br>`ability_forgotten`<br>`ability_activated`<br>`ability_completed` |
+| [GameplayAbilityComponent](../scripts/components/gameplay_ability_component.gd) | `Node` | `_initial_abilities`<br>`externally_driven` | `advance_simulation()`<br>`initialize()`<br>`match_input()`<br>`learn_ability()`<br>`forget_ability()`<br>`disable_ability()`<br>`enable_ability()`<br>`get_ability_instance()`<br>`get_all_ability_instances()`<br>`can_activate_ability()`<br>`try_activate_ability()`<br>`cancel_ability()`<br>`get_current_casting_ability()`<br>`get_all_ability_ids()`<br>`has_ability()`<br>`request_ability_preview()`<br>`cancel_ability_preview()`<br>`has_targeting_ability()`<br>`get_current_targeting_ability()` | `ability_learned`<br>`ability_forgotten`<br>`ability_activated`<br>`ability_completed` |
 | [GameplayAttributeComponent](../scripts/components/gameplay_attribute_component.gd) | `Node` | `_active_sets` | `initialize()`<br>`get_value()`<br>`get_attribute()`<br>`set_base_value()`<br>`has_attribute()`<br>`add_modifier()`<br>`remove_modifier()`<br>`remove_modifiers_by_source()`<br>`get_level()`<br>`set_level()` | `attribute_value_changed`<br>`level_changed` |
-| [GameplayStatusComponent](../scripts/components/gameplay_status_component.gd) | `Node` | — | `apply_status()`<br>`remove_status()`<br>`remove_statuses_by_tags()`<br>`get_active_statuses()`<br>`get_status()`<br>`has_status()`<br>`get_random_status()`<br>`handle_event()` | `status_applied`<br>`status_removed`<br>`status_stacked` |
-| [GameplayVitalAttributeComponent](../scripts/components/gameplay_vital_attribute_component.gd) | `GameplayAttributeComponent` | `_vitals` | `initialize()`<br>`has_vital()`<br>`get_vital()`<br>`get_vital_value()`<br>`has_sufficient_vital()`<br>`get_vital_percent()`<br>`modify_vital()` | `vital_value_changed`<br>`vital_depleted` |
+| [GameplayStatusComponent](../scripts/components/gameplay_status_component.gd) | `Node` | `externally_driven`<br>`filter_events_by_owner` | `advance_simulation()`<br>`apply_status()`<br>`remove_status()`<br>`remove_statuses_by_tags()`<br>`get_active_statuses()`<br>`get_status()`<br>`has_status()`<br>`get_random_status()`<br>`handle_event()` | `status_applied`<br>`status_removed`<br>`status_stacked` |
+| [GameplayVitalAttributeComponent](../scripts/components/gameplay_vital_attribute_component.gd) | `GameplayAttributeComponent` | `_vitals`<br>`externally_driven` | `advance_simulation()`<br>`initialize()`<br>`has_vital()`<br>`get_vital()`<br>`get_vital_value()`<br>`has_sufficient_vital()`<br>`get_vital_percent()`<br>`modify_vital()` | `vital_value_changed`<br>`vital_depleted` |
 
 ## scripts/cues
 
@@ -232,7 +232,6 @@
 
 | 文件 / 类型 | 基类 | 导出配置 | 公开方法 | 信号 |
 | --- | --- | --- | --- | --- |
-| [ability_event_bus.gd](../scripts/singletons/ability_event_bus.gd) | `Node` | — | `trigger_game_event()` | `game_event_occurred` |
 | [damage_calculator.gd](../scripts/singletons/damage_calculator.gd) | `Node` | — | `set_strategy()`<br>`calculate_final_damage()` | — |
 | [gameplay_ability_system.gd](../scripts/singletons/gameplay_ability_system.gd) | `Node` | `smart_cast` | `get_component_by_interface()` | — |
 | [gameplay_cue_manager.gd](../scripts/singletons/gameplay_cue_manager.gd) | `Node` | — | `execute_cue()`<br>`stop_cue()` | — |

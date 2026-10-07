@@ -75,15 +75,19 @@ EventProcessor 声明 `_filters` 和 KeyFilter/ActionFilter，但 `process_event
 
 ## 操作意图系统
 
-这是与原 InputManager 并列的通道，不会自动接管 InputMap 或角色逻辑。
+这是与原 InputManager 并列的语义通道，现由 [BattlePlayerOperations](../../battle_foundation/input/battle_player_operations.gd) 接入真实平台角色。完整 API、键位、控制权、原版对应及验收见 [操作文档](../../battle_foundation/input/README.md)。
 
-[CoreOperationProfile](../source/operation_system/operation_profile.gd) 是共享映射 Resource：`bindings` 把语义意图映射到 InputMap 动作数组，`axes` 把轴映射到正负意图。[CoreOperationIntent](../source/operation_system/operation_intent.gd) 继承 InputEventAction，增加 origin 与 payload；`action` 是意图 ID，`is_intent_pressed()` 要求 just_pressed，避免模拟强度改变被识别为再次按下。
+[CoreOperationProfile](../source/operation_system/operation_profile.gd) 保存意图/InputMap/轴与输入窗口的共享定义；[CoreOperationIntent](../source/operation_system/operation_intent.gd) 含 PRESSED、HELD、RELEASED、CHANGED、序列、输入时间、持有时长和负载。强度变化和 OS echo 不冒充按下；长按阈值只通知一次。
 
-[CoreOperationController](../source/operation_system/operation_controller.gd) 是每个角色独立的 Node。在 `_unhandled_input()` 接受新输入，留给 UI 先处理；`_input()` 只清理释放，避免 UI 吞掉松键而持续移动。它过滤设备和 echo，再按键/鼠标/手柄来源 token 保存强度；同一意图按所有来源的最大强度聚合，松开一个来源不会清除其他来源。轴计算是“正意图强度 − 负意图强度”，夹在 [-1, 1]。
+[CoreOperationController](../source/operation_system/operation_controller.gd) 在 _unhandled_input 接收新操作，_input 只记录来源/清理释放。多物理键、设备和虚拟来源按最大强度聚合；相反方向可后按优先，摇杆正负精确匹配。同方向双击在配置窗口内识别，第二次持有期间查询奔跑方向。
 
-`submit_intent()` 允许触屏/AI/网络直接提交意图，不要求 InputMap 中存在同名动作；同一 origin 的值覆盖该来源。`pulse_intent()` 发一次按下再松开。`clear_native_sources()` 只移除原生来源；`reset()` 全部清零并发释放；失焦、暂停通知及退出树时会 reset。直接重新赋值 profile 不等同于 `set_profile()`，后者先 reset。
+新增 [CoreOperationBuffer](../source/operation_system/operation_buffer.gd) 缓存按下快照，按 sequence 消费、按输入时间过期、有界 FIFO；角色通过许可后消费，RETRY 保留直至过期。输入时间不受战斗慢动作或停顿缩放，暂停撤回控制并清队列。
 
-[CoreOperationManager](../source/operation_system/operation_manager.gd) 用 WeakRef 注册控制器，通过 tree_exited 注销。`create_controller()` 不执行 add_child，调用者必须把节点挂在角色子树，使暂停/禁用与角色保持一致。它没有全局输入转发，也不会自动向状态机或技能组件发送事件。
+[CoreOperationBindings](../source/operation_system/operation_bindings.gd) 安装默认 InputMap、恢复用户配置，捕获并校验冲突/保留键，保存物理键/鼠标/手柄描述。重映射实际修改 InputMap，保存失败保持原映射；共享 Profile 不改写。绑定服务 Always 运行，菜单暂停时仍可使用。
+
+控制权是独立原因集合：菜单、失焦、暂停、改键、控制者切换、死亡等。reset 清強度/缓存/双击并发 cancelled 释放；恢复后持有键先松开。submit_intent/pulse_intent 也经过控制权门。clear_native_sources 只移除原生来源，set_profile 先 reset。
+
+[CoreOperationManager](../source/operation_system/operation_manager.gd) 通过 WeakRef 和 tree_exited 管理注册表，持有绑定服务，改键清理受影响控制器。create_controller 不执行 add_child，角色负责挂树；externally_driven 由 BattleSession 推进，禁止双驱动。角色适配器负责公共行为与专属钩子，不自动向 GAS 或状态机转发。
 
 ## 逻辑状态机
 
@@ -230,17 +234,17 @@ AsyncIOStrategy 直接 await 全局 io_completed，一旦先完成其他任务�
 
 ![CoreSystem 与技能插件的接入边界](core-gas-integration.svg)
 
-当前代码已经让两套插件在同一项目启动；没有写入输入、事件、标签、存档或时间的自动桥接。下面是依据接口可以实现的接入设计，图中的虚线表示调用者需要编写的适配器，实线表示已经存在的内部调用。
+当前 GAS 总线事件已直接迁移到 `CoreSystem.event_bus`，没有第二条事件总线或转发适配器。输入、标签、存档和时间尚无自动联动。图中的虚线表示仍需调用者编写的适配器，实线包含已接入的事件路径与 GAS 内部调用。
 
 1. 角色把 CoreOperationController 挂为子节点，绑定 intent_emitted；移动意图查询轴，技能意图找到 GAS 的 GameplayAbilityComponent，再调用 try_activate_ability。状态机选择是否发起调用，GAS 自己管理技能 Feature、行为树和消耗。
-2. 技能行为树选目标、应用 Effect、生成投射物或魔法场。Effect 进入 GAS 属性/Vital/Status/Cue，仍使用 GAS 的 TagManager 和 AbilityEventBus，CoreSystem 不替代这些对象。
-3. 若要让 Core GameplayTrigger 响应受伤，适配器监听 AbilityEventBus 的实际信号/广播，按 CoreEventBus 的 `[Dictionary]` 参数约定转发，并在 context 写入 actor、target、damage 等显式作用域；退出时退订。两条总线互相转发时需避免同名事件回环。
+2. 技能行为树选目标、应用 Effect、生成投射物或魔法场。Effect 进入 GAS 属性/Vital/Status/Cue，继续使用 GAS 的 TagManager；技能、状态、伤害和技能栏共 10 类总线事件则直接调用 `CoreSystem.event_bus.push_event(name, [context], true)`。
+3. GAS 状态组件入树时连接 Core 的 `event_pushed`，只接收单 Dictionary 负载，离树退订并支持再入树。它先于 Core 按名订阅的优先级回调处理，两个同步阶段都在 HealthVital 扣血之前完成。Core GameplayTrigger 可直接订阅 damage_received / damage_applied 等事件；同一字典和 DamageInfo 保留引用。伤害负载新增 entity 目标字段；Battle Foundation 宿主通过 GAS 的可选过滤接口实现本实体/本场作用域，普通 GAS 默认仍广播。
 4. 存档节点 save() 输出基本数据，例如等级、当前生命、技能 ID、可重建的状态 ID/剩余时间；load_data() 在 GAS 组件初始化之后重建。两个插件没有现成的 GAS 存档协议，不应直接保存缓存组件、BT 运行节点或全部共享 Resource 图。
 5. 场景/实体创建协议负责初始化 GAS 组件，卸载时清理状态、Cue 和订阅。标签要选定角色层的同步协议：Core 的路径树和 GAS 的带来源引用计数标签不能直接互换。
 
 | 看起来相同的功能 | CoreSystem | GAS | 接入时的含义 |
 | --- | --- | --- | --- |
-| 事件 | CoreEventBus，Array 参数、优先级/过滤/延迟 | AbilityEventBus，技能/伤害事件 | 单独存储；显式转换负载和实体作用域 |
+| 事件 | CoreEventBus，Array 参数、优先级/过滤/延迟 | 全部总线事件直接使用 Core；状态连接 event_pushed | 已共享一条总线；保持 `[Dictionary]` 与同步语义，仍需实体过滤 |
 | 标签 | CoreGameplayTag 树与 Resource 容器 | GameplayTag 定义与 TagManager 引用计数 | 同一路径字符串不代表同一个运行时状态 |
 | 状态 | BaseStateMachine 当前逻辑状态 | GameplayStatusInstance 多个持续效果 | 可以“状态机触发技能，技能附加 Status” |
 | 时间 | TimeManager 自己的 delta 缩放与计时器 | 冷却/Status/行为树各自更新 | 当前没有全局联动暂停和缩放 |

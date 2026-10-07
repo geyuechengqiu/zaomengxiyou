@@ -6,9 +6,9 @@ static func attribute_sets() -> Array[GameplayAttributeSet]:
 	var attributes := GameplayAttributeSet.new()
 	var values := {
 		&"strength": 10.0, &"agility": 8.0, &"intelligence": 12.0,
-		&"vitality": 10.0, &"max_health": 100.0, &"max_mana": 80.0,
-		&"phy_attack": 20.0, &"defense": 5.0, &"crit_rate": 0.0,
-		&"health_regen": 0.0, &"mana_regen": 5.0,
+		&"vitality": 10.0, &"hpMax": 100.0, &"mpMax": 80.0,
+		&"atk": 20.0, &"phyDef": 5.0, &"critical": 0.0,
+		&"reHP": 0.0, &"reMP": 5.0,
 	}
 	for id in values:
 		var attribute := GameplayAttribute.new()
@@ -20,7 +20,7 @@ static func attribute_sets() -> Array[GameplayAttributeSet]:
 
 static func vitals() -> Array[GameplayVital]:
 	var mana := ManaVital.new()
-	mana.regen_rate_attribute = &"mana_regen"
+	mana.regen_rate_attribute = &"reMP"
 	return [HealthVital.new(), mana]
 
 static func register_tags() -> void:

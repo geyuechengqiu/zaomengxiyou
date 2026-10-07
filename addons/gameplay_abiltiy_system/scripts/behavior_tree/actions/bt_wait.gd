@@ -12,12 +12,13 @@ class_name BTWait
 func _enter(instance: BTInstance):
 	# 获取实际的等待时间（优先从黑板读取）
 	var actual_duration = _get_actual_duration(instance)
-	var end_time = Time.get_ticks_msec() / 1000.0 + actual_duration
-	_set_storage(instance, end_time)
+	_set_storage(instance, maxf(0.0, actual_duration))
 
 func _tick(instance: BTInstance, delta: float) -> int:
-	var current_time = Time.get_ticks_msec() / 1000.0
-	if current_time >= _get_storage(instance):
+	var remaining: float = _get_storage(instance, 0.0)
+	remaining = maxf(0.0, remaining - delta)
+	_set_storage(instance, remaining)
+	if remaining <= 0.0:
 		return Status.SUCCESS
 	return Status.RUNNING
 

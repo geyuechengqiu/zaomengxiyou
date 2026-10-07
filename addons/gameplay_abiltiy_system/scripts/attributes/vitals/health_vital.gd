@@ -20,8 +20,8 @@ func _init(p_comp: GameplayAttributeComponent = null) -> void:
 	# 设置 HealthVital 的默认值（在调用 super 之前设置）
 	vital_id = &"health"
 	display_name = "生命值"
-	max_value_attribute = &"max_health"  # 依赖 "health" 属性作为上限
-	#regen_rate_attribute = &"health_regen"  # 可选：自动回复
+	max_value_attribute = &"hpMax"  # 依赖原版最大生命属性作为上限
+	#regen_rate_attribute = &"reHP"  # 可选：自动回复
 #endregion
 #region 信号
 
@@ -50,9 +50,10 @@ func apply_damage(damage_info: DamageInfo, owner_entity: Node) -> float:
 	if not is_alive: return 0.0
 	# 发出伤害接收信号（在计算减免之前）
 	damage_received.emit(damage_info)
-	AbilityEventBus.trigger_game_event(&"damage_received", {
+	CoreSystem.event_bus.push_event("damage_received", [{
+		"entity": owner_entity,
 		"damage_info": damage_info
-	})
+	}], true)
 	
 	# 在应用伤害前被BUFF修改为0或更少
 	var final_damage = damage_info.final_damage
@@ -64,9 +65,10 @@ func apply_damage(damage_info: DamageInfo, owner_entity: Node) -> float:
 	
 	# UI系统可以监听这个信号来显示伤害飘字
 	damage_applied.emit(damage_info, final_damage)
-	AbilityEventBus.trigger_game_event(&"damage_applied", {
+	CoreSystem.event_bus.push_event("damage_applied", [{
+		"entity": owner_entity,
 		"damage_info": damage_info
-	})
+	}], true)
 
 	# 处理死亡
 	if not is_alive:

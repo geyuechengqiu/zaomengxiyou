@@ -12,9 +12,7 @@ var _blackboard: BTBlackboard = null
 
 # 【核心状态】技能是否正在执行（行为树是否在跑）
 var is_active: bool = false
-var disabled : bool = false:
-	get:
-		return _definition.disabled
+var disabled: bool = false
 
 var _indicator_instance: Node3D = null
 var _is_targeting: bool = false
@@ -31,6 +29,7 @@ signal ability_data_changed(ability: GameplayAbilityInstance)
 func _init(owner: Node, definition: GameplayAbilityDefinition) -> void:
 	_owner = owner
 	_definition = definition
+	disabled = definition.disabled
 	# 初始化行为树黑板
 	_blackboard = BTBlackboard.new()
 	_blackboard.value_changed.connect(_on_blackboard_value_changed)
@@ -44,6 +43,9 @@ func _init(owner: Node, definition: GameplayAbilityDefinition) -> void:
 
 func get_definition() -> GameplayAbilityDefinition:
 	return _definition
+
+func get_owner_entity() -> Node:
+	return _owner
 
 ## 尝试激活技能 (由 Player/Component 调用)
 func try_activate(context: Dictionary = {}) -> bool:

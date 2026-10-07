@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="GameplayAttribute" format=3]
+
+[ext_resource type="Script" path="res://addons/gameplay_abiltiy_system/scripts/attributes/gameplay_attribute.gd" id="1_qdrle"]
+
+[resource]
+script = ExtResource("1_qdrle")
+attribute_id = &"jumpSpeed1"
+attribute_display_name = "一段跳速度"
+attribute_description = "原版一段跳的竖直速度，保留向上为负的值；宿主负责坐标轴转换。"
+metadata/source_field = "jumpSpeed1"
+metadata/category = "movement"
+metadata/unit = "原版有符号速度"

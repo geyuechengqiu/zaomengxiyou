@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="ManaVital" format=3]
+
+[ext_resource type="Script" path="res://addons/gameplay_abiltiy_system/scripts/attributes/vitals/mana_vital.gd" id="1_hl8om"]
+
+[resource]
+script = ExtResource("1_hl8om")
+vital_id = &"mana"
+display_name = "魔法值"
+max_value_attribute = &"mpMax"
+regen_rate_attribute = &"reMP"

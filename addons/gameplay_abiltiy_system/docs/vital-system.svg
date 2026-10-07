@@ -45,7 +45,7 @@
 <path d="M660 590H1120Q1130 590 1130 600V666H650V600Q650 590 660 590Z" fill="#e9f8f2"/>
 <text x="670" y="615" class="type" text-anchor="start">«Resource : GameplayVital»</text><text x="670" y="648" class="name" text-anchor="start">HealthVital</text>
 <path d="M650 666H1130" stroke="#c4cdd9"/>
-<text x="670" y="697" class="body" text-anchor="start">health / max_health / is_alive: bool</text><text x="670" y="724" class="body" text-anchor="start">damage_received / damage_applied</text>
+<text x="670" y="697" class="body" text-anchor="start">health / hpMax / is_alive: bool</text><text x="670" y="724" class="body" text-anchor="start">damage_received / damage_applied</text>
 <path d="M650 737H1130" stroke="#e0e5ee"/>
 <text x="670" y="764" class="body" text-anchor="start">apply_damage(info, owner) / heal()</text><text x="670" y="791" class="body" text-anchor="start">health_depleted(instigator)</text></g></a><a href="../scripts/damage/damage_logic_strategy.gd"><title>damage/damage_logic_strategy.gd</title><g><rect x="1250" y="590" width="480" height="250" rx="10" fill="white" stroke="#8191a8" stroke-width="1.5"/>
 <path d="M1260 590H1720Q1730 590 1730 600V666H1250V600Q1250 590 1260 590Z" fill="#eaf3ff"/>
@@ -57,7 +57,7 @@
 <path d="M60 970H520Q530 970 530 980V1046H50V980Q50 970 60 970Z" fill="#e9f8f2"/>
 <text x="70" y="995" class="type" text-anchor="start">«Resource : GameplayVital»</text><text x="70" y="1028" class="name" text-anchor="start">ManaVital</text>
 <path d="M50 1046H530" stroke="#c4cdd9"/>
-<text x="70" y="1077" class="body" text-anchor="start">mana / max_mana</text>
+<text x="70" y="1077" class="body" text-anchor="start">mana / mpMax</text>
 <path d="M50 1090H530" stroke="#e0e5ee"/>
 <text x="70" y="1117" class="body" text-anchor="start">try_spend_mana(amount)</text></g></a><a href="../scripts/damage/damage_info.gd"><title>damage/damage_info.gd</title><g><rect x="650" y="970" width="480" height="250" rx="10" fill="white" stroke="#8191a8" stroke-width="1.5"/>
 <path d="M660 970H1120Q1130 970 1130 980V1046H650V980Q650 970 660 970Z" fill="#e9f8f2"/>
@@ -69,8 +69,8 @@
 <path d="M1260 970H1720Q1730 970 1730 980V1046H1250V980Q1250 970 1260 970Z" fill="#eaf3ff"/>
 <text x="1270" y="995" class="type" text-anchor="start">«Resource : DamageLogicStrategy»</text><text x="1270" y="1028" class="name" text-anchor="start">SimpleDamageLogic</text>
 <path d="M1250 1046H1730" stroke="#c4cdd9"/>
-<text x="1270" y="1077" class="body" text-anchor="start">phy_attack / defense 属性键</text>
+<text x="1270" y="1077" class="body" text-anchor="start">atk / phyDef 属性键</text>
 <path d="M1250 1090H1730" stroke="#e0e5ee"/>
-<text x="1270" y="1117" class="body" text-anchor="start">calculate(): max(1, attack-defense)</text><text x="1270" y="1144" class="body" text-anchor="start">读取伤害倍率上下文</text></g></a><rect x="50" y="1330" width="1680" height="172" rx="12" fill="#f1edff" stroke="#8191a8" stroke-width="1.5"/>
+<text x="1270" y="1117" class="body" text-anchor="start">calculate(): max(1, attack-phyDef)</text><text x="1270" y="1144" class="body" text-anchor="start">读取伤害倍率上下文</text></g></a><rect x="50" y="1330" width="1680" height="172" rx="12" fill="#f1edff" stroke="#8191a8" stroke-width="1.5"/>
 <text x="72" y="1366" class="step" text-anchor="start">实现要点</text><text x="72" y="1400" class="note" text-anchor="start">先创建属性，再复制 Vital；初始 current = max。上限增加不补满，上限减少会截断当前值。</text><text x="72" y="1429" class="note" text-anchor="start">Health 的事件伤害链与直接扣值不同；普通治疗不能复活。组件对资源不足的负数修改整体拒绝。</text><text x="72" y="1458" class="note" text-anchor="start">恢复速率需显式配置属性键；Mana、Health 模板中的默认恢复键均未开启。</text>
 </svg>

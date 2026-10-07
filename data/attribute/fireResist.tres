@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="GameplayAttribute" format=3]
+
+[ext_resource type="Script" path="res://addons/gameplay_abiltiy_system/scripts/attributes/gameplay_attribute.gd" id="1_x51hn"]
+
+[resource]
+script = ExtResource("1_x51hn")
+attribute_id = &"fireResist"
+attribute_display_name = "火抗"
+attribute_description = "火系抗性。原始配置存在 -20 等弱点值，不能限制为非负数。"
+metadata/source_field = "fireResist"
+metadata/category = "resistance"
+metadata/unit = "抗性值"

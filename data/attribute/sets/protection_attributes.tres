@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="GameplayAttributeSet" format=3]
+
+[ext_resource type="Script" path="res://addons/gameplay_abiltiy_system/scripts/attributes/gameplay_attribute.gd" id="1_ys5uk"]
+[ext_resource type="Resource" path="res://data/attribute/enduranceMax.tres" id="2_rdi4n"]
+[ext_resource type="Resource" path="res://data/attribute/reEndurance.tres" id="3_j6hw3"]
+[ext_resource type="Resource" path="res://data/attribute/reduceEndurance.tres" id="4_1183r"]
+[ext_resource type="Resource" path="res://data/attribute/protectPoint.tres" id="5_07xas"]
+[ext_resource type="Script" path="res://addons/gameplay_abiltiy_system/scripts/utilties/scalable_value.gd" id="6_36vnv"]
+[ext_resource type="Script" path="res://addons/gameplay_abiltiy_system/scripts/attributes/gameplay_attribute_set.gd" id="7_5pjyt"]
+
+[resource]
+script = ExtResource("7_5pjyt")
+attributes = Dictionary[ExtResource("1_ys5uk"), float]({
+ExtResource("2_rdi4n"): 0.0,
+ExtResource("3_j6hw3"): 0.0,
+ExtResource("4_1183r"): 0.0,
+ExtResource("5_07xas"): -1.0
+})

@@ -1,0 +1,50 @@
+[gd_resource type="Resource" script_class="GameplayAbilityDefinition" format=3]
+[ext_resource type="Script" path="res://addons/gameplay_abiltiy_system/scripts/abilities/gameplay_ability_definition.gd" id="definition"]
+[ext_resource type="Script" path="res://addons/gameplay_abiltiy_system/scripts/abilities/features/gameplay_ability_feature.gd" id="feature_type"]
+[ext_resource type="Script" path="res://addons/gameplay_abiltiy_system/scripts/abilities/features/cooldown_feature.gd" id="cooldown"]
+[ext_resource type="Script" path="res://addons/battle_foundation/gas/battle_frame_timeline_feature.gd" id="timeline"]
+[ext_resource type="Script" path="res://addons/battle_foundation/definitions/battle_frame_event.gd" id="event"]
+[ext_resource type="Script" path="res://addons/gameplay_abiltiy_system/scripts/behavior_tree/bt_node.gd" id="bt_type"]
+[ext_resource type="Script" path="res://addons/gameplay_abiltiy_system/scripts/behavior_tree/composites/bt_sequence.gd" id="sequence"]
+[ext_resource type="Script" path="res://addons/gameplay_abiltiy_system/scripts/abilities/ability_nodes/ability_node_commit_cooldown.gd" id="commit"]
+[ext_resource type="Script" path="res://addons/gameplay_abiltiy_system/scripts/behavior_tree/actions/bt_wait.gd" id="wait"]
+
+[sub_resource type="Resource" id="Cooldown"]
+script = ExtResource("cooldown")
+cooldown_duration = 2.0
+
+[sub_resource type="Resource" id="Frame12"]
+script = ExtResource("event")
+source_frame = 12
+event_id = &"battle.skill.marker"
+payload = {"marker": "impact"}
+
+[sub_resource type="Resource" id="Frame18"]
+script = ExtResource("event")
+source_frame = 18
+event_id = &"battle.skill.marker"
+payload = {"marker": "recovery"}
+
+[sub_resource type="Resource" id="Timeline"]
+script = ExtResource("timeline")
+source_fps = 30.0
+duration_frames = 30
+events = Array[ExtResource("event")]([SubResource("Frame12"), SubResource("Frame18")])
+
+[sub_resource type="Resource" id="Commit"]
+script = ExtResource("commit")
+
+[sub_resource type="Resource" id="Wait"]
+script = ExtResource("wait")
+duration = 1.0
+
+[sub_resource type="Resource" id="Execution"]
+script = ExtResource("sequence")
+children = Array[ExtResource("bt_type")]([SubResource("Commit"), SubResource("Wait")])
+
+[resource]
+script = ExtResource("definition")
+ability_id = &"sample_attack"
+ability_name = "30 fps 素材时序示例"
+features = Array[ExtResource("feature_type")]([SubResource("Cooldown"), SubResource("Timeline")])
+execution_tree = SubResource("Execution")

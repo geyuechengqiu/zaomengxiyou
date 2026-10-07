@@ -1,0 +1,34 @@
+[gd_resource type="Resource" script_class="GameplayAttributeSet" format=3]
+
+[ext_resource type="Script" path="res://addons/gameplay_abiltiy_system/scripts/attributes/gameplay_attribute.gd" id="1_0osjr"]
+[ext_resource type="Resource" path="res://data/attribute/atk.tres" id="2_2n3jc"]
+[ext_resource type="Resource" path="res://data/attribute/phyDef.tres" id="3_dwyi1"]
+[ext_resource type="Resource" path="res://data/attribute/hpMax.tres" id="4_hdpq2"]
+[ext_resource type="Resource" path="res://data/attribute/mpMax.tres" id="5_i70ha"]
+[ext_resource type="Resource" path="res://data/attribute/reHP.tres" id="6_ftlbh"]
+[ext_resource type="Resource" path="res://data/attribute/reMP.tres" id="7_okqay"]
+[ext_resource type="Resource" path="res://data/attribute/hit.tres" id="8_2odoj"]
+[ext_resource type="Resource" path="res://data/attribute/dodge.tres" id="9_ghyjd"]
+[ext_resource type="Resource" path="res://data/attribute/critical.tres" id="10_ouyfg"]
+[ext_resource type="Resource" path="res://data/attribute/toughness.tres" id="11_rstp4"]
+[ext_resource type="Resource" path="res://data/attribute/lucky.tres" id="12_ih1jc"]
+[ext_resource type="Resource" path="res://data/attribute/guardian.tres" id="13_8jr3y"]
+[ext_resource type="Script" path="res://addons/gameplay_abiltiy_system/scripts/utilties/scalable_value.gd" id="14_qhlrh"]
+[ext_resource type="Script" path="res://addons/gameplay_abiltiy_system/scripts/attributes/gameplay_attribute_set.gd" id="15_g8ejk"]
+
+[resource]
+script = ExtResource("15_g8ejk")
+attributes = Dictionary[ExtResource("1_0osjr"), float]({
+ExtResource("2_2n3jc"): 0.0,
+ExtResource("3_dwyi1"): 0.0,
+ExtResource("4_hdpq2"): 1.0,
+ExtResource("5_i70ha"): 0.0,
+ExtResource("6_ftlbh"): 0.0,
+ExtResource("7_okqay"): 0.0,
+ExtResource("8_2odoj"): 0.0,
+ExtResource("9_ghyjd"): 0.0,
+ExtResource("10_ouyfg"): 0.0,
+ExtResource("11_rstp4"): 0.0,
+ExtResource("12_ih1jc"): 0.0,
+ExtResource("13_8jr3y"): 0.0
+})

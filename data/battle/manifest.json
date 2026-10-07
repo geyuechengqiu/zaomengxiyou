@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "definitions": {
+    "characters": {
+      "sample_hero": "res://data/battle/characters/sample_hero.tres"
+    },
+    "skills": {
+      "sample_attack": "res://data/battle/skills/sample_attack.tres"
+    },
+    "monsters": {
+      "sample_monster": "res://data/battle/monsters/sample_monster.tres"
+    },
+    "equipment": {
+      "sample_sword": "res://data/battle/equipment/sample_sword.tres"
+    },
+    "levels": {
+      "sample_arena": "res://data/battle/levels/sample_arena.tres"
+    },
+    "statuses": {
+      "sample_guard": "res://data/battle/statuses/sample_guard.tres"
+    }
+  }
+}

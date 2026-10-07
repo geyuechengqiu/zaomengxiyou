@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="GameplayAttribute" format=3]
+
+[ext_resource type="Script" path="res://addons/gameplay_abiltiy_system/scripts/attributes/gameplay_attribute.gd" id="1_2q63y"]
+
+[resource]
+script = ExtResource("1_2q63y")
+attribute_id = &"reduceEndurance"
+attribute_display_name = "耐久衰减"
+attribute_description = "原版每秒耐久衰减量，存储非负衰减量；由业务机制接入。"
+min_value = 0.0
+metadata/source_field = "reduceEndurance"
+metadata/category = "protection"
+metadata/unit = "点/秒"

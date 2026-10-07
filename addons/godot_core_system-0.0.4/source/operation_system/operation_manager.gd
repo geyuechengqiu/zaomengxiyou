@@ -6,16 +6,28 @@ class_name CoreOperationManager
 const Controller = preload("./operation_controller.gd")
 const Profile = preload("./operation_profile.gd")
 const Intent = preload("./operation_intent.gd")
+const Bindings = preload("./operation_bindings.gd")
 #endregion
 #region 配置与运行状态
 var _controllers: Dictionary = {}
+var bindings: Bindings
 #endregion
 
 
 #region 公共接口
+func _ready() -> void:
+	bindings = Bindings.new()
+	bindings.name = "OperationBindings"
+	bindings.mapping_changed.connect(_on_mapping_changed)
+	add_child(bindings)
+
+
 func create_controller(id: StringName, profile: Profile = null, device_filter: int = -1) -> Controller:
 	if id.is_empty() or get_controller(id) != null:
 		push_error("Operation controller %s already registered" % id)
+		return null
+	if bindings != null and not bindings.install_profile(profile):
+		push_error(bindings.last_error)
 		return null
 	var controller := Controller.new()
 	controller.name = "OperationController"
@@ -48,6 +60,17 @@ func get_controller(id: StringName) -> Controller:
 
 
 #region 内部实现
+func _on_mapping_changed(action: StringName) -> void:
+	for id in _controllers.keys():
+		var controller := get_controller(id)
+		if controller == null or controller.profile == null:
+			continue
+		for intent in controller.profile.bindings:
+			if controller.profile.get_actions(StringName(intent)).has(action):
+				controller.reset(&"binding_changed")
+				break
+
+
 func _unregister_controller(id: StringName, instance_id: int) -> void:
 	var controller := get_controller(id)
 	if controller != null and controller.get_instance_id() == instance_id:

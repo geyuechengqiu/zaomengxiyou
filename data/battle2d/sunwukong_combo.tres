@@ -1,0 +1,49 @@
+[gd_resource type="Resource" script_class="BattleComboDefinition" format=3]
+[ext_resource type="Script" path="res://addons/battle_foundation/definitions/battle_combo_definition.gd" id="script"]
+[ext_resource type="Script" path="res://addons/battle_foundation/definitions/battle_attack_step_2d.gd" id="step"]
+
+[sub_resource type="Resource" id="Step1"]
+script = ExtResource("step")
+ability_id = &"sunwukong_attack1"
+action = &"attack_1"
+duration_frames = 10
+source_fps = 30.0
+allow_jump_cancel = true
+
+[sub_resource type="Resource" id="Step2"]
+script = ExtResource("step")
+ability_id = &"sunwukong_attack2"
+action = &"attack_2"
+duration_frames = 10
+source_fps = 30.0
+allow_jump_cancel = true
+
+[sub_resource type="Resource" id="Step3"]
+script = ExtResource("step")
+ability_id = &"sunwukong_attack3"
+action = &"attack_3"
+duration_frames = 12
+source_fps = 30.0
+allow_jump_cancel = true
+
+[sub_resource type="Resource" id="Step4"]
+script = ExtResource("step")
+ability_id = &"sunwukong_attack4"
+action = &"attack_4"
+duration_frames = 18
+source_fps = 30.0
+allow_jump_cancel = true
+root_motion_speed = 300.0
+root_motion_frames = 16
+
+[sub_resource type="Resource" id="Step5"]
+script = ExtResource("step")
+ability_id = &"sunwukong_attack5"
+action = &"attack_5"
+duration_frames = 20
+source_fps = 30.0
+allow_jump_cancel = true
+
+[resource]
+script = ExtResource("script")
+steps = Array[ExtResource("step")]([SubResource("Step1"), SubResource("Step2"), SubResource("Step3"), SubResource("Step4"), SubResource("Step5")])

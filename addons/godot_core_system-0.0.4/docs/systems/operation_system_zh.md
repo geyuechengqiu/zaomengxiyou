@@ -1,133 +1,55 @@
-# 操作意图系统：可扩展的角色操作控制器
+# 操作意图系统
 
-本模块将 Godot 原生输入转换为游戏语义意图，是 `godot_core_system` 的可选模块，不依赖悟空、Spine 或特定角色状态机。上古天帝篇当前玩家操作作为接入示例。
+CoreSystem 的可选 operation_manager 模块将 Godot 输入变成角色操作名称。按下、持有、松开、强度变化、缓存、双击、改键和控制权均已实现；角色决定意图能否执行。模块不依赖 Spine、悟空或 GAS，业务接入使用 Battle Foundation。
 
-```text
-键盘 / 手柄 / 鼠标
-  → Godot InputMap 原生动作
-    → CoreOperationProfile 可配置映射
-      → CoreOperationController 独立意图通道
-        → intent_emitted → 状态机处理一次性意图
-        → get_axis / is_pressed → 状态查询持续意图
-AI / 触屏 / 网络代码
-  → submit_intent / pulse_intent → 同一意图通道
-```
+完整键表、角色扩展、原版来源、SVG 类图和验收见 [角色操作控制器文档](../../../battle_foundation/input/README.md)。当前入口是 [孙悟空平台](../../../../examples/wukong_platform_demo.tscn)，按 Esc 打开设置。
 
-插件只决定“用户想做什么”，状态决定“当前是否可以做、怎样做”。双击奔跑、二段跳次数、连击缓存、第四段翻转窗口、攻击位移和动画结束逻辑仍属于角色状态，不写入通用控制器。
+## 组成
 
-## 1. 模块入口与组成
-
-入口为 `CoreSystem.operation_manager`，作为现有 CoreSystem 插件的内部模块，不需要再启用一个独立 EditorPlugin。项目设置 `godot_core_system/module_enable/operation_manager` 在启动时控制模块是否启用，默认开启；禁用后该入口为 null，依赖此模块的玩家组件会报告初始化错误。
-
-| 类型 | 职责 |
+| 类型 | 实现职责 |
 | --- | --- |
-| `CoreOperationProfile` / `operation_profile.gd` | Resource，定义语义意图与原生动作/轴的映射，可保存成 `.tres` |
-| `CoreOperationController` / `operation_controller.gd` | Node，接收原生输入、聚合来源、维护强度、生成语义事件 |
-| `CoreOperationIntent` / `operation_intent.gd` | 一次意图事件，包含 ID、按下/松开、强度、设备、来源、负载 |
-| `CoreOperationManager` / `operation_manager.gd` | 创建/查询/注册控制器，弱引用注册，不接管其场景生命周期 |
+| CoreOperationProfile | Resource：bindings、axes、default_keys、reserved_keys、buffered_intents、窗口/容量；共享只读 |
+| CoreOperationManager | Node：WeakRef 注册、创建控制器、持有绑定服务、改键时 reset 受影响控制器 |
+| CoreOperationController | Node：来源强度、阶段、长按、双击、控制权原因集合和输入时钟 |
+| CoreOperationIntent | InputEventAction：phase、sequence、input_time、held_seconds、origin、device、payload 快照 |
+| CoreOperationBuffer | RefCounted：按下缓存、TTL/FIFO/容量、sequence 精确消费 |
+| CoreOperationBindings | Node：安装默认 InputMap、捕获/校验绑定、冲突检测、用户配置保存和恢复 |
 
-现有 `CoreSystem.input_manager` 保持不变。它仍提供重映射、输入缓冲、记录器等底层功能；操作模块不订阅其 `_input` 阶段的动作信号，避免 UI 消费前触发角色动作，也不自动复用它的事件过滤器。需要额外过滤时可在控制器适配方法中实现。
+旧 InputManager 与此通道并列，不自动连线。旧 KeyRemapHandler、InputBuffer 和配置适配器的限制见 [实现分析](../implementation-analysis.md)；新通道使用自己的可消费队列与绑定服务。
 
-## 2. 创建可配置控制器
+## 创建与消费
 
-```gdscript
-const Profile = preload("res://addons/godot_core_system-0.0.4/source/operation_system/operation_profile.gd")
-
-func _ready() -> void:
-    var profile = Profile.new()
-    profile.bind_intent(&"move_left", [&"left"])
-    profile.bind_intent(&"move_right", [&"right"])
-    profile.bind_intent(&"jump", [&"jump"])
-    profile.bind_intent(&"attack", [&"attack"])
-    profile.bind_axis(&"move", &"move_left", &"move_right")
-    var controls = CoreSystem.operation_manager.create_controller(
-        StringName("player_%d" % get_instance_id()), profile
-    )
-    controls.intent_emitted.connect(_on_intent)
+    var profile := CoreOperationProfile.new()
+    profile.bind_intent(&"attack", [&"my_player.attack"])
+    profile.default_keys = {&"my_player.attack": ["J"]}
+    profile.buffered_intents = [&"attack"]
+    var controls := CoreSystem.operation_manager.create_controller(&"player/input", profile)
     add_child(controls)
+    controls.intent_emitted.connect(func(intent): print(intent.action, intent.get_phase_name()))
 
-func _on_intent(intent: InputEvent) -> void:
-    if intent.is_intent_pressed(&"jump"):
-        print("请求跳跃，而不是收到 K 键")
-```
+create_controller 不自动 add_child；控制器放到拥有者子树，退出自动注销。自定义适配器可继承 CoreOperationController 并 register_controller。项目设置 godot_core_system/module_enable/operation_manager 默认开启，业务还需要 Core 配置服务。
 
-`create_controller()` 返回的节点需要由调用方 `add_child()`，应放在角色子树中。不要把所有控制器放在始终运行的全局单例下，以免角色暂停后输入仍在处理。
+action 是操作名称。PRESSED 在聚合强度从零变非零时产生；HELD 每输入 tick 产生，long_press_started 只越过阈值一次；RELEASED 带持有时长；CHANGED 表示强度变化。is_intent_pressed 不把 HELD/CHANGED 当新按下。不要再将意图交给 Input.parse_input_event。
 
-资源示例：[上古天帝篇 Profile](../../examples/operation_demo/shang_gu_tian_di_profile.tres)。也可在编辑器创建 `CoreOperationProfile` 资源并填写 `bindings`、`axes`。
+原生新按下在 _unhandled_input 接受，UI 优先；_input 只记录来源/清理释放。OS echo 被忽略；多物理来源按最大强度聚合，摇杆正负精确匹配。get_axis 默认正减负，可选 opposites=last_pressed；get_double_tap_direction 返回第二次持有期间的双击方向。
 
-`bindings` 的结构为 `意图名: [原生 InputMap 动作名...]`。一项意图可以对应多个动作，例如 `dodge: [keyboard_dodge, gamepad_dodge]`；动作须在项目 InputMap 中已定义。模块不改写按键绑定，A/D、手柄按键等仍由 Godot InputMap 配置。
+peek_buffered_intents 返回独立按下快照，角色通过许可后 consume_buffered_intent(sequence)。RETRY 保留，容量满丢最旧项，过期按 input_time；松键不丢短按，reset 清队列。不按 action 一次删除全部连按。
 
-`axes` 的结构为 `轴名: {"negative": 负向意图, "positive": 正向意图}`。`get_axis()` 返回正向强度减负向强度，范围 -1～1；摇杆输入使用动作强度，等强度反向抵消。
+## 时间、改键与控制权
 
-配置资源可以共享，但运行数据不共享。需要某个控制器单独修改绑定时，先 `profile.duplicate(true)` 再 `set_profile()`，不要修改共享 Resource。切换 Profile 会释放旧的持续意图。
+默认 _physics_process 推进未缩放输入时间；统一会话设置 externally_driven=true 并每 tick advance_input(unscaled_delta)，避免双驱动。输入时间与战斗慢动作/停顿分开，暂停撤回控制，停顿期间缓存继续过期。
 
-## 3. 事件与持续状态
+    controls.set_control_blocked(&"menu", true)
+    controls.set_control_blocked(&"menu", false)
+    CoreSystem.operation_manager.bindings.start_remap(controls, &"attack")
+    CoreSystem.operation_manager.bindings.set_binding(&"my_player.attack", new_key_event)
 
-状态中只使用语义名称：
+menu、focus_lost、ownership、remapping 等原因可以同时存在，移除一个不会覆盖另一个。撤回时立即 reset，发 cancelled 释放，清缓存/双击；恢复后旧持有键先松开再按。submit_intent/pulse_intent 同样经过控制权门；native_input_enabled=false 只撤销原生来源，保留虚拟来源。
 
-```gdscript
-if intent.is_intent_pressed(&"attack"):
-    # 是否进入地面攻击、跑攻或空攻，由当前状态决定。
-    pass
-var direction = controls.get_axis(&"move")
-var holding_left = controls.is_pressed(&"move_left")
-```
+绑定服务 Always 运行，Esc 取消，冲突不覆盖其他操作。键盘/鼠标/手柄描述保存到 Core ConfigManager 的 operation_bindings 段；默认安装、恢复与改键不修改 Profile。保存失败保持原映射。保留键由 Profile 声明。
 
-`is_intent_pressed()` 只在 0 → 非零时返回 true；摇杆强度 0.4 → 0.8 仍发送变化事件，但不重复触发跳跃/攻击。`is_intent_released()` 表示强度归零。
+## 业务与验收
 
-事件的 `action` 是**语义意图 ID**，不是原生 InputMap 动作名。`pressed`、`strength` 表示聚合后的状态；`origin` 为 `native`、`ai`、`network` 或自定义来源；`device` 是原生设备 ID，虚拟来源为 -1；`payload` 可携带技能 ID、目标等业务数据，控制器会补充 `just_pressed`。
+BattlePlayerOperations 先执行公共移动、跳跃、普攻和技能槽，再调用角色钩子。战斗状态、生命、落地和 GAS 冷却负责许可，控制器不越过规则。阶段和消费结果通过 Core 战斗事件公开。
 
-意图事件继承 `InputEventAction`，是为了复用现有 `BaseStateMachine.handle_input(InputEvent)`，并不代表还在分发键盘事件。**不要把生成的意图再次传给 `Input.parse_input_event()`**，否则可能重新映射并形成循环。
-
-同一意图的不同按键、设备及虚拟来源分别记录，取最大强度。一个来源松开，不会清除另一个仍有效的来源。键盘 echo 和重复的同强度事件不会产生重复按下。
-
-## 4. AI、触屏或网络输入
-
-```gdscript
-# 持续向右，随后停止；origin 标识独立来源。
-controls.submit_intent(&"move_right", 1.0, &"ai")
-controls.submit_intent(&"move_right", 0.0, &"ai")
-
-# 一次跳跃请求，内部依次发出按下与松开。
-controls.pulse_intent(&"jump", &"touch")
-
-# 无需 InputMap 中存在 cast_spell，可直接扩展业务意图。
-controls.pulse_intent(&"cast_spell", &"network", {"skill": 7})
-```
-
-`submit_intent()` 更新该意图、该 origin 的强度。`pulse_intent()` 适合当前未持有的按钮意图；已有其他来源持续持有同意图时不会强行生成第二次按下。多触点/多网络实体应使用不同 origin。
-
-要彻底由 AI 控制，设置 `native_input_enabled = false`。关闭原生来源只清除原生来源的持有值，不清除虚拟来源。网络输入接口只是接入点，不包含联网、同步、预测或安全校验。
-
-## 5. 继承扩展适配器
-
-继承 `CoreOperationController`，可覆盖 `process_native_event(event)` 追加过滤/翻译，也可不接收原生输入，直接从触屏按钮、AI 或其他组件调用 `submit_intent()`。
-
-自定义实例通过 `CoreSystem.operation_manager.register_controller(id, custom_controller)` 注册，再加入角色子树。ID 不能重复，一个实例只能注册一次。管理器只保存 WeakRef，节点退出场景树时注销，调用方负责释放节点。
-
-添加新操作通常只需：
-
-1. 在 InputMap 增加按键动作（虚拟来源可跳过）。
-2. 在 Profile 增加如 `dodge`、`interact`、`cast_spell` 的语义映射。
-3. 在合适的业务状态中消费该意图。
-
-无需修改 manager/controller。只在需要新输入设备协议时编写适配器。
-
-## 6. UI、设备、暂停与生命周期
-
-- 新按下只在 `_unhandled_input` 接受，UI 消费的按下不会进入意图通道，物理帧也不绕过 UI 去读全局 `Input`。
-- `_input` 仅清理已持有来源的松开，不接受按下；松开即使被 UI 消费也不会卡键。
-- `device_filter = -1` 接受全部设备，非负值只接受对应 Godot `InputEvent.device`。多个角色默认仍可使用同一套按键，独立控制需要不同映射或设备过滤。
-- 失焦和节点暂停清空意图。禁用/暂停角色子树会停止原生控制器回调；当前示例消费者也检查 `can_process()`，不会让外部 AI 信号在暂停时切动作。
-- 直接调用虚拟输入接口会更新通道数据，不受原生事件回调开关约束；其是否驱动游戏由消费者控制。
-- 退出角色时先断开消费者信号，再注销状态机并释放父子引用，控制器退出时自行清空状态和注销。
-
-## 7. 当前玩家接入与测试
-
-玩家的 `StateMachine` 组件持有 `operations`，根状态机共享变量 `operations` 指向同一个通道。叶子通过 `_controls()` 查询；分组通过语义事件选择攻击/跳跃。所有动作状态不再调用全局 `Input` 或识别玩家的原生动作名。
-
-组件 Inspector 中可指定 `operation_profile`、`input_device`；Profile 留空时从玩家旧的四项 `*_action` 配置构建兼容映射。指定 Profile 后这四项旧配置不再参与映射。
-
-现有项目的 `test_state_machine.tscn` 已指定 `res://controls/test_operation_profile.tres`，测试场景直接继承该配置，不再依赖旧字段回退。该资源设置 `resource_local_to_scene = true`，每个角色实例得到独立配置。可在角色的 StateMachine 子节点 Inspector 中编辑/替换 Profile。
-
-回归入口：`res://tests/test_operation_intents.tscn`，运行参数 `--headless --path . --fixed-fps 60 --quit-after 4000`，成功标记 `OPERATION_INTENT_TESTS_PASSED`。覆盖语义轴、摇杆变向/回中、多绑定聚合、强度边沿、UI 吞按下/松开、设备与实例隔离、自定义负载、失焦、Profile 切换、扩展注册与清理，以及实际角色的虚拟行走、跳跃、空攻、奔跑和连击。
+运行 res://examples/verify_player_operations.tscn，成功打印 PASS，失败返回 1；覆盖实际 Godot 分发、UI 消费、改键保存/重载、失焦、暂停、双击、多来源、缓存、角色扩展和真实角色/GAS/平台。原有动画与战斗验收保留。

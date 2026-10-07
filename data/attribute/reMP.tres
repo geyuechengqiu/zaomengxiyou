@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="GameplayAttribute" format=3]
+
+[ext_resource type="Script" path="res://addons/gameplay_abiltiy_system/scripts/attributes/gameplay_attribute.gd" id="1_2p68d"]
+
+[resource]
+script = ExtResource("1_2p68d")
+attribute_id = &"reMP"
+attribute_display_name = "回魔"
+attribute_description = "每秒魔法恢复量，供 ManaVital.regen_rate_attribute 引用。"
+min_value = 0.0
+metadata/source_field = "reMP"
+metadata/category = "core"
+metadata/unit = "点/秒"

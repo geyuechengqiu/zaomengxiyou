@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="GameplayAttribute" format=3]
+
+[ext_resource type="Script" path="res://addons/gameplay_abiltiy_system/scripts/attributes/gameplay_attribute.gd" id="1_ehvqt"]
+
+[resource]
+script = ExtResource("1_ehvqt")
+attribute_id = &"reEndurance"
+attribute_display_name = "耐久恢复"
+attribute_description = "原版每秒耐久恢复量，原逻辑优先恢复，再考虑衰减；由业务机制接入。"
+min_value = 0.0
+metadata/source_field = "reEndurance"
+metadata/category = "protection"
+metadata/unit = "点/秒"

@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="HealthVital" format=3]
+
+[ext_resource type="Script" path="res://addons/gameplay_abiltiy_system/scripts/attributes/vitals/health_vital.gd" id="1_h708s"]
+
+[resource]
+script = ExtResource("1_h708s")
+vital_id = &"health"
+display_name = "生命值"
+max_value_attribute = &"hpMax"
+regen_rate_attribute = &"reHP"

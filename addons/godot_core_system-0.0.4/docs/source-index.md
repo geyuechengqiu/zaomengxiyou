@@ -1,6 +1,6 @@
 # CoreSystem 全部源码索引
 
-覆盖当前插件全部 85 个 GDScript，含编辑器入口、配置、模块、策略与示例。由 [文档生成工具](../../../tools/generate_core_docs.mjs) 重建。实现说明见 [完整分析](implementation-analysis.md)。
+覆盖当前插件全部 87 个 GDScript，含编辑器入口、配置、模块、策略与示例。由 [文档生成工具](../../../tools/generate_core_docs.mjs) 重建。实现说明见 [完整分析](implementation-analysis.md)。
 
 列表提取声明，不代表所有接口已验证；公开方法包含 ready/dispose 等自定义生命周期，内部回调也单独列出。无全局 class_name 的文件通过 CoreSystem preload 常量或路径使用。
 
@@ -205,10 +205,12 @@
 
 | 脚本 / 类型 | 基类 | 配置与字段 | 公开方法 | 内部方法与回调 | 信号 |
 | --- | --- | --- | --- | --- | --- |
-| [CoreOperationController](../source/operation_system/operation_controller.gd) | `Node` | `profile`<br>`device_filter`<br>`native_input_enabled`<br>`controller_id`<br>`_strengths`<br>`_sources` | `process_native_event()`<br>`get_strength()`<br>`is_pressed()`<br>`get_axis()`<br>`submit_intent()`<br>`pulse_intent()`<br>`set_profile()`<br>`clear_native_sources()`<br>`reset()` | `_unhandled_input()`<br>`_input()`<br>`_process_native()`<br>`_event_source()`<br>`_set_source()`<br>`_emit_intent()`<br>`_notification()`<br>`_exit_tree()` | `intent_emitted` |
-| [CoreOperationIntent](../source/operation_system/operation_intent.gd) | `InputEventAction` | `origin`<br>`payload` | `is_intent_pressed()`<br>`is_intent_released()` | — | — |
-| [CoreOperationManager](../source/operation_system/operation_manager.gd) | `Node` | `_controllers` | `create_controller()`<br>`register_controller()`<br>`get_controller()` | `_unregister_controller()` | — |
-| [CoreOperationProfile](../source/operation_system/operation_profile.gd) | `Resource` | `bindings`<br>`axes` | `bind_intent()`<br>`bind_axis()`<br>`get_actions()` | — | — |
+| [CoreOperationBindings](../source/operation_system/operation_bindings.gd) | `Node` | `last_error`<br>`_defaults`<br>`_capture_controller`<br>`_capture_action`<br>`_capture_persist`<br>`_reserved` | `install_profile()`<br>`set_binding()`<br>`get_conflicts()`<br>`reset_profile()`<br>`get_binding_text()`<br>`start_remap()`<br>`is_remapping()`<br>`cancel_remap()`<br>`capture_event()` | `_ready()`<br>`_input()`<br>`_finish_capture()`<br>`_notification()`<br>`_exit_tree()`<br>`_replace()`<br>`_valid_event()`<br>`_binding_template()`<br>`_serialize()`<br>`_deserialize()`<br>`_fail()` | `mapping_changed`<br>`remap_started`<br>`remap_finished`<br>`remap_failed` |
+| [CoreOperationBuffer](../source/operation_system/operation_buffer.gd) | `RefCounted` | `_entries` | `append()`<br>`peek()`<br>`consume()`<br>`clear()`<br>`clean_expired()` | — | — |
+| [CoreOperationController](../source/operation_system/operation_controller.gd) | `Node` | `profile`<br>`device_filter`<br>`externally_driven`<br>`native_input_enabled`<br>`controller_id`<br>`_strengths`<br>`_sources`<br>`input_time`<br>`_held_since`<br>`_press_orders`<br>`_last_tap`<br>`_double_held`<br>`_long_announced`<br>`_blocks`<br>`_native_down`<br>`_quarantined`<br>`_buffer`<br>`_sequence`<br>`_resetting` | `process_native_event()`<br>`get_strength()`<br>`is_pressed()`<br>`get_axis()`<br>`get_double_tap_direction()`<br>`submit_intent()`<br>`pulse_intent()`<br>`set_profile()`<br>`clear_native_sources()`<br>`reset()`<br>`advance_input()`<br>`peek_buffered_intents()`<br>`consume_buffered_intent()`<br>`clear_buffered_intents()`<br>`has_control()`<br>`get_control_blocks()`<br>`set_control_blocked()` | `_unhandled_input()`<br>`_input()`<br>`_record_native()`<br>`_process_native()`<br>`_event_source()`<br>`_set_source()`<br>`_emit_intent()`<br>`_notification()`<br>`_exit_tree()`<br>`_physics_process()` | `intent_emitted`<br>`control_changed` |
+| [CoreOperationIntent](../source/operation_system/operation_intent.gd) | `InputEventAction` | `origin`<br>`payload`<br>`phase`<br>`sequence`<br>`input_time`<br>`held_seconds` | `is_intent_pressed()`<br>`is_intent_released()`<br>`is_intent_held()`<br>`get_phase_name()`<br>`copy_intent()` | — | — |
+| [CoreOperationManager](../source/operation_system/operation_manager.gd) | `Node` | `_controllers`<br>`bindings` | `create_controller()`<br>`register_controller()`<br>`get_controller()` | `_ready()`<br>`_on_mapping_changed()`<br>`_unregister_controller()` | — |
+| [CoreOperationProfile](../source/operation_system/operation_profile.gd) | `Resource` | `bindings`<br>`axes`<br>`default_keys`<br>`reserved_keys`<br>`buffered_intents`<br>`buffer_seconds`<br>`buffer_capacity`<br>`long_press_seconds`<br>`double_tap_intents`<br>`double_tap_seconds` | `bind_intent()`<br>`bind_axis()`<br>`get_actions()` | — | — |
 
 ## source/resource_system
 

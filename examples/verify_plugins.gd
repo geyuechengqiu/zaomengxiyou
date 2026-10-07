@@ -1,10 +1,9 @@
 extends Node
 #region 生命周期与引擎回调
 
-## 验证业务目录删除后，插件资源和主要交互仍可独立运行。
+## 验证插件资源和主要交互仍可独立运行；业务属性资源另有验证场景。
 func _ready() -> void:
 	assert(not DirAccess.dir_exists_absolute("res://scripts"))
-	assert(not DirAccess.dir_exists_absolute("res://data"))
 	assert(not DirAccess.dir_exists_absolute("res://ui"))
 	_check_resources("res://addons")
 	var demo := preload("res://examples/plugin_showcase.tscn").instantiate()

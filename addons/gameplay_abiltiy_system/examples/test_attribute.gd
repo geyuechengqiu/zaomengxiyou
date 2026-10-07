@@ -74,7 +74,7 @@ func _print_all_attributes() -> void:
 	print("Intelligence: ", attribute_component.get_value(&"intelligence"))
 	print("Vitality: ", attribute_component.get_value(&"vitality"))
 
-	print("Max Health: ", attribute_component.get_value(&"max_health"))
-	print("Physical Attack: ", attribute_component.get_value(&"phy_attack"))
-	print("Defense: ", attribute_component.get_value(&"defense"))
+	print("Max Health: ", attribute_component.get_value(&"hpMax"))
+	print("Physical Attack: ", attribute_component.get_value(&"atk"))
+	print("Defense: ", attribute_component.get_value(&"phyDef"))
 #endregion

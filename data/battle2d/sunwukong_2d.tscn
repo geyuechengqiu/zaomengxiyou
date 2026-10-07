@@ -1,0 +1,23 @@
+[gd_scene format=3]
+[ext_resource type="Script" path="res://addons/battle_foundation/runtime/battle_entity_2d.gd" id="entity"]
+[ext_resource type="Script" path="res://addons/battle_foundation/animation/spine_animation_adapter.gd" id="adapter"]
+[ext_resource type="Resource" path="res://data/animation/sunwukong_profile.tres" id="profile"]
+[ext_resource type="Resource" path="res://data/battle2d/sunwukong_actions.tres" id="actions"]
+
+[sub_resource type="CapsuleShape2D" id="body"]
+radius = 22.0
+height = 180.0
+
+[node name="SunWukong" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 1
+script = ExtResource("entity")
+action_profile = ExtResource("actions")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -90)
+shape = SubResource("body")
+
+[node name="AnimationAdapter" type="Node2D" parent="."]
+script = ExtResource("adapter")
+profile = ExtResource("profile")

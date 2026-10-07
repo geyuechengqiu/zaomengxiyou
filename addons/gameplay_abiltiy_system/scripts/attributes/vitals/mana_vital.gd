@@ -9,8 +9,8 @@ func _init(p_comp: GameplayAttributeComponent = null) -> void:
 	# 设置 ManaVital 的默认值（在调用 super 之前设置）
 	vital_id = &"mana"
 	display_name = "魔法值"
-	max_value_attribute = &"max_mana"  # 依赖 "mana" 属性作为上限
-	# regen_rate_attribute = &"mana_regen"  # 可选：自动回复
+	max_value_attribute = &"mpMax"  # 依赖原版最大魔法属性作为上限
+	# regen_rate_attribute = &"reMP"  # 可选：自动回复
 #endregion
 #region 公共接口
 	

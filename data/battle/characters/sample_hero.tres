@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="BattleEntityDefinition" format=3]
+[ext_resource type="Script" path="res://addons/battle_foundation/definitions/battle_entity_definition.gd" id="script"]
+[ext_resource type="Script" path="res://addons/gameplay_abiltiy_system/scripts/attributes/vitals/gameplay_vital.gd" id="vital_type"]
+[ext_resource type="Resource" path="res://data/battle/attributes/sample_hero.tres" id="attributes"]
+[ext_resource type="Resource" path="res://data/attribute/vitals/health.tres" id="health"]
+[ext_resource type="Resource" path="res://data/attribute/vitals/mana.tres" id="mana"]
+[ext_resource type="PackedScene" path="res://data/battle/scenes/sample_entity.tscn" id="scene"]
+
+[resource]
+script = ExtResource("script")
+definition_id = &"sample_hero"
+display_name = "阶段一示例角色"
+faction_id = &"player"
+scene = ExtResource("scene")
+attribute_set = ExtResource("attributes")
+vitals = Array[ExtResource("vital_type")]([ExtResource("health"), ExtResource("mana")])
+ability_ids = Array[StringName]([&"sample_attack"])

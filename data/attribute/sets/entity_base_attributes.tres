@@ -1,0 +1,66 @@
+[gd_resource type="Resource" script_class="GameplayAttributeSet" format=3]
+
+[ext_resource type="Script" path="res://addons/gameplay_abiltiy_system/scripts/attributes/gameplay_attribute.gd" id="1_yup2n"]
+[ext_resource type="Resource" path="res://data/attribute/atk.tres" id="2_oqrau"]
+[ext_resource type="Resource" path="res://data/attribute/phyDef.tres" id="3_1d0mv"]
+[ext_resource type="Resource" path="res://data/attribute/hpMax.tres" id="4_vpwyr"]
+[ext_resource type="Resource" path="res://data/attribute/mpMax.tres" id="5_ka212"]
+[ext_resource type="Resource" path="res://data/attribute/reHP.tres" id="6_or7l3"]
+[ext_resource type="Resource" path="res://data/attribute/reMP.tres" id="7_f7hgq"]
+[ext_resource type="Resource" path="res://data/attribute/hit.tres" id="8_vxaw8"]
+[ext_resource type="Resource" path="res://data/attribute/dodge.tres" id="9_6376g"]
+[ext_resource type="Resource" path="res://data/attribute/critical.tres" id="10_ydtv0"]
+[ext_resource type="Resource" path="res://data/attribute/toughness.tres" id="11_0ap71"]
+[ext_resource type="Resource" path="res://data/attribute/lucky.tres" id="12_wjngf"]
+[ext_resource type="Resource" path="res://data/attribute/guardian.tres" id="13_cmlh6"]
+[ext_resource type="Resource" path="res://data/attribute/lightResist.tres" id="14_n8ed0"]
+[ext_resource type="Resource" path="res://data/attribute/darkResist.tres" id="15_ry644"]
+[ext_resource type="Resource" path="res://data/attribute/waterResist.tres" id="16_tyuyx"]
+[ext_resource type="Resource" path="res://data/attribute/fireResist.tres" id="17_74q3d"]
+[ext_resource type="Resource" path="res://data/attribute/woodResist.tres" id="18_3eui8"]
+[ext_resource type="Resource" path="res://data/attribute/soilResist.tres" id="19_ywqhr"]
+[ext_resource type="Resource" path="res://data/attribute/windResist.tres" id="20_jgf5t"]
+[ext_resource type="Resource" path="res://data/attribute/rayResist.tres" id="21_dbgdi"]
+[ext_resource type="Resource" path="res://data/attribute/walkSpeed.tres" id="22_iipa7"]
+[ext_resource type="Resource" path="res://data/attribute/runSpeed.tres" id="23_3f36j"]
+[ext_resource type="Resource" path="res://data/attribute/jumpSpeed1.tres" id="24_p47mf"]
+[ext_resource type="Resource" path="res://data/attribute/jumpSpeed2.tres" id="25_dvu5g"]
+[ext_resource type="Resource" path="res://data/attribute/enduranceMax.tres" id="26_iwhtg"]
+[ext_resource type="Resource" path="res://data/attribute/reEndurance.tres" id="27_boxta"]
+[ext_resource type="Resource" path="res://data/attribute/reduceEndurance.tres" id="28_yskaw"]
+[ext_resource type="Resource" path="res://data/attribute/protectPoint.tres" id="29_2uqun"]
+[ext_resource type="Script" path="res://addons/gameplay_abiltiy_system/scripts/utilties/scalable_value.gd" id="30_megn5"]
+[ext_resource type="Script" path="res://addons/gameplay_abiltiy_system/scripts/attributes/gameplay_attribute_set.gd" id="31_bn61c"]
+
+[resource]
+script = ExtResource("31_bn61c")
+attributes = Dictionary[ExtResource("1_yup2n"), float]({
+ExtResource("29_2uqun"): -1.0,
+ExtResource("28_yskaw"): 0.0,
+ExtResource("27_boxta"): 0.0,
+ExtResource("26_iwhtg"): 0.0,
+ExtResource("25_dvu5g"): 0.0,
+ExtResource("24_p47mf"): 0.0,
+ExtResource("23_3f36j"): 0.0,
+ExtResource("22_iipa7"): 0.0,
+ExtResource("21_dbgdi"): 0.0,
+ExtResource("20_jgf5t"): 0.0,
+ExtResource("19_ywqhr"): 0.0,
+ExtResource("18_3eui8"): 0.0,
+ExtResource("17_74q3d"): 0.0,
+ExtResource("16_tyuyx"): 0.0,
+ExtResource("15_ry644"): 0.0,
+ExtResource("14_n8ed0"): 0.0,
+ExtResource("13_cmlh6"): 0.0,
+ExtResource("12_wjngf"): 0.0,
+ExtResource("11_0ap71"): 0.0,
+ExtResource("10_ydtv0"): 0.0,
+ExtResource("9_6376g"): 0.0,
+ExtResource("8_vxaw8"): 0.0,
+ExtResource("7_f7hgq"): 0.0,
+ExtResource("6_or7l3"): 0.0,
+ExtResource("5_ka212"): 0.0,
+ExtResource("4_vpwyr"): 1.0,
+ExtResource("3_1d0mv"): 0.0,
+ExtResource("2_oqrau"): 0.0
+})

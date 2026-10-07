@@ -4,30 +4,30 @@
   <marker id="inherit" viewBox="0 0 14 14" refX="13" refY="7" markerWidth="13" markerHeight="13" orient="auto"><path d="M1 1L13 7L1 13Z" fill="#f9fbff" stroke="#536b89" stroke-width="1.5"/></marker></defs>
   <style>text{font-family:'Microsoft YaHei','Noto Sans CJK SC',sans-serif;fill:#30445d}.title{font-size:32px;font-weight:600}.subtitle{font-size:19px}.name{font-family:Consolas,monospace;font-size:23px}.type{font-size:17px}.body{font-size:19px}.label{font-size:17px;paint-order:stroke;stroke:#f9fbff;stroke-width:8px;stroke-linejoin:round}.note{font-size:20px}.card{fill:#edf4ff;stroke:#91a6c1;stroke-width:1.6}.rule{stroke:#cbd8e8;fill:none}.edge{fill:none;stroke:#536b89;stroke-width:2;marker-end:url(#arrow)}.bridge{stroke-dasharray:8 6}.inherit{marker-end:url(#inherit)}</style>
   <rect width="1800" height="1423" fill="#f9fbff"/>
-  <text x="50" y="55" class="title">CoreSystem 与 GAS：现有链路及适配边界</text><text x="50" y="95" class="subtitle">基于当前导入源码；框中列出关键成员，完整接口见 source-index.md</text><text x="50" y="143" class="subtitle">实线：持有 / 调用；空心三角：继承；虚线：调用者需实现的适配；点击类框可打开源码</text><path d="M580 320H640" class="edge bridge"/><text x="610" y="292" class="label" text-anchor="middle">接入</text><path d="M1160 320H1220" class="edge bridge"/><text x="1190" y="292" class="label" text-anchor="middle">调用</text><path d="M1220 670H1160" class="edge bridge"/><text x="1190" y="642" class="label" text-anchor="middle">接入</text><path d="M640 670H580" class="edge bridge"/><text x="610" y="642" class="label" text-anchor="middle">转发</text><path d="M580 1020H640" class="edge bridge"/><text x="610" y="992" class="label" text-anchor="middle">协议</text><path d="M1160 1020H1220" class="edge bridge"/><text x="1190" y="992" class="label" text-anchor="middle">重建</text><path d="M1480 440V462H1208V1167H1480V1140" class="edge edge"/><text x="1344" y="1159" class="label">Effect 执行</text><a href="../source/operation_system/operation_controller.gd"><g><rect x="60" y="200" width="520" height="240" rx="12" class="card"/>
+  <text x="50" y="55" class="title">CoreSystem 与 GAS：现有链路及适配边界</text><text x="50" y="95" class="subtitle">基于当前导入源码；框中列出关键成员，完整接口见 source-index.md</text><text x="50" y="143" class="subtitle">实线：持有 / 调用；空心三角：继承；虚线：调用者需实现的适配；点击类框可打开源码</text><path d="M580 320H640" class="edge edge"/><text x="610" y="292" class="label" text-anchor="middle">接入</text><path d="M1160 320H1220" class="edge edge"/><text x="1190" y="292" class="label" text-anchor="middle">调用</text><path d="M580 670H640" class="edge edge"/><text x="610" y="642" class="label" text-anchor="middle">同步推</text><text x="610" y="664" class="label" text-anchor="middle">送</text><path d="M1160 670H1220" class="edge edge"/><text x="1190" y="642" class="label" text-anchor="middle">同步广</text><text x="1190" y="664" class="label" text-anchor="middle">播</text><path d="M580 1020H640" class="edge bridge"/><text x="610" y="992" class="label" text-anchor="middle">协议</text><path d="M1160 1020H1220" class="edge bridge"/><text x="1190" y="992" class="label" text-anchor="middle">重建</text><path d="M1480 440V462H1208V1167H1480V1140" class="edge edge"/><text x="1344" y="1159" class="label">Effect 执行</text><a href="../source/operation_system/operation_controller.gd"><g><rect x="60" y="200" width="520" height="240" rx="12" class="card"/>
     <path d="M60 283H580" class="rule"/>
     <text x="80" y="228" class="type">«Core · Node»</text><text x="80" y="262" class="name">OperationController</text>
     <text x="80" y="319" class="body">输入来源 → 语义意图</text><text x="80" y="349" class="body">UI 优先 / intent_emitted</text>
-    </g></a><g><rect x="640" y="200" width="520" height="240" rx="12" class="card"/>
+    </g></a><a href="../../battle_foundation/input/battle_player_operations.gd"><g><rect x="640" y="200" width="520" height="240" rx="12" class="card"/>
     <path d="M640 283H1160" class="rule"/>
-    <text x="660" y="228" class="type">«调用者需编写»</text><text x="660" y="262" class="name">RoleAdapter</text>
-    <text x="660" y="319" class="body">意图 ID → 技能 ID / 状态机规则</text><text x="660" y="349" class="body">初始化组件 / 连接并清理订阅</text>
-    </g><a href="../../gameplay_abiltiy_system/scripts/components/gameplay_ability_component.gd"><g><rect x="1220" y="200" width="520" height="240" rx="12" class="card"/>
+    <text x="660" y="228" class="type">«BattlePlayerOperations · 已接入»</text><text x="660" y="262" class="name">RoleAdapter</text>
+    <text x="660" y="319" class="body">公共意图 / ability_slots / 角色钩子</text><text x="660" y="349" class="body">战斗许可 / 缓存消费 / 控制权</text>
+    </g></a><a href="../../gameplay_abiltiy_system/scripts/components/gameplay_ability_component.gd"><g><rect x="1220" y="200" width="520" height="240" rx="12" class="card"/>
     <path d="M1220 283H1740" class="rule"/>
     <text x="1240" y="228" class="type">«GAS · Node»</text><text x="1240" y="262" class="name">AbilityComponent</text>
     <text x="1240" y="319" class="body">技能实例 → 行为树 → Effect</text><text x="1240" y="349" class="body">try_activate_ability()</text>
-    </g></a><a href="../source/event_system/event_bus.gd"><g><rect x="60" y="550" width="520" height="240" rx="12" class="card"/>
+    </g></a><a href="../../gameplay_abiltiy_system/scripts/attributes/vitals/health_vital.gd"><g><rect x="60" y="550" width="520" height="240" rx="12" class="card"/>
     <path d="M60 633H580" class="rule"/>
-    <text x="80" y="578" class="type">«Core · Node»</text><text x="80" y="612" class="name">CoreEventBus</text>
-    <text x="80" y="669" class="body">Array 参数 / 优先级 / 过滤</text><text x="80" y="699" class="body">TriggerManager → GameplayTrigger</text>
-    </g></a><g><rect x="640" y="550" width="520" height="240" rx="12" class="card"/>
+    <text x="80" y="578" class="type">«GAS · 已接入»</text><text x="80" y="612" class="name">GAS Event Publishers</text>
+    <text x="80" y="669" class="body">技能、状态、伤害与技能栏事件</text><text x="80" y="699" class="body">push_event(name, [context], true)</text>
+    </g></a><a href="../source/event_system/event_bus.gd"><g><rect x="640" y="550" width="520" height="240" rx="12" class="card"/>
     <path d="M640 633H1160" class="rule"/>
-    <text x="660" y="578" class="type">«调用者需编写»</text><text x="660" y="612" class="name">EventAdapter</text>
-    <text x="660" y="669" class="body">Dictionary 负载 / actor 与 target</text><text x="660" y="699" class="body">防回环 / 退出时退订</text>
-    </g><a href="../../gameplay_abiltiy_system/scripts/singletons/ability_event_bus.gd"><g><rect x="1220" y="550" width="520" height="240" rx="12" class="card"/>
+    <text x="660" y="578" class="type">«Core · Node»</text><text x="660" y="612" class="name">CoreEventBus</text>
+    <text x="660" y="669" class="body">Array 参数 / 优先级 / 过滤</text><text x="660" y="699" class="body">TriggerManager → GameplayTrigger</text>
+    </g></a><a href="../../gameplay_abiltiy_system/scripts/components/gameplay_status_component.gd"><g><rect x="1220" y="550" width="520" height="240" rx="12" class="card"/>
     <path d="M1220 633H1740" class="rule"/>
-    <text x="1240" y="578" class="type">«GAS · Autoload»</text><text x="1240" y="612" class="name">AbilityEventBus</text>
-    <text x="1240" y="669" class="body">技能、受伤等事件</text><text x="1240" y="699" class="body">同步事件 → 状态事件效果</text>
+    <text x="1240" y="578" class="type">«GAS · 已接入»</text><text x="1240" y="612" class="name">GameplayStatusComponent</text>
+    <text x="1240" y="669" class="body">event_pushed → handle_event()</text><text x="1240" y="699" class="body">入树订阅 / 离树退订</text>
     </g></a><a href="../source/save_system/save_manager.gd"><g><rect x="60" y="900" width="520" height="240" rx="12" class="card"/>
     <path d="M60 983H580" class="rule"/>
     <text x="80" y="928" class="type">«Core · Node»</text><text x="80" y="962" class="name">SaveManager</text>
@@ -40,4 +40,4 @@
     <path d="M1220 983H1740" class="rule"/>
     <text x="1240" y="928" class="type">«GAS · 组件协作»</text><text x="1240" y="962" class="name">Attributes / Vital / Status</text>
     <text x="1240" y="1019" class="body">属性修改 / 伤害结算 / 持续效果</text><text x="1240" y="1049" class="body">Effect → 组件 → Cue / 事件</text>
-    </g></a><rect x="50" y="1240" width="1700" height="143" rx="12" fill="#f0edff" stroke="#91a6c1"/><text x="75" y="1278" class="note">虚线适配器尚未实现；当前项目启动两套插件，不等于完成输入/事件/存档联动。</text><text x="75" y="1309" class="note">Core 标签树与 GAS 引用计数标签独立；TimeManager 不自动缩放 GAS 冷却和状态。</text><text x="75" y="1340" class="note">实线只表示已有 GAS 内部执行关系；桥接示例与清理职责见 implementation-analysis.md。</text></svg>
+    </g></a><rect x="50" y="1240" width="1700" height="143" rx="12" fill="#f0edff" stroke="#91a6c1"/><text x="75" y="1278" class="note">事件直接使用 CoreEventBus；输入已由 BattlePlayerOperations 接入，存档仍需适配。</text><text x="75" y="1309" class="note">Core 标签树与 GAS 引用计数标签独立；TimeManager 不自动缩放 GAS 冷却和状态。</text><text x="75" y="1340" class="note">GAS 状态监听先于按名订阅的优先级回调；全局事件仍需宿主提供实体作用域。</text></svg>

@@ -12,6 +12,8 @@ class_name GameplayAbilityComponent
 @export_group("Initialization")
 ## 初始技能列表（在 _ready 时自动学习）
 @export var _initial_abilities: Array[GameplayAbilityDefinition] = []
+## 外部战斗时钟驱动时关闭自身逐帧调度，独立插件示例仍使用默认调度。
+@export var externally_driven: bool = false
 
 ## 已学会的技能字典（运行时数据）
 var _learned_abilities: Dictionary[StringName, GameplayAbilityInstance] = {}
@@ -39,10 +41,17 @@ func _ready() -> void:
 	set_process(true)
 
 func _process(delta: float) -> void:
+	if not externally_driven:
+		advance_simulation(delta)
+
+## 供固定物理战斗时钟调用；暂停的零时间不推进行为树。
+func advance_simulation(delta: float) -> void:
+	if delta <= 0.0:
+		return
 	# 统一调用所有技能的 update 方法（符合开闭原则）
 	# 技能会在自己的 update 中管理冷却时间
-	for ability_id in _learned_abilities:
-		var ability_instance : GameplayAbilityInstance = _learned_abilities[ability_id]
+	for ability_id in _learned_abilities.keys():
+		var ability_instance : GameplayAbilityInstance = _learned_abilities.get(ability_id)
 		if not is_instance_valid(ability_instance):
 			continue
 
@@ -102,10 +111,10 @@ func learn_ability(ability_data: GameplayAbilityDefinition) -> void:
 	learned_ability.handle_learned(self)
 	
 	ability_learned.emit(learned_ability)
-	AbilityEventBus.trigger_game_event(&"ability_learned", {
+	CoreSystem.event_bus.push_event("ability_learned", [{
 		"entity": get_parent(),
 		"ability_id": ability_id
-	})
+	}], true)
 	
 ## 遗忘技能
 ## [param] ability_id: StringName 技能ID
@@ -126,10 +135,10 @@ func forget_ability(ability_id: StringName) -> void:
 	_learned_abilities.erase(ability_id)
 
 	ability_forgotten.emit(ability_id)
-	AbilityEventBus.trigger_game_event(&"ability_forgotten", {
+	CoreSystem.event_bus.push_event("ability_forgotten", [{
 		"entity": get_parent(),
 		"ability_id": ability_id
-	})
+	}], true)
 
 ## 禁用技能
 ## [param] ability_id: StringName 技能ID
@@ -210,10 +219,10 @@ func try_activate_ability(ability_id: StringName, context: Dictionary = {}) -> b
 	_current_casting_ability = ability_instance
 
 	ability_activated.emit(ability_instance)
-	AbilityEventBus.trigger_game_event(&"ability_activated", {
+	CoreSystem.event_bus.push_event("ability_activated", [{
 		"entity": get_parent(),
 		"ability_id": ability_instance.get_definition().ability_id,
-	})
+	}], true)
 	
 	# 订阅技能完成信号（如果尚未订阅）
 	if not ability_instance.ability_completed.is_connected(_on_ability_completed):
@@ -240,10 +249,10 @@ func cancel_ability(ability_id: StringName = &"", context: Dictionary = {}) -> v
 		return
 
 	ability_instance.end_ability(BTNode.Status.FAILURE)
-	AbilityEventBus.trigger_game_event(&"ability_cancelled", {
+	CoreSystem.event_bus.push_event("ability_cancelled", [{
 		"entity": get_parent(),
 		"ability_id": target_id
-	})
+	}], true)
 
 func get_current_casting_ability() -> GameplayAbilityInstance:
 	return _current_casting_ability
@@ -337,10 +346,10 @@ func _on_ability_completed(ability: GameplayAbilityInstance) -> void:
 	# 结束技能
 	if _current_casting_ability == ability:
 		ability_completed.emit(ability)
-		AbilityEventBus.trigger_game_event(&"ability_completed", {
+		CoreSystem.event_bus.push_event("ability_completed", [{
 			"entity": get_parent(),
 			"ability_id": ability_id
-		})
+		}], true)
 		_current_casting_ability = null
 		_current_targeting_ability = null
 #endregion

@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="GameplayAttribute" format=3]
+
+[ext_resource type="Script" path="res://addons/gameplay_abiltiy_system/scripts/attributes/gameplay_attribute.gd" id="1_a3cjc"]
+
+[resource]
+script = ExtResource("1_a3cjc")
+attribute_id = &"mpMax"
+attribute_display_name = "最大魔法"
+attribute_description = "魔法上限。当前魔法保存在 ManaVital。零表示实体不使用魔法。"
+min_value = 0.0
+metadata/source_field = "mpMax"
+metadata/category = "core"
+metadata/unit = "点"

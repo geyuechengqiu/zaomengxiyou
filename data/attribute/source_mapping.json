@@ -1,0 +1,263 @@
+{
+  "source_project": "Speculum-4399-master",
+  "attributes": [
+    {
+      "id": "atk",
+      "display_name": "攻击",
+      "source_field": "atk",
+      "category": "core",
+      "unit": "点",
+      "resource": "atk.tres"
+    },
+    {
+      "id": "phyDef",
+      "display_name": "防御",
+      "source_field": "phyDef",
+      "category": "core",
+      "unit": "点",
+      "resource": "phyDef.tres"
+    },
+    {
+      "id": "hpMax",
+      "display_name": "最大生命",
+      "source_field": "hpMax",
+      "category": "core",
+      "unit": "点",
+      "resource": "hpMax.tres"
+    },
+    {
+      "id": "mpMax",
+      "display_name": "最大魔法",
+      "source_field": "mpMax",
+      "category": "core",
+      "unit": "点",
+      "resource": "mpMax.tres"
+    },
+    {
+      "id": "reHP",
+      "display_name": "回血",
+      "source_field": "reHP",
+      "category": "core",
+      "unit": "点/秒",
+      "resource": "reHP.tres"
+    },
+    {
+      "id": "reMP",
+      "display_name": "回魔",
+      "source_field": "reMP",
+      "category": "core",
+      "unit": "点/秒",
+      "resource": "reMP.tres"
+    },
+    {
+      "id": "hit",
+      "display_name": "命中",
+      "source_field": "hit",
+      "category": "core",
+      "unit": "评分",
+      "resource": "hit.tres"
+    },
+    {
+      "id": "dodge",
+      "display_name": "闪避",
+      "source_field": "dodge",
+      "category": "core",
+      "unit": "评分",
+      "resource": "dodge.tres"
+    },
+    {
+      "id": "critical",
+      "display_name": "暴击",
+      "source_field": "critical",
+      "category": "core",
+      "unit": "评分",
+      "resource": "critical.tres"
+    },
+    {
+      "id": "toughness",
+      "display_name": "韧性",
+      "source_field": "toughness",
+      "category": "core",
+      "unit": "评分",
+      "resource": "toughness.tres"
+    },
+    {
+      "id": "lucky",
+      "display_name": "幸运",
+      "source_field": "lucky",
+      "category": "core",
+      "unit": "评分",
+      "resource": "lucky.tres"
+    },
+    {
+      "id": "guardian",
+      "display_name": "守护",
+      "source_field": "guardian",
+      "category": "core",
+      "unit": "评分",
+      "resource": "guardian.tres"
+    },
+    {
+      "id": "lightResist",
+      "display_name": "光抗",
+      "source_field": "lightResist",
+      "category": "resistance",
+      "unit": "抗性值",
+      "resource": "lightResist.tres"
+    },
+    {
+      "id": "darkResist",
+      "display_name": "暗抗",
+      "source_field": "darkResist",
+      "category": "resistance",
+      "unit": "抗性值",
+      "resource": "darkResist.tres"
+    },
+    {
+      "id": "waterResist",
+      "display_name": "水抗",
+      "source_field": "waterResist",
+      "category": "resistance",
+      "unit": "抗性值",
+      "resource": "waterResist.tres"
+    },
+    {
+      "id": "fireResist",
+      "display_name": "火抗",
+      "source_field": "fireResist",
+      "category": "resistance",
+      "unit": "抗性值",
+      "resource": "fireResist.tres"
+    },
+    {
+      "id": "woodResist",
+      "display_name": "木抗",
+      "source_field": "woodResist",
+      "category": "resistance",
+      "unit": "抗性值",
+      "resource": "woodResist.tres"
+    },
+    {
+      "id": "soilResist",
+      "display_name": "土抗",
+      "source_field": "soilResist",
+      "category": "resistance",
+      "unit": "抗性值",
+      "resource": "soilResist.tres"
+    },
+    {
+      "id": "windResist",
+      "display_name": "风抗",
+      "source_field": "windResist",
+      "category": "resistance",
+      "unit": "抗性值",
+      "resource": "windResist.tres"
+    },
+    {
+      "id": "rayResist",
+      "display_name": "雷抗",
+      "source_field": "rayResist",
+      "category": "resistance",
+      "unit": "抗性值",
+      "resource": "rayResist.tres"
+    },
+    {
+      "id": "walkSpeed",
+      "display_name": "行走速度",
+      "source_field": "walkSpeed",
+      "category": "movement",
+      "unit": "原版速度单位",
+      "resource": "walkSpeed.tres"
+    },
+    {
+      "id": "runSpeed",
+      "display_name": "奔跑速度",
+      "source_field": "runSpeed",
+      "category": "movement",
+      "unit": "原版速度单位",
+      "resource": "runSpeed.tres"
+    },
+    {
+      "id": "jumpSpeed1",
+      "display_name": "一段跳速度",
+      "source_field": "jumpSpeed1",
+      "category": "movement",
+      "unit": "原版有符号速度",
+      "resource": "jumpSpeed1.tres"
+    },
+    {
+      "id": "jumpSpeed2",
+      "display_name": "二段跳速度",
+      "source_field": "jumpSpeed2",
+      "category": "movement",
+      "unit": "原版有符号速度",
+      "resource": "jumpSpeed2.tres"
+    },
+    {
+      "id": "enduranceMax",
+      "display_name": "最大耐久",
+      "source_field": "enduranceMax",
+      "category": "protection",
+      "unit": "点",
+      "resource": "enduranceMax.tres"
+    },
+    {
+      "id": "reEndurance",
+      "display_name": "耐久恢复",
+      "source_field": "reEndurance",
+      "category": "protection",
+      "unit": "点/秒",
+      "resource": "reEndurance.tres"
+    },
+    {
+      "id": "reduceEndurance",
+      "display_name": "耐久衰减",
+      "source_field": "reduceEndurance",
+      "category": "protection",
+      "unit": "点/秒",
+      "resource": "reduceEndurance.tres"
+    },
+    {
+      "id": "protectPoint",
+      "display_name": "保护触发阈值",
+      "source_field": "protectPoint",
+      "category": "protection",
+      "unit": "点",
+      "resource": "protectPoint.tres"
+    }
+  ],
+  "source_files": [
+    {
+      "path": "exports/zmhj_role_stats/原始配置/Role.json",
+      "sha256": "cd3444fb3e21a6aba6e122c57aed382cde9873ea2451d3d288285c06d1c0cadd"
+    },
+    {
+      "path": "exports/zmhj_role_stats/原始配置/EXP.json",
+      "sha256": "a671e32fd2dc220aaf0a648652ce8915b42c4fdb9bfe50e2c7e512236dc401d8"
+    },
+    {
+      "path": "exports/zmhj_damage_formulas/sources/com/wdcgame/engine/model/UserVOBase.as",
+      "sha256": "60909e954e33558532dd10799e25b0373a85a57697740e982f7ccd8f9af706a8"
+    },
+    {
+      "path": "out/zmhj-equip-skill-diag/com/wdcgame/engine/model/RoleConfigVO.as",
+      "sha256": "a1581cd964586598bbf0575416f0318c27fa3b9a56fd11ef066554006a6080c8"
+    },
+    {
+      "path": "out/zmhj-equip-skill-diag/com/wdcgame/engine/model/ManConfigVO.as",
+      "sha256": "cf3a9b3b1366482745f3e0365e5738f83669e10a9eb3800304545203dfea10b6"
+    },
+    {
+      "path": "out/zmhj-equip-skill-diag/models/constants/ResistType.as",
+      "sha256": "11dbac3884af0cd7da894820ff156e90847bdd4715849cad2718efa52130a45a"
+    },
+    {
+      "path": "exports/zmhj_damage_formulas/sources/models/vo/UserVO.as",
+      "sha256": "9290bdaf8d53ffb3dbf1bf7a76f66a24ebb1d2d442c7abeda56c98bc708839cd"
+    },
+    {
+      "path": "exports/zmhj_damage_formulas/sources/models/managers/BattleModelManager.as",
+      "sha256": "d253316c1057dd3f6609bebb3ad666912a78e56216e50e4210660a990d65e63e"
+    }
+  ]
+}

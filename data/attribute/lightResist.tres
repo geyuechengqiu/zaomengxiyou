@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="GameplayAttribute" format=3]
+
+[ext_resource type="Script" path="res://addons/gameplay_abiltiy_system/scripts/attributes/gameplay_attribute.gd" id="1_4vl0u"]
+
+[resource]
+script = ExtResource("1_4vl0u")
+attribute_id = &"lightResist"
+attribute_display_name = "光抗"
+attribute_description = "光系抗性。保留原始数值，负数表示弱点，不直接作为百分比。"
+metadata/source_field = "lightResist"
+metadata/category = "resistance"
+metadata/unit = "抗性值"

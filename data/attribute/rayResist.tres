@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="GameplayAttribute" format=3]
+
+[ext_resource type="Script" path="res://addons/gameplay_abiltiy_system/scripts/attributes/gameplay_attribute.gd" id="1_ktq2f"]
+
+[resource]
+script = ExtResource("1_ktq2f")
+attribute_id = &"rayResist"
+attribute_display_name = "雷抗"
+attribute_description = "雷系抗性，对应原字段 rayResist，保留原始数值并允许负数。"
+metadata/source_field = "rayResist"
+metadata/category = "resistance"
+metadata/unit = "抗性值"

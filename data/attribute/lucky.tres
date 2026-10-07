@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="GameplayAttribute" format=3]
+
+[ext_resource type="Script" path="res://addons/gameplay_abiltiy_system/scripts/attributes/gameplay_attribute.gd" id="1_wrvbi"]
+
+[resource]
+script = ExtResource("1_wrvbi")
+attribute_id = &"lucky"
+attribute_display_name = "幸运"
+attribute_description = "暴击伤害评分，与目标守护及等级共同换算暴击倍率；不用于掉落概率。"
+min_value = 0.0
+metadata/source_field = "lucky"
+metadata/category = "core"
+metadata/unit = "评分"

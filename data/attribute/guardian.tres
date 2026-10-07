@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="GameplayAttribute" format=3]
+
+[ext_resource type="Script" path="res://addons/gameplay_abiltiy_system/scripts/attributes/gameplay_attribute.gd" id="1_cdsp1"]
+
+[resource]
+script = ExtResource("1_cdsp1")
+attribute_id = &"guardian"
+attribute_display_name = "守护"
+attribute_description = "暴击伤害防护评分，用于抵消攻击者幸运造成的暴击伤害加成。"
+min_value = 0.0
+metadata/source_field = "guardian"
+metadata/category = "core"
+metadata/unit = "评分"

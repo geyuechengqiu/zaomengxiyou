@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="GameplayAttribute" format=3]
+
+[ext_resource type="Script" path="res://addons/gameplay_abiltiy_system/scripts/attributes/gameplay_attribute.gd" id="1_7hf1o"]
+
+[resource]
+script = ExtResource("1_7hf1o")
+attribute_id = &"protectPoint"
+attribute_display_name = "保护触发阈值"
+attribute_description = "保护条触发阈值；负值保留原版禁用语义。它不是当前保护累计值，也不是耐久上限。"
+metadata/source_field = "protectPoint"
+metadata/category = "protection"
+metadata/unit = "点"

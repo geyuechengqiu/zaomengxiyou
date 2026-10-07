@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="GameplayAttribute" format=3]
+
+[ext_resource type="Script" path="res://addons/gameplay_abiltiy_system/scripts/attributes/gameplay_attribute.gd" id="1_8r6ws"]
+
+[resource]
+script = ExtResource("1_8r6ws")
+attribute_id = &"critical"
+attribute_display_name = "暴击"
+attribute_description = "暴击评分，与目标韧性及双方等级换算暴击概率；区别于 crit_rate。"
+min_value = 0.0
+metadata/source_field = "critical"
+metadata/category = "core"
+metadata/unit = "评分"

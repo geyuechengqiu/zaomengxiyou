@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="BattleEquipmentDefinition" format=3]
+[ext_resource type="Script" path="res://addons/battle_foundation/definitions/battle_equipment_definition.gd" id="definition"]
+[ext_resource type="Script" path="res://addons/gameplay_abiltiy_system/scripts/attributes/gameplay_attribute_modifier.gd" id="modifier"]
+
+[sub_resource type="Resource" id="Attack"]
+script = ExtResource("modifier")
+attribute_id = &"atk"
+value = 5.0
+
+[resource]
+script = ExtResource("definition")
+definition_id = &"sample_sword"
+display_name = "阶段一示例武器"
+max_durability = 100.0
+attribute_modifiers = Array[ExtResource("modifier")]([SubResource("Attack")])

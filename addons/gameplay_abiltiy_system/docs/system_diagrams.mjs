@@ -95,11 +95,11 @@ export function generateSystemDiagrams({ diagram, text, card, edge, legend, step
      c('GameplayVital','attributes/vitals/gameplay_vital.gd',['vital_id / current_value','max_value_attribute','regen_rate_attribute'],['create_instance() / modify_value()','process_regen() / value_changed'],'Resource','runtime'),
      c('DamageCalculator','singletons/damage_calculator.gd',['_strategy: DamageLogicStrategy'],['calculate_final_damage() / set_strategy()'],'autoload Node','service')],
     [c('GameplayVitalAttributeComponent','components/gameplay_vital_attribute_component.gd',['_vitals: Array / _active_vitals','继承属性容器与等级接口'],['initialize() / modify_vital()','get_vital() / has_sufficient_vital()'],'Node : AttributeComponent','runtime'),
-     c('HealthVital','attributes/vitals/health_vital.gd',['health / max_health / is_alive: bool','damage_received / damage_applied'],['apply_damage(info, owner) / heal()','health_depleted(instigator)'],'Resource : GameplayVital','runtime'),
+     c('HealthVital','attributes/vitals/health_vital.gd',['health / hpMax / is_alive: bool','damage_received / damage_applied'],['apply_damage(info, owner) / heal()','health_depleted(instigator)'],'Resource : GameplayVital','runtime'),
      c('DamageLogicStrategy','damage/damage_logic_strategy.gd',[],['calculate(target, instigator, context)','抽象结算接口'],'abstract Resource')],
-    [c('ManaVital','attributes/vitals/mana_vital.gd',['mana / max_mana'],['try_spend_mana(amount)'],'Resource : GameplayVital','runtime'),
+    [c('ManaVital','attributes/vitals/mana_vital.gd',['mana / mpMax'],['try_spend_mana(amount)'],'Resource : GameplayVital','runtime'),
      c('DamageInfo','damage/damage_info.gd',['instigator / source_component','base_damage / final_damage / is_crit'],['可被同步受伤事件原地修改'],'RefCounted','runtime'),
-     c('SimpleDamageLogic','damage/simple_damage_logic.gd',['phy_attack / defense 属性键'],['calculate(): max(1, attack-defense)','读取伤害倍率上下文'],'Resource : DamageLogicStrategy')]
+     c('SimpleDamageLogic','damage/simple_damage_logic.gd',['atk / phyDef 属性键'],['calculate(): max(1, attack-phyDef)','读取伤害倍率上下文'],'Resource : DamageLogicStrategy')]
   ],[
     ['GameplayVitalAttributeComponent','GameplayAttributeComponent','inherit'],
     ['GameplayVitalAttributeComponent','HealthVital','owned','活跃 Vital 0..*'],
@@ -223,7 +223,7 @@ export function generateSystemDiagrams({ diagram, text, card, edge, legend, step
      c('BTWaitSignal','behavior_tree/actions/bt_wait_signal.gd',['signal_key / timeout / consume_signal'],['监听黑板值变化；超时失败'],'Resource : BTAction'),
      c('BTCheckVarDecorator','behavior_tree/decorators/bt_check_var_decorator.gd',['key / value / check_exist_only'],['检查变量并观察相关键'],'Resource : BTObserver')],
     [c('BTSwitch','behavior_tree/composites/bt_switch.gd',['variable_key: String'],['黑板索引选择 children[index]'],'Resource : BTComposite'),
-     c('BTWait','behavior_tree/actions/bt_wait.gd',['duration / duration_key'],['按真实毫秒时钟等待'],'Resource : BTAction'),
+     c('BTWait','behavior_tree/actions/bt_wait.gd',['duration / duration_key'],['累计战斗 delta 等待'],'Resource : BTAction'),
      c('BTRepeatPeriodic','behavior_tree/decorators/bt_repeat_periodic.gd',['period / return_success_on_failure'],['成功后等待再重跑'],'Resource : BTDecorator')],
     [c('BTSetVar','behavior_tree/actions/bt_set_var.gd',['variable_key / value'],['写变量；null 则删除键'],'Resource : BTAction'),
      c('BTCheckVar','behavior_tree/actions/bt_check_var.gd',['key / value / check_exist_only'],['变量不存在则 FAILURE'],'Resource : BTAction'),
@@ -237,7 +237,7 @@ export function generateSystemDiagrams({ diagram, text, card, edge, legend, step
     ['BTAction','BTNode','inherit'],['BTSequence','BTComposite','inherit'],['BTObserver','BTDecorator','inherit'],
     ['BTWaitSignal','BTAction','inherit'],['BTCheckVarDecorator','BTObserver','inherit']
   ],['节点资源共享；每个实例独立保存节点状态、节点私有存储、观察者和最多 100 条执行历史。',
-      'BTWaitSignal 监听 Blackboard，不是 AbilityEventBus；重复输入通过黑板 true / false 切换送达。',
+      'BTWaitSignal 监听 Blackboard，不是 CoreEventBus；重复输入通过黑板 true / false 切换送达。',
       '观察者优先级判断和 active_nodes 维护未完整实现；Runner.reset() 调用不存在的 Instance.reset()。']);
 
   module('targeting-system.svg','目标选择、命中查询与施法预览',[
@@ -302,7 +302,7 @@ export function generateSystemDiagrams({ diagram, text, card, edge, legend, step
 
   module('services-system.svg','自动加载服务、标签、过滤与同步事件',[
     [c('GameplayAbilitySystem','singletons/gameplay_ability_system.gd',['smart_cast: bool'],['get_component_by_interface()'],'autoload Node','service'),
-     c('AbilityEventBus','singletons/ability_event_bus.gd',[],['trigger_game_event()','game_event_occurred(type, context)'],'autoload Node','service'),
+     c('CoreEventBus','../../godot_core_system-0.0.4/source/event_system/event_bus.gd',[],['push_event(name, [context], true)','event_pushed(name, payload)'],'CoreSystem.event_bus','service'),
      c('TagManager','singletons/gameplay_tag_manager.gd',['_tag_db / relation caches','_query_cache / entity meta counts'],['register / add / remove / force_remove','has_tag / any / all / inherited'],'autoload Node','service')],
     [c('GameplayStatusComponent','components/gameplay_status_component.gd',['订阅全局广播'],['handle_event(): 转交状态实例'],'Node','runtime'),
      c('GameplayTag','tags/gameplay_tag.gd',['id / parent_tag_id','mutually_exclusive_tags / UI 字段'],['单继承关系与互斥配置']),
@@ -311,10 +311,10 @@ export function generateSystemDiagrams({ diagram, text, card, edge, legend, step
      c('DamageCalculator','singletons/damage_calculator.gd',['_strategy: DamageLogicStrategy'],['calculate_final_damage()'],'autoload Node','service'),
      c('GameplayCueManager','singletons/gameplay_cue_manager.gd',['_persistent_cues: Array'],['execute_cue() / stop_cue()','_process(): 更新每个 Cue 组件'],'autoload Node','service')]
   ],[
-    ['AbilityEventBus','GameplayStatusComponent','dependency','同步广播；无实体过滤'],
+    ['CoreEventBus','GameplayStatusComponent','dependency','同步广播；退出退订'],
     ['TagManager','GameplayTag','shared','定义库 0..*'],['FilterTargetByTags','TagManager','dependency','查询标签'],
     ['FilterTargetByTags','GameplayFilterData','inherit']
-  ],['插件启用 / 禁用时注册 / 移除这五个 Autoload。GameplayAbilitySystem 是组件查询服务，不是统一调度器。',
+  ],['GAS 注册四个 Autoload；事件直接使用 CoreSystem.event_bus。GameplayAbilitySystem 只负责组件查询。',
       '标签存于目标 Node 的 meta 引用计数及 tag_* 分组；查询默认包含父标签，不自动给父标签增加计数。',
       '事件总线同步 emit，不排队、不复制字典、不划分实体作用域；伤害事件传递同一个 DamageInfo 引用。']);
 
@@ -375,7 +375,7 @@ export function generateSystemDiagrams({ diagram, text, card, edge, legend, step
   joint+=edge('M1130 825H1190V1040H1340V1100','dependency','效果 Cue',1210,1023);
   joint+=step(50,1450,1680,235,'跨系统桥梁与宿主接口',[
     '宿主实体持有顶部三个组件；Vital 已继承属性容器。GameplayAbilitySystem 按 getter / get_component / 节点名查询。',
-    'TagManager：状态添加标签；目标策略、过滤器和 Effect 查询标签。AbilityEventBus：同步通知状态 Feature 和宿主。',
+    'TagManager：状态添加标签；目标策略、过滤器和 Effect 查询标签。CoreEventBus：同步通知状态 Feature 和宿主。',
     'DamageCalculator：Effect 使用伤害策略读取属性；HealthVital 在扣血前让事件状态修改同一个 DamageInfo。',
     'UI / 输入 / 预览位于入口；按钮与预览本身不会自动释放技能，宿主提供目标、动画、挂点及场景。',
     '清理链：状态 remove → Effect.remove → 按 source_id 撤销修改器 → 属性信号 → Vital 上限刷新。'

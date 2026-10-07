@@ -17,14 +17,18 @@ config/icon="res://icon.svg"
 
 [autoload]
 
+CoreSystem="*res://addons/godot_core_system-0.0.4/source/core_system.gd"
 GameplayAbilitySystem="*uid://u2lf4qtnkmft"
 DamageCalculator="*uid://b2jxgcjagrkdx"
 TagManager="*uid://crdi6238nttlg"
-AbilityEventBus="*uid://dly4cms3ynkwf"
 GameplayCueManager="*uid://b4t83autfu2j7"
+BattleSystem="*res://addons/battle_foundation/runtime/battle_system.gd"
 Panku="*res://addons/panku_console/console.tscn"
 DebugDraw="*res://addons/zylann.debug_draw/debug_draw.gd"
-CoreSystem="*uid://cbspmadydncps"
+
+[battle_foundation]
+
+manifest_path="res://data/battle/manifest.json"
 
 [display]
 
@@ -35,7 +39,7 @@ window/stretch/aspect="expand"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/gameplay_abiltiy_system/plugin.cfg", "res://addons/godot_core_system-0.0.4/plugin.cfg", "res://addons/panku_console/plugin.cfg", "res://addons/simple_inventory/plugin.cfg")
+enabled=PackedStringArray("res://addons/gameplay_abiltiy_system/plugin.cfg", "res://addons/godot_core_system-0.0.4/plugin.cfg", "res://addons/panku_console/plugin.cfg", "res://addons/simple_inventory/plugin.cfg", "res://addons/battle_foundation/plugin.cfg")
 
 [physics]
 

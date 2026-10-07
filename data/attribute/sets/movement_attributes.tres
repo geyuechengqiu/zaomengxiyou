@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="GameplayAttributeSet" format=3]
+
+[ext_resource type="Script" path="res://addons/gameplay_abiltiy_system/scripts/attributes/gameplay_attribute.gd" id="1_dtwg0"]
+[ext_resource type="Resource" path="res://data/attribute/walkSpeed.tres" id="2_r2c3t"]
+[ext_resource type="Resource" path="res://data/attribute/runSpeed.tres" id="3_oe5qp"]
+[ext_resource type="Resource" path="res://data/attribute/jumpSpeed1.tres" id="4_85f1c"]
+[ext_resource type="Resource" path="res://data/attribute/jumpSpeed2.tres" id="5_sm8fv"]
+[ext_resource type="Script" path="res://addons/gameplay_abiltiy_system/scripts/utilties/scalable_value.gd" id="6_4vcbv"]
+[ext_resource type="Script" path="res://addons/gameplay_abiltiy_system/scripts/attributes/gameplay_attribute_set.gd" id="7_jik83"]
+
+[resource]
+script = ExtResource("7_jik83")
+attributes = Dictionary[ExtResource("1_dtwg0"), float]({
+ExtResource("2_r2c3t"): 0.0,
+ExtResource("3_oe5qp"): 0.0,
+ExtResource("4_85f1c"): 0.0,
+ExtResource("5_sm8fv"): 0.0
+})

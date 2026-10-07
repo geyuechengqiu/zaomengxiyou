@@ -15,7 +15,7 @@ func _ready() -> void:
 	vital_component.modify_vital(&"health", -20.0)
 	assert(is_equal_approx(health.current_value, 80.0))
 	# 直接验证插件联动，不引入业务衍生属性公式。
-	vital_component.set_base_value(&"max_health", 150.0)
+	vital_component.set_base_value(&"hpMax", 150.0)
 	assert(is_equal_approx(health.get_max_value(), 150.0))
 	assert(is_equal_approx(health.current_value, 80.0))
 	vital_component.modify_vital(&"mana", -30.0)
@@ -25,7 +25,7 @@ func _ready() -> void:
 	var effect := GE_ApplyDamage.new()
 	effect.apply(self, self, {})
 	assert(is_equal_approx(health.current_value, 65.0))
-	vital_component.set_base_value(&"defense", 10.0)
+	vital_component.set_base_value(&"phyDef", 10.0)
 	effect.apply(self, self, {})
 	assert(is_equal_approx(health.current_value, 55.0))
 	print("✅ Vital 初始化、上限联动、恢复和内置伤害策略测试通过")

@@ -122,18 +122,22 @@ classDiagram('core-input-state.svg', '输入、操作意图与逻辑状态机', 
    node('InputConfigAdapter', 'source/input_system/config/input_config_adapter.gd', 'RefCounted', 'ConfigManager 的 input 配置段', 'save_config() / reset_to_default()'),
    node('ConfigManager', 'source/config_system/config_manager.gd', 'Node', 'ConfigFile / _modified', 'get_section() / set_section()')],
   [node('CoreOperationManager', 'source/operation_system/operation_manager.gd', 'Node', '控制器 WeakRef 注册表', 'create_controller()', 'register_controller()'),
-   node('CoreOperationController', 'source/operation_system/operation_controller.gd', 'Node', '来源强度聚合 / UI 优先 / 失焦清理', 'intent_emitted / submit_intent()'),
-   node('CoreOperationProfile', 'source/operation_system/operation_profile.gd', 'Resource', 'bindings / axes', 'bind_intent() / bind_axis()')],
+   node('CoreOperationController', 'source/operation_system/operation_controller.gd', 'Node', '按下 / 持有 / 释放 / 强度变化', 'UI 优先 / 双击 / 独立控制权'),
+   node('CoreOperationProfile', 'source/operation_system/operation_profile.gd', 'Resource', '映射 / 默认键 / 缓存与长按窗口', '共享只读定义')],
   [node('StateMachineManager', 'source/state_machine/state_machine_manager.gd', 'Node', 'SMRegistration / 驱动标志', 'register_state_machine() / 注销'),
    node('BaseStateMachine', 'source/state_machine/base_state_machine.gd', 'RefCounted : BaseState', 'states / current_state / values', 'start() / transition_local() / stop()'),
    node('BaseState', 'source/state_machine/base_state.gd', 'RefCounted', 'agent / state_machine / is_active', 'enter() / exit() / update()')],
-  [null,node('CoreOperationIntent', 'source/operation_system/operation_intent.gd', 'InputEventAction', 'origin / payload / action / strength', 'is_intent_pressed() / is_intent_released()'),null]
+  [node('CoreOperationBindings', 'source/operation_system/operation_bindings.gd', 'Node', 'InputMap 安装 / 捕获 / 冲突 / 配置', 'start_remap() / set_binding()'),
+   node('CoreOperationIntent', 'source/operation_system/operation_intent.gd', 'InputEventAction', 'phase / sequence / input_time', 'held_seconds / payload 快照'),
+   node('CoreOperationBuffer', 'source/operation_system/operation_buffer.gd', 'RefCounted', 'PRESSED 有界 FIFO / 输入秒过期', 'peek() / consume(sequence)')]
 ], [
   ['InputManager','InputVirtualAxis','持有'], ['InputManager','InputEventProcessor','持有'],
   ['InputConfigAdapter','InputConfig','持有'], ['InputConfigAdapter','ConfigManager','配置读写'],
   ['CoreOperationManager','CoreOperationController','弱引用'], ['CoreOperationController','CoreOperationProfile','配置'],
   ['StateMachineManager','BaseStateMachine','驱动'], ['BaseStateMachine','BaseState','继承','inherit'],
   ['CoreOperationController','CoreOperationIntent','生成事件'],
+  ['CoreOperationManager','CoreOperationBindings','持有'],
+  ['CoreOperationController','CoreOperationBuffer','按下缓存'],
   ['CoreOperationIntent','BaseStateMachine','消费者转发','bridge']
 ], ['InputManager 轮询与 OperationController 语义意图是并列通道，没有自动连接。',
   '控制器由角色挂树；状态机由管理器或角色驱动，须避免重复 update。',
@@ -171,22 +175,22 @@ classDiagram('core-persistence.svg', '存档、IO 策略与线程执行', [
 // #region 与 GAS 联合接入图
 classDiagram('core-gas-integration.svg', 'CoreSystem 与 GAS：现有链路及适配边界', [
   [node('OperationController', 'source/operation_system/operation_controller.gd', 'Core · Node', '输入来源 → 语义意图', 'UI 优先 / intent_emitted'),
-   node('RoleAdapter', '', '调用者需编写', '意图 ID → 技能 ID / 状态机规则', '初始化组件 / 连接并清理订阅'),
+   node('RoleAdapter', '../battle_foundation/input/battle_player_operations.gd', 'BattlePlayerOperations · 已接入', '公共意图 / ability_slots / 角色钩子', '战斗许可 / 缓存消费 / 控制权'),
    node('AbilityComponent', '../gameplay_abiltiy_system/scripts/components/gameplay_ability_component.gd', 'GAS · Node', '技能实例 → 行为树 → Effect', 'try_activate_ability()')],
-  [node('CoreEventBus', 'source/event_system/event_bus.gd', 'Core · Node', 'Array 参数 / 优先级 / 过滤', 'TriggerManager → GameplayTrigger'),
-   node('EventAdapter', '', '调用者需编写', 'Dictionary 负载 / actor 与 target', '防回环 / 退出时退订'),
-   node('AbilityEventBus', '../gameplay_abiltiy_system/scripts/singletons/ability_event_bus.gd', 'GAS · Autoload', '技能、受伤等事件', '同步事件 → 状态事件效果')],
+  [node('GAS Event Publishers', '../gameplay_abiltiy_system/scripts/attributes/vitals/health_vital.gd', 'GAS · 已接入', '技能、状态、伤害与技能栏事件', 'push_event(name, [context], true)'),
+   node('CoreEventBus', 'source/event_system/event_bus.gd', 'Core · Node', 'Array 参数 / 优先级 / 过滤', 'TriggerManager → GameplayTrigger'),
+   node('GameplayStatusComponent', '../gameplay_abiltiy_system/scripts/components/gameplay_status_component.gd', 'GAS · 已接入', 'event_pushed → handle_event()', '入树订阅 / 离树退订')],
   [node('SaveManager', 'source/save_system/save_manager.gd', 'Core · Node', 'saveable 节点 / save() / load_data()', '配置、场景、实体与节点状态'),
    node('SaveableAdapter', '', '调用者需编写', '序列化基本值与稳定 ID', 'GAS 初始化之后重建运行状态'),
    node('Attributes / Vital / Status', '../gameplay_abiltiy_system/scripts/components/gameplay_status_component.gd', 'GAS · 组件协作', '属性修改 / 伤害结算 / 持续效果', 'Effect → 组件 → Cue / 事件')]
 ], [
-  ['OperationController','RoleAdapter','接入','bridge'], ['RoleAdapter','AbilityComponent','调用','bridge'],
-  ['AbilityEventBus','EventAdapter','接入','bridge'], ['EventAdapter','CoreEventBus','转发','bridge'],
+  ['OperationController','RoleAdapter','接入'], ['RoleAdapter','AbilityComponent','调用'],
+  ['GAS Event Publishers','CoreEventBus','同步推送'], ['CoreEventBus','GameplayStatusComponent','同步广播'],
   ['SaveManager','SaveableAdapter','协议','bridge'], ['SaveableAdapter','Attributes / Vital / Status','重建','bridge'],
   ['AbilityComponent','Attributes / Vital / Status','Effect 执行']
-], ['虚线适配器尚未实现；当前项目启动两套插件，不等于完成输入/事件/存档联动。',
+], ['事件直接使用 CoreEventBus；输入已由 BattlePlayerOperations 接入，存档仍需适配。',
   'Core 标签树与 GAS 引用计数标签独立；TimeManager 不自动缩放 GAS 冷却和状态。',
-  '实线只表示已有 GAS 内部执行关系；桥接示例与清理职责见 implementation-analysis.md。']);
+  'GAS 状态监听先于按名订阅的优先级回调；全局事件仍需宿主提供实体作用域。']);
 // #endregion
 
 // #region 全部脚本索引

@@ -4,7 +4,7 @@
   <marker id="inherit" viewBox="0 0 14 14" refX="13" refY="7" markerWidth="13" markerHeight="13" orient="auto"><path d="M1 1L13 7L1 13Z" fill="#f9fbff" stroke="#536b89" stroke-width="1.5"/></marker></defs>
   <style>text{font-family:'Microsoft YaHei','Noto Sans CJK SC',sans-serif;fill:#30445d}.title{font-size:32px;font-weight:600}.subtitle{font-size:19px}.name{font-family:Consolas,monospace;font-size:23px}.type{font-size:17px}.body{font-size:19px}.label{font-size:17px;paint-order:stroke;stroke:#f9fbff;stroke-width:8px;stroke-linejoin:round}.note{font-size:20px}.card{fill:#edf4ff;stroke:#91a6c1;stroke-width:1.6}.rule{stroke:#cbd8e8;fill:none}.edge{fill:none;stroke:#536b89;stroke-width:2;marker-end:url(#arrow)}.bridge{stroke-dasharray:8 6}.inherit{marker-end:url(#inherit)}</style>
   <rect width="1800" height="2473" fill="#f9fbff"/>
-  <text x="50" y="55" class="title">输入、操作意图与逻辑状态机</text><text x="50" y="95" class="subtitle">基于当前导入源码；框中列出关键成员，完整接口见 source-index.md</text><text x="50" y="143" class="subtitle">实线：持有 / 调用；空心三角：继承；虚线：调用者需实现的适配；点击类框可打开源码</text><path d="M580 320H640" class="edge edge"/><text x="610" y="292" class="label" text-anchor="middle">持有</text><path d="M320 440V550" class="edge edge"/><text x="332" y="495" class="label">持有</text><path d="M640 1020H580" class="edge edge"/><text x="610" y="992" class="label" text-anchor="middle">持有</text><path d="M1160 1020H1220" class="edge edge"/><text x="1190" y="992" class="label" text-anchor="middle">配置读</text><text x="1190" y="1014" class="label" text-anchor="middle">写</text><path d="M580 1370H640" class="edge edge"/><text x="610" y="1342" class="label" text-anchor="middle">弱引用</text><path d="M1160 1370H1220" class="edge edge"/><text x="1190" y="1342" class="label" text-anchor="middle">配置</text><path d="M580 1720H640" class="edge edge"/><text x="610" y="1692" class="label" text-anchor="middle">驱动</text><path d="M1160 1720H1220" class="edge inherit"/><text x="1190" y="1692" class="label" text-anchor="middle">继承</text><path d="M900 1490V1548H604V2253H900V2190" class="edge edge"/><text x="752" y="2245" class="label">生成事件</text><path d="M900 1950V1840" class="edge bridge"/><text x="912" y="1895" class="label">消费者转发</text><a href="../source/input_system/input_manager.gd"><g><rect x="60" y="200" width="520" height="240" rx="12" class="card"/>
+  <text x="50" y="55" class="title">输入、操作意图与逻辑状态机</text><text x="50" y="95" class="subtitle">基于当前导入源码；框中列出关键成员，完整接口见 source-index.md</text><text x="50" y="143" class="subtitle">实线：持有 / 调用；空心三角：继承；虚线：调用者需实现的适配；点击类框可打开源码</text><path d="M580 320H640" class="edge edge"/><text x="610" y="292" class="label" text-anchor="middle">持有</text><path d="M320 440V550" class="edge edge"/><text x="332" y="495" class="label">持有</text><path d="M640 1020H580" class="edge edge"/><text x="610" y="992" class="label" text-anchor="middle">持有</text><path d="M1160 1020H1220" class="edge edge"/><text x="1190" y="992" class="label" text-anchor="middle">配置读</text><text x="1190" y="1014" class="label" text-anchor="middle">写</text><path d="M580 1370H640" class="edge edge"/><text x="610" y="1342" class="label" text-anchor="middle">弱引用</text><path d="M1160 1370H1220" class="edge edge"/><text x="1190" y="1342" class="label" text-anchor="middle">配置</text><path d="M580 1720H640" class="edge edge"/><text x="610" y="1692" class="label" text-anchor="middle">驱动</text><path d="M1160 1720H1220" class="edge inherit"/><text x="1190" y="1692" class="label" text-anchor="middle">继承</text><path d="M900 1490V1548H604V2253H900V2190" class="edge edge"/><text x="752" y="2245" class="label">生成事件</text><path d="M320 1490V1512H48V2217H320V2190" class="edge edge"/><text x="184" y="2209" class="label">持有</text><path d="M900 1490V1530H616V2235H1480V2190" class="edge edge"/><text x="1048" y="2227" class="label">按下缓存</text><path d="M900 1950V1840" class="edge bridge"/><text x="912" y="1895" class="label">消费者转发</text><a href="../source/input_system/input_manager.gd"><g><rect x="60" y="200" width="520" height="240" rx="12" class="card"/>
     <path d="M60 283H580" class="rule"/>
     <text x="80" y="228" class="type">«Node»</text><text x="80" y="262" class="name">InputManager</text>
     <text x="80" y="319" class="body">virtual_axis / input_buffer / input_state</text><text x="80" y="349" class="body">_input() / _process() / action_triggered</text>
@@ -47,11 +47,11 @@
     </g></a><a href="../source/operation_system/operation_controller.gd"><g><rect x="640" y="1250" width="520" height="240" rx="12" class="card"/>
     <path d="M640 1333H1160" class="rule"/>
     <text x="660" y="1278" class="type">«Node»</text><text x="660" y="1312" class="name">CoreOperationController</text>
-    <text x="660" y="1369" class="body">来源强度聚合 / UI 优先 / 失焦清理</text><text x="660" y="1399" class="body">intent_emitted / submit_intent()</text>
+    <text x="660" y="1369" class="body">按下 / 持有 / 释放 / 强度变化</text><text x="660" y="1399" class="body">UI 优先 / 双击 / 独立控制权</text>
     </g></a><a href="../source/operation_system/operation_profile.gd"><g><rect x="1220" y="1250" width="520" height="240" rx="12" class="card"/>
     <path d="M1220 1333H1740" class="rule"/>
     <text x="1240" y="1278" class="type">«Resource»</text><text x="1240" y="1312" class="name">CoreOperationProfile</text>
-    <text x="1240" y="1369" class="body">bindings / axes</text><text x="1240" y="1399" class="body">bind_intent() / bind_axis()</text>
+    <text x="1240" y="1369" class="body">映射 / 默认键 / 缓存与长按窗口</text><text x="1240" y="1399" class="body">共享只读定义</text>
     </g></a><a href="../source/state_machine/state_machine_manager.gd"><g><rect x="60" y="1600" width="520" height="240" rx="12" class="card"/>
     <path d="M60 1683H580" class="rule"/>
     <text x="80" y="1628" class="type">«Node»</text><text x="80" y="1662" class="name">StateMachineManager</text>
@@ -64,8 +64,16 @@
     <path d="M1220 1683H1740" class="rule"/>
     <text x="1240" y="1628" class="type">«RefCounted»</text><text x="1240" y="1662" class="name">BaseState</text>
     <text x="1240" y="1719" class="body">agent / state_machine / is_active</text><text x="1240" y="1749" class="body">enter() / exit() / update()</text>
+    </g></a><a href="../source/operation_system/operation_bindings.gd"><g><rect x="60" y="1950" width="520" height="240" rx="12" class="card"/>
+    <path d="M60 2033H580" class="rule"/>
+    <text x="80" y="1978" class="type">«Node»</text><text x="80" y="2012" class="name">CoreOperationBindings</text>
+    <text x="80" y="2069" class="body">InputMap 安装 / 捕获 / 冲突 / 配置</text><text x="80" y="2099" class="body">start_remap() / set_binding()</text>
     </g></a><a href="../source/operation_system/operation_intent.gd"><g><rect x="640" y="1950" width="520" height="240" rx="12" class="card"/>
     <path d="M640 2033H1160" class="rule"/>
     <text x="660" y="1978" class="type">«InputEventAction»</text><text x="660" y="2012" class="name">CoreOperationIntent</text>
-    <text x="660" y="2069" class="body">origin / payload / action / strength</text><text x="660" y="2099" class="body">is_intent_pressed() / is_intent_released()</text>
+    <text x="660" y="2069" class="body">phase / sequence / input_time</text><text x="660" y="2099" class="body">held_seconds / payload 快照</text>
+    </g></a><a href="../source/operation_system/operation_buffer.gd"><g><rect x="1220" y="1950" width="520" height="240" rx="12" class="card"/>
+    <path d="M1220 2033H1740" class="rule"/>
+    <text x="1240" y="1978" class="type">«RefCounted»</text><text x="1240" y="2012" class="name">CoreOperationBuffer</text>
+    <text x="1240" y="2069" class="body">PRESSED 有界 FIFO / 输入秒过期</text><text x="1240" y="2099" class="body">peek() / consume(sequence)</text>
     </g></a><rect x="50" y="2290" width="1700" height="143" rx="12" fill="#f0edff" stroke="#91a6c1"/><text x="75" y="2328" class="note">InputManager 轮询与 OperationController 语义意图是并列通道，没有自动连接。</text><text x="75" y="2359" class="note">控制器由角色挂树；状态机由管理器或角色驱动，须避免重复 update。</text><text x="75" y="2390" class="note">输入 Handler、配置适配器与层级切换的现有限制见实现分析。</text></svg>

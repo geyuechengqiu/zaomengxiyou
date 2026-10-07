@@ -1,0 +1,91 @@
+{
+  "version": 1,
+  "source_project": "Speculum-4399-master",
+  "character_id": "孙悟空",
+  "skill_id": "sunwukong_attack1",
+  "spine_version": "4.3.23",
+  "source_fps": 30,
+  "bone_count": 35,
+  "slot_count": 34,
+  "animation_count": 44,
+  "runtime_skin_count": 206,
+  "empty_default_skin_excluded": true,
+  "action_frames": {
+    "idle": 35,
+    "move": 25,
+    "run": 16,
+    "jump": 20,
+    "fall": 17,
+    "hurt": 8,
+    "death": 31,
+    "attack_1": 10
+  },
+  "attack": {
+    "shootFrame": 4,
+    "actionName": "attack1",
+    "canWalk": 0,
+    "canUseInGround": 1,
+    "canUseInSKy": 0,
+    "cd": 0,
+    "atkRange": [
+      0,
+      -200,
+      130,
+      300
+    ],
+    "sample_source_unit_scale": 2,
+    "sample_hit_check": "single rectangle query at frame 4; original persistent sensor not ported"
+  },
+  "registration": {
+    "fixed_skeleton_offset": [
+      0,
+      -4.2384
+    ],
+    "display_scale": 2,
+    "preserve_attachment_offsets": true,
+    "preserve_draw_order": true,
+    "skin_does_not_reset_tracks": true
+  },
+  "sources": [
+    {
+      "sha256": "ebbe8b4c52f637a7f89dce2cba0b7f62308ab8857f4e06efbe5770be3a1c56bf",
+      "path": "exports/character_2001_wukong_placeholders/spine_wukong_registration_fixed/wukong.json"
+    },
+    {
+      "sha256": "9e98c3c102bcbf3e17b84f20cdb8db147fb85e1ed3ea888f7f548116884a5ffe",
+      "path": "exports/character_2001_wukong_placeholders/dragonbones56/1_V427/1_V427_ske.json"
+    },
+    {
+      "sha256": "18d41c1d66d763c1813d667a4b057e0d2b77821cb458ca95f5a82e67d8637c1d",
+      "path": "exports/character_2001_wukong_placeholders/spine_wukong_registration_fixed/装备名称与ID索引.json"
+    },
+    {
+      "sha256": "cd3444fb3e21a6aba6e122c57aed382cde9873ea2451d3d288285c06d1c0cadd",
+      "path": "exports/zmhj_role_stats/原始配置/Role.json"
+    },
+    {
+      "sha256": "84dfa46b6e8d332927ffa7372733ba99bcd411b68153d90ab9e7a2dcfd2df2a1",
+      "path": "exports/zmhj_role_stats/原始配置/Skill.json"
+    },
+    {
+      "sha256": "6f85e91714f99dd9b629c640d62e1d9db46bb09bb5647451b01a4c1c5208ecb1",
+      "path": "out/zmhj-equip-skill-diag/com/wdcgame/engine/entitys/CharEntity.as"
+    }
+  ],
+  "unchanged_runtime_assets": [
+    {
+      "sha256": "ec2c22a4457d799f337083778d7d45bbcf20539210b3b5a3f02151d975185358",
+      "path": "assets/skelton/char/sunwukong/wukong.skel"
+    },
+    {
+      "sha256": "ec7db0eedebee869cae8f33f3a8eb5f96d0252175e997a2becefb907ed0664ac",
+      "path": "assets/skelton/char/sunwukong/wukong.atlas"
+    },
+    {
+      "sha256": "ad5c493328c08d0aa91113ee39286168912aa1d990c4019958ab9b3de425522b",
+      "path": "assets/skelton/char/sunwukong/wukong.png"
+    }
+  ],
+  "source_character_id": "2001",
+  "source_skill_id": "1001010"
+}

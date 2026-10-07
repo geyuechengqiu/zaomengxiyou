@@ -3,11 +3,11 @@ class_name SimpleDamageLogic
 #region 配置与运行状态
 
 ## ARPG 伤害计算策略
-## 公式：(攻击力 - 防御力) * (1 + 暴击倍数 * 暴击率)
+## 当前公式：max(1, atk - phyDef) × 上下文倍率；原版暴击评分尚未参与结算。
 
-@export var attack_attribute: StringName = &"phy_attack"  ## 攻击力属性
-@export var defense_attribute: StringName = &"defense"   ## 防御力属性
-@export var crit_rate_attribute: StringName = &"crit_rate"  ## 暴击率属性
+@export var attack_attribute: StringName = &"atk"  ## 攻击力属性
+@export var defense_attribute: StringName = &"phyDef"   ## 防御力属性
+@export var crit_rate_attribute: StringName = &""  ## 预留概率属性 ID；原版 critical 是评分，默认不绑定
 @export var crit_multiplier: float = 2.0  ## 暴击倍数
 #endregion
 #region 公共接口
