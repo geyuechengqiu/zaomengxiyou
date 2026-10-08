@@ -303,6 +303,7 @@ func _verify_role_and_gui() -> void:
 	add_child(demo)
 	demo.set_physics_process(false)
 	session = demo.session
+	session.damage_strategy = SimpleDamageLogic.new()
 	session.set_physics_process(false)
 	CoreSystem.event_bus.event_pushed.connect(_on_event)
 	await _step(1.0 / 60.0, 6)

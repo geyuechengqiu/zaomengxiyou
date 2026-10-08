@@ -1,6 +1,6 @@
 # 角色动画预览与单一攻击判定框
 
-[sunwukong_visual.tscn](sunwukong_visual.tscn) 保存 SpineSprite、SpineAnimationTrack、两个 AnimationPlayer 和**一个** AttackHitbox / CollisionShape2D。[角色物理场景](../battle2d/sunwukong_2d.tscn) 实例化此表现场景。所有技能、所有命中序号复用同一节点与矩形形状，运行时不创建额外判定框。
+[sunwukong_visual.tscn](sunwukong_visual.tscn) 保存角色与攻击特效 SpineSprite、SpineAnimationTrack、主与原生子 AnimationPlayer，以及**一个** AttackHitbox / CollisionShape2D。[角色物理场景](../battle2d/sunwukong_2d.tscn) 实例化此表现场景。所有技能、所有命中序号复用同一节点与矩形形状，运行时不创建额外判定框。五段普攻的原版触发帧、特效编辑和跳跃/移速调参见 [孙悟空配置说明](sunwukong-config.md)。
 
 动画结构参考本机 `godot-spine-example/test_sunwukong.tscn`，来源与哈希见 [visual_source_mapping.json](visual_source_mapping.json)。主 AnimationPlayer 的 Animation 类型轨道控制原生子播放器，通过 SpineAnimationTrack 驱动姿态。[Spine 官方说明](https://esotericsoftware.com/spine-godot#SpineAnimationTrack)
 
@@ -9,12 +9,17 @@ AnimationAdapter                 SpineAnimationAdapter：语义动作接口
 ├─ SpineVisual                   SpineSprite：骨架、注册点、皮肤
 │  └─ SpineAnimationTrack         原生辅助节点
 │     └─ SpineVisual Track 0      原生 AnimationPlayer：素材动作及循环版本
-├─ AnimationPlayer               主播放器：14 个语义动作
-└─ AttackHitbox                  BattleHitbox2D：所有技能共用
-   └─ CollisionShape2D           唯一 RectangleShape2D，由技能数据填充
+├─ AnimationPlayer               主播放器：16 个语义动作
+├─ AttackHitbox                  BattleHitbox2D：所有技能共用
+│  └─ CollisionShape2D           唯一 RectangleShape2D，由技能数据填充
+└─ AttackEffects                 2 倍素材比例，随角色朝向镜像
+   ├─ Primary                    五段普攻、跑攻、跳攻原版特效，各自原生轨道与子播放器
+   └─ Secondary                  第四段第8帧特效，偏移(-17,-4)、缩放(-1,1)
 ```
 
 ![动画与单一判定框联合类图](../../addons/battle_foundation/docs/animation-authoring.svg)
+
+跑攻 `run_attack` 与跳攻 `jump_attack` 也已预置身体、特效与单一攻击框轨道；原帧号、独立状态和第四段转身规则见 [上下文攻击说明](../battle2d/wukong-context-attacks.md)。
 
 ## 编辑技能判定并预览
 

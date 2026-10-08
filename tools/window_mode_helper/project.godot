@@ -1,0 +1,17 @@
+; Minimal editor-settings helper. No game plugins or autoloads.
+; Verification plugin is inert unless --verify-window-mode is explicitly passed.
+
+config_version=5
+
+[application]
+
+config/name="EditorWindowModeHelper"
+config/features=PackedStringArray("4.7", "Forward Plus")
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://verification_plugin.cfg")
+
+[rendering]
+
+rendering_device/driver.windows="d3d12"

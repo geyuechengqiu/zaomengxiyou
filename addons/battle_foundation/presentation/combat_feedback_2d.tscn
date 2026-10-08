@@ -1,22 +1,34 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene format=3]
 [ext_resource type="Script" path="res://addons/battle_foundation/presentation/battle_combat_feedback_2d.gd" id="script"]
+[ext_resource type="PackedScene" path="res://data/effects/hurt_effect_all.tscn" id="hit_effect"]
+[ext_resource type="PackedScene" path="res://data/effects/damage_number.tscn" id="damage_number"]
+[ext_resource type="Script" path="res://addons/battle_foundation/presentation/battle_damage_number_layer_2d.gd" id="number_layer"]
+[ext_resource type="PackedScene" path="res://data/effects/monster_health_bar.tscn" id="health_bar"]
+[sub_resource type="StyleBoxFlat" id="protect_background"]
+bg_color = Color(0.045, 0.14, 0.17, 0.92)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_left = 3
+corner_radius_bottom_right = 3
+[sub_resource type="StyleBoxFlat" id="protect_fill"]
+bg_color = Color(0.24, 0.8, 0.95, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_left = 3
+corner_radius_bottom_right = 3
 [node name="CombatFeedback" type="Node2D"]
 script = ExtResource("script")
-[node name="HealthBar" type="ProgressBar" parent="."]
-offset_left = -68.0
-offset_top = -215.0
-offset_right = 68.0
-offset_bottom = -202.0
-mouse_filter = 2
-show_percentage = false
+number_scene = ExtResource("damage_number")
+[node name="HealthBar" parent="." instance=ExtResource("health_bar")]
 [node name="HealthLabel" type="Label" parent="."]
+visible = false
 offset_left = -68.0
 offset_top = -239.0
 offset_right = 68.0
 offset_bottom = -215.0
 mouse_filter = 2
 horizontal_alignment = 1
-theme_override_font_sizes/font_size = 17
+theme_override_font_sizes/font_size = 26
 [node name="DamageLabel" type="Label" parent="."]
 offset_left = -68.0
 offset_top = -260.0
@@ -25,4 +37,31 @@ offset_bottom = -230.0
 mouse_filter = 2
 horizontal_alignment = 1
 theme_override_colors/font_color = Color(1, 0.78, 0.3, 1)
-theme_override_font_sizes/font_size = 26
+theme_override_font_sizes/font_size = 32
+[node name="HitEffect" parent="." instance=ExtResource("hit_effect")]
+[node name="ProtectionBar" type="ProgressBar" parent="."]
+visible = false
+offset_left = -68.0
+offset_top = -199.0
+offset_right = 68.0
+offset_bottom = -188.0
+mouse_filter = 2
+show_percentage = false
+theme_override_colors/font_color = Color(0.4, 0.9, 1, 1)
+theme_override_styles/background = SubResource("protect_background")
+theme_override_styles/fill = SubResource("protect_fill")
+[node name="ProtectionLabel" type="Label" parent="."]
+visible = false
+offset_left = -130.0
+offset_top = -185.0
+offset_right = 130.0
+offset_bottom = -156.0
+mouse_filter = 2
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 20
+theme_override_colors/font_color = Color(0.4, 0.9, 1, 1)
+[node name="DamageNumbers" type="CanvasLayer" parent="."]
+layer = 10
+[node name="Rows" type="Node2D" parent="DamageNumbers"]
+script = ExtResource("number_layer")
+number_scene = ExtResource("damage_number")

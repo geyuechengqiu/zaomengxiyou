@@ -48,6 +48,7 @@ func _ready() -> void:
 		add_child(body)
 	session = BattleSystem.create_session(self, MANIFEST, 2001)
 	assert(session != null)
+	session.damage_strategy = load("res://data/damage/original_strategy.tres")
 	session.set_time_scale(1.0)
 	camera = Camera2D.new()
 	camera.position = Vector2(640, 400)
@@ -126,7 +127,7 @@ func _on_console_visibility(open: bool) -> void:
 		operations.set_control_blocked(&"console", open)
 
 func _on_operation(intent: CoreOperationIntent) -> void:
-	last_operation = "%s / %s / %.2fs%s" % [intent.action, intent.get_phase_name(), intent.held_seconds, " / 双击" if intent.payload.get("double_tap", false) else ""]
+	last_operation = "%s / %s / %.0fms%s" % [intent.action, intent.get_phase_name(), intent.held_seconds * 1000.0, " / 双击" if intent.payload.get("double_tap", false) else ""]
 
 func _unhandled_key_input(event: InputEvent) -> void:
 	if not event is InputEventKey or not event.pressed or event.echo or player == null:
@@ -147,11 +148,11 @@ func _process(_delta: float) -> void:
 	if not is_instance_valid(player):
 		return
 	var anim := player.animation
-	info.text = "战斗状态  %s     动作  %s     进度  %3.0f%% / %.3fs\n生命  %.0f / %.0f     脚底  (%0.1f, %0.1f)     朝向  %s     时钟  %.2fs  ×%.2f%s\n左靶生命  %.0f     右靶生命  %.0f     外观  %s" % [player.action_state.get_name(), anim.get_current_action(), anim.get_playback_progress() * 100, anim.get_action_duration(anim.get_current_action()), player.attributes.get_vital_value(&"health"), player.attributes.get_value(&"hpMax"), player.position.x, player.position.y, "右" if anim.get_facing() > 0 else "左", session.clock.elapsed, session.clock.time_scale, "（暂停）" if session.clock.paused else "", left_target.attributes.get_vital_value(&"health"), right_target.attributes.get_vital_value(&"health"), ", ".join(anim.get_skin_names())]
+	info.text = "战斗状态  %s     动作  %s     进度  %3.0f%% / %.0fms\n生命  %.0f / %.0f     脚底  (%.0f, %.0f)     朝向  %s     时钟  %.0fms  缩放%.0f%%%s\n左靶生命  %.0f     右靶生命  %.0f     外观  %s" % [player.action_state.get_name(), anim.get_current_action(), anim.get_playback_progress() * 100, anim.get_action_duration(anim.get_current_action()) * 1000.0, player.attributes.get_vital_value(&"health"), player.attributes.get_value(&"hpMax"), player.position.x, player.position.y, "右" if anim.get_facing() > 0 else "左", session.clock.elapsed * 1000.0, session.clock.time_scale * 100.0, "（暂停）" if session.clock.paused else "", left_target.attributes.get_vital_value(&"health"), right_target.attributes.get_vital_value(&"health"), ", ".join(anim.get_skin_names())]
 	if is_instance_valid(operations):
 		info.text += "\n操作意图  %s     缓存  %d" % [last_operation, operations.controller.peek_buffered_intents().size()]
 		var bindings := CoreSystem.operation_manager.bindings
-		_help.text = "移动 %s / %s · 二段跳 %s · 连按 %s 五段普攻 · 法宝 %s · 无双 %s · 双击方向奔跑\nEsc 菜单/改键 · F1 受击 / F2 死亡 / F4 重生 / F8 翻转 · F9 暂停 / F10 慢动作 / F11 停顿 · 1/2 换装" % [bindings.get_binding_text(&"battle_player.left"), bindings.get_binding_text(&"battle_player.right"), bindings.get_binding_text(&"battle_player.jump"), bindings.get_binding_text(&"battle_player.attack"), bindings.get_binding_text(&"battle_player.magic_weapon"), bindings.get_binding_text(&"battle_player.wushuang")]
+		_help.text = "移动 %s / %s · 二段跳 %s · 连按 %s 五段普攻/跑攻/跳攻 · 法宝 %s · 无双 %s · 双击方向奔跑\nEsc 菜单/改键 · F1 受击 / F2 死亡 / F4 重生 / F8 翻转 · F9 暂停 / F10 慢动作 / F11 停顿 · 1/2 换装" % [bindings.get_binding_text(&"battle_player.left"), bindings.get_binding_text(&"battle_player.right"), bindings.get_binding_text(&"battle_player.jump"), bindings.get_binding_text(&"battle_player.attack"), bindings.get_binding_text(&"battle_player.magic_weapon"), bindings.get_binding_text(&"battle_player.wushuang")]
 	info.text += "\n支撑 %s · 跳跃预算 %d / %d · 连击 %d / 5 · 下一段 %s" % ["地面" if player.motion.grounded else "空中", player.motion.jumps_used, player.action_profile.maximum_jumps, player.combo.index + 1, "已预约" if player.combo.queued_next else "未预约"]
 
 func cycle_outfit() -> void:
@@ -201,7 +202,9 @@ func _on_event(event_id: String, payload: Array) -> void:
 		return
 	if event_id != "battle.attack.hit" or payload.size() != 1 or payload[0].get("battle_id") != session.battle_id:
 		return
-	message.text = "普攻第 %d 段 / 命中 %d：素材第 %d 帧 = %.3fs，伤害 %.1f" % [payload[0].combo_step, payload[0].hit_index, payload[0].source_frame, payload[0].skill_time, payload[0].damage]
+	var data: Dictionary = payload[0]
+	var label := "跑动攻击" if data.get("action") == &"run_attack" else ("跳跃攻击" if data.get("action") == &"jump_attack" else "普攻第 %d 段" % int(data.get("combo_step", 1)))
+	message.text = "%s / 命中 %d：素材第 %d 帧 = %.0fms，伤害 %.0f" % [label, data.hit_index, data.source_frame, data.skill_time * 1000.0, data.damage]
 #endregion
 #region 横版平台绘制
 func _draw() -> void:

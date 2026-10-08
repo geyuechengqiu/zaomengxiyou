@@ -1,66 +1,284 @@
-[gd_scene load_steps=3 format=3]
-[ext_resource type="Script" path="res://examples/single_attack_demo.gd" id="script"]
+[gd_scene format=3 uid="uid://wmwnj75nw53o"]
+
+[ext_resource type="Script" uid="uid://n8p5beakef7b" path="res://addons/gameplay_abiltiy_system/scripts/components/gameplay_ability_component.gd" id="abilities"]
+[ext_resource type="Script" uid="uid://cea1apq6pvlmp" path="res://addons/battle_foundation/runtime/battle_attribute_component.gd" id="attributes"]
+[ext_resource type="Script" uid="uid://de1ptsybyejr" path="res://addons/godot_core_system-0.0.4/source/operation_system/operation_controller.gd" id="controller"]
+[ext_resource type="Resource" path="res://data/controls/player_operations.tres" id="controls"]
+[ext_resource type="PackedScene" path="res://data/battle2d/dummy/wooden_dummy.tscn" id="dummy"]
+[ext_resource type="PackedScene" path="res://addons/battle_foundation/input/battle_operation_menu.tscn" id="menu"]
+[ext_resource type="Script" uid="uid://cejsmre475mvk" path="res://addons/battle_foundation/input/battle_player_operations.gd" id="operations"]
+[ext_resource type="Script" uid="uid://bojpin5w8rk26" path="res://examples/single_attack_demo.gd" id="script"]
+[ext_resource type="Script" uid="uid://cp8lkcidkxi3c" path="res://addons/battle_foundation/runtime/battle_session.gd" id="session"]
+[ext_resource type="Script" uid="uid://b6hkniyhlhrsf" path="res://addons/gameplay_abiltiy_system/scripts/components/gameplay_status_component.gd" id="statuses"]
+[ext_resource type="PackedScene" path="res://data/battle2d/single_attack/sunwukong_2d.tscn" id="wukong"]
+
+[ext_resource type="Resource" path="res://data/damage/original_strategy.tres" id="damage_strategy"]
+
 [sub_resource type="RectangleShape2D" id="ground"]
-size = Vector2(2800, 150)
-[node name="SingleAttackDemo" type="Node2D"]
+size = Vector2(2800, 400)
+
+[sub_resource type="RectangleShape2D" id="wall"]
+size = Vector2(30, 400)
+
+[sub_resource type="RectangleShape2D" id="platform"]
+size = Vector2(260, 20)
+
+[sub_resource type="StyleBoxFlat" id="panel"]
+content_margin_left = 14.0
+content_margin_top = 10.0
+content_margin_right = 14.0
+content_margin_bottom = 10.0
+bg_color = Color(0.035, 0.075, 0.1, 0.94)
+
+[node name="SingleAttackDemo" type="Node2D" unique_id=101602583]
+process_mode = 3
 script = ExtResource("script")
-[node name="Ground" type="StaticBody2D" parent="."]
-position = Vector2(1200, 725)
-collision_layer = 1
+
+[node name="Background" type="CanvasLayer" parent="." unique_id=96251161]
+layer = -5
+
+[node name="Sky" type="ColorRect" parent="Background" unique_id=905433657]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+color = Color(0.045, 0.09, 0.14, 1)
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=897935788]
+position = Vector2(400, 450)
+zoom = Vector2(0.5, 0.5)
+
+[node name="BattleSession" type="Node3D" parent="." unique_id=1627635524]
+script = ExtResource("session")
+damage_strategy = ExtResource("damage_strategy")
+scene_manifest_path = "res://data/battle2d/single_attack/manifest.json"
+scene_seed = 6001
+
+[node name="Terrain" type="Node2D" parent="BattleSession" unique_id=1125340613]
+
+[node name="Mountain1" type="Polygon2D" parent="BattleSession/Terrain" unique_id=1862394254]
+color = Color(0.075, 0.16, 0.21, 1)
+polygon = PackedVector2Array(-700, 650, -470, 40, -170, 650)
+
+[node name="Mountain2" type="Polygon2D" parent="BattleSession/Terrain" unique_id=164863167]
+color = Color(0.075, 0.16, 0.21, 1)
+polygon = PackedVector2Array(-280, 650, -50, 40, 250, 650)
+
+[node name="Mountain3" type="Polygon2D" parent="BattleSession/Terrain" unique_id=2099663968]
+color = Color(0.075, 0.16, 0.21, 1)
+polygon = PackedVector2Array(140, 650, 370, 40, 670, 650)
+
+[node name="Mountain4" type="Polygon2D" parent="BattleSession/Terrain" unique_id=28741113]
+color = Color(0.075, 0.16, 0.21, 1)
+polygon = PackedVector2Array(560, 650, 790, 40, 1090, 650)
+
+[node name="Mountain5" type="Polygon2D" parent="BattleSession/Terrain" unique_id=381966993]
+color = Color(0.075, 0.16, 0.21, 1)
+polygon = PackedVector2Array(980, 650, 1210, 40, 1510, 650)
+
+[node name="Mountain6" type="Polygon2D" parent="BattleSession/Terrain" unique_id=1833767451]
+color = Color(0.075, 0.16, 0.21, 1)
+polygon = PackedVector2Array(1400, 650, 1630, 40, 1930, 650)
+
+[node name="Ground" type="StaticBody2D" parent="BattleSession/Terrain" unique_id=1674197476]
+position = Vector2(400, 850)
 collision_mask = 2
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BattleSession/Terrain/Ground" unique_id=1027062259]
 shape = SubResource("ground")
-[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="Surface" type="Polygon2D" parent="BattleSession/Terrain/Ground" unique_id=1032216797]
+color = Color(0.14, 0.27, 0.28, 1)
+polygon = PackedVector2Array(-1400, -200, 1400, -200, 1400, 200, -1400, 200)
+
+[node name="Edge" type="Polygon2D" parent="BattleSession/Terrain/Ground" unique_id=1070616980]
+color = Color(0.4, 0.73, 0.62, 1)
+polygon = PackedVector2Array(-1400, -200, 1400, -200, 1400, -190, -1400, -190)
+
+[node name="LeftWall" type="StaticBody2D" parent="BattleSession/Terrain" unique_id=1097285706]
+position = Vector2(-420, 450)
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BattleSession/Terrain/LeftWall" unique_id=260398008]
+shape = SubResource("wall")
+
+[node name="Visual" type="Polygon2D" parent="BattleSession/Terrain/LeftWall" unique_id=1590509300]
+color = Color(0.25, 0.36, 0.35, 1)
+polygon = PackedVector2Array(-15, -200, 15, -200, 15, 200, -15, 200)
+
+[node name="RightWall" type="StaticBody2D" parent="BattleSession/Terrain" unique_id=839458861]
+position = Vector2(1300, 450)
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BattleSession/Terrain/RightWall" unique_id=409992764]
+shape = SubResource("wall")
+
+[node name="Visual" type="Polygon2D" parent="BattleSession/Terrain/RightWall" unique_id=1028587991]
+color = Color(0.25, 0.36, 0.35, 1)
+polygon = PackedVector2Array(-15, -200, 15, -200, 15, 200, -15, 200)
+
+[node name="Platform" type="StaticBody2D" parent="BattleSession/Terrain" unique_id=277669772]
+position = Vector2(950, 540)
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BattleSession/Terrain/Platform" unique_id=845901506]
+shape = SubResource("platform")
+one_way_collision = true
+
+[node name="Visual" type="Polygon2D" parent="BattleSession/Terrain/Platform" unique_id=1380090509]
+color = Color(0.62, 0.52, 0.3, 1)
+polygon = PackedVector2Array(-130, -10, 130, -10, 130, 10, -130, 10)
+
+[node name="Actors" type="Node2D" parent="BattleSession" unique_id=2039907037]
+
+[node name="SunWukong" parent="BattleSession/Actors" unique_id=215774442 instance=ExtResource("wukong")]
+position = Vector2(400, 650)
+scene_definition_id = &"孙悟空"
+
+[node name="GameplayVitalAttributeComponent" type="Node" parent="BattleSession/Actors/SunWukong" unique_id=1148543648]
+script = ExtResource("attributes")
+externally_driven = true
+
+[node name="GameplayAbilityComponent" type="Node" parent="BattleSession/Actors/SunWukong" unique_id=1369396151]
+script = ExtResource("abilities")
+externally_driven = true
+
+[node name="GameplayStatusComponent" type="Node" parent="BattleSession/Actors/SunWukong" unique_id=149019847]
+script = ExtResource("statuses")
+externally_driven = true
+filter_events_by_owner = true
+
+[node name="PlayerOperations" type="Node" parent="BattleSession/Actors/SunWukong" unique_id=153778525]
+script = ExtResource("operations")
+operation_profile = ExtResource("controls")
+controller_path = NodePath("OperationController")
+
+[node name="OperationController" type="Node" parent="BattleSession/Actors/SunWukong/PlayerOperations" unique_id=782067667]
+script = ExtResource("controller")
+profile = ExtResource("controls")
+externally_driven = true
+
+[node name="LeftDummy" parent="BattleSession/Actors" unique_id=2061580595 instance=ExtResource("dummy")]
+position = Vector2(110, 650)
+scene_definition_id = &"木桩"
+scene_category = "monsters"
+
+[node name="GameplayVitalAttributeComponent" type="Node" parent="BattleSession/Actors/LeftDummy" unique_id=777245975]
+script = ExtResource("attributes")
+externally_driven = true
+
+[node name="GameplayAbilityComponent" type="Node" parent="BattleSession/Actors/LeftDummy" unique_id=1021585182]
+script = ExtResource("abilities")
+externally_driven = true
+
+[node name="GameplayStatusComponent" type="Node" parent="BattleSession/Actors/LeftDummy" unique_id=382660741]
+script = ExtResource("statuses")
+externally_driven = true
+filter_events_by_owner = true
+
+[node name="RightDummy" parent="BattleSession/Actors" unique_id=194518912 instance=ExtResource("dummy")]
+position = Vector2(690, 650)
+scene_definition_id = &"木桩"
+scene_category = "monsters"
+
+[node name="GameplayVitalAttributeComponent" type="Node" parent="BattleSession/Actors/RightDummy" unique_id=190324478]
+script = ExtResource("attributes")
+externally_driven = true
+
+[node name="GameplayAbilityComponent" type="Node" parent="BattleSession/Actors/RightDummy" unique_id=2120963698]
+script = ExtResource("abilities")
+externally_driven = true
+
+[node name="GameplayStatusComponent" type="Node" parent="BattleSession/Actors/RightDummy" unique_id=853981197]
+script = ExtResource("statuses")
+externally_driven = true
+filter_events_by_owner = true
+
+[node name="HUD" type="CanvasLayer" parent="." unique_id=1371758860]
 layer = 10
-[node name="Panel" type="PanelContainer" parent="HUD"]
-offset_left = 24.0
-offset_top = 20.0
-offset_right = 1256.0
-offset_bottom = 210.0
-[node name="Column" type="VBoxContainer" parent="HUD/Panel"]
+
+[node name="Panel" type="PanelContainer" parent="HUD" unique_id=368405760]
+offset_left = 16.0
+offset_top = 12.0
+offset_right = 924.0
+offset_bottom = 158.0
+theme_override_styles/panel = SubResource("panel")
+
+[node name="Column" type="VBoxContainer" parent="HUD/Panel" unique_id=1485260079]
 layout_mode = 2
-theme_override_constants/separation = 12
-[node name="Title" type="Label" parent="HUD/Panel/Column"]
+theme_override_constants/separation = 6
+
+[node name="Title" type="Label" parent="HUD/Panel/Column" unique_id=102024885]
 layout_mode = 2
-text = "阶段 6 · 悟空单段普攻与木桩战斗闭环"
-theme_override_font_sizes/font_size = 28
-[node name="Info" type="Label" parent="HUD/Panel/Column"]
+theme_override_font_sizes/font_size = 23
+text = "孙悟空 · 单段普攻测试"
+
+[node name="Info" type="Label" parent="HUD/Panel/Column" unique_id=1855550032]
 layout_mode = 2
-theme_override_font_sizes/font_size = 18
-[node name="Message" type="Label" parent="HUD/Panel/Column"]
+theme_override_font_sizes/font_size = 15
+
+[node name="Message" type="Label" parent="HUD/Panel/Column" unique_id=613897948]
 layout_mode = 2
-theme_override_colors/font_color = Color(1, 0.84, 0.55, 1)
-theme_override_font_sizes/font_size = 18
-[node name="Buttons" type="HBoxContainer" parent="HUD/Panel/Column"]
+theme_override_colors/font_color = Color(1, 0.83, 0.55, 1)
+theme_override_font_sizes/font_size = 15
+
+[node name="Buttons" type="HBoxContainer" parent="HUD/Panel/Column" unique_id=1064093802]
 layout_mode = 2
-theme_override_constants/separation = 10
-[node name="Attack" type="Button" parent="HUD/Panel/Column/Buttons"]
+theme_override_constants/separation = 8
+
+[node name="Attack" type="Button" parent="HUD/Panel/Column/Buttons" unique_id=135158782]
 layout_mode = 2
 focus_mode = 0
-text = "单段攻击 [J]"
-[node name="Flip" type="Button" parent="HUD/Panel/Column/Buttons"]
+theme_override_font_sizes/font_size = 15
+text = "攻击 [J]"
+
+[node name="Flip" type="Button" parent="HUD/Panel/Column/Buttons" unique_id=506736405]
 layout_mode = 2
 focus_mode = 0
+theme_override_font_sizes/font_size = 15
 text = "翻转"
-[node name="Near" type="Button" parent="HUD/Panel/Column/Buttons"]
+
+[node name="Near" type="Button" parent="HUD/Panel/Column/Buttons" unique_id=1079220468]
 layout_mode = 2
 focus_mode = 0
-text = "木桩靠近"
-[node name="Far" type="Button" parent="HUD/Panel/Column/Buttons"]
+theme_override_font_sizes/font_size = 15
+text = "靠近"
+
+[node name="Far" type="Button" parent="HUD/Panel/Column/Buttons" unique_id=573049551]
 layout_mode = 2
 focus_mode = 0
-text = "木桩远离 / 打空"
-[node name="Power" type="Button" parent="HUD/Panel/Column/Buttons"]
+theme_override_font_sizes/font_size = 15
+text = "远离 / 打空"
+
+[node name="Power" type="Button" parent="HUD/Panel/Column/Buttons" unique_id=1282445382]
 layout_mode = 2
 focus_mode = 0
+theme_override_font_sizes/font_size = 15
 text = "攻击 26 / 200"
-[node name="Reset" type="Button" parent="HUD/Panel/Column/Buttons"]
+
+[node name="Reset" type="Button" parent="HUD/Panel/Column/Buttons" unique_id=1119633413]
 layout_mode = 2
 focus_mode = 0
-text = "重新生成木桩"
-[node name="Pause" type="Button" parent="HUD/Panel/Column/Buttons"]
+theme_override_font_sizes/font_size = 15
+text = "重置场景"
+
+[node name="Pause" type="Button" parent="HUD/Panel/Column/Buttons" unique_id=809075783]
 layout_mode = 2
 focus_mode = 0
+theme_override_font_sizes/font_size = 15
 text = "暂停 / 恢复"
-[node name="MenuLayer" type="CanvasLayer" parent="."]
+
+[node name="Help" type="Label" parent="HUD" unique_id=600272984]
+offset_left = 24.0
+offset_top = 506.0
+offset_right = 916.0
+offset_bottom = 566.0
+theme_override_colors/font_color = Color(0.78, 0.86, 0.82, 1)
+theme_override_font_sizes/font_size = 17
+text = "A / D 移动 · K 二段跳 · J 单段普攻 · Esc 菜单 / 改键
+黄色：技能攻击范围；蓝色：编辑器受击框；原版受击特效为 30 FPS。"
+
+[node name="MenuLayer" type="CanvasLayer" parent="." unique_id=1607981689]
 layer = 30
+
+[node name="OperationMenu" parent="MenuLayer" unique_id=1622449180 instance=ExtResource("menu")]

@@ -92,7 +92,7 @@ func _button(parent: Node, title: String, action: Callable) -> Button:
 func _process(_delta: float) -> void:
 	if not is_instance_valid(_session) or _summary == null:
 		return
-	_summary.text = "战斗时间 %.3f s  |  固定物理 tick %d  |  缩放 %.1f×  |  停顿剩余 %.3f s" % [_session.clock.elapsed, _session.clock.physics_tick, _session.clock.time_scale, _session.clock.hit_stop_remaining]
+	_summary.text = "战斗时间 %.0f ms  |  固定物理 tick %d  |  缩放 %.0f%%  |  停顿剩余 %.0f ms" % [_session.clock.elapsed * 1000.0, _session.clock.physics_tick, _session.clock.time_scale * 100.0, _session.clock.hit_stop_remaining * 1000.0]
 	_first_label.text = _describe_entity("实体 A", _first)
 	_second_label.text = _describe_entity("实体 B", _second)
 	_event_label.text = _last_event
@@ -129,12 +129,11 @@ func _hit_stop() -> void:
 func _on_skill_marker(context: Dictionary) -> void:
 	if context.battle_id != _session.battle_id or context.source_entity_id != _first.entity_id:
 		return
-	_last_event = "Core 事件 #%d：素材帧 %d，技能时间 %.2f s，战斗时间 %.3f s" % [context.sequence, context.source_frame, context.skill_time, context.combat_time]
+	_last_event = "Core 事件 #%d：素材帧 %d，技能时间 %.0f ms，战斗时间 %.0f ms" % [context.sequence, context.source_frame, context.skill_time * 1000.0, context.combat_time * 1000.0]
 	if context.source_frame == 12:
-		var info := DamageInfo.new(_first, _first.abilities, DamageCalculator.calculate_final_damage(_second, _first, {}))
-		info.final_damage = info.base_damage
+		var info := DamageCalculator.calculate_damage(_second, _first, {})
 		var applied := (_second.attributes.get_vital(&"health") as HealthVital).apply_damage(info, _second)
-		_last_event += "；B 实际受到 %.1f 伤害。" % applied
+		_last_event += "；B 实际受到 %.0f 伤害。" % applied
 
 func _describe_entity(title: String, entity: BattleEntity) -> String:
 	if not is_instance_valid(entity):
@@ -142,7 +141,7 @@ func _describe_entity(title: String, entity: BattleEntity) -> String:
 	var ability := entity.abilities.get_ability_instance(&"sample_attack")
 	var cooldown := ability.get_feature("CooldownFeature") as CooldownFeature
 	var guard := entity.statuses.get_status(&"sample_guard")
-	return "%s  |  %s\n配置 ID：%s\n运行序号：%s\n生命：%.1f / %.1f\n技能冷却：%.2f s\n减伤状态：%s" % [title, entity.faction_id, entity.definition_id, String(entity.entity_id).get_file(), entity.attributes.get_vital_value(&"health"), entity.attributes.get_value(&"hpMax"), cooldown.get_cooldown_remaining(ability), "%.2f s / %d 层" % [guard.remaining_duration, guard.stacks] if guard != null else "无"]
+	return "%s  |  %s\n配置 ID：%s\n运行序号：%s\n生命：%.0f / %.0f\n技能冷却：%.0f ms\n减伤状态：%s" % [title, entity.faction_id, entity.definition_id, String(entity.entity_id).get_file(), entity.attributes.get_vital_value(&"health"), entity.attributes.get_value(&"hpMax"), cooldown.get_cooldown_remaining(ability) * 1000.0, "%.0f ms / %d 层" % [guard.remaining_duration * 1000.0, guard.stacks] if guard != null else "无"]
 
 func _exit_tree() -> void:
 	CoreSystem.event_bus.unsubscribe("battle.skill.marker", _on_skill_marker)

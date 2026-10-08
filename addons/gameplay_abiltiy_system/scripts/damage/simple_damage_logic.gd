@@ -3,7 +3,7 @@ class_name SimpleDamageLogic
 #region 配置与运行状态
 
 ## ARPG 伤害计算策略
-## 当前公式：max(1, atk - phyDef) × 上下文倍率；原版暴击评分尚未参与结算。
+## 当前公式：max(1, atk - phyDef) × 上下文倍率 + 固定附伤；原版暴击评分尚未参与结算。
 
 @export var attack_attribute: StringName = &"atk"  ## 攻击力属性
 @export var defense_attribute: StringName = &"phyDef"   ## 防御力属性
@@ -26,5 +26,5 @@ func calculate(target: Node, instigator: Node, context: Dictionary) -> float:
 	base_damage *= context.get("damage_multiplier", 1.0)
 	base_damage *= context.get("damage_multiplier_modifier", 1.0)
 	
-	return base_damage
+	return base_damage + maxf(0.0, float(context.get("fixed_damage", 0.0)))
 #endregion

@@ -18,10 +18,18 @@ func set_strategy(strategy: DamageLogicStrategy) -> void:
 ## [param] target_comp: GameplayAttributeComponent 目标的属性组件
 ## [return] float 最终伤害值
 func calculate_final_damage(target: Node, instigator: Node, context: Dictionary, strategy: DamageLogicStrategy = null) -> float:
-	var strategy_to_use = strategy if is_instance_valid(strategy) else _strategy
-	if not is_instance_valid(strategy_to_use):
-		return 0.0
-	
-	# 只计算，不应用
-	return max(0.0, strategy_to_use.calculate(target, instigator, context))
+	return calculate_damage(target, instigator, context, strategy).calculated_damage
+
+## 一次攻击只调用一次，随后把同一 DamageInfo 交给 Vital。
+func calculate_damage(target: Node, instigator: Node, context: Dictionary, strategy: DamageLogicStrategy = null) -> DamageInfo:
+	var selected := resolve_strategy(instigator, context, strategy)
+	return selected.calculate_result(target, instigator, context) if selected != null else DamageInfo.new(instigator)
+
+func resolve_strategy(instigator: Node, context: Dictionary, strategy: DamageLogicStrategy = null) -> DamageLogicStrategy:
+	var selected: DamageLogicStrategy = context.get("damage_strategy", strategy)
+	if selected == null and is_instance_valid(instigator) and instigator.has_method("get_damage_strategy"):
+		selected = instigator.get_damage_strategy()
+	if selected == null:
+		selected = _strategy
+	return selected
 #endregion

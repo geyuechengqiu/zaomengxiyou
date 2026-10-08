@@ -134,6 +134,8 @@ func _verify_adapter() -> void:
 #region GAS 时序与战斗状态独立
 func _verify_combat() -> void:
 	var anim := player.animation
+	# 阶段8已加入随机浮动；固定中位随机数，保留26-5=21的几何验收样例。
+	player.damage_context = {"random_values": {"calDamage": 0.5, "baojiRatio": 0.5, "calPhysicalDamage": 0.5}}
 	_check(player.attributes.get_value(&"atk") == 26 and player.attributes.get_value(&"hpMax") == 275, "角色初始属性来自原版 Role 2001")
 	_check(player.action_state.grounded, "真实平台碰撞确认落地")
 	anim.play_action(&"death", true)
@@ -199,7 +201,7 @@ func _verify_platform() -> void:
 	player.position.x = 780
 	player.move_axis = 1.0
 	_check(player.try_jump(), "落地可跳跃")
-	_check(not player.try_attack() and not player.try_activate_skill(&"sunwukong_attack1"), "普攻遵守原版只允许地面的规则")
+	_check(not player.try_activate_skill(&"sunwukong_attack1"), "五段地面普攻不在空中直接发动；空中攻击使用专属跳攻")
 	player.animation.action_completed.emit(&"jump")
 	_check(player.action_state.current == BattleActionState2D.State.TAKEOFF, "跳跃动画完成不会跳过起跳状态或让空中角色落地")
 	await _step(1.0 / 60.0, 25)

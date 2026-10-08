@@ -1,0 +1,43 @@
+{
+  "level_count": 220,
+  "skill_count": 6411,
+  "sources": [
+    {
+      "path": "exports/zmhj_damage_formulas/等级换算参数.json",
+      "sha256": "c018e6079e501bd2083c50fa76670c3020d2dc5d868d64c55b12b2accd625520"
+    },
+    {
+      "path": "exports/zmhj_damage_formulas/技能伤害配置.json",
+      "sha256": "6b73b1c757a9eac2904a67d7d9e35f9d32a47dd662298c311bc17e37127878bf"
+    },
+    {
+      "path": "exports/zmhj_damage_formulas/伤害计算公式.md",
+      "sha256": "110698ff4707268306db05e92eb389a4b2466abd521a626344bf58a83ec1100e"
+    },
+    {
+      "path": "exports/zmhj_damage_formulas/sources/models/managers/BattleModelManager.as",
+      "sha256": "d253316c1057dd3f6609bebb3ad666912a78e56216e50e4210660a990d65e63e"
+    },
+    {
+      "path": "exports/zmhj_damage_formulas/sources/prefabs/controls/DamageControl.as",
+      "sha256": "2775e78eb9b167670c22598f6fea92bc7d13d5700ac3c23d34d6164f602b3764"
+    },
+    {
+      "path": "exports/zmhj_damage_formulas/sources/models/vo/UserVO.as",
+      "sha256": "9290bdaf8d53ffb3dbf1bf7a76f66a24ebb1d2d442c7abeda56c98bc708839cd"
+    },
+    {
+      "path": "exports/zmhj_damage_formulas/sources/com/wdcgame/engine/model/SkillConfigVO.as",
+      "sha256": "f4cee834be03f43f098e7a424c9e4adbfd75ea342fa83f65f1ac322e9f56388d"
+    },
+    {
+      "path": "exports/zmhj_damage_formulas/sources/com/wdcgame/engine/model/SkillParam.as",
+      "sha256": "b9f2a449e8b49257f5b3c62a8f9fadaa6ee7eca872584f9670da835aca995dd2"
+    },
+    {
+      "path": "exports/zmhj_damage_formulas/sources/com/wdcgame/utils/MathUtils.as",
+      "sha256": "0c76fcce443cc23b8554c270b2000b29ae06a117b2f99207eb4bfb2cb4071937"
+    }
+  ],
+  "policy": "Original numeric precision retained; business skill IDs remain human readable."
+}

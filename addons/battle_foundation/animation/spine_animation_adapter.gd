@@ -4,6 +4,7 @@ class_name SpineAnimationAdapter
 @export var sprite_path: NodePath = ^"SpineVisual"
 @export var animation_player_path: NodePath = ^"AnimationPlayer"
 @export var spine_player_path: NodePath = ^"SpineVisual/SpineAnimationTrack/SpineVisual Track 0"
+@export var effect_root_path: NodePath = ^"AttackEffects"
 var _sprite: SpineSprite
 var _player: AnimationPlayer
 var _spine_player: AnimationPlayer
@@ -15,6 +16,9 @@ var _composite_skin: SpineSkin
 var _completed: bool = false
 var _initialized: bool = false
 var _track_time: float = 0.0
+var _effect_root: Node2D
+var _effect_sprites: Array[SpineSprite] = []
+var _effect_players: Array[AnimationPlayer] = []
 #endregion
 #region 生命周期
 func _ready() -> void:
@@ -57,6 +61,19 @@ func initialize_adapter() -> bool:
 	_player.callback_mode_process = AnimationMixer.ANIMATION_CALLBACK_MODE_PROCESS_MANUAL
 	_spine_player.callback_mode_process = AnimationMixer.ANIMATION_CALLBACK_MODE_PROCESS_MANUAL
 	_sprite.set_update_mode(SpineConstant.UpdateMode_Manual)
+	_effect_root = get_node_or_null(effect_root_path) as Node2D
+	if _effect_root != null:
+		for child in _effect_root.get_children():
+			if not child is SpineSprite:
+				continue
+			var effect := child as SpineSprite
+			var nested := effect.get_node_or_null("SpineAnimationTrack/AnimationPlayer") as AnimationPlayer
+			if nested == null or effect.get_skeleton_data_res() == null or not effect.get_skeleton_data_res().is_skeleton_data_loaded():
+				return _fail("攻击特效需要预置骨架和原生 AnimationPlayer：" + String(effect.name))
+			_effect_sprites.append(effect)
+			_effect_players.append(nested)
+			nested.callback_mode_process = AnimationMixer.ANIMATION_CALLBACK_MODE_PROCESS_MANUAL
+			effect.set_update_mode(SpineConstant.UpdateMode_Manual)
 	_player.animation_finished.connect(_on_animation_finished)
 	_initialized = true
 	if not set_skins([]):
@@ -117,32 +134,17 @@ func _apply_player_pose() -> void:
 	# 从主时间轴读取当前 key 与局部时间，保留编辑器编排的多个 clip。
 	var master := _player.get_animation(_action)
 	var time := get_playback_time()
-	for track in range(master.get_track_count()):
-		if master.track_get_type(track) != Animation.TYPE_ANIMATION or _player.get_node(_player.root_node).get_node_or_null(master.track_get_path(track)) != _spine_player:
-			continue
-		for key in range(master.track_get_key_count(track) - 1, -1, -1):
-			var start := master.track_get_key_time(track, key)
-			if start > time:
-				continue
-			var clip_name := StringName(master.track_get_key_value(track, key))
-			if not _spine_player.has_animation(clip_name):
-				continue
-			var clip := _spine_player.get_animation(clip_name)
-			var local_time := maxf(0.0, time - start)
-			local_time = fmod(local_time, clip.length) if clip.loop_mode != Animation.LOOP_NONE else minf(local_time, clip.length)
-			if _spine_player.current_animation != clip_name:
-				_spine_player.play(clip_name)
-			_spine_player.seek(local_time, true)
-			_spine_player.advance(0.0)
-			# 原生 SpineAnimationTrack 在骨架更新时提交 animation_name 的变化。
-			_sprite.update_skeleton(0.0)
-			_entry = _sprite.get_animation_state().get_track(0)
-			if _entry != null:
-				_entry.set_track_time(local_time)
-			break
+	_sync_native_pose(_sprite, _spine_player, master, time)
 	_entry = _sprite.get_animation_state().get_track(0)
-	if _entry != null:
-		_sprite.update_skeleton(0.0)
+	for index in range(_effect_sprites.size()):
+		_sync_native_pose(_effect_sprites[index], _effect_players[index], master, time)
+
+func _sync_native_pose(sprite: SpineSprite, nested: AnimationPlayer, master: Animation, time: float) -> void:
+	if not SpineTimelinePose.apply(sprite, nested, master, _player.get_node(_player.root_node), time, sprite != _sprite) and sprite != _sprite:
+		# 新动作没有特效轨道时，不能继承上一动作的表现。
+		sprite.visible = false
+		nested.stop()
+		sprite.get_animation_state().clear_track(0)
 
 func get_animation_player() -> AnimationPlayer:
 	return _player
@@ -173,6 +175,9 @@ func set_facing(direction: int) -> void:
 	if _initialized:
 		_sprite.get_skeleton().set_scale_x(float(_facing))
 		_sprite.update_skeleton(0.0)
+		if _effect_root != null:
+			# 容器同时镜像偏移和子特效的原始 scaleX；第四段的 -1 保留在子节点。
+			_effect_root.scale.x = absf(_effect_root.scale.x) * _facing
 
 func get_facing() -> int:
 	return _facing

@@ -1,0 +1,315 @@
+{
+  "source_project": "Speculum-4399-master",
+  "source_path": "games/zmhj-g5/cache/assets/ui/mission2_20250707_1.swf",
+  "source_sha256": "6168f618107d92257687fb0157e053a82fe7f7c6a910e20421c3b245424aa050",
+  "symbol": "hurtEffectAll",
+  "fps": 30,
+  "loop": false,
+  "frame_count": 11,
+  "duration": 0.36666666666666664,
+  "canvas": [
+    151,
+    150
+  ],
+  "pivot": [
+    72,
+    73
+  ],
+  "viewport": [
+    940,
+    590
+  ],
+  "source_role_id": "2001",
+  "role_hit_offset": "0;-60",
+  "source_skill_id": "1001010",
+  "skill_has_hit_effect": true,
+  "frames": [
+    {
+      "name": "hurtEffectAll0000",
+      "file": "hurtEffectAll0000.png",
+      "atlas": "mission2",
+      "region": [
+        112,
+        143,
+        151,
+        150
+      ],
+      "trim": [
+        0,
+        0,
+        151,
+        150
+      ],
+      "pivot": [
+        72.0,
+        73.0
+      ],
+      "empty": false,
+      "sha256": "d9f52b112b608f94e45fa7436c759c31c7239f38a6c9e08a9725fb605beb6c0d"
+    },
+    {
+      "name": "hurtEffectAll0001",
+      "file": "hurtEffectAll0001.png",
+      "atlas": "mission2",
+      "region": [
+        112,
+        143,
+        151,
+        150
+      ],
+      "trim": [
+        0,
+        0,
+        151,
+        150
+      ],
+      "pivot": [
+        72.0,
+        73.0
+      ],
+      "empty": false,
+      "sha256": "d9f52b112b608f94e45fa7436c759c31c7239f38a6c9e08a9725fb605beb6c0d"
+    },
+    {
+      "name": "hurtEffectAll0002",
+      "file": "hurtEffectAll0002.png",
+      "atlas": "mission2",
+      "region": [
+        263,
+        143,
+        151,
+        150
+      ],
+      "trim": [
+        0,
+        0,
+        151,
+        150
+      ],
+      "pivot": [
+        72.0,
+        73.0
+      ],
+      "empty": false,
+      "sha256": "25c81c409d4c74b9be7f44ee6bce68c8a8b796b9799885acdf57be63cdb75998"
+    },
+    {
+      "name": "hurtEffectAll0003",
+      "file": "hurtEffectAll0003.png",
+      "atlas": "mission2",
+      "region": [
+        263,
+        143,
+        151,
+        150
+      ],
+      "trim": [
+        0,
+        0,
+        151,
+        150
+      ],
+      "pivot": [
+        72.0,
+        73.0
+      ],
+      "empty": false,
+      "sha256": "25c81c409d4c74b9be7f44ee6bce68c8a8b796b9799885acdf57be63cdb75998"
+    },
+    {
+      "name": "hurtEffectAll0004",
+      "file": "hurtEffectAll0004.png",
+      "atlas": "mission2",
+      "region": [
+        414,
+        143,
+        151,
+        150
+      ],
+      "trim": [
+        0,
+        0,
+        151,
+        150
+      ],
+      "pivot": [
+        72.0,
+        73.0
+      ],
+      "empty": false,
+      "sha256": "20eac3249c2f8e32f40deac5ba0994e40bbcc0f1c0ef3a259f24522b00e5e5c2"
+    },
+    {
+      "name": "hurtEffectAll0005",
+      "file": "hurtEffectAll0005.png",
+      "atlas": "mission2",
+      "region": [
+        414,
+        143,
+        151,
+        150
+      ],
+      "trim": [
+        0,
+        0,
+        151,
+        150
+      ],
+      "pivot": [
+        72.0,
+        73.0
+      ],
+      "empty": false,
+      "sha256": "20eac3249c2f8e32f40deac5ba0994e40bbcc0f1c0ef3a259f24522b00e5e5c2"
+    },
+    {
+      "name": "hurtEffectAll0006",
+      "file": "hurtEffectAll0006.png",
+      "atlas": "mission2",
+      "region": [
+        565,
+        143,
+        151,
+        150
+      ],
+      "trim": [
+        0,
+        0,
+        151,
+        150
+      ],
+      "pivot": [
+        72.0,
+        73.0
+      ],
+      "empty": false,
+      "sha256": "8b795270a9f32adc33dfa0e961fb081653ea5e336d5ff4886eff0b9b853b7ef3"
+    },
+    {
+      "name": "hurtEffectAll0007",
+      "file": "hurtEffectAll0007.png",
+      "atlas": "mission2",
+      "region": [
+        565,
+        143,
+        151,
+        150
+      ],
+      "trim": [
+        0,
+        0,
+        151,
+        150
+      ],
+      "pivot": [
+        72.0,
+        73.0
+      ],
+      "empty": false,
+      "sha256": "8b795270a9f32adc33dfa0e961fb081653ea5e336d5ff4886eff0b9b853b7ef3"
+    },
+    {
+      "name": "hurtEffectAll0008",
+      "file": "hurtEffectAll0008.png",
+      "atlas": "mission2",
+      "region": [
+        716,
+        143,
+        151,
+        150
+      ],
+      "trim": [
+        0,
+        0,
+        151,
+        150
+      ],
+      "pivot": [
+        72.0,
+        73.0
+      ],
+      "empty": false,
+      "sha256": "d064dd88cbcfc5a97e462c1930c1817e1398d34558aded573839ba20d5be4585"
+    },
+    {
+      "name": "hurtEffectAll0009",
+      "file": "hurtEffectAll0009.png",
+      "atlas": "mission2",
+      "region": [
+        716,
+        143,
+        151,
+        150
+      ],
+      "trim": [
+        0,
+        0,
+        151,
+        150
+      ],
+      "pivot": [
+        72.0,
+        73.0
+      ],
+      "empty": false,
+      "sha256": "d064dd88cbcfc5a97e462c1930c1817e1398d34558aded573839ba20d5be4585"
+    },
+    {
+      "name": "hurtEffectAll0010",
+      "file": "hurtEffectAll0010.png",
+      "atlas": "mission2",
+      "region": [
+        867,
+        143,
+        0,
+        0
+      ],
+      "trim": [
+        -72,
+        -73,
+        151,
+        150
+      ],
+      "pivot": [
+        72.0,
+        73.0
+      ],
+      "empty": true,
+      "sha256": "0bc7de1cbcf7fb669f398d6f3ff2b842087d4bcbaa4ed21ef1c7aba9fa88fc83"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "games/zmhj-g5/game.json",
+      "sha256": "b3cc12e5c7f6d46dba95e8458ce66847e477d7f59e97a4ff731db42c03b95909"
+    },
+    {
+      "path": "out/zmhj-equip-skill-diag/Game.as",
+      "sha256": "d779f2f235286cfc6fc8108aaec330333bd5365b870997cbbbf3072bc9d6fa9b"
+    },
+    {
+      "path": "out/zmhj-equip-skill-diag/viewers/component/HurtEffect.as",
+      "sha256": "5a915f63b5af7061033b5edc930760c94c6d1c2dee132f01a7c016b221edfcd4"
+    },
+    {
+      "path": "out/zmhj-equip-skill-diag/models/managers/ModelManager.as",
+      "sha256": "346c55d6ca72584b13cdd434a02e791a38905e30070c48285b247184d3eba9fd"
+    },
+    {
+      "path": "out/zmhj-equip-skill-diag/prefabs/scripts/ManEntity.as",
+      "sha256": "e3dcfcc236578a9cf6953db22c6f7bae6297fa98ccf0a603e8054f6f38bb4bad"
+    },
+    {
+      "path": "out/zmhj-equip-skill-diag/prefabs/controls/DamageControl.as",
+      "sha256": "2775e78eb9b167670c22598f6fea92bc7d13d5700ac3c23d34d6164f602b3764"
+    },
+    {
+      "path": "out/zmhj-equip-skill-diag/com/wdcgame/engine/model/SkillParam.as",
+      "sha256": "b9f2a449e8b49257f5b3c62a8f9fadaa6ee7eca872584f9670da835aca995dd2"
+    },
+    {
+      "path": "out/zmhj-equip-skill-diag/com/wdcgame/engine/textures/TextureAtlas.as",
+      "sha256": "a62fc17a96432bbd11e33b2c203d8930dee92afad762396763d85539fc420588"
+    }
+  ]
+}

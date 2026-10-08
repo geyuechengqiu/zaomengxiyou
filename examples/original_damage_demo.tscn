@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://3l64upx2x0jk"]
+
+[ext_resource type="Resource" uid="uid://bsaofsrec4vo" path="res://data/battle2d/sunwukong_actions.tres" id="actions"]
+[ext_resource type="PackedScene" uid="uid://wmwnj75nw53o" path="res://examples/single_attack_demo.tscn" id="scene"]
+[ext_resource type="Script" uid="uid://b8ar4f560g4r0" path="res://examples/original_damage_demo.gd" id="script"]
+
+[node name="OriginalDamageDemo" unique_id=758983325 instance=ExtResource("scene")]
+script = ExtResource("script")
+
+[node name="BattleSession" parent="." index="2" unique_id=1627635524]
+scene_manifest_path = "res://data/battle2d/original_damage/manifest.json"
+
+[node name="SunWukong" parent="BattleSession/Actors" parent_id_path=PackedInt32Array(2039907037) index="0" unique_id=215774442]
+action_profile = ExtResource("actions")
+
+[node name="Panel" parent="HUD" parent_id_path=PackedInt32Array(1371758860) index="0" unique_id=368405760]
+offset_top = 408.0
+offset_bottom = 578.0
+
+[node name="Title" parent="HUD/Panel/Column" parent_id_path=PackedInt32Array(1485260079) index="0" unique_id=102024885]
+text = "阶段8 · 原版伤害与五连击"
+
+[node name="Attack" parent="HUD/Panel/Column/Buttons" parent_id_path=PackedInt32Array(1064093802) index="0" unique_id=135158782]
+text = "普攻 / 预约下一段"
+
+[node name="Help" parent="HUD" parent_id_path=PackedInt32Array(1371758860) index="1" unique_id=600272984]
+offset_top = 18.0
+offset_bottom = 78.0
+text = "A / D 移动 · K 二段跳 · 跑步/跳跃时 J 攻击 · 连按 J 五连击 · Esc 改键
+第四段8～16帧内新按反方向可转身一次；本段继续前移，第五段沿新朝向攻击。"

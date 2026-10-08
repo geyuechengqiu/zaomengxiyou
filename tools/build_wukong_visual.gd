@@ -47,7 +47,7 @@ func _build() -> void:
 	assert(packed.pack(visual) == OK)
 	assert(ResourceSaver.save(packed, OUTPUT) == OK)
 	visual.free()
-	print("Built static Spine + AnimationPlayer visual scene, 14 semantic clips and one skill-driven hitbox.")
+	print("Built static Spine + AnimationPlayer visual scene, semantic clips and one skill-driven hitbox.")
 	quit()
 #endregion
 #region 与参考项目相同的原生播放器属性轨道
@@ -106,6 +106,9 @@ func _add_hitbox(container: Node2D, scale: float) -> void:
 	var preview: Array = hitbox.get("preview_abilities")
 	for index in range(1, 6):
 		preview.append(load("res://data/battle2d/attack%d.tres" % index))
+	for path in ["res://data/battle2d/run_attack.tres", "res://data/battle2d/jump_attack.tres"]:
+		if ResourceLoader.exists(path):
+			preview.append(load(path))
 	hitbox.collision_layer = 0
 	hitbox.collision_mask = 0
 	hitbox.monitoring = false

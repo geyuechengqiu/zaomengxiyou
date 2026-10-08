@@ -130,7 +130,7 @@ if visual.is_socket_active(&"weapon"):
 
 角色已使用 [独立操作控制器](../input/README.md)，无按键轮询。改键只更新 InputMap 和用户配置；动画与角色代码仍消费动作/操作名称。输入缓存、长按、双击、控制权与技能槽扩展不进入 Spine 适配层。
 
-原版 Role.walkSpeed=210、runSpeed=300 已导入 GAS；jumpSpeed=-178 保存在属性中，平台使用重力 1500、跳跃速度 -620 的校准参数。二段跳和五段连击已接入。完整原版运动单位、其他技能、特效和装备属性加成仍待迁移。换装只改变外观。
+原版 Role.walkSpeed=210、runSpeed=300 已导入 GAS；jumpSpeed=-178 保存在属性中，平台运动实际读取动作配置的重力 1500、跳跃速度 -620。二段跳、五段连击和原版普攻特效已接入。其他技能特效与完整原版运动单位仍待迁移。换装只改变外观。资源路径、不同样例的覆盖配置和全部调参步骤见 [孙悟空配置说明](../../../data/animation/sunwukong-config.md)。
 
 ![平台原生渲染](../docs/wukong-platform.png)
 

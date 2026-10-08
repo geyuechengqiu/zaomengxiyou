@@ -1,0 +1,1047 @@
+{
+  "size": [
+    1024,
+    162
+  ],
+  "padding": 2,
+  "unique_images": 95,
+  "aliases": 115,
+  "sha256": "fec747b7c5e36036cc36c72f313dca29e490fe640ce4ff41b8519c8af484786b",
+  "regions": [
+    {
+      "file": "bleedNumber/bleedNumber0000.png",
+      "region": [
+        2,
+        2,
+        26,
+        30
+      ]
+    },
+    {
+      "file": "bleedNumber/bleedNumber0001.png",
+      "region": [
+        32,
+        2,
+        26,
+        30
+      ]
+    },
+    {
+      "file": "bleedNumber/bleedNumber0002.png",
+      "region": [
+        62,
+        2,
+        26,
+        30
+      ]
+    },
+    {
+      "file": "bleedNumber/bleedNumber0003.png",
+      "region": [
+        92,
+        2,
+        26,
+        30
+      ]
+    },
+    {
+      "file": "bleedNumber/bleedNumber0004.png",
+      "region": [
+        122,
+        2,
+        26,
+        30
+      ]
+    },
+    {
+      "file": "bleedNumber/bleedNumber0005.png",
+      "region": [
+        152,
+        2,
+        26,
+        30
+      ]
+    },
+    {
+      "file": "bleedNumber/bleedNumber0006.png",
+      "region": [
+        182,
+        2,
+        26,
+        30
+      ]
+    },
+    {
+      "file": "bleedNumber/bleedNumber0007.png",
+      "region": [
+        212,
+        2,
+        26,
+        30
+      ]
+    },
+    {
+      "file": "bleedNumber/bleedNumber0008.png",
+      "region": [
+        242,
+        2,
+        26,
+        30
+      ]
+    },
+    {
+      "file": "bleedNumber/bleedNumber0009.png",
+      "region": [
+        272,
+        2,
+        26,
+        30
+      ]
+    },
+    {
+      "file": "bleedNumber2/bleedNumber20000.png",
+      "region": [
+        302,
+        2,
+        26,
+        30
+      ]
+    },
+    {
+      "file": "bleedNumber2/bleedNumber20001.png",
+      "region": [
+        332,
+        2,
+        26,
+        30
+      ]
+    },
+    {
+      "file": "bleedNumber2/bleedNumber20002.png",
+      "region": [
+        362,
+        2,
+        26,
+        30
+      ]
+    },
+    {
+      "file": "bleedNumber2/bleedNumber20003.png",
+      "region": [
+        392,
+        2,
+        26,
+        30
+      ]
+    },
+    {
+      "file": "bleedNumber2/bleedNumber20004.png",
+      "region": [
+        422,
+        2,
+        26,
+        30
+      ]
+    },
+    {
+      "file": "bleedNumber2/bleedNumber20005.png",
+      "region": [
+        452,
+        2,
+        26,
+        30
+      ]
+    },
+    {
+      "file": "bleedNumber2/bleedNumber20006.png",
+      "region": [
+        482,
+        2,
+        26,
+        30
+      ]
+    },
+    {
+      "file": "bleedNumber2/bleedNumber20007.png",
+      "region": [
+        512,
+        2,
+        26,
+        30
+      ]
+    },
+    {
+      "file": "bleedNumber2/bleedNumber20008.png",
+      "region": [
+        542,
+        2,
+        26,
+        30
+      ]
+    },
+    {
+      "file": "bleedNumber2/bleedNumber20009.png",
+      "region": [
+        572,
+        2,
+        26,
+        30
+      ]
+    },
+    {
+      "file": "playerBleedNumber/playerBleedNumber0000.png",
+      "region": [
+        602,
+        2,
+        26,
+        30
+      ]
+    },
+    {
+      "file": "playerBleedNumber/playerBleedNumber0001.png",
+      "region": [
+        632,
+        2,
+        26,
+        30
+      ]
+    },
+    {
+      "file": "playerBleedNumber/playerBleedNumber0002.png",
+      "region": [
+        662,
+        2,
+        26,
+        30
+      ]
+    },
+    {
+      "file": "playerBleedNumber/playerBleedNumber0003.png",
+      "region": [
+        692,
+        2,
+        26,
+        30
+      ]
+    },
+    {
+      "file": "playerBleedNumber/playerBleedNumber0004.png",
+      "region": [
+        722,
+        2,
+        26,
+        30
+      ]
+    },
+    {
+      "file": "playerBleedNumber/playerBleedNumber0005.png",
+      "region": [
+        752,
+        2,
+        26,
+        30
+      ]
+    },
+    {
+      "file": "playerBleedNumber/playerBleedNumber0006.png",
+      "region": [
+        782,
+        2,
+        26,
+        30
+      ]
+    },
+    {
+      "file": "playerBleedNumber/playerBleedNumber0007.png",
+      "region": [
+        812,
+        2,
+        26,
+        30
+      ]
+    },
+    {
+      "file": "playerBleedNumber/playerBleedNumber0008.png",
+      "region": [
+        842,
+        2,
+        26,
+        30
+      ]
+    },
+    {
+      "file": "playerBleedNumber/playerBleedNumber0009.png",
+      "region": [
+        872,
+        2,
+        26,
+        30
+      ]
+    },
+    {
+      "file": "baojiNumber/baojiNumber0000.png",
+      "region": [
+        902,
+        2,
+        30,
+        36
+      ]
+    },
+    {
+      "file": "baojiNumber/baojiNumber0001.png",
+      "region": [
+        936,
+        2,
+        30,
+        36
+      ]
+    },
+    {
+      "file": "baojiNumber/baojiNumber0002.png",
+      "region": [
+        970,
+        2,
+        30,
+        36
+      ]
+    },
+    {
+      "file": "baojiNumber/baojiNumber0003.png",
+      "region": [
+        2,
+        42,
+        30,
+        36
+      ]
+    },
+    {
+      "file": "baojiNumber/baojiNumber0004.png",
+      "region": [
+        36,
+        42,
+        30,
+        36
+      ]
+    },
+    {
+      "file": "baojiNumber/baojiNumber0005.png",
+      "region": [
+        70,
+        42,
+        30,
+        36
+      ]
+    },
+    {
+      "file": "baojiNumber/baojiNumber0006.png",
+      "region": [
+        104,
+        42,
+        30,
+        36
+      ]
+    },
+    {
+      "file": "baojiNumber/baojiNumber0007.png",
+      "region": [
+        138,
+        42,
+        30,
+        36
+      ]
+    },
+    {
+      "file": "baojiNumber/baojiNumber0008.png",
+      "region": [
+        172,
+        42,
+        30,
+        36
+      ]
+    },
+    {
+      "file": "baojiNumber/baojiNumber0009.png",
+      "region": [
+        206,
+        42,
+        30,
+        36
+      ]
+    },
+    {
+      "file": "baojiNumber2/baojiNumber20000.png",
+      "region": [
+        240,
+        42,
+        30,
+        36
+      ]
+    },
+    {
+      "file": "baojiNumber2/baojiNumber20001.png",
+      "region": [
+        274,
+        42,
+        30,
+        36
+      ]
+    },
+    {
+      "file": "baojiNumber2/baojiNumber20002.png",
+      "region": [
+        308,
+        42,
+        30,
+        36
+      ]
+    },
+    {
+      "file": "baojiNumber2/baojiNumber20003.png",
+      "region": [
+        342,
+        42,
+        30,
+        36
+      ]
+    },
+    {
+      "file": "baojiNumber2/baojiNumber20004.png",
+      "region": [
+        376,
+        42,
+        30,
+        36
+      ]
+    },
+    {
+      "file": "baojiNumber2/baojiNumber20005.png",
+      "region": [
+        410,
+        42,
+        30,
+        36
+      ]
+    },
+    {
+      "file": "baojiNumber2/baojiNumber20006.png",
+      "region": [
+        444,
+        42,
+        30,
+        36
+      ]
+    },
+    {
+      "file": "baojiNumber2/baojiNumber20007.png",
+      "region": [
+        478,
+        42,
+        30,
+        36
+      ]
+    },
+    {
+      "file": "baojiNumber2/baojiNumber20008.png",
+      "region": [
+        512,
+        42,
+        30,
+        36
+      ]
+    },
+    {
+      "file": "baojiNumber2/baojiNumber20009.png",
+      "region": [
+        546,
+        42,
+        30,
+        36
+      ]
+    },
+    {
+      "file": "baoji/baoji0000.png",
+      "region": [
+        580,
+        42,
+        68,
+        40
+      ]
+    },
+    {
+      "file": "baoji/baoji0001.png",
+      "region": [
+        580,
+        42,
+        68,
+        40
+      ]
+    },
+    {
+      "file": "baoji/baoji0002.png",
+      "region": [
+        580,
+        42,
+        68,
+        40
+      ]
+    },
+    {
+      "file": "baoji/baoji0003.png",
+      "region": [
+        580,
+        42,
+        68,
+        40
+      ]
+    },
+    {
+      "file": "baoji/baoji0004.png",
+      "region": [
+        580,
+        42,
+        68,
+        40
+      ]
+    },
+    {
+      "file": "baoji/baoji0005.png",
+      "region": [
+        580,
+        42,
+        68,
+        40
+      ]
+    },
+    {
+      "file": "baoji/baoji0006.png",
+      "region": [
+        580,
+        42,
+        68,
+        40
+      ]
+    },
+    {
+      "file": "baoji/baoji0007.png",
+      "region": [
+        580,
+        42,
+        68,
+        40
+      ]
+    },
+    {
+      "file": "baoji/baoji0008.png",
+      "region": [
+        580,
+        42,
+        68,
+        40
+      ]
+    },
+    {
+      "file": "baoji/baoji0009.png",
+      "region": [
+        580,
+        42,
+        68,
+        40
+      ]
+    },
+    {
+      "file": "baoji/baoji0010.png",
+      "region": [
+        580,
+        42,
+        68,
+        40
+      ]
+    },
+    {
+      "file": "baoji/baoji0011.png",
+      "region": [
+        580,
+        42,
+        68,
+        40
+      ]
+    },
+    {
+      "file": "baoji/baoji0012.png",
+      "region": [
+        580,
+        42,
+        68,
+        40
+      ]
+    },
+    {
+      "file": "baoji/baoji0013.png",
+      "region": [
+        580,
+        42,
+        68,
+        40
+      ]
+    },
+    {
+      "file": "baoji/baoji0014.png",
+      "region": [
+        580,
+        42,
+        68,
+        40
+      ]
+    },
+    {
+      "file": "baoji/baoji0015.png",
+      "region": [
+        580,
+        42,
+        68,
+        40
+      ]
+    },
+    {
+      "file": "baoji/baoji0016.png",
+      "region": [
+        580,
+        42,
+        68,
+        40
+      ]
+    },
+    {
+      "file": "baoji/baoji0017.png",
+      "region": [
+        580,
+        42,
+        68,
+        40
+      ]
+    },
+    {
+      "file": "baoji/baoji0018.png",
+      "region": [
+        580,
+        42,
+        68,
+        40
+      ]
+    },
+    {
+      "file": "baoji/baoji0019.png",
+      "region": [
+        580,
+        42,
+        68,
+        40
+      ]
+    },
+    {
+      "file": "baoji/baoji0020.png",
+      "region": [
+        580,
+        42,
+        68,
+        40
+      ]
+    },
+    {
+      "file": "baoji2/baoji20000.png",
+      "region": [
+        652,
+        42,
+        67,
+        40
+      ]
+    },
+    {
+      "file": "real_bleedNumber/real_bleedNumber0000.png",
+      "region": [
+        723,
+        42,
+        26,
+        30
+      ]
+    },
+    {
+      "file": "real_bleedNumber/real_bleedNumber0001.png",
+      "region": [
+        753,
+        42,
+        26,
+        30
+      ]
+    },
+    {
+      "file": "real_bleedNumber/real_bleedNumber0002.png",
+      "region": [
+        783,
+        42,
+        26,
+        30
+      ]
+    },
+    {
+      "file": "real_bleedNumber/real_bleedNumber0003.png",
+      "region": [
+        813,
+        42,
+        26,
+        30
+      ]
+    },
+    {
+      "file": "real_bleedNumber/real_bleedNumber0004.png",
+      "region": [
+        843,
+        42,
+        26,
+        30
+      ]
+    },
+    {
+      "file": "real_bleedNumber/real_bleedNumber0005.png",
+      "region": [
+        873,
+        42,
+        26,
+        30
+      ]
+    },
+    {
+      "file": "real_bleedNumber/real_bleedNumber0006.png",
+      "region": [
+        903,
+        42,
+        26,
+        30
+      ]
+    },
+    {
+      "file": "real_bleedNumber/real_bleedNumber0007.png",
+      "region": [
+        933,
+        42,
+        26,
+        30
+      ]
+    },
+    {
+      "file": "real_bleedNumber/real_bleedNumber0008.png",
+      "region": [
+        963,
+        42,
+        26,
+        30
+      ]
+    },
+    {
+      "file": "real_bleedNumber/real_bleedNumber0009.png",
+      "region": [
+        993,
+        42,
+        26,
+        30
+      ]
+    },
+    {
+      "file": "real_baojiNumber/real_baojiNumber0000.png",
+      "region": [
+        2,
+        86,
+        30,
+        36
+      ]
+    },
+    {
+      "file": "real_baojiNumber/real_baojiNumber0001.png",
+      "region": [
+        36,
+        86,
+        30,
+        36
+      ]
+    },
+    {
+      "file": "real_baojiNumber/real_baojiNumber0002.png",
+      "region": [
+        70,
+        86,
+        30,
+        36
+      ]
+    },
+    {
+      "file": "real_baojiNumber/real_baojiNumber0003.png",
+      "region": [
+        104,
+        86,
+        30,
+        36
+      ]
+    },
+    {
+      "file": "real_baojiNumber/real_baojiNumber0004.png",
+      "region": [
+        138,
+        86,
+        30,
+        36
+      ]
+    },
+    {
+      "file": "real_baojiNumber/real_baojiNumber0005.png",
+      "region": [
+        172,
+        86,
+        30,
+        36
+      ]
+    },
+    {
+      "file": "real_baojiNumber/real_baojiNumber0006.png",
+      "region": [
+        206,
+        86,
+        30,
+        36
+      ]
+    },
+    {
+      "file": "real_baojiNumber/real_baojiNumber0007.png",
+      "region": [
+        240,
+        86,
+        30,
+        36
+      ]
+    },
+    {
+      "file": "real_baojiNumber/real_baojiNumber0008.png",
+      "region": [
+        274,
+        86,
+        30,
+        36
+      ]
+    },
+    {
+      "file": "real_baojiNumber/real_baojiNumber0009.png",
+      "region": [
+        308,
+        86,
+        30,
+        36
+      ]
+    },
+    {
+      "file": "real_baoji/real_baoji0000.png",
+      "region": [
+        342,
+        86,
+        67,
+        40
+      ]
+    },
+    {
+      "file": "baoDuBleedNumber/baoDuBleedNumber0000.png",
+      "region": [
+        413,
+        86,
+        24,
+        32
+      ]
+    },
+    {
+      "file": "baoDuBleedNumber/baoDuBleedNumber0001.png",
+      "region": [
+        441,
+        86,
+        24,
+        32
+      ]
+    },
+    {
+      "file": "baoDuBleedNumber/baoDuBleedNumber0002.png",
+      "region": [
+        469,
+        86,
+        24,
+        32
+      ]
+    },
+    {
+      "file": "baoDuBleedNumber/baoDuBleedNumber0003.png",
+      "region": [
+        497,
+        86,
+        24,
+        32
+      ]
+    },
+    {
+      "file": "baoDuBleedNumber/baoDuBleedNumber0004.png",
+      "region": [
+        525,
+        86,
+        24,
+        32
+      ]
+    },
+    {
+      "file": "baoDuBleedNumber/baoDuBleedNumber0005.png",
+      "region": [
+        553,
+        86,
+        24,
+        32
+      ]
+    },
+    {
+      "file": "baoDuBleedNumber/baoDuBleedNumber0006.png",
+      "region": [
+        581,
+        86,
+        24,
+        32
+      ]
+    },
+    {
+      "file": "baoDuBleedNumber/baoDuBleedNumber0007.png",
+      "region": [
+        609,
+        86,
+        24,
+        32
+      ]
+    },
+    {
+      "file": "baoDuBleedNumber/baoDuBleedNumber0008.png",
+      "region": [
+        637,
+        86,
+        24,
+        32
+      ]
+    },
+    {
+      "file": "baoDuBleedNumber/baoDuBleedNumber0009.png",
+      "region": [
+        665,
+        86,
+        24,
+        32
+      ]
+    },
+    {
+      "file": "sb/sb0000.png",
+      "region": [
+        693,
+        86,
+        68,
+        40
+      ]
+    },
+    {
+      "file": "miaosa/miaosa0000.png",
+      "region": [
+        765,
+        86,
+        68,
+        40
+      ]
+    },
+    {
+      "file": "bleedNumberAdd/bleedNumberAdd0000.png",
+      "region": [
+        837,
+        86,
+        26,
+        30
+      ]
+    },
+    {
+      "file": "bleedNumberAdd/bleedNumberAdd0001.png",
+      "region": [
+        867,
+        86,
+        26,
+        30
+      ]
+    },
+    {
+      "file": "bleedNumberAdd/bleedNumberAdd0002.png",
+      "region": [
+        897,
+        86,
+        26,
+        30
+      ]
+    },
+    {
+      "file": "bleedNumberAdd/bleedNumberAdd0003.png",
+      "region": [
+        927,
+        86,
+        26,
+        30
+      ]
+    },
+    {
+      "file": "bleedNumberAdd/bleedNumberAdd0004.png",
+      "region": [
+        957,
+        86,
+        26,
+        30
+      ]
+    },
+    {
+      "file": "bleedNumberAdd/bleedNumberAdd0005.png",
+      "region": [
+        987,
+        86,
+        26,
+        30
+      ]
+    },
+    {
+      "file": "bleedNumberAdd/bleedNumberAdd0006.png",
+      "region": [
+        2,
+        130,
+        26,
+        30
+      ]
+    },
+    {
+      "file": "bleedNumberAdd/bleedNumberAdd0007.png",
+      "region": [
+        32,
+        130,
+        26,
+        30
+      ]
+    },
+    {
+      "file": "bleedNumberAdd/bleedNumberAdd0008.png",
+      "region": [
+        62,
+        130,
+        26,
+        30
+      ]
+    },
+    {
+      "file": "bleedNumberAdd/bleedNumberAdd0009.png",
+      "region": [
+        92,
+        130,
+        26,
+        30
+      ]
+    }
+  ]
+}

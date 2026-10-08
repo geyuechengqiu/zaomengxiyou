@@ -28,7 +28,7 @@ func _apply(target: Node, _instigator: Node, context: Dictionary) -> void:
 		# 或使用线性公式：final_multiplier = damage_multiplier * (1.0 - 0.1 * (stacks - 1))
 	
 	# DamageInfo 是引用类型，直接修改其 final_damage 即可影响后续计算
-	damage_info.final_damage *= final_multiplier
+	damage_info.scale_damage(final_multiplier)
 
 func _get_description() -> String:
 	return "Modify incoming damage by multiplier %.2f\n" % damage_multiplier

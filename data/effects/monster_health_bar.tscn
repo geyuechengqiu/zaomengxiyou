@@ -1,0 +1,27 @@
+[gd_scene format=3]
+[ext_resource type="Script" path="res://addons/battle_foundation/presentation/battle_monster_health_bar_2d.gd" id="script"]
+[ext_resource type="Texture2D" path="res://assets/ui/monster_health_bar/background.png" id="background"]
+[ext_resource type="Texture2D" path="res://assets/ui/monster_health_bar/fill.png" id="fill"]
+[node name="MonsterHealthBar" type="Node2D"]
+texture_filter = 1
+position = Vector2(0, -200)
+scale = Vector2(2, 2)
+script = ExtResource("script")
+[node name="Background" type="Sprite2D" parent="."]
+texture = ExtResource("background")
+[node name="Trail" type="Sprite2D" parent="."]
+position = Vector2(-30, -2)
+texture = ExtResource("fill")
+centered = false
+modulate = Color(0.5, 0.5, 0.5, 1)
+[node name="Mask" type="Control" parent="."]
+offset_left = -31.0
+offset_top = -3.55
+offset_right = 32.0
+offset_bottom = 3.55
+mouse_filter = 2
+clip_contents = true
+[node name="Foreground" type="Sprite2D" parent="Mask"]
+position = Vector2(1, 1.55)
+texture = ExtResource("fill")
+centered = false

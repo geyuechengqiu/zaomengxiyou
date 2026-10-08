@@ -6,7 +6,9 @@
 [ext_resource type="Script" path="res://addons/battle_foundation/movement/battle_hurtbox_2d.gd" id="hurtbox"]
 [ext_resource type="Script" path="res://addons/battle_foundation/movement/battle_hitbox_2d.gd" id="hitbox"]
 [ext_resource type="Texture2D" path="res://data/battle2d/dummy/wooden_dummy.svg" id="texture"]
+[ext_resource type="Texture2D" path="res://data/battle2d/dummy/wooden_dummy_hurt_face.svg" id="hurt_face"]
 [ext_resource type="PackedScene" path="res://addons/battle_foundation/presentation/combat_feedback_2d.tscn" id="feedback"]
+[ext_resource type="AnimationLibrary" path="res://data/battle2d/dummy/reaction_animations.tres" id="reactions"]
 [sub_resource type="Resource" id="actions"]
 script = ExtResource("actions")
 attack_skill_id = &""
@@ -24,26 +26,77 @@ size = Vector2(90, 170)
 resource_local_to_scene = true
 size = Vector2(1, 1)
 [sub_resource type="Animation" id="idle"]
-length = 1.0
+length = 1
 loop_mode = 1
 tracks/0/type = "value"
-tracks/0/path = NodePath("Visual:modulate")
-tracks/0/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 0, "values": [Color(1, 1, 1, 1)]}
+tracks/0/path = NodePath("Visual/Body:position")
+tracks/0/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 0, "values": [Vector2(0, -16)]}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Visual/Body:rotation")
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 0, "values": [0.0]}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Visual/Body:scale")
+tracks/2/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 0, "values": [Vector2(1, 1)]}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Visual/Body:modulate")
+tracks/3/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 0, "values": [Color(1, 1, 1, 1)]}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Visual/Body/HurtFace:modulate")
+tracks/4/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 0, "values": [Color(1, 1, 1, 0)]}
+[sub_resource type="Animation" id="reset"]
+resource_name = "RESET"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Visual/Body:position")
+tracks/0/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 0, "values": [Vector2(0, -16)]}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Visual/Body:rotation")
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 0, "values": [0.0]}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Visual/Body:scale")
+tracks/2/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 0, "values": [Vector2(1, 1)]}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Visual/Body:modulate")
+tracks/3/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 0, "values": [Color(1, 1, 1, 1)]}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Visual/Body/HurtFace:modulate")
+tracks/4/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 0, "values": [Color(1, 1, 1, 0)]}
 [sub_resource type="Animation" id="hurt"]
 length = 0.26666668
 tracks/0/type = "value"
-tracks/0/path = NodePath("Visual:modulate")
-tracks/0/keys = {"times": PackedFloat32Array(0, 0.15, 0.26666668), "transitions": PackedFloat32Array(1, 1, 1), "update": 0, "values": [Color(1, 0.4, 0.3, 1), Color(1, 0.85, 0.65, 1), Color(1, 1, 1, 1)]}
+tracks/0/path = NodePath("Visual/Body:position")
+tracks/0/keys = {"times": PackedFloat32Array(0, 0.033333333, 0.1, 0.166666667, 0.26666668), "transitions": PackedFloat32Array(1, 1, 1, 1, 1), "update": 0, "values": [Vector2(0, -16), Vector2(3, -18), Vector2(-2, -16), Vector2(1, -16), Vector2(0, -16)]}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Visual/Body:rotation")
+tracks/1/keys = {"times": PackedFloat32Array(0, 0.033333333, 0.1, 0.166666667, 0.26666668), "transitions": PackedFloat32Array(1, 1, 1, 1, 1), "update": 0, "values": [0.0, 0.13, -0.08, 0.035, 0.0]}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Visual/Body:scale")
+tracks/2/keys = {"times": PackedFloat32Array(0, 0.033333333, 0.1, 0.166666667, 0.26666668), "transitions": PackedFloat32Array(1, 1, 1, 1, 1), "update": 0, "values": [Vector2(1, 1), Vector2(1.06, 0.92), Vector2(0.98, 1.03), Vector2(1.01, 0.99), Vector2(1, 1)]}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Visual/Body:modulate")
+tracks/3/keys = {"times": PackedFloat32Array(0, 0.033333333, 0.1, 0.166666667, 0.26666668), "transitions": PackedFloat32Array(1, 1, 1, 1, 1), "update": 0, "values": [Color(1, 0.7, 0.62, 1), Color(1, 0.76, 0.68, 1), Color(1, 0.88, 0.82, 1), Color(1, 0.96, 0.94, 1), Color(1, 1, 1, 1)]}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Visual/Body/HurtFace:modulate")
+tracks/4/keys = {"times": PackedFloat32Array(0, 0.033333333, 0.1, 0.166666667, 0.26666668), "transitions": PackedFloat32Array(1, 1, 1, 1, 1), "update": 0, "values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0.85), Color(1, 1, 1, 0)]}
 [sub_resource type="Animation" id="death"]
 length = 0.5166667
 tracks/0/type = "value"
-tracks/0/path = NodePath("Visual:modulate")
-tracks/0/keys = {"times": PackedFloat32Array(0, 0.5166667), "transitions": PackedFloat32Array(1, 1), "update": 0, "values": [Color(1, 0.4, 0.3, 1), Color(0.35, 0.35, 0.35, 0.6)]}
+tracks/0/path = NodePath("Visual/Body:position")
+tracks/0/keys = {"times": PackedFloat32Array(0, 0.5166667), "transitions": PackedFloat32Array(1, 1), "update": 0, "values": [Vector2(0, -16), Vector2(0, -16)]}
 tracks/1/type = "value"
-tracks/1/path = NodePath("Visual:rotation")
+tracks/1/path = NodePath("Visual/Body:rotation")
 tracks/1/keys = {"times": PackedFloat32Array(0, 0.5166667), "transitions": PackedFloat32Array(1, 1), "update": 0, "values": [0.0, -1.2]}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Visual/Body:scale")
+tracks/2/keys = {"times": PackedFloat32Array(0, 0.5166667), "transitions": PackedFloat32Array(1, 1), "update": 0, "values": [Vector2(1, 1), Vector2(1, 1)]}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Visual/Body:modulate")
+tracks/3/keys = {"times": PackedFloat32Array(0, 0.5166667), "transitions": PackedFloat32Array(1, 1), "update": 0, "values": [Color(1, 0.7, 0.62, 1), Color(0.35, 0.35, 0.35, 0.6)]}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Visual/Body/HurtFace:modulate")
+tracks/4/keys = {"times": PackedFloat32Array(0, 0.5166667), "transitions": PackedFloat32Array(1, 1), "update": 0, "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0)]}
 [sub_resource type="AnimationLibrary" id="library"]
-_data = {&"idle": SubResource("idle"), &"land": SubResource("idle"), &"hurt": SubResource("hurt"), &"death": SubResource("death")}
+_data = {&"RESET": SubResource("reset"), &"idle": SubResource("idle"), &"land": SubResource("idle"), &"hurt": SubResource("hurt"), &"death": SubResource("death")}
 [node name="WoodenDummy" type="CharacterBody2D"]
 script = ExtResource("entity")
 action_profile = SubResource("actions")
@@ -55,11 +108,31 @@ shape = SubResource("physical")
 [node name="AnimationAdapter" type="Node2D" parent="."]
 script = ExtResource("adapter")
 profile = SubResource("profile")
-[node name="Visual" type="Sprite2D" parent="AnimationAdapter"]
-position = Vector2(0, -90)
+[node name="Visual" type="Node2D" parent="AnimationAdapter"]
+[node name="Base" type="Sprite2D" parent="AnimationAdapter/Visual"]
+position = Vector2(-50, -16)
 texture = ExtResource("texture")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 164, 100, 16)
+[node name="Body" type="Node2D" parent="AnimationAdapter/Visual"]
+position = Vector2(0, -16)
+[node name="Sprite" type="Sprite2D" parent="AnimationAdapter/Visual/Body"]
+position = Vector2(-50, -164)
+texture = ExtResource("texture")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 100, 164)
+[node name="HurtFace" type="Sprite2D" parent="AnimationAdapter/Visual/Body"]
+modulate = Color(1, 1, 1, 0)
+position = Vector2(-50, -164)
+texture = ExtResource("hurt_face")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 100, 164)
 [node name="AnimationPlayer" type="AnimationPlayer" parent="AnimationAdapter"]
 libraries/ = SubResource("library")
+libraries/reaction = ExtResource("reactions")
 [node name="AttackHitbox" type="Area2D" parent="AnimationAdapter"]
 script = ExtResource("hitbox")
 collision_layer = 0

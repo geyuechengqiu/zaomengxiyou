@@ -127,12 +127,18 @@ func forget_ability(ability_id: StringName) -> void:
 	if not is_instance_valid(ability_instance):
 		push_warning("GameplayAbilityComponent: Ability %s not found." % ability_id)
 		return
+	# 遗忘也是释放生命周期结束；先禁用，防止同步结束回调重入旧实例。
+	ability_instance.disabled = true
+	ability_instance.end_ability(BTNode.Status.FAILURE)
+	if _current_casting_ability == ability_instance:
+		_current_casting_ability = null
 	
 	if ability_instance.ability_completed.is_connected(_on_ability_completed):
 		ability_instance.ability_completed.disconnect(_on_ability_completed)
 	# 移除被动技能效果
 	ability_instance.handle_forgotten(self)
 	_learned_abilities.erase(ability_id)
+	ability_instance.clear_blackboard()
 
 	ability_forgotten.emit(ability_id)
 	CoreSystem.event_bus.push_event("ability_forgotten", [{
@@ -239,6 +245,8 @@ func try_activate_ability(ability_id: StringName, context: Dictionary = {}) -> b
 func cancel_ability(ability_id: StringName = &"", context: Dictionary = {}) -> void:
 	var target_id = ability_id
 	if ability_id.is_empty():
+		if not is_instance_valid(_current_casting_ability):
+			return
 		target_id = _current_casting_ability.get_definition().ability_id
 		
 	if target_id.is_empty():

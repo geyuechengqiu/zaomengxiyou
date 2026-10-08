@@ -10,6 +10,8 @@ var jumps_used: int = 0
 var jump_count: int = 0
 var landing_serial: int = 0
 var jump_serial: int = 0
+var impulse_speed: float = 0.0
+var impulse_remaining: float = 0.0
 #endregion
 #region 跳跃入口
 func can_jump(maximum_jumps: int) -> bool:
@@ -27,6 +29,51 @@ func jump(profile: BattleActionProfile2D) -> bool:
 	return true
 #endregion
 #region 战斗时间中的扫掠碰撞
+func sweep_skill_displacement(displacement: Vector2, profile: BattleActionProfile2D) -> void:
+	if displacement.is_zero_approx():
+		return
+	var was_grounded := grounded
+	if displacement.y < 0.0:
+		grounded = false
+	var remaining := displacement
+	for iteration in range(6):
+		var collision := body.move_and_collide(remaining)
+		if collision == null:
+			break
+		var normal := collision.get_normal()
+		if normal.dot(Vector2.UP) >= cos(profile.maximum_floor_angle):
+			grounded = true
+		elif normal.dot(Vector2.DOWN) > 0.7:
+			on_ceiling = true
+		else:
+			on_wall = true
+		body.velocity = body.velocity.slide(normal)
+		remaining = collision.get_remainder().slide(normal)
+		if remaining.is_zero_approx():
+			break
+	if grounded:
+		var support := body.move_and_collide(Vector2.DOWN * profile.floor_snap_distance, true)
+		if support == null or support.get_normal().dot(Vector2.UP) < cos(profile.maximum_floor_angle):
+			grounded = false
+	if grounded and not was_grounded:
+		just_landed = true
+		landing_serial += 1
+		jumps_used = 0
+	elif not grounded and was_grounded:
+		jumps_used = maxi(jumps_used, 1)
+
+func apply_impulse(horizontal: float, duration: float, launch: float) -> void:
+	impulse_speed = horizontal
+	impulse_remaining = duration
+	if launch > 0.0:
+		body.velocity.y = -launch
+		grounded = false
+		jumps_used = maxi(jumps_used, 1)
+
+func clear_impulse() -> void:
+	impulse_speed = 0.0
+	impulse_remaining = 0.0
+
 func advance(delta: float, horizontal_speed: float, profile: BattleActionProfile2D) -> void:
 	just_landed = false
 	on_wall = false
@@ -36,7 +83,9 @@ func advance(delta: float, horizontal_speed: float, profile: BattleActionProfile
 	for tick in range(count):
 		var was_grounded := grounded
 		grounded = false
-		body.velocity.x = horizontal_speed
+		var impulse_delta := minf(step_delta, impulse_remaining)
+		body.velocity.x = horizontal_speed + impulse_speed * impulse_delta / step_delta
+		impulse_remaining = maxf(0.0, impulse_remaining - step_delta)
 		body.velocity.y = minf(body.velocity.y + profile.gravity * step_delta, profile.maximum_fall_speed)
 		var remaining := body.velocity * step_delta
 		for iteration in range(6):

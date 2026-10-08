@@ -47,35 +47,41 @@ func modify_value(amount: float, is_regen: bool = false) -> void:
 ## [param] owner_entity: Node 拥有者实体
 ## [return] float 最终伤害值（用于 Cue 系统）
 func apply_damage(damage_info: DamageInfo, owner_entity: Node) -> float:
-	if not is_alive: return 0.0
-	# 发出伤害接收信号（在计算减免之前）
+	if damage_info.applied and damage_info.single_use:
+		return damage_info.actual_hp_loss
+	damage_info.applied = true
+	damage_info.actual_hp_loss = 0.0
+	damage_info.hp_before = current_value
+	damage_info.hp_after = current_value
+	if not is_alive or damage_info.is_dodged:
+		return 0.0
+	var notify_received := _notify_damage_received.bind(damage_info, owner_entity)
+	if damage_info.application_resolver.is_valid():
+		damage_info.application_resolver.call(damage_info, owner_entity, notify_received)
+	else:
+		notify_received.call()
+	# 战斗宿主可明确配置霸体的受伤倍率；与是否进入硬直没有关系。
+	var incoming_multiplier := maxf(0.0, float(damage_info.get_meta(&"battle_received_damage_multiplier", 1.0)))
+	damage_info.final_damage *= incoming_multiplier
+	damage_info.normal_damage *= incoming_multiplier
+	damage_info.true_damage *= incoming_multiplier
+	## 原版后置倍率及生命使用 Number；界面舍入不反写结算精度。
+	damage_info.hp_before = current_value
+	if is_finite(damage_info.final_damage) and damage_info.final_damage > 0.0:
+		_modify_value(-damage_info.final_damage)
+	damage_info.hp_after = current_value
+	damage_info.actual_hp_loss = maxf(0.0, damage_info.hp_before - current_value)
+	damage_info.record(&"health", {"before": damage_info.hp_before, "after": current_value, "actual_hp_loss": damage_info.actual_hp_loss})
+	if damage_info.actual_hp_loss > 0.0:
+		damage_applied.emit(damage_info, damage_info.actual_hp_loss)
+		CoreSystem.event_bus.push_event("damage_applied", [{"entity": owner_entity, "damage_info": damage_info}], true)
+		if not is_alive:
+			_die(damage_info.instigator, owner_entity)
+	return damage_info.actual_hp_loss
+
+func _notify_damage_received(damage_info: DamageInfo, owner_entity: Node) -> void:
 	damage_received.emit(damage_info)
-	CoreSystem.event_bus.push_event("damage_received", [{
-		"entity": owner_entity,
-		"damage_info": damage_info
-	}], true)
-	
-	# 在应用伤害前被BUFF修改为0或更少
-	var final_damage = damage_info.final_damage
-	if final_damage <= 0: return 0.0
-
-	# 应用伤害
-	if final_damage > 0:
-		_modify_value(-final_damage)
-	
-	# UI系统可以监听这个信号来显示伤害飘字
-	damage_applied.emit(damage_info, final_damage)
-	CoreSystem.event_bus.push_event("damage_applied", [{
-		"entity": owner_entity,
-		"damage_info": damage_info
-	}], true)
-
-	# 处理死亡
-	if not is_alive:
-		_die(damage_info.instigator, owner_entity)
-
-	# 返回最终伤害值（供 Cue 系统使用）
-	return final_damage
+	CoreSystem.event_bus.push_event("damage_received", [{"entity": owner_entity, "damage_info": damage_info}], true)
 
 ## 受到治疗
 ## [param] amount: float 要增加的生命值数量

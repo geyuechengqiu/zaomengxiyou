@@ -6,7 +6,7 @@
 script = ExtResource("script")
 skeleton_data = ExtResource("data")
 source_fps = 30.0
-animations = Dictionary[StringName, StringName]({&"idle": &"idle", &"move": &"walk", &"run": &"runNormal", &"jump": &"jumpNormal", &"jump_2": &"jumpTwo", &"fall": &"jumpDown", &"land": &"idle", &"hurt": &"hurtStand", &"death": &"dead", &"attack_1": &"attack1", &"attack_2": &"attack2", &"attack_3": &"attack3", &"attack_4": &"attack4", &"attack_5": &"attack5"})
+animations = Dictionary[StringName, StringName]({&"idle": &"idle", &"move": &"walk", &"run": &"runNormal", &"jump": &"jumpNormal", &"jump_2": &"jumpTwo", &"fall": &"jumpDown", &"land": &"idle", &"hurt": &"hurtStand", &"death": &"dead", &"attack_1": &"attack1", &"attack_2": &"attack2", &"attack_3": &"attack3", &"attack_4": &"attack4", &"attack_5": &"attack5", &"run_attack": &"runAttack", &"jump_attack": &"jumpAttack"})
 looping_actions = Array[StringName]([&"idle", &"move", &"run"])
 base_skin = &"基础"
 display_scale = 2.0

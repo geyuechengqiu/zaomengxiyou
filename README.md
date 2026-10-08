@@ -1,8 +1,51 @@
 # 插件效果演示
 
-孙悟空 [表现场景](data/animation/sunwukong_visual.tscn) 通过主 AnimationPlayer 预览十四个动作，所有技能统一使用一个 AttackHitbox / CollisionShape2D，判定范围读取当前 GAS 技能数据。修改技能事件的 hit_rect、缩放和偏移即可调整预览与实际命中。[编辑步骤、新角色接入与类图](data/animation/README.md)。
+孙悟空已接入原版跑攻、跳攻动画与独立 Core 状态：跑步或空中按 J 发动对应攻击。第四段新增可配置的 [8,16) 素材帧转身窗，窗口内新按反方向仅转身一次，身体与特效翻转、当前位移方向保留，第五段沿新朝向释放。动作、技能、转身参数及实际渲染见 [跑攻、跳攻与第四段转身](data/battle2d/wukong-context-attacks.md)。
 
-使用 Godot 4.7 或更新版本打开 `project.godot`，按 F6 运行所选示例，或按 F5 运行主场景 `examples/plugin_showcase.tscn`。
+游戏内怪物头顶血条已替换为原版62×6背景及60×4生命贴图：出生隐藏、受伤显现、0.6秒残血补间、2秒自动隐藏、最低4%显示及死亡隐藏。伤害跳字使用共享图集、有界节点池及原版连续Quad.easeOut Tween曲线采样，保持原轨迹、时长、随机规则与命中数量。实际GPU压力测试每战斗秒生成3600条、同时约3180条时，完整帧P95约12.59ms；单帧骤增5000条仍有峰值。配置、预热与实测边界见 [跳字高并发性能](data/effects/damage-number-performance.md)。原版边界、时间规则、编辑入口与实测范围见 [原版血条与跳字说明](data/effects/monster-health-bar.md)。
+
+阶段 9 已实现独立受击反应与保护条。F5 运行 [受击与保护演示](examples/hit_reaction_demo.tscn)：连按 J 五连击观察硬直、击退、击飞、落地倒地与起身；目标模式可切换普通、霸体、无敌和免伤但允许动作反应。左上输入框分别编辑东皇太一 25000、商羊 35000 的保护满值；同目标同技能跨施放累计命中，触发后重置计数。物理经过墙体/平台扫掠，受击停顿统一冻结战斗时钟。配置与实现见 [阶段9详细说明](addons/battle_foundation/combat/hit-reaction-protection.md) 和 [原版保护数据](data/protection/README.md)，自动验收 199 项及 13 套既有回归通过。
+
+训练木桩已按悟空的猴脸、棕帽金箍与黄色护衣重绘为 SVG，并加入预置 AnimationPlayer 受伤动画：身体倾斜、压缩、回弹与表情变化，底座保持固定。连续命中会重新播放，暂停与慢动作跟随战斗时钟；打开 [木桩场景](data/battle2d/dummy/wooden_dummy.tscn) 即可编辑和预览，详见 [木桩外观与动画说明](data/battle2d/dummy/README.md)。
+
+孙悟空五段普攻已接入项目现有 Spine 攻击特效，按原版 30 FPS 的第 4、4、2、0/8、6 帧播放。节点与时间轴保存在 [visual 场景](data/animation/sunwukong_visual.tscn)，可直接编辑和预览；左右镜像、取消、暂停与慢动作同步。跳跃高度、行走/奔跑速度、重力及不同测试场景的配置入口见 [孙悟空特效与运动调参](data/animation/sunwukong-config.md)。
+
+阶段 8 已接入原版伤害流程：命中/闪避、暴击/韧性、幸运/守护、技能等级与附伤、抗性、增减伤、真实伤害、护盾及后置回调。F6 运行 [原版伤害预置场景](examples/original_damage_demo.tscn)，连按 J 使用孙悟空五连击（第四段两次命中），点击“样例”切换八种结算；普通、暴击、真实伤害和闪避使用原版贴图跳字，连续命中的数字分别存在。所有面板数值显示整数，概率沿用原版220级EXP参数。结果区分计算伤害、护盾吸收和实际扣血。详见 [跳字编辑与原版逻辑](data/effects/README.md)、[公式与扩展说明](addons/battle_foundation/combat/original-damage.md)、[原版数据](data/damage/README.md) 和 [联合类图](addons/battle_foundation/docs/original-damage.svg)。
+
+阶段 7 已接入现有 GAS 技能时间轴：[三段技能预置场景](examples/skill_timeline_demo.tscn) 按 F6 运行，J 释放三段，后摇前再次按 J 派生，支持独立倍率/附伤/击退/浮空、持续间隔与次数、消耗冷却和取消清理。所有攻击段复用一个判定框，117项验收通过。实现、编辑方法、时序与边界见 [阶段7说明](addons/battle_foundation/combat/skill-timeline.md) 和 [联合类图](addons/battle_foundation/docs/skill-timeline.svg)。三段数值为验收配置，原五连击与单段场景保留，伤害默认已升级到阶段8原版策略。
+
+孙悟空 [表现场景](data/animation/sunwukong_visual.tscn) 通过主 AnimationPlayer 预览十六个动作，所有技能统一使用一个 AttackHitbox / CollisionShape2D，判定范围读取当前 GAS 技能数据。修改技能事件的 hit_rect、缩放和偏移即可调整预览与实际命中。[编辑步骤、新角色接入与类图](data/animation/README.md)。
+
+使用带原生 Spine 模块的 Godot 4.7 或更新版本打开 `project.godot`，按 F5 运行阶段9受击与保护测试场景，或按 F6 运行所选示例。插件综合演示仍可单独运行 `examples/plugin_showcase.tscn`。
+
+Windows 编辑器若偶发 `Failed to create Windows OS window`、`Failed to create sub window` 或 `INVALID_WINDOW_ID`，先保存并关闭编辑器，再通过 [单窗口启动脚本](tools/open_editor_single_window.ps1) 打开本项目：
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\tools\open_editor_single_window.ps1
+# 首次打开或更换电脑时，指定支持 Spine 的 Godot：
+powershell -ExecutionPolicy Bypass -File .\tools\open_editor_single_window.ps1 -Godot 'D:\路径\Spine-Godot.exe'
+```
+
+脚本读取本项目上次使用的 Godot 路径，并传入 `--editor --single-window`，让编辑器弹窗和提示嵌入主窗口，减少 Windows 子窗口创建。默认不修改全局设置，也不关闭正在运行的编辑器。**普通启动仍会使用原有多窗口设置**；要持续应用此规避措施，请先保存并关闭所有使用该引擎的编辑器，然后执行：
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\tools\open_editor_single_window.ps1 -PersistSingleWindow
+# 只保存设置、不打开编辑器：在上面的命令后添加 -ConfigureOnly
+```
+
+此选项通过 [Godot 设置脚本](tools/window_mode_helper/configure_editor_window_mode.gd) 持久化当前版本的 `interface/editor/display/single_window_mode=true`，影响使用同一用户设置文件的其他项目；首次修改前，在设置文件旁保留 `.before-single-window.bak` 备份。配置进程使用独立辅助工程，不会加载游戏插件；辅助工程的自检插件只在显式验证参数下运行。Windows GUI 版 Godot 通过等待进程退出确认保存完成。若发现同一引擎仍有编辑器进程，脚本会停止并提示保存关闭，不会强制结束进程。也可在“编辑器设置”搜索 `single_window_mode`，手动开启并重启；恢复多窗口只需关闭该开关并重启，不建议整份还原备份覆盖之后的其他设置。单窗口模式会限制浮动面板；按当前 [官方设置文档](https://docs.godotengine.org/en/latest/classes/class_editorsettings.html#class-editorsettings-property-interface-editor-display-single-window-mode)，游戏嵌入也会停用，F5/F6 在独立游戏窗口运行。
+
+2026-10-08 排查时：最新游戏日志没有窗口错误，Panku 用户配置的 `enable_os_window=false`，编辑器单窗口设置为 `false`，运行中的编辑器命令也没有 `--single-window`。这些证据更倾向于编辑器原生弹窗路径，而非游戏战斗代码，但仍不能证明底层失败原因。`Config file 'user://config.cfg' not found` 是使用默认配置的提示，不是这组窗口错误。
+
+验证入口 [verify_editor_window_mode.gd](tools/window_mode_helper/verify_editor_window_mode.gd) 通过正常编辑器插件生命周期执行，不替换编辑器主循环；验证持久化设置时不传 `--single-window`，反复显示/隐藏嵌入弹窗后自动退出。请关闭日常编辑器或使用隔离用户配置再运行验证，避免并行写编辑器设置：
+
+```powershell
+& 'D:\路径\Spine-Godot.exe' --path .\tools\window_mode_helper --editor --quit-after 1200 -- --verify-window-mode
+```
+
+2026-10-08 已通过同一自编译引擎、同一 NVIDIA/D3D12 后端的 30 次弹窗显示/隐藏验证，无错误；主场景运行 180 帧正常退出，无窗口错误；原版伤害测试通过 90 项检查。游戏场景仍有现存的资源 UID 回退路径警告，与这组 Windows 子窗口错误无关，未在本次调整中修改。当前用户的 Godot 4.7 编辑器单窗口设置已保存为 `true` 并保留原设置备份；这是对失败创建子窗口路径的规避，不是已证明并修复了底层 Windows/引擎故障。
+
+这是针对窗口创建路径的规避措施，尚未确定这台电脑上偶发错误的根因。[同类 Windows 窗口失败报告](https://github.com/godotengine/godot/issues/74152) 和 [已合并的 Windows 图标泄漏修复](https://github.com/godotengine/godot/pull/114525) 可供对照；仅凭 `INVALID_WINDOW_ID` 不能断定为图标泄漏、显卡问题或某个插件故障。2026-10-07 检查时游戏日志没有该组错误，编辑器 GDI 数量为 115，未发现当时已耗尽的证据。
 
 当前包含以下六套插件：
 
@@ -31,19 +74,19 @@
 
 已在现有 Battle Foundation 中增加独立运动控制器、状态权限表和连击运行实例，复用 Core 输入/事件与 GAS 属性/Vital/技能。完成待机、行走、奔跑、起跳、空中、落地、受击、死亡；支持重力、墙体、顶头、单向平台、二段跳和朝向限制。死亡优先于霸体与技能规则，动画完成只通知动作系统。
 
-动作状态已接入插件的 Core `BaseStateMachine` / `BaseState`，九种状态在 Core 中进入、退出及转换，按实体登记到 StateMachineManager；旧语义入口读取当前 Core 叶子。管理器关闭默认驱动，状态仍统一接收战斗 delta；重生和离树注销机器。接入结构、查询 API 及生命周期见 [状态机说明](addons/battle_foundation/movement/README.md#动作状态接入-core-插件状态机) 和 [Core 状态机类图](addons/battle_foundation/docs/action-state-machine.svg)，验收入口为 [verify_wukong_state_machine.tscn](examples/verify_wukong_state_machine.tscn)。
+动作状态已接入插件的 Core `BaseStateMachine` / `BaseState`，十七种状态（含受击反应、跑攻与跳攻）在 Core 中进入、退出及转换，按实体登记到 StateMachineManager；旧语义入口读取当前 Core 叶子。管理器关闭默认驱动，状态仍统一接收战斗 delta；重生和离树注销机器。接入结构、查询 API 及生命周期见 [状态机说明](addons/battle_foundation/movement/README.md#动作状态接入-core-插件状态机) 和 [Core 状态机类图](addons/battle_foundation/docs/action-state-machine.svg)，验收入口为 [verify_wukong_state_machine.tscn](examples/verify_wukong_state_machine.tscn)。
 
-孙悟空普通攻击使用 `sunwukong_attack1` 至 `sunwukong_attack5`，保留原素材 30 FPS 的段时长、六次命中事件、伤害倍率，以及第四段前移和第二击偏移。攻击范围使用从原版素材提取的五组 ABRect；负显示缩放不反转碰撞框，朝向按脚底整体镜像。连按 J 在当前段预约下一段，长按不自动连击；攻击锁行走与转向，可按 K 跳取消。第四段位移经过碰撞，不穿墙。
+孙悟空普通攻击使用 `sunwukong_attack1` 至 `sunwukong_attack5`，保留原素材 30 FPS 的段时长、六次命中事件、伤害倍率，以及第四段前移和第二击偏移。攻击范围使用从原版素材提取的五组 ABRect；负显示缩放不反转碰撞框，朝向按脚底整体镜像。连按 J 在当前段预约下一段，长按不自动连击；地面连击锁行走与常规转向，可按 K 跳取消；第四段额外允许窗口内一次反向转身。第四段位移经过碰撞，不穿墙。
 
 操作意图按顺序交给 Core 动作机当前叶子，覆盖按下、持有、松开和强度变化；方向松开后状态与动画返回待机，攻击期间释放方向不会打断攻击。菜单与失焦同步释放移动状态。已移除 Core 包内三个失效的历史示例入口及专用子场景，保留可运行示例；插件验收对资源编译失败返回失败码。
 
-打开 [平台场景](examples/wukong_platform_demo.tscn) 按 F6，A/D 行走、Shift/同方向双击奔跑、K 二段跳、J 五段普攻。面板显示支撑、跳跃预算及连击预约；Esc 菜单会清预约。完整条件表、原版来源、扩展 API 和迁移边界见 [阶段四 README](addons/battle_foundation/movement/README.md)。
+打开 [平台场景](examples/wukong_platform_demo.tscn) 按 F6，A/D 行走、Shift/同方向双击奔跑、K 二段跳、J 地面五段普攻或跑攻/跳攻。面板显示支撑、跳跃预算及连击预约；Esc 菜单会清预约。完整条件表、原版来源、扩展 API 和迁移边界见 [阶段四 README](addons/battle_foundation/movement/README.md)。
 
 ![运动与动作状态联合类图](addons/battle_foundation/docs/motion-state.svg)
 
 ![五段连击联合运行图](addons/battle_foundation/docs/combo-runtime.svg)
 
-验收 [verify_stage_four.tscn](examples/verify_stage_four.tscn) 已通过 222 项真实碰撞、平台、跳跃、连击、原版攻击边界、打断、时钟和输入检查；145 项输入检查、903 项动画检查及 46 项 Core 状态机检查通过。插件资源、阶段一、属性、Core 事件回归均通过。原版完整击退、暴击/保护公式、持续 sensor 和特效仍待后续接入。
+验收 [verify_stage_four.tscn](examples/verify_stage_four.tscn) 已通过 222 项真实碰撞、平台、跳跃、连击、原版攻击边界、打断、时钟和输入检查；145 项输入检查、903 项动画检查及 46 项 Core 状态机检查通过。插件资源、阶段一、属性、Core 事件回归均通过。这是阶段4时的验收记录；后续阶段6—8已接入命中窗口、原版受击特效与通用伤害公式，完整保护阈值及各职业专属逻辑仍需后续移植。
 
 ## 可扩展角色操作控制器
 
@@ -91,7 +134,7 @@
 
 阶段 6 已完成 [单段普攻与最小战斗闭环](addons/battle_foundation/combat/README.md)：Core 输入与动作状态 → GAS 命中窗口 → 独立受击区域 → 属性伤害/HealthVital 扣血 → 生命条与飘字 → 待机。每次施放保存攻击者、阵营、攻击编号和窗口命中集合，持续重叠只结算一次；单一攻击框继续读取技能数据并随朝向镜像。
 
-打开 [single_attack_demo.tscn](examples/single_attack_demo.tscn) 按 F6，J 单段普攻；按钮可翻转、让木桩靠近/远离、切换攻击值并重新生成木桩，演示打中、打空与击杀。Esc 菜单支持改键并阻断攻击。独立配置不改变原五连击。验收 [verify_single_attack.tscn](examples/verify_single_attack.tscn) 覆盖输入至待机、去重、镜像、死亡、打断及暂停；已查看实际 D3D12 命中与击杀画面。
+打开 [single_attack_demo.tscn](examples/single_attack_demo.tscn) 按 F6，或按 F5。画面采用原版 **940×590**，保持宽高比；角色、木桩、地形、摄像机、HUD、GAS 组件、输入控制器、完整菜单和特效均预置在场景中，启动时不创建节点。J 单段普攻，按钮可测试打中/打空/击杀并重载场景。已导出 [原版受击特效](assets/effects/hurt_effect_all/README.md)，11 帧、30 FPS，保留注册点和透明结尾，支持编辑器 AnimationPlayer 预览与统一暂停。64 项闭环/预置场景/特效验收及 8 项重载检查通过，已检查实际 D3D12 画面。Esc 菜单支持改键并阻断攻击，独立配置不改变原五连击。
 
 ![单段攻击联合类图](addons/battle_foundation/docs/single-attack-runtime.svg)
 

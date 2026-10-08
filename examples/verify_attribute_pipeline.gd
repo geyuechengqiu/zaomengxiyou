@@ -11,6 +11,7 @@ func _ready() -> void:
 	demo = (load("res://examples/wukong_platform_demo.tscn") as PackedScene).instantiate()
 	demo.enable_player_controls = false
 	add_child(demo)
+	demo.session.damage_strategy = SimpleDamageLogic.new()
 	demo.session.set_physics_process(false)
 	attributes = demo.player.attributes
 	attributes.snapshot_changed.connect(func(snapshot): notifications.append(snapshot))

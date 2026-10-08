@@ -3,9 +3,22 @@ class_name BattleGASBinding
 #region 共用 GAS 装配
 ## 2D/3D 实体共享这套装配，组件、Vital 和技能黑板仍各实例独占。
 static func attach(owner: Node, session: BattleSession, data: BattleEntityDefinition) -> Array:
-	var attributes := BattleAttributeComponent.new()
-	var abilities := GameplayAbilityComponent.new()
-	var statuses := GameplayStatusComponent.new()
+	var attributes := owner.get_node_or_null(^"GameplayVitalAttributeComponent") as BattleAttributeComponent
+	var abilities := owner.get_node_or_null(^"GameplayAbilityComponent") as GameplayAbilityComponent
+	var statuses := owner.get_node_or_null(^"GameplayStatusComponent") as GameplayStatusComponent
+	# 场景预置组件直接初始化；无预置的旧示例仍可通过工厂装配。
+	if attributes == null:
+		attributes = BattleAttributeComponent.new()
+		attributes.name = "GameplayVitalAttributeComponent"
+		owner.add_child(attributes)
+	if abilities == null:
+		abilities = GameplayAbilityComponent.new()
+		abilities.name = "GameplayAbilityComponent"
+		owner.add_child(abilities)
+	if statuses == null:
+		statuses = GameplayStatusComponent.new()
+		statuses.name = "GameplayStatusComponent"
+		owner.add_child(statuses)
 	attributes.name = "GameplayVitalAttributeComponent"
 	abilities.name = "GameplayAbilityComponent"
 	statuses.name = "GameplayStatusComponent"
@@ -13,9 +26,6 @@ static func attach(owner: Node, session: BattleSession, data: BattleEntityDefini
 	abilities.externally_driven = true
 	statuses.externally_driven = true
 	statuses.filter_events_by_owner = true
-	owner.add_child(attributes)
-	owner.add_child(abilities)
-	owner.add_child(statuses)
 	var sets: Array[GameplayAttributeSet] = [data.attribute_set]
 	if data.progression != null and data.progression.attribute_set != null:
 		sets.append(data.progression.attribute_set)

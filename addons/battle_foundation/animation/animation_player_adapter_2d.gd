@@ -14,15 +14,19 @@ func _ready() -> void:
 	_player = get_node(player_path) as AnimationPlayer
 	_visual = get_node(visual_path) as Node2D
 	_player.callback_mode_process = AnimationMixer.ANIMATION_CALLBACK_MODE_PROCESS_MANUAL
-	_player.animation_finished.connect(func(action): action_completed.emit(action))
+	_player.animation_finished.connect(func(_clip): action_completed.emit(_action))
 
 func play_action(action: StringName, restart: bool = false) -> bool:
-	if _player == null or not _player.has_animation(action):
+	var clip := _get_clip(action)
+	if _player == null or clip.is_empty():
 		return false
 	if action == _action and not restart:
 		return true
 	_action = action
-	_player.play(action)
+	# 连续命中会重新请求 hurt；相同动画的 play 本身不会重置播放进度。
+	if restart:
+		_player.stop()
+	_player.play(clip)
 	_player.advance(0.0)
 	action_started.emit(action)
 	return true
@@ -61,7 +65,16 @@ func get_current_action() -> StringName:
 	return _action
 
 func get_action_duration(action: StringName) -> float:
-	return _player.get_animation(action).length if _player != null and _player.has_animation(action) else 0.0
+	var clip := _get_clip(action)
+	return _player.get_animation(clip).length if _player != null and not clip.is_empty() else 0.0
+
+func _get_clip(action: StringName) -> StringName:
+	if _player == null:
+		return &""
+	if _player.has_animation(action):
+		return action
+	var reaction_clip := StringName("reaction/" + String(action))
+	return reaction_clip if _player.has_animation(reaction_clip) else &""
 
 func get_playback_time() -> float:
 	return _player.current_animation_position if _player != null and not _action.is_empty() else 0.0

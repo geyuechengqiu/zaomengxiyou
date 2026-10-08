@@ -11,6 +11,13 @@ const skills = read('exports/zmhj_role_stats/原始配置/Skill.json');
 const skeleton = read('exports/character_2001_wukong_placeholders/dragonbones56/1_V427/1_V427_ske.json');
 const frames = Object.fromEntries(skeleton.armature[0].animation.map(a=>[a.name,a.duration]));
 const folder = path.join(root,'data/battle2d');
+const previousCombo = fs.existsSync(path.join(folder,'sunwukong_combo.tres')) ? fs.readFileSync(path.join(folder,'sunwukong_combo.tres'),'utf8') : '';
+const previousStep4 = previousCombo.match(/\[sub_resource[^\n]*id="Step4"[^\n]*\]([\s\S]*?)(?=\n\[|$)/)?.[1] ?? '';
+const step4Number = (name, fallback) => Number(previousStep4.match(new RegExp(`^${name} = ([^\\n]+)`, 'm'))?.[1] ?? fallback);
+const motionSpeed = step4Number('root_motion_speed', 300);
+const motionFrames = step4Number('root_motion_frames', 16);
+const turnStart = step4Number('turn_window_start_frame', 8);
+const turnEnd = step4Number('turn_window_end_frame', 16);
 const hitboxes = readProject('data/battle2d/attack_hitboxes_source.json');
 if (crypto.createHash('sha256').update(fs.readFileSync(path.join(source,hitboxes.source_path))).digest('hex') !== hitboxes.sha256)
   throw new Error('Attack asset changed: regenerate attack_hitboxes_source.json with tools/extract_wukong_hitboxes.py');
@@ -33,7 +40,7 @@ for(let i=1;i<=5;i++) {
   skill+=`\n[sub_resource type="Resource" id="Timeline"]\nscript = ExtResource("timeline")\nsource_fps = 30.0\nduration_frames = ${duration}\nevents = Array[ExtResource("event")]([${impacts.map((e,index)=>`SubResource("Impact${index}")`).join(', ')}])\n\n[resource]\nscript = ExtResource("definition")\nability_id = &"${id}"\nability_name = "${original.name}"\nfeatures = Array[ExtResource("feature_type")]([SubResource("Cooldown"), SubResource("Timeline")])\n`;
   fs.writeFileSync(path.join(folder,`attack${i}.tres`),skill);
   combo+=`\n[sub_resource type="Resource" id="Step${i}"]\nscript = ExtResource("step")\nability_id = &"${id}"\naction = &"${action}"\nduration_frames = ${duration}\nsource_fps = 30.0\nallow_jump_cancel = ${original.breakByActionNames?.split(';').includes('jumpNormal')?'true':'false'}\n`;
-  if(i===4)combo+='root_motion_speed = 300.0\nroot_motion_frames = 16\n';
+  if(i===4)combo+=`root_motion_speed = ${motionSpeed}\nroot_motion_frames = ${motionFrames}\nturn_window_start_frame = ${turnStart}\nturn_window_end_frame = ${turnEnd}\n`;
   manifest.definitions.skills[id]=`res://data/battle2d/attack${i}.tres`;
   sourceSteps.push({id,source_skill_id:original.id,action,source_action:original.actionName,duration_frames:duration,impact_frames:impacts.map(e=>e.shootFrame),damage_multiplier:original.skillDefault,can_walk:original.canWalk,jump_cancel:original.breakByActionNames,hitbox,impact_definitions:impacts});
 }
@@ -43,7 +50,7 @@ fs.writeFileSync(path.join(folder,'manifest.json'),JSON.stringify(manifest,null,
 // #endregion
 // #region 来源记录
 const files=['exports/zmhj_role_stats/原始配置/Skill.json','exports/character_2001_wukong_placeholders/dragonbones56/1_V427/1_V427_ske.json','out/zmhj-equip-skill-diag/com/wdcgame/engine/entitys/CharEntity.as',hitboxes.source_path,'out/zmhj-equip-skill-diag/com/wdcgame/engine/entitys/controls/skill/SkillControl.as','out/zmhj-equip-skill-diag/com/wdcgame/engine/model/ManResourceVO.as'];
-fs.writeFileSync(path.join(folder,'combo_source_mapping.json'),JSON.stringify({source_project:'Speculum-4399-master',source_fps:30,steps:sourceSteps,chain_policy:'press during current segment queues one next segment; no hold auto-repeat; completion gates segment transition',movement_policy:'player input blocked; attack4 forward 150 source units/sec for 16/30 sec; collisions apply',landing_policy:'explicit one-frame battle state using existing idle visual; original skeleton has no separate landing clip',jump_policy:'two jumps; jumpTwo uses original 8-frame animation; platform velocities are Godot calibration values',sources:files.map(file=>({path:file,sha256:crypto.createHash('sha256').update(fs.readFileSync(path.join(source,file))).digest('hex')}))},null,2)+'\n');
+fs.writeFileSync(path.join(folder,'combo_source_mapping.json'),JSON.stringify({source_project:'Speculum-4399-master',source_fps:30,steps:sourceSteps,chain_policy:'press during current segment queues one next segment; no hold auto-repeat; completion gates segment transition',movement_policy:`player input blocked; attack4 uses configured ${motionSpeed} world units/sec for ${motionFrames}/30 sec; startup motion facing is independent of one-shot turn in [${turnStart},${turnEnd})`,landing_policy:'explicit one-frame battle state using existing idle visual; original skeleton has no separate landing clip',jump_policy:'two jumps; jumpTwo uses original 8-frame animation; platform velocities are Godot calibration values',sources:files.map(file=>({path:file,sha256:crypto.createHash('sha256').update(fs.readFileSync(path.join(source,file))).digest('hex')}))},null,2)+'\n');
 function readProject(file){return JSON.parse(fs.readFileSync(path.join(root,file),'utf8'));}
 console.log('Imported 5 Wukong combo abilities, 6 impact markers and source audit.');
 // #endregion

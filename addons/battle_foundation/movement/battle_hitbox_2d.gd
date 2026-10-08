@@ -48,6 +48,9 @@ func find_impact_payload(definition: GameplayAbilityDefinition, index: int) -> D
 	if definition != null:
 		for feature in definition.features:
 			if feature is BattleFrameTimelineFeature:
+				for segment in feature.attack_segments:
+					if segment != null and segment.hit_index == index:
+						return segment.get_payload()
 				for marker in feature.events:
 					if marker != null and marker.event_id == &"battle.attack.impact" and int(marker.payload.get("hit_index", 1)) == index:
 						return marker.payload
@@ -76,6 +79,15 @@ func _refresh_preview() -> void:
 				continue
 			if not is_finite(feature.source_fps) or feature.source_fps <= 0.0:
 				continue
+			var chosen: BattleAttackSegment
+			for segment in feature.attack_segments:
+				if segment == null or segment.action != preview_action:
+					continue
+				if chosen == null or (segment.start_frame / feature.source_fps <= preview_time + 0.000000001 and segment.start_frame >= chosen.start_frame):
+					chosen = segment
+			if chosen != null:
+				configure_skill(definition, chosen.hit_index)
+				return
 			var selected: BattleFrameEvent
 			for marker in feature.events:
 				if marker == null or marker.event_id != &"battle.attack.impact" or StringName(marker.payload.get("action", &"")) != preview_action:

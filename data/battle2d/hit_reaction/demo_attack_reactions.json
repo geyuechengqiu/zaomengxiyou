@@ -1,0 +1,10 @@
+{
+  "note": "阶段9验收配置：速度为Godot世界像素/秒，非原Flash运动单位；保护增量仍读取原版技能表。",
+  "steps": [
+    {"reaction_type": "hurt", "hit_stun": 0.12, "knockback_speed": 90, "knockback_duration": 0.06, "hit_stop_seconds": 0.025},
+    {"reaction_type": "knockback", "hit_stun": 0.18, "knockback_mode": "displacement", "knockback_distance": 8, "knockback_duration": 0.08, "hit_stop_seconds": 0.025},
+    {"reaction_type": "hurt", "hit_stun": 0.22, "knockback_speed": 100, "knockback_duration": 0.08, "hit_stop_seconds": 0.03},
+    {"reaction_type": "launch", "hit_stun": 0.25, "knockback_speed": 100, "knockback_duration": 0.1, "launch_speed": 320, "knockdown": true, "interrupt_kind": "launch", "interrupt_priority": 80, "hit_stop_seconds": 0.03},
+    {"reaction_type": "launch", "hit_stun": 0.3, "knockback_speed": 220, "knockback_duration": 0.16, "launch_speed": 520, "knockdown": true, "interrupt_kind": "launch", "interrupt_priority": 90, "hit_stop_seconds": 0.04}
+  ]
+}

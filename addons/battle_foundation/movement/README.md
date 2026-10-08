@@ -1,6 +1,6 @@
 # 阶段四：运动、动作状态与孙悟空五段普攻
 
-运行 [横版验收场景](../../../examples/wukong_platform_demo.tscn)，使用项目现有带 Spine 模块的 Godot 按 F6。A/D 或方向键行走，Shift 或同方向双击奔跑，K 地面跳 / 空中二段跳，J 连按预约五段普攻。Esc 菜单与改键，F1 普通受击，F2 死亡，F4 重生。地面、高台、黄色单向平台、墙和低天花板用于测试。面板显示动作状态、支撑、跳跃预算、连击段号与预约情况。
+运行 [横版验收场景](../../../examples/wukong_platform_demo.tscn)，使用项目现有带 Spine 模块的 Godot 按 F6。A/D 或方向键行走，Shift 或同方向双击奔跑，K 地面跳 / 空中二段跳，J 地面连按预约五段普攻，奔跑/空中按 J 发动跑攻/跳攻。Esc 菜单与改键，F1 普通受击，F2 死亡，F4 重生。地面、高台、黄色单向平台、墙和低天花板用于测试。面板显示动作状态、支撑、跳跃预算、连击段号与预约情况。
 
 复用现有 Battle Foundation、Core 操作/事件与 GAS 属性/Vital/技能系统。本阶段扩展 Battle Foundation，不另建重复的输入、技能或时钟插件。
 
@@ -16,7 +16,7 @@
 | --- | --- |
 | [BattleMotionController2D](../runtime/battle_motion_controller_2d.gd) | 每实体独立的速度、地面/墙/顶接触、跳跃预算、落地与起跳序号；使用 CharacterBody2D 做扫掠碰撞 |
 | [BattleActionState2D](../runtime/battle_action_state_2d.gd) | 兼容语义入口；状态、时间与权限委托 Core 当前叶子；绑定及注销 |
-| [BattleActionStateMachine2D](../runtime/battle_action_state_machine_2d.gd) | 继承 Core BaseStateMachine，持有九种动作状态及更新上下文、死亡守卫 |
+| [BattleActionStateMachine2D](../runtime/battle_action_state_machine_2d.gd) | 继承 Core BaseStateMachine，持有十七种动作状态（含阶段9六种受击/保护状态与跑攻/跳攻）及更新上下文、死亡守卫 |
 | [BattleActionLeafState2D](../runtime/battle_action_leaf_state_2d.gd) | 继承 Core BaseState；进入/退出、计时、状态转换和权限判定 |
 | [BattleActionProfile2D](../definitions/battle_action_profile_2d.gd) | 共享只读重力、跳跃、锁定时间、状态条件表、判定框与连击定义 |
 | [BattleComboDefinition](../definitions/battle_combo_definition.gd) / [BattleAttackStep2D](../definitions/battle_attack_step_2d.gd) | 共享只读五段 ID、动作名、时长、跳取消、霸体、打断强度与技能位移窗口 |
@@ -30,7 +30,7 @@ Core 将按键转换为语义意图，BattlePlayerOperations 调用 `request_att
 
 ![Core 动作状态机继承与联合生命周期](../docs/action-state-machine.svg)
 
-每个实体创建一台 `BattleActionStateMachine2D : BaseStateMachine`，通过 Core `add_state()` 持有九个独立 `BattleActionLeafState2D : BaseState`，构造时 `start("IDLE")`。实体进入场景时登记到 `CoreSystem.state_machine_manager`，ID 为 `battle.actions.<battle_id>.<entity_id>`。Core 负责当前状态、历史、退出/进入调用和 `state_changed`；`BattleActionState2D.current` / `elapsed` 仅查询当前叶子，不再另存枚举状态或另一份计时。
+每个实体创建一台 `BattleActionStateMachine2D : BaseStateMachine`，通过 Core `add_state()` 持有十七个独立 `BattleActionLeafState2D : BaseState`（原九种 + LAUNCHED、AIR_HURT、HIT_LAND、KNOCKDOWN、GETUP、PROTECT，再加 RUN_ATTACK / JUMP_ATTACK），构造时 `start("IDLE")`。实体进入场景时登记到 `CoreSystem.state_machine_manager`，ID 为 `battle.actions.<battle_id>.<entity_id>`。Core 负责当前状态、历史、退出/进入调用和 `state_changed`；`BattleActionState2D.current` / `elapsed` 仅查询当前叶子，不再另存枚举状态或另一份计时。阶段9新增状态的时序、落地和权限见 [受击与保护说明](../combat/hit-reaction-protection.md)。
 
 叶子 `_enter(msg)` 重置本段计时并复制 `action_rules`，`_exit()` 清覆盖规则，`_physics_update(delta)` 执行上面的转换条件。五段连击在同一个 ATTACK 叶子上进行 Core 退出/重入，每段重新计时；规则通过转换消息在进入时安装，观察者不会看到新段尚未配置权限的中间状态。Core `state_changed` 经宿主发布 `battle.action_state_changed`，包含场次/实体及 `from_state`、`to_state`、本段规则。
 
@@ -74,6 +74,8 @@ BattleSession 在固定物理更新中先识别未缩放输入，再计算战斗
 | AIR | 是 | 有剩余额度 | 是 | 10 | 着地、受击或死亡 |
 | LAND | 是 | 是 | 是 | 10 | 1 素材帧后进入地面运动状态；可直接跳/攻击 |
 | ATTACK | 默认否 | 默认否；本普攻允许 | 默认否 | 30；可由每段覆盖 | GAS 当前段结束、允许的跳取消、离地、受击或死亡 |
+| RUN_ATTACK | 否，使用技能冲刺位移 | 否 | 否 | 30 | GAS 结束或失去地面支撑，受击或死亡可取消 |
+| JUMP_ATTACK | 是，持续重力 | 否 | 否 | 30 | GAS 结束回空中，落地取消后 LAND；受击或死亡可取消 |
 | HURT | 否 | 否 | 否 | 60 | 8 素材帧硬直结束后按支撑决定下一状态 |
 | DEAD | 否 | 否 | 否 | 最高优先，终态 | 只能销毁并生成新实体 |
 
@@ -95,7 +97,7 @@ BattleSession 在固定物理更新中先识别未缩放输入，再计算战斗
 
 首次按下发动第一段；当前段期间再次按下，只预约下一段，重复按下不会预约多段或跳过当前动画。GAS 当前段结束才推进一次；没有预约立即回运动状态，第五段结束不自动循环。长按不自动连击。已受理的预约保留至当前段结束，未受理的输入仍遵守 Core 的 0.2 秒缓存；菜单、失焦、暂停与死亡会撤销预约。受击和允许的跳取消会同时取消当前 GAS 技能、未来命中和后续预约。
 
-第四段前 16 素材帧按朝向施加 300 px/s 的技能位移（原单位 150 × 场景缩放 2），整段位移仍被墙挡住；玩家移动/转向输入不能覆盖它。第 8 帧的第二击保留原配置 `scaleX=-1`、偏移 `(-17,-4)`：负缩放只作用于显示，碰撞框不因此反转；局部添加偏移后按角色朝向整体镜像。其他段固定角色位置。帧 0 在激活后首个战斗 tick 发出，所有事件仍以 30 FPS 计时；例如第 8 帧为 0.267 秒，在 60 Hz 中对应约第 16 次物理更新。
+第四段前 16 素材帧按起手方向施加技能位移，当前配置为 100 px/s（原导入为 300）；整段位移仍被墙挡住。第 [8,16) 帧内新按反方向允许一次转身，只改变身体、特效与攻击朝向，不改变本段位移方向；预约第五段沿新朝向释放。详细规则与编辑入口见 [跑攻、跳攻与第四段转身](../../../data/battle2d/wukong-context-attacks.md)。第 8 帧的第二击保留原配置 `scaleX=-1`、偏移 `(-17,-4)`：负缩放只作用于显示，碰撞框不因此反转；局部添加偏移后按角色朝向整体镜像。其他段固定角色位置。帧 0 在激活后首个战斗 tick 发出，所有事件仍以 30 FPS 计时；例如第 8 帧为 0.267 秒，在 60 Hz 中对应约第 16 次物理更新。
 
 ### 原版实际碰撞范围
 

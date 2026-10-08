@@ -1,0 +1,2202 @@
+{
+  "1": {
+    "level": 1,
+    "hitAttribute": 156.25,
+    "dodgeAttribute": 156.25,
+    "criticalMax": 156.25,
+    "toughnessMax": 156.25,
+    "luckyMax": 156.25,
+    "guardianMax": 156.25,
+    "atkMax": 106.25
+  },
+  "2": {
+    "level": 2,
+    "hitAttribute": 281.25,
+    "dodgeAttribute": 281.25,
+    "criticalMax": 281.25,
+    "toughnessMax": 281.25,
+    "luckyMax": 281.25,
+    "guardianMax": 281.25,
+    "atkMax": 191.25
+  },
+  "3": {
+    "level": 3,
+    "hitAttribute": 328.125,
+    "dodgeAttribute": 328.125,
+    "criticalMax": 328.125,
+    "toughnessMax": 328.125,
+    "luckyMax": 328.125,
+    "guardianMax": 328.125,
+    "atkMax": 223.125
+  },
+  "4": {
+    "level": 4,
+    "hitAttribute": 375,
+    "dodgeAttribute": 375,
+    "criticalMax": 375,
+    "toughnessMax": 375,
+    "luckyMax": 375,
+    "guardianMax": 375,
+    "atkMax": 255
+  },
+  "5": {
+    "level": 5,
+    "hitAttribute": 421.875,
+    "dodgeAttribute": 421.875,
+    "criticalMax": 421.875,
+    "toughnessMax": 421.875,
+    "luckyMax": 421.875,
+    "guardianMax": 421.875,
+    "atkMax": 286.875
+  },
+  "6": {
+    "level": 6,
+    "hitAttribute": 468.75,
+    "dodgeAttribute": 468.75,
+    "criticalMax": 468.75,
+    "toughnessMax": 468.75,
+    "luckyMax": 468.75,
+    "guardianMax": 468.75,
+    "atkMax": 318.75
+  },
+  "7": {
+    "level": 7,
+    "hitAttribute": 687.5,
+    "dodgeAttribute": 687.5,
+    "criticalMax": 687.5,
+    "toughnessMax": 687.5,
+    "luckyMax": 687.5,
+    "guardianMax": 687.5,
+    "atkMax": 467.5
+  },
+  "8": {
+    "level": 8,
+    "hitAttribute": 750,
+    "dodgeAttribute": 750,
+    "criticalMax": 750,
+    "toughnessMax": 750,
+    "luckyMax": 750,
+    "guardianMax": 750,
+    "atkMax": 510
+  },
+  "9": {
+    "level": 9,
+    "hitAttribute": 812.5,
+    "dodgeAttribute": 812.5,
+    "criticalMax": 812.5,
+    "toughnessMax": 812.5,
+    "luckyMax": 812.5,
+    "guardianMax": 812.5,
+    "atkMax": 552.5
+  },
+  "10": {
+    "level": 10,
+    "hitAttribute": 875,
+    "dodgeAttribute": 875,
+    "criticalMax": 875,
+    "toughnessMax": 875,
+    "luckyMax": 875,
+    "guardianMax": 875,
+    "atkMax": 595
+  },
+  "11": {
+    "level": 11,
+    "hitAttribute": 937.5,
+    "dodgeAttribute": 937.5,
+    "criticalMax": 937.5,
+    "toughnessMax": 937.5,
+    "luckyMax": 937.5,
+    "guardianMax": 937.5,
+    "atkMax": 637.5
+  },
+  "12": {
+    "level": 12,
+    "hitAttribute": 1000,
+    "dodgeAttribute": 1000,
+    "criticalMax": 1000,
+    "toughnessMax": 1000,
+    "luckyMax": 1000,
+    "guardianMax": 1000,
+    "atkMax": 680
+  },
+  "13": {
+    "level": 13,
+    "hitAttribute": 1328.125,
+    "dodgeAttribute": 1328.125,
+    "criticalMax": 1328.125,
+    "toughnessMax": 1328.125,
+    "luckyMax": 1328.125,
+    "guardianMax": 1328.125,
+    "atkMax": 903.125
+  },
+  "14": {
+    "level": 14,
+    "hitAttribute": 1406.25,
+    "dodgeAttribute": 1406.25,
+    "criticalMax": 1406.25,
+    "toughnessMax": 1406.25,
+    "luckyMax": 1406.25,
+    "guardianMax": 1406.25,
+    "atkMax": 956.25
+  },
+  "15": {
+    "level": 15,
+    "hitAttribute": 1484.375,
+    "dodgeAttribute": 1484.375,
+    "criticalMax": 1484.375,
+    "toughnessMax": 1484.375,
+    "luckyMax": 1484.375,
+    "guardianMax": 1484.375,
+    "atkMax": 1009.375
+  },
+  "16": {
+    "level": 16,
+    "hitAttribute": 1562.5,
+    "dodgeAttribute": 1562.5,
+    "criticalMax": 1562.5,
+    "toughnessMax": 1562.5,
+    "luckyMax": 1562.5,
+    "guardianMax": 1562.5,
+    "atkMax": 1062.5
+  },
+  "17": {
+    "level": 17,
+    "hitAttribute": 1640.625,
+    "dodgeAttribute": 1640.625,
+    "criticalMax": 1640.625,
+    "toughnessMax": 1640.625,
+    "luckyMax": 1640.625,
+    "guardianMax": 1640.625,
+    "atkMax": 1115.625
+  },
+  "18": {
+    "level": 18,
+    "hitAttribute": 1718.75,
+    "dodgeAttribute": 1718.75,
+    "criticalMax": 1718.75,
+    "toughnessMax": 1718.75,
+    "luckyMax": 1718.75,
+    "guardianMax": 1718.75,
+    "atkMax": 1168.75
+  },
+  "19": {
+    "level": 19,
+    "hitAttribute": 2156.25,
+    "dodgeAttribute": 2156.25,
+    "criticalMax": 2156.25,
+    "toughnessMax": 2156.25,
+    "luckyMax": 2156.25,
+    "guardianMax": 2156.25,
+    "atkMax": 1466.25
+  },
+  "20": {
+    "level": 20,
+    "hitAttribute": 2250,
+    "dodgeAttribute": 2250,
+    "criticalMax": 2250,
+    "toughnessMax": 2250,
+    "luckyMax": 2250,
+    "guardianMax": 2250,
+    "atkMax": 1530
+  },
+  "21": {
+    "level": 21,
+    "hitAttribute": 2343.75,
+    "dodgeAttribute": 2343.75,
+    "criticalMax": 2343.75,
+    "toughnessMax": 2343.75,
+    "luckyMax": 2343.75,
+    "guardianMax": 2343.75,
+    "atkMax": 1593.75
+  },
+  "22": {
+    "level": 22,
+    "hitAttribute": 2437.5,
+    "dodgeAttribute": 2437.5,
+    "criticalMax": 2437.5,
+    "toughnessMax": 2437.5,
+    "luckyMax": 2437.5,
+    "guardianMax": 2437.5,
+    "atkMax": 1657.5
+  },
+  "23": {
+    "level": 23,
+    "hitAttribute": 2531.25,
+    "dodgeAttribute": 2531.25,
+    "criticalMax": 2531.25,
+    "toughnessMax": 2531.25,
+    "luckyMax": 2531.25,
+    "guardianMax": 2531.25,
+    "atkMax": 1721.25
+  },
+  "24": {
+    "level": 24,
+    "hitAttribute": 2625,
+    "dodgeAttribute": 2625,
+    "criticalMax": 2625,
+    "toughnessMax": 2625,
+    "luckyMax": 2625,
+    "guardianMax": 2625,
+    "atkMax": 1785
+  },
+  "25": {
+    "level": 25,
+    "hitAttribute": 3171.875,
+    "dodgeAttribute": 3171.875,
+    "criticalMax": 3171.875,
+    "toughnessMax": 3171.875,
+    "luckyMax": 3171.875,
+    "guardianMax": 3171.875,
+    "atkMax": 2156.875
+  },
+  "26": {
+    "level": 26,
+    "hitAttribute": 3281.25,
+    "dodgeAttribute": 3281.25,
+    "criticalMax": 3281.25,
+    "toughnessMax": 3281.25,
+    "luckyMax": 3281.25,
+    "guardianMax": 3281.25,
+    "atkMax": 2231.25
+  },
+  "27": {
+    "level": 27,
+    "hitAttribute": 3390.625,
+    "dodgeAttribute": 3390.625,
+    "criticalMax": 3390.625,
+    "toughnessMax": 3390.625,
+    "luckyMax": 3390.625,
+    "guardianMax": 3390.625,
+    "atkMax": 2305.625
+  },
+  "28": {
+    "level": 28,
+    "hitAttribute": 3500,
+    "dodgeAttribute": 3500,
+    "criticalMax": 3500,
+    "toughnessMax": 3500,
+    "luckyMax": 3500,
+    "guardianMax": 3500,
+    "atkMax": 2380
+  },
+  "29": {
+    "level": 29,
+    "hitAttribute": 3609.375,
+    "dodgeAttribute": 3609.375,
+    "criticalMax": 3609.375,
+    "toughnessMax": 3609.375,
+    "luckyMax": 3609.375,
+    "guardianMax": 3609.375,
+    "atkMax": 2454.375
+  },
+  "30": {
+    "level": 30,
+    "hitAttribute": 3718.75,
+    "dodgeAttribute": 3718.75,
+    "criticalMax": 3718.75,
+    "toughnessMax": 3718.75,
+    "luckyMax": 3718.75,
+    "guardianMax": 3718.75,
+    "atkMax": 2528.75
+  },
+  "31": {
+    "level": 31,
+    "hitAttribute": 4375,
+    "dodgeAttribute": 4375,
+    "criticalMax": 4375,
+    "toughnessMax": 4375,
+    "luckyMax": 4375,
+    "guardianMax": 4375,
+    "atkMax": 2975
+  },
+  "32": {
+    "level": 32,
+    "hitAttribute": 4500,
+    "dodgeAttribute": 4500,
+    "criticalMax": 4500,
+    "toughnessMax": 4500,
+    "luckyMax": 4500,
+    "guardianMax": 4500,
+    "atkMax": 3060
+  },
+  "33": {
+    "level": 33,
+    "hitAttribute": 4625,
+    "dodgeAttribute": 4625,
+    "criticalMax": 4625,
+    "toughnessMax": 4625,
+    "luckyMax": 4625,
+    "guardianMax": 4625,
+    "atkMax": 3145
+  },
+  "34": {
+    "level": 34,
+    "hitAttribute": 4750,
+    "dodgeAttribute": 4750,
+    "criticalMax": 4750,
+    "toughnessMax": 4750,
+    "luckyMax": 4750,
+    "guardianMax": 4750,
+    "atkMax": 3230
+  },
+  "35": {
+    "level": 35,
+    "hitAttribute": 4875,
+    "dodgeAttribute": 4875,
+    "criticalMax": 4875,
+    "toughnessMax": 4875,
+    "luckyMax": 4875,
+    "guardianMax": 4875,
+    "atkMax": 3315
+  },
+  "36": {
+    "level": 36,
+    "hitAttribute": 5000,
+    "dodgeAttribute": 5000,
+    "criticalMax": 5000,
+    "toughnessMax": 5000,
+    "luckyMax": 5000,
+    "guardianMax": 5000,
+    "atkMax": 3400
+  },
+  "37": {
+    "level": 37,
+    "hitAttribute": 5765.625,
+    "dodgeAttribute": 5765.625,
+    "criticalMax": 5765.625,
+    "toughnessMax": 5765.625,
+    "luckyMax": 5765.625,
+    "guardianMax": 5765.625,
+    "atkMax": 3920.625
+  },
+  "38": {
+    "level": 38,
+    "hitAttribute": 5906.25,
+    "dodgeAttribute": 5906.25,
+    "criticalMax": 5906.25,
+    "toughnessMax": 5906.25,
+    "luckyMax": 5906.25,
+    "guardianMax": 5906.25,
+    "atkMax": 4016.25
+  },
+  "39": {
+    "level": 39,
+    "hitAttribute": 6046.875,
+    "dodgeAttribute": 6046.875,
+    "criticalMax": 6046.875,
+    "toughnessMax": 6046.875,
+    "luckyMax": 6046.875,
+    "guardianMax": 6046.875,
+    "atkMax": 4111.875
+  },
+  "40": {
+    "level": 40,
+    "hitAttribute": 6187.5,
+    "dodgeAttribute": 6187.5,
+    "criticalMax": 6187.5,
+    "toughnessMax": 6187.5,
+    "luckyMax": 6187.5,
+    "guardianMax": 6187.5,
+    "atkMax": 4207.5
+  },
+  "41": {
+    "level": 41,
+    "hitAttribute": 6328.125,
+    "dodgeAttribute": 6328.125,
+    "criticalMax": 6328.125,
+    "toughnessMax": 6328.125,
+    "luckyMax": 6328.125,
+    "guardianMax": 6328.125,
+    "atkMax": 4303.125
+  },
+  "42": {
+    "level": 42,
+    "hitAttribute": 6468.75,
+    "dodgeAttribute": 6468.75,
+    "criticalMax": 6468.75,
+    "toughnessMax": 6468.75,
+    "luckyMax": 6468.75,
+    "guardianMax": 6468.75,
+    "atkMax": 4398.75
+  },
+  "43": {
+    "level": 43,
+    "hitAttribute": 7343.75,
+    "dodgeAttribute": 7343.75,
+    "criticalMax": 7343.75,
+    "toughnessMax": 7343.75,
+    "luckyMax": 7343.75,
+    "guardianMax": 7343.75,
+    "atkMax": 4993.75
+  },
+  "44": {
+    "level": 44,
+    "hitAttribute": 7500,
+    "dodgeAttribute": 7500,
+    "criticalMax": 7500,
+    "toughnessMax": 7500,
+    "luckyMax": 7500,
+    "guardianMax": 7500,
+    "atkMax": 5100
+  },
+  "45": {
+    "level": 45,
+    "hitAttribute": 7656.25,
+    "dodgeAttribute": 7656.25,
+    "criticalMax": 7656.25,
+    "toughnessMax": 7656.25,
+    "luckyMax": 7656.25,
+    "guardianMax": 7656.25,
+    "atkMax": 5206.25
+  },
+  "46": {
+    "level": 46,
+    "hitAttribute": 7812.5,
+    "dodgeAttribute": 7812.5,
+    "criticalMax": 7812.5,
+    "toughnessMax": 7812.5,
+    "luckyMax": 7812.5,
+    "guardianMax": 7812.5,
+    "atkMax": 5312.5
+  },
+  "47": {
+    "level": 47,
+    "hitAttribute": 7968.75,
+    "dodgeAttribute": 7968.75,
+    "criticalMax": 7968.75,
+    "toughnessMax": 7968.75,
+    "luckyMax": 7968.75,
+    "guardianMax": 7968.75,
+    "atkMax": 5418.75
+  },
+  "48": {
+    "level": 48,
+    "hitAttribute": 8125,
+    "dodgeAttribute": 8125,
+    "criticalMax": 8125,
+    "toughnessMax": 8125,
+    "luckyMax": 8125,
+    "guardianMax": 8125,
+    "atkMax": 5525
+  },
+  "49": {
+    "level": 49,
+    "hitAttribute": 9109.375,
+    "dodgeAttribute": 9109.375,
+    "criticalMax": 9109.375,
+    "toughnessMax": 9109.375,
+    "luckyMax": 9109.375,
+    "guardianMax": 9109.375,
+    "atkMax": 6194.375
+  },
+  "50": {
+    "level": 50,
+    "hitAttribute": 9281.25,
+    "dodgeAttribute": 9281.25,
+    "criticalMax": 9281.25,
+    "toughnessMax": 9281.25,
+    "luckyMax": 9281.25,
+    "guardianMax": 9281.25,
+    "atkMax": 6311.25
+  },
+  "51": {
+    "level": 51,
+    "hitAttribute": 9453.125,
+    "dodgeAttribute": 9453.125,
+    "criticalMax": 9453.125,
+    "toughnessMax": 9453.125,
+    "luckyMax": 9453.125,
+    "guardianMax": 9453.125,
+    "atkMax": 6428.125
+  },
+  "52": {
+    "level": 52,
+    "hitAttribute": 9625,
+    "dodgeAttribute": 9625,
+    "criticalMax": 9625,
+    "toughnessMax": 9625,
+    "luckyMax": 9625,
+    "guardianMax": 9625,
+    "atkMax": 6545
+  },
+  "53": {
+    "level": 53,
+    "hitAttribute": 9796.875,
+    "dodgeAttribute": 9796.875,
+    "criticalMax": 9796.875,
+    "toughnessMax": 9796.875,
+    "luckyMax": 9796.875,
+    "guardianMax": 9796.875,
+    "atkMax": 6661.875
+  },
+  "54": {
+    "level": 54,
+    "hitAttribute": 9968.75,
+    "dodgeAttribute": 9968.75,
+    "criticalMax": 9968.75,
+    "toughnessMax": 9968.75,
+    "luckyMax": 9968.75,
+    "guardianMax": 9968.75,
+    "atkMax": 6778.75
+  },
+  "55": {
+    "level": 55,
+    "hitAttribute": 11062.5,
+    "dodgeAttribute": 11062.5,
+    "criticalMax": 11062.5,
+    "toughnessMax": 11062.5,
+    "luckyMax": 11062.5,
+    "guardianMax": 11062.5,
+    "atkMax": 7522.5
+  },
+  "56": {
+    "level": 56,
+    "hitAttribute": 11250,
+    "dodgeAttribute": 11250,
+    "criticalMax": 11250,
+    "toughnessMax": 11250,
+    "luckyMax": 11250,
+    "guardianMax": 11250,
+    "atkMax": 7650
+  },
+  "57": {
+    "level": 57,
+    "hitAttribute": 11437.5,
+    "dodgeAttribute": 11437.5,
+    "criticalMax": 11437.5,
+    "toughnessMax": 11437.5,
+    "luckyMax": 11437.5,
+    "guardianMax": 11437.5,
+    "atkMax": 7777.5
+  },
+  "58": {
+    "level": 58,
+    "hitAttribute": 11625,
+    "dodgeAttribute": 11625,
+    "criticalMax": 11625,
+    "toughnessMax": 11625,
+    "luckyMax": 11625,
+    "guardianMax": 11625,
+    "atkMax": 7905
+  },
+  "59": {
+    "level": 59,
+    "hitAttribute": 11812.5,
+    "dodgeAttribute": 11812.5,
+    "criticalMax": 11812.5,
+    "toughnessMax": 11812.5,
+    "luckyMax": 11812.5,
+    "guardianMax": 11812.5,
+    "atkMax": 8032.5
+  },
+  "60": {
+    "level": 60,
+    "hitAttribute": 12000,
+    "dodgeAttribute": 12000,
+    "criticalMax": 12000,
+    "toughnessMax": 12000,
+    "luckyMax": 12000,
+    "guardianMax": 12000,
+    "atkMax": 8160
+  },
+  "61": {
+    "level": 61,
+    "hitAttribute": 13203.125,
+    "dodgeAttribute": 13203.125,
+    "criticalMax": 13203.125,
+    "toughnessMax": 13203.125,
+    "luckyMax": 13203.125,
+    "guardianMax": 13203.125,
+    "atkMax": 8978.125
+  },
+  "62": {
+    "level": 62,
+    "hitAttribute": 13406.25,
+    "dodgeAttribute": 13406.25,
+    "criticalMax": 13406.25,
+    "toughnessMax": 13406.25,
+    "luckyMax": 13406.25,
+    "guardianMax": 13406.25,
+    "atkMax": 9116.25
+  },
+  "63": {
+    "level": 63,
+    "hitAttribute": 13609.375,
+    "dodgeAttribute": 13609.375,
+    "criticalMax": 13609.375,
+    "toughnessMax": 13609.375,
+    "luckyMax": 13609.375,
+    "guardianMax": 13609.375,
+    "atkMax": 9254.375
+  },
+  "64": {
+    "level": 64,
+    "hitAttribute": 13812.5,
+    "dodgeAttribute": 13812.5,
+    "criticalMax": 13812.5,
+    "toughnessMax": 13812.5,
+    "luckyMax": 13812.5,
+    "guardianMax": 13812.5,
+    "atkMax": 9392.5
+  },
+  "65": {
+    "level": 65,
+    "hitAttribute": 14015.625,
+    "dodgeAttribute": 14015.625,
+    "criticalMax": 14015.625,
+    "toughnessMax": 14015.625,
+    "luckyMax": 14015.625,
+    "guardianMax": 14015.625,
+    "atkMax": 9530.625
+  },
+  "66": {
+    "level": 66,
+    "hitAttribute": 14218.75,
+    "dodgeAttribute": 14218.75,
+    "criticalMax": 14218.75,
+    "toughnessMax": 14218.75,
+    "luckyMax": 14218.75,
+    "guardianMax": 14218.75,
+    "atkMax": 9668.75
+  },
+  "67": {
+    "level": 67,
+    "hitAttribute": 15531.25,
+    "dodgeAttribute": 15531.25,
+    "criticalMax": 15531.25,
+    "toughnessMax": 15531.25,
+    "luckyMax": 15531.25,
+    "guardianMax": 15531.25,
+    "atkMax": 10561.25
+  },
+  "68": {
+    "level": 68,
+    "hitAttribute": 15750,
+    "dodgeAttribute": 15750,
+    "criticalMax": 15750,
+    "toughnessMax": 15750,
+    "luckyMax": 15750,
+    "guardianMax": 15750,
+    "atkMax": 10710
+  },
+  "69": {
+    "level": 69,
+    "hitAttribute": 15968.75,
+    "dodgeAttribute": 15968.75,
+    "criticalMax": 15968.75,
+    "toughnessMax": 15968.75,
+    "luckyMax": 15968.75,
+    "guardianMax": 15968.75,
+    "atkMax": 10858.75
+  },
+  "70": {
+    "level": 70,
+    "hitAttribute": 16187.5,
+    "dodgeAttribute": 16187.5,
+    "criticalMax": 16187.5,
+    "toughnessMax": 16187.5,
+    "luckyMax": 16187.5,
+    "guardianMax": 16187.5,
+    "atkMax": 11007.5
+  },
+  "71": {
+    "level": 71,
+    "hitAttribute": 16406.25,
+    "dodgeAttribute": 16406.25,
+    "criticalMax": 16406.25,
+    "toughnessMax": 16406.25,
+    "luckyMax": 16406.25,
+    "guardianMax": 16406.25,
+    "atkMax": 11156.25
+  },
+  "72": {
+    "level": 72,
+    "hitAttribute": 16625,
+    "dodgeAttribute": 16625,
+    "criticalMax": 16625,
+    "toughnessMax": 16625,
+    "luckyMax": 16625,
+    "guardianMax": 16625,
+    "atkMax": 11305
+  },
+  "73": {
+    "level": 73,
+    "hitAttribute": 18046.875,
+    "dodgeAttribute": 18046.875,
+    "criticalMax": 18046.875,
+    "toughnessMax": 18046.875,
+    "luckyMax": 18046.875,
+    "guardianMax": 18046.875,
+    "atkMax": 12271.875
+  },
+  "74": {
+    "level": 74,
+    "hitAttribute": 18281.25,
+    "dodgeAttribute": 18281.25,
+    "criticalMax": 18281.25,
+    "toughnessMax": 18281.25,
+    "luckyMax": 18281.25,
+    "guardianMax": 18281.25,
+    "atkMax": 12431.25
+  },
+  "75": {
+    "level": 75,
+    "hitAttribute": 18515.625,
+    "dodgeAttribute": 18515.625,
+    "criticalMax": 18515.625,
+    "toughnessMax": 18515.625,
+    "luckyMax": 18515.625,
+    "guardianMax": 18515.625,
+    "atkMax": 12590.625
+  },
+  "76": {
+    "level": 76,
+    "hitAttribute": 18750,
+    "dodgeAttribute": 18750,
+    "criticalMax": 18750,
+    "toughnessMax": 18750,
+    "luckyMax": 18750,
+    "guardianMax": 18750,
+    "atkMax": 12750
+  },
+  "77": {
+    "level": 77,
+    "hitAttribute": 18984.375,
+    "dodgeAttribute": 18984.375,
+    "criticalMax": 18984.375,
+    "toughnessMax": 18984.375,
+    "luckyMax": 18984.375,
+    "guardianMax": 18984.375,
+    "atkMax": 12909.375
+  },
+  "78": {
+    "level": 78,
+    "hitAttribute": 19218.75,
+    "dodgeAttribute": 19218.75,
+    "criticalMax": 19218.75,
+    "toughnessMax": 19218.75,
+    "luckyMax": 19218.75,
+    "guardianMax": 19218.75,
+    "atkMax": 13068.75
+  },
+  "79": {
+    "level": 79,
+    "hitAttribute": 20750,
+    "dodgeAttribute": 20750,
+    "criticalMax": 20750,
+    "toughnessMax": 20750,
+    "luckyMax": 20750,
+    "guardianMax": 20750,
+    "atkMax": 14110
+  },
+  "80": {
+    "level": 80,
+    "hitAttribute": 21000,
+    "dodgeAttribute": 21000,
+    "criticalMax": 21000,
+    "toughnessMax": 21000,
+    "luckyMax": 21000,
+    "guardianMax": 21000,
+    "atkMax": 14280
+  },
+  "81": {
+    "level": 81,
+    "hitAttribute": 21250,
+    "dodgeAttribute": 21250,
+    "criticalMax": 21250,
+    "toughnessMax": 21250,
+    "luckyMax": 21250,
+    "guardianMax": 21250,
+    "atkMax": 14450
+  },
+  "82": {
+    "level": 82,
+    "hitAttribute": 21500,
+    "dodgeAttribute": 21500,
+    "criticalMax": 21500,
+    "toughnessMax": 21500,
+    "luckyMax": 21500,
+    "guardianMax": 21500,
+    "atkMax": 14620
+  },
+  "83": {
+    "level": 83,
+    "hitAttribute": 21750,
+    "dodgeAttribute": 21750,
+    "criticalMax": 21750,
+    "toughnessMax": 21750,
+    "luckyMax": 21750,
+    "guardianMax": 21750,
+    "atkMax": 14790
+  },
+  "84": {
+    "level": 84,
+    "hitAttribute": 22000,
+    "dodgeAttribute": 22000,
+    "criticalMax": 22000,
+    "toughnessMax": 22000,
+    "luckyMax": 22000,
+    "guardianMax": 22000,
+    "atkMax": 14960
+  },
+  "85": {
+    "level": 85,
+    "hitAttribute": 23640.625,
+    "dodgeAttribute": 23640.625,
+    "criticalMax": 23640.625,
+    "toughnessMax": 23640.625,
+    "luckyMax": 23640.625,
+    "guardianMax": 23640.625,
+    "atkMax": 16075.625
+  },
+  "86": {
+    "level": 86,
+    "hitAttribute": 23906.25,
+    "dodgeAttribute": 23906.25,
+    "criticalMax": 23906.25,
+    "toughnessMax": 23906.25,
+    "luckyMax": 23906.25,
+    "guardianMax": 23906.25,
+    "atkMax": 16256.25
+  },
+  "87": {
+    "level": 87,
+    "hitAttribute": 24171.875,
+    "dodgeAttribute": 24171.875,
+    "criticalMax": 24171.875,
+    "toughnessMax": 24171.875,
+    "luckyMax": 24171.875,
+    "guardianMax": 24171.875,
+    "atkMax": 16436.875
+  },
+  "88": {
+    "level": 88,
+    "hitAttribute": 24437.5,
+    "dodgeAttribute": 24437.5,
+    "criticalMax": 24437.5,
+    "toughnessMax": 24437.5,
+    "luckyMax": 24437.5,
+    "guardianMax": 24437.5,
+    "atkMax": 16617.5
+  },
+  "89": {
+    "level": 89,
+    "hitAttribute": 24703.125,
+    "dodgeAttribute": 24703.125,
+    "criticalMax": 24703.125,
+    "toughnessMax": 24703.125,
+    "luckyMax": 24703.125,
+    "guardianMax": 24703.125,
+    "atkMax": 16798.125
+  },
+  "90": {
+    "level": 90,
+    "hitAttribute": 24968.75,
+    "dodgeAttribute": 24968.75,
+    "criticalMax": 24968.75,
+    "toughnessMax": 24968.75,
+    "luckyMax": 24968.75,
+    "guardianMax": 24968.75,
+    "atkMax": 16978.75
+  },
+  "91": {
+    "level": 91,
+    "hitAttribute": 26718.75,
+    "dodgeAttribute": 26718.75,
+    "criticalMax": 26718.75,
+    "toughnessMax": 26718.75,
+    "luckyMax": 26718.75,
+    "guardianMax": 26718.75,
+    "atkMax": 18168.75
+  },
+  "92": {
+    "level": 92,
+    "hitAttribute": 27000,
+    "dodgeAttribute": 27000,
+    "criticalMax": 27000,
+    "toughnessMax": 27000,
+    "luckyMax": 27000,
+    "guardianMax": 27000,
+    "atkMax": 18360
+  },
+  "93": {
+    "level": 93,
+    "hitAttribute": 27281.25,
+    "dodgeAttribute": 27281.25,
+    "criticalMax": 27281.25,
+    "toughnessMax": 27281.25,
+    "luckyMax": 27281.25,
+    "guardianMax": 27281.25,
+    "atkMax": 18551.25
+  },
+  "94": {
+    "level": 94,
+    "hitAttribute": 27562.5,
+    "dodgeAttribute": 27562.5,
+    "criticalMax": 27562.5,
+    "toughnessMax": 27562.5,
+    "luckyMax": 27562.5,
+    "guardianMax": 27562.5,
+    "atkMax": 18742.5
+  },
+  "95": {
+    "level": 95,
+    "hitAttribute": 27843.75,
+    "dodgeAttribute": 27843.75,
+    "criticalMax": 27843.75,
+    "toughnessMax": 27843.75,
+    "luckyMax": 27843.75,
+    "guardianMax": 27843.75,
+    "atkMax": 18933.75
+  },
+  "96": {
+    "level": 96,
+    "hitAttribute": 28125,
+    "dodgeAttribute": 28125,
+    "criticalMax": 28125,
+    "toughnessMax": 28125,
+    "luckyMax": 28125,
+    "guardianMax": 28125,
+    "atkMax": 19125
+  },
+  "97": {
+    "level": 97,
+    "hitAttribute": 29984.375,
+    "dodgeAttribute": 29984.375,
+    "criticalMax": 29984.375,
+    "toughnessMax": 29984.375,
+    "luckyMax": 29984.375,
+    "guardianMax": 29984.375,
+    "atkMax": 20389.375
+  },
+  "98": {
+    "level": 98,
+    "hitAttribute": 30281.25,
+    "dodgeAttribute": 30281.25,
+    "criticalMax": 30281.25,
+    "toughnessMax": 30281.25,
+    "luckyMax": 30281.25,
+    "guardianMax": 30281.25,
+    "atkMax": 20591.25
+  },
+  "99": {
+    "level": 99,
+    "hitAttribute": 30578.125,
+    "dodgeAttribute": 30578.125,
+    "criticalMax": 30578.125,
+    "toughnessMax": 30578.125,
+    "luckyMax": 30578.125,
+    "guardianMax": 30578.125,
+    "atkMax": 20793.125
+  },
+  "100": {
+    "level": 100,
+    "hitAttribute": 34580,
+    "dodgeAttribute": 34580,
+    "criticalMax": 34580,
+    "toughnessMax": 34580,
+    "luckyMax": 34580,
+    "guardianMax": 34580,
+    "atkMax": 20995
+  },
+  "101": {
+    "level": 101,
+    "hitAttribute": 34912.5,
+    "dodgeAttribute": 34912.5,
+    "criticalMax": 34912.5,
+    "toughnessMax": 34912.5,
+    "luckyMax": 34912.5,
+    "guardianMax": 34912.5,
+    "atkMax": 21196.875
+  },
+  "102": {
+    "level": 102,
+    "hitAttribute": 35245,
+    "dodgeAttribute": 35245,
+    "criticalMax": 35245,
+    "toughnessMax": 35245,
+    "luckyMax": 35245,
+    "guardianMax": 35245,
+    "atkMax": 21398.75
+  },
+  "103": {
+    "level": 103,
+    "hitAttribute": 37450,
+    "dodgeAttribute": 37450,
+    "criticalMax": 37450,
+    "toughnessMax": 37450,
+    "luckyMax": 37450,
+    "guardianMax": 37450,
+    "atkMax": 22737.5
+  },
+  "104": {
+    "level": 104,
+    "hitAttribute": 37800,
+    "dodgeAttribute": 37800,
+    "criticalMax": 37800,
+    "toughnessMax": 37800,
+    "luckyMax": 37800,
+    "guardianMax": 37800,
+    "atkMax": 22950
+  },
+  "105": {
+    "level": 105,
+    "hitAttribute": 38150,
+    "dodgeAttribute": 38150,
+    "criticalMax": 38150,
+    "toughnessMax": 38150,
+    "luckyMax": 38150,
+    "guardianMax": 38150,
+    "atkMax": 23162.5
+  },
+  "106": {
+    "level": 106,
+    "hitAttribute": 38500,
+    "dodgeAttribute": 38500,
+    "criticalMax": 38500,
+    "toughnessMax": 38500,
+    "luckyMax": 38500,
+    "guardianMax": 38500,
+    "atkMax": 23375
+  },
+  "107": {
+    "level": 107,
+    "hitAttribute": 38850,
+    "dodgeAttribute": 38850,
+    "criticalMax": 38850,
+    "toughnessMax": 38850,
+    "luckyMax": 38850,
+    "guardianMax": 38850,
+    "atkMax": 23587.5
+  },
+  "108": {
+    "level": 108,
+    "hitAttribute": 39200,
+    "dodgeAttribute": 39200,
+    "criticalMax": 39200,
+    "toughnessMax": 39200,
+    "luckyMax": 39200,
+    "guardianMax": 39200,
+    "atkMax": 23800
+  },
+  "109": {
+    "level": 109,
+    "hitAttribute": 41527.5,
+    "dodgeAttribute": 41527.5,
+    "criticalMax": 41527.5,
+    "toughnessMax": 41527.5,
+    "luckyMax": 41527.5,
+    "guardianMax": 41527.5,
+    "atkMax": 25213.125
+  },
+  "110": {
+    "level": 110,
+    "hitAttribute": 41895,
+    "dodgeAttribute": 41895,
+    "criticalMax": 41895,
+    "toughnessMax": 41895,
+    "luckyMax": 41895,
+    "guardianMax": 41895,
+    "atkMax": 25436.25
+  },
+  "111": {
+    "level": 111,
+    "hitAttribute": 42262.5,
+    "dodgeAttribute": 42262.5,
+    "criticalMax": 42262.5,
+    "toughnessMax": 42262.5,
+    "luckyMax": 42262.5,
+    "guardianMax": 42262.5,
+    "atkMax": 25659.375
+  },
+  "112": {
+    "level": 112,
+    "hitAttribute": 42630,
+    "dodgeAttribute": 42630,
+    "criticalMax": 42630,
+    "toughnessMax": 42630,
+    "luckyMax": 42630,
+    "guardianMax": 42630,
+    "atkMax": 25882.5
+  },
+  "113": {
+    "level": 113,
+    "hitAttribute": 42997.5,
+    "dodgeAttribute": 42997.5,
+    "criticalMax": 42997.5,
+    "toughnessMax": 42997.5,
+    "luckyMax": 42997.5,
+    "guardianMax": 42997.5,
+    "atkMax": 26105.625
+  },
+  "114": {
+    "level": 114,
+    "hitAttribute": 43365,
+    "dodgeAttribute": 43365,
+    "criticalMax": 43365,
+    "toughnessMax": 43365,
+    "luckyMax": 43365,
+    "guardianMax": 43365,
+    "atkMax": 26328.75
+  },
+  "115": {
+    "level": 115,
+    "hitAttribute": 45815,
+    "dodgeAttribute": 45815,
+    "criticalMax": 45815,
+    "toughnessMax": 45815,
+    "luckyMax": 45815,
+    "guardianMax": 45815,
+    "atkMax": 27816.25
+  },
+  "116": {
+    "level": 116,
+    "hitAttribute": 46200,
+    "dodgeAttribute": 46200,
+    "criticalMax": 46200,
+    "toughnessMax": 46200,
+    "luckyMax": 46200,
+    "guardianMax": 46200,
+    "atkMax": 28050
+  },
+  "117": {
+    "level": 117,
+    "hitAttribute": 46585,
+    "dodgeAttribute": 46585,
+    "criticalMax": 46585,
+    "toughnessMax": 46585,
+    "luckyMax": 46585,
+    "guardianMax": 46585,
+    "atkMax": 28283.75
+  },
+  "118": {
+    "level": 118,
+    "hitAttribute": 46970,
+    "dodgeAttribute": 46970,
+    "criticalMax": 46970,
+    "toughnessMax": 46970,
+    "luckyMax": 46970,
+    "guardianMax": 46970,
+    "atkMax": 28517.5
+  },
+  "119": {
+    "level": 119,
+    "hitAttribute": 47355,
+    "dodgeAttribute": 47355,
+    "criticalMax": 47355,
+    "toughnessMax": 47355,
+    "luckyMax": 47355,
+    "guardianMax": 47355,
+    "atkMax": 28751.25
+  },
+  "120": {
+    "level": 120,
+    "hitAttribute": 47740,
+    "dodgeAttribute": 47740,
+    "criticalMax": 47740,
+    "toughnessMax": 47740,
+    "luckyMax": 47740,
+    "guardianMax": 47740,
+    "atkMax": 28985
+  },
+  "121": {
+    "level": 121,
+    "hitAttribute": 50312.5,
+    "dodgeAttribute": 50312.5,
+    "criticalMax": 50312.5,
+    "toughnessMax": 50312.5,
+    "luckyMax": 50312.5,
+    "guardianMax": 50312.5,
+    "atkMax": 30546.875
+  },
+  "122": {
+    "level": 122,
+    "hitAttribute": 50715,
+    "dodgeAttribute": 50715,
+    "criticalMax": 50715,
+    "toughnessMax": 50715,
+    "luckyMax": 50715,
+    "guardianMax": 50715,
+    "atkMax": 30791.25
+  },
+  "123": {
+    "level": 123,
+    "hitAttribute": 51117.5,
+    "dodgeAttribute": 51117.5,
+    "criticalMax": 51117.5,
+    "toughnessMax": 51117.5,
+    "luckyMax": 51117.5,
+    "guardianMax": 51117.5,
+    "atkMax": 31035.625
+  },
+  "124": {
+    "level": 124,
+    "hitAttribute": 51520,
+    "dodgeAttribute": 51520,
+    "criticalMax": 51520,
+    "toughnessMax": 51520,
+    "luckyMax": 51520,
+    "guardianMax": 51520,
+    "atkMax": 31280
+  },
+  "125": {
+    "level": 125,
+    "hitAttribute": 51922.5,
+    "dodgeAttribute": 51922.5,
+    "criticalMax": 51922.5,
+    "toughnessMax": 51922.5,
+    "luckyMax": 51922.5,
+    "guardianMax": 51922.5,
+    "atkMax": 31524.375
+  },
+  "126": {
+    "level": 126,
+    "hitAttribute": 52325,
+    "dodgeAttribute": 52325,
+    "criticalMax": 52325,
+    "toughnessMax": 52325,
+    "luckyMax": 52325,
+    "guardianMax": 52325,
+    "atkMax": 31768.75
+  },
+  "127": {
+    "level": 127,
+    "hitAttribute": 55020,
+    "dodgeAttribute": 55020,
+    "criticalMax": 55020,
+    "toughnessMax": 55020,
+    "luckyMax": 55020,
+    "guardianMax": 55020,
+    "atkMax": 33405
+  },
+  "128": {
+    "level": 128,
+    "hitAttribute": 55440,
+    "dodgeAttribute": 55440,
+    "criticalMax": 55440,
+    "toughnessMax": 55440,
+    "luckyMax": 55440,
+    "guardianMax": 55440,
+    "atkMax": 33660
+  },
+  "129": {
+    "level": 129,
+    "hitAttribute": 55860,
+    "dodgeAttribute": 55860,
+    "criticalMax": 55860,
+    "toughnessMax": 55860,
+    "luckyMax": 55860,
+    "guardianMax": 55860,
+    "atkMax": 33915
+  },
+  "130": {
+    "level": 130,
+    "hitAttribute": 56280,
+    "dodgeAttribute": 56280,
+    "criticalMax": 56280,
+    "toughnessMax": 56280,
+    "luckyMax": 56280,
+    "guardianMax": 56280,
+    "atkMax": 34170
+  },
+  "131": {
+    "level": 131,
+    "hitAttribute": 56700,
+    "dodgeAttribute": 56700,
+    "criticalMax": 56700,
+    "toughnessMax": 56700,
+    "luckyMax": 56700,
+    "guardianMax": 56700,
+    "atkMax": 34425
+  },
+  "132": {
+    "level": 132,
+    "hitAttribute": 57120,
+    "dodgeAttribute": 57120,
+    "criticalMax": 57120,
+    "toughnessMax": 57120,
+    "luckyMax": 57120,
+    "guardianMax": 57120,
+    "atkMax": 34680
+  },
+  "133": {
+    "level": 133,
+    "hitAttribute": 59937.5,
+    "dodgeAttribute": 59937.5,
+    "criticalMax": 59937.5,
+    "toughnessMax": 59937.5,
+    "luckyMax": 59937.5,
+    "guardianMax": 59937.5,
+    "atkMax": 36390.625
+  },
+  "134": {
+    "level": 134,
+    "hitAttribute": 60375,
+    "dodgeAttribute": 60375,
+    "criticalMax": 60375,
+    "toughnessMax": 60375,
+    "luckyMax": 60375,
+    "guardianMax": 60375,
+    "atkMax": 36656.25
+  },
+  "135": {
+    "level": 135,
+    "hitAttribute": 60812.5,
+    "dodgeAttribute": 60812.5,
+    "criticalMax": 60812.5,
+    "toughnessMax": 60812.5,
+    "luckyMax": 60812.5,
+    "guardianMax": 60812.5,
+    "atkMax": 36921.875
+  },
+  "136": {
+    "level": 136,
+    "hitAttribute": 61250,
+    "dodgeAttribute": 61250,
+    "criticalMax": 61250,
+    "toughnessMax": 61250,
+    "luckyMax": 61250,
+    "guardianMax": 61250,
+    "atkMax": 37187.5
+  },
+  "137": {
+    "level": 137,
+    "hitAttribute": 61687.5,
+    "dodgeAttribute": 61687.5,
+    "criticalMax": 61687.5,
+    "toughnessMax": 61687.5,
+    "luckyMax": 61687.5,
+    "guardianMax": 61687.5,
+    "atkMax": 37453.125
+  },
+  "138": {
+    "level": 138,
+    "hitAttribute": 62125,
+    "dodgeAttribute": 62125,
+    "criticalMax": 62125,
+    "toughnessMax": 62125,
+    "luckyMax": 62125,
+    "guardianMax": 62125,
+    "atkMax": 37718.75
+  },
+  "139": {
+    "level": 139,
+    "hitAttribute": 65065,
+    "dodgeAttribute": 65065,
+    "criticalMax": 65065,
+    "toughnessMax": 65065,
+    "luckyMax": 65065,
+    "guardianMax": 65065,
+    "atkMax": 39503.75
+  },
+  "140": {
+    "level": 140,
+    "hitAttribute": 65520,
+    "dodgeAttribute": 65520,
+    "criticalMax": 65520,
+    "toughnessMax": 65520,
+    "luckyMax": 65520,
+    "guardianMax": 65520,
+    "atkMax": 39780
+  },
+  "141": {
+    "level": 141,
+    "hitAttribute": 65975,
+    "dodgeAttribute": 65975,
+    "criticalMax": 65975,
+    "toughnessMax": 65975,
+    "luckyMax": 65975,
+    "guardianMax": 65975,
+    "atkMax": 40056.25
+  },
+  "142": {
+    "level": 142,
+    "hitAttribute": 66430,
+    "dodgeAttribute": 66430,
+    "criticalMax": 66430,
+    "toughnessMax": 66430,
+    "luckyMax": 66430,
+    "guardianMax": 66430,
+    "atkMax": 40332.5
+  },
+  "143": {
+    "level": 143,
+    "hitAttribute": 66885,
+    "dodgeAttribute": 66885,
+    "criticalMax": 66885,
+    "toughnessMax": 66885,
+    "luckyMax": 66885,
+    "guardianMax": 66885,
+    "atkMax": 40608.75
+  },
+  "144": {
+    "level": 144,
+    "hitAttribute": 67340,
+    "dodgeAttribute": 67340,
+    "criticalMax": 67340,
+    "toughnessMax": 67340,
+    "luckyMax": 67340,
+    "guardianMax": 67340,
+    "atkMax": 40885
+  },
+  "145": {
+    "level": 145,
+    "hitAttribute": 70402.5,
+    "dodgeAttribute": 70402.5,
+    "criticalMax": 70402.5,
+    "toughnessMax": 70402.5,
+    "luckyMax": 70402.5,
+    "guardianMax": 70402.5,
+    "atkMax": 42744.375
+  },
+  "146": {
+    "level": 146,
+    "hitAttribute": 70875,
+    "dodgeAttribute": 70875,
+    "criticalMax": 70875,
+    "toughnessMax": 70875,
+    "luckyMax": 70875,
+    "guardianMax": 70875,
+    "atkMax": 43031.25
+  },
+  "147": {
+    "level": 147,
+    "hitAttribute": 71347.5,
+    "dodgeAttribute": 71347.5,
+    "criticalMax": 71347.5,
+    "toughnessMax": 71347.5,
+    "luckyMax": 71347.5,
+    "guardianMax": 71347.5,
+    "atkMax": 43318.125
+  },
+  "148": {
+    "level": 148,
+    "hitAttribute": 71820,
+    "dodgeAttribute": 71820,
+    "criticalMax": 71820,
+    "toughnessMax": 71820,
+    "luckyMax": 71820,
+    "guardianMax": 71820,
+    "atkMax": 43605
+  },
+  "149": {
+    "level": 149,
+    "hitAttribute": 72292.5,
+    "dodgeAttribute": 72292.5,
+    "criticalMax": 72292.5,
+    "toughnessMax": 72292.5,
+    "luckyMax": 72292.5,
+    "guardianMax": 72292.5,
+    "atkMax": 43891.875
+  },
+  "150": {
+    "level": 150,
+    "hitAttribute": 72765,
+    "dodgeAttribute": 72765,
+    "criticalMax": 72765,
+    "toughnessMax": 72765,
+    "luckyMax": 72765,
+    "guardianMax": 72765,
+    "atkMax": 44178.75
+  },
+  "151": {
+    "level": 151,
+    "hitAttribute": 77035,
+    "dodgeAttribute": 77035,
+    "criticalMax": 77035,
+    "toughnessMax": 77035,
+    "luckyMax": 77035,
+    "guardianMax": 77035,
+    "atkMax": 46112.5
+  },
+  "152": {
+    "level": 152,
+    "hitAttribute": 77532,
+    "dodgeAttribute": 77532,
+    "criticalMax": 77532,
+    "toughnessMax": 77532,
+    "luckyMax": 77532,
+    "guardianMax": 77532,
+    "atkMax": 46410
+  },
+  "153": {
+    "level": 153,
+    "hitAttribute": 78029,
+    "dodgeAttribute": 78029,
+    "criticalMax": 78029,
+    "toughnessMax": 78029,
+    "luckyMax": 78029,
+    "guardianMax": 78029,
+    "atkMax": 46707.5
+  },
+  "154": {
+    "level": 154,
+    "hitAttribute": 78526,
+    "dodgeAttribute": 78526,
+    "criticalMax": 78526,
+    "toughnessMax": 78526,
+    "luckyMax": 78526,
+    "guardianMax": 78526,
+    "atkMax": 47005
+  },
+  "155": {
+    "level": 155,
+    "hitAttribute": 79023,
+    "dodgeAttribute": 79023,
+    "criticalMax": 79023,
+    "toughnessMax": 79023,
+    "luckyMax": 79023,
+    "guardianMax": 79023,
+    "atkMax": 47302.5
+  },
+  "156": {
+    "level": 156,
+    "hitAttribute": 79520,
+    "dodgeAttribute": 79520,
+    "criticalMax": 79520,
+    "toughnessMax": 79520,
+    "luckyMax": 79520,
+    "guardianMax": 79520,
+    "atkMax": 47600
+  },
+  "157": {
+    "level": 157,
+    "hitAttribute": 82874.75,
+    "dodgeAttribute": 82874.75,
+    "criticalMax": 82874.75,
+    "toughnessMax": 82874.75,
+    "luckyMax": 82874.75,
+    "guardianMax": 82874.75,
+    "atkMax": 49608.125
+  },
+  "158": {
+    "level": 158,
+    "hitAttribute": 83389.5,
+    "dodgeAttribute": 83389.5,
+    "criticalMax": 83389.5,
+    "toughnessMax": 83389.5,
+    "luckyMax": 83389.5,
+    "guardianMax": 83389.5,
+    "atkMax": 49916.25
+  },
+  "159": {
+    "level": 159,
+    "hitAttribute": 83904.25,
+    "dodgeAttribute": 83904.25,
+    "criticalMax": 83904.25,
+    "toughnessMax": 83904.25,
+    "luckyMax": 83904.25,
+    "guardianMax": 83904.25,
+    "atkMax": 50224.375
+  },
+  "160": {
+    "level": 160,
+    "hitAttribute": 84419,
+    "dodgeAttribute": 84419,
+    "criticalMax": 84419,
+    "toughnessMax": 84419,
+    "luckyMax": 84419,
+    "guardianMax": 84419,
+    "atkMax": 50532.5
+  },
+  "161": {
+    "level": 161,
+    "hitAttribute": 84933.75,
+    "dodgeAttribute": 84933.75,
+    "criticalMax": 84933.75,
+    "toughnessMax": 84933.75,
+    "luckyMax": 84933.75,
+    "guardianMax": 84933.75,
+    "atkMax": 50840.625
+  },
+  "162": {
+    "level": 162,
+    "hitAttribute": 85448.5,
+    "dodgeAttribute": 85448.5,
+    "criticalMax": 85448.5,
+    "toughnessMax": 85448.5,
+    "luckyMax": 85448.5,
+    "guardianMax": 85448.5,
+    "atkMax": 51148.75
+  },
+  "163": {
+    "level": 163,
+    "hitAttribute": 88927.5,
+    "dodgeAttribute": 88927.5,
+    "criticalMax": 88927.5,
+    "toughnessMax": 88927.5,
+    "luckyMax": 88927.5,
+    "guardianMax": 88927.5,
+    "atkMax": 53231.25
+  },
+  "164": {
+    "level": 164,
+    "hitAttribute": 89460,
+    "dodgeAttribute": 89460,
+    "criticalMax": 89460,
+    "toughnessMax": 89460,
+    "luckyMax": 89460,
+    "guardianMax": 89460,
+    "atkMax": 53550
+  },
+  "165": {
+    "level": 165,
+    "hitAttribute": 89992.5,
+    "dodgeAttribute": 89992.5,
+    "criticalMax": 89992.5,
+    "toughnessMax": 89992.5,
+    "luckyMax": 89992.5,
+    "guardianMax": 89992.5,
+    "atkMax": 53868.75
+  },
+  "166": {
+    "level": 166,
+    "hitAttribute": 90525,
+    "dodgeAttribute": 90525,
+    "criticalMax": 90525,
+    "toughnessMax": 90525,
+    "luckyMax": 90525,
+    "guardianMax": 90525,
+    "atkMax": 54187.5
+  },
+  "167": {
+    "level": 167,
+    "hitAttribute": 91057.5,
+    "dodgeAttribute": 91057.5,
+    "criticalMax": 91057.5,
+    "toughnessMax": 91057.5,
+    "luckyMax": 91057.5,
+    "guardianMax": 91057.5,
+    "atkMax": 54506.25
+  },
+  "168": {
+    "level": 168,
+    "hitAttribute": 91590,
+    "dodgeAttribute": 91590,
+    "criticalMax": 91590,
+    "toughnessMax": 91590,
+    "luckyMax": 91590,
+    "guardianMax": 91590,
+    "atkMax": 54825
+  },
+  "169": {
+    "level": 169,
+    "hitAttribute": 95193.25,
+    "dodgeAttribute": 95193.25,
+    "criticalMax": 95193.25,
+    "toughnessMax": 95193.25,
+    "luckyMax": 95193.25,
+    "guardianMax": 95193.25,
+    "atkMax": 56981.875
+  },
+  "170": {
+    "level": 170,
+    "hitAttribute": 95743.5,
+    "dodgeAttribute": 95743.5,
+    "criticalMax": 95743.5,
+    "toughnessMax": 95743.5,
+    "luckyMax": 95743.5,
+    "guardianMax": 95743.5,
+    "atkMax": 57311.25
+  },
+  "171": {
+    "level": 171,
+    "hitAttribute": 96293.75,
+    "dodgeAttribute": 96293.75,
+    "criticalMax": 96293.75,
+    "toughnessMax": 96293.75,
+    "luckyMax": 96293.75,
+    "guardianMax": 96293.75,
+    "atkMax": 57640.625
+  },
+  "172": {
+    "level": 172,
+    "hitAttribute": 96844,
+    "dodgeAttribute": 96844,
+    "criticalMax": 96844,
+    "toughnessMax": 96844,
+    "luckyMax": 96844,
+    "guardianMax": 96844,
+    "atkMax": 57970
+  },
+  "173": {
+    "level": 173,
+    "hitAttribute": 97394.25,
+    "dodgeAttribute": 97394.25,
+    "criticalMax": 97394.25,
+    "toughnessMax": 97394.25,
+    "luckyMax": 97394.25,
+    "guardianMax": 97394.25,
+    "atkMax": 58299.375
+  },
+  "174": {
+    "level": 174,
+    "hitAttribute": 97944.5,
+    "dodgeAttribute": 97944.5,
+    "criticalMax": 97944.5,
+    "toughnessMax": 97944.5,
+    "luckyMax": 97944.5,
+    "guardianMax": 97944.5,
+    "atkMax": 58628.75
+  },
+  "175": {
+    "level": 175,
+    "hitAttribute": 101672,
+    "dodgeAttribute": 101672,
+    "criticalMax": 101672,
+    "toughnessMax": 101672,
+    "luckyMax": 101672,
+    "guardianMax": 101672,
+    "atkMax": 60860
+  },
+  "176": {
+    "level": 176,
+    "hitAttribute": 102240,
+    "dodgeAttribute": 102240,
+    "criticalMax": 102240,
+    "toughnessMax": 102240,
+    "luckyMax": 102240,
+    "guardianMax": 102240,
+    "atkMax": 61200
+  },
+  "177": {
+    "level": 177,
+    "hitAttribute": 102808,
+    "dodgeAttribute": 102808,
+    "criticalMax": 102808,
+    "toughnessMax": 102808,
+    "luckyMax": 102808,
+    "guardianMax": 102808,
+    "atkMax": 61540
+  },
+  "178": {
+    "level": 178,
+    "hitAttribute": 103376,
+    "dodgeAttribute": 103376,
+    "criticalMax": 103376,
+    "toughnessMax": 103376,
+    "luckyMax": 103376,
+    "guardianMax": 103376,
+    "atkMax": 61880
+  },
+  "179": {
+    "level": 179,
+    "hitAttribute": 103944,
+    "dodgeAttribute": 103944,
+    "criticalMax": 103944,
+    "toughnessMax": 103944,
+    "luckyMax": 103944,
+    "guardianMax": 103944,
+    "atkMax": 62220
+  },
+  "180": {
+    "level": 180,
+    "hitAttribute": 104512,
+    "dodgeAttribute": 104512,
+    "criticalMax": 104512,
+    "toughnessMax": 104512,
+    "luckyMax": 104512,
+    "guardianMax": 104512,
+    "atkMax": 62560
+  },
+  "181": {
+    "level": 181,
+    "hitAttribute": 108363.75,
+    "dodgeAttribute": 108363.75,
+    "criticalMax": 108363.75,
+    "toughnessMax": 108363.75,
+    "luckyMax": 108363.75,
+    "guardianMax": 108363.75,
+    "atkMax": 64865.625
+  },
+  "182": {
+    "level": 182,
+    "hitAttribute": 108949.5,
+    "dodgeAttribute": 108949.5,
+    "criticalMax": 108949.5,
+    "toughnessMax": 108949.5,
+    "luckyMax": 108949.5,
+    "guardianMax": 108949.5,
+    "atkMax": 65216.25
+  },
+  "183": {
+    "level": 183,
+    "hitAttribute": 109535.25,
+    "dodgeAttribute": 109535.25,
+    "criticalMax": 109535.25,
+    "toughnessMax": 109535.25,
+    "luckyMax": 109535.25,
+    "guardianMax": 109535.25,
+    "atkMax": 65566.875
+  },
+  "184": {
+    "level": 184,
+    "hitAttribute": 110121,
+    "dodgeAttribute": 110121,
+    "criticalMax": 110121,
+    "toughnessMax": 110121,
+    "luckyMax": 110121,
+    "guardianMax": 110121,
+    "atkMax": 65917.5
+  },
+  "185": {
+    "level": 185,
+    "hitAttribute": 110706.75,
+    "dodgeAttribute": 110706.75,
+    "criticalMax": 110706.75,
+    "toughnessMax": 110706.75,
+    "luckyMax": 110706.75,
+    "guardianMax": 110706.75,
+    "atkMax": 66268.125
+  },
+  "186": {
+    "level": 186,
+    "hitAttribute": 111292.5,
+    "dodgeAttribute": 111292.5,
+    "criticalMax": 111292.5,
+    "toughnessMax": 111292.5,
+    "luckyMax": 111292.5,
+    "guardianMax": 111292.5,
+    "atkMax": 66618.75
+  },
+  "187": {
+    "level": 187,
+    "hitAttribute": 115268.5,
+    "dodgeAttribute": 115268.5,
+    "criticalMax": 115268.5,
+    "toughnessMax": 115268.5,
+    "luckyMax": 115268.5,
+    "guardianMax": 115268.5,
+    "atkMax": 68998.75
+  },
+  "188": {
+    "level": 188,
+    "hitAttribute": 115872,
+    "dodgeAttribute": 115872,
+    "criticalMax": 115872,
+    "toughnessMax": 115872,
+    "luckyMax": 115872,
+    "guardianMax": 115872,
+    "atkMax": 69360
+  },
+  "189": {
+    "level": 189,
+    "hitAttribute": 116475.5,
+    "dodgeAttribute": 116475.5,
+    "criticalMax": 116475.5,
+    "toughnessMax": 116475.5,
+    "luckyMax": 116475.5,
+    "guardianMax": 116475.5,
+    "atkMax": 69721.25
+  },
+  "190": {
+    "level": 190,
+    "hitAttribute": 117079,
+    "dodgeAttribute": 117079,
+    "criticalMax": 117079,
+    "toughnessMax": 117079,
+    "luckyMax": 117079,
+    "guardianMax": 117079,
+    "atkMax": 70082.5
+  },
+  "191": {
+    "level": 191,
+    "hitAttribute": 117682.5,
+    "dodgeAttribute": 117682.5,
+    "criticalMax": 117682.5,
+    "toughnessMax": 117682.5,
+    "luckyMax": 117682.5,
+    "guardianMax": 117682.5,
+    "atkMax": 70443.75
+  },
+  "192": {
+    "level": 192,
+    "hitAttribute": 118286,
+    "dodgeAttribute": 118286,
+    "criticalMax": 118286,
+    "toughnessMax": 118286,
+    "luckyMax": 118286,
+    "guardianMax": 118286,
+    "atkMax": 70805
+  },
+  "193": {
+    "level": 193,
+    "hitAttribute": 122386.25,
+    "dodgeAttribute": 122386.25,
+    "criticalMax": 122386.25,
+    "toughnessMax": 122386.25,
+    "luckyMax": 122386.25,
+    "guardianMax": 122386.25,
+    "atkMax": 73259.375
+  },
+  "194": {
+    "level": 194,
+    "hitAttribute": 123007.5,
+    "dodgeAttribute": 123007.5,
+    "criticalMax": 123007.5,
+    "toughnessMax": 123007.5,
+    "luckyMax": 123007.5,
+    "guardianMax": 123007.5,
+    "atkMax": 73631.25
+  },
+  "195": {
+    "level": 195,
+    "hitAttribute": 123628.75,
+    "dodgeAttribute": 123628.75,
+    "criticalMax": 123628.75,
+    "toughnessMax": 123628.75,
+    "luckyMax": 123628.75,
+    "guardianMax": 123628.75,
+    "atkMax": 74003.125
+  },
+  "196": {
+    "level": 196,
+    "hitAttribute": 124250,
+    "dodgeAttribute": 124250,
+    "criticalMax": 124250,
+    "toughnessMax": 124250,
+    "luckyMax": 124250,
+    "guardianMax": 124250,
+    "atkMax": 74375
+  },
+  "197": {
+    "level": 197,
+    "hitAttribute": 124871.25,
+    "dodgeAttribute": 124871.25,
+    "criticalMax": 124871.25,
+    "toughnessMax": 124871.25,
+    "luckyMax": 124871.25,
+    "guardianMax": 124871.25,
+    "atkMax": 74746.875
+  },
+  "198": {
+    "level": 198,
+    "hitAttribute": 125492.5,
+    "dodgeAttribute": 125492.5,
+    "criticalMax": 125492.5,
+    "toughnessMax": 125492.5,
+    "luckyMax": 125492.5,
+    "guardianMax": 125492.5,
+    "atkMax": 75118.75
+  },
+  "199": {
+    "level": 199,
+    "hitAttribute": 129717,
+    "dodgeAttribute": 129717,
+    "criticalMax": 129717,
+    "toughnessMax": 129717,
+    "luckyMax": 129717,
+    "guardianMax": 129717,
+    "atkMax": 77647.5
+  },
+  "200": {
+    "level": 200,
+    "hitAttribute": 130356,
+    "dodgeAttribute": 130356,
+    "criticalMax": 130356,
+    "toughnessMax": 130356,
+    "luckyMax": 130356,
+    "guardianMax": 130356,
+    "atkMax": 78030
+  },
+  "201": {
+    "level": 201,
+    "hitAttribute": 130995,
+    "dodgeAttribute": 130995,
+    "criticalMax": 130995,
+    "toughnessMax": 130995,
+    "luckyMax": 130995,
+    "guardianMax": 130995,
+    "atkMax": 78412.5
+  },
+  "202": {
+    "level": 202,
+    "hitAttribute": 131634,
+    "dodgeAttribute": 131634,
+    "criticalMax": 131634,
+    "toughnessMax": 131634,
+    "luckyMax": 131634,
+    "guardianMax": 131634,
+    "atkMax": 78795
+  },
+  "203": {
+    "level": 203,
+    "hitAttribute": 132273,
+    "dodgeAttribute": 132273,
+    "criticalMax": 132273,
+    "toughnessMax": 132273,
+    "luckyMax": 132273,
+    "guardianMax": 132273,
+    "atkMax": 79177.5
+  },
+  "204": {
+    "level": 204,
+    "hitAttribute": 132912,
+    "dodgeAttribute": 132912,
+    "criticalMax": 132912,
+    "toughnessMax": 132912,
+    "luckyMax": 132912,
+    "guardianMax": 132912,
+    "atkMax": 79560
+  },
+  "205": {
+    "level": 205,
+    "hitAttribute": 137260.75,
+    "dodgeAttribute": 137260.75,
+    "criticalMax": 137260.75,
+    "toughnessMax": 137260.75,
+    "luckyMax": 137260.75,
+    "guardianMax": 137260.75,
+    "atkMax": 82163.125
+  },
+  "206": {
+    "level": 206,
+    "hitAttribute": 137917.5,
+    "dodgeAttribute": 137917.5,
+    "criticalMax": 137917.5,
+    "toughnessMax": 137917.5,
+    "luckyMax": 137917.5,
+    "guardianMax": 137917.5,
+    "atkMax": 82556.25
+  },
+  "207": {
+    "level": 207,
+    "hitAttribute": 138574.25,
+    "dodgeAttribute": 138574.25,
+    "criticalMax": 138574.25,
+    "toughnessMax": 138574.25,
+    "luckyMax": 138574.25,
+    "guardianMax": 138574.25,
+    "atkMax": 82949.375
+  },
+  "208": {
+    "level": 208,
+    "hitAttribute": 139231,
+    "dodgeAttribute": 139231,
+    "criticalMax": 139231,
+    "toughnessMax": 139231,
+    "luckyMax": 139231,
+    "guardianMax": 139231,
+    "atkMax": 83342.5
+  },
+  "209": {
+    "level": 209,
+    "hitAttribute": 139887.75,
+    "dodgeAttribute": 139887.75,
+    "criticalMax": 139887.75,
+    "toughnessMax": 139887.75,
+    "luckyMax": 139887.75,
+    "guardianMax": 139887.75,
+    "atkMax": 83735.625
+  },
+  "210": {
+    "level": 210,
+    "hitAttribute": 140544.5,
+    "dodgeAttribute": 140544.5,
+    "criticalMax": 140544.5,
+    "toughnessMax": 140544.5,
+    "luckyMax": 140544.5,
+    "guardianMax": 140544.5,
+    "atkMax": 84128.75
+  },
+  "211": {
+    "level": 211,
+    "hitAttribute": 145017.5,
+    "dodgeAttribute": 145017.5,
+    "criticalMax": 145017.5,
+    "toughnessMax": 145017.5,
+    "luckyMax": 145017.5,
+    "guardianMax": 145017.5,
+    "atkMax": 86806.25
+  },
+  "212": {
+    "level": 212,
+    "hitAttribute": 145692,
+    "dodgeAttribute": 145692,
+    "criticalMax": 145692,
+    "toughnessMax": 145692,
+    "luckyMax": 145692,
+    "guardianMax": 145692,
+    "atkMax": 87210
+  },
+  "213": {
+    "level": 213,
+    "hitAttribute": 146366.5,
+    "dodgeAttribute": 146366.5,
+    "criticalMax": 146366.5,
+    "toughnessMax": 146366.5,
+    "luckyMax": 146366.5,
+    "guardianMax": 146366.5,
+    "atkMax": 87613.75
+  },
+  "214": {
+    "level": 214,
+    "hitAttribute": 147041,
+    "dodgeAttribute": 147041,
+    "criticalMax": 147041,
+    "toughnessMax": 147041,
+    "luckyMax": 147041,
+    "guardianMax": 147041,
+    "atkMax": 88017.5
+  },
+  "215": {
+    "level": 215,
+    "hitAttribute": 147715.5,
+    "dodgeAttribute": 147715.5,
+    "criticalMax": 147715.5,
+    "toughnessMax": 147715.5,
+    "luckyMax": 147715.5,
+    "guardianMax": 147715.5,
+    "atkMax": 88421.25
+  },
+  "216": {
+    "level": 216,
+    "hitAttribute": 148390,
+    "dodgeAttribute": 148390,
+    "criticalMax": 148390,
+    "toughnessMax": 148390,
+    "luckyMax": 148390,
+    "guardianMax": 148390,
+    "atkMax": 88825
+  },
+  "217": {
+    "level": 217,
+    "hitAttribute": 152987.25,
+    "dodgeAttribute": 152987.25,
+    "criticalMax": 152987.25,
+    "toughnessMax": 152987.25,
+    "luckyMax": 152987.25,
+    "guardianMax": 152987.25,
+    "atkMax": 91576.875
+  },
+  "218": {
+    "level": 218,
+    "hitAttribute": 153679.5,
+    "dodgeAttribute": 153679.5,
+    "criticalMax": 153679.5,
+    "toughnessMax": 153679.5,
+    "luckyMax": 153679.5,
+    "guardianMax": 153679.5,
+    "atkMax": 91991.25
+  },
+  "219": {
+    "level": 219,
+    "hitAttribute": 154371.75,
+    "dodgeAttribute": 154371.75,
+    "criticalMax": 154371.75,
+    "toughnessMax": 154371.75,
+    "luckyMax": 154371.75,
+    "guardianMax": 154371.75,
+    "atkMax": 92405.625
+  },
+  "220": {
+    "level": 220,
+    "hitAttribute": 155064,
+    "dodgeAttribute": 155064,
+    "criticalMax": 155064,
+    "toughnessMax": 155064,
+    "luckyMax": 155064,
+    "guardianMax": 155064,
+    "atkMax": 92820
+  }
+}

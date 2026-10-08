@@ -19,6 +19,7 @@ func _ready() -> void:
 	add_child(demo)
 	demo.set_physics_process(false)
 	session = demo.session
+	session.damage_strategy = SimpleDamageLogic.new()
 	session.set_physics_process(false)
 	player = demo.player
 	CoreSystem.event_bus.event_pushed.connect(_on_event)
@@ -66,7 +67,7 @@ func _on_machine_started(id: StringName) -> void:
 func _verify_registration() -> void:
 	var manager := CoreSystem.state_machine_manager
 	var actions := player.action_state
-	_check(actions.machine is BaseStateMachine and actions.machine.states.size() == 9, "九种动作由 Core BaseStateMachine 持有")
+	_check(actions.machine is BaseStateMachine and actions.machine.states.size() == BattleActionLeafState2D.Kind.size(), "基础动作与阶段9受击叶子均由 Core BaseStateMachine 持有")
 	_check(manager.get_state_machine(actions.registration_id) == actions.machine and manager.get_current_state(actions.registration_id) == actions.machine.current_state, "Core 管理器查询真实动作机与当前叶子")
 	_check(manager.get_all_state_machine_ids().size() == baseline_count + 3, "三个实体各自注册一台机器")
 	_check(actions.registration_id != demo.left_target.action_state.registration_id and actions.machine != demo.right_target.action_state.machine, "多实体状态机及注册 ID 隔离")

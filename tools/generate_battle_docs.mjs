@@ -295,11 +295,11 @@ singleAttack += box(30,415,440,210,'BattleAttackInstance : RefCounted', ['attack
 singleAttack += box(530,415,440,210,'BattleHitbox2D : Area2D', ['唯一 CollisionShape2D，读取技能数据','hit_rect → 正缩放 → 偏移 → 比例','以脚底镜像 → 世界多边形','窗口未结束：每个战斗 tick 查询'], '../movement/battle_hitbox_2d.gd','#fce7f3');
 singleAttack += box(1030,415,440,210,'BattleHurtbox2D : Area2D', ['独立可编辑 RectangleShape2D','vulnerable / get_polygon_global()','多边形相交；不参与物理阻挡','实例局部资源，不改共享模板'], '../movement/battle_hurtbox_2d.gd','#fce7f3');
 singleAttack += box(30,740,440,210,'GAS 伤害 / HealthVital', ['DamageCalculator 读取当前最终属性','临时公式：max(1, atk-phyDef) × 倍率','DamageInfo → apply_damage','生命耗尽 → Core DEAD / 取消攻击'], '../../gameplay_abiltiy_system/scripts/attributes/vitals/health_vital.gd','#fef3c7');
-singleAttack += box(530,740,440,210,'BattleCombatFeedback2D', ['snapshot_changed → 当前 / 最大生命','Core battle.attack.hit → 实际扣血','生命条 / 伤害飘字 / 击杀标签','combat delta 驱动上浮与淡出'], '../presentation/battle_combat_feedback_2d.gd','#e2e8f0');
+singleAttack += box(530,740,440,210,'BattleCombatFeedback2D', ['snapshot_changed → 当前 / 最大生命','Core battle.attack.hit → 实际扣血','生命条 / 飘字 / 原版受击闪光','combat delta 同步推进与暂停'], '../presentation/battle_combat_feedback_2d.gd','#e2e8f0');
 singleAttack += box(1030,740,440,210,'CharacterAnimationAdapter', ['悟空：原有 Spine / AnimationPlayer','木桩：AnimationPlayerAdapter2D','hurt / death：场景预置动画','动画完成只通知，不裁决战斗规则'], '../animation/animation_player_adapter_2d.gd','#e2e8f0');
 singleAttack += box(30,1060,440,185,'BattleClock / 生命周期', ['暂停 / 停顿冻结，慢动作统一缩放','打断 / 死亡 / 替换 / 退出关闭攻击','attack.finished 每个实例只通知一次','旧编号事件不能伤害新一次施放'], '../runtime/battle_clock.gd','#dcfce7');
 singleAttack += box(530,1060,440,185,'移动物理体：独立责任', ['CharacterBody2D + CapsuleShape2D','只负责地面 / 墙 / 平台 / 运动','攻击框和受击框物理层均为 0','木桩物理宽 44，受击宽 90'], '../../../data/battle2d/dummy/wooden_dummy.tscn','#dcfce7');
-singleAttack += box(1030,1060,440,185,'单段场景与验收', ['J 短按 / 长按：一次第一段攻击','命中 / 打空 / 击杀 / 左右镜像','途中进入 / 去重 / 暂停 / 菜单','独立 manifest；不修改原五连击'], '../../../examples/verify_single_attack.tscn','#dcfce7');
+singleAttack += box(1030,1060,440,185,'BattleHitEffect2D / 预置场景', ['原版 11 帧 / 30 fps / pivot(72,73)','预置 Sprite2D / AnimationPlayer','场景 940×590；启动不新增节点','重载复位并注销旧运行注册'], '../presentation/battle_hit_effect_2d.gd','#dcfce7');
 singleAttack += arrow('M470 220H530','意图',482,205);
 singleAttack += arrow('M970 220H1030','激活',982,205);
 singleAttack += arrow('M750 320V365H250V415','创建 / 管理',550,355);
@@ -312,5 +312,30 @@ singleAttack += arrow('M970 845H1030','表现',982,830);
 singleAttack += text(32,1300,'时间线：起手 0 → 命中 [4/30, 6/30) 秒 → 收招 → 10/30 秒结束 / 待机；同一窗口同一目标只结算一次。',18);
 singleAttack += text(32,1334,'2 帧持续窗口是阶段 6 的临时配置；未配置窗口的原五连击保持瞬时查询，原版完整 sensor 流程尚待迁移。',18);
 fs.writeFileSync(path.join(docs,'single-attack-runtime.svg'),svg(1500,1380,'阶段 6 · 单段攻击、受击区域与反馈联合类图',singleAttack));
+// #endregion
+// #region 技能时间轴、多攻击段与释放实例联合类图
+let timelineDiagram = text(32,82,'定义资源只读；Core 意图 → GAS 激活 → 有序素材时间轴 → 每段命中 / 派生 / 取消。');
+timelineDiagram += box(30,120,440,205,'GAS 技能定义与资源', ['GameplayAbilityDefinition / Feature','AttackSegment：几何、倍率、反应','SkillBranch / SkillMotion / FrameEvent','BattleCatalog：深拷贝与引用校验'], '../definitions/battle_attack_segment.gd','#dcfce7');
+timelineDiagram += box(530,120,440,205,'GameplayAbilityInstance', ['学习、激活、独立黑板与完成','elapsed / pending / next_event','activation_serial：同步重入保护','CostFeature / VitalCost / Cooldown'], '../../gameplay_abiltiy_system/scripts/abilities/gameplay_ability_instance.gd','#fef3c7');
+timelineDiagram += box(1030,120,440,205,'BattleFrameTimelineFeature', ['30 FPS 素材帧转换为战斗秒','有序重放：事件 / 采样 / 关闭 / 派生','推进至事件时刻，再查询命中','跨完整技能仍先结算再完成'], '../gas/battle_frame_timeline_feature.gd','#fef3c7');
+timelineDiagram += box(30,435,440,230,'Core 操作与动作状态', ['按下 / 缓存 → 公共角色入口','分支按 operation，重映射不改技能','ATTACK 权限 / 霸体 / HURT / DEAD','动画完成只通知；死亡最高'], '../runtime/battle_action_leaf_state_2d.gd');
+timelineDiagram += box(530,435,440,230,'BattleAttackInstance', ['attack_id / ability_id / 起手朝向阵营','elapsed / phase / committed','windows[hit_index] / 操作缓存','hit_targets[段/目标]：count / next_time','owned_objects：按 cast_id 回收'], '../runtime/battle_attack_instance.gd','#fce7f3');
+timelineDiagram += box(1030,435,440,230,'BattleEntity2D + 一个攻击框', ['校验场次 / 实体 / 技能 / 释放编号','每段配置同一个 CollisionShape2D','素材矩形 → 比例 → 朝向 → 世界','独立 Hurtbox / 敌对 / 存活 / 去重','持续段：每目标间隔与最大次数'], '../runtime/battle_entity_2d.gd','#fce7f3');
+timelineDiagram += box(30,795,440,205,'GAS 伤害、Vital、Status / Effect', ['当前最终 atk / phyDef × 倍率 + 附伤','HealthVital → 实际扣血 → 反馈','成功命中后施加配置 Buff','保护上下文保留给后续完整结算'], '../../gameplay_abiltiy_system/scripts/singletons/damage_calculator.gd','#fef3c7');
+timelineDiagram += box(530,795,440,205,'运动、反应与动画适配', ['技能位移逐区间扫掠，不提前执行','不同击退 / 浮空 / 硬直 → Core 许可','AnimationPlayer 按素材事件切动作','暂停 / 慢动作 / 停顿共用时钟'], '../runtime/battle_motion_controller_2d.gd','#dbeafe');
+timelineDiagram += box(1030,795,440,205,'预置时间轴对象与清理', ['FrameEvent → battle.skill.object','承载 effect / projectile / summon','生成偏移、速度、生命周期、播放器','关闭窗口 / pending / 缓存 / 对象'], '../presentation/battle_timeline_object_2d.gd','#dcfce7');
+timelineDiagram += arrow('M470 222H530','实例',482,207);
+timelineDiagram += arrow('M970 222H1030','驱动',982,207);
+timelineDiagram += arrow('M250 325V380H750V435','定义只读',365,370);
+timelineDiagram += arrow('M470 548H530','意图',482,533);
+timelineDiagram += arrow('M970 548H1030','判定',982,533);
+timelineDiagram += arrow('M1250 325V435','重放',1264,393);
+timelineDiagram += arrow('M1130 665V724H250V795','倍率 / 子技能 / Buff / 反应',470,714);
+timelineDiagram += arrow('M470 895H530','受击',482,880);
+timelineDiagram += arrow('M1250 665V795','事件',1266,752);
+timelineDiagram += text(32,1080,'测试：4 / 12 / 20 帧三段 → 10.5 / 24 / 36.5 伤害 → 不同击退，末段浮空 → 28—38 帧派生 → 40 帧结束。',18);
+timelineDiagram += text(32,1116,'持续命中按释放 / 段 / 目标隔离；取消立即阻止未来事件与位移；旧回调不能回收新释放复用的对象。',18);
+timelineDiagram += text(32,1152,'对象是时间轴承载接口；原版保护公式、2D 弹道碰撞 / 穿透与召唤 AI 由后续模块接入。',18);
+fs.writeFileSync(path.join(docs,'skill-timeline.svg'),svg(1500,1200,'阶段 7 · 技能时间轴与多段攻击联合类图',timelineDiagram));
 // #endregion
 console.log(`Generated ${fs.readdirSync(docs).filter(file => file.endsWith('.svg')).length} Battle Foundation SVG diagrams.`);

@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="100" height="180" viewBox="0 0 100 180">
+  <title>悟空木桩受伤表情覆盖层</title>
+  <defs>
+    <linearGradient id="wood" gradientUnits="userSpaceOnUse" x1="23" y1="0" x2="77" y2="0">
+      <stop stop-color="#bb8146"/><stop offset=".45" stop-color="#edc18b"/><stop offset="1" stop-color="#b8773c"/>
+    </linearGradient>
+  </defs>
+  <!-- 与本体脸颊共用注册点，只覆盖五官，不覆盖帽子、耳朵和木纹边缘。 -->
+  <path d="M29 46q21-7 42 0l2 17q-6 12-23 13-17-1-23-13Z" fill="url(#wood)"/>
+  <g fill="none" stroke="#472b1c" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round">
+    <path d="m34 50 8 3m24-3-8 3"/>
+    <path d="m35 55 6 4-6 4m30-8-6 4 6 4"/>
+    <path d="m45 65 5 2 5-2" stroke="#a06a37" stroke-width="2"/>
+    <path d="m41 71 5-2 4 3 4-3 5 2" stroke-width="2"/>
+    <path d="m31 65 2 2m34-2 2-2" stroke="#b85735" stroke-width="1.8"/>
+  </g>
+</svg>

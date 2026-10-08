@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="BattleActionProfile2D" format=3 uid="uid://cy4rhasllqdks"]
+
+[ext_resource type="Script" uid="uid://pnovbntgojod" path="res://addons/battle_foundation/definitions/battle_action_profile_2d.gd" id="script"]
+
+[resource]
+script = ExtResource("script")
+attack_skill_id = &"sunwukong_timeline_attack"
+jump_velocity = -820.0
+second_jump_velocity = -820.0

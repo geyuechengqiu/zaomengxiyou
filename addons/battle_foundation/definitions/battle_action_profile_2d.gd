@@ -3,6 +3,9 @@ class_name BattleActionProfile2D
 #region 战斗规则配置
 ## 以下锁定时间属于战斗规则；不从动画播放进度判断技能许可。
 @export var attack_skill_id: StringName = &"sunwukong_attack1"
+## 留空时不启用对应上下文攻击；仅在本角色的配置中绑定技能。
+@export var run_attack_skill_id: StringName = &""
+@export var jump_attack_skill_id: StringName = &""
 @export var source_fps: float = 30.0
 @export var attack_lock_frames: int = 10
 @export var hurt_lock_frames: int = 8
@@ -26,8 +29,16 @@ class_name BattleActionProfile2D
 	&"TAKEOFF": {"move": true, "jump": false, "turn": true, "interrupt_priority": 10},
 	&"JUMP": {"move": true, "jump": true, "turn": true, "interrupt_priority": 10},
 	&"LAND": {"move": true, "jump": true, "turn": true, "interrupt_priority": 10},
+	&"RUN_ATTACK": {"move": false, "jump": false, "turn": false, "interrupt_priority": 30},
+	&"JUMP_ATTACK": {"move": true, "jump": false, "turn": false, "interrupt_priority": 30},
 	&"ATTACK": {"move": false, "jump": false, "turn": false, "interrupt_priority": 30},
 	&"HURT": {"move": false, "jump": false, "turn": false, "interrupt_priority": 60},
+	&"LAUNCHED": {"move": false, "jump": false, "turn": false, "interrupt_priority": 60},
+	&"AIR_HURT": {"move": false, "jump": false, "turn": false, "interrupt_priority": 60},
+	&"HIT_LAND": {"move": false, "jump": false, "turn": false, "interrupt_priority": 60},
+	&"KNOCKDOWN": {"move": false, "jump": false, "turn": false, "interrupt_priority": 60},
+	&"GETUP": {"move": false, "jump": false, "turn": false, "interrupt_priority": 60},
+	&"PROTECT": {"move": false, "jump": false, "turn": false, "interrupt_priority": 1000},
 	&"DEAD": {"move": false, "jump": false, "turn": false, "interrupt_priority": 1000}
 }
 #endregion

@@ -1,0 +1,4199 @@
+{
+  "source": "games/zmhj-g5/cache/assets/ui/mission2_20250707_1.swf",
+  "source_sha256": "6168f618107d92257687fb0157e053a82fe7f7c6a910e20421c3b245424aa050",
+  "glyph_count": 115,
+  "groups": {
+    "bleedNumber": {
+      "label": "普通伤害",
+      "count": 10
+    },
+    "bleedNumber2": {
+      "label": "普通伤害第二样式",
+      "count": 10
+    },
+    "playerBleedNumber": {
+      "label": "玩家受伤",
+      "count": 10
+    },
+    "baojiNumber": {
+      "label": "暴击数字",
+      "count": 10
+    },
+    "baojiNumber2": {
+      "label": "暴击数字第二样式",
+      "count": 10
+    },
+    "baoji": {
+      "label": "暴击标识",
+      "count": 21
+    },
+    "baoji2": {
+      "label": "暴击标识第二样式",
+      "count": 1
+    },
+    "real_bleedNumber": {
+      "label": "真实伤害",
+      "count": 10
+    },
+    "real_baojiNumber": {
+      "label": "真实伤害暴击数字",
+      "count": 10
+    },
+    "real_baoji": {
+      "label": "真实伤害暴击标识",
+      "count": 1
+    },
+    "baoDuBleedNumber": {
+      "label": "特殊伤害数字-isBao",
+      "count": 10
+    },
+    "sb": {
+      "label": "闪避",
+      "count": 1
+    },
+    "miaosa": {
+      "label": "秒杀",
+      "count": 1
+    },
+    "bleedNumberAdd": {
+      "label": "回血数字-附赠",
+      "count": 10
+    }
+  },
+  "textures": [
+    {
+      "group": "bleedNumber",
+      "label": "普通伤害",
+      "index": 0,
+      "digit": 0,
+      "name": "bleedNumber0000",
+      "source_atlas": "mission2",
+      "atlas_fields": {
+        "name": "bleedNumber0000",
+        "x": "957",
+        "y": "0",
+        "width": "26",
+        "height": "30",
+        "pivotX": "13",
+        "pivotY": "15"
+      },
+      "pivot": [
+        13.0,
+        15.0
+      ],
+      "cropped_size": [
+        26,
+        30
+      ],
+      "restored_size": [
+        26,
+        30
+      ],
+      "files": {
+        "cropped": "cropped/bleedNumber/bleedNumber0000.png",
+        "restored": "restored/bleedNumber/bleedNumber0000.png"
+      },
+      "file": "bleedNumber/bleedNumber0000.png",
+      "sha256": "6d1906ced4908abf0161ea699210a773de19c0f274759fede622f7d929b40482"
+    },
+    {
+      "group": "bleedNumber",
+      "label": "普通伤害",
+      "index": 1,
+      "digit": 1,
+      "name": "bleedNumber0001",
+      "source_atlas": "mission2",
+      "atlas_fields": {
+        "name": "bleedNumber0001",
+        "x": "983",
+        "y": "0",
+        "width": "26",
+        "height": "30",
+        "pivotX": "13",
+        "pivotY": "15"
+      },
+      "pivot": [
+        13.0,
+        15.0
+      ],
+      "cropped_size": [
+        26,
+        30
+      ],
+      "restored_size": [
+        26,
+        30
+      ],
+      "files": {
+        "cropped": "cropped/bleedNumber/bleedNumber0001.png",
+        "restored": "restored/bleedNumber/bleedNumber0001.png"
+      },
+      "file": "bleedNumber/bleedNumber0001.png",
+      "sha256": "e6db5af58603e337f8e0752cee7d8a1be72781f8c6572cead1696ccea94cd1a3"
+    },
+    {
+      "group": "bleedNumber",
+      "label": "普通伤害",
+      "index": 2,
+      "digit": 2,
+      "name": "bleedNumber0002",
+      "source_atlas": "mission2",
+      "atlas_fields": {
+        "name": "bleedNumber0002",
+        "x": "0",
+        "y": "40",
+        "width": "26",
+        "height": "30",
+        "pivotX": "13",
+        "pivotY": "15"
+      },
+      "pivot": [
+        13.0,
+        15.0
+      ],
+      "cropped_size": [
+        26,
+        30
+      ],
+      "restored_size": [
+        26,
+        30
+      ],
+      "files": {
+        "cropped": "cropped/bleedNumber/bleedNumber0002.png",
+        "restored": "restored/bleedNumber/bleedNumber0002.png"
+      },
+      "file": "bleedNumber/bleedNumber0002.png",
+      "sha256": "a20c203ad58af8630d97af8f841b85b09d1e0e792d1bc94a46c3a9f6a59d50ae"
+    },
+    {
+      "group": "bleedNumber",
+      "label": "普通伤害",
+      "index": 3,
+      "digit": 3,
+      "name": "bleedNumber0003",
+      "source_atlas": "mission2",
+      "atlas_fields": {
+        "name": "bleedNumber0003",
+        "x": "26",
+        "y": "40",
+        "width": "26",
+        "height": "30",
+        "pivotX": "13",
+        "pivotY": "15"
+      },
+      "pivot": [
+        13.0,
+        15.0
+      ],
+      "cropped_size": [
+        26,
+        30
+      ],
+      "restored_size": [
+        26,
+        30
+      ],
+      "files": {
+        "cropped": "cropped/bleedNumber/bleedNumber0003.png",
+        "restored": "restored/bleedNumber/bleedNumber0003.png"
+      },
+      "file": "bleedNumber/bleedNumber0003.png",
+      "sha256": "d18295712adfa59bc61c8d950eab7811e3a612156632ecb1dcd9d43c05e50fac"
+    },
+    {
+      "group": "bleedNumber",
+      "label": "普通伤害",
+      "index": 4,
+      "digit": 4,
+      "name": "bleedNumber0004",
+      "source_atlas": "mission2",
+      "atlas_fields": {
+        "name": "bleedNumber0004",
+        "x": "52",
+        "y": "40",
+        "width": "26",
+        "height": "30",
+        "pivotX": "13",
+        "pivotY": "15"
+      },
+      "pivot": [
+        13.0,
+        15.0
+      ],
+      "cropped_size": [
+        26,
+        30
+      ],
+      "restored_size": [
+        26,
+        30
+      ],
+      "files": {
+        "cropped": "cropped/bleedNumber/bleedNumber0004.png",
+        "restored": "restored/bleedNumber/bleedNumber0004.png"
+      },
+      "file": "bleedNumber/bleedNumber0004.png",
+      "sha256": "a5577af8c3ab38ee04d6c1f226ad8dd888ce95f5fadb2e05157828a4f83f782d"
+    },
+    {
+      "group": "bleedNumber",
+      "label": "普通伤害",
+      "index": 5,
+      "digit": 5,
+      "name": "bleedNumber0005",
+      "source_atlas": "mission2",
+      "atlas_fields": {
+        "name": "bleedNumber0005",
+        "x": "78",
+        "y": "40",
+        "width": "26",
+        "height": "30",
+        "pivotX": "13",
+        "pivotY": "15"
+      },
+      "pivot": [
+        13.0,
+        15.0
+      ],
+      "cropped_size": [
+        26,
+        30
+      ],
+      "restored_size": [
+        26,
+        30
+      ],
+      "files": {
+        "cropped": "cropped/bleedNumber/bleedNumber0005.png",
+        "restored": "restored/bleedNumber/bleedNumber0005.png"
+      },
+      "file": "bleedNumber/bleedNumber0005.png",
+      "sha256": "1a9abe3ab95b8c385e77a7d5d0240a4fee4566cf405f94c6f87436a82c4787f1"
+    },
+    {
+      "group": "bleedNumber",
+      "label": "普通伤害",
+      "index": 6,
+      "digit": 6,
+      "name": "bleedNumber0006",
+      "source_atlas": "mission2",
+      "atlas_fields": {
+        "name": "bleedNumber0006",
+        "x": "104",
+        "y": "40",
+        "width": "26",
+        "height": "30",
+        "pivotX": "13",
+        "pivotY": "15"
+      },
+      "pivot": [
+        13.0,
+        15.0
+      ],
+      "cropped_size": [
+        26,
+        30
+      ],
+      "restored_size": [
+        26,
+        30
+      ],
+      "files": {
+        "cropped": "cropped/bleedNumber/bleedNumber0006.png",
+        "restored": "restored/bleedNumber/bleedNumber0006.png"
+      },
+      "file": "bleedNumber/bleedNumber0006.png",
+      "sha256": "f63d89d21f73d29086fde25e89dffd64b98a3303f026e6bd6868e7deeec1f666"
+    },
+    {
+      "group": "bleedNumber",
+      "label": "普通伤害",
+      "index": 7,
+      "digit": 7,
+      "name": "bleedNumber0007",
+      "source_atlas": "mission2",
+      "atlas_fields": {
+        "name": "bleedNumber0007",
+        "x": "130",
+        "y": "40",
+        "width": "26",
+        "height": "30",
+        "pivotX": "13",
+        "pivotY": "15"
+      },
+      "pivot": [
+        13.0,
+        15.0
+      ],
+      "cropped_size": [
+        26,
+        30
+      ],
+      "restored_size": [
+        26,
+        30
+      ],
+      "files": {
+        "cropped": "cropped/bleedNumber/bleedNumber0007.png",
+        "restored": "restored/bleedNumber/bleedNumber0007.png"
+      },
+      "file": "bleedNumber/bleedNumber0007.png",
+      "sha256": "2367da42d4119fa26e5e363001c4b022c0dd1e0cb5d3f80e13f3f9c871acecee"
+    },
+    {
+      "group": "bleedNumber",
+      "label": "普通伤害",
+      "index": 8,
+      "digit": 8,
+      "name": "bleedNumber0008",
+      "source_atlas": "mission2",
+      "atlas_fields": {
+        "name": "bleedNumber0008",
+        "x": "156",
+        "y": "40",
+        "width": "26",
+        "height": "30",
+        "pivotX": "13",
+        "pivotY": "15"
+      },
+      "pivot": [
+        13.0,
+        15.0
+      ],
+      "cropped_size": [
+        26,
+        30
+      ],
+      "restored_size": [
+        26,
+        30
+      ],
+      "files": {
+        "cropped": "cropped/bleedNumber/bleedNumber0008.png",
+        "restored": "restored/bleedNumber/bleedNumber0008.png"
+      },
+      "file": "bleedNumber/bleedNumber0008.png",
+      "sha256": "a0076eee81772fbdc40da3f441ec44f045044a668daad88a271f1f1872995baa"
+    },
+    {
+      "group": "bleedNumber",
+      "label": "普通伤害",
+      "index": 9,
+      "digit": 9,
+      "name": "bleedNumber0009",
+      "source_atlas": "mission2",
+      "atlas_fields": {
+        "name": "bleedNumber0009",
+        "x": "182",
+        "y": "40",
+        "width": "26",
+        "height": "30",
+        "pivotX": "13",
+        "pivotY": "15"
+      },
+      "pivot": [
+        13.0,
+        15.0
+      ],
+      "cropped_size": [
+        26,
+        30
+      ],
+      "restored_size": [
+        26,
+        30
+      ],
+      "files": {
+        "cropped": "cropped/bleedNumber/bleedNumber0009.png",
+        "restored": "restored/bleedNumber/bleedNumber0009.png"
+      },
+      "file": "bleedNumber/bleedNumber0009.png",
+      "sha256": "7ccec95f58ed8af89521c9bb1cc2f432028af7694843ef08de20d297d5056b7f"
+    },
+    {
+      "group": "bleedNumber2",
+      "label": "普通伤害第二样式",
+      "index": 0,
+      "digit": 0,
+      "name": "bleedNumber20000",
+      "source_atlas": "mission2",
+      "atlas_fields": {
+        "name": "bleedNumber20000",
+        "x": "208",
+        "y": "40",
+        "width": "26",
+        "height": "30",
+        "pivotX": "13",
+        "pivotY": "15"
+      },
+      "pivot": [
+        13.0,
+        15.0
+      ],
+      "cropped_size": [
+        26,
+        30
+      ],
+      "restored_size": [
+        26,
+        30
+      ],
+      "files": {
+        "cropped": "cropped/bleedNumber2/bleedNumber20000.png",
+        "restored": "restored/bleedNumber2/bleedNumber20000.png"
+      },
+      "file": "bleedNumber2/bleedNumber20000.png",
+      "sha256": "79cefd02263e01a15057eceb30801fb7f29b7e469c84d9790332c0d9d9878557"
+    },
+    {
+      "group": "bleedNumber2",
+      "label": "普通伤害第二样式",
+      "index": 1,
+      "digit": 1,
+      "name": "bleedNumber20001",
+      "source_atlas": "mission2",
+      "atlas_fields": {
+        "name": "bleedNumber20001",
+        "x": "234",
+        "y": "40",
+        "width": "26",
+        "height": "30",
+        "pivotX": "13",
+        "pivotY": "15"
+      },
+      "pivot": [
+        13.0,
+        15.0
+      ],
+      "cropped_size": [
+        26,
+        30
+      ],
+      "restored_size": [
+        26,
+        30
+      ],
+      "files": {
+        "cropped": "cropped/bleedNumber2/bleedNumber20001.png",
+        "restored": "restored/bleedNumber2/bleedNumber20001.png"
+      },
+      "file": "bleedNumber2/bleedNumber20001.png",
+      "sha256": "396ae3f02456f6e13835b103184c8e55b7c2fcb7ad68d6cf1e491e01b67eb5ab"
+    },
+    {
+      "group": "bleedNumber2",
+      "label": "普通伤害第二样式",
+      "index": 2,
+      "digit": 2,
+      "name": "bleedNumber20002",
+      "source_atlas": "mission2",
+      "atlas_fields": {
+        "name": "bleedNumber20002",
+        "x": "260",
+        "y": "40",
+        "width": "26",
+        "height": "30",
+        "pivotX": "13",
+        "pivotY": "15"
+      },
+      "pivot": [
+        13.0,
+        15.0
+      ],
+      "cropped_size": [
+        26,
+        30
+      ],
+      "restored_size": [
+        26,
+        30
+      ],
+      "files": {
+        "cropped": "cropped/bleedNumber2/bleedNumber20002.png",
+        "restored": "restored/bleedNumber2/bleedNumber20002.png"
+      },
+      "file": "bleedNumber2/bleedNumber20002.png",
+      "sha256": "97f437df84a76d422f480faa9ef451317865d2709b669c71d8ced3fed9b1de00"
+    },
+    {
+      "group": "bleedNumber2",
+      "label": "普通伤害第二样式",
+      "index": 3,
+      "digit": 3,
+      "name": "bleedNumber20003",
+      "source_atlas": "mission2",
+      "atlas_fields": {
+        "name": "bleedNumber20003",
+        "x": "286",
+        "y": "40",
+        "width": "26",
+        "height": "30",
+        "pivotX": "13",
+        "pivotY": "15"
+      },
+      "pivot": [
+        13.0,
+        15.0
+      ],
+      "cropped_size": [
+        26,
+        30
+      ],
+      "restored_size": [
+        26,
+        30
+      ],
+      "files": {
+        "cropped": "cropped/bleedNumber2/bleedNumber20003.png",
+        "restored": "restored/bleedNumber2/bleedNumber20003.png"
+      },
+      "file": "bleedNumber2/bleedNumber20003.png",
+      "sha256": "f097193cbc316d0bbf5e8796c8f7dacda905bf1004e8b4f042f1b1d32b6aa541"
+    },
+    {
+      "group": "bleedNumber2",
+      "label": "普通伤害第二样式",
+      "index": 4,
+      "digit": 4,
+      "name": "bleedNumber20004",
+      "source_atlas": "mission2",
+      "atlas_fields": {
+        "name": "bleedNumber20004",
+        "x": "312",
+        "y": "40",
+        "width": "26",
+        "height": "30",
+        "pivotX": "13",
+        "pivotY": "15"
+      },
+      "pivot": [
+        13.0,
+        15.0
+      ],
+      "cropped_size": [
+        26,
+        30
+      ],
+      "restored_size": [
+        26,
+        30
+      ],
+      "files": {
+        "cropped": "cropped/bleedNumber2/bleedNumber20004.png",
+        "restored": "restored/bleedNumber2/bleedNumber20004.png"
+      },
+      "file": "bleedNumber2/bleedNumber20004.png",
+      "sha256": "a36edc136b00289a08bbe151e97c0460bdd566882a1a273afd02949ffac4d0f4"
+    },
+    {
+      "group": "bleedNumber2",
+      "label": "普通伤害第二样式",
+      "index": 5,
+      "digit": 5,
+      "name": "bleedNumber20005",
+      "source_atlas": "mission2",
+      "atlas_fields": {
+        "name": "bleedNumber20005",
+        "x": "338",
+        "y": "40",
+        "width": "26",
+        "height": "30",
+        "pivotX": "13",
+        "pivotY": "15"
+      },
+      "pivot": [
+        13.0,
+        15.0
+      ],
+      "cropped_size": [
+        26,
+        30
+      ],
+      "restored_size": [
+        26,
+        30
+      ],
+      "files": {
+        "cropped": "cropped/bleedNumber2/bleedNumber20005.png",
+        "restored": "restored/bleedNumber2/bleedNumber20005.png"
+      },
+      "file": "bleedNumber2/bleedNumber20005.png",
+      "sha256": "5315bd81bafef45517582ae49247bac3d88c833468f4c53ea6b29d4cf771dc30"
+    },
+    {
+      "group": "bleedNumber2",
+      "label": "普通伤害第二样式",
+      "index": 6,
+      "digit": 6,
+      "name": "bleedNumber20006",
+      "source_atlas": "mission2",
+      "atlas_fields": {
+        "name": "bleedNumber20006",
+        "x": "364",
+        "y": "40",
+        "width": "26",
+        "height": "30",
+        "pivotX": "13",
+        "pivotY": "15"
+      },
+      "pivot": [
+        13.0,
+        15.0
+      ],
+      "cropped_size": [
+        26,
+        30
+      ],
+      "restored_size": [
+        26,
+        30
+      ],
+      "files": {
+        "cropped": "cropped/bleedNumber2/bleedNumber20006.png",
+        "restored": "restored/bleedNumber2/bleedNumber20006.png"
+      },
+      "file": "bleedNumber2/bleedNumber20006.png",
+      "sha256": "d091f4ee7810aa273120cc7703faa548938b9861d27505c6fb3c9c1ff492d233"
+    },
+    {
+      "group": "bleedNumber2",
+      "label": "普通伤害第二样式",
+      "index": 7,
+      "digit": 7,
+      "name": "bleedNumber20007",
+      "source_atlas": "mission2",
+      "atlas_fields": {
+        "name": "bleedNumber20007",
+        "x": "390",
+        "y": "40",
+        "width": "26",
+        "height": "30",
+        "pivotX": "13",
+        "pivotY": "15"
+      },
+      "pivot": [
+        13.0,
+        15.0
+      ],
+      "cropped_size": [
+        26,
+        30
+      ],
+      "restored_size": [
+        26,
+        30
+      ],
+      "files": {
+        "cropped": "cropped/bleedNumber2/bleedNumber20007.png",
+        "restored": "restored/bleedNumber2/bleedNumber20007.png"
+      },
+      "file": "bleedNumber2/bleedNumber20007.png",
+      "sha256": "ab10d7a6e51ac377e5eeea2f0e379653c7e6dc1ab43a90b9227e972492456f7f"
+    },
+    {
+      "group": "bleedNumber2",
+      "label": "普通伤害第二样式",
+      "index": 8,
+      "digit": 8,
+      "name": "bleedNumber20008",
+      "source_atlas": "mission2",
+      "atlas_fields": {
+        "name": "bleedNumber20008",
+        "x": "416",
+        "y": "40",
+        "width": "26",
+        "height": "30",
+        "pivotX": "13",
+        "pivotY": "15"
+      },
+      "pivot": [
+        13.0,
+        15.0
+      ],
+      "cropped_size": [
+        26,
+        30
+      ],
+      "restored_size": [
+        26,
+        30
+      ],
+      "files": {
+        "cropped": "cropped/bleedNumber2/bleedNumber20008.png",
+        "restored": "restored/bleedNumber2/bleedNumber20008.png"
+      },
+      "file": "bleedNumber2/bleedNumber20008.png",
+      "sha256": "c247eaa10c987201e5fa2e6f9677c8faef45f8865e5cb76456b33b5e3c658d2b"
+    },
+    {
+      "group": "bleedNumber2",
+      "label": "普通伤害第二样式",
+      "index": 9,
+      "digit": 9,
+      "name": "bleedNumber20009",
+      "source_atlas": "mission2",
+      "atlas_fields": {
+        "name": "bleedNumber20009",
+        "x": "442",
+        "y": "40",
+        "width": "26",
+        "height": "30",
+        "pivotX": "13",
+        "pivotY": "15"
+      },
+      "pivot": [
+        13.0,
+        15.0
+      ],
+      "cropped_size": [
+        26,
+        30
+      ],
+      "restored_size": [
+        26,
+        30
+      ],
+      "files": {
+        "cropped": "cropped/bleedNumber2/bleedNumber20009.png",
+        "restored": "restored/bleedNumber2/bleedNumber20009.png"
+      },
+      "file": "bleedNumber2/bleedNumber20009.png",
+      "sha256": "d7eac9b608142202497b3c99b32591fc6420161885089a2d2d8ba98befc24776"
+    },
+    {
+      "group": "playerBleedNumber",
+      "label": "玩家受伤",
+      "index": 0,
+      "digit": 0,
+      "name": "playerBleedNumber0000",
+      "source_atlas": "mission2",
+      "atlas_fields": {
+        "name": "playerBleedNumber0000",
+        "x": "888",
+        "y": "997",
+        "width": "26",
+        "height": "30",
+        "pivotX": "13",
+        "pivotY": "15"
+      },
+      "pivot": [
+        13.0,
+        15.0
+      ],
+      "cropped_size": [
+        26,
+        30
+      ],
+      "restored_size": [
+        26,
+        30
+      ],
+      "files": {
+        "cropped": "cropped/playerBleedNumber/playerBleedNumber0000.png",
+        "restored": "restored/playerBleedNumber/playerBleedNumber0000.png"
+      },
+      "file": "playerBleedNumber/playerBleedNumber0000.png",
+      "sha256": "0b6c9b343320ec706e769039962d36d6ef43fbb089bea4388bec56d5cfdda71b"
+    },
+    {
+      "group": "playerBleedNumber",
+      "label": "玩家受伤",
+      "index": 1,
+      "digit": 1,
+      "name": "playerBleedNumber0001",
+      "source_atlas": "mission2",
+      "atlas_fields": {
+        "name": "playerBleedNumber0001",
+        "x": "914",
+        "y": "997",
+        "width": "26",
+        "height": "30",
+        "pivotX": "13",
+        "pivotY": "15"
+      },
+      "pivot": [
+        13.0,
+        15.0
+      ],
+      "cropped_size": [
+        26,
+        30
+      ],
+      "restored_size": [
+        26,
+        30
+      ],
+      "files": {
+        "cropped": "cropped/playerBleedNumber/playerBleedNumber0001.png",
+        "restored": "restored/playerBleedNumber/playerBleedNumber0001.png"
+      },
+      "file": "playerBleedNumber/playerBleedNumber0001.png",
+      "sha256": "e8f467ce88aa013403cb4c910c3a76824c9c455708b29c7e28faa093369ff137"
+    },
+    {
+      "group": "playerBleedNumber",
+      "label": "玩家受伤",
+      "index": 2,
+      "digit": 2,
+      "name": "playerBleedNumber0002",
+      "source_atlas": "mission2",
+      "atlas_fields": {
+        "name": "playerBleedNumber0002",
+        "x": "940",
+        "y": "997",
+        "width": "26",
+        "height": "30",
+        "pivotX": "13",
+        "pivotY": "15"
+      },
+      "pivot": [
+        13.0,
+        15.0
+      ],
+      "cropped_size": [
+        26,
+        30
+      ],
+      "restored_size": [
+        26,
+        30
+      ],
+      "files": {
+        "cropped": "cropped/playerBleedNumber/playerBleedNumber0002.png",
+        "restored": "restored/playerBleedNumber/playerBleedNumber0002.png"
+      },
+      "file": "playerBleedNumber/playerBleedNumber0002.png",
+      "sha256": "94f9125c0abe96b71c515a94452ffc33dba234883b3022ffd5cabbb2814cd01e"
+    },
+    {
+      "group": "playerBleedNumber",
+      "label": "玩家受伤",
+      "index": 3,
+      "digit": 3,
+      "name": "playerBleedNumber0003",
+      "source_atlas": "mission2",
+      "atlas_fields": {
+        "name": "playerBleedNumber0003",
+        "x": "966",
+        "y": "997",
+        "width": "26",
+        "height": "30",
+        "pivotX": "13",
+        "pivotY": "15"
+      },
+      "pivot": [
+        13.0,
+        15.0
+      ],
+      "cropped_size": [
+        26,
+        30
+      ],
+      "restored_size": [
+        26,
+        30
+      ],
+      "files": {
+        "cropped": "cropped/playerBleedNumber/playerBleedNumber0003.png",
+        "restored": "restored/playerBleedNumber/playerBleedNumber0003.png"
+      },
+      "file": "playerBleedNumber/playerBleedNumber0003.png",
+      "sha256": "865cc0d6b2b5c2751f6d6cace031e102296193751299720a7ad0e4f0b5c875c6"
+    },
+    {
+      "group": "playerBleedNumber",
+      "label": "玩家受伤",
+      "index": 4,
+      "digit": 4,
+      "name": "playerBleedNumber0004",
+      "source_atlas": "mission2",
+      "atlas_fields": {
+        "name": "playerBleedNumber0004",
+        "x": "992",
+        "y": "997",
+        "width": "26",
+        "height": "30",
+        "pivotX": "13",
+        "pivotY": "15"
+      },
+      "pivot": [
+        13.0,
+        15.0
+      ],
+      "cropped_size": [
+        26,
+        30
+      ],
+      "restored_size": [
+        26,
+        30
+      ],
+      "files": {
+        "cropped": "cropped/playerBleedNumber/playerBleedNumber0004.png",
+        "restored": "restored/playerBleedNumber/playerBleedNumber0004.png"
+      },
+      "file": "playerBleedNumber/playerBleedNumber0004.png",
+      "sha256": "15d6ecf33c5826fa90dc0e818e459a8db452aa96a03c182cd9574a748c827711"
+    },
+    {
+      "group": "playerBleedNumber",
+      "label": "玩家受伤",
+      "index": 5,
+      "digit": 5,
+      "name": "playerBleedNumber0005",
+      "source_atlas": "mission2",
+      "atlas_fields": {
+        "name": "playerBleedNumber0005",
+        "x": "0",
+        "y": "1349",
+        "width": "26",
+        "height": "30",
+        "pivotX": "13",
+        "pivotY": "15"
+      },
+      "pivot": [
+        13.0,
+        15.0
+      ],
+      "cropped_size": [
+        26,
+        30
+      ],
+      "restored_size": [
+        26,
+        30
+      ],
+      "files": {
+        "cropped": "cropped/playerBleedNumber/playerBleedNumber0005.png",
+        "restored": "restored/playerBleedNumber/playerBleedNumber0005.png"
+      },
+      "file": "playerBleedNumber/playerBleedNumber0005.png",
+      "sha256": "e9a30938ae28b70b12755bfec847f8551d094110d1d94bfac5717141d6ae9ba8"
+    },
+    {
+      "group": "playerBleedNumber",
+      "label": "玩家受伤",
+      "index": 6,
+      "digit": 6,
+      "name": "playerBleedNumber0006",
+      "source_atlas": "mission2",
+      "atlas_fields": {
+        "name": "playerBleedNumber0006",
+        "x": "26",
+        "y": "1349",
+        "width": "26",
+        "height": "30",
+        "pivotX": "13",
+        "pivotY": "15"
+      },
+      "pivot": [
+        13.0,
+        15.0
+      ],
+      "cropped_size": [
+        26,
+        30
+      ],
+      "restored_size": [
+        26,
+        30
+      ],
+      "files": {
+        "cropped": "cropped/playerBleedNumber/playerBleedNumber0006.png",
+        "restored": "restored/playerBleedNumber/playerBleedNumber0006.png"
+      },
+      "file": "playerBleedNumber/playerBleedNumber0006.png",
+      "sha256": "ac5c82a2fb79a9fb4b5b803c3544cdc07167a87cbb7491b26b8b3589e8af43b0"
+    },
+    {
+      "group": "playerBleedNumber",
+      "label": "玩家受伤",
+      "index": 7,
+      "digit": 7,
+      "name": "playerBleedNumber0007",
+      "source_atlas": "mission2",
+      "atlas_fields": {
+        "name": "playerBleedNumber0007",
+        "x": "52",
+        "y": "1349",
+        "width": "26",
+        "height": "30",
+        "pivotX": "13",
+        "pivotY": "15"
+      },
+      "pivot": [
+        13.0,
+        15.0
+      ],
+      "cropped_size": [
+        26,
+        30
+      ],
+      "restored_size": [
+        26,
+        30
+      ],
+      "files": {
+        "cropped": "cropped/playerBleedNumber/playerBleedNumber0007.png",
+        "restored": "restored/playerBleedNumber/playerBleedNumber0007.png"
+      },
+      "file": "playerBleedNumber/playerBleedNumber0007.png",
+      "sha256": "cbe6ddf06f0defe04cf4bd15d20dd9f55743873cb44c2f281f78e796e87e3dc3"
+    },
+    {
+      "group": "playerBleedNumber",
+      "label": "玩家受伤",
+      "index": 8,
+      "digit": 8,
+      "name": "playerBleedNumber0008",
+      "source_atlas": "mission2",
+      "atlas_fields": {
+        "name": "playerBleedNumber0008",
+        "x": "78",
+        "y": "1349",
+        "width": "26",
+        "height": "30",
+        "pivotX": "13",
+        "pivotY": "15"
+      },
+      "pivot": [
+        13.0,
+        15.0
+      ],
+      "cropped_size": [
+        26,
+        30
+      ],
+      "restored_size": [
+        26,
+        30
+      ],
+      "files": {
+        "cropped": "cropped/playerBleedNumber/playerBleedNumber0008.png",
+        "restored": "restored/playerBleedNumber/playerBleedNumber0008.png"
+      },
+      "file": "playerBleedNumber/playerBleedNumber0008.png",
+      "sha256": "d62220f64ed9a6599178e67e44d698c2574565b86d643cd3e5e54d3333b744ad"
+    },
+    {
+      "group": "playerBleedNumber",
+      "label": "玩家受伤",
+      "index": 9,
+      "digit": 9,
+      "name": "playerBleedNumber0009",
+      "source_atlas": "mission2",
+      "atlas_fields": {
+        "name": "playerBleedNumber0009",
+        "x": "104",
+        "y": "1349",
+        "width": "26",
+        "height": "30",
+        "pivotX": "13",
+        "pivotY": "15"
+      },
+      "pivot": [
+        13.0,
+        15.0
+      ],
+      "cropped_size": [
+        26,
+        30
+      ],
+      "restored_size": [
+        26,
+        30
+      ],
+      "files": {
+        "cropped": "cropped/playerBleedNumber/playerBleedNumber0009.png",
+        "restored": "restored/playerBleedNumber/playerBleedNumber0009.png"
+      },
+      "file": "playerBleedNumber/playerBleedNumber0009.png",
+      "sha256": "ba4b21ef9a4cf7c47aada5b3a5575084a120d34a4ad2a39270d5681f7f11b9f8"
+    },
+    {
+      "group": "baojiNumber",
+      "label": "暴击数字",
+      "index": 0,
+      "digit": 0,
+      "name": "baojiNumber0000",
+      "source_atlas": "mission2",
+      "atlas_fields": {
+        "name": "baojiNumber0000",
+        "x": "357",
+        "y": "0",
+        "width": "30",
+        "height": "36",
+        "pivotX": "15",
+        "pivotY": "17.5"
+      },
+      "pivot": [
+        15.0,
+        17.5
+      ],
+      "cropped_size": [
+        30,
+        36
+      ],
+      "restored_size": [
+        30,
+        36
+      ],
+      "files": {
+        "cropped": "cropped/baojiNumber/baojiNumber0000.png",
+        "restored": "restored/baojiNumber/baojiNumber0000.png"
+      },
+      "file": "baojiNumber/baojiNumber0000.png",
+      "sha256": "8269b18da21b22d26b2de726109cba5ae2453984116f9785357f13aed3339e3a"
+    },
+    {
+      "group": "baojiNumber",
+      "label": "暴击数字",
+      "index": 1,
+      "digit": 1,
+      "name": "baojiNumber0001",
+      "source_atlas": "mission2",
+      "atlas_fields": {
+        "name": "baojiNumber0001",
+        "x": "387",
+        "y": "0",
+        "width": "30",
+        "height": "36",
+        "pivotX": "15",
+        "pivotY": "17.5"
+      },
+      "pivot": [
+        15.0,
+        17.5
+      ],
+      "cropped_size": [
+        30,
+        36
+      ],
+      "restored_size": [
+        30,
+        36
+      ],
+      "files": {
+        "cropped": "cropped/baojiNumber/baojiNumber0001.png",
+        "restored": "restored/baojiNumber/baojiNumber0001.png"
+      },
+      "file": "baojiNumber/baojiNumber0001.png",
+      "sha256": "9a5de6e5227ef6966fe3828737efba92eb6d6273f874354e28592177580b54f7"
+    },
+    {
+      "group": "baojiNumber",
+      "label": "暴击数字",
+      "index": 2,
+      "digit": 2,
+      "name": "baojiNumber0002",
+      "source_atlas": "mission2",
+      "atlas_fields": {
+        "name": "baojiNumber0002",
+        "x": "417",
+        "y": "0",
+        "width": "30",
+        "height": "36",
+        "pivotX": "15",
+        "pivotY": "17.5"
+      },
+      "pivot": [
+        15.0,
+        17.5
+      ],
+      "cropped_size": [
+        30,
+        36
+      ],
+      "restored_size": [
+        30,
+        36
+      ],
+      "files": {
+        "cropped": "cropped/baojiNumber/baojiNumber0002.png",
+        "restored": "restored/baojiNumber/baojiNumber0002.png"
+      },
+      "file": "baojiNumber/baojiNumber0002.png",
+      "sha256": "fae14c84019a34cb134020b45491dd794ae44719060c3f02104a770a66b2cc2b"
+    },
+    {
+      "group": "baojiNumber",
+      "label": "暴击数字",
+      "index": 3,
+      "digit": 3,
+      "name": "baojiNumber0003",
+      "source_atlas": "mission2",
+      "atlas_fields": {
+        "name": "baojiNumber0003",
+        "x": "447",
+        "y": "0",
+        "width": "30",
+        "height": "36",
+        "pivotX": "15",
+        "pivotY": "17.5"
+      },
+      "pivot": [
+        15.0,
+        17.5
+      ],
+      "cropped_size": [
+        30,
+        36
+      ],
+      "restored_size": [
+        30,
+        36
+      ],
+      "files": {
+        "cropped": "cropped/baojiNumber/baojiNumber0003.png",
+        "restored": "restored/baojiNumber/baojiNumber0003.png"
+      },
+      "file": "baojiNumber/baojiNumber0003.png",
+      "sha256": "0b5ecaa4bafbc0da6b21688b508de4eb6c33ed9df834d815d3d309150368904f"
+    },
+    {
+      "group": "baojiNumber",
+      "label": "暴击数字",
+      "index": 4,
+      "digit": 4,
+      "name": "baojiNumber0004",
+      "source_atlas": "mission2",
+      "atlas_fields": {
+        "name": "baojiNumber0004",
+        "x": "477",
+        "y": "0",
+        "width": "30",
+        "height": "36",
+        "pivotX": "15",
+        "pivotY": "17.5"
+      },
+      "pivot": [
+        15.0,
+        17.5
+      ],
+      "cropped_size": [
+        30,
+        36
+      ],
+      "restored_size": [
+        30,
+        36
+      ],
+      "files": {
+        "cropped": "cropped/baojiNumber/baojiNumber0004.png",
+        "restored": "restored/baojiNumber/baojiNumber0004.png"
+      },
+      "file": "baojiNumber/baojiNumber0004.png",
+      "sha256": "4d0b4fc27ec2f57a0deb365a466ef3b8e8c36e0c1bebc06b7b9670ebb141e333"
+    },
+    {
+      "group": "baojiNumber",
+      "label": "暴击数字",
+      "index": 5,
+      "digit": 5,
+      "name": "baojiNumber0005",
+      "source_atlas": "mission2",
+      "atlas_fields": {
+        "name": "baojiNumber0005",
+        "x": "507",
+        "y": "0",
+        "width": "30",
+        "height": "36",
+        "pivotX": "15",
+        "pivotY": "17.5"
+      },
+      "pivot": [
+        15.0,
+        17.5
+      ],
+      "cropped_size": [
+        30,
+        36
+      ],
+      "restored_size": [
+        30,
+        36
+      ],
+      "files": {
+        "cropped": "cropped/baojiNumber/baojiNumber0005.png",
+        "restored": "restored/baojiNumber/baojiNumber0005.png"
+      },
+      "file": "baojiNumber/baojiNumber0005.png",
+      "sha256": "93552e7d364375b648ce5b391ba1a633b9a697ae1f996e88ccbca29b30698f25"
+    },
+    {
+      "group": "baojiNumber",
+      "label": "暴击数字",
+      "index": 6,
+      "digit": 6,
+      "name": "baojiNumber0006",
+      "source_atlas": "mission2",
+      "atlas_fields": {
+        "name": "baojiNumber0006",
+        "x": "537",
+        "y": "0",
+        "width": "30",
+        "height": "36",
+        "pivotX": "15",
+        "pivotY": "17.5"
+      },
+      "pivot": [
+        15.0,
+        17.5
+      ],
+      "cropped_size": [
+        30,
+        36
+      ],
+      "restored_size": [
+        30,
+        36
+      ],
+      "files": {
+        "cropped": "cropped/baojiNumber/baojiNumber0006.png",
+        "restored": "restored/baojiNumber/baojiNumber0006.png"
+      },
+      "file": "baojiNumber/baojiNumber0006.png",
+      "sha256": "74d8ce0be5d129835ed55c0404d08c6b29e5797f07b3569d468e84c9cf492633"
+    },
+    {
+      "group": "baojiNumber",
+      "label": "暴击数字",
+      "index": 7,
+      "digit": 7,
+      "name": "baojiNumber0007",
+      "source_atlas": "mission2",
+      "atlas_fields": {
+        "name": "baojiNumber0007",
+        "x": "567",
+        "y": "0",
+        "width": "30",
+        "height": "36",
+        "pivotX": "15",
+        "pivotY": "17.5"
+      },
+      "pivot": [
+        15.0,
+        17.5
+      ],
+      "cropped_size": [
+        30,
+        36
+      ],
+      "restored_size": [
+        30,
+        36
+      ],
+      "files": {
+        "cropped": "cropped/baojiNumber/baojiNumber0007.png",
+        "restored": "restored/baojiNumber/baojiNumber0007.png"
+      },
+      "file": "baojiNumber/baojiNumber0007.png",
+      "sha256": "b338f59509bbd094511a235a3847f289b323c2f8ec320e0382b8b07a53baafb2"
+    },
+    {
+      "group": "baojiNumber",
+      "label": "暴击数字",
+      "index": 8,
+      "digit": 8,
+      "name": "baojiNumber0008",
+      "source_atlas": "mission2",
+      "atlas_fields": {
+        "name": "baojiNumber0008",
+        "x": "597",
+        "y": "0",
+        "width": "30",
+        "height": "36",
+        "pivotX": "15",
+        "pivotY": "17.5"
+      },
+      "pivot": [
+        15.0,
+        17.5
+      ],
+      "cropped_size": [
+        30,
+        36
+      ],
+      "restored_size": [
+        30,
+        36
+      ],
+      "files": {
+        "cropped": "cropped/baojiNumber/baojiNumber0008.png",
+        "restored": "restored/baojiNumber/baojiNumber0008.png"
+      },
+      "file": "baojiNumber/baojiNumber0008.png",
+      "sha256": "f7f8de5546cf5ae4a0513b47c2b40434771f690db32be8db7d2929bce0dc6b2a"
+    },
+    {
+      "group": "baojiNumber",
+      "label": "暴击数字",
+      "index": 9,
+      "digit": 9,
+      "name": "baojiNumber0009",
+      "source_atlas": "mission2",
+      "atlas_fields": {
+        "name": "baojiNumber0009",
+        "x": "627",
+        "y": "0",
+        "width": "30",
+        "height": "36",
+        "pivotX": "15",
+        "pivotY": "17.5"
+      },
+      "pivot": [
+        15.0,
+        17.5
+      ],
+      "cropped_size": [
+        30,
+        36
+      ],
+      "restored_size": [
+        30,
+        36
+      ],
+      "files": {
+        "cropped": "cropped/baojiNumber/baojiNumber0009.png",
+        "restored": "restored/baojiNumber/baojiNumber0009.png"
+      },
+      "file": "baojiNumber/baojiNumber0009.png",
+      "sha256": "b759aa11c0b14e341a1a3f0c4379e085dfef99b182ca9d4dc7294dfa56c4a59a"
+    },
+    {
+      "group": "baojiNumber2",
+      "label": "暴击数字第二样式",
+      "index": 0,
+      "digit": 0,
+      "name": "baojiNumber20000",
+      "source_atlas": "mission2",
+      "atlas_fields": {
+        "name": "baojiNumber20000",
+        "x": "657",
+        "y": "0",
+        "width": "30",
+        "height": "36",
+        "pivotX": "15",
+        "pivotY": "17.5"
+      },
+      "pivot": [
+        15.0,
+        17.5
+      ],
+      "cropped_size": [
+        30,
+        36
+      ],
+      "restored_size": [
+        30,
+        36
+      ],
+      "files": {
+        "cropped": "cropped/baojiNumber2/baojiNumber20000.png",
+        "restored": "restored/baojiNumber2/baojiNumber20000.png"
+      },
+      "file": "baojiNumber2/baojiNumber20000.png",
+      "sha256": "8bca997648cd971714f56e2647dd59c0012d6472e5e88fb68ed31086e1a0d50e"
+    },
+    {
+      "group": "baojiNumber2",
+      "label": "暴击数字第二样式",
+      "index": 1,
+      "digit": 1,
+      "name": "baojiNumber20001",
+      "source_atlas": "mission2",
+      "atlas_fields": {
+        "name": "baojiNumber20001",
+        "x": "687",
+        "y": "0",
+        "width": "30",
+        "height": "36",
+        "pivotX": "15",
+        "pivotY": "17.5"
+      },
+      "pivot": [
+        15.0,
+        17.5
+      ],
+      "cropped_size": [
+        30,
+        36
+      ],
+      "restored_size": [
+        30,
+        36
+      ],
+      "files": {
+        "cropped": "cropped/baojiNumber2/baojiNumber20001.png",
+        "restored": "restored/baojiNumber2/baojiNumber20001.png"
+      },
+      "file": "baojiNumber2/baojiNumber20001.png",
+      "sha256": "a46228cf800a6b1e10d819616c3ee2185784a2f19c55f549e88bbc8034c95f55"
+    },
+    {
+      "group": "baojiNumber2",
+      "label": "暴击数字第二样式",
+      "index": 2,
+      "digit": 2,
+      "name": "baojiNumber20002",
+      "source_atlas": "mission2",
+      "atlas_fields": {
+        "name": "baojiNumber20002",
+        "x": "717",
+        "y": "0",
+        "width": "30",
+        "height": "36",
+        "pivotX": "15",
+        "pivotY": "17.5"
+      },
+      "pivot": [
+        15.0,
+        17.5
+      ],
+      "cropped_size": [
+        30,
+        36
+      ],
+      "restored_size": [
+        30,
+        36
+      ],
+      "files": {
+        "cropped": "cropped/baojiNumber2/baojiNumber20002.png",
+        "restored": "restored/baojiNumber2/baojiNumber20002.png"
+      },
+      "file": "baojiNumber2/baojiNumber20002.png",
+      "sha256": "43fdf056b0191288e0c2a7a311fc129b6b4d9f29aff1ace9be371a51786ef23d"
+    },
+    {
+      "group": "baojiNumber2",
+      "label": "暴击数字第二样式",
+      "index": 3,
+      "digit": 3,
+      "name": "baojiNumber20003",
+      "source_atlas": "mission2",
+      "atlas_fields": {
+        "name": "baojiNumber20003",
+        "x": "747",
+        "y": "0",
+        "width": "30",
+        "height": "36",
+        "pivotX": "15",
+        "pivotY": "17.5"
+      },
+      "pivot": [
+        15.0,
+        17.5
+      ],
+      "cropped_size": [
+        30,
+        36
+      ],
+      "restored_size": [
+        30,
+        36
+      ],
+      "files": {
+        "cropped": "cropped/baojiNumber2/baojiNumber20003.png",
+        "restored": "restored/baojiNumber2/baojiNumber20003.png"
+      },
+      "file": "baojiNumber2/baojiNumber20003.png",
+      "sha256": "e951207b83fe4d1492749355ed633fcbe1f27d0dd77a88df8e1c58f67f534dfa"
+    },
+    {
+      "group": "baojiNumber2",
+      "label": "暴击数字第二样式",
+      "index": 4,
+      "digit": 4,
+      "name": "baojiNumber20004",
+      "source_atlas": "mission2",
+      "atlas_fields": {
+        "name": "baojiNumber20004",
+        "x": "777",
+        "y": "0",
+        "width": "30",
+        "height": "36",
+        "pivotX": "15",
+        "pivotY": "17.5"
+      },
+      "pivot": [
+        15.0,
+        17.5
+      ],
+      "cropped_size": [
+        30,
+        36
+      ],
+      "restored_size": [
+        30,
+        36
+      ],
+      "files": {
+        "cropped": "cropped/baojiNumber2/baojiNumber20004.png",
+        "restored": "restored/baojiNumber2/baojiNumber20004.png"
+      },
+      "file": "baojiNumber2/baojiNumber20004.png",
+      "sha256": "2b51501b2f55de3e39b789187f2cc64a68c8ca5d8f14d857b9bc4d23aee4f2fa"
+    },
+    {
+      "group": "baojiNumber2",
+      "label": "暴击数字第二样式",
+      "index": 5,
+      "digit": 5,
+      "name": "baojiNumber20005",
+      "source_atlas": "mission2",
+      "atlas_fields": {
+        "name": "baojiNumber20005",
+        "x": "807",
+        "y": "0",
+        "width": "30",
+        "height": "36",
+        "pivotX": "15",
+        "pivotY": "17.5"
+      },
+      "pivot": [
+        15.0,
+        17.5
+      ],
+      "cropped_size": [
+        30,
+        36
+      ],
+      "restored_size": [
+        30,
+        36
+      ],
+      "files": {
+        "cropped": "cropped/baojiNumber2/baojiNumber20005.png",
+        "restored": "restored/baojiNumber2/baojiNumber20005.png"
+      },
+      "file": "baojiNumber2/baojiNumber20005.png",
+      "sha256": "42629b038a7afca24a6ea13181fd777d4df1d6baa87f9c44c98d92420b65744d"
+    },
+    {
+      "group": "baojiNumber2",
+      "label": "暴击数字第二样式",
+      "index": 6,
+      "digit": 6,
+      "name": "baojiNumber20006",
+      "source_atlas": "mission2",
+      "atlas_fields": {
+        "name": "baojiNumber20006",
+        "x": "837",
+        "y": "0",
+        "width": "30",
+        "height": "36",
+        "pivotX": "15",
+        "pivotY": "17.5"
+      },
+      "pivot": [
+        15.0,
+        17.5
+      ],
+      "cropped_size": [
+        30,
+        36
+      ],
+      "restored_size": [
+        30,
+        36
+      ],
+      "files": {
+        "cropped": "cropped/baojiNumber2/baojiNumber20006.png",
+        "restored": "restored/baojiNumber2/baojiNumber20006.png"
+      },
+      "file": "baojiNumber2/baojiNumber20006.png",
+      "sha256": "c617e01491d2bd410dcdf9e098ce92898aa41f845ef27c9a8e71fa4a9bc7c9ac"
+    },
+    {
+      "group": "baojiNumber2",
+      "label": "暴击数字第二样式",
+      "index": 7,
+      "digit": 7,
+      "name": "baojiNumber20007",
+      "source_atlas": "mission2",
+      "atlas_fields": {
+        "name": "baojiNumber20007",
+        "x": "867",
+        "y": "0",
+        "width": "30",
+        "height": "36",
+        "pivotX": "15",
+        "pivotY": "17.5"
+      },
+      "pivot": [
+        15.0,
+        17.5
+      ],
+      "cropped_size": [
+        30,
+        36
+      ],
+      "restored_size": [
+        30,
+        36
+      ],
+      "files": {
+        "cropped": "cropped/baojiNumber2/baojiNumber20007.png",
+        "restored": "restored/baojiNumber2/baojiNumber20007.png"
+      },
+      "file": "baojiNumber2/baojiNumber20007.png",
+      "sha256": "da0b56096af74bd35a3f205206ef97ea7d28ccc10d113497ae08637928f60f61"
+    },
+    {
+      "group": "baojiNumber2",
+      "label": "暴击数字第二样式",
+      "index": 8,
+      "digit": 8,
+      "name": "baojiNumber20008",
+      "source_atlas": "mission2",
+      "atlas_fields": {
+        "name": "baojiNumber20008",
+        "x": "897",
+        "y": "0",
+        "width": "30",
+        "height": "36",
+        "pivotX": "15",
+        "pivotY": "17.5"
+      },
+      "pivot": [
+        15.0,
+        17.5
+      ],
+      "cropped_size": [
+        30,
+        36
+      ],
+      "restored_size": [
+        30,
+        36
+      ],
+      "files": {
+        "cropped": "cropped/baojiNumber2/baojiNumber20008.png",
+        "restored": "restored/baojiNumber2/baojiNumber20008.png"
+      },
+      "file": "baojiNumber2/baojiNumber20008.png",
+      "sha256": "96106b7767f0e43f12f23fc045e821f92c754e5c1cd1747de4e637f188122f02"
+    },
+    {
+      "group": "baojiNumber2",
+      "label": "暴击数字第二样式",
+      "index": 9,
+      "digit": 9,
+      "name": "baojiNumber20009",
+      "source_atlas": "mission2",
+      "atlas_fields": {
+        "name": "baojiNumber20009",
+        "x": "927",
+        "y": "0",
+        "width": "30",
+        "height": "36",
+        "pivotX": "15",
+        "pivotY": "17.5"
+      },
+      "pivot": [
+        15.0,
+        17.5
+      ],
+      "cropped_size": [
+        30,
+        36
+      ],
+      "restored_size": [
+        30,
+        36
+      ],
+      "files": {
+        "cropped": "cropped/baojiNumber2/baojiNumber20009.png",
+        "restored": "restored/baojiNumber2/baojiNumber20009.png"
+      },
+      "file": "baojiNumber2/baojiNumber20009.png",
+      "sha256": "1ec6caedbbe04ff73761fee76e1cde918a2a7f7c6288da5c087ad40fe7366e16"
+    },
+    {
+      "group": "baoji",
+      "label": "暴击标识",
+      "index": 0,
+      "digit": null,
+      "name": "baoji0000",
+      "source_atlas": "mission2",
+      "atlas_fields": {
+        "name": "baoji0000",
+        "x": "222",
+        "y": "0",
+        "width": "68",
+        "height": "40",
+        "pivotX": "33.5",
+        "pivotY": "19.5"
+      },
+      "pivot": [
+        33.5,
+        19.5
+      ],
+      "cropped_size": [
+        68,
+        40
+      ],
+      "restored_size": [
+        68,
+        40
+      ],
+      "files": {
+        "cropped": "cropped/baoji/baoji0000.png",
+        "restored": "restored/baoji/baoji0000.png"
+      },
+      "file": "baoji/baoji0000.png",
+      "sha256": "c61828201187dd612e97f86bc49837fa4f708bdfd5f76e05994be8dca0415923"
+    },
+    {
+      "group": "baoji",
+      "label": "暴击标识",
+      "index": 1,
+      "digit": null,
+      "name": "baoji0001",
+      "source_atlas": "mission2",
+      "atlas_fields": {
+        "name": "baoji0001",
+        "x": "222",
+        "y": "0",
+        "width": "68",
+        "height": "40",
+        "pivotX": "33.5",
+        "pivotY": "19.5"
+      },
+      "pivot": [
+        33.5,
+        19.5
+      ],
+      "cropped_size": [
+        68,
+        40
+      ],
+      "restored_size": [
+        68,
+        40
+      ],
+      "files": {
+        "cropped": "cropped/baoji/baoji0001.png",
+        "restored": "restored/baoji/baoji0001.png"
+      },
+      "file": "baoji/baoji0001.png",
+      "sha256": "c61828201187dd612e97f86bc49837fa4f708bdfd5f76e05994be8dca0415923"
+    },
+    {
+      "group": "baoji",
+      "label": "暴击标识",
+      "index": 2,
+      "digit": null,
+      "name": "baoji0002",
+      "source_atlas": "mission2",
+      "atlas_fields": {
+        "name": "baoji0002",
+        "x": "222",
+        "y": "0",
+        "width": "68",
+        "height": "40",
+        "pivotX": "33.5",
+        "pivotY": "19.5"
+      },
+      "pivot": [
+        33.5,
+        19.5
+      ],
+      "cropped_size": [
+        68,
+        40
+      ],
+      "restored_size": [
+        68,
+        40
+      ],
+      "files": {
+        "cropped": "cropped/baoji/baoji0002.png",
+        "restored": "restored/baoji/baoji0002.png"
+      },
+      "file": "baoji/baoji0002.png",
+      "sha256": "c61828201187dd612e97f86bc49837fa4f708bdfd5f76e05994be8dca0415923"
+    },
+    {
+      "group": "baoji",
+      "label": "暴击标识",
+      "index": 3,
+      "digit": null,
+      "name": "baoji0003",
+      "source_atlas": "mission2",
+      "atlas_fields": {
+        "name": "baoji0003",
+        "x": "222",
+        "y": "0",
+        "width": "68",
+        "height": "40",
+        "pivotX": "33.5",
+        "pivotY": "19.5"
+      },
+      "pivot": [
+        33.5,
+        19.5
+      ],
+      "cropped_size": [
+        68,
+        40
+      ],
+      "restored_size": [
+        68,
+        40
+      ],
+      "files": {
+        "cropped": "cropped/baoji/baoji0003.png",
+        "restored": "restored/baoji/baoji0003.png"
+      },
+      "file": "baoji/baoji0003.png",
+      "sha256": "c61828201187dd612e97f86bc49837fa4f708bdfd5f76e05994be8dca0415923"
+    },
+    {
+      "group": "baoji",
+      "label": "暴击标识",
+      "index": 4,
+      "digit": null,
+      "name": "baoji0004",
+      "source_atlas": "mission2",
+      "atlas_fields": {
+        "name": "baoji0004",
+        "x": "222",
+        "y": "0",
+        "width": "68",
+        "height": "40",
+        "pivotX": "33.5",
+        "pivotY": "19.5"
+      },
+      "pivot": [
+        33.5,
+        19.5
+      ],
+      "cropped_size": [
+        68,
+        40
+      ],
+      "restored_size": [
+        68,
+        40
+      ],
+      "files": {
+        "cropped": "cropped/baoji/baoji0004.png",
+        "restored": "restored/baoji/baoji0004.png"
+      },
+      "file": "baoji/baoji0004.png",
+      "sha256": "c61828201187dd612e97f86bc49837fa4f708bdfd5f76e05994be8dca0415923"
+    },
+    {
+      "group": "baoji",
+      "label": "暴击标识",
+      "index": 5,
+      "digit": null,
+      "name": "baoji0005",
+      "source_atlas": "mission2",
+      "atlas_fields": {
+        "name": "baoji0005",
+        "x": "222",
+        "y": "0",
+        "width": "68",
+        "height": "40",
+        "pivotX": "33.5",
+        "pivotY": "19.5"
+      },
+      "pivot": [
+        33.5,
+        19.5
+      ],
+      "cropped_size": [
+        68,
+        40
+      ],
+      "restored_size": [
+        68,
+        40
+      ],
+      "files": {
+        "cropped": "cropped/baoji/baoji0005.png",
+        "restored": "restored/baoji/baoji0005.png"
+      },
+      "file": "baoji/baoji0005.png",
+      "sha256": "c61828201187dd612e97f86bc49837fa4f708bdfd5f76e05994be8dca0415923"
+    },
+    {
+      "group": "baoji",
+      "label": "暴击标识",
+      "index": 6,
+      "digit": null,
+      "name": "baoji0006",
+      "source_atlas": "mission2",
+      "atlas_fields": {
+        "name": "baoji0006",
+        "x": "222",
+        "y": "0",
+        "width": "68",
+        "height": "40",
+        "pivotX": "33.5",
+        "pivotY": "19.5"
+      },
+      "pivot": [
+        33.5,
+        19.5
+      ],
+      "cropped_size": [
+        68,
+        40
+      ],
+      "restored_size": [
+        68,
+        40
+      ],
+      "files": {
+        "cropped": "cropped/baoji/baoji0006.png",
+        "restored": "restored/baoji/baoji0006.png"
+      },
+      "file": "baoji/baoji0006.png",
+      "sha256": "c61828201187dd612e97f86bc49837fa4f708bdfd5f76e05994be8dca0415923"
+    },
+    {
+      "group": "baoji",
+      "label": "暴击标识",
+      "index": 7,
+      "digit": null,
+      "name": "baoji0007",
+      "source_atlas": "mission2",
+      "atlas_fields": {
+        "name": "baoji0007",
+        "x": "222",
+        "y": "0",
+        "width": "68",
+        "height": "40",
+        "pivotX": "33.5",
+        "pivotY": "19.5"
+      },
+      "pivot": [
+        33.5,
+        19.5
+      ],
+      "cropped_size": [
+        68,
+        40
+      ],
+      "restored_size": [
+        68,
+        40
+      ],
+      "files": {
+        "cropped": "cropped/baoji/baoji0007.png",
+        "restored": "restored/baoji/baoji0007.png"
+      },
+      "file": "baoji/baoji0007.png",
+      "sha256": "c61828201187dd612e97f86bc49837fa4f708bdfd5f76e05994be8dca0415923"
+    },
+    {
+      "group": "baoji",
+      "label": "暴击标识",
+      "index": 8,
+      "digit": null,
+      "name": "baoji0008",
+      "source_atlas": "mission2",
+      "atlas_fields": {
+        "name": "baoji0008",
+        "x": "222",
+        "y": "0",
+        "width": "68",
+        "height": "40",
+        "pivotX": "33.5",
+        "pivotY": "19.5"
+      },
+      "pivot": [
+        33.5,
+        19.5
+      ],
+      "cropped_size": [
+        68,
+        40
+      ],
+      "restored_size": [
+        68,
+        40
+      ],
+      "files": {
+        "cropped": "cropped/baoji/baoji0008.png",
+        "restored": "restored/baoji/baoji0008.png"
+      },
+      "file": "baoji/baoji0008.png",
+      "sha256": "c61828201187dd612e97f86bc49837fa4f708bdfd5f76e05994be8dca0415923"
+    },
+    {
+      "group": "baoji",
+      "label": "暴击标识",
+      "index": 9,
+      "digit": null,
+      "name": "baoji0009",
+      "source_atlas": "mission2",
+      "atlas_fields": {
+        "name": "baoji0009",
+        "x": "222",
+        "y": "0",
+        "width": "68",
+        "height": "40",
+        "pivotX": "33.5",
+        "pivotY": "19.5"
+      },
+      "pivot": [
+        33.5,
+        19.5
+      ],
+      "cropped_size": [
+        68,
+        40
+      ],
+      "restored_size": [
+        68,
+        40
+      ],
+      "files": {
+        "cropped": "cropped/baoji/baoji0009.png",
+        "restored": "restored/baoji/baoji0009.png"
+      },
+      "file": "baoji/baoji0009.png",
+      "sha256": "c61828201187dd612e97f86bc49837fa4f708bdfd5f76e05994be8dca0415923"
+    },
+    {
+      "group": "baoji",
+      "label": "暴击标识",
+      "index": 10,
+      "digit": null,
+      "name": "baoji0010",
+      "source_atlas": "mission2",
+      "atlas_fields": {
+        "name": "baoji0010",
+        "x": "222",
+        "y": "0",
+        "width": "68",
+        "height": "40",
+        "pivotX": "33.5",
+        "pivotY": "19.5"
+      },
+      "pivot": [
+        33.5,
+        19.5
+      ],
+      "cropped_size": [
+        68,
+        40
+      ],
+      "restored_size": [
+        68,
+        40
+      ],
+      "files": {
+        "cropped": "cropped/baoji/baoji0010.png",
+        "restored": "restored/baoji/baoji0010.png"
+      },
+      "file": "baoji/baoji0010.png",
+      "sha256": "c61828201187dd612e97f86bc49837fa4f708bdfd5f76e05994be8dca0415923"
+    },
+    {
+      "group": "baoji",
+      "label": "暴击标识",
+      "index": 11,
+      "digit": null,
+      "name": "baoji0011",
+      "source_atlas": "mission2",
+      "atlas_fields": {
+        "name": "baoji0011",
+        "x": "222",
+        "y": "0",
+        "width": "68",
+        "height": "40",
+        "pivotX": "33.5",
+        "pivotY": "19.5"
+      },
+      "pivot": [
+        33.5,
+        19.5
+      ],
+      "cropped_size": [
+        68,
+        40
+      ],
+      "restored_size": [
+        68,
+        40
+      ],
+      "files": {
+        "cropped": "cropped/baoji/baoji0011.png",
+        "restored": "restored/baoji/baoji0011.png"
+      },
+      "file": "baoji/baoji0011.png",
+      "sha256": "c61828201187dd612e97f86bc49837fa4f708bdfd5f76e05994be8dca0415923"
+    },
+    {
+      "group": "baoji",
+      "label": "暴击标识",
+      "index": 12,
+      "digit": null,
+      "name": "baoji0012",
+      "source_atlas": "mission2",
+      "atlas_fields": {
+        "name": "baoji0012",
+        "x": "222",
+        "y": "0",
+        "width": "68",
+        "height": "40",
+        "pivotX": "33.5",
+        "pivotY": "19.5"
+      },
+      "pivot": [
+        33.5,
+        19.5
+      ],
+      "cropped_size": [
+        68,
+        40
+      ],
+      "restored_size": [
+        68,
+        40
+      ],
+      "files": {
+        "cropped": "cropped/baoji/baoji0012.png",
+        "restored": "restored/baoji/baoji0012.png"
+      },
+      "file": "baoji/baoji0012.png",
+      "sha256": "c61828201187dd612e97f86bc49837fa4f708bdfd5f76e05994be8dca0415923"
+    },
+    {
+      "group": "baoji",
+      "label": "暴击标识",
+      "index": 13,
+      "digit": null,
+      "name": "baoji0013",
+      "source_atlas": "mission2",
+      "atlas_fields": {
+        "name": "baoji0013",
+        "x": "222",
+        "y": "0",
+        "width": "68",
+        "height": "40",
+        "pivotX": "33.5",
+        "pivotY": "19.5"
+      },
+      "pivot": [
+        33.5,
+        19.5
+      ],
+      "cropped_size": [
+        68,
+        40
+      ],
+      "restored_size": [
+        68,
+        40
+      ],
+      "files": {
+        "cropped": "cropped/baoji/baoji0013.png",
+        "restored": "restored/baoji/baoji0013.png"
+      },
+      "file": "baoji/baoji0013.png",
+      "sha256": "c61828201187dd612e97f86bc49837fa4f708bdfd5f76e05994be8dca0415923"
+    },
+    {
+      "group": "baoji",
+      "label": "暴击标识",
+      "index": 14,
+      "digit": null,
+      "name": "baoji0014",
+      "source_atlas": "mission2",
+      "atlas_fields": {
+        "name": "baoji0014",
+        "x": "222",
+        "y": "0",
+        "width": "68",
+        "height": "40",
+        "pivotX": "33.5",
+        "pivotY": "19.5"
+      },
+      "pivot": [
+        33.5,
+        19.5
+      ],
+      "cropped_size": [
+        68,
+        40
+      ],
+      "restored_size": [
+        68,
+        40
+      ],
+      "files": {
+        "cropped": "cropped/baoji/baoji0014.png",
+        "restored": "restored/baoji/baoji0014.png"
+      },
+      "file": "baoji/baoji0014.png",
+      "sha256": "c61828201187dd612e97f86bc49837fa4f708bdfd5f76e05994be8dca0415923"
+    },
+    {
+      "group": "baoji",
+      "label": "暴击标识",
+      "index": 15,
+      "digit": null,
+      "name": "baoji0015",
+      "source_atlas": "mission2",
+      "atlas_fields": {
+        "name": "baoji0015",
+        "x": "222",
+        "y": "0",
+        "width": "68",
+        "height": "40",
+        "pivotX": "33.5",
+        "pivotY": "19.5"
+      },
+      "pivot": [
+        33.5,
+        19.5
+      ],
+      "cropped_size": [
+        68,
+        40
+      ],
+      "restored_size": [
+        68,
+        40
+      ],
+      "files": {
+        "cropped": "cropped/baoji/baoji0015.png",
+        "restored": "restored/baoji/baoji0015.png"
+      },
+      "file": "baoji/baoji0015.png",
+      "sha256": "c61828201187dd612e97f86bc49837fa4f708bdfd5f76e05994be8dca0415923"
+    },
+    {
+      "group": "baoji",
+      "label": "暴击标识",
+      "index": 16,
+      "digit": null,
+      "name": "baoji0016",
+      "source_atlas": "mission2",
+      "atlas_fields": {
+        "name": "baoji0016",
+        "x": "222",
+        "y": "0",
+        "width": "68",
+        "height": "40",
+        "pivotX": "33.5",
+        "pivotY": "19.5"
+      },
+      "pivot": [
+        33.5,
+        19.5
+      ],
+      "cropped_size": [
+        68,
+        40
+      ],
+      "restored_size": [
+        68,
+        40
+      ],
+      "files": {
+        "cropped": "cropped/baoji/baoji0016.png",
+        "restored": "restored/baoji/baoji0016.png"
+      },
+      "file": "baoji/baoji0016.png",
+      "sha256": "c61828201187dd612e97f86bc49837fa4f708bdfd5f76e05994be8dca0415923"
+    },
+    {
+      "group": "baoji",
+      "label": "暴击标识",
+      "index": 17,
+      "digit": null,
+      "name": "baoji0017",
+      "source_atlas": "mission2",
+      "atlas_fields": {
+        "name": "baoji0017",
+        "x": "222",
+        "y": "0",
+        "width": "68",
+        "height": "40",
+        "pivotX": "33.5",
+        "pivotY": "19.5"
+      },
+      "pivot": [
+        33.5,
+        19.5
+      ],
+      "cropped_size": [
+        68,
+        40
+      ],
+      "restored_size": [
+        68,
+        40
+      ],
+      "files": {
+        "cropped": "cropped/baoji/baoji0017.png",
+        "restored": "restored/baoji/baoji0017.png"
+      },
+      "file": "baoji/baoji0017.png",
+      "sha256": "c61828201187dd612e97f86bc49837fa4f708bdfd5f76e05994be8dca0415923"
+    },
+    {
+      "group": "baoji",
+      "label": "暴击标识",
+      "index": 18,
+      "digit": null,
+      "name": "baoji0018",
+      "source_atlas": "mission2",
+      "atlas_fields": {
+        "name": "baoji0018",
+        "x": "222",
+        "y": "0",
+        "width": "68",
+        "height": "40",
+        "pivotX": "33.5",
+        "pivotY": "19.5"
+      },
+      "pivot": [
+        33.5,
+        19.5
+      ],
+      "cropped_size": [
+        68,
+        40
+      ],
+      "restored_size": [
+        68,
+        40
+      ],
+      "files": {
+        "cropped": "cropped/baoji/baoji0018.png",
+        "restored": "restored/baoji/baoji0018.png"
+      },
+      "file": "baoji/baoji0018.png",
+      "sha256": "c61828201187dd612e97f86bc49837fa4f708bdfd5f76e05994be8dca0415923"
+    },
+    {
+      "group": "baoji",
+      "label": "暴击标识",
+      "index": 19,
+      "digit": null,
+      "name": "baoji0019",
+      "source_atlas": "mission2",
+      "atlas_fields": {
+        "name": "baoji0019",
+        "x": "222",
+        "y": "0",
+        "width": "68",
+        "height": "40",
+        "pivotX": "33.5",
+        "pivotY": "19.5"
+      },
+      "pivot": [
+        33.5,
+        19.5
+      ],
+      "cropped_size": [
+        68,
+        40
+      ],
+      "restored_size": [
+        68,
+        40
+      ],
+      "files": {
+        "cropped": "cropped/baoji/baoji0019.png",
+        "restored": "restored/baoji/baoji0019.png"
+      },
+      "file": "baoji/baoji0019.png",
+      "sha256": "c61828201187dd612e97f86bc49837fa4f708bdfd5f76e05994be8dca0415923"
+    },
+    {
+      "group": "baoji",
+      "label": "暴击标识",
+      "index": 20,
+      "digit": null,
+      "name": "baoji0020",
+      "source_atlas": "mission2",
+      "atlas_fields": {
+        "name": "baoji0020",
+        "x": "222",
+        "y": "0",
+        "width": "68",
+        "height": "40",
+        "pivotX": "33.5",
+        "pivotY": "19.5"
+      },
+      "pivot": [
+        33.5,
+        19.5
+      ],
+      "cropped_size": [
+        68,
+        40
+      ],
+      "restored_size": [
+        68,
+        40
+      ],
+      "files": {
+        "cropped": "cropped/baoji/baoji0020.png",
+        "restored": "restored/baoji/baoji0020.png"
+      },
+      "file": "baoji/baoji0020.png",
+      "sha256": "c61828201187dd612e97f86bc49837fa4f708bdfd5f76e05994be8dca0415923"
+    },
+    {
+      "group": "baoji2",
+      "label": "暴击标识第二样式",
+      "index": 0,
+      "digit": null,
+      "name": "baoji20000",
+      "source_atlas": "mission2",
+      "atlas_fields": {
+        "name": "baoji20000",
+        "x": "290",
+        "y": "0",
+        "width": "67",
+        "height": "40",
+        "pivotX": "33",
+        "pivotY": "19.05"
+      },
+      "pivot": [
+        33.0,
+        19.05
+      ],
+      "cropped_size": [
+        67,
+        40
+      ],
+      "restored_size": [
+        67,
+        40
+      ],
+      "files": {
+        "cropped": "cropped/baoji2/baoji20000.png",
+        "restored": "restored/baoji2/baoji20000.png"
+      },
+      "file": "baoji2/baoji20000.png",
+      "sha256": "df01cda22a9f055256fb29b0ff3d5a2e2a3c09df14b04e11a8be002ada156289"
+    },
+    {
+      "group": "real_bleedNumber",
+      "label": "真实伤害",
+      "index": 0,
+      "digit": 0,
+      "name": "real_bleedNumber0000",
+      "source_atlas": "mission2",
+      "atlas_fields": {
+        "name": "real_bleedNumber0000",
+        "x": "367",
+        "y": "1443",
+        "width": "26",
+        "height": "30",
+        "pivotX": "13",
+        "pivotY": "15"
+      },
+      "pivot": [
+        13.0,
+        15.0
+      ],
+      "cropped_size": [
+        26,
+        30
+      ],
+      "restored_size": [
+        26,
+        30
+      ],
+      "files": {
+        "cropped": "cropped/real_bleedNumber/real_bleedNumber0000.png",
+        "restored": "restored/real_bleedNumber/real_bleedNumber0000.png"
+      },
+      "file": "real_bleedNumber/real_bleedNumber0000.png",
+      "sha256": "c8ab01637bd8d28f50ba5cae6f8a167154ce6367a93d4a692d01feb52f4eedcb"
+    },
+    {
+      "group": "real_bleedNumber",
+      "label": "真实伤害",
+      "index": 1,
+      "digit": 1,
+      "name": "real_bleedNumber0001",
+      "source_atlas": "mission2",
+      "atlas_fields": {
+        "name": "real_bleedNumber0001",
+        "x": "393",
+        "y": "1443",
+        "width": "26",
+        "height": "30",
+        "pivotX": "13",
+        "pivotY": "15"
+      },
+      "pivot": [
+        13.0,
+        15.0
+      ],
+      "cropped_size": [
+        26,
+        30
+      ],
+      "restored_size": [
+        26,
+        30
+      ],
+      "files": {
+        "cropped": "cropped/real_bleedNumber/real_bleedNumber0001.png",
+        "restored": "restored/real_bleedNumber/real_bleedNumber0001.png"
+      },
+      "file": "real_bleedNumber/real_bleedNumber0001.png",
+      "sha256": "de00cc440cdfd170297ba2a7c5a5754758d26e3cdedc06ed57b06cadc154eeba"
+    },
+    {
+      "group": "real_bleedNumber",
+      "label": "真实伤害",
+      "index": 2,
+      "digit": 2,
+      "name": "real_bleedNumber0002",
+      "source_atlas": "mission2",
+      "atlas_fields": {
+        "name": "real_bleedNumber0002",
+        "x": "419",
+        "y": "1443",
+        "width": "26",
+        "height": "30",
+        "pivotX": "13",
+        "pivotY": "15"
+      },
+      "pivot": [
+        13.0,
+        15.0
+      ],
+      "cropped_size": [
+        26,
+        30
+      ],
+      "restored_size": [
+        26,
+        30
+      ],
+      "files": {
+        "cropped": "cropped/real_bleedNumber/real_bleedNumber0002.png",
+        "restored": "restored/real_bleedNumber/real_bleedNumber0002.png"
+      },
+      "file": "real_bleedNumber/real_bleedNumber0002.png",
+      "sha256": "23adb09320af5b21f1182c74aaf30ea848539ae511eaf02bc6f9c6f07e813907"
+    },
+    {
+      "group": "real_bleedNumber",
+      "label": "真实伤害",
+      "index": 3,
+      "digit": 3,
+      "name": "real_bleedNumber0003",
+      "source_atlas": "mission2",
+      "atlas_fields": {
+        "name": "real_bleedNumber0003",
+        "x": "445",
+        "y": "1443",
+        "width": "26",
+        "height": "30",
+        "pivotX": "13",
+        "pivotY": "15"
+      },
+      "pivot": [
+        13.0,
+        15.0
+      ],
+      "cropped_size": [
+        26,
+        30
+      ],
+      "restored_size": [
+        26,
+        30
+      ],
+      "files": {
+        "cropped": "cropped/real_bleedNumber/real_bleedNumber0003.png",
+        "restored": "restored/real_bleedNumber/real_bleedNumber0003.png"
+      },
+      "file": "real_bleedNumber/real_bleedNumber0003.png",
+      "sha256": "a47bdd70efb4b2ae5955c361d51ff68cc5a69263d0257721f42c6aff53ea544e"
+    },
+    {
+      "group": "real_bleedNumber",
+      "label": "真实伤害",
+      "index": 4,
+      "digit": 4,
+      "name": "real_bleedNumber0004",
+      "source_atlas": "mission2",
+      "atlas_fields": {
+        "name": "real_bleedNumber0004",
+        "x": "471",
+        "y": "1443",
+        "width": "26",
+        "height": "30",
+        "pivotX": "13",
+        "pivotY": "15"
+      },
+      "pivot": [
+        13.0,
+        15.0
+      ],
+      "cropped_size": [
+        26,
+        30
+      ],
+      "restored_size": [
+        26,
+        30
+      ],
+      "files": {
+        "cropped": "cropped/real_bleedNumber/real_bleedNumber0004.png",
+        "restored": "restored/real_bleedNumber/real_bleedNumber0004.png"
+      },
+      "file": "real_bleedNumber/real_bleedNumber0004.png",
+      "sha256": "14e7d6619411307fab6d9be14c1a6fc0f83cf464145a06e4b37e6a1332cf5a1f"
+    },
+    {
+      "group": "real_bleedNumber",
+      "label": "真实伤害",
+      "index": 5,
+      "digit": 5,
+      "name": "real_bleedNumber0005",
+      "source_atlas": "mission2",
+      "atlas_fields": {
+        "name": "real_bleedNumber0005",
+        "x": "497",
+        "y": "1443",
+        "width": "26",
+        "height": "30",
+        "pivotX": "13",
+        "pivotY": "15"
+      },
+      "pivot": [
+        13.0,
+        15.0
+      ],
+      "cropped_size": [
+        26,
+        30
+      ],
+      "restored_size": [
+        26,
+        30
+      ],
+      "files": {
+        "cropped": "cropped/real_bleedNumber/real_bleedNumber0005.png",
+        "restored": "restored/real_bleedNumber/real_bleedNumber0005.png"
+      },
+      "file": "real_bleedNumber/real_bleedNumber0005.png",
+      "sha256": "099f63e444582cd3a7dea7dff21eb22e2697524ff8f69b152507380abd368e50"
+    },
+    {
+      "group": "real_bleedNumber",
+      "label": "真实伤害",
+      "index": 6,
+      "digit": 6,
+      "name": "real_bleedNumber0006",
+      "source_atlas": "mission2",
+      "atlas_fields": {
+        "name": "real_bleedNumber0006",
+        "x": "523",
+        "y": "1443",
+        "width": "26",
+        "height": "30",
+        "pivotX": "13",
+        "pivotY": "15"
+      },
+      "pivot": [
+        13.0,
+        15.0
+      ],
+      "cropped_size": [
+        26,
+        30
+      ],
+      "restored_size": [
+        26,
+        30
+      ],
+      "files": {
+        "cropped": "cropped/real_bleedNumber/real_bleedNumber0006.png",
+        "restored": "restored/real_bleedNumber/real_bleedNumber0006.png"
+      },
+      "file": "real_bleedNumber/real_bleedNumber0006.png",
+      "sha256": "51392be95d51f5c2c5fae99953aaef84bdfcce72ecbc8c30ae0bba6f9583b7f3"
+    },
+    {
+      "group": "real_bleedNumber",
+      "label": "真实伤害",
+      "index": 7,
+      "digit": 7,
+      "name": "real_bleedNumber0007",
+      "source_atlas": "mission2",
+      "atlas_fields": {
+        "name": "real_bleedNumber0007",
+        "x": "549",
+        "y": "1443",
+        "width": "26",
+        "height": "30",
+        "pivotX": "13",
+        "pivotY": "15"
+      },
+      "pivot": [
+        13.0,
+        15.0
+      ],
+      "cropped_size": [
+        26,
+        30
+      ],
+      "restored_size": [
+        26,
+        30
+      ],
+      "files": {
+        "cropped": "cropped/real_bleedNumber/real_bleedNumber0007.png",
+        "restored": "restored/real_bleedNumber/real_bleedNumber0007.png"
+      },
+      "file": "real_bleedNumber/real_bleedNumber0007.png",
+      "sha256": "ba491cbd31ea87fad97d747b39bf3aff1957bf1aa187cd2a8c12b61fb28867f1"
+    },
+    {
+      "group": "real_bleedNumber",
+      "label": "真实伤害",
+      "index": 8,
+      "digit": 8,
+      "name": "real_bleedNumber0008",
+      "source_atlas": "mission2",
+      "atlas_fields": {
+        "name": "real_bleedNumber0008",
+        "x": "575",
+        "y": "1443",
+        "width": "26",
+        "height": "30",
+        "pivotX": "13",
+        "pivotY": "15"
+      },
+      "pivot": [
+        13.0,
+        15.0
+      ],
+      "cropped_size": [
+        26,
+        30
+      ],
+      "restored_size": [
+        26,
+        30
+      ],
+      "files": {
+        "cropped": "cropped/real_bleedNumber/real_bleedNumber0008.png",
+        "restored": "restored/real_bleedNumber/real_bleedNumber0008.png"
+      },
+      "file": "real_bleedNumber/real_bleedNumber0008.png",
+      "sha256": "009aa2232b73514b0b8419634bc8726a40d5086e3b2e5b3b23c7a8bc6a01d949"
+    },
+    {
+      "group": "real_bleedNumber",
+      "label": "真实伤害",
+      "index": 9,
+      "digit": 9,
+      "name": "real_bleedNumber0009",
+      "source_atlas": "mission2",
+      "atlas_fields": {
+        "name": "real_bleedNumber0009",
+        "x": "601",
+        "y": "1443",
+        "width": "26",
+        "height": "30",
+        "pivotX": "13",
+        "pivotY": "15"
+      },
+      "pivot": [
+        13.0,
+        15.0
+      ],
+      "cropped_size": [
+        26,
+        30
+      ],
+      "restored_size": [
+        26,
+        30
+      ],
+      "files": {
+        "cropped": "cropped/real_bleedNumber/real_bleedNumber0009.png",
+        "restored": "restored/real_bleedNumber/real_bleedNumber0009.png"
+      },
+      "file": "real_bleedNumber/real_bleedNumber0009.png",
+      "sha256": "2a67b881383c6d4cc313f0fd434e3a3c21de92483ecddabe34ab441ada213c76"
+    },
+    {
+      "group": "real_baojiNumber",
+      "label": "真实伤害暴击数字",
+      "index": 0,
+      "digit": 0,
+      "name": "real_baojiNumber0000",
+      "source_atlas": "mission2",
+      "atlas_fields": {
+        "name": "real_baojiNumber0000",
+        "x": "67",
+        "y": "1443",
+        "width": "30",
+        "height": "36",
+        "pivotX": "15",
+        "pivotY": "17.5"
+      },
+      "pivot": [
+        15.0,
+        17.5
+      ],
+      "cropped_size": [
+        30,
+        36
+      ],
+      "restored_size": [
+        30,
+        36
+      ],
+      "files": {
+        "cropped": "cropped/real_baojiNumber/real_baojiNumber0000.png",
+        "restored": "restored/real_baojiNumber/real_baojiNumber0000.png"
+      },
+      "file": "real_baojiNumber/real_baojiNumber0000.png",
+      "sha256": "7f83e296b0e29cda93fe837b75a7c200934f36f542b0ddf8b81e6c42521df55d"
+    },
+    {
+      "group": "real_baojiNumber",
+      "label": "真实伤害暴击数字",
+      "index": 1,
+      "digit": 1,
+      "name": "real_baojiNumber0001",
+      "source_atlas": "mission2",
+      "atlas_fields": {
+        "name": "real_baojiNumber0001",
+        "x": "97",
+        "y": "1443",
+        "width": "30",
+        "height": "36",
+        "pivotX": "15",
+        "pivotY": "17.5"
+      },
+      "pivot": [
+        15.0,
+        17.5
+      ],
+      "cropped_size": [
+        30,
+        36
+      ],
+      "restored_size": [
+        30,
+        36
+      ],
+      "files": {
+        "cropped": "cropped/real_baojiNumber/real_baojiNumber0001.png",
+        "restored": "restored/real_baojiNumber/real_baojiNumber0001.png"
+      },
+      "file": "real_baojiNumber/real_baojiNumber0001.png",
+      "sha256": "b6e0aa281a20ea92f0e7ad697a450d212bef1bb344b1c44869f0650dbc6ec64f"
+    },
+    {
+      "group": "real_baojiNumber",
+      "label": "真实伤害暴击数字",
+      "index": 2,
+      "digit": 2,
+      "name": "real_baojiNumber0002",
+      "source_atlas": "mission2",
+      "atlas_fields": {
+        "name": "real_baojiNumber0002",
+        "x": "127",
+        "y": "1443",
+        "width": "30",
+        "height": "36",
+        "pivotX": "15",
+        "pivotY": "17.5"
+      },
+      "pivot": [
+        15.0,
+        17.5
+      ],
+      "cropped_size": [
+        30,
+        36
+      ],
+      "restored_size": [
+        30,
+        36
+      ],
+      "files": {
+        "cropped": "cropped/real_baojiNumber/real_baojiNumber0002.png",
+        "restored": "restored/real_baojiNumber/real_baojiNumber0002.png"
+      },
+      "file": "real_baojiNumber/real_baojiNumber0002.png",
+      "sha256": "9c5ab5bec82e70d9b57fd6a03d0db6953b94e506d692538bdf420aad77b22d54"
+    },
+    {
+      "group": "real_baojiNumber",
+      "label": "真实伤害暴击数字",
+      "index": 3,
+      "digit": 3,
+      "name": "real_baojiNumber0003",
+      "source_atlas": "mission2",
+      "atlas_fields": {
+        "name": "real_baojiNumber0003",
+        "x": "157",
+        "y": "1443",
+        "width": "30",
+        "height": "36",
+        "pivotX": "15",
+        "pivotY": "17.5"
+      },
+      "pivot": [
+        15.0,
+        17.5
+      ],
+      "cropped_size": [
+        30,
+        36
+      ],
+      "restored_size": [
+        30,
+        36
+      ],
+      "files": {
+        "cropped": "cropped/real_baojiNumber/real_baojiNumber0003.png",
+        "restored": "restored/real_baojiNumber/real_baojiNumber0003.png"
+      },
+      "file": "real_baojiNumber/real_baojiNumber0003.png",
+      "sha256": "5a011a841eb9b04cf7e4a996a775516dd45a91b4ca9c8cc9dcce181e2bccf2db"
+    },
+    {
+      "group": "real_baojiNumber",
+      "label": "真实伤害暴击数字",
+      "index": 4,
+      "digit": 4,
+      "name": "real_baojiNumber0004",
+      "source_atlas": "mission2",
+      "atlas_fields": {
+        "name": "real_baojiNumber0004",
+        "x": "187",
+        "y": "1443",
+        "width": "30",
+        "height": "36",
+        "pivotX": "15",
+        "pivotY": "17.5"
+      },
+      "pivot": [
+        15.0,
+        17.5
+      ],
+      "cropped_size": [
+        30,
+        36
+      ],
+      "restored_size": [
+        30,
+        36
+      ],
+      "files": {
+        "cropped": "cropped/real_baojiNumber/real_baojiNumber0004.png",
+        "restored": "restored/real_baojiNumber/real_baojiNumber0004.png"
+      },
+      "file": "real_baojiNumber/real_baojiNumber0004.png",
+      "sha256": "e29d0cad039816390ebacda50cb1526b39314458a16ba55af0638ed6c19620cc"
+    },
+    {
+      "group": "real_baojiNumber",
+      "label": "真实伤害暴击数字",
+      "index": 5,
+      "digit": 5,
+      "name": "real_baojiNumber0005",
+      "source_atlas": "mission2",
+      "atlas_fields": {
+        "name": "real_baojiNumber0005",
+        "x": "217",
+        "y": "1443",
+        "width": "30",
+        "height": "36",
+        "pivotX": "15",
+        "pivotY": "17.5"
+      },
+      "pivot": [
+        15.0,
+        17.5
+      ],
+      "cropped_size": [
+        30,
+        36
+      ],
+      "restored_size": [
+        30,
+        36
+      ],
+      "files": {
+        "cropped": "cropped/real_baojiNumber/real_baojiNumber0005.png",
+        "restored": "restored/real_baojiNumber/real_baojiNumber0005.png"
+      },
+      "file": "real_baojiNumber/real_baojiNumber0005.png",
+      "sha256": "7f68418c96c6c86e643f18d2c1706ea9d36e9067701861b516048c182881d19e"
+    },
+    {
+      "group": "real_baojiNumber",
+      "label": "真实伤害暴击数字",
+      "index": 6,
+      "digit": 6,
+      "name": "real_baojiNumber0006",
+      "source_atlas": "mission2",
+      "atlas_fields": {
+        "name": "real_baojiNumber0006",
+        "x": "247",
+        "y": "1443",
+        "width": "30",
+        "height": "36",
+        "pivotX": "15",
+        "pivotY": "17.5"
+      },
+      "pivot": [
+        15.0,
+        17.5
+      ],
+      "cropped_size": [
+        30,
+        36
+      ],
+      "restored_size": [
+        30,
+        36
+      ],
+      "files": {
+        "cropped": "cropped/real_baojiNumber/real_baojiNumber0006.png",
+        "restored": "restored/real_baojiNumber/real_baojiNumber0006.png"
+      },
+      "file": "real_baojiNumber/real_baojiNumber0006.png",
+      "sha256": "02d5b5ef904d1edc5508065255e326e46759e1df3b8b137dfbf7f2c72c836094"
+    },
+    {
+      "group": "real_baojiNumber",
+      "label": "真实伤害暴击数字",
+      "index": 7,
+      "digit": 7,
+      "name": "real_baojiNumber0007",
+      "source_atlas": "mission2",
+      "atlas_fields": {
+        "name": "real_baojiNumber0007",
+        "x": "277",
+        "y": "1443",
+        "width": "30",
+        "height": "36",
+        "pivotX": "15",
+        "pivotY": "17.5"
+      },
+      "pivot": [
+        15.0,
+        17.5
+      ],
+      "cropped_size": [
+        30,
+        36
+      ],
+      "restored_size": [
+        30,
+        36
+      ],
+      "files": {
+        "cropped": "cropped/real_baojiNumber/real_baojiNumber0007.png",
+        "restored": "restored/real_baojiNumber/real_baojiNumber0007.png"
+      },
+      "file": "real_baojiNumber/real_baojiNumber0007.png",
+      "sha256": "eb9cf04980935a606f691b8b8a3c02a67a176641bad4cf8e6997e3737486fd62"
+    },
+    {
+      "group": "real_baojiNumber",
+      "label": "真实伤害暴击数字",
+      "index": 8,
+      "digit": 8,
+      "name": "real_baojiNumber0008",
+      "source_atlas": "mission2",
+      "atlas_fields": {
+        "name": "real_baojiNumber0008",
+        "x": "307",
+        "y": "1443",
+        "width": "30",
+        "height": "36",
+        "pivotX": "15",
+        "pivotY": "17.5"
+      },
+      "pivot": [
+        15.0,
+        17.5
+      ],
+      "cropped_size": [
+        30,
+        36
+      ],
+      "restored_size": [
+        30,
+        36
+      ],
+      "files": {
+        "cropped": "cropped/real_baojiNumber/real_baojiNumber0008.png",
+        "restored": "restored/real_baojiNumber/real_baojiNumber0008.png"
+      },
+      "file": "real_baojiNumber/real_baojiNumber0008.png",
+      "sha256": "e324b8004882cd4f67f958a1df899b06e5acf2555bc8bb4927b517a6cb7a9fb9"
+    },
+    {
+      "group": "real_baojiNumber",
+      "label": "真实伤害暴击数字",
+      "index": 9,
+      "digit": 9,
+      "name": "real_baojiNumber0009",
+      "source_atlas": "mission2",
+      "atlas_fields": {
+        "name": "real_baojiNumber0009",
+        "x": "337",
+        "y": "1443",
+        "width": "30",
+        "height": "36",
+        "pivotX": "15",
+        "pivotY": "17.5"
+      },
+      "pivot": [
+        15.0,
+        17.5
+      ],
+      "cropped_size": [
+        30,
+        36
+      ],
+      "restored_size": [
+        30,
+        36
+      ],
+      "files": {
+        "cropped": "cropped/real_baojiNumber/real_baojiNumber0009.png",
+        "restored": "restored/real_baojiNumber/real_baojiNumber0009.png"
+      },
+      "file": "real_baojiNumber/real_baojiNumber0009.png",
+      "sha256": "12091ca441ee39c95475168307166e2ac38ddae0c1716219213f5a31b637fb89"
+    },
+    {
+      "group": "real_baoji",
+      "label": "真实伤害暴击标识",
+      "index": 0,
+      "digit": null,
+      "name": "real_baoji0000",
+      "source_atlas": "mission2",
+      "atlas_fields": {
+        "name": "real_baoji0000",
+        "x": "0",
+        "y": "1443",
+        "width": "67",
+        "height": "40",
+        "pivotX": "33",
+        "pivotY": "19.05"
+      },
+      "pivot": [
+        33.0,
+        19.05
+      ],
+      "cropped_size": [
+        67,
+        40
+      ],
+      "restored_size": [
+        67,
+        40
+      ],
+      "files": {
+        "cropped": "cropped/real_baoji/real_baoji0000.png",
+        "restored": "restored/real_baoji/real_baoji0000.png"
+      },
+      "file": "real_baoji/real_baoji0000.png",
+      "sha256": "9b4aadc120d934c3177dad84677f06f0a64e462f1fbf92c0606d28ae61367fbf"
+    },
+    {
+      "group": "baoDuBleedNumber",
+      "label": "特殊伤害数字-isBao",
+      "index": 0,
+      "digit": 0,
+      "name": "baoDuBleedNumber0000",
+      "source_atlas": "mission2",
+      "atlas_fields": {
+        "name": "baoDuBleedNumber0000",
+        "x": "0",
+        "y": "0",
+        "width": "22",
+        "height": "30",
+        "pivotX": "12",
+        "pivotY": "15.5",
+        "frameX": "-1",
+        "frameY": "-1",
+        "frameWidth": "24",
+        "frameHeight": "32"
+      },
+      "pivot": [
+        12.0,
+        15.5
+      ],
+      "cropped_size": [
+        22,
+        30
+      ],
+      "restored_size": [
+        24,
+        32
+      ],
+      "files": {
+        "cropped": "cropped/baoDuBleedNumber/baoDuBleedNumber0000.png",
+        "restored": "restored/baoDuBleedNumber/baoDuBleedNumber0000.png"
+      },
+      "file": "baoDuBleedNumber/baoDuBleedNumber0000.png",
+      "sha256": "889fe534c6a090a6bdc0dd13a01dfeb2aacbc1f003376ff721d000ade00688a0"
+    },
+    {
+      "group": "baoDuBleedNumber",
+      "label": "特殊伤害数字-isBao",
+      "index": 1,
+      "digit": 1,
+      "name": "baoDuBleedNumber0001",
+      "source_atlas": "mission2",
+      "atlas_fields": {
+        "name": "baoDuBleedNumber0001",
+        "x": "22",
+        "y": "0",
+        "width": "22",
+        "height": "30",
+        "pivotX": "12",
+        "pivotY": "15.5",
+        "frameX": "-1",
+        "frameY": "-1",
+        "frameWidth": "24",
+        "frameHeight": "32"
+      },
+      "pivot": [
+        12.0,
+        15.5
+      ],
+      "cropped_size": [
+        22,
+        30
+      ],
+      "restored_size": [
+        24,
+        32
+      ],
+      "files": {
+        "cropped": "cropped/baoDuBleedNumber/baoDuBleedNumber0001.png",
+        "restored": "restored/baoDuBleedNumber/baoDuBleedNumber0001.png"
+      },
+      "file": "baoDuBleedNumber/baoDuBleedNumber0001.png",
+      "sha256": "b51532f5c916f83ea2f2c3931a0e6f50c1e1c3cf0f671f0615451ea22514520e"
+    },
+    {
+      "group": "baoDuBleedNumber",
+      "label": "特殊伤害数字-isBao",
+      "index": 2,
+      "digit": 2,
+      "name": "baoDuBleedNumber0002",
+      "source_atlas": "mission2",
+      "atlas_fields": {
+        "name": "baoDuBleedNumber0002",
+        "x": "44",
+        "y": "0",
+        "width": "22",
+        "height": "30",
+        "pivotX": "12",
+        "pivotY": "15.5",
+        "frameX": "-1",
+        "frameY": "-1",
+        "frameWidth": "24",
+        "frameHeight": "32"
+      },
+      "pivot": [
+        12.0,
+        15.5
+      ],
+      "cropped_size": [
+        22,
+        30
+      ],
+      "restored_size": [
+        24,
+        32
+      ],
+      "files": {
+        "cropped": "cropped/baoDuBleedNumber/baoDuBleedNumber0002.png",
+        "restored": "restored/baoDuBleedNumber/baoDuBleedNumber0002.png"
+      },
+      "file": "baoDuBleedNumber/baoDuBleedNumber0002.png",
+      "sha256": "8209205cc34c04d6ffb49c1df0426881ea5ae8f5ea9673b004ae5cc02bfd25e4"
+    },
+    {
+      "group": "baoDuBleedNumber",
+      "label": "特殊伤害数字-isBao",
+      "index": 3,
+      "digit": 3,
+      "name": "baoDuBleedNumber0003",
+      "source_atlas": "mission2",
+      "atlas_fields": {
+        "name": "baoDuBleedNumber0003",
+        "x": "66",
+        "y": "0",
+        "width": "22",
+        "height": "30",
+        "pivotX": "12",
+        "pivotY": "15.5",
+        "frameX": "-1",
+        "frameY": "-1",
+        "frameWidth": "24",
+        "frameHeight": "32"
+      },
+      "pivot": [
+        12.0,
+        15.5
+      ],
+      "cropped_size": [
+        22,
+        30
+      ],
+      "restored_size": [
+        24,
+        32
+      ],
+      "files": {
+        "cropped": "cropped/baoDuBleedNumber/baoDuBleedNumber0003.png",
+        "restored": "restored/baoDuBleedNumber/baoDuBleedNumber0003.png"
+      },
+      "file": "baoDuBleedNumber/baoDuBleedNumber0003.png",
+      "sha256": "a2d591ee8b4be4696309bb7491c2e8542afa6098307d5f1f211bd70e40e44769"
+    },
+    {
+      "group": "baoDuBleedNumber",
+      "label": "特殊伤害数字-isBao",
+      "index": 4,
+      "digit": 4,
+      "name": "baoDuBleedNumber0004",
+      "source_atlas": "mission2",
+      "atlas_fields": {
+        "name": "baoDuBleedNumber0004",
+        "x": "88",
+        "y": "0",
+        "width": "24",
+        "height": "30",
+        "pivotX": "12",
+        "pivotY": "15.5",
+        "frameX": "0",
+        "frameY": "-1",
+        "frameWidth": "24",
+        "frameHeight": "32"
+      },
+      "pivot": [
+        12.0,
+        15.5
+      ],
+      "cropped_size": [
+        24,
+        30
+      ],
+      "restored_size": [
+        24,
+        32
+      ],
+      "files": {
+        "cropped": "cropped/baoDuBleedNumber/baoDuBleedNumber0004.png",
+        "restored": "restored/baoDuBleedNumber/baoDuBleedNumber0004.png"
+      },
+      "file": "baoDuBleedNumber/baoDuBleedNumber0004.png",
+      "sha256": "2c3f64b471f7cd2cf39b5203331a2a5bb2b771d53ab2a263803be72a1e4791ee"
+    },
+    {
+      "group": "baoDuBleedNumber",
+      "label": "特殊伤害数字-isBao",
+      "index": 5,
+      "digit": 5,
+      "name": "baoDuBleedNumber0005",
+      "source_atlas": "mission2",
+      "atlas_fields": {
+        "name": "baoDuBleedNumber0005",
+        "x": "112",
+        "y": "0",
+        "width": "22",
+        "height": "32",
+        "pivotX": "12",
+        "pivotY": "15.5",
+        "frameX": "-1",
+        "frameY": "0",
+        "frameWidth": "24",
+        "frameHeight": "32"
+      },
+      "pivot": [
+        12.0,
+        15.5
+      ],
+      "cropped_size": [
+        22,
+        32
+      ],
+      "restored_size": [
+        24,
+        32
+      ],
+      "files": {
+        "cropped": "cropped/baoDuBleedNumber/baoDuBleedNumber0005.png",
+        "restored": "restored/baoDuBleedNumber/baoDuBleedNumber0005.png"
+      },
+      "file": "baoDuBleedNumber/baoDuBleedNumber0005.png",
+      "sha256": "c5e98a3c53e63c763d60647604c5638d0bd2154f28c15f7c02caeb2bdc9825f4"
+    },
+    {
+      "group": "baoDuBleedNumber",
+      "label": "特殊伤害数字-isBao",
+      "index": 6,
+      "digit": 6,
+      "name": "baoDuBleedNumber0006",
+      "source_atlas": "mission2",
+      "atlas_fields": {
+        "name": "baoDuBleedNumber0006",
+        "x": "134",
+        "y": "0",
+        "width": "22",
+        "height": "30",
+        "pivotX": "12",
+        "pivotY": "15.5",
+        "frameX": "-1",
+        "frameY": "-1",
+        "frameWidth": "24",
+        "frameHeight": "32"
+      },
+      "pivot": [
+        12.0,
+        15.5
+      ],
+      "cropped_size": [
+        22,
+        30
+      ],
+      "restored_size": [
+        24,
+        32
+      ],
+      "files": {
+        "cropped": "cropped/baoDuBleedNumber/baoDuBleedNumber0006.png",
+        "restored": "restored/baoDuBleedNumber/baoDuBleedNumber0006.png"
+      },
+      "file": "baoDuBleedNumber/baoDuBleedNumber0006.png",
+      "sha256": "512f876460ce8a169d419520e9f8ee85e5e7dd1c34a555093f7f3bbbd0eecc5a"
+    },
+    {
+      "group": "baoDuBleedNumber",
+      "label": "特殊伤害数字-isBao",
+      "index": 7,
+      "digit": 7,
+      "name": "baoDuBleedNumber0007",
+      "source_atlas": "mission2",
+      "atlas_fields": {
+        "name": "baoDuBleedNumber0007",
+        "x": "156",
+        "y": "0",
+        "width": "22",
+        "height": "30",
+        "pivotX": "12",
+        "pivotY": "15.5",
+        "frameX": "-1",
+        "frameY": "-1",
+        "frameWidth": "24",
+        "frameHeight": "32"
+      },
+      "pivot": [
+        12.0,
+        15.5
+      ],
+      "cropped_size": [
+        22,
+        30
+      ],
+      "restored_size": [
+        24,
+        32
+      ],
+      "files": {
+        "cropped": "cropped/baoDuBleedNumber/baoDuBleedNumber0007.png",
+        "restored": "restored/baoDuBleedNumber/baoDuBleedNumber0007.png"
+      },
+      "file": "baoDuBleedNumber/baoDuBleedNumber0007.png",
+      "sha256": "e74bddadbf48d8cd77373c3405e0b1e69d11cdf5d93d18ed026c404be5b72489"
+    },
+    {
+      "group": "baoDuBleedNumber",
+      "label": "特殊伤害数字-isBao",
+      "index": 8,
+      "digit": 8,
+      "name": "baoDuBleedNumber0008",
+      "source_atlas": "mission2",
+      "atlas_fields": {
+        "name": "baoDuBleedNumber0008",
+        "x": "178",
+        "y": "0",
+        "width": "22",
+        "height": "30",
+        "pivotX": "12",
+        "pivotY": "15.5",
+        "frameX": "-1",
+        "frameY": "-1",
+        "frameWidth": "24",
+        "frameHeight": "32"
+      },
+      "pivot": [
+        12.0,
+        15.5
+      ],
+      "cropped_size": [
+        22,
+        30
+      ],
+      "restored_size": [
+        24,
+        32
+      ],
+      "files": {
+        "cropped": "cropped/baoDuBleedNumber/baoDuBleedNumber0008.png",
+        "restored": "restored/baoDuBleedNumber/baoDuBleedNumber0008.png"
+      },
+      "file": "baoDuBleedNumber/baoDuBleedNumber0008.png",
+      "sha256": "829430063a2241c35abce5f1754c45fd6603f19c5a2f8af8c6d8759316110002"
+    },
+    {
+      "group": "baoDuBleedNumber",
+      "label": "特殊伤害数字-isBao",
+      "index": 9,
+      "digit": 9,
+      "name": "baoDuBleedNumber0009",
+      "source_atlas": "mission2",
+      "atlas_fields": {
+        "name": "baoDuBleedNumber0009",
+        "x": "200",
+        "y": "0",
+        "width": "22",
+        "height": "30",
+        "pivotX": "12",
+        "pivotY": "15.5",
+        "frameX": "-1",
+        "frameY": "-1",
+        "frameWidth": "24",
+        "frameHeight": "32"
+      },
+      "pivot": [
+        12.0,
+        15.5
+      ],
+      "cropped_size": [
+        22,
+        30
+      ],
+      "restored_size": [
+        24,
+        32
+      ],
+      "files": {
+        "cropped": "cropped/baoDuBleedNumber/baoDuBleedNumber0009.png",
+        "restored": "restored/baoDuBleedNumber/baoDuBleedNumber0009.png"
+      },
+      "file": "baoDuBleedNumber/baoDuBleedNumber0009.png",
+      "sha256": "3b9ce83479f7111b1ddc766d862c7aded9e2a61255772aafcc14fd24160c82bb"
+    },
+    {
+      "group": "sb",
+      "label": "闪避",
+      "index": 0,
+      "digit": null,
+      "name": "sb0000",
+      "source_atlas": "mission2",
+      "atlas_fields": {
+        "name": "sb0000",
+        "x": "627",
+        "y": "1443",
+        "width": "68",
+        "height": "40",
+        "pivotX": "33.5",
+        "pivotY": "19.5"
+      },
+      "pivot": [
+        33.5,
+        19.5
+      ],
+      "cropped_size": [
+        68,
+        40
+      ],
+      "restored_size": [
+        68,
+        40
+      ],
+      "files": {
+        "cropped": "cropped/sb/sb0000.png",
+        "restored": "restored/sb/sb0000.png"
+      },
+      "file": "sb/sb0000.png",
+      "sha256": "daa2d172d589d023ce10c163b630a9c68c32e1a219db14e7ee87c60e336e3629"
+    },
+    {
+      "group": "miaosa",
+      "label": "秒杀",
+      "index": 0,
+      "digit": null,
+      "name": "miaosa0000",
+      "source_atlas": "mission2",
+      "atlas_fields": {
+        "name": "miaosa0000",
+        "x": "300",
+        "y": "997",
+        "width": "68",
+        "height": "40",
+        "pivotX": "33.5",
+        "pivotY": "19.5"
+      },
+      "pivot": [
+        33.5,
+        19.5
+      ],
+      "cropped_size": [
+        68,
+        40
+      ],
+      "restored_size": [
+        68,
+        40
+      ],
+      "files": {
+        "cropped": "cropped/miaosa/miaosa0000.png",
+        "restored": "restored/miaosa/miaosa0000.png"
+      },
+      "file": "miaosa/miaosa0000.png",
+      "sha256": "e95847a3014a4dea9c42c3f5576f1cd413b21abcc742abfbc080f38e16948951"
+    },
+    {
+      "group": "bleedNumberAdd",
+      "label": "回血数字-附赠",
+      "index": 0,
+      "digit": 0,
+      "name": "bleedNumberAdd0000",
+      "source_atlas": "mission2",
+      "atlas_fields": {
+        "name": "bleedNumberAdd0000",
+        "x": "468",
+        "y": "40",
+        "width": "26",
+        "height": "30",
+        "pivotX": "13",
+        "pivotY": "15"
+      },
+      "pivot": [
+        13.0,
+        15.0
+      ],
+      "cropped_size": [
+        26,
+        30
+      ],
+      "restored_size": [
+        26,
+        30
+      ],
+      "files": {
+        "cropped": "cropped/bleedNumberAdd/bleedNumberAdd0000.png",
+        "restored": "restored/bleedNumberAdd/bleedNumberAdd0000.png"
+      },
+      "file": "bleedNumberAdd/bleedNumberAdd0000.png",
+      "sha256": "42f162cfebab7f1b8f76166d239377599759dae95f1d90bfeb07eb7a797e867f"
+    },
+    {
+      "group": "bleedNumberAdd",
+      "label": "回血数字-附赠",
+      "index": 1,
+      "digit": 1,
+      "name": "bleedNumberAdd0001",
+      "source_atlas": "mission2",
+      "atlas_fields": {
+        "name": "bleedNumberAdd0001",
+        "x": "494",
+        "y": "40",
+        "width": "26",
+        "height": "30",
+        "pivotX": "13",
+        "pivotY": "15"
+      },
+      "pivot": [
+        13.0,
+        15.0
+      ],
+      "cropped_size": [
+        26,
+        30
+      ],
+      "restored_size": [
+        26,
+        30
+      ],
+      "files": {
+        "cropped": "cropped/bleedNumberAdd/bleedNumberAdd0001.png",
+        "restored": "restored/bleedNumberAdd/bleedNumberAdd0001.png"
+      },
+      "file": "bleedNumberAdd/bleedNumberAdd0001.png",
+      "sha256": "ad5859b0d7d657675fc670b2cb3a9706c0db7e19dfdfe44f8a3d2ed41bfb39e5"
+    },
+    {
+      "group": "bleedNumberAdd",
+      "label": "回血数字-附赠",
+      "index": 2,
+      "digit": 2,
+      "name": "bleedNumberAdd0002",
+      "source_atlas": "mission2",
+      "atlas_fields": {
+        "name": "bleedNumberAdd0002",
+        "x": "520",
+        "y": "40",
+        "width": "26",
+        "height": "30",
+        "pivotX": "13",
+        "pivotY": "15"
+      },
+      "pivot": [
+        13.0,
+        15.0
+      ],
+      "cropped_size": [
+        26,
+        30
+      ],
+      "restored_size": [
+        26,
+        30
+      ],
+      "files": {
+        "cropped": "cropped/bleedNumberAdd/bleedNumberAdd0002.png",
+        "restored": "restored/bleedNumberAdd/bleedNumberAdd0002.png"
+      },
+      "file": "bleedNumberAdd/bleedNumberAdd0002.png",
+      "sha256": "b197f9b9a4f4bcc4c8a8f3fccae2701b27eed638474b02820e313077dbd996c8"
+    },
+    {
+      "group": "bleedNumberAdd",
+      "label": "回血数字-附赠",
+      "index": 3,
+      "digit": 3,
+      "name": "bleedNumberAdd0003",
+      "source_atlas": "mission2",
+      "atlas_fields": {
+        "name": "bleedNumberAdd0003",
+        "x": "546",
+        "y": "40",
+        "width": "26",
+        "height": "30",
+        "pivotX": "13",
+        "pivotY": "15"
+      },
+      "pivot": [
+        13.0,
+        15.0
+      ],
+      "cropped_size": [
+        26,
+        30
+      ],
+      "restored_size": [
+        26,
+        30
+      ],
+      "files": {
+        "cropped": "cropped/bleedNumberAdd/bleedNumberAdd0003.png",
+        "restored": "restored/bleedNumberAdd/bleedNumberAdd0003.png"
+      },
+      "file": "bleedNumberAdd/bleedNumberAdd0003.png",
+      "sha256": "a794d7899cb9eee5f27d8675a9aa959d45bbc7679605e822c058ea67224ae7fc"
+    },
+    {
+      "group": "bleedNumberAdd",
+      "label": "回血数字-附赠",
+      "index": 4,
+      "digit": 4,
+      "name": "bleedNumberAdd0004",
+      "source_atlas": "mission2",
+      "atlas_fields": {
+        "name": "bleedNumberAdd0004",
+        "x": "572",
+        "y": "40",
+        "width": "26",
+        "height": "30",
+        "pivotX": "13",
+        "pivotY": "15"
+      },
+      "pivot": [
+        13.0,
+        15.0
+      ],
+      "cropped_size": [
+        26,
+        30
+      ],
+      "restored_size": [
+        26,
+        30
+      ],
+      "files": {
+        "cropped": "cropped/bleedNumberAdd/bleedNumberAdd0004.png",
+        "restored": "restored/bleedNumberAdd/bleedNumberAdd0004.png"
+      },
+      "file": "bleedNumberAdd/bleedNumberAdd0004.png",
+      "sha256": "8c9778ab45d18426ed4d7c1864edc1fab74498af8744aa0a1187340072a46dd1"
+    },
+    {
+      "group": "bleedNumberAdd",
+      "label": "回血数字-附赠",
+      "index": 5,
+      "digit": 5,
+      "name": "bleedNumberAdd0005",
+      "source_atlas": "mission2",
+      "atlas_fields": {
+        "name": "bleedNumberAdd0005",
+        "x": "598",
+        "y": "40",
+        "width": "26",
+        "height": "30",
+        "pivotX": "13",
+        "pivotY": "15"
+      },
+      "pivot": [
+        13.0,
+        15.0
+      ],
+      "cropped_size": [
+        26,
+        30
+      ],
+      "restored_size": [
+        26,
+        30
+      ],
+      "files": {
+        "cropped": "cropped/bleedNumberAdd/bleedNumberAdd0005.png",
+        "restored": "restored/bleedNumberAdd/bleedNumberAdd0005.png"
+      },
+      "file": "bleedNumberAdd/bleedNumberAdd0005.png",
+      "sha256": "1bf429f31e866b2b4e4fde9d1dc6ed4b43813e70d23769b23c8198c5c081fcb4"
+    },
+    {
+      "group": "bleedNumberAdd",
+      "label": "回血数字-附赠",
+      "index": 6,
+      "digit": 6,
+      "name": "bleedNumberAdd0006",
+      "source_atlas": "mission2",
+      "atlas_fields": {
+        "name": "bleedNumberAdd0006",
+        "x": "624",
+        "y": "40",
+        "width": "26",
+        "height": "30",
+        "pivotX": "13",
+        "pivotY": "15"
+      },
+      "pivot": [
+        13.0,
+        15.0
+      ],
+      "cropped_size": [
+        26,
+        30
+      ],
+      "restored_size": [
+        26,
+        30
+      ],
+      "files": {
+        "cropped": "cropped/bleedNumberAdd/bleedNumberAdd0006.png",
+        "restored": "restored/bleedNumberAdd/bleedNumberAdd0006.png"
+      },
+      "file": "bleedNumberAdd/bleedNumberAdd0006.png",
+      "sha256": "4b0a7f2b421ca418ef683235f1969a90e79af73de1ad7d55bb2a5f1d8863acae"
+    },
+    {
+      "group": "bleedNumberAdd",
+      "label": "回血数字-附赠",
+      "index": 7,
+      "digit": 7,
+      "name": "bleedNumberAdd0007",
+      "source_atlas": "mission2",
+      "atlas_fields": {
+        "name": "bleedNumberAdd0007",
+        "x": "650",
+        "y": "40",
+        "width": "26",
+        "height": "30",
+        "pivotX": "13",
+        "pivotY": "15"
+      },
+      "pivot": [
+        13.0,
+        15.0
+      ],
+      "cropped_size": [
+        26,
+        30
+      ],
+      "restored_size": [
+        26,
+        30
+      ],
+      "files": {
+        "cropped": "cropped/bleedNumberAdd/bleedNumberAdd0007.png",
+        "restored": "restored/bleedNumberAdd/bleedNumberAdd0007.png"
+      },
+      "file": "bleedNumberAdd/bleedNumberAdd0007.png",
+      "sha256": "dd3754cf2392a791704fdb0ae340b379b8327b681689de506f3dc8ccc7251d2f"
+    },
+    {
+      "group": "bleedNumberAdd",
+      "label": "回血数字-附赠",
+      "index": 8,
+      "digit": 8,
+      "name": "bleedNumberAdd0008",
+      "source_atlas": "mission2",
+      "atlas_fields": {
+        "name": "bleedNumberAdd0008",
+        "x": "676",
+        "y": "40",
+        "width": "26",
+        "height": "30",
+        "pivotX": "13",
+        "pivotY": "15"
+      },
+      "pivot": [
+        13.0,
+        15.0
+      ],
+      "cropped_size": [
+        26,
+        30
+      ],
+      "restored_size": [
+        26,
+        30
+      ],
+      "files": {
+        "cropped": "cropped/bleedNumberAdd/bleedNumberAdd0008.png",
+        "restored": "restored/bleedNumberAdd/bleedNumberAdd0008.png"
+      },
+      "file": "bleedNumberAdd/bleedNumberAdd0008.png",
+      "sha256": "bbfbc0923133ee122fc5da1e8aa631848a5d877c058e6f2b48e7c64679348422"
+    },
+    {
+      "group": "bleedNumberAdd",
+      "label": "回血数字-附赠",
+      "index": 9,
+      "digit": 9,
+      "name": "bleedNumberAdd0009",
+      "source_atlas": "mission2",
+      "atlas_fields": {
+        "name": "bleedNumberAdd0009",
+        "x": "702",
+        "y": "40",
+        "width": "26",
+        "height": "30",
+        "pivotX": "13",
+        "pivotY": "15"
+      },
+      "pivot": [
+        13.0,
+        15.0
+      ],
+      "cropped_size": [
+        26,
+        30
+      ],
+      "restored_size": [
+        26,
+        30
+      ],
+      "files": {
+        "cropped": "cropped/bleedNumberAdd/bleedNumberAdd0009.png",
+        "restored": "restored/bleedNumberAdd/bleedNumberAdd0009.png"
+      },
+      "file": "bleedNumberAdd/bleedNumberAdd0009.png",
+      "sha256": "954e5590101b8aa3497b0ce3e0b5463338b164d0d2d622319a309c1133cf0944"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "out/zmhj-equip-skill-diag/viewers/component/NewBleedNumber.as",
+      "sha256": "c92c5d55706ca61265fd7e4ca62ab385a9fa5538dccac554c0449fff15123b02"
+    },
+    {
+      "path": "out/zmhj-equip-skill-diag/viewers/component/NewBaoJiNumber.as",
+      "sha256": "4dbb822ecffc1eb815e60a6d9c4c1fabc88ad095be546935a533b5db3d45ec48"
+    },
+    {
+      "path": "out/zmhj-equip-skill-diag/viewers/component/NewRealBaoJiNumber.as",
+      "sha256": "c0927e436c0b93667b56fa367154956421468e74e8d9bedb71be4191edef635c"
+    },
+    {
+      "path": "out/zmhj-equip-skill-diag/viewers/component/NewSanbiNumber.as",
+      "sha256": "312fa903a7e69919acece3efc1e6831d0e5f3172a9338d21fc6ec9467894b203"
+    },
+    {
+      "path": "out/zmhj-equip-skill-diag/viewers/container/layers/BattleTopLayer.as",
+      "sha256": "52701cde3e66b9623c47d3a1699d6e5c74481a341085fb93b3e840371a502201"
+    },
+    {
+      "path": "out/zmhj-equip-skill-diag/prefabs/controls/DamageControl.as",
+      "sha256": "2775e78eb9b167670c22598f6fea92bc7d13d5700ac3c23d34d6164f602b3764"
+    },
+    {
+      "path": "out/zmhj-equip-skill-diag/com/wdcgame/engine/display/Image.as",
+      "sha256": "c8ef9146ad53a5f81182e68db25f817094e1c5e9e9148bb0fc6e69731115f9de"
+    }
+  ],
+  "fps": 30,
+  "duration": 0.9,
+  "rotation": 0,
+  "spacing": -2,
+  "image_anchor": "Bitmap top-left; Texture.pivot unused by original Image",
+  "normal_offset": {
+    "x": [
+      0,
+      0
+    ],
+    "y": [
+      -60,
+      -60
+    ]
+  },
+  "dodge_offset": {
+    "x": [
+      0,
+      20
+    ],
+    "y": [
+      -80,
+      -60
+    ]
+  },
+  "default_bleed_offset_screen": [
+    0,
+    -60
+  ],
+  "true_extra_offset_screen": {
+    "x": [
+      -60,
+      60
+    ],
+    "y": [
+      -40,
+      -10
+    ]
+  }
+}

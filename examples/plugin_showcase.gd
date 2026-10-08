@@ -160,9 +160,9 @@ func _process(_delta: float) -> void:
 	health_bar.value = health.current_value
 	health_label.text = "生命值 %.0f / %.0f　无敌：%s" % [health.current_value, health.get_max_value(), "开启" if TagManager.has_tag(target, &"state.invulnerable") else "关闭"]
 	var status := statuses.get_status(&"burn")
-	status_label.text = "状态：%d 层 / 剩余 %.1f 秒" % [status.stacks, status.remaining_duration] if is_instance_valid(status) else "状态：无"
+	status_label.text = "状态：%d 层 / 剩余 %.0f ms" % [status.stacks, status.remaining_duration * 1000.0] if is_instance_valid(status) else "状态：无"
 	var cooldown := heal_ability.get_feature("CooldownFeature") as CooldownFeature
-	cooldown_label.text = "治疗 25 点　冷却：%.1f 秒" % cooldown.get_cooldown_remaining(heal_ability)
+	cooldown_label.text = "治疗 25 点　冷却：%.0f ms" % (cooldown.get_cooldown_remaining(heal_ability) * 1000.0)
 	if tabs.current_tab == 2 and draw_enabled:
 		var rotation := Basis(Vector3.UP, Time.get_ticks_msec() / 1000.0)
 		DebugDraw.draw_transformed_cube(Transform3D(rotation, Vector3.ZERO), Color.CORNFLOWER_BLUE)

@@ -16,11 +16,20 @@ var _configured: bool = false
 var _event_bus: Node
 var _level_root: Node
 var _advancing: bool = false
+var _pending_hit_stop: float = 0.0
+## 可在 .tscn 中预置会话；留空保留原工厂配置方式。
+@export_file("*.json") var scene_manifest_path: String = ""
+@export var scene_seed: int = 0
+## 场景显式选择原版策略，插件独立示例仍可选择 SimpleDamageLogic。
+@export var damage_strategy: DamageLogicStrategy
 #endregion
 #region 固定物理生命周期
 func _enter_tree() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	_event_bus = CoreSystem.event_bus
+	if not _configured and not scene_manifest_path.is_empty():
+		var configured := BattleSystem.configure_scene_session(self, scene_manifest_path, scene_seed)
+		assert(configured, last_error)
 	if not _event_bus.event_pushed.is_connected(_on_core_event):
 		_event_bus.event_pushed.connect(_on_core_event)
 
@@ -104,6 +113,23 @@ func spawn_entity_2d(category: String, id: StringName, at: Vector2 = Vector2.ZER
 func get_entity(id: StringName) -> Variant:
 	return _entities.get(id)
 
+## 只注册已存在的 2D 节点；实体入树时调用，先于动画/反馈/GAS 子节点 ready。
+func register_scene_entity_2d(entity: BattleEntity2D, category: String, id: StringName) -> bool:
+	if not _configured or not ["characters", "monsters"].has(category) or not entity.entity_id.is_empty():
+		last_error = "预置实体需要已配置会话、合法类别且只能注册一次"
+		return false
+	var data := catalog.instantiate_definition(category, id) as BattleEntityDefinition
+	if data == null:
+		last_error = catalog.last_error
+		return false
+	_entity_serial += 1
+	var runtime_id := StringName("%s/entity/%d" % [battle_id, _entity_serial])
+	entity.initialize_battle(self, runtime_id, data)
+	_entities[runtime_id] = entity
+	entity.tree_exiting.connect(_on_entity_exiting.bind(runtime_id), CONNECT_ONE_SHOT)
+	publish_event(&"battle.entity_spawned", null, entity, {"definition_id": id, "category": category, "scene_authored": true})
+	return true
+
 func get_entities() -> Array:
 	return _entities.values().duplicate()
 
@@ -174,6 +200,11 @@ func advance_physics(unscaled_delta: float) -> void:
 		for entity in _entities.values():
 			if is_instance_valid(entity) and not entity.is_queued_for_deletion():
 				entity.advance_simulation(delta)
+	# 同一 tick 的所有目标先完成命中，停顿从下一个物理 tick 开始。
+	# 不能让第一个目标请求停顿后，后面的目标因为 blocked 而漏结算。
+	if _pending_hit_stop > 0.0:
+		clock.request_hit_stop(_pending_hit_stop)
+		_pending_hit_stop = 0.0
 	_advancing = false
 
 func is_simulation_blocked() -> bool:
@@ -192,7 +223,11 @@ func set_time_scale(value: float) -> bool:
 	return true
 
 func request_hit_stop(seconds: float) -> void:
-	clock.request_hit_stop(seconds)
+	if _advancing:
+		if is_finite(seconds):
+			_pending_hit_stop = maxf(_pending_hit_stop, seconds)
+	else:
+		clock.request_hit_stop(seconds)
 
 func _refresh_operation_control() -> void:
 	# 控制权变更立即同步，避免菜单关闭至下一 tick 之间丢失新按下。

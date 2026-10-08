@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="zaomengxiyou"
-run/main_scene="res://examples/plugin_showcase.tscn"
+run/main_scene="res://examples/hit_reaction_demo.tscn"
 config/features=PackedStringArray("4.7", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -32,10 +32,9 @@ manifest_path="res://data/battle/manifest.json"
 
 [display]
 
-window/size/viewport_width=1280
-window/size/viewport_height=800
+window/size/viewport_width=940
+window/size/viewport_height=590
 window/stretch/mode="canvas_items"
-window/stretch/aspect="expand"
 
 [editor_plugins]
 

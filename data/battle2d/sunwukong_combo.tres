@@ -24,8 +24,10 @@ script = ExtResource("step")
 ability_id = &"sunwukong_attack4"
 action = &"attack_4"
 duration_frames = 18
-root_motion_speed = 300.0
+root_motion_speed = 100.0
 root_motion_frames = 16
+turn_window_start_frame = 8
+turn_window_end_frame = 16
 
 [sub_resource type="Resource" id="Step5"]
 script = ExtResource("step")

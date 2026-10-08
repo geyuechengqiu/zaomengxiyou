@@ -10,6 +10,7 @@ var abilities: GameplayAbilityComponent
 var statuses: GameplayStatusComponent
 var _definition: BattleEntityDefinition
 var _cleaned: bool = false
+var damage_rules := BattleDamageRules.new()
 #endregion
 #region 初始化
 ## 每次 spawn 只能初始化一次；定义由 Catalog 创建为该实体独占的资源图。
@@ -57,6 +58,15 @@ func publish_battle_event(event_id: StringName, payload: Dictionary = {}) -> voi
 func get_battle_random_int(minimum: int, maximum: int, stream: StringName = &"combat") -> int:
 	return session.random.random_int(minimum, maximum, stream)
 
+func get_battle_random_float(stream: StringName = &"combat") -> float:
+	return session.random.random_float(stream)
+
+func get_damage_rules() -> BattleDamageRules:
+	return damage_rules
+
+func get_damage_strategy() -> DamageLogicStrategy:
+	return session.damage_strategy if session != null else null
+
 func accepts_status_event(context: Dictionary) -> bool:
 	if context.has("battle_id") and context.battle_id != session.battle_id:
 		return false
@@ -82,6 +92,7 @@ func cleanup_battle() -> void:
 		return
 	_cleaned = true
 	BattleGASBinding.cleanup(abilities, statuses)
+	damage_rules.clear()
 
 func _exit_tree() -> void:
 	cleanup_battle()

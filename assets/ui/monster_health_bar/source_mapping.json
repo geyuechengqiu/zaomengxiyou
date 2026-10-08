@@ -1,0 +1,87 @@
+{
+  "source": "games/zmhj-g5/cache/assets/ui/mission_20260406_1.swf",
+  "source_sha256": "60944248515768281bc82c2e20e267711bf2922967c54029133c36c3c35b9862",
+  "symbol": "monsterBleedBar",
+  "symbol_id": 179,
+  "fps": 30,
+  "textures": [
+    {
+      "file": "background.png",
+      "shape_id": 174,
+      "bitmap_id": 173,
+      "size": [
+        62,
+        6
+      ],
+      "sha256": "916c4d3f260551401d418d08001dbbf78f4dccac2212842836a7725230ebef04"
+    },
+    {
+      "file": "fill.png",
+      "shape_id": 176,
+      "bitmap_id": 175,
+      "size": [
+        60,
+        4
+      ],
+      "sha256": "306d94201b020e412ec75f3c692f34e45abbb642afaf773ba188067010000ac6"
+    }
+  ],
+  "background_bounds": [
+    -31,
+    -3,
+    62,
+    6
+  ],
+  "fill_bounds": [
+    -30,
+    -2,
+    60,
+    4
+  ],
+  "mask": {
+    "origin": [
+      -31,
+      -3.55
+    ],
+    "size": [
+      63,
+      7.1
+    ],
+    "scale_target": "hp/hpMax clamped to 0 or [0.04,1]"
+  },
+  "trail": {
+    "rgb_multiplier": 0.5,
+    "duration": 0.6,
+    "ease": "Quad.easeOut (TweenLite defaultEase)"
+  },
+  "hide_delay_seconds": 2,
+  "evidence": [
+    {
+      "path": "out/zmhj-equip-skill-diag/prefabs/scripts/ManEntity.as",
+      "sha256": "e3dcfcc236578a9cf6953db22c6f7bae6297fa98ccf0a603e8054f6f38bb4bad"
+    },
+    {
+      "path": "out/zmhj-equip-skill-diag/com/greensock/TweenLite.as",
+      "sha256": "9dad2446d972a3afb2f5fc2d3ddd527e2da3b5e3caf895bd944d5a65a4c6d9f8"
+    },
+    {
+      "path": "out/zmhj-equip-skill-diag/com/wdcgame/engine/model/RoleConfigVO.as",
+      "sha256": "a1581cd964586598bbf0575416f0318c27fa3b9a56fd11ef066554006a6080c8"
+    }
+  ],
+  "config_source": {
+    "path": "games/zmhj-g5/cache/assets/data/cg1_20260921_1.swf",
+    "sha256": "754e4db204d396151fedd0a510aa80f3283a616b29c4a3483ed1f4deb1c0c8c3"
+  },
+  "monster_example": {
+    "table": "Monster",
+    "source_id": 1024001,
+    "fields": {
+      "name": "突木桩-1阶",
+      "showHP": 1,
+      "alwaysShowHP": 0,
+      "hpBarOffset": "0;-100",
+      "hpBarLink": null
+    }
+  }
+}

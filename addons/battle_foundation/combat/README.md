@@ -1,6 +1,39 @@
 # 阶段 6：单段普攻与最小战斗闭环
 
-打开 [single_attack_demo.tscn](../../../examples/single_attack_demo.tscn)，使用项目现有带 Spine 模块的 Godot 按 F6。A/D 移动，K 跳跃，J 只施放第一段普攻；长按不自动重复，也不预约连击。Esc 打开菜单与改键。按钮可翻转角色、移动木桩以打空、切换攻击 26/200、重新生成实体及暂停。两侧木桩初始生命 70、防御 5，是明确使用测试数值的敌方实体。
+阶段 8 使用 GAS 策略 + Attribute/Vital/Status/Effect + Core 事件完成原版通用伤害链；等级评分沿用原版EXP，界面统一整数。原版盾后补1、真实伤害与吸血顺序、角色回调和结果字段见 [详细说明](original-damage.md)。
+
+阶段 7 在此闭环上扩展 [技能时间轴、连招与多段攻击](skill-timeline.md)。新场景使用独立资源，阶段 6 的窗口和场景保持兼容；BattleAttackInstance 的目标记录现包含 count / next_hit_time，hit_count 统计实际次数。分段反应、派生缓存、消耗与冷却、对象和事件取消协议见新文档。
+
+打开 [single_attack_demo.tscn](../../../examples/single_attack_demo.tscn)，使用项目现有带 Spine 模块的 Godot 按 F6，或按 F5 运行项目主场景。A/D 移动，K 跳跃，J 只施放第一段普攻；长按不自动重复，也不预约连击。Esc 打开菜单与改键。按钮可翻转角色、移动木桩以打空、切换攻击 26/200、重置整个场景及暂停。两侧木桩初始生命 70、防御 5，是明确使用测试数值的敌方实体。
+
+项目视口已改为原版 **940×590**，保持宽高比缩放。依据原版 `games/zmhj-g5/game.json` 的 contentWidth/contentHeight，以及反编译 `Game.as` 的 `drawRect(0,0,940,590)`；基础引擎 GameData 的 640×480 默认值不作为该游戏的有效尺寸。世界沿用现有 2 倍战斗坐标，预置 Camera2D 的 zoom=0.5，让原素材以 1 倍像素显示，命中几何和碰撞单位保持一致。
+
+## 在编辑器搭建与调整
+
+角色、木桩、摄像机、地面、两侧墙体、单向平台、背景、HUD、操作控制器、GAS 组件、完整菜单及受击特效都在 `.tscn` 中预置。启动前后节点树完全一致；菜单打开时只更新已有 20 行控件。测试脚本不调用 spawn_entity、new/add_child 或 `_draw` 创建场景内容。
+
+```text
+SingleAttackDemo
+├─ Background / Sky
+├─ Camera2D                          预置位置、缩放
+├─ BattleSession                     manifest 与随机种子
+│  ├─ Terrain                        Polygon2D 与静态物理地形
+│  │  ├─ Ground
+│  │  ├─ LeftWall / RightWall
+│  │  └─ Platform                    单向平台
+│  └─ Actors
+│     ├─ SunWukong                   预置角色场景
+│     │  ├─ GameplayVitalAttributeComponent / GameplayAbilityComponent / GameplayStatusComponent
+│     │  ├─ PlayerOperations / OperationController
+│     │  └─ CombatFeedback / HitEffect / AnimationPlayer
+│     └─ LeftDummy / RightDummy      独立组件和反馈节点
+├─ HUD                               预置面板、按钮与帮助
+└─ MenuLayer / OperationMenu          预置改键界面
+```
+
+直接在场景树中移动角色/木桩、调整地形 CollisionShape2D 或 Polygon2D、修改 Camera2D 和 HUD。实体 Inspector 中的 `scene_definition_id`、`scene_category`、`scene_session_path` 指定定义和所属会话；BattleSession 的 `scene_manifest_path` 和 `scene_seed` 指定场次配置。入树时只给已有节点创建独立运行数据与编号，GAS 装配复用预置组件，输入系统登记预置控制器。资源定义仍只读，当前生命、窗口和技能黑板仍按实例隔离。
+
+重置按钮通过 `reload_current_scene()` 重载整个已保存场景，恢复场景定义的位置、生命和状态，并注销旧 Core 动作机与输入控制器。离线工具 `node tools/build_single_attack_scene.mjs` 可重建基准测试场景与菜单；执行它会覆盖这两份 `.tscn`，日常编辑后应直接保存场景。
 
 复用 Core 操作意图、状态机和事件总线、GAS 技能时间线、最终属性与 HealthVital、Battle Foundation 战斗时钟和单一技能判定框。新增功能放在现有插件中，没有再建立一套技能、伤害或输入系统。
 
@@ -21,6 +54,7 @@
 | [BattleHurtbox2D](../movement/battle_hurtbox_2d.gd) | 独立 Area2D / RectangleShape2D；提供目标受击多边形，可单独编辑及关闭受击资格 |
 | GAS DamageCalculator / HealthVital | 从即时最终属性计算临时伤害，走现有 DamageInfo 和生命扣除、通知、耗尽流程 |
 | [BattleCombatFeedback2D](../presentation/battle_combat_feedback_2d.gd) | 完整属性快照更新生命条；Core 命中事件显示实际扣血；战斗时间驱动飘字 |
+| [BattleHitEffect2D](../presentation/battle_hit_effect_2d.gd) | 控制预置原版受击 AnimationPlayer，单次播放与战斗时钟同步 |
 | [AnimationPlayerAdapter2D](../animation/animation_player_adapter_2d.gd) | 木桩的非 Spine 动画后端；控制场景预置 AnimationPlayer，不参与伤害与状态裁决 |
 
 运行顺序如下：
@@ -75,7 +109,17 @@
 
 `battle.attack.hit` 的 `damage` 表示前后生命差；`calculated_damage` 表示公式请求值，`resolved_damage` 表示 HealthVital 返回值。飘字和面板使用实际生命差，防止过量伤害反馈超过剩余生命。木桩受击变红，死亡播放预置 AnimationPlayer 倒下动作；动画结束不复活、不解锁死亡状态。生命条监听完整属性快照，修改最大生命或受到非本次攻击的伤害也会同步。
 
-木桩和悟空分别使用独立 GAS/Vital 实例，共享 `.tres` 仅保存定义。原版暴击、保护值、击退、全部 sensor 流程及特效仍由后续阶段接入。
+木桩和悟空分别使用独立 GAS/Vital 实例，共享 `.tres` 仅保存定义。阶段8已接入原版伤害及数字特效；阶段9已接入 [独立受击与保护](hit-reaction-protection.md)，包含击退/击飞/倒地/起身与每 Boss 保护阈值。本文保留阶段6闭环说明，不表示所有原版 sensor、Boss AI 或职业特例已完成。
+
+## 原版受击特效
+
+已从本地原版 `assets/ui/mission2_20250707_1.swf` 的 AMF3 图集中导出 `hurtEffectAll0000`～`0010`。它不是普通 SWF 时间线，无需执行 Flash。原版 ModelManager 选择 `hurtEffectAll`，HurtEffect 默认 30 FPS、单次播放，ManEntity 按目标朝向镜像 `hitEffOffset.x` 并挂到目标显示节点。孙悟空挂点为 (0,-60)，SkillParam 的 hasHitEffect 默认 true。
+
+素材、每帧 PNG 哈希、原图集裁剪参数及源码证据哈希保存在 [assets/effects/hurt_effect_all](../../../assets/effects/hurt_effect_all/README.md)。原注册点为 (72,73)，画布 151×150；保留重复帧和第 11 帧的透明占位，不缩短 11/30 秒时长。
+
+[hurt_effect_all.tscn](../../../data/effects/hurt_effect_all.tscn) 包含 Sprite2D 与预置 AnimationPlayer 的 texture 轨道。编辑时选择节点，临时打开 HitEffect 的 Visible，拖动播放器 `hit` 时间轴即可预览；运行中只在命中通知到达时播放，完成后隐藏。播放不创建节点，不决定死亡、不重复扣血。素材 offset=(-72,-73)，目标方向只改变挂点 X，特效图像保持原方向。CombatFeedback 的 `hit_effect_unit_scale` 默认 2，独立于木桩 SVG 的显示比例；配合镜头 0.5 恢复原特效像素尺寸。
+
+受击帧动画与技能、飘字使用相同 combat delta，暂停/停顿冻结，慢动作同步；死亡目标仍可完成本次受击表现。后续技能可在命中 payload 设置 `has_hit_effect=false` 禁用普通受击闪光，或在特效节点禁用 enabled。
 
 ## 验收
 
@@ -83,7 +127,9 @@
 & '<带 Spine 模块的 Godot 路径>' --headless --path . res://examples/verify_single_attack.tscn
 ```
 
-[验收脚本](../../../examples/verify_single_attack.gd) 驱动真实按键入口、GAS 帧事件、2D 物理更新和实际 HealthVital，已通过 **46 项检查**。覆盖短按起手、命中前不扣血、打中/打空/击杀、生命条与飘字、一次结算、后续再次施放、物理体与受击框独立、左右镜像、友方与不可受击过滤、途中进入/过期不命中、暂停恢复、打断、旧攻击编号拒绝、长按/echo、菜单控制、进入攻击状态时的同步打断和死亡/退出清理。失败返回非零退出码。
+[验收脚本](../../../examples/verify_single_attack.gd) 驱动真实按键入口、GAS 帧事件、2D 物理更新和实际 HealthVital，已通过 **64 项检查**。覆盖原 46 项战斗闭环，另验证 940×590、启动节点树一致、预置 GAS/输入/菜单、摄像机素材比例、原版特效时长/透明结尾/注册点、单次播放、暂停、挂点镜像、连续受击重播及技能关闭闪光。失败返回非零退出码。
+
+`--headless --path . --script res://tools/verify_single_attack_scene.gd` 另通过 8 项完整场景重载、死亡复位、注册注销与菜单控制检查。
 
 五连击 222 项、动画 903 项、输入 145 项、Core 动作机 46 项、属性链 65 项、动画编辑 74 项及真正编辑器预览 212 项回归通过；阶段一、插件、基础属性与 Core 事件验收也通过。命中与击杀截图由项目实际 D3D12 / Forward+ 渲染取得。
 

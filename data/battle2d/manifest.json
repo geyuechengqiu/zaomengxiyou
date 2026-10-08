@@ -9,7 +9,9 @@
       "sunwukong_attack2": "res://data/battle2d/attack2.tres",
       "sunwukong_attack3": "res://data/battle2d/attack3.tres",
       "sunwukong_attack4": "res://data/battle2d/attack4.tres",
-      "sunwukong_attack5": "res://data/battle2d/attack5.tres"
+      "sunwukong_attack5": "res://data/battle2d/attack5.tres",
+      "sunwukong_run_attack": "res://data/battle2d/run_attack.tres",
+      "sunwukong_jump_attack": "res://data/battle2d/jump_attack.tres"
     },
     "monsters": {
       "属性验收怪物": "res://data/battle2d/attribute_test_monster.tres"

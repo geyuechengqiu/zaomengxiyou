@@ -18,6 +18,7 @@ func _ready() -> void:
 	add_child(demo)
 	demo.set_physics_process(false)
 	session = demo.session
+	session.damage_strategy = SimpleDamageLogic.new()
 	session.set_physics_process(false)
 	CoreSystem.event_bus.event_pushed.connect(_on_event)
 	await _fresh()
@@ -240,6 +241,9 @@ func _verify_platforms() -> void:
 #region 五段完整连击、双命中与移动限制
 func _verify_combo() -> void:
 	await _fresh()
+	# 位移验收固定原导入的300速度，使用私有夹具，允许业务资源自由调参。
+	player.combo.definition = player.combo.definition.duplicate(true) as BattleComboDefinition
+	player.combo.definition.steps[3].root_motion_speed = 300.0
 	_check(player.try_attack(), "开始第一段")
 	_check(not player.try_attack(), "直接施放不重入正在播放的攻击")
 	var durations := [10, 10, 12, 18, 20]

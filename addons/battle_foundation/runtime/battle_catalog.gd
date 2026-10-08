@@ -116,6 +116,8 @@ func _validate_definition(category: String, id: String, data: Resource) -> bool:
 				feature_names[feature.feature_name] = true
 				if feature is BattleFrameTimelineFeature and not feature.is_configuration_valid():
 					return _fail("技能素材帧事件配置无效：" + id)
+				if feature is BattleFrameTimelineFeature and feature.commit_resources and data.execution_tree != null:
+					return _fail("技能消耗/冷却只能由时间轴或行为树一方提交：" + id)
 		"statuses":
 			if not data is GameplayStatusData:
 				return _fail("状态应使用 GAS 定义：" + id)
@@ -137,6 +139,19 @@ func _validate_definition(category: String, id: String, data: Resource) -> bool:
 	return true
 
 func _validate_references(definitions: Dictionary) -> bool:
+	for skill: GameplayAbilityDefinition in definitions.skills.values():
+		for feature in skill.features:
+			if not feature is BattleFrameTimelineFeature:
+				continue
+			for branch in feature.branch_windows:
+				if not definitions.skills.has(branch.target_ability_id):
+					return _fail("派生引用了未登记技能：" + String(branch.target_ability_id))
+			for segment in feature.attack_segments:
+				if not segment.sub_skill_id.is_empty() and not definitions.skills.has(segment.sub_skill_id):
+					return _fail("攻击段引用了未登记子技能：" + String(segment.sub_skill_id))
+				for status_id in segment.status_ids:
+					if not definitions.statuses.has(status_id):
+						return _fail("攻击段引用了未登记状态：" + String(status_id))
 	for category in ["characters", "monsters"]:
 		for entity: BattleEntityDefinition in definitions[category].values():
 			for skill_id in entity.ability_ids:

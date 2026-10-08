@@ -312,7 +312,7 @@
     }
   ],
   "chain_policy": "press during current segment queues one next segment; no hold auto-repeat; completion gates segment transition",
-  "movement_policy": "player input blocked; attack4 forward 150 source units/sec for 16/30 sec; collisions apply",
+  "movement_policy": "player movement blocked; attack4 keeps startup motion direction at current configured 100 world px/sec for 16/30 sec; one reverse pressed edge in project-defined [8,16) frame window changes facing, fifth uses new facing; collisions apply",
   "landing_policy": "explicit one-frame battle state using existing idle visual; original skeleton has no separate landing clip",
   "jump_policy": "two jumps; jumpTwo uses original 8-frame animation; platform velocities are Godot calibration values",
   "sources": [

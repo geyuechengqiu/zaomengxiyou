@@ -1,6 +1,14 @@
 # 孙悟空 2D 动画接入数据
 
+新增 [run_attack.tres](run_attack.tres) 与 [jump_attack.tres](jump_attack.tres)，跑步或空中按攻击进入独立 Core 状态，读取原动画时长、命中帧、倍率与 SWF 判定框。第四段支持窗口内一次反向转身，保留本段运动方向并决定第五段方向。编辑步骤、规则与原始来源见 [上下文攻击说明](wukong-context-attacks.md)。
+
+训练木桩已采用参考悟空造型的 SVG 和预置受伤时间轴，所有战斗样例复用 [wooden_dummy.tscn](dummy/wooden_dummy.tscn)。外观、身体/底座注册点、表情覆盖层和受伤关键帧编辑见 [木桩说明](dummy/README.md)。
+
+阶段 7 新增 [skill_timeline/manifest.json](skill_timeline/manifest.json) 与 [three_hit.tres](skill_timeline/three_hit.tres)：孙悟空业务 ID 不变，技能使用 `sunwukong_timeline_attack`，可派生 `sunwukong_attack1`。三段倍率/附伤/击退、10魔法和0.8秒冷却、500生命木桩均为验收配置；原五连击定义未改动。[独立预置场景](../../examples/skill_timeline_demo.tscn) 按F6运行，资源编辑、联合类图和运行规则见 [阶段7说明](../../addons/battle_foundation/combat/skill-timeline.md)。
+
 阶段 6 增加 [single_attack/manifest.json](single_attack/manifest.json)，以相同业务 ID 复用悟空场景、动画和成长，仅配置第一段技能及 [木桩](dummy/wooden_dummy.tres)。单段技能额外设置 2 个素材帧的临时命中窗口，原五连击资源保持默认瞬时查询。运行 [单段场景](../../examples/single_attack_demo.tscn)，实现与验收见 [战斗闭环 README](../../addons/battle_foundation/combat/README.md)。
+
+单段场景现已在编辑器预置角色、木桩、地形、GAS 组件和输入节点，使用原版 940×590。普通受击的原版 PNG 与来源见 [特效资源](../../assets/effects/hurt_effect_all/README.md)，预置 AnimationPlayer 场景位于 [data/effects](../effects/hurt_effect_all.tscn)。
 
 这组业务定义使用角色 ID `孙悟空`、普攻技能 ID `sunwukong_attack1` 至 `sunwukong_attack5`，独立于阶段一的接口样例。运行时加载本目录 manifest，不需要 Speculum-4399-master 项目或外部 JSON。
 
@@ -15,7 +23,7 @@
 | [sunwukong_actions.tres](sunwukong_actions.tres) | 战斗锁定、状态权限与平台运动参数 |
 | [attack1.tres](attack1.tres) | GAS 普攻：10 帧 / 30 fps，第 4 帧 Core 攻击事件，原版冷却 0 |
 | [attack2.tres](attack2.tres)、[attack3.tres](attack3.tres)、[attack4.tres](attack4.tres)、[attack5.tres](attack5.tres) | 其余四段 GAS 技能：原版段时长、命中帧与伤害倍率，第四段双判定 |
-| [sunwukong_combo.tres](sunwukong_combo.tres) | 五段语义 ID、动作、许可、优先级与第四段技能位移窗口 |
+| [sunwukong_combo.tres](sunwukong_combo.tres) | 五段语义 ID、动作、许可、优先级、第四段位移与一次转身窗口 |
 | [combo_source_mapping.json](combo_source_mapping.json) | 五段原版源码/配置来源、SHA-256、碰撞框与偏移、迁移边界 |
 | [attack_hitboxes_source.json](attack_hitboxes_source.json) | 原版 attackV427.swf 中五组 ABRect 只读提取快照与素材哈希 |
 | [source_mapping.json](source_mapping.json) | 业务 ID 与原版来源 ID、文件路径、SHA-256、动作帧数、注册点和原资源哈希 |

@@ -13,12 +13,17 @@ var checks: int = 0
 
 func _ready() -> void:
 	demo = (load("res://examples/single_attack_demo.tscn") as PackedScene).instantiate()
+	var authored_nodes := _get_node_paths(demo)
 	add_child(demo)
+	_check(_get_node_paths(demo) == authored_nodes, "启动只初始化预置节点，不新增会话、角色、GAS、操作、菜单或特效节点")
 	session = demo.session
+	session.damage_strategy = SimpleDamageLogic.new()
 	session.set_physics_process(false)
 	CoreSystem.operation_manager.bindings.reset_profile(load("res://data/controls/player_operations.tres"), false)
 	CoreSystem.event_bus.event_pushed.connect(_on_event)
 	await _fresh()
+	_verify_scene_authoring()
+	await _verify_original_hit_effect()
 	await _verify_input_hit_and_idle()
 	await _verify_miss_and_kill()
 	await _verify_hurtbox_and_mirroring()
@@ -41,6 +46,67 @@ func _check(condition: bool, message: String) -> void:
 	if not condition:
 		failures.append(message)
 
+func _get_node_paths(root: Node) -> Array[String]:
+	var paths: Array[String] = []
+	for child in root.get_children():
+		paths.append(String(root.get_path_to(child)))
+		for descendant in _get_node_paths(child):
+			paths.append("%s/%s" % [child.name, descendant])
+	return paths
+
+func _verify_scene_authoring() -> void:
+	_check(ProjectSettings.get_setting("display/window/size/viewport_width") == 940 and ProjectSettings.get_setting("display/window/size/viewport_height") == 590 and ProjectSettings.get_setting("display/window/stretch/aspect") == "keep", "原版940×590画面保持宽高比")
+	_check(session == demo.get_node("BattleSession") and session.get_entities().size() == 3, "会话注册三只编辑器预置实体")
+	for actor in session.get_entities():
+		_check(actor.attributes == actor.get_node("GameplayVitalAttributeComponent") and actor.abilities == actor.get_node("GameplayAbilityComponent") and actor.statuses == actor.get_node("GameplayStatusComponent"), "初始化复用预置GAS组件")
+	_check(demo.operations.controller == player.get_node("PlayerOperations/OperationController"), "输入控制器为预置节点")
+	var before := _get_node_paths(demo)
+	demo.menu.set_open(true)
+	demo.menu.set_open(false)
+	_check(_get_node_paths(demo) == before and demo.menu.get_node("Margin/Panel/Column/Scroll/Rows").get_child_count() == 20, "菜单重映射行已预置，打开菜单不新增节点")
+	var camera: Camera2D = demo.get_node("Camera2D")
+	_check(camera.zoom == Vector2(0.5, 0.5) and player.animation.profile.display_scale * camera.zoom.x == 1.0, "保持2倍战斗坐标，通过镜头恢复素材原像素比例")
+
+func _verify_original_hit_effect() -> void:
+	var effect: BattleHitEffect2D = target.feedback.hit_effect
+	var clip := effect.player.get_animation(&"hit")
+	_check(clip.track_get_key_count(0) == 11 and is_equal_approx(clip.length, 11.0 / 30.0) and clip.loop_mode == Animation.LOOP_NONE, "原版11帧30FPS单次受击动画含透明结尾")
+	_check(effect.sprite.offset == Vector2(-72, -73) and not effect.sprite.centered, "原版pivot(72,73)保留到预置Sprite")
+	var last: Texture2D = clip.track_get_key_value(0, 10)
+	_check(last.get_image().get_used_rect().size == Vector2i.ZERO and not effect.visible, "透明占位帧保留且未命中时不显示特效")
+	player.request_attack()
+	await _step(8)
+	_check(effect.visible and effect.play_count == 1 and effect.position == Vector2(0,-120), "命中驱动预置原版受击动画，挂点按角色单位换算")
+	var time := effect.player.current_animation_position
+	session.set_paused(true)
+	await _step(10)
+	_check(effect.player.current_animation_position == time and effect.visible, "暂停同时冻结原版受击帧动画")
+	session.set_paused(false)
+	await _step(30)
+	_check(not effect.visible and effect.play_count == 1, "单次动画结束隐藏，持续重叠不反复播放")
+	await _fresh()
+	effect = target.feedback.hit_effect
+	effect.hit_offset = Vector2(8,-60)
+	target.animation.set_facing(-1)
+	player.request_attack()
+	await _step(8)
+	_check(effect.position == Vector2(-16,-120) and effect.sprite.scale.x == 2.0, "原版只镜像目标挂点X，不重复翻转特效图像")
+	await _fresh()
+	effect = target.feedback.hit_effect
+	effect.play_hit(1, 2.0)
+	effect.advance_effect(0.1)
+	effect.play_hit(1, 2.0)
+	_check(effect.player.current_animation_position == 0.0 and effect.play_count == 2, "连续受击重新开始原版特效，不沿用上一击帧进度")
+	await _fresh()
+	var definition := player.abilities.get_ability_instance(&"sunwukong_attack1").get_definition()
+	for feature in definition.features:
+		if feature is BattleFrameTimelineFeature:
+			feature.events[0].payload["has_hit_effect"] = false
+	player.request_attack()
+	await _step(8)
+	_check(target.attributes.get_vital_value(&"health") == 49 and target.feedback.hit_effect.play_count == 0, "技能禁用普通受击特效时，伤害结算仍正常")
+	await _fresh()
+
 func _on_event(id: String, payload: Array) -> void:
 	if not is_instance_valid(player):
 		return
@@ -58,7 +124,15 @@ func _step(count: int, delta: float = 1.0 / 60.0) -> void:
 		session.advance_physics(delta)
 
 func _fresh() -> void:
-	demo.respawn()
+	# 验收夹具重新载入已搭建的场景；业务启动过程不创建实体节点。
+	if is_instance_valid(demo):
+		player = null
+		demo.free()
+	demo = (load("res://examples/single_attack_demo.tscn") as PackedScene).instantiate()
+	add_child(demo)
+	session = demo.session
+	session.damage_strategy = SimpleDamageLogic.new()
+	session.set_physics_process(false)
 	player = demo.player
 	target = demo.dummies[1]
 	var controller: CoreOperationController = demo.operations.controller
@@ -95,8 +169,9 @@ func _verify_input_hit_and_idle() -> void:
 	await _step(1)
 	_check(impacts.size() == 1 and impacts[0].source_frame == 4 and is_equal_approx(impacts[0].skill_time, 4.0 / 30.0), "GAS沿用素材第4帧，不把物理tick当素材帧")
 	_check(hits.size() == 1 and target.attributes.get_vital_value(&"health") == 49, "命中木桩，简单伤害26-5扣21")
-	_check(target.feedback.hit_count == 1 and target.feedback.last_damage == 21 and target.feedback.get_node("DamageLabel").visible, "伤害数字显示一次，使用实际扣血")
-	_check(target.feedback.get_node("HealthBar").value == 49 and target.animation.get_current_action() == &"hurt", "生命条与受击动画即时反馈")
+	var rows := target.feedback.number_rows.get_active_numbers()
+	_check(target.feedback.hit_count == 1 and target.feedback.last_damage == 21 and rows.size() == 1 and rows[0].number == 21 and rows[0].visible, "单段命中生成一个原版贴图跳字，21点扣血一致")
+	_check(target.feedback.get_node("HealthBar").current_health == 49 and target.animation.get_current_action() == &"hurt", "生命条与受击动画即时反馈")
 	await _step(3)
 	_check(hits.size() == 1 and attack.hit_targets.size() == 1, "持续重叠的后续物理帧不会重复扣血")
 	await _step(15)

@@ -1,0 +1,34 @@
+[gd_scene format=3]
+[ext_resource type="Script" path="res://addons/battle_foundation/presentation/battle_hit_effect_2d.gd" id="script"]
+[ext_resource type="Texture2D" path="res://assets/effects/hurt_effect_all/hurtEffectAll0000.png" id="f0"]
+[ext_resource type="Texture2D" path="res://assets/effects/hurt_effect_all/hurtEffectAll0001.png" id="f1"]
+[ext_resource type="Texture2D" path="res://assets/effects/hurt_effect_all/hurtEffectAll0002.png" id="f2"]
+[ext_resource type="Texture2D" path="res://assets/effects/hurt_effect_all/hurtEffectAll0003.png" id="f3"]
+[ext_resource type="Texture2D" path="res://assets/effects/hurt_effect_all/hurtEffectAll0004.png" id="f4"]
+[ext_resource type="Texture2D" path="res://assets/effects/hurt_effect_all/hurtEffectAll0005.png" id="f5"]
+[ext_resource type="Texture2D" path="res://assets/effects/hurt_effect_all/hurtEffectAll0006.png" id="f6"]
+[ext_resource type="Texture2D" path="res://assets/effects/hurt_effect_all/hurtEffectAll0007.png" id="f7"]
+[ext_resource type="Texture2D" path="res://assets/effects/hurt_effect_all/hurtEffectAll0008.png" id="f8"]
+[ext_resource type="Texture2D" path="res://assets/effects/hurt_effect_all/hurtEffectAll0009.png" id="f9"]
+[ext_resource type="Texture2D" path="res://assets/effects/hurt_effect_all/hurtEffectAll0010.png" id="f10"]
+[sub_resource type="Animation" id="hit"]
+length = 0.3666666667
+step = 0.0333333333
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/keys = {"times": PackedFloat32Array(0.0000000000, 0.0333333333, 0.0666666667, 0.1000000000, 0.1333333333, 0.1666666667, 0.2000000000, 0.2333333333, 0.2666666667, 0.3000000000, 0.3333333333), "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1), "update": 1, "values": [ExtResource("f0"), ExtResource("f1"), ExtResource("f2"), ExtResource("f3"), ExtResource("f4"), ExtResource("f5"), ExtResource("f6"), ExtResource("f7"), ExtResource("f8"), ExtResource("f9"), ExtResource("f10")]}
+[sub_resource type="AnimationLibrary" id="library"]
+_data = {&"hit": SubResource("hit")}
+[node name="HitEffect" type="Node2D"]
+visible = false
+position = Vector2(0, -120)
+z_index = 5
+script = ExtResource("script")
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(2, 2)
+texture = ExtResource("f0")
+centered = false
+offset = Vector2(-72, -73)
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries/ = SubResource("library")
+callback_mode_process = 2

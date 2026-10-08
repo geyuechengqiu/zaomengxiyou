@@ -1,0 +1,76 @@
+{
+  "animation_player": {
+    "advance_median_us": 76098,
+    "create_median_us": 19882,
+    "extra_player_nodes_per_number": 1,
+    "memory_median_bytes": 10566984
+  },
+  "count": 1000,
+  "delta": 0.0166666666666667,
+  "engine": "4.7.2-stable (custom_build)",
+  "method": "identical Node2D targets; 3 tracks vs 4 property Tweeners + 1 interval; headless main-thread only, no glyph draw/texture load",
+  "runs": 5,
+  "samples": {
+    "animation_player": [
+      {
+        "advance_us": 77970,
+        "create_us": 19882,
+        "memory_bytes": 12148248
+      },
+      {
+        "advance_us": 70803,
+        "create_us": 15479,
+        "memory_bytes": 10558984
+      },
+      {
+        "advance_us": 70865,
+        "create_us": 16920,
+        "memory_bytes": 10559048
+      },
+      {
+        "advance_us": 82991,
+        "create_us": 19937,
+        "memory_bytes": 10566984
+      },
+      {
+        "advance_us": 76098,
+        "create_us": 20104,
+        "memory_bytes": 10567048
+      }
+    ],
+    "tween": [
+      {
+        "advance_us": 39358,
+        "create_us": 14191,
+        "memory_bytes": 9478344
+      },
+      {
+        "advance_us": 40495,
+        "create_us": 13044,
+        "memory_bytes": 9482360
+      },
+      {
+        "advance_us": 42863,
+        "create_us": 13556,
+        "memory_bytes": 9220152
+      },
+      {
+        "advance_us": 44321,
+        "create_us": 14064,
+        "memory_bytes": 9220956
+      },
+      {
+        "advance_us": 40095,
+        "create_us": 12140,
+        "memory_bytes": 9224152
+      }
+    ]
+  },
+  "tween": {
+    "advance_median_us": 40495,
+    "create_median_us": 13556,
+    "extra_player_nodes_per_number": 0,
+    "memory_median_bytes": 9224152
+  },
+  "updates": 54
+}

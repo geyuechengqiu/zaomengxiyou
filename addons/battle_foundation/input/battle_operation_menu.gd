@@ -9,6 +9,7 @@ var _status: Label
 var _rows: VBoxContainer
 var _buttons: Dictionary = {}
 var _reason: StringName
+var _scene_ui: bool = false
 #endregion
 #region 创建与绑定
 func _ready() -> void:
@@ -58,6 +59,9 @@ func _gui_input(_event: InputEvent) -> void:
 
 func _refresh_rows() -> void:
 	if _rows == null:
+		return
+	if _scene_ui:
+		_refresh_scene_rows()
 		return
 	for child in _rows.get_children():
 		child.queue_free()
@@ -110,6 +114,13 @@ func _on_remap_finished(_action: StringName, succeeded: bool) -> void:
 #endregion
 #region 模态界面
 func _build_ui() -> void:
+	if has_node(^"Margin/Panel/Column/Scroll/Rows"):
+		_scene_ui = true
+		_status = $Margin/Panel/Column/Status
+		_rows = $Margin/Panel/Column/Scroll/Rows
+		$Margin/Panel/Column/Buttons/Reset.pressed.connect(func(): _bindings.reset_profile(controller.profile); _refresh_rows())
+		$Margin/Panel/Column/Buttons/Close.pressed.connect(func(): set_open(false))
+		return
 	set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	mouse_filter = Control.MOUSE_FILTER_STOP
 	focus_mode = Control.FOCUS_ALL
@@ -164,4 +175,20 @@ func _build_ui() -> void:
 	close.text = "返回游戏 [Esc]"
 	close.pressed.connect(func(): set_open(false))
 	row.add_child(close)
+
+## 预置行只更新文字、可见性与连接，不创建/删除控件。
+func _refresh_scene_rows() -> void:
+	_buttons.clear()
+	for row in _rows.get_children():
+		var intent := StringName(row.get_meta(&"intent", &""))
+		var actions := controller.profile.get_actions(intent) if is_instance_valid(controller) and controller.profile != null else []
+		row.visible = not actions.is_empty()
+		if actions.is_empty():
+			continue
+		var button := row.get_node(^"Binding") as Button
+		button.text = _bindings.get_binding_text(StringName(actions[0]))
+		var callback := _start_remap.bind(intent)
+		if not button.pressed.is_connected(callback):
+			button.pressed.connect(callback)
+		_buttons[intent] = button
 #endregion

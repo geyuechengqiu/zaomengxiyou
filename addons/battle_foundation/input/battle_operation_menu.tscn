@@ -1,0 +1,287 @@
+[gd_scene format=3]
+[ext_resource type="Script" path="res://addons/battle_foundation/input/battle_operation_menu.gd" id="script"]
+[sub_resource type="StyleBoxFlat" id="panel"]
+bg_color = Color(0.09, 0.16, 0.23, 1)
+content_margin_left = 20.0
+content_margin_right = 20.0
+content_margin_top = 16.0
+content_margin_bottom = 16.0
+[node name="OperationMenu" type="Control"]
+process_mode = 3
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 2
+script = ExtResource("script")
+[node name="Backdrop" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+color = Color(0.02, 0.04, 0.07, 0.95)
+[node name="Margin" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme_override_constants/margin_left = 120
+theme_override_constants/margin_right = 120
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_bottom = 24
+[node name="Panel" type="PanelContainer" parent="Margin"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("panel")
+[node name="Column" type="VBoxContainer" parent="Margin/Panel"]
+layout_mode = 2
+theme_override_constants/separation = 8
+[node name="Title" type="Label" parent="Margin/Panel/Column"]
+layout_mode = 2
+text = "操作设置 · 按键重映射"
+theme_override_font_sizes/font_size = 24
+[node name="Status" type="Label" parent="Margin/Panel/Column"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 40)
+autowrap_mode = 3
+theme_override_font_sizes/font_size = 16
+theme_override_colors/font_color = Color(1, 0.83, 0.55, 1)
+[node name="Scroll" type="ScrollContainer" parent="Margin/Panel/Column"]
+layout_mode = 2
+size_flags_vertical = 3
+[node name="Rows" type="VBoxContainer" parent="Margin/Panel/Column/Scroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 5
+[node name="move_left" type="HBoxContainer" parent="Margin/Panel/Column/Scroll/Rows"]
+layout_mode = 2
+metadata/intent = &"move_left"
+[node name="Name" type="Label" parent="Margin/Panel/Column/Scroll/Rows/move_left"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "左移"
+[node name="Binding" type="Button" parent="Margin/Panel/Column/Scroll/Rows/move_left"]
+layout_mode = 2
+custom_minimum_size = Vector2(220, 30)
+text = "未绑定"
+[node name="move_right" type="HBoxContainer" parent="Margin/Panel/Column/Scroll/Rows"]
+layout_mode = 2
+metadata/intent = &"move_right"
+[node name="Name" type="Label" parent="Margin/Panel/Column/Scroll/Rows/move_right"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "右移"
+[node name="Binding" type="Button" parent="Margin/Panel/Column/Scroll/Rows/move_right"]
+layout_mode = 2
+custom_minimum_size = Vector2(220, 30)
+text = "未绑定"
+[node name="move_up" type="HBoxContainer" parent="Margin/Panel/Column/Scroll/Rows"]
+layout_mode = 2
+metadata/intent = &"move_up"
+[node name="Name" type="Label" parent="Margin/Panel/Column/Scroll/Rows/move_up"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "上方向"
+[node name="Binding" type="Button" parent="Margin/Panel/Column/Scroll/Rows/move_up"]
+layout_mode = 2
+custom_minimum_size = Vector2(220, 30)
+text = "未绑定"
+[node name="move_down" type="HBoxContainer" parent="Margin/Panel/Column/Scroll/Rows"]
+layout_mode = 2
+metadata/intent = &"move_down"
+[node name="Name" type="Label" parent="Margin/Panel/Column/Scroll/Rows/move_down"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "下方向"
+[node name="Binding" type="Button" parent="Margin/Panel/Column/Scroll/Rows/move_down"]
+layout_mode = 2
+custom_minimum_size = Vector2(220, 30)
+text = "未绑定"
+[node name="run" type="HBoxContainer" parent="Margin/Panel/Column/Scroll/Rows"]
+layout_mode = 2
+metadata/intent = &"run"
+[node name="Name" type="Label" parent="Margin/Panel/Column/Scroll/Rows/run"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "奔跑"
+[node name="Binding" type="Button" parent="Margin/Panel/Column/Scroll/Rows/run"]
+layout_mode = 2
+custom_minimum_size = Vector2(220, 30)
+text = "未绑定"
+[node name="jump" type="HBoxContainer" parent="Margin/Panel/Column/Scroll/Rows"]
+layout_mode = 2
+metadata/intent = &"jump"
+[node name="Name" type="Label" parent="Margin/Panel/Column/Scroll/Rows/jump"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "跳跃"
+[node name="Binding" type="Button" parent="Margin/Panel/Column/Scroll/Rows/jump"]
+layout_mode = 2
+custom_minimum_size = Vector2(220, 30)
+text = "未绑定"
+[node name="attack" type="HBoxContainer" parent="Margin/Panel/Column/Scroll/Rows"]
+layout_mode = 2
+metadata/intent = &"attack"
+[node name="Name" type="Label" parent="Margin/Panel/Column/Scroll/Rows/attack"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "普攻"
+[node name="Binding" type="Button" parent="Margin/Panel/Column/Scroll/Rows/attack"]
+layout_mode = 2
+custom_minimum_size = Vector2(220, 30)
+text = "未绑定"
+[node name="skill_1" type="HBoxContainer" parent="Margin/Panel/Column/Scroll/Rows"]
+layout_mode = 2
+metadata/intent = &"skill_1"
+[node name="Name" type="Label" parent="Margin/Panel/Column/Scroll/Rows/skill_1"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "技能槽 1"
+[node name="Binding" type="Button" parent="Margin/Panel/Column/Scroll/Rows/skill_1"]
+layout_mode = 2
+custom_minimum_size = Vector2(220, 30)
+text = "未绑定"
+[node name="skill_2" type="HBoxContainer" parent="Margin/Panel/Column/Scroll/Rows"]
+layout_mode = 2
+metadata/intent = &"skill_2"
+[node name="Name" type="Label" parent="Margin/Panel/Column/Scroll/Rows/skill_2"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "技能槽 2"
+[node name="Binding" type="Button" parent="Margin/Panel/Column/Scroll/Rows/skill_2"]
+layout_mode = 2
+custom_minimum_size = Vector2(220, 30)
+text = "未绑定"
+[node name="skill_3" type="HBoxContainer" parent="Margin/Panel/Column/Scroll/Rows"]
+layout_mode = 2
+metadata/intent = &"skill_3"
+[node name="Name" type="Label" parent="Margin/Panel/Column/Scroll/Rows/skill_3"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "技能槽 3"
+[node name="Binding" type="Button" parent="Margin/Panel/Column/Scroll/Rows/skill_3"]
+layout_mode = 2
+custom_minimum_size = Vector2(220, 30)
+text = "未绑定"
+[node name="skill_4" type="HBoxContainer" parent="Margin/Panel/Column/Scroll/Rows"]
+layout_mode = 2
+metadata/intent = &"skill_4"
+[node name="Name" type="Label" parent="Margin/Panel/Column/Scroll/Rows/skill_4"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "技能槽 4"
+[node name="Binding" type="Button" parent="Margin/Panel/Column/Scroll/Rows/skill_4"]
+layout_mode = 2
+custom_minimum_size = Vector2(220, 30)
+text = "未绑定"
+[node name="skill_5" type="HBoxContainer" parent="Margin/Panel/Column/Scroll/Rows"]
+layout_mode = 2
+metadata/intent = &"skill_5"
+[node name="Name" type="Label" parent="Margin/Panel/Column/Scroll/Rows/skill_5"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "技能槽 5"
+[node name="Binding" type="Button" parent="Margin/Panel/Column/Scroll/Rows/skill_5"]
+layout_mode = 2
+custom_minimum_size = Vector2(220, 30)
+text = "未绑定"
+[node name="magic_weapon" type="HBoxContainer" parent="Margin/Panel/Column/Scroll/Rows"]
+layout_mode = 2
+metadata/intent = &"magic_weapon"
+[node name="Name" type="Label" parent="Margin/Panel/Column/Scroll/Rows/magic_weapon"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "法宝"
+[node name="Binding" type="Button" parent="Margin/Panel/Column/Scroll/Rows/magic_weapon"]
+layout_mode = 2
+custom_minimum_size = Vector2(220, 30)
+text = "未绑定"
+[node name="wushuang" type="HBoxContainer" parent="Margin/Panel/Column/Scroll/Rows"]
+layout_mode = 2
+metadata/intent = &"wushuang"
+[node name="Name" type="Label" parent="Margin/Panel/Column/Scroll/Rows/wushuang"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "无双"
+[node name="Binding" type="Button" parent="Margin/Panel/Column/Scroll/Rows/wushuang"]
+layout_mode = 2
+custom_minimum_size = Vector2(220, 30)
+text = "未绑定"
+[node name="wing_skill" type="HBoxContainer" parent="Margin/Panel/Column/Scroll/Rows"]
+layout_mode = 2
+metadata/intent = &"wing_skill"
+[node name="Name" type="Label" parent="Margin/Panel/Column/Scroll/Rows/wing_skill"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "翅膀技能"
+[node name="Binding" type="Button" parent="Margin/Panel/Column/Scroll/Rows/wing_skill"]
+layout_mode = 2
+custom_minimum_size = Vector2(220, 30)
+text = "未绑定"
+[node name="ultimate" type="HBoxContainer" parent="Margin/Panel/Column/Scroll/Rows"]
+layout_mode = 2
+metadata/intent = &"ultimate"
+[node name="Name" type="Label" parent="Margin/Panel/Column/Scroll/Rows/ultimate"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "奥义"
+[node name="Binding" type="Button" parent="Margin/Panel/Column/Scroll/Rows/ultimate"]
+layout_mode = 2
+custom_minimum_size = Vector2(220, 30)
+text = "未绑定"
+[node name="item_1" type="HBoxContainer" parent="Margin/Panel/Column/Scroll/Rows"]
+layout_mode = 2
+metadata/intent = &"item_1"
+[node name="Name" type="Label" parent="Margin/Panel/Column/Scroll/Rows/item_1"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "道具 1"
+[node name="Binding" type="Button" parent="Margin/Panel/Column/Scroll/Rows/item_1"]
+layout_mode = 2
+custom_minimum_size = Vector2(220, 30)
+text = "未绑定"
+[node name="item_2" type="HBoxContainer" parent="Margin/Panel/Column/Scroll/Rows"]
+layout_mode = 2
+metadata/intent = &"item_2"
+[node name="Name" type="Label" parent="Margin/Panel/Column/Scroll/Rows/item_2"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "道具 2"
+[node name="Binding" type="Button" parent="Margin/Panel/Column/Scroll/Rows/item_2"]
+layout_mode = 2
+custom_minimum_size = Vector2(220, 30)
+text = "未绑定"
+[node name="pet_toggle" type="HBoxContainer" parent="Margin/Panel/Column/Scroll/Rows"]
+layout_mode = 2
+metadata/intent = &"pet_toggle"
+[node name="Name" type="Label" parent="Margin/Panel/Column/Scroll/Rows/pet_toggle"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "宠物"
+[node name="Binding" type="Button" parent="Margin/Panel/Column/Scroll/Rows/pet_toggle"]
+layout_mode = 2
+custom_minimum_size = Vector2(220, 30)
+text = "未绑定"
+[node name="mount_toggle" type="HBoxContainer" parent="Margin/Panel/Column/Scroll/Rows"]
+layout_mode = 2
+metadata/intent = &"mount_toggle"
+[node name="Name" type="Label" parent="Margin/Panel/Column/Scroll/Rows/mount_toggle"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "坐骑"
+[node name="Binding" type="Button" parent="Margin/Panel/Column/Scroll/Rows/mount_toggle"]
+layout_mode = 2
+custom_minimum_size = Vector2(220, 30)
+text = "未绑定"
+[node name="Buttons" type="HBoxContainer" parent="Margin/Panel/Column"]
+layout_mode = 2
+theme_override_constants/separation = 12
+[node name="Reset" type="Button" parent="Margin/Panel/Column/Buttons"]
+layout_mode = 2
+text = "恢复默认按键"
+[node name="Close" type="Button" parent="Margin/Panel/Column/Buttons"]
+layout_mode = 2
+text = "返回游戏 [Esc]"

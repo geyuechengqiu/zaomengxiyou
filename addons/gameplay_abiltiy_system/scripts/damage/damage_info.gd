@@ -13,6 +13,26 @@ var source_component: Node = null                ## 伤害的直接来源组件�
 var base_damage : float = 0.0
 var is_crit: bool = false                        ## 是否暴击
 var final_damage: float = 0.0
+## 一次命中共享同一个结果；计算阶段与生命应用阶段分离。
+var calculated_damage: float = 0.0
+var normal_damage: float = 0.0
+var true_damage: float = 0.0
+var shield_absorbed: float = 0.0
+var actual_hp_loss: float = 0.0
+var hp_before: float = 0.0
+var hp_after: float = 0.0
+var is_dodged: bool = false
+var is_blocked: bool = false
+var is_immune: bool = false
+var applied: bool = false
+## 计算器生成的单次命中不可重复应用；旧手工数据包保留可复用语义。
+var single_use: bool = false
+var hit_rate: float = 1.0
+var crit_rate: float = 0.0
+var crit_multiplier: float = 1.0
+var trace: Array[Dictionary] = []
+## 原版策略在 Vital 应用时按原顺序处理 Buff、护盾和角色回调。
+var application_resolver: Callable
 #endregion
 #region 生命周期与引擎回调
 
@@ -24,4 +44,24 @@ func _init(
 	instigator = p_instigator
 	source_component = p_source_component
 	base_damage = p_base_damage
+#endregion
+#region 结果与审计
+func scale_damage(multiplier: float) -> void:
+	normal_damage *= multiplier
+	true_damage *= multiplier
+	final_damage *= multiplier
+
+func record(stage: StringName, details: Dictionary = {}) -> void:
+	var row := {"stage": stage, "normal": normal_damage, "true": true_damage}
+	row.merge(details, true)
+	trace.append(row)
+
+func to_dictionary() -> Dictionary:
+	return {"calculated_damage": calculated_damage, "normal_damage": normal_damage,
+		"true_damage": true_damage, "shield_absorbed": shield_absorbed,
+		"actual_hp_loss": actual_hp_loss, "resolved_damage": final_damage,
+		"hp_before": hp_before, "hp_after": hp_after, "is_dodged": is_dodged,
+		"is_crit": is_crit, "is_blocked": is_blocked, "is_immune": is_immune,
+		"hit_rate": hit_rate, "crit_rate": crit_rate, "crit_multiplier": crit_multiplier,
+		"damage_trace": trace.duplicate(true), "damage_info": self}
 #endregion

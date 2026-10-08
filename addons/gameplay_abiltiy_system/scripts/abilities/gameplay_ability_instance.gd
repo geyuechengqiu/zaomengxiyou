@@ -13,6 +13,9 @@ var _blackboard: BTBlackboard = null
 # 【核心状态】技能是否正在执行（行为树是否在跑）
 var is_active: bool = false
 var disabled: bool = false
+## 同步完成通知重新激活同一技能时，旧调用不能继续更新或重置新施放。
+var activation_serial: int = 0
+var completion_status: int = BTNode.Status.SUCCESS
 
 var _indicator_instance: Node3D = null
 var _is_targeting: bool = false
@@ -83,6 +86,7 @@ func try_activate(context: Dictionary = {}) -> bool:
 		return false
 
 	# 2. 注入初始黑板数据（在设置 is_active 之前）
+	activation_serial += 1
 	if is_instance_valid(_blackboard):
 		_blackboard.clear() # 清理上一轮的残留
 		# 将 context 注入黑板，供树节点读取
@@ -106,11 +110,14 @@ func try_activate(context: Dictionary = {}) -> bool:
 
 # 每帧更新（用于需要持续更新的技能，如连击计时器、引导技能）
 func update(delta: float) -> void:
+	var serial := activation_serial
 	# 调用所有特性的 update（通用钩子，对所有技能类型有效）
 	for feature in _features.values():
 		if not is_instance_valid(feature):
 			continue
 		feature.update(self, delta)
+		if activation_serial != serial:
+			return
 	# 更新行为树
 	if is_active and is_instance_valid(_bt_instance):
 		var result = _bt_instance.tick(delta)
@@ -122,14 +129,20 @@ func end_ability(final_status: int = BTNode.Status.SUCCESS) -> void:
 	if not is_active: return
 
 	is_active = false
+	completion_status = final_status
+	var serial := activation_serial
 	
 	# 通知特性技能结束了
 	for feature in _features.values():
 		if is_instance_valid(feature): 
 			feature.on_completed(self)
+			if activation_serial != serial:
+				return
 			
 	# 发出信号
 	ability_completed.emit(self)
+	if activation_serial != serial:
+		return
 
 	# (可选) 如果树还在跑但被强制结束，重置树
 	if is_instance_valid(_bt_instance):

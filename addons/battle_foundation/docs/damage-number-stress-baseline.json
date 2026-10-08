@@ -1,0 +1,141 @@
+{
+  "cpu": "AMD Ryzen 9 8940HX with Radeon Graphics",
+  "engine": "4.7.2-stable (custom_build)",
+  "gpu": "NVIDIA GeForce RTX 5060 Laptop GPU",
+  "method": "actual damage_number PackedScene via CombatFeedback, mixed original styles and 1-5 digits, GPU-rendered; 48 updates/burst, delta=1/120; stream delta=1/60",
+  "results": [
+    {
+      "draw_calls_p50": 488.0,
+      "live": 100,
+      "memory_delta_bytes": 1007388,
+      "mode": "burst_first",
+      "render_frame_p50_ms": 1.071,
+      "render_frame_p95_ms": 1.887,
+      "spawn_ms": 2.237,
+      "update_p50_ms": 0.12,
+      "update_p95_ms": 0.193
+    },
+    {
+      "draw_calls_p50": 488.0,
+      "live": 100,
+      "memory_delta_bytes": 1002556,
+      "mode": "burst_warm",
+      "render_frame_p50_ms": 1.01,
+      "render_frame_p95_ms": 1.321,
+      "spawn_ms": 2.082,
+      "update_p50_ms": 0.113,
+      "update_p95_ms": 0.168
+    },
+    {
+      "draw_calls_p50": 2168.0,
+      "live": 500,
+      "memory_delta_bytes": 5689100,
+      "mode": "burst_first",
+      "render_frame_p50_ms": 2.222,
+      "render_frame_p95_ms": 2.872,
+      "spawn_ms": 9.762,
+      "update_p50_ms": 0.655,
+      "update_p95_ms": 0.96
+    },
+    {
+      "draw_calls_p50": 2168.0,
+      "live": 500,
+      "memory_delta_bytes": 5010464,
+      "mode": "burst_warm",
+      "render_frame_p50_ms": 2.307,
+      "render_frame_p95_ms": 2.938,
+      "spawn_ms": 9.236,
+      "update_p50_ms": 0.621,
+      "update_p95_ms": 1.087
+    },
+    {
+      "draw_calls_p50": 4225.0,
+      "live": 1000,
+      "memory_delta_bytes": 10714600,
+      "mode": "burst_first",
+      "render_frame_p50_ms": 4.479,
+      "render_frame_p95_ms": 6.346,
+      "spawn_ms": 20.434,
+      "update_p50_ms": 1.803,
+      "update_p95_ms": 2.729
+    },
+    {
+      "draw_calls_p50": 4225.0,
+      "live": 1000,
+      "memory_delta_bytes": 10017552,
+      "mode": "burst_warm",
+      "render_frame_p50_ms": 4.252,
+      "render_frame_p95_ms": 5.337,
+      "spawn_ms": 18.514,
+      "update_p50_ms": 1.7,
+      "update_p95_ms": 2.189
+    },
+    {
+      "draw_calls_p50": 8377.0,
+      "live": 2000,
+      "memory_delta_bytes": 21702016,
+      "mode": "burst_first",
+      "render_frame_p50_ms": 9.264,
+      "render_frame_p95_ms": 10.802,
+      "spawn_ms": 40.17,
+      "update_p50_ms": 4.429,
+      "update_p95_ms": 5.5
+    },
+    {
+      "draw_calls_p50": 8377.0,
+      "live": 2000,
+      "memory_delta_bytes": 20036208,
+      "mode": "burst_warm",
+      "render_frame_p50_ms": 9.704,
+      "render_frame_p95_ms": 10.989,
+      "spawn_ms": 43.755,
+      "update_p50_ms": 4.467,
+      "update_p95_ms": 5.424
+    },
+    {
+      "draw_calls_p50": 20766.0,
+      "live": 5000,
+      "memory_delta_bytes": 55222216,
+      "mode": "burst_first",
+      "render_frame_p50_ms": 23.408,
+      "render_frame_p95_ms": 27.296,
+      "spawn_ms": 108.722,
+      "update_p50_ms": 11.965,
+      "update_p95_ms": 14.623
+    },
+    {
+      "draw_calls_p50": 20766.0,
+      "live": 5000,
+      "memory_delta_bytes": 50104180,
+      "mode": "burst_warm",
+      "render_frame_p50_ms": 23.296,
+      "render_frame_p95_ms": 27.901,
+      "spawn_ms": 101.966,
+      "update_p50_ms": 11.971,
+      "update_p95_ms": 13.9
+    },
+    {
+      "frames": 240,
+      "mode": "stream",
+      "new_per_second": 1200,
+      "peak_live": 1080,
+      "render_frame_p50_ms": 6.624,
+      "render_frame_p95_ms": 8.407,
+      "spawn_update_p50_ms": 2.829,
+      "spawn_update_p95_ms": 3.614
+    },
+    {
+      "frames": 240,
+      "mode": "stream",
+      "new_per_second": 3600,
+      "peak_live": 3240,
+      "render_frame_p50_ms": 19.646,
+      "render_frame_p95_ms": 21.768,
+      "spawn_update_p50_ms": 9.481,
+      "spawn_update_p95_ms": 10.622
+    }
+  ],
+  "viewport": "(940.0, 590.0)",
+  "vsync": "disabled",
+  "timing_note": "render_frame is update start through frame_post_draw, not full frame. Baseline did not capture full_frame. Burst creation is timed separately. Original peak_live includes pending queued frees."
+}

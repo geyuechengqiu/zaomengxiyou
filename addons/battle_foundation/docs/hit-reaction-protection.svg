@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="480" viewBox="0 0 1000 480">
+  <defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8" fill="#73849b"/></marker></defs>
+  <rect width="1000" height="480" rx="16" fill="#16202e"/>
+  <g font-family="Microsoft YaHei, sans-serif" fill="#e7eef7">
+    <text x="28" y="40" font-size="23">阶段 9 · 一次命中，多个独立裁决</text>
+    <g fill="#243448" stroke="#586d89"><rect x="30" y="72" width="940" height="66" rx="10"/></g>
+    <text x="50" y="100" font-size="18">BattleEntity2D.receive_damage_info · 统一命中入口</text>
+    <text x="50" y="124" font-size="14">先读取无敌策略；闪避跳过效果；触发保护后重新读取策略，避免普通受击覆盖 PROTECT</text>
+    <g fill="none" stroke="#73849b" stroke-width="2" marker-end="url(#arrow)">
+      <path d="M180 138 V183"/><path d="M500 138 V183"/><path d="M820 138 V183"/>
+      <path d="M180 289 V324"/><path d="M500 289 V324"/><path d="M820 289 V324"/>
+    </g>
+    <g fill="#263b4e" stroke="#629bc1"><rect x="30" y="188" width="300" height="100" rx="10"/><rect x="350" y="188" width="300" height="100" rx="10"/><rect x="670" y="188" width="300" height="100" rx="10"/></g>
+    <g font-size="18"><text x="50" y="215">HP · GAS / HealthVital</text><text x="370" y="215">动作 · ReactionController</text><text x="690" y="215">保护 · ProtectionSystem</text></g>
+    <g font-size="14">
+      <text x="50" y="244">霸体默认仍扣血，可编辑受伤倍率</text><text x="50" y="267">无敌提前阻止伤害应用/盾消耗</text>
+      <text x="370" y="244">攻击段 + 目标抵抗 + Core 打断规则</text><text x="370" y="267">零扣血也可以硬直、击退、击飞</text>
+      <text x="690" y="244">每 Boss protectPoint / 可编辑满值</text><text x="690" y="267">每目标每技能累计，触发清零次数</text>
+    </g>
+    <g fill="#223c36" stroke="#61a68c"><rect x="30" y="330" width="300" height="75" rx="10"/><rect x="350" y="330" width="300" height="75" rx="10"/><rect x="670" y="330" width="300" height="75" rx="10"/></g>
+    <g font-size="16"><text x="50" y="359">独立生命、盾、状态与事件</text><text x="370" y="359">Core 叶子 + 扫掠碰撞运动</text><text x="690" y="359">PROTECT + 技能/预约清理</text></g>
+    <g font-size="13"><text x="50" y="383">不是“扣血后必定硬直”</text><text x="370" y="383">落地 → 倒地 → 起身；不瞬移穿墙</text><text x="690" y="383">保护默认防反应，不默认免伤</text></g>
+    <text x="30" y="447" font-size="16" fill="#b5c5d9">BattleClock 统一驱动：同 tick 全目标结算后开始 hit-stop；物理、动画、硬直、保护计时同步冻结</text>
+  </g>
+</svg>

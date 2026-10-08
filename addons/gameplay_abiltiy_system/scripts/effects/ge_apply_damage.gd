@@ -20,28 +20,50 @@ func _init() -> void:
 #endregion
 #region 内部实现
 
+## 原版免疫在结算末尾处理，保留结构化结果；其他过滤器仍照常工作。
+func _check_filters(target: Node, instigator: Node, context: Dictionary) -> bool:
+	var selected := DamageCalculator.resolve_strategy(instigator, context, damage_strategy)
+	if selected == null or not selected.resolves_invulnerability():
+		return super._check_filters(target, instigator, context)
+	for filter: GameplayFilterData in filters:
+		if not filter.check(target, instigator, context):
+			return false
+	for tag in target_blocked_tags:
+		if tag != invulnerable_block_tag and TagManager.has_tag(target, tag):
+			return false
+	return target_required_tags.is_empty() or TagManager.has_all_tags(target, target_required_tags)
+
 func _apply(target: Node, instigator: Node, context: Dictionary) -> void:
-	damage_multiplier *= context.get("damage_multiplier", 1)
-	context["damage_multiplier"] = damage_multiplier
-	damage_strategy = context.get("damage_strategy", damage_strategy)
+	var calculation_context := context.duplicate()
+	calculation_context["damage_multiplier_modifier"] = float(context.get("damage_multiplier_modifier", 1.0)) * damage_multiplier
 	
 	# 1. 获取 HealthVital
 	var vital_comp = GameplayAbilitySystem.get_component_by_interface(target, vital_comp_name)
+	if not is_instance_valid(vital_comp):
+		return
 	var health_vital: HealthVital = vital_comp.get_vital(vital_id)
+	if health_vital == null:
+		return
 	
 	# 直接从 context Dictionary 读取
 	var stacks = context.get("stacks", 1)
 	
 	# 2. 计算最终伤害
-	var final_damage = DamageCalculator.calculate_final_damage(target, instigator, context, damage_strategy)
+	var damage_info := DamageCalculator.calculate_damage(target, instigator, calculation_context, damage_strategy)
 	
 	# 3. 创建 DamageInfo
-	var damage_info = DamageInfo.new(instigator, context.get("source_node", null), final_damage * stacks)
-	damage_info.final_damage = damage_info.base_damage
+	damage_info.scale_damage(stacks)
+	damage_info.calculated_damage *= stacks
 	
 	# 4. 应用伤害（由 HealthVital 负责）
-	damage_info.final_damage = health_vital.apply_damage(damage_info, target)
+	if vital_id == &"health" and target.has_method("receive_damage_info"):
+		# 战斗宿主统一裁决无敌的各类效果、保护与反应；不再绕过其命中入口。
+		target.receive_damage_info(damage_info, StringName(context.get("interrupt_kind", &"normal")), int(context.get("interrupt_priority", 60)), calculation_context)
+	else:
+		health_vital.apply_damage(damage_info, target)
 	
 	# 5. 保存到上下文
-	context["final_damage"] = damage_info.final_damage
+	context["final_damage"] = damage_info.actual_hp_loss
+	context["damage_info"] = damage_info
+	context.merge(damage_info.to_dictionary(), true)
 #endregion

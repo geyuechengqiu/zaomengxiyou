@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="BattleOriginalDamageStrategy" format=3]
+[ext_resource type="Script" path="res://addons/battle_foundation/combat/battle_original_damage_strategy.gd" id="strategy"]
+[resource]
+script = ExtResource("strategy")
+levels_path = "res://data/damage/original_levels.json"
+skills_path = "res://data/damage/original_skills.json"
+mapping_path = "res://data/damage/skill_mapping.json"

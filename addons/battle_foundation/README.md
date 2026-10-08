@@ -1,6 +1,16 @@
 # Battle Foundation · 战斗基础、动画与操作控制
 
+阶段 9 新增 [受击、击退、浮空与独立保护条](combat/hit-reaction-protection.md)：HP 与动作分离，霸体受伤倍率、无敌效果策略可配置，真实 Core 叶子管理击飞/下落/落地/倒地/起身；保护满值读取各 Boss protectPoint 或显式覆盖，同目标同技能累计并在触发后重置。演示 [hit_reaction_demo.tscn](../../examples/hit_reaction_demo.tscn)，自动验收 199 项及 13 套既有回归通过。
+
+阶段 8 使用 GAS 策略 + Attribute/Vital/Status/Effect + Core 事件完成原版通用伤害链；等级评分沿用原版EXP，界面统一整数。原版盾后补1、真实伤害与吸血顺序、角色回调和结果字段见 [详细说明](combat/original-damage.md)。
+
+原版伤害样例已恢复五连击，并接入115张原版数字贴图、闪避/真实伤害随机偏移和 AnimationPlayer 上飘淡出；普通与真实伤害分开生成实例。窗口放大后的重复拉伸已修复。预览、源码依据与78项验收见 [跳字说明](../../data/effects/README.md)。
+
+阶段 7 见 [技能时间轴、连招与多段攻击](combat/skill-timeline.md)：扩展现有 BattleFrameTimelineFeature，新增攻击段/派生/位移资源，每次施放独立保存命中次数与下次命中时间；接入 GAS Cost/Cooldown、Status/Effect、Core 状态反应和预置对象回收。[三段演示](../../examples/skill_timeline_demo.tscn)、[验收](../../examples/verify_skill_timeline.tscn)、[联合类图](docs/skill-timeline.svg)。
+
 阶段 6 见 [单段普攻与战斗闭环](combat/README.md)：复用 Core/GAS，将物理体、受击区域和单一攻击框分开，加入每次施放独立的攻击实例与窗口去重、木桩、生命条和实际扣血飘字。交互入口 [single_attack_demo.tscn](../../examples/single_attack_demo.tscn)，自动验收 [verify_single_attack.tscn](../../examples/verify_single_attack.tscn)，结构与时序见 [联合类图](docs/single-attack-runtime.svg)。
+
+单段测试采用原版 940×590，已搭建全部节点；BattleSession 支持 scene_manifest_path，BattleEntity2D 支持 scene_definition_id / category / session_path，GAS 与操作系统复用预置组件和控制器。原版普通受击的 11 帧动画通过 [BattleHitEffect2D](presentation/battle_hit_effect_2d.gd) 和场景预置 AnimationPlayer 接入，时钟仍统一。配置与重置流程见战斗 README。
 
 属性阶段见 [属性计算链说明](attributes/README.md)：复用 GAS 最终属性/Vital/Status/Effect、Simple Inventory 装备槽和 Core 通知，统一基础、成长、装备、临时来源。面板与伤害读取相同最终值；提供 [联合类图](docs/attribute-pipeline.svg) 和 [场景验收](../../examples/verify_attribute_pipeline.tscn)。
 
@@ -31,7 +41,7 @@
 
 ![运动与状态联合类图](docs/motion-state.svg)
 
-动作状态使用 Core `BaseStateMachine` / `BaseState` 实现；每实体登记真实机器和九个独立叶子，保持单一 combat delta。`BattleActionState2D` 是语义兼容入口，查询 Core 当前叶子，不再维护另一份状态。继承、生命周期、死亡守卫和注销说明见 [动作状态机接入](movement/README.md#动作状态接入-core-插件状态机)；验收入口 [verify_wukong_state_machine.tscn](../../examples/verify_wukong_state_machine.tscn)。
+动作状态使用 Core `BaseStateMachine` / `BaseState` 实现；每实体登记真实机器和十五个独立叶子（原九种 + 阶段9六种），保持单一 combat delta。`BattleActionState2D` 是语义兼容入口，查询 Core 当前叶子，不再维护另一份状态。继承、生命周期、死亡守卫和注销说明见 [动作状态机接入](movement/README.md#动作状态接入-core-插件状态机)；验收入口 [verify_wukong_state_machine.tscn](../../examples/verify_wukong_state_machine.tscn)。
 
 ## 为什么需要补充插件
 

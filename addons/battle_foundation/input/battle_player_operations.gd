@@ -4,6 +4,8 @@ class_name BattlePlayerOperations
 const Result = BattleActionLeafState2D.OperationResult
 signal operation_observed(intent: CoreOperationIntent)
 @export var operation_profile: CoreOperationProfile
+## 指向预置 CoreOperationController；留空保留工厂兼容入口。
+@export var controller_path: NodePath
 ## skill_1..skill_5 / magic_weapon / wushuang 等语义槽位到 GAS 技能 ID。
 @export var ability_slots: Dictionary[StringName, StringName] = {}
 @export var device_filter: int = -1
@@ -21,12 +23,25 @@ func _ready() -> void:
 	actor = get_parent() as BattleEntity2D
 	assert(actor != null and operation_profile != null, "玩家操作需要 2D 战斗实体与操作配置")
 	assert(CoreSystem.operation_manager != null, "请启用 Core operation_manager")
-	controller = CoreSystem.operation_manager.create_controller(StringName("%s/operations" % actor.entity_id), operation_profile, device_filter)
+	var id := StringName("%s/operations" % actor.entity_id)
+	if not controller_path.is_empty():
+		controller = get_node(controller_path) as CoreOperationController
+		assert(controller != null)
+		var installed: bool = CoreSystem.operation_manager.bindings.install_profile(operation_profile)
+		assert(installed)
+		controller.profile = operation_profile
+		controller.device_filter = device_filter
+		var registered: bool = CoreSystem.operation_manager.register_controller(id, controller)
+		assert(registered)
+	else:
+		controller = CoreSystem.operation_manager.create_controller(id, operation_profile, device_filter)
 	assert(controller != null)
 	controller.externally_driven = true
 	controller.intent_emitted.connect(_on_intent)
 	controller.control_changed.connect(_on_control_changed)
-	add_child(controller)
+	if controller.get_parent() == null:
+		add_child(controller)
+	actor.operations = self
 	controller.set_control_blocked(&"ownership", not enabled)
 
 func advance_input(unscaled_delta: float) -> void:
