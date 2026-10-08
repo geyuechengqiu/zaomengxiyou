@@ -1,0 +1,61 @@
+[gd_resource type="Resource" script_class="GameplayAbilityDefinition" format=3 uid="uid://bqtqu071a622l"]
+
+[ext_resource type="Script" uid="uid://dm30yy8ucnbot" path="res://addons/battle_foundation/definitions/battle_frame_event.gd" id="8_27frn"]
+[ext_resource type="Script" uid="uid://ud4ug2ylqdo2" path="res://addons/battle_foundation/definitions/battle_skill_branch.gd" id="branch"]
+[ext_resource type="Script" uid="uid://dg5napbfppfb3" path="res://addons/battle_foundation/gas/battle_skill_cooldown_feature.gd" id="cooldown"]
+[ext_resource type="Script" uid="uid://chls772x4fojc" path="res://addons/gameplay_abiltiy_system/scripts/abilities/features/cost_feature.gd" id="cost"]
+[ext_resource type="Script" uid="uid://cmn60ti1qd07f" path="res://addons/gameplay_abiltiy_system/scripts/abilities/costs/ability_cost_base.gd" id="cost_type"]
+[ext_resource type="Script" uid="uid://bm4h231fb21pv" path="res://addons/gameplay_abiltiy_system/scripts/abilities/gameplay_ability_definition.gd" id="definition"]
+[ext_resource type="Script" uid="uid://cm0x3pewlrveo" path="res://addons/gameplay_abiltiy_system/scripts/abilities/features/gameplay_ability_feature.gd" id="feature"]
+[ext_resource type="Script" uid="uid://jxo0f6fi7ad" path="res://addons/battle_foundation/gas/battle_skill_mana_cost.gd" id="mana"]
+[ext_resource type="Script" uid="uid://b1047b2i0w3jx" path="res://addons/battle_foundation/definitions/battle_skill_motion.gd" id="motion"]
+[ext_resource type="Script" uid="uid://ctus3t2tt37o6" path="res://addons/battle_foundation/definitions/battle_attack_segment.gd" id="segment"]
+[ext_resource type="Script" uid="uid://daneexb55k8ae" path="res://addons/battle_foundation/gas/battle_frame_timeline_feature.gd" id="timeline"]
+
+[sub_resource type="Resource" id="Mana"]
+script = ExtResource("mana")
+skill_id = &"sunwukong_skill1"
+amounts = Array[float]([0.0, 22.0, 44.0, 71.0, 104.0, 140.0, 158.0, 199.0, 244.0, 291.0, 341.0, 393.0, 426.0, 498.0, 575.0, 658.0, 746.0, 840.0, 887.0, 990.0, 1097.0, 1211.0, 1330.0, 1454.0, 1515.0, 1648.0, 1786.0, 1930.0, 2080.0, 2235.0, 2385.0, 2593.0, 2813.0, 3045.0, 3288.0, 3544.0, 3669.0, 3915.0, 4170.0, 4435.0, 4709.0, 4994.0, 5149.0, 5449.0, 5760.0, 6081.0, 6412.0, 6754.0, 6942.0, 7301.0, 7671.0])
+
+[sub_resource type="Resource" id="Cost"]
+script = ExtResource("cost")
+costs = Array[ExtResource("cost_type")]([SubResource("Mana")])
+
+[sub_resource type="Resource" id="Cooldown"]
+script = ExtResource("cooldown")
+durations = Array[float]([0.0, 2.6, 2.3, 2.1, 1.8, 1.6, 1.4, 1.1, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9])
+cooldown_duration = 2.6
+
+[sub_resource type="Resource" id="Hit1"]
+script = ExtResource("segment")
+segment_id = &"skill1_hit_1"
+start_frame = 3
+end_frame = 10
+action = &"skill1"
+hit_rect = Rect2(-125, -249.05, 273.05, 262.05)
+damage_multiplier = 1.212
+hit_interval = 1.0
+knockback_speed = 96.0
+knockback_duration = 1.0
+launch_speed = 1200.0
+reset_vertical_velocity = true
+reaction_gravity = 1980.0
+hit_stun = 1.0
+protection_skill_id = "1101010"
+
+[sub_resource type="Resource" id="Timeline"]
+script = ExtResource("timeline")
+duration_frames = 12
+attack_segments = Array[ExtResource("segment")]([SubResource("Hit1")])
+animation_action = &"skill1"
+commit_resources = true
+can_use_in_air = true
+interrupt_actions = Array[StringName]([&"attack_1", &"attack_2", &"attack_3", &"attack_4", &"attack_5", &"skill2"])
+initial_status_ids = Array[StringName]([&"sunwukong_buff_6000101"])
+
+[resource]
+script = ExtResource("definition")
+ability_id = &"sunwukong_skill1"
+ability_name = "升龙斩"
+features = Array[ExtResource("feature")]([SubResource("Cost"), SubResource("Cooldown"), SubResource("Timeline")])
+metadata/original_skill_id = 1101010

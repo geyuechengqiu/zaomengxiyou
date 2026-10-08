@@ -1,0 +1,62 @@
+{
+  "original_repository": "D:\\UserData\\Downloads\\game\\Speculum-4399-master",
+  "business_character_id": "孙悟空",
+  "business_ability_id": "sunwukong_wushuang",
+  "original_role_id_for_traceability_only": "2001",
+  "scope": "ordinary xpType=1 visual appearance; rage gate/drain meter/combat buffs are not implemented",
+  "sources": [
+    {
+      "path": "exports/zmhj_character_state_control/sources/prefabs/scripts/ManEntity.as",
+      "sha256": "e3dcfcc236578a9cf6953db22c6f7bae6297fa98ccf0a603e8054f6f38bb4bad"
+    },
+    {
+      "path": "out/zmhj-equip-skill-diag/viewers/component/WuShuanImage.as",
+      "sha256": "718d7318c784fac9cae638cb6a7863ba2c34d71dd2edd7afcffd7e738ca8967d"
+    },
+    {
+      "path": "exports/zmhj_character_state_control/sources/com/wdcgame/engine/animation/Tween.as",
+      "sha256": "0cc0d1ad5d48bcb5ffd693cae066d2f046737231fbbcbb09c0583fb28feeaf57"
+    },
+    {
+      "path": "exports/zmhj_character_state_control/sources/models/vo/UserVO.as",
+      "sha256": "9290bdaf8d53ffb3dbf1bf7a76f66a24ebb1d2d442c7abeda56c98bc708839cd"
+    },
+    {
+      "path": "exports/zmhj_role_stats/原始配置/Role.json",
+      "sha256": "cd3444fb3e21a6aba6e122c57aed382cde9873ea2451d3d288285c06d1c0cadd"
+    }
+  ],
+  "parameters": {
+    "color": "0xFF3000",
+    "source_fps": 30,
+    "snapshot_interval_seconds": 0.2,
+    "ghost_lifetime_seconds": 1,
+    "ghost_fade": "linear alpha 1 to 0; custom Tween.as",
+    "original_bitmap_size": [
+      240,
+      240
+    ],
+    "original_foot_origin": [
+      120,
+      180
+    ],
+    "original_glow_filter": {
+      "alpha": 1,
+      "strength": 1,
+      "quality": 2,
+      "blur_x_y": "10+step",
+      "step_initial": 0,
+      "step_upper": 30,
+      "reverse_when_step_less_than": 0,
+      "cycle_source_frames": 62
+    },
+    "default_duration_seconds": 15,
+    "unit_scale": 2
+  },
+  "renderer": "isolated preauthored Spine GPU viewport; Gaussian shader approximates Flash GlowFilter",
+  "differences": [
+    "Snapshot includes body/skin/weapon and solved head pose, not independent attack VFX.",
+    "Large delta samples interpolate age/position but share current solved pose.",
+    "Original zSort-100+serial replaced by scene draw order behind body and above terrain."
+  ]
+}

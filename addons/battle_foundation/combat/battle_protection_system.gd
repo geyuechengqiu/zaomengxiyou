@@ -1,4 +1,4 @@
-extends RefCounted
+extends Node
 class_name BattleProtectionSystem
 ## 目标拥有自己的条和技能次数；次数跨释放延续，不属于 BattleAttackInstance。
 

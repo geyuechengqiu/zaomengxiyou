@@ -74,7 +74,7 @@ func _verify_registration() -> void:
 	for name in BattleActionLeafState2D.NAMES:
 		var leaf: BaseState = actions.machine.states[name]
 		_check(leaf is BattleActionLeafState2D and leaf.state_machine == actions.machine and leaf.agent == player and leaf != demo.right_target.action_state.machine.states[name], "Core 叶子所属关系、agent 与实例独立")
-	_check(actions.current == State.IDLE and actions.get_name() == "IDLE" and actions.machine.current_state.is_active, "旧语义入口读取当前 Core 叶子")
+	_check(actions.current == State.IDLE and actions.get_state_name() == "IDLE" and actions.machine.current_state.is_active, "旧语义入口读取当前 Core 叶子")
 #endregion
 #region 进入、退出、消息规则、直接 Core 跳转和唯一时钟
 func _verify_lifecycle_and_clock() -> void:

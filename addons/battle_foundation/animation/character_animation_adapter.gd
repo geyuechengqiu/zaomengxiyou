@@ -25,4 +25,11 @@ var last_error: String = ""
 @abstract func get_playback_progress() -> float
 @abstract func get_socket_global_transform(socket: StringName) -> Transform2D
 @abstract func is_socket_active(socket: StringName) -> bool
+
+## 状态表现与动作播放分别推进，每实体每个战斗tick只调用一次。
+func advance_status_visuals(_delta: float) -> void:
+	pass
+
+func clear_status_visuals() -> void:
+	pass
 #endregion

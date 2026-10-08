@@ -142,7 +142,7 @@ func _verify_combo(facing: int) -> void:
 	await _fresh()
 	demo.player.animation.set_facing(facing)
 	demo.place_near()
-	_check(demo.player.combo.definition.steps.size() == 5 and demo.player.abilities.get_all_ability_ids().size() == 7, "场景预置五连击与跑攻、跳攻GAS技能")
+	_check(demo.player.combo.definition.steps.size() == 5 and demo.player.abilities.has_ability(&"sunwukong_run_attack") and demo.player.abilities.has_ability(&"sunwukong_jump_attack"), "场景预置五连击与跑攻、跳攻GAS技能")
 	_check(demo.player.request_attack(), "发起五连击")
 	for duration in [10, 10, 12, 18]:
 		_check(demo.player.request_attack(), "同一普攻入口预约下一段")
@@ -185,6 +185,9 @@ func _verify_lifecycle() -> void:
 	await _fresh()
 	var target: BattleEntity2D = demo.dummies[1]
 	target.receive_damage(495.0)
+	_check(target.feedback.number_rows.get_active_count() == 1 and target.feedback.number_rows.get_active_numbers()[0].number == 495, "直接伤害也由公共结算事件生成一次跳字")
+	# 隔离下一次过量攻击的展示断言，先清理用于准备5HP的直接伤害数字。
+	target.feedback.number_rows.clear_numbers()
 	demo.player.request_attack()
 	await _step(8)
 	_check(hits[0].actual_hp_loss == 5.0 and target.feedback.number_rows.get_active_numbers()[0].number == 80, "过量伤害跳字显示原结算80，面板实际扣血5")

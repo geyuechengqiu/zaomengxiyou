@@ -32,6 +32,10 @@ var crit_rate: float = 0.0
 var crit_multiplier: float = 1.0
 var trace: Array[Dictionary] = []
 ## 原版策略在 Vital 应用时按原顺序处理 Buff、护盾和角色回调。
+## 明确的原版吸血阶段：伤害Buff之后、附伤与护盾之前。
+var lifesteal_basis: float = 0.0
+var lifesteal_requested: float = 0.0
+var lifesteal_actual: float = 0.0
 var application_resolver: Callable
 #endregion
 #region 生命周期与引擎回调
@@ -57,7 +61,7 @@ func record(stage: StringName, details: Dictionary = {}) -> void:
 	trace.append(row)
 
 func to_dictionary() -> Dictionary:
-	return {"calculated_damage": calculated_damage, "normal_damage": normal_damage,
+	return {"lifesteal_basis": lifesteal_basis, "lifesteal_requested": lifesteal_requested, "lifesteal_actual": lifesteal_actual, "calculated_damage": calculated_damage, "normal_damage": normal_damage,
 		"true_damage": true_damage, "shield_absorbed": shield_absorbed,
 		"actual_hp_loss": actual_hp_loss, "resolved_damage": final_damage,
 		"hp_before": hp_before, "hp_after": hp_after, "is_dodged": is_dodged,

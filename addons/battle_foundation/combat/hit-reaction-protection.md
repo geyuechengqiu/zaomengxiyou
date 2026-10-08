@@ -61,11 +61,15 @@ F5 运行 [hit_reaction_demo.tscn](../../../examples/hit_reaction_demo.tscn)。A
 | knockback_direction | attack_facing、away_from_attacker、target_facing、explicit |
 | knockback_sign | explicit 模式用 -1 向左、1 向右 |
 | launch_speed | 正值转换为向上 `velocity.y = -launch_speed`，受目标抗性缩放 |
+| reset_vertical_velocity | 即使 launch_speed 为 0 也覆写旧竖向速度；用于原版 TargetMove |
+| reaction_gravity | -1 沿用目标重力；非负值指定本次受击空中重力，落地恢复 |
 | knockdown | 落地后进入倒地/起身流程 |
 | interrupt_kind / priority | 同时经过 Core 当前动作的可打断种类与强度门槛 |
 | hit_stop_seconds | 当前命中的受击停顿秒数，同 tick 取最大请求 |
 
 速度单位是 Godot 世界像素/秒，距离是世界像素；这些演示运动值不是原 Flash 的单位换算结论。方向由命中上下文中的攻击朝向或相对位置确定，后续转身不会反向修改已经施加的冲量。
+
+悟空基础技能已按原版 TargetMove 单独换算：横向经过 normalToBodyVelocity，竖向直接进入 Nape 物理体。30 FPS、0.1 物理步长、110 重力和当前素材比例 2 对应横向 ×2、竖向 ×6、受击重力 1980；完整依据与每段数值见 [悟空技能说明](../../../data/skills/sunwukong/README.md)。原版火魔斩以相对目标方向配合负速度吸附，霸体仍可阻止位移。
 
 击退使用已有 `BattleMotionController2D.apply_impulse()`，每步通过 `move_and_collide` 扫掠并沿碰撞面滑动，不直接修改 X 坐标。定距击退最后一个 tick 只走剩余时间对应距离。重力与击退共同推进；墙体阻止穿越，地面和单向平台提供支撑，平台边缘可正常掉落。场景边界必须有真实碰撞体，不能只依靠摄影机范围；本演示左右墙为高碰撞体，覆盖浮空路径。连续新命中的冲量替换旧冲量，不叠加为无限速度。
 

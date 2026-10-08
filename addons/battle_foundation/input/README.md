@@ -21,6 +21,8 @@
 
 Core 继续与旧 InputManager 并列。这个角色入口不轮询全局 `Input.is_action_pressed()`，不依赖旧 InputManager 的事件过滤、墙钟缓存或只发出候选事件的 KeyRemapHandler。原模块的实现边界见 [Core 实现分析](../../godot_core_system-0.0.4/docs/implementation-analysis.md)。
 
+空格无双槽已装配 `sunwukong_wushuang`，直接预览15秒红光与残影；怒气门槛和无双数值加成尚未接入，详见 [普通无双说明](../../../data/effects/wushuang/README.md)。
+
 ## 默认操作
 
 | 语义意图 | 默认物理键 | 公共行为 |

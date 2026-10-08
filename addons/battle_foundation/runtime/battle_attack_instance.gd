@@ -13,6 +13,7 @@ var facing: int = 1
 var motion_facing: int = 1
 var phase: StringName = &"startup"
 var committed: bool = false
+var aim_degrees: float = 0.0
 var hit_count: int = 0
 var timeline: BattleFrameTimelineFeature
 var buffered_operations: Dictionary = {}
@@ -53,6 +54,16 @@ func register_hit(index: int, target_id: StringName, context: Dictionary = {}) -
 	hit_targets[key] = record
 	hit_count += 1
 	return true
+
+func next_hit_deadline(index: int, after: float, maximum: int, fallback: float) -> float:
+	var next := fallback
+	var prefix := "%d/" % index
+	for key: String in hit_targets:
+		if not key.begins_with(prefix): continue
+		var record: Dictionary = hit_targets[key]
+		if int(record.count) < maximum and float(record.next_hit_time) > after + 0.000000001:
+			next = minf(next, float(record.next_hit_time))
+	return next
 
 func close() -> void:
 	active = false

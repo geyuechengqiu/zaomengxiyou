@@ -295,7 +295,7 @@ singleAttack += box(30,415,440,210,'BattleAttackInstance : RefCounted', ['attack
 singleAttack += box(530,415,440,210,'BattleHitbox2D : Area2D', ['唯一 CollisionShape2D，读取技能数据','hit_rect → 正缩放 → 偏移 → 比例','以脚底镜像 → 世界多边形','窗口未结束：每个战斗 tick 查询'], '../movement/battle_hitbox_2d.gd','#fce7f3');
 singleAttack += box(1030,415,440,210,'BattleHurtbox2D : Area2D', ['独立可编辑 RectangleShape2D','vulnerable / get_polygon_global()','多边形相交；不参与物理阻挡','实例局部资源，不改共享模板'], '../movement/battle_hurtbox_2d.gd','#fce7f3');
 singleAttack += box(30,740,440,210,'GAS 伤害 / HealthVital', ['DamageCalculator 读取当前最终属性','临时公式：max(1, atk-phyDef) × 倍率','DamageInfo → apply_damage','生命耗尽 → Core DEAD / 取消攻击'], '../../gameplay_abiltiy_system/scripts/attributes/vitals/health_vital.gd','#fef3c7');
-singleAttack += box(530,740,440,210,'BattleCombatFeedback2D', ['snapshot_changed → 当前 / 最大生命','Core battle.attack.hit → 实际扣血','生命条 / 飘字 / 原版受击闪光','combat delta 同步推进与暂停'], '../presentation/battle_combat_feedback_2d.gd','#e2e8f0');
+singleAttack += box(530,740,440,210,'BattlePresentation2D', ['EntityViews → 目标血条 / 受击反馈','Core 命中事件 → 按目标分发','会话级 CanvasLayer / 共享跳字池','BattleSession 每 tick 统一推进一次'], '../presentation/battle_presentation_2d.gd','#e2e8f0');
 singleAttack += box(1030,740,440,210,'CharacterAnimationAdapter', ['悟空：原有 Spine / AnimationPlayer','木桩：AnimationPlayerAdapter2D','hurt / death：场景预置动画','动画完成只通知，不裁决战斗规则'], '../animation/animation_player_adapter_2d.gd','#e2e8f0');
 singleAttack += box(30,1060,440,185,'BattleClock / 生命周期', ['暂停 / 停顿冻结，慢动作统一缩放','打断 / 死亡 / 替换 / 退出关闭攻击','attack.finished 每个实例只通知一次','旧编号事件不能伤害新一次施放'], '../runtime/battle_clock.gd','#dcfce7');
 singleAttack += box(530,1060,440,185,'移动物理体：独立责任', ['CharacterBody2D + CapsuleShape2D','只负责地面 / 墙 / 平台 / 运动','攻击框和受击框物理层均为 0','木桩物理宽 44，受击宽 90'], '../../../data/battle2d/dummy/wooden_dummy.tscn','#dcfce7');
@@ -338,4 +338,83 @@ timelineDiagram += text(32,1116,'持续命中按释放 / 段 / 目标隔离；�
 timelineDiagram += text(32,1152,'对象是时间轴承载接口；原版保护公式、2D 弹道碰撞 / 穿透与召唤 AI 由后续模块接入。',18);
 fs.writeFileSync(path.join(docs,'skill-timeline.svg'),svg(1500,1200,'阶段 7 · 技能时间轴与多段攻击联合类图',timelineDiagram));
 // #endregion
+
+// #region Buff、被动与战斗触发联合类图
+let buffs = text(32,82,'复用 GAS 状态/效果与 Core 事件；定义只读、每次实例来源独立，公共表现属于战斗会话。');
+buffs += box(30,120,460,210,'GameplayStatusData', ['duration / max_stacks / stacking_group','tags / apply_effects / features','remove_on_death / initial_update_delta','施加时深复制完整资源图'], '../../gameplay_abiltiy_system/scripts/status/gameplay_status_data.gd','#dcfce7');
+buffs += box(530,120,460,210,'GameplayStatusComponent', ['active: Array[Instance]','匹配group + 直接被动来源','apply_status / remove_instance','快照遍历 / 外部 combat delta'], '../../gameplay_abiltiy_system/scripts/components/gameplay_status_component.gd');
+buffs += box(1030,120,460,210,'GameplayStatusInstance', ['stacks / remaining / elapsed / removed','instigator WeakRef / effect_state','每实例 source_id / Feature storage','到期、覆盖、驱散、死亡幂等移除'], '../../gameplay_abiltiy_system/scripts/status/gameplay_status_instance.gd');
+buffs += box(30,410,460,210,'BattleOriginalStatusPolicy', ['继承 GAS StatusStackingPolicy','0拒绝 / 1覆盖 / 2周期timer比较','3独立实例 / 基础4、5叠层 / 6延时','GAS策略保留；同组不同ID可合并'], '../gas/battle_original_status_policy.gd','#dcfce7');
+buffs += box(530,410,460,210,'StatusFeature / PeriodicEffects', ['apply / update / event / remove','循环补算截止到期的所有周期','实例计时；可配置 trigger_on_apply','PassiveStatusFeature 持有实例WeakRef'], '../../gameplay_abiltiy_system/scripts/status/features/feature_periodic_effects.gd');
+buffs += box(1030,410,460,210,'GameplayEffect + 原版效果', ['Attribute / PeriodicVital / Shield','DamageRules / ReflectDamage','reapply_on_stack 仅重放持续效果','状态、治疗等组合效果统一调用'], '../../gameplay_abiltiy_system/scripts/effects/gameplay_effect.gd','#fef3c7');
+buffs += box(30,700,460,210,'BattleAttributeComponent / Vital', ['按 status.instance 来源修正属性','覆盖/叠层使用嵌套事务','current health 与 hpMax 分开','健康比例变化与统一属性通知'], '../runtime/battle_attribute_component.gd');
+buffs += box(530,700,460,210,'BattleTriggerFeature', ['SOURCE / TARGET / EITHER 身份','OWNER / SOURCE / TARGET 接收者','概率 / 冷却 / 生命阈值穿越','实例busy + trigger_chain去重'], '../gas/battle_trigger_feature.gd','#fef3c7');
+buffs += box(1030,700,460,210,'GameplayTriggerGuard', ['嵌套入口预算 MAX_DEPTH = 16','apply_status / effect apply / remove','次生伤害默认不触发普通被动','允许次生时链内也不重复自身'], '../../gameplay_abiltiy_system/scripts/effects/gameplay_trigger_guard.gd','#fee2e2');
+buffs += box(30,990,460,210,'Core动作状态 / GAS标签', ['state.stunned → Core STUN','无敌 / 霸体使用标签引用计数','宿主 can_use_ability 阻止绕过','死亡最高优先；离场注销状态机'], '../runtime/battle_entity_2d.gd');
+buffs += box(530,990,460,210,'BattleSession + Core EventBus', ['cast → effective → settled → received','killed / health.changed / 次生伤害','battle/entity/damage身份与触发链','统一时钟 + 共享血条/数字/反馈'], '../runtime/battle_session.gd','#e2e8f0');
+buffs += box(1030,990,460,210,'BattleOriginalDamageStrategy', ['damage_buffs → 盾前吸血 → 护盾','最终普通+真实伤害作为反伤基准','DamageInfo保留请求/实际回复','实际扣血 / 吸收 / 闪避 / 暴击'], '../combat/battle_original_damage_strategy.gd','#fef3c7');
+buffs += arrow('M490 210H530','定义',492,190);
+buffs += arrow('M990 210H1030','持有',992,190);
+buffs += arrow('M260 410V370H750V330','裁决分组与策略',405,358);
+buffs += arrow('M1260 330V365H750V410','驱动Feature',921,356);
+buffs += arrow('M1260 330V410','执行效果',1280,371);
+buffs += arrow('M750 620V700','事件Feature',765,671);
+buffs += arrow('M1260 620V700','递归约束',1275,671);
+buffs += arrow('M1030 545H1010V660H260V700','记录/撤销自己的修改来源',481,653);
+buffs += arrow('M260 910V990','标签与控制',275,962);
+buffs += arrow('M750 990V910','统一事件通知',765,962);
+buffs += arrow('M1030 1090H990','发布结构化结果',958,1242);
+buffs += text(32,1270,'原版配置与组合验收被动分开；周期只执行有效区间，Buff结束/死亡/离场撤销来源、计时、标签与Cue。',18);
+fs.writeFileSync(path.join(docs,'buffs-triggers.svg'),svg(1520,1310,'Buff、被动与战斗触发 · 系统联合类图',buffs));
+// #endregion
+
+// #region 普通怪物AI与共享战斗类图
+let monsterAI = text(32,80,'资源只保存行为定义；AI提交意图，Core动作规则与GAS执行，公共表现属于BattleSession。');
+monsterAI += box(30,120,460,210,'BattleAIProfile2D', ['Policy / TargetSelector / Skill ID','索敌、活动、巡逻与攻击距离','退步、跳障、低血逃离配置','不保存当前目标或冷却'], '../ai/battle_ai_profile_2d.gd','#dcfce7');
+monsterAI += box(530,120,460,210,'BattleAIPolicy2D', ['decide(controller) → 意图Dictionary','Basic：melee / ranged / stationary','CHASE / RETURN / PATROL / FLEE','自定义资源覆盖决策函数'], '../ai/battle_ai_policy_2d.gd','#dcfce7');
+monsterAI += box(1030,120,460,210,'BattleAITargetSelector2D', ['过滤敌对、存活、检测/活动边界','最近 / 最低HP / 最高攻击','可优先指定实体定义','新规则覆盖score_target'], '../ai/battle_ai_target_selector_2d.gd','#dcfce7');
+monsterAI += box(30,430,460,210,'BattleAIController2D : Node', ['场景预置，独占目标/出生点','独占退步、巡逻、决策计时','只接受战斗delta，受控时停请求','AI与玩家共享动作入口'], '../ai/battle_ai_controller_2d.gd');
+monsterAI += box(530,430,460,210,'CoreOperationIntent → Core状态机', ['origin=ai；move / jump / ai_skill','当前叶子检查移动/转向/攻击许可','STUN / HURT / DEAD 不绕过','request_skill_operation → GAS'], '../runtime/battle_action_leaf_state_2d.gd','#fef3c7');
+monsterAI += box(1030,430,460,210,'GAS Ability / Cooldown / Cast', ['每怪物独占AbilityInstance与黑板','按原素材30FPS重放命中窗口','AttackInstance按释放/段/目标去重','取消和死亡清除窗口及待执行事件'], '../gas/battle_frame_timeline_feature.gd');
+monsterAI += box(30,770,460,235,'BattleEntity2D · 共享角色组件', ['Motion：重力 / 墙 / 地面 / 跳跃','Attribute / Vital：基础和当前HP','Status：眩晕、减速、护盾、霸体','Reaction / Protection / Death','无需第二套怪物移动或扣血代码'], '../runtime/battle_entity_2d.gd');
+monsterAI += box(530,770,460,235,'动画、判定与原版伤害', ['AnimationPlayerAdapter2D + 原图集','角色物理体 / Hurtbox / 单一Hitbox','同一攻击段可逐帧读取hit_rect_frames','原版DamageStrategy → HealthVital','命中/结算事件接入Buff被动'], '../movement/battle_hitbox_2d.gd','#fef3c7');
+monsterAI += box(1030,770,460,235,'BattleSession + 预置关卡', ['Clock：暂停 / 慢动作 / 受击停顿','Core EventBus + 命名ai随机流','预置32只碧玉径普通小怪','共享Presentation：血条/跳字/受击','关卡退出统一注销和清理实例'], '../runtime/battle_session.gd','#e2e8f0');
+monsterAI += arrow('M260 330V430','配置',275,383);
+monsterAI += arrow('M750 330V365H400V430','调用Policy',450,358);
+monsterAI += arrow('M1260 330V395H435V430','选择目标',910,387);
+monsterAI += arrow('M490 535H530','意图',491,521);
+monsterAI += arrow('M990 535H1030','GAS',998,521);
+monsterAI += arrow('M260 640V770','操作同一角色',275,713);
+monsterAI += arrow('M1260 640V680H750V770','素材帧 → 几何/结算',797,673);
+monsterAI += arrow('M490 880H530','属性',491,857);
+monsterAI += arrow('M990 880H1030','事件',991,857);
+monsterAI += arrow('M1260 770V700H10V535H30','统一战斗tick',1080,725);
+monsterAI += text(32,1070,'原版：剑舞32帧/两个窗口；驭兽使53帧/36～39帧兽形判定；共享配置不保存生命与技能冷却。',18);
+fs.writeFileSync(path.join(docs,'monster-ai.svg'),svg(1520,1110,'普通怪物与AI · 类图及联合执行',monsterAI));
+// #endregion
+
+// #region 悟空原版四技能与火魔斩联合类图
+let basicSkills = text(32,82,'配置只读，施放实例独占技能等级、瞄准、时钟与命中记录；所有身体、特效及唯一攻击框预置在场景。');
+basicSkills += box(30,120,440,210,'Core Operation → ActionState', ['Y / U / I / O / L → 技能槽意图','当前状态检查地面 / 空中 / 控制','重复 O → 风暴重劈派生','W / S → 射线瞄准轴'], '../input/battle_player_operations.gd','#e2e8f0');
+basicSkills += box(530,120,440,210,'GameplayAbilityDefinition', ['原版 MP / CD 逐级表','FrameTimeline：30 FPS 原帧号','AttackSegment：AB / 次数 / 间隔','状态、位移、派生与空中许可'], '../../../data/skills/sunwukong/README.md','#dcfce7');
+basicSkills += box(1030,120,440,210,'GAS AbilityInstance / Status', ['本次技能等级快照 → MP / CD','黑板保存剩余冷却和运行状态','原版霸体与 dmgRate 来源撤销','取消不退已支付MP和已提交CD'], '../gas/battle_skill_mana_cost.gd');
+basicSkills += box(30,440,440,235,'BattleAttackInstance', ['释放 / 攻击段 / 目标 → 命中记录','素材帧接触采样 + 精确再次命中','0.18秒不舍入至整数素材帧','取消清空窗口、待执行事件','多个同配置悟空完全隔离'], '../runtime/battle_attack_instance.gd');
+basicSkills += box(530,440,440,235,'BattleFrameTimelineFeature', ['跨帧按时间顺序补发','烈焰闪扫掠 / 墙体，速度800','火眼金睛60度/秒，-30～15度','风暴：旋转5次 → 重劈1次','火魔斩：连打5次 → 独立砸地'], '../gas/battle_frame_timeline_feature.gd','#fef3c7');
+basicSkills += box(1030,440,440,235,'SpineAnimationAdapter', ['主 AnimationPlayer → 原生子轨道','SkillPrimary / Secondary / BeamEnd','身体、射线、头部、端点同步','火魔斩：43帧恢复，46帧消散','尾帧仅表现，取消统一清理'], '../animation/spine_animation_adapter.gd','#fef3c7');
+basicSkills += box(30,790,440,210,'唯一 AttackHitbox → Hurtbox', ['AB坐标 / 偏移 / 素材比例2','射线旋转，整体随朝向镜像','无效或零面积AB不命中','物理碰撞与攻击/受击区域分开'], '../movement/battle_hitbox_2d.gd');
+basicSkills += box(530,790,440,210,'OriginalDamage → GAS Vital', ['语义 ID → 原技能倍率与固定附伤','火魔斩砸地独立1101081','原版暴击、抗性、减伤与护盾','计算伤害 / 实际HP变化分别保存'], '../combat/battle_original_damage_strategy.gd');
+basicSkills += box(1030,790,440,210,'BattleClock / Presentation', ['统一暂停、慢动作与受击停顿','MP/CD/动画/Buff只用战斗delta','Core发布命中、结算及状态通知','全场共用跳字池与怪物血条'], '../runtime/battle_session.gd','#e2e8f0');
+basicSkills += arrow('M470 225H530','槽位',475,210);
+basicSkills += arrow('M970 225H1030','独占实例',974,210);
+basicSkills += arrow('M750 330V440','只读时间轴',765,385);
+basicSkills += arrow('M1250 330V380H915V440','开始 / MP / CD / 状态',1000,370);
+basicSkills += arrow('M530 555H470','记录',478,542);
+basicSkills += arrow('M970 555H1030','动作',980,542);
+basicSkills += arrow('M250 675V790','窗口与去重',265,735);
+basicSkills += arrow('M470 895H530','敌对目标',475,875);
+basicSkills += arrow('M970 895H1030','反馈',980,875);
+basicSkills += arrow('M1250 790V730H750V675','统一战斗时钟',995,717);
+basicSkills += text(32,1050,'火魔斩：0～28帧连打（最多5次，每次间隔0.18秒） → 28～43帧砸地（1次） → 43～46帧视觉尾部（0伤害）。',17);
+fs.writeFileSync(path.join(docs,'wukong-basic-skills.svg'),svg(1500,1090,'悟空转职前四技能与火魔斩 · 类图和联合执行',basicSkills));
 console.log(`Generated ${fs.readdirSync(docs).filter(file => file.endsWith('.svg')).length} Battle Foundation SVG diagrams.`);
+// #endregion

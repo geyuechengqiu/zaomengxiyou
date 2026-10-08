@@ -11,7 +11,15 @@
       "sunwukong_attack4": "res://data/battle2d/hit_reaction/attack4.tres",
       "sunwukong_attack5": "res://data/battle2d/hit_reaction/attack5.tres",
       "sunwukong_run_attack": "res://data/battle2d/run_attack.tres",
-      "sunwukong_jump_attack": "res://data/battle2d/jump_attack.tres"
+      "sunwukong_jump_attack": "res://data/battle2d/jump_attack.tres",
+      "sunwukong_skill1": "res://data/skills/sunwukong/skill1.tres",
+      "sunwukong_skill2": "res://data/skills/sunwukong/skill2.tres",
+      "sunwukong_skill3": "res://data/skills/sunwukong/skill3.tres",
+      "sunwukong_skill4": "res://data/skills/sunwukong/skill4.tres",
+      "sunwukong_skill4_1": "res://data/skills/sunwukong/skill4_1.tres",
+      "sunwukong_skill8": "res://data/skills/sunwukong/skill8.tres",
+      "sunwukong_skill8_slam": "res://data/skills/sunwukong/skill8_slam.tres",
+      "sunwukong_wushuang": "res://data/skills/sunwukong/wushuang.tres"
     },
     "monsters": {
       "木桩": "res://data/battle2d/dummy/wooden_dummy.tres"
@@ -19,7 +27,13 @@
     "equipment": {},
     "levels": {},
     "statuses": {
-      "normal_shield": "res://data/damage/normal_shield.tres"
+      "normal_shield": "res://data/damage/normal_shield.tres",
+      "sunwukong_buff_6000101": "res://data/skills/sunwukong/sunwukong_buff_6000101.tres",
+      "sunwukong_buff_6000201": "res://data/skills/sunwukong/sunwukong_buff_6000201.tres",
+      "sunwukong_buff_6000301": "res://data/skills/sunwukong/sunwukong_buff_6000301.tres",
+      "sunwukong_buff_6000501": "res://data/skills/sunwukong/sunwukong_buff_6000501.tres",
+      "sunwukong_buff_19000101": "res://data/skills/sunwukong/sunwukong_buff_19000101.tres",
+      "normal_wushuang_visual": "res://data/buffs/normal_wushuang_visual.tres"
     }
   }
 }

@@ -27,7 +27,7 @@ var draw_enabled := true
 
 func _ready() -> void:
 	ExampleData.register_tags()
-	_create_components()
+	_initialize_components()
 	_create_ui()
 	_create_debug_camera()
 	Panku.gd_exprenv.register_env("demo", self)
@@ -35,21 +35,12 @@ func _ready() -> void:
 #endregion
 #region 内部实现
 
-func _create_components() -> void:
-	target = Node3D.new()
-	target.name = "DemoTarget"
-	target.add_to_group("Entities")
-	add_child(target)
-	vitals = GameplayVitalAttributeComponent.new()
-	vitals.name = "GameplayVitalAttributeComponent"
-	target.add_child(vitals)
+func _initialize_components() -> void:
+	target = $DemoTarget
+	vitals = $DemoTarget/GameplayVitalAttributeComponent
 	vitals.initialize(ExampleData.attribute_sets(), ExampleData.vitals())
-	statuses = GameplayStatusComponent.new()
-	statuses.name = "GameplayStatusComponent"
-	target.add_child(statuses)
-	abilities = GameplayAbilityComponent.new()
-	abilities.name = "GameplayAbilityComponent"
-	target.add_child(abilities)
+	statuses = $DemoTarget/GameplayStatusComponent
+	abilities = $DemoTarget/GameplayAbilityComponent
 
 	var heal := GE_ModifyVital.new()
 	heal.vital_id = &"health"
@@ -70,9 +61,7 @@ func _create_components() -> void:
 	abilities.learn_ability(definition)
 	heal_ability = abilities.get_ability_instance(&"demo_heal")
 
-	inventory = C_Inventory.new()
-	inventory.name = "C_Inventory"
-	add_child(inventory)
+	inventory = $DemoTarget/Inventory
 	add_demo_items()
 
 func _create_ui() -> void:

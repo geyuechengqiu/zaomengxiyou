@@ -51,5 +51,5 @@ func set_protection_maximum(target_index: int, value: int) -> void:
 func _process(_delta: float) -> void:
 	if not is_instance_valid(player):
 		return
-	info.text = "悟空 %s · 命中%d · %s\n左 %s 保护%d/%d · 右 %s 保护%d/%d" % [player.action_state.get_name(), total_hits, TARGET_MODES[target_mode], dummies[0].action_state.get_name(), dummies[0].protection.score, dummies[0].protection.maximum, dummies[1].action_state.get_name(), dummies[1].protection.score, dummies[1].protection.maximum]
+	info.text = "悟空 %s · 命中%d · %s\n左 %s 保护%d/%d · 右 %s 保护%d/%d" % [player.action_state.get_state_name(), total_hits, TARGET_MODES[target_mode], dummies[0].action_state.get_state_name(), dummies[0].protection.score, dummies[0].protection.maximum, dummies[1].action_state.get_state_name(), dummies[1].protection.score, dummies[1].protection.maximum]
 #endregion

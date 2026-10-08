@@ -23,7 +23,7 @@ static func apply(sprite: SpineSprite, nested: AnimationPlayer, master: Animatio
 			bound = true
 			var clip := nested.get_animation(name)
 			var local_time := maxf(0.0, time - start)
-			local_time = fmod(local_time, clip.length) if clip.loop_mode != Animation.LOOP_NONE else minf(local_time, clip.length)
+			local_time = fmod(local_time, clip.length) if is_looping(clip, local_time) else minf(local_time, clip.length)
 			posed_time = local_time
 			if nested.current_animation != name:
 				nested.play(name)
@@ -51,4 +51,17 @@ static func apply(sprite: SpineSprite, nested: AnimationPlayer, master: Animatio
 		else:
 			sprite.update_skeleton(0.0)
 	return bound
+
+static func is_looping(clip: Animation, time: float = 0.0) -> bool:
+	if clip.loop_mode != Animation.LOOP_NONE:
+		return true
+	# Spine辅助播放器在编辑器重建后只保存原生loop属性轨道。
+	# 手动采样同样读取该轨道，不能因为Animation.loop_mode缺失而停在终帧。
+	for track in range(clip.get_track_count()):
+		var path := clip.track_get_path(track)
+		if clip.track_is_enabled(track) and clip.track_get_type(track) == Animation.TYPE_VALUE and path.get_subname_count() > 0 and path.get_subname(path.get_subname_count()-1) == &"loop":
+			for key in range(clip.track_get_key_count(track)-1,-1,-1):
+				if clip.track_get_key_time(track,key) <= time + 0.0000001:
+					return bool(clip.track_get_key_value(track,key))
+	return false
 #endregion

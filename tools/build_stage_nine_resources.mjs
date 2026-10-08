@@ -1,3 +1,4 @@
+// #region 脚本实现
 // Mechanical copies of the existing five attacks. Does not rewrite stages 6–8.
 import fs from 'node:fs';
 import path from 'node:path';
@@ -18,3 +19,4 @@ manifest.definitions.statuses.normal_shield = 'res://data/damage/normal_shield.t
 for (let step=1;step<=5;step++) manifest.definitions.skills[`sunwukong_attack${step}`] = `res://data/battle2d/hit_reaction/attack${step}.tres`;
 fs.writeFileSync(path.join(out, 'manifest.json'), JSON.stringify(manifest,null,2)+'\n');
 console.log('Built stage 9 five-combo resources and independent manifest');
+// #endregion

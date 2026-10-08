@@ -1,5 +1,7 @@
 # Gameplay Ability System：完整实现分析
 
+阶段10已重构状态生命周期、周期补算、实例来源与被动所有权，并增加效果递归预算与宿主技能许可检查。原版业务效果、统一战斗事件、验收与最新联合类图见 [Buff 与被动接入](../battle_foundation/combat/buffs-triggers.md)。下面状态章节已同步更新。
+
 业务层现已通过 [Battle Foundation 属性链](../battle_foundation/attributes/README.md) 连接基础、成长、装备和临时修改器，复用本插件最终属性、Vital、Status 与 Effect。属性组件新增可嵌套事务和完整重算通知，生命/魔法上限支持明确策略；业务原版成长、装备槽连接、升级补充规则见该说明。
 
 当前插件使用 **技能配置 → 技能实例 → 行为树 → 效果** 的执行结构。技能决定执行顺序，效果执行具体操作，状态负责持续时间与重复触发，Cue 负责表现。下面的分析以当前 `.gd` 实现为准；源码中部分注释描述的是设计意图，实际差异在文末列出。
@@ -142,24 +144,24 @@
 
 ### 持续状态、叠加和清理
 
-`GameplayStatusData` 定义进入效果、移除效果、Feature、持续时间策略、堆叠策略、标签和 Cue。`GameplayStatusComponent` 按 `status_id` 保存活跃的 `GameplayStatusInstance`：高优先级替换旧状态，低优先级拒绝，同优先级交给堆叠策略。
+`GameplayStatusComponent` 持有实例数组，以 `stacking_group`（为空时使用 ID）和直接持有被动的来源分组匹配。高优先级覆盖、低优先级拒绝，同优先级使用策略；策略可声明独立实例。施加时深复制 Data、Feature 和效果图，外部修改模板不会污染已运行状态。
 
-新实例应用时缓存上下文、注入当前 `stacks` 和来源 ID（通常为 `status.<实例ID>`），复制并执行 `apply_effects`。持续状态随后初始化持续时间、处理互斥标签、添加标签，并执行专属于该状态的 Cue 副本。
-
-每帧先检查持续时间；过期则安排移除，不再更新本帧的 Feature。未过期时，`FeaturePeriodicEffects` 以 `period` 累积计时，触发后调用 `instance.apply_effects(periodic_effects)`；`FeatureEventListener` 监听指定事件，调用同一个执行器。两者最后仍进入统一的 `GameplayEffect.apply()`。
+持续状态先初始化持续时间、互斥关系与标签，然后执行进入效果和 Feature，保存独立上下文、effect_state、Cue 和运行计时。每帧先补算持续时间内的 Feature，再执行到期移除；周期用循环处理跨越多个周期，包含到期末点。暂停、慢动作与停顿由外部战斗时钟传入。
 
 | 堆叠策略 | 当前行为 |
 | --- | --- |
-| `StackingRefreshDuration`（默认） | 仅刷新持续时间，不增加层数。 |
-| `StackingIntensity` | 增加层数并刷新持续时间。 |
-| `StackingRefreshAndStack` | 先刷新，再增加层数。 |
+| `StackingRefreshDuration`（默认） | 刷新持续时间，不增加层数。 |
+| `StackingIntensity` / `StackingRefreshAndStack` | 增层至上限并刷新时间；重新应用持续效果。 |
 | `StackingAccumulateDuration` | 累加持续时间，不增加层数。 |
+| `BattleOriginalStatusPolicy`（Battle Foundation） | 复刻本阶段原版配置使用的拒绝、覆盖、周期计时比较和独立实例策略，提供基础叠层/延时规则；适用边界见阶段10说明。 |
 
-`add_stack()` 在达到上限前，会先应用 `remove_effects`、移除原 `apply_effects`，增加层数，再重新应用 `apply_effects`。因此一次性伤害或治疗放在进入效果中，也可能在叠加时再次触发；当前实现与“不会重新触发应用时效果”的源码注释不同。
+`add_stack()` 只撤销并重新应用 `reapply_on_stack=true` 的持续效果，不重新执行进入伤害、治疗或 remove_effects。修改器在嵌套属性事务中更新，UI 不会看到“先撤销后叠加”的中间值。达到层数上限仍可刷新时间。
 
-状态移除顺序是：应用 `remove_effects` → 对 `apply_effects` 调用 `remove()` → 清理 Feature 与存储 → 移除标签 → 停止状态 Cue → 发出完成和移除信号。
+移除按实例身份进行：先从容器取出，标记 removed，再执行移除效果、撤销持续效果、清理 Feature/标签/Cue、发完成和移除信号、释放上下文。`remove_status(id)` 移除所有同 ID 实例，`remove_instance(instance)` 只移除指定实例。清空期间拒绝重入施加。
 
-`duration = 0` 的实例在执行进入效果和 Feature 初始化后立即完成，跳过持续时间、标签和状态 Cue 初始化。空 `status_id` 不入活跃表；即使配置了正持续时间，也不会由组件持续更新，应当用于一次性效果包装。正常堆叠被策略处理时，`apply_status()` 返回 `null`，不能仅用返回值判断是否生效。
+`apply_status()` 在刷新或叠层后返回实际保留的旧实例；拒绝目标、优先级或递归预算时返回 null。拒绝重复策略保留旧实例并返回它。非瞬时空 ID 实例也纳入计时和清理；duration=0 仍仅用于一次性效果包装，不能配置需要后续移除的持续修改器。
+
+组件退出树时退订 Core，重新入树恢复订阅并保留状态；销毁会清理状态。Battle Foundation 的死亡/离场显式调用 clear_statuses：死亡默认清理，可配置 remove_on_death；离场无条件清理。原版关系、低帧率以及触发防递归见 [阶段10说明](../battle_foundation/combat/buffs-triggers.md)。
 
 ### 上下文键与数据流
 
@@ -200,14 +202,14 @@ heal.apply(target, target, {})
 
 ## 阅读源码时需要注意的实现边界
 
-这些是当前代码的行为说明，本次文档工作没有修改运行逻辑。
+这些是当前代码的行为说明；阶段10修复项已同步到相应章节。
 
 - `AbilityNodeApplyEffect.use_instigator_as_fallback` 虽然是导出属性，但 `_tick()` 实际传入 `_get_target_list(instance, false)`，所以该选项目前不生效。目标列表为空时不应用任何效果，节点仍返回 `SUCCESS`。
 - `GameplayEffect.apply()` 返回 `void`，没有统一的“成功 / 失败”结果。子类 `_apply()` 因缺少组件或数据提前返回时，基类仍可能继续执行 Cue 与子效果；后续步骤不是事务式回滚。
 - `GE_ApplyDamage` 修改自身倍率，并把合并倍率写回共享 `context`。复用同一实例或同一字典，可能让多目标、多次周期及兄弟伤害效果意外累乘；深复制效果不等于隔离字典。
 - `GE_ModifyVital` 当前不读取 `heal_multiplier`；状态持续时间初始化读取 `status_data.duration`，也没有统一应用 `duration_multiplier` / `duration_add`。修改器写入这些字段并不保证效果落地。
 - `GameplayStatusComponent` 默认订阅全局事件；可开启 `filter_events_by_owner` 并由宿主实现 `accepts_status_event()`。伤害上下文现在包含 `entity=owner_entity` 和原始 DamageInfo；Battle Foundation 实体已开启宿主过滤，普通 GAS 示例默认仍保持广播行为。
-- `FeaturePeriodicEffects` 每次更新最多触发一次，没有用循环补齐一帧跨过多个周期的次数。`duration = 0` 或空 ID 状态不适合需要组件驱动的持续效果。
+- `FeaturePeriodicEffects` 现在循环补齐有效持续时间内的周期，支持 trigger_on_apply；duration=0 不适合需要组件驱动的持续效果。
 - 效果自己的 `remove()` 不调用 `stop_cue()`；只有状态实例保存并停止自己的 Cue 副本。`GameplayCueManager` 也会把每次执行的组件加入持续更新列表，并不自动按“瞬时 / 持续”分类。
 - Cue 挂点查询依赖目标的 `get_attachment_point(name)`，返回的对象必须是 `Node3D`。未实现时位置返回 `Vector3.INF`，当前没有自动退回目标坐标的逻辑。
 - 创建技能实例时写入的 `blackboard_defaults` 会在首次非激活分支的 `try_activate()` 中被 `clear()` 清掉；当前不能假定默认键跨激活保留。
@@ -245,7 +247,7 @@ heal.apply(target, target, {})
 | [AbilityInputFeature](scripts/abilities/features/ability_input_feature.gd) | 将输入事件与 InputMap action 匹配；未注册 action 时用物理键文字回退；提供快捷键文字。 | 只是匹配器；组件 `match_input` 返回首个匹配技能 ID，不自行接收输入或释放技能。 |
 | [ToggleFeature](scripts/abilities/features/toggle_feature.gd) | 已激活检查写跳过消耗/冷却标志；首次激活写 `turn_on`，再激活写 `turn_off` 并重置树。 | 激活实例会先让全部 Feature 预检查一遍，再进行真正检查；自定义检查钩子应考虑被调用两次。 |
 | [DynamicIconFeature](scripts/abilities/features/dynamic_icon_feature.gd) | 读 `current_icon_id`（可配置）并查 `icon_map`。 | 未找到图标时实例回退定义图标；图标变化由黑板信号驱动 UI。 |
-| [PassiveStatusFeature](scripts/abilities/features/passive_status_feature.gd) | 学习时施加配置状态，黑板记录状态 ID；遗忘时按 ID 移除。 | 激活 clear 会丢失已应用 ID；按 ID 移除也不区分该状态后来是否被其他来源替换。 |
+| [PassiveStatusFeature](scripts/abilities/features/passive_status_feature.gd) | 学习时施加状态，以技能ID分组，metadata保存实例WeakRef；遗忘时只移除自己持有的实例。 | 激活清空黑板不会丢失所有权，已被替换的旧实例移除为幂等操作。 |
 | [EffectModifierFeature](scripts/abilities/features/effect_modifer_feature.gd) | 激活时遍历外部注入的 `GameplayEffectModifier`，按技能 ID 筛选并组合上下文参数。 | `ability_id` 为空表示影响所有技能，否则只匹配该 ID；消费者不读取的字段不会自动生效。源码文件名 `modifer` 是现有拼写。 |
 | [ProjectilePayloadModifierFeature](scripts/abilities/features/projectile_payload_modifier_feature.gd) | 激活时把 `{旧状态ID: 新状态资源}` 合并到 `projectile_payload_replacements`。 | 发射节点按旧 ID 替换弹头并保留层数；不会直接改目标已有状态。 |
 
@@ -353,22 +355,21 @@ MULTIPLY 的 0.1 表示增加 10%，多条按加法合并。例如基础 100、A
 
 ![状态系统独立类图](docs/status-system.svg)
 
-状态是效果的持续载体。`GameplayStatusData` 保存配置；`GameplayStatusComponent` 按 ID 管实例、优先级、堆叠和事件订阅；`GameplayStatusInstance` 保存施法者、层数、剩余时间、上下文浅副本、持续时间策略副本、独立 Cue 和 Feature 私有存储。状态数据自身仍引用模板，不能假设修改模板只影响未来状态。
+状态是效果的持续载体；Data 保存定义，Component 管理实例、分组、策略、事件与外部时钟，Instance 保存施法者 WeakRef、层数、剩余时间、独立上下文、effect_state、Cue 与 Feature storage。最新生命周期和返回语义见 [持续状态、叠加和清理](#持续状态叠加和清理)。
 
-| 扩展接口 | 实现和调度 |
+| 扩展接口 | 当前调度 |
 | --- | --- |
-| `StatusFeature` | 普通 Resource，源码虽称抽象类，实际没有 @abstract。`apply_feature/update_feature/remove_feature/handle_event` 转交默认空钩子；可通过实例按 Feature 资源索引的 storage 存运行数据。 |
-| `FeaturePeriodicEffects` | 应用时 timer = 0；更新积累 delta，达到 period 就减一次并执行 periodic_effects；每次调用最多触发一次，不能补齐所有跨过周期。 |
-| `FeatureEventListener` | `trigger_on_events` 声明事件，`event_triggered_effects` 声明反应效果；数据报告事件可触发后，实例把事件 context 合并进缓存再执行。 |
-| `StatusDurationPolicy` | 抽象 Resource，分离 initialize、update、refresh、accumulate、handle_event；update 返回是否到期。状态实例持有独立副本。 |
-| `DurationNaturalTime` | 正 duration 倒计时，<=0 初始化为 -1，刷新重新赋时长，累加增加剩余时间；duration=0 的状态在到策略前已短路。 |
-| `StatusStackingPolicy` | 抽象 Resource，已有同 ID 且相同优先级时调用；四个具体策略与进入/清理顺序见 [持续状态、叠加和清理](#持续状态叠加和清理)。 |
+| `StatusFeature` | apply/update/remove/handle_event 转交默认空钩子，运行数据保存在实例 storage。 |
+| `FeaturePeriodicEffects` | 应用时 timer=0，可选立即触发；更新循环补算所有周期，结束点包含末次，不结算结束后的时间。 |
+| `FeatureEventListener` | 在一次执行上下文副本中合并事件，实例级 busy 防止同一监听器重入，不污染初始缓存。 |
+| `StatusDurationPolicy` | initialize/update/refresh/accumulate/handle_event；实例持有策略副本。仅配置事件型持续时间策略时还需一个相应事件 Feature，使 Data 放行事件。 |
+| `DurationNaturalTime` | 正值倒计时，-1 永久；duration=0 在进入策略前短路。 |
+| `StatusStackingPolicy` | 按分组匹配调用，可声明 allows_parallel_instances；接收实际来袭上下文。 |
+| `BattleTriggerFeature`（Battle Foundation） | 来源/目标角色、概率、冷却、阈值穿越、效果接收者和触发链限制。 |
 
-事件处理先用 Data 的 Feature 判定是否可触发，再通知 duration_policy 和 Feature；只有 duration_policy 自己有事件钩子、没有事件型 Feature 时，当前实例入口可能根本不会转交事件。组件依赖全局总线，未按事件实体筛选。
+事件遍历活跃快照，执行前检查实例仍在容器且未移除。开启 filter_events_by_owner 后由宿主过滤战斗ID及来源/目标身份。叠层沿用旧实例的施法者，覆盖产生新实例；每次效果都强制使用该实例 source_id，效果输出仅在本次执行中共享，不污染将来的周期上下文。
 
-叠加使用旧实例的施法者及缓存上下文，组件传给堆叠策略的是新空字典，来袭 context 没有带入；不同施法者追加同一 ID 状态时不会自动改归属。状态执行效果前统一覆盖 `stacks` 与 `source_id`；旧来源 ID 不是后续属性修改器的最终来源。Feature 触发的兄弟效果复用缓存字典，前一个效果写入的键会继续存在。
-
-组件声明了 `status_stacked` 信号，但当前堆叠调用链没有 emit，UI 不应只靠它更新层数。duration=0 虽初始化 Feature 后立即完成，却不走普通 remove 的 Feature 清理；空 ID 不入活跃表也不会逐帧更新。移除按 ID 操作，组件在调用实例 remove 前先从表中 erase，以避免清理效果再次查到旧实例，但它不提供独立的多来源同 ID 状态句柄。
+status_applied/status_removed/status_stacked 已实际发出。被动学习持有的同ID状态按技能ID隔离；被动随后施加给目标的衍生Buff取消该所有权分组，仍按 Buff 本身的分组覆盖/叠加。示例不额外创建状态节点，使用角色场景已有组件。
 
 ## 目标选择与预览系统
 
@@ -420,7 +421,7 @@ MULTIPLY 的 0.1 表示增加 10%，多条按加法合并。例如基础 100、A
 
 两种生成入口不同：`GE_SpawnMagicField` 要求 context[position_key] 是 Vector3，默认 projectile_impact，先赋施法者和 Data 再 add_child；`AbilityNodeSpawnMagicField` 有多级位置回退，却先 add_child 再赋 Data。这会让后一条路径的 `_ready` 按默认 duration=5、period=0 建计时器，后赋配置不会自动重建周期或寿命 Timer。图示接口不代表这两条路径行为相同。
 
-清理还存在三个具体限制：无周期进入路径未往 `_targets_in_area` 添加记录，退出/销毁不会清理该状态；周期触发堆叠返回 null 会覆盖已有清理 ID 数组，导致后续丢失句柄；按 ID 移除不能区分别的场或技能后来创建的同名状态。来自策略但未登记的目标也不记录句柄。生命周期敏感的区域效果需要先处理这些路径，当前文档只揭示实现，不修改逻辑。
+清理还存在三个具体限制：无周期进入路径未往 `_targets_in_area` 添加记录，退出/销毁不会清理该状态；周期重复返回旧实例虽已修复，但区域仍使用 ID 清理而非实例身份；按 ID 移除不能区分别的场或技能后来创建的同名状态。来自策略但未登记的目标也不记录句柄。生命周期敏感的区域效果需要先处理这些路径，当前文档只揭示实现，不修改逻辑。
 
 ## 标签、过滤器与事件服务
 

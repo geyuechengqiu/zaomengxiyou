@@ -19,6 +19,9 @@ var _track_time: float = 0.0
 var _effect_root: Node2D
 var _effect_sprites: Array[SpineSprite] = []
 var _effect_players: Array[AnimationPlayer] = []
+var _effect_tail: Dictionary = {}
+var _aim_head: SpineBone
+var _aim_head_base_rotation: float = 0.0
 #endregion
 #region 生命周期
 func _ready() -> void:
@@ -90,7 +93,7 @@ func _has_native_binding(action: StringName) -> bool:
 	var root_node := _player.get_node(_player.root_node)
 	for index in range(clip.get_track_count()):
 		if clip.track_get_type(index) == Animation.TYPE_ANIMATION and root_node.get_node_or_null(clip.track_get_path(index)) == _spine_player:
-			if clip.track_get_key_count(index) > 0 and is_zero_approx(clip.track_get_key_time(index, 0)) and String(clip.track_get_key_value(index, 0)) == native:
+			if clip.track_get_key_count(index) > 0 and is_zero_approx(clip.track_get_key_time(index, 0)) and String(clip.track_get_key_value(index, 0)) in [native, native + "_looped"]:
 				for key in range(clip.track_get_key_count(index)):
 					if not _spine_player.has_animation(clip.track_get_key_value(index, key)):
 						return false
@@ -99,6 +102,8 @@ func _has_native_binding(action: StringName) -> bool:
 #endregion
 #region 动作与时间
 func play_action(action: StringName, restart: bool = false) -> bool:
+	if action not in [&"idle", &"move", &"run", &"jump", &"jump_2", &"fall", &"land"]:
+		_effect_tail.clear()
 	if not _initialized:
 		# 保留初始化的首个错误，以便未来资源配置问题可以直接诊断。
 		return false
@@ -117,6 +122,12 @@ func play_action(action: StringName, restart: bool = false) -> bool:
 	return true
 
 func advance_animation(delta: float) -> void:
+	if not is_finite(delta) or delta <= 0.0:
+		return
+	if not _effect_tail.is_empty():
+		_effect_tail.time += delta
+		if float(_effect_tail.time) + 0.0000001 >= float(_effect_tail.end):
+			_effect_tail.clear()
 	if _initialized and is_finite(delta) and delta > 0.0:
 		var duration := get_action_duration(_action)
 		var previous := get_playback_time()
@@ -130,6 +141,7 @@ func advance_animation(delta: float) -> void:
 					action_looped.emit(_action)
 
 func _apply_player_pose() -> void:
+	_restore_aim_head()
 	# 手动模式的动画轨道只选择子 clip，不自动推进子播放器。
 	# 从主时间轴读取当前 key 与局部时间，保留编辑器编排的多个 clip。
 	var master := _player.get_animation(_action)
@@ -137,7 +149,13 @@ func _apply_player_pose() -> void:
 	_sync_native_pose(_sprite, _spine_player, master, time)
 	_entry = _sprite.get_animation_state().get_track(0)
 	for index in range(_effect_sprites.size()):
-		_sync_native_pose(_effect_sprites[index], _effect_players[index], master, time)
+		var sprite := _effect_sprites[index]
+		var nested := _effect_players[index]
+		if not _effect_tail.is_empty() and _action != _effect_tail.action and _has_effect_tail_track(sprite, nested):
+			_apply_tail_properties(sprite)
+			_sync_native_pose(sprite, nested, _effect_tail.master, _effect_tail.time)
+		else:
+			_sync_native_pose(sprite, nested, master, time)
 
 func _sync_native_pose(sprite: SpineSprite, nested: AnimationPlayer, master: Animation, time: float) -> void:
 	if not SpineTimelinePose.apply(sprite, nested, master, _player.get_node(_player.root_node), time, sprite != _sprite) and sprite != _sprite:
@@ -148,6 +166,72 @@ func _sync_native_pose(sprite: SpineSprite, nested: AnimationPlayer, master: Ani
 
 func get_animation_player() -> AnimationPlayer:
 	return _player
+
+func advance_status_visuals(delta: float) -> void:
+	var effect := get_node_or_null(^"WushuangEffect") as BattleWushuangEffect2D
+	if effect != null: effect.advance_effect(delta)
+
+func clear_status_visuals() -> void:
+	var effect := get_node_or_null(^"WushuangEffect") as BattleWushuangEffect2D
+	if effect != null: effect.clear_effect()
+
+func apply_skill_aim(timeline: BattleFrameTimelineFeature, degrees: float) -> void:
+	_restore_aim_head()
+	for path in timeline.aim_effect_paths:
+		var effect := get_node_or_null(path) as Node2D
+		if effect != null:
+			effect.rotation = deg_to_rad(degrees)
+	if not timeline.aim_tip_path.is_empty() and not timeline.aim_effect_paths.is_empty():
+		var beam := get_node_or_null(timeline.aim_effect_paths[0]) as Node2D
+		var tip := get_node_or_null(timeline.aim_tip_path) as Node2D
+		if beam != null and tip != null:
+			tip.position = beam.position + Vector2(timeline.aim_length, 0.0).rotated(deg_to_rad(degrees))
+			tip.rotation = deg_to_rad(degrees)
+	if not timeline.aim_head_bone.is_empty():
+		var bone := _sprite.get_skeleton().find_bone(String(timeline.aim_head_bone))
+		if bone != null:
+			var pose := bone.get_pose()
+			_aim_head = bone
+			_aim_head_base_rotation = pose.get_rotation()
+			# DragonBones的node旋转是相对动画的绝对偏移；Spine转为Y向上角度。
+			# 每次先撤销上次偏移，不让无旋转关键帧的头骨累积瞄准角。
+			pose.set_rotation(_aim_head_base_rotation - degrees)
+			_sprite.get_skeleton().update_world_transform(SpineConstant.Physics_Update)
+
+func _restore_aim_head() -> void:
+	if _aim_head != null:
+		_aim_head.get_pose().set_rotation(_aim_head_base_rotation)
+		_aim_head = null
+
+func begin_effect_tail(action: StringName, time: float, end: float) -> void:
+	if time < end and _player.has_animation(action):
+		_effect_tail = {"action": action, "master": _player.get_animation(action), "time": time, "end": end}
+
+func clear_effect_tail() -> void:
+	_effect_tail.clear()
+	if _initialized and not _action.is_empty():
+		_apply_player_pose()
+
+func _has_effect_tail_track(_sprite: SpineSprite, nested: AnimationPlayer) -> bool:
+	var master: Animation = _effect_tail.master
+	var root := _player.get_node(_player.root_node)
+	for track in range(master.get_track_count()):
+		if master.track_is_enabled(track) and master.track_get_type(track) == Animation.TYPE_ANIMATION and root.get_node_or_null(master.track_get_path(track)) == nested:
+			for key in range(master.track_get_key_count(track) - 1, -1, -1):
+				if master.track_get_key_time(track, key) <= float(_effect_tail.time) + 0.0000001:
+					return StringName(master.track_get_key_value(track, key)) != &"RESET"
+	return false
+
+func _apply_tail_properties(sprite: SpineSprite) -> void:
+	var master: Animation = _effect_tail.master
+	var root := _player.get_node(_player.root_node)
+	for track in range(master.get_track_count()):
+		var path := master.track_get_path(track)
+		if master.track_is_enabled(track) and master.track_get_type(track) == Animation.TYPE_VALUE and path.get_subname_count() == 1 and root.get_node_or_null(NodePath(path.get_concatenated_names())) == sprite:
+			for key in range(master.track_get_key_count(track) - 1, -1, -1):
+				if master.track_get_key_time(track, key) <= float(_effect_tail.time) + 0.0000001:
+					sprite.set(path.get_subname(0), master.track_get_key_value(track, key))
+					break
 
 func get_current_action() -> StringName:
 	return _action

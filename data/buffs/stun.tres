@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="GameplayStatusData" format=3]
+[ext_resource type="Script" path="res://addons/gameplay_abiltiy_system/scripts/status/gameplay_status_data.gd" id="status"]
+[ext_resource type="Script" path="res://addons/gameplay_abiltiy_system/scripts/effects/gameplay_effect.gd" id="effect_type"]
+[ext_resource type="Script" path="res://addons/gameplay_abiltiy_system/scripts/status/features/status_feature.gd" id="feature_type"]
+[ext_resource type="Script" path="res://addons/battle_foundation/gas/battle_original_status_policy.gd" id="policy"]
+[sub_resource type="Resource" id="policy"]
+script = ExtResource("policy")
+replace_rule = 1
+[resource]
+script = ExtResource("status")
+status_id = &"stun"
+status_display_name = "福星-晕眩"
+duration = 1.5
+stacking_policy = SubResource("policy")
+max_stacks = 1
+stacking_group = &"original.2/"
+tags = Array[StringName]([&"status.debuff", &"state.stunned"])
+metadata/original_buff_id = 2000201
+metadata/original_type = 2

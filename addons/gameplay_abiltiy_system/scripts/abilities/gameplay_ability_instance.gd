@@ -52,6 +52,8 @@ func get_owner_entity() -> Node:
 
 ## 尝试激活技能 (由 Player/Component 调用)
 func try_activate(context: Dictionary = {}) -> bool:
+	if not _owner_allows_activation(context):
+		return false
 	if is_active:
 		# 如果技能已激活，无论是否允许重新激活，都应该处理连击输入
 		# 触发信号，确保 BTWaitSignal 能够收到通知（用于连击系统）
@@ -148,8 +150,14 @@ func end_ability(final_status: int = BTNode.Status.SUCCESS) -> void:
 	if is_instance_valid(_bt_instance):
 		_bt_instance.reset_tree()
 
+## 战斗宿主统一裁决控制状态，直接调用实例也不能绕过眩晕/死亡。
+func _owner_allows_activation(context: Dictionary) -> bool:
+	return not disabled and is_instance_valid(_owner) and (not _owner.has_method("can_use_ability") or _owner.can_use_ability(_definition.ability_id, context))
+
 ## 检查是否可以施法
 func can_activate(context: Dictionary = {}) -> bool:
+	if not _owner_allows_activation(context):
+		return false
 	# 如果技能已激活，先让所有特性有机会设置 skip 标志（如 ToggleFeature 设置 skip_cost/skip_cooldown）
 	# 然后再进行实际的检查
 	if is_active:

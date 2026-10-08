@@ -1,12 +1,16 @@
 # 阶段 6：单段普攻与最小战斗闭环
 
+阶段 10 新增 [Buff、被动与战斗触发](buffs-triggers.md)，复用并重构 GAS Status/Effect/PassiveStatusFeature，接入 Core STUN、标签引用计数、统一周期时钟、原版吸血/反伤与死亡/离场清理。测试场景为项目当前 F5 入口，节点与控件预置，全部定义位于业务 data/buffs。
+
 阶段 8 使用 GAS 策略 + Attribute/Vital/Status/Effect + Core 事件完成原版通用伤害链；等级评分沿用原版EXP，界面统一整数。原版盾后补1、真实伤害与吸血顺序、角色回调和结果字段见 [详细说明](original-damage.md)。
 
 阶段 7 在此闭环上扩展 [技能时间轴、连招与多段攻击](skill-timeline.md)。新场景使用独立资源，阶段 6 的窗口和场景保持兼容；BattleAttackInstance 的目标记录现包含 count / next_hit_time，hit_count 统计实际次数。分段反应、派生缓存、消耗与冷却、对象和事件取消协议见新文档。
 
-打开 [single_attack_demo.tscn](../../../examples/single_attack_demo.tscn)，使用项目现有带 Spine 模块的 Godot 按 F6，或按 F5 运行项目主场景。A/D 移动，K 跳跃，J 只施放第一段普攻；长按不自动重复，也不预约连击。Esc 打开菜单与改键。按钮可翻转角色、移动木桩以打空、切换攻击 26/200、重置整个场景及暂停。两侧木桩初始生命 70、防御 5，是明确使用测试数值的敌方实体。
+打开 [single_attack_demo.tscn](../../../examples/single_attack_demo.tscn)，使用项目现有带 Spine 模块的 Godot 按 F6。A/D 移动，K 跳跃，J 只施放第一段普攻；长按不自动重复，也不预约连击。Esc 打开菜单与改键。按钮可翻转角色、移动木桩以打空、切换攻击 26/200、重置整个场景及暂停。两侧木桩初始生命 70、防御 5，是明确使用测试数值的敌方实体。
 
 项目视口已改为原版 **940×590**，保持宽高比缩放。依据原版 `games/zmhj-g5/game.json` 的 contentWidth/contentHeight，以及反编译 `Game.as` 的 `drawRect(0,0,940,590)`；基础引擎 GameData 的 640×480 默认值不作为该游戏的有效尺寸。世界沿用现有 2 倍战斗坐标，预置 Camera2D 的 zoom=0.5，让原素材以 1 倍像素显示，命中几何和碰撞单位保持一致。
+
+公共表现的节点归属、配置及新角色接入见 [公共战斗表现](../presentation/README.md)。
 
 ## 在编辑器搭建与调整
 
@@ -17,6 +21,9 @@ SingleAttackDemo
 ├─ Background / Sky
 ├─ Camera2D                          预置位置、缩放
 ├─ BattleSession                     manifest 与随机种子
+│  ├─ BattlePresentation             公共战斗表现
+│  │  ├─ EntityViews                 每个目标的血条、保护条与受击闪光
+│  │  └─ DamageNumbers / Rows        全场共用跳字对象池
 │  ├─ Terrain                        Polygon2D 与静态物理地形
 │  │  ├─ Ground
 │  │  ├─ LeftWall / RightWall
@@ -25,8 +32,8 @@ SingleAttackDemo
 │     ├─ SunWukong                   预置角色场景
 │     │  ├─ GameplayVitalAttributeComponent / GameplayAbilityComponent / GameplayStatusComponent
 │     │  ├─ PlayerOperations / OperationController
-│     │  └─ CombatFeedback / HitEffect / AnimationPlayer
-│     └─ LeftDummy / RightDummy      独立组件和反馈节点
+│     │  └─ ActionState / MotionController
+│     └─ LeftDummy / RightDummy      独立战斗组件
 ├─ HUD                               预置面板、按钮与帮助
 └─ MenuLayer / OperationMenu          预置改键界面
 ```
@@ -53,7 +60,8 @@ SingleAttackDemo
 | [BattleHitbox2D](../movement/battle_hitbox_2d.gd) | 场景中唯一攻击框；从实际技能定义读取矩形、正缩放和偏移，按朝向生成世界多边形 |
 | [BattleHurtbox2D](../movement/battle_hurtbox_2d.gd) | 独立 Area2D / RectangleShape2D；提供目标受击多边形，可单独编辑及关闭受击资格 |
 | GAS DamageCalculator / HealthVital | 从即时最终属性计算临时伤害，走现有 DamageInfo 和生命扣除、通知、耗尽流程 |
-| [BattleCombatFeedback2D](../presentation/battle_combat_feedback_2d.gd) | 完整属性快照更新生命条；Core 命中事件显示实际扣血；战斗时间驱动飘字 |
+| [BattlePresentation2D](../presentation/battle_presentation_2d.gd) | 会话级订阅 Core 命中事件，分发目标视图，全场数字池按战斗时钟统一推进 |
+| [BattleCombatFeedback2D](../presentation/battle_combat_feedback_2d.gd) | 公共 EntityViews 中的目标表现实例；属性快照更新血条，生成共享池跳字并播放受击闪光 |
 | [BattleHitEffect2D](../presentation/battle_hit_effect_2d.gd) | 控制预置原版受击 AnimationPlayer，单次播放与战斗时钟同步 |
 | [AnimationPlayerAdapter2D](../animation/animation_player_adapter_2d.gd) | 木桩的非 Spine 动画后端；控制场景预置 AnimationPlayer，不参与伤害与状态裁决 |
 
@@ -94,7 +102,7 @@ SingleAttackDemo
 │  ├─ … / AnimationPlayer             预置表现节点
 │  └─ AttackHitbox : BattleHitbox2D
 │     └─ CollisionShape2D             所有技能共用一个攻击矩形
-└─ CombatFeedback                    预置生命条与飘字
+└─ ProtectionSystem                  独立保护值与保护时间
 ```
 
 木桩物理体为 44×180 胶囊，受击框为 90×170 矩形；悟空受击框先使用 44×180，保留已有范围边界。受击形状使用 `resource_local_to_scene`，编辑单个运行实例不会污染另一实例或模板。打开 [木桩场景](../../../data/battle2d/dummy/wooden_dummy.tscn) 或 [角色场景](../../../data/battle2d/sunwukong_2d.tscn)，选择 `Hurtbox/CollisionShape2D`，调整尺寸与局部位置；编辑器显示蓝色范围。`vulnerable=false` 可关闭几何受击资格。

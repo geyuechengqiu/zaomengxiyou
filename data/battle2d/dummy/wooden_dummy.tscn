@@ -7,8 +7,17 @@
 [ext_resource type="Script" path="res://addons/battle_foundation/movement/battle_hitbox_2d.gd" id="hitbox"]
 [ext_resource type="Texture2D" path="res://data/battle2d/dummy/wooden_dummy.svg" id="texture"]
 [ext_resource type="Texture2D" path="res://data/battle2d/dummy/wooden_dummy_hurt_face.svg" id="hurt_face"]
-[ext_resource type="PackedScene" path="res://addons/battle_foundation/presentation/combat_feedback_2d.tscn" id="feedback"]
 [ext_resource type="AnimationLibrary" path="res://data/battle2d/dummy/reaction_animations.tres" id="reactions"]
+[ext_resource type="Script" path="res://addons/battle_foundation/runtime/battle_attribute_component.gd" id="component_GameplayVitalAttributeComponent"]
+[ext_resource type="Script" path="res://addons/gameplay_abiltiy_system/scripts/components/gameplay_ability_component.gd" id="component_GameplayAbilityComponent"]
+[ext_resource type="Script" path="res://addons/gameplay_abiltiy_system/scripts/components/gameplay_status_component.gd" id="component_GameplayStatusComponent"]
+[ext_resource type="Script" path="res://addons/battle_foundation/combat/battle_damage_rules_component.gd" id="component_DamageRules"]
+[ext_resource type="Script" path="res://addons/battle_foundation/runtime/battle_action_state_2d.gd" id="component_ActionState"]
+[ext_resource type="Script" path="res://addons/battle_foundation/runtime/battle_motion_controller_2d.gd" id="component_MotionController"]
+[ext_resource type="Script" path="res://addons/battle_foundation/runtime/battle_combo_state.gd" id="component_ComboState"]
+[ext_resource type="Script" path="res://addons/battle_foundation/combat/battle_hit_reaction_controller_2d.gd" id="component_HitReactionController"]
+[ext_resource type="Script" path="res://addons/battle_foundation/combat/battle_protection_system.gd" id="component_ProtectionSystem"]
+
 [sub_resource type="Resource" id="actions"]
 script = ExtResource("actions")
 attack_skill_id = &""
@@ -152,4 +161,34 @@ monitorable = false
 position = Vector2(0, -85)
 shape = SubResource("hurt_shape")
 disabled = true
-[node name="CombatFeedback" parent="." instance=ExtResource("feedback")]
+
+[node name="GameplayVitalAttributeComponent" type="Node" parent="."]
+script = ExtResource("component_GameplayVitalAttributeComponent")
+externally_driven = true
+
+[node name="GameplayAbilityComponent" type="Node" parent="."]
+script = ExtResource("component_GameplayAbilityComponent")
+externally_driven = true
+
+[node name="GameplayStatusComponent" type="Node" parent="."]
+script = ExtResource("component_GameplayStatusComponent")
+externally_driven = true
+filter_events_by_owner = true
+
+[node name="DamageRules" type="Node" parent="."]
+script = ExtResource("component_DamageRules")
+
+[node name="ActionState" type="Node" parent="."]
+script = ExtResource("component_ActionState")
+
+[node name="MotionController" type="Node" parent="."]
+script = ExtResource("component_MotionController")
+
+[node name="ComboState" type="Node" parent="."]
+script = ExtResource("component_ComboState")
+
+[node name="HitReactionController" type="Node" parent="."]
+script = ExtResource("component_HitReactionController")
+
+[node name="ProtectionSystem" type="Node" parent="."]
+script = ExtResource("component_ProtectionSystem")

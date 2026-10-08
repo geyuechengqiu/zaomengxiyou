@@ -1,7 +1,16 @@
 extends Node2D
 class_name BattleCombatFeedback2D
 #region 生命条与单次伤害反馈
-@export var number_scene: PackedScene
+## 预置反馈视图绑定的角色路径；动态出生目标由公共管理器绑定。
+@export var actor_path: NodePath
+var number_scene: PackedScene:
+	get: return _presentation.number_scene
+var number_rows: BattleDamageNumberLayer2D:
+	get: return _presentation.number_rows
+var _presentation: BattlePresentation2D
+var _actor_ref: WeakRef
+var _actor: BattleEntity2D:
+	get: return _actor_ref.get_ref() as BattleEntity2D if _actor_ref != null else null
 ## 原版素材坐标到战斗坐标的比例；独立于木桩 PNG 的显示缩放。
 @export var hit_effect_unit_scale: float = 2.0
 ## DamageControl 默认 bleedOffset，在场景坐标转屏幕后追加；只镜像 X。
@@ -11,26 +20,31 @@ class_name BattleCombatFeedback2D
 @export var always_show_health_bar: bool = false
 @export var show_player_health_bar: bool = false
 @export var show_health_values: bool = false
-@onready var _actor: BattleEntity2D = get_parent() as BattleEntity2D
 @onready var _health: BattleMonsterHealthBar2D = $HealthBar
 @onready var _label: Label = $HealthLabel
 @onready var _damage: Label = $DamageLabel
 @onready var _protection_bar: ProgressBar = $ProtectionBar
 @onready var _protection_label: Label = $ProtectionLabel
 @onready var hit_effect: BattleHitEffect2D = $HitEffect
-@onready var number_rows: BattleDamageNumberLayer2D = $DamageNumbers/Rows
 var remaining: float = 0.0
 var last_damage: float = 0.0
 var hit_count: int = 0
 var _setup_complete: bool = false
 
 func _ready() -> void:
+	visible = false
+
+func bind_actor(actor: BattleEntity2D, presentation: BattlePresentation2D) -> void:
+	unbind_actor()
+	_actor_ref = weakref(actor)
+	_presentation = presentation
+	visible = true
+	global_transform = actor.global_transform
 	var snapshot := _actor.attributes.get_snapshot()
 	_health.configure(health_bar_enabled and (_actor.faction_id != &"player" or show_player_health_bar), always_show_health_bar, _health.is_team or _actor.faction_id == &"player", snapshot.hp, snapshot.hpMax)
 	_label.visible = show_health_values and _health.visible
 	_actor.attributes.snapshot_changed.connect(_refresh_health)
 	_refresh_health(snapshot)
-	CoreSystem.event_bus.event_pushed.connect(_on_event)
 	_damage.visible = false
 	# 父场景_ready中的初始属性、补满生命不算战斗受伤。
 	(_actor.attributes.get_vital(&"health") as HealthVital).damage_received.connect(_on_damage_received)
@@ -43,21 +57,37 @@ func _on_damage_received(_info: DamageInfo) -> void:
 	# 若出生同帧就受到真实伤害，仍须及时显现。
 	_setup_complete = true
 
+func unbind_actor() -> void:
+	var actor := _actor
+	if is_instance_valid(actor) and is_instance_valid(actor.attributes):
+		if actor.attributes.snapshot_changed.is_connected(_refresh_health):
+			actor.attributes.snapshot_changed.disconnect(_refresh_health)
+		var health := actor.attributes.get_vital(&"health") as HealthVital
+		if health != null and health.damage_received.is_connected(_on_damage_received):
+			health.damage_received.disconnect(_on_damage_received)
+	_actor_ref = null
+	_setup_complete = false
+	remaining = 0.0
+	last_damage = 0.0
+	hit_count = 0
+	if is_instance_valid(hit_effect):
+		hit_effect.player.stop()
+		hit_effect.visible = false
+		hit_effect.play_count = 0
+	visible = false
+
 func _exit_tree() -> void:
-	if CoreSystem.event_bus.event_pushed.is_connected(_on_event):
-		CoreSystem.event_bus.event_pushed.disconnect(_on_event)
+	unbind_actor()
 
 func _refresh_health(snapshot: Dictionary) -> void:
 	if _health.current_health != float(snapshot.hp) or _health.maximum_health != float(snapshot.hpMax):
 		_health.set_health(snapshot.hp, snapshot.hpMax, _setup_complete)
 	_label.text = "%s / %s" % [_format_value(snapshot.hp), _format_value(snapshot.hpMax)] if snapshot.hp > 0.0 else "已击杀"
 
-func _on_event(id: String, payload: Array) -> void:
-	if id != "battle.attack.hit" or payload.size() != 1:
+func show_hit(data: Dictionary) -> void:
+	if not is_instance_valid(_actor):
 		return
-	var data: Dictionary = payload[0]
-	if data.get("battle_id") != _actor.session.battle_id or data.get("target_entity_id") != _actor.entity_id:
-		return
+	global_transform = _actor.global_transform
 	# 原版onDamage(0)也先显现；闪避与免疫不走这个分支。
 	if not bool(data.get("is_dodged", false)) and not bool(data.get("is_immune", false)):
 		_health.show_health()
@@ -83,11 +113,13 @@ func _on_event(id: String, payload: Array) -> void:
 		hit_effect.play_hit(_actor.animation.get_facing(), hit_effect_unit_scale)
 
 func advance_feedback(delta: float) -> void:
+	if not is_instance_valid(_actor):
+		return
+	global_transform = _actor.global_transform
 	_refresh_protection()
 	_health.advance_bar(delta, _actor.animation.get_facing())
 	_label.visible = show_health_values and _health.visible
 	hit_effect.advance_effect(delta)
-	number_rows.advance_numbers(delta)
 	if remaining <= 0.0:
 		return
 	remaining = maxf(0.0, remaining - delta)

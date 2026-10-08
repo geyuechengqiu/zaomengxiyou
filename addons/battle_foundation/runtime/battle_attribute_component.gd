@@ -1,5 +1,22 @@
 extends GameplayVitalAttributeComponent
 class_name BattleAttributeComponent
+#region 场景中直接编辑的一级属性
+@export_group("Scene Attributes")
+## 按原属性ID编辑一级基础值。只覆盖填写的属性，未填写的沿用角色定义。
+## 保存场景后重新运行；成长、装备和Buff继续在这些一级值上计算。
+@export var base_values: Dictionary[StringName, float] = {}:
+	set(values):
+		base_values = values.duplicate()
+## 0沿用角色定义的initial_level；大于0时使用组件中的初始等级。
+@export_range(0, 10000) var initial_level_override: int = 0
+@export_group("")
+var _initial_base_values: Dictionary[StringName, float] = {}
+
+func _validate_property(property: Dictionary) -> void:
+	# GAS的这两个数组是初始化后的内部副本，避免显示一个会被定义覆盖的编辑入口。
+	if property.name in ["_active_sets", "_vitals"]:
+		property.usage = PROPERTY_USAGE_STORAGE
+#endregion
 #region 属性链运行状态
 ## 最终值仍由 GAS GameplayAttributeInstance 计算；此组件只管理成长与来源。
 var progression: BattleAttributeProgression
@@ -8,7 +25,57 @@ var _inventory: C_Inventory
 var _refill_after_level: bool = false
 var _configured: bool = false
 var _pending_vital_snapshot: bool = false
+var _last_health_ratio: float = -1.0
 signal snapshot_changed(snapshot: Dictionary)
+#endregion
+#region 使用场景配置初始化，模板不被修改
+func get_initial_configuration_error(data: BattleEntityDefinition) -> String:
+	var ids := {}
+	for attribute_set in _get_definition_sets(data):
+		for attribute: GameplayAttribute in attribute_set.attributes:
+			ids[attribute.attribute_id] = true
+		for attribute: GameplayAttribute in attribute_set.scalable_attributes:
+			ids[attribute.attribute_id] = true
+	for id in base_values:
+		if id == &"level":
+			return "初始等级请使用Initial Level Override，而不是Base Values中的level"
+		if not ids.has(id) or not is_finite(base_values[id]):
+			return "组件基础属性ID未知或数值无效：" + str(id)
+	var maximum := data.progression.maximum_level if data.progression != null else 10000
+	if initial_level_override < 0 or initial_level_override > maximum:
+		return "组件初始等级超出范围：" + str(initial_level_override)
+	return ""
+
+func initialize_from_definition(data: BattleEntityDefinition) -> void:
+	assert(get_initial_configuration_error(data).is_empty(), get_initial_configuration_error(data))
+	var sets: Array[GameplayAttributeSet] = []
+	# 先修改实例副本，再创建Vital，初始生命/魔法以修改后的最大值填满。
+	for source in _get_definition_sets(data):
+		var local := source.duplicate_deep(Resource.DEEP_DUPLICATE_ALL) as GameplayAttributeSet
+		for attribute: GameplayAttribute in local.attributes.keys() + local.scalable_attributes.keys():
+			var id := attribute.attribute_id
+			if base_values.has(id):
+				local.attributes[attribute] = base_values[id]
+				local.scalable_attributes.erase(attribute)
+				attribute.scalable_value = null
+		sets.append(local)
+	initialize(sets, data.vitals)
+	_initial_base_values.clear()
+	for id in _attributes:
+		_initial_base_values[id] = get_attribute(id).base_value
+	configure_progression(data.progression, initial_level_override if initial_level_override > 0 else data.initial_level)
+	if base_values.has(&"exp"):
+		set_experience(base_values[&"exp"])
+
+func _get_definition_sets(data: BattleEntityDefinition) -> Array[GameplayAttributeSet]:
+	var sets: Array[GameplayAttributeSet] = [data.attribute_set]
+	if data.progression != null and data.progression.attribute_set != null:
+		sets.append(data.progression.attribute_set)
+	return sets
+
+## 返回初始化时的一级基础值，供演示样例恢复其组件配置，不覆盖为脚本常量。
+func get_initial_base_value(id: StringName, fallback: float = 0.0) -> float:
+	return _initial_base_values.get(id, fallback)
 #endregion
 #region 初始化与统一通知
 func configure_progression(data: BattleAttributeProgression, initial_level: int) -> void:
@@ -27,6 +94,11 @@ func _on_recalculated(_changes: Dictionary) -> void:
 	var owner := get_parent()
 	if is_instance_valid(owner) and owner.has_method("publish_battle_event"):
 		owner.publish_battle_event(&"battle.attributes.changed", {"attributes": snapshot})
+		var ratio := float(snapshot.hp) / float(snapshot.hpMax) if float(snapshot.hpMax) > 0.0 else 0.0
+		var previous := _last_health_ratio
+		_last_health_ratio = ratio
+		if previous >= 0.0 and not is_equal_approx(previous, ratio):
+			owner.publish_battle_event(&"battle.health.changed", {"previous_health_ratio": previous, "health_ratio": ratio, "hp": snapshot.hp, "hpMax": snapshot.hpMax})
 
 func _on_vital_changed(_id: StringName, _value: float, _maximum: float, _percent: float, _regen: bool) -> void:
 	# 属性事务会在完成时发布完整快照；单独伤害、耗蓝和回复也即时通知面板。

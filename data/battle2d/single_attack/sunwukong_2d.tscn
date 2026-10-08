@@ -12,3 +12,36 @@ action_profile = ExtResource("actions")
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
 shape = SubResource("RectangleShape2D_xr0gf")
+
+[node name="GameplayVitalAttributeComponent" parent="." index="3"]
+base_values = Dictionary[StringName, float]({
+&"atk": 26.0,
+&"critical": 0.0,
+&"darkResist": 0.0,
+&"dodge": 0.0,
+&"enduranceMax": 0.0,
+&"exp": 0.0,
+&"fireResist": 20.0,
+&"guardian": 0.0,
+&"hit": 0.0,
+&"hpMax": 275.0,
+&"jumpSpeed1": -200.0,
+&"jumpSpeed2": -200.0,
+&"lightResist": 0.0,
+&"lucky": 0.0,
+&"mpMax": 100.0,
+&"phyDef": 5.0,
+&"protectPoint": 50000.0,
+&"rayResist": 0.0,
+&"reEndurance": 0.0,
+&"reHP": 0.0,
+&"reMP": 0.0,
+&"reduceEndurance": 0.0,
+&"runSpeed": 350.0,
+&"soilResist": 0.0,
+&"toughness": 0.0,
+&"walkSpeed": 150.0,
+&"waterResist": -20.0,
+&"windResist": 0.0,
+&"woodResist": 0.0
+})

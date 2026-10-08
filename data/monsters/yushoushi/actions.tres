@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="BattleActionProfile2D" format=3]
+[ext_resource type="Script" path="res://addons/battle_foundation/definitions/battle_action_profile_2d.gd" id="script"]
+[resource]
+script = ExtResource("script")
+attack_skill_id = &"yushoushi_skill1"
+maximum_jumps = 1
+hurt_lock_frames = 9

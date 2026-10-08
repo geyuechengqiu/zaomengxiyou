@@ -1,0 +1,16 @@
+{
+  "source": "D:\\UserData\\Downloads\\game\\Speculum-4399-master\\exports\\zmhj_role_stats\\原始配置\\Buff.json",
+  "sha256": "3b5a508340122df421a747b3beeebfa12411188d045d202c3aec2e57b09430b0",
+  "statuses": {
+    "attack_up": 8030701,
+    "slow": 21004401,
+    "stun": 2000201,
+    "poison": 5019101,
+    "shield": 26002408,
+    "invulnerable": 1000101,
+    "super_armor": 6000301,
+    "reflection": 15000101,
+    "lifesteal": 81101001
+  },
+  "scope": "PvE common types 1/2/5/6/8/15/21/81/262; composition passives are test resources"
+}

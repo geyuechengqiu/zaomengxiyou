@@ -9,6 +9,11 @@ class_name GE_AttributeModifier
 @export var source_id: StringName = &""
 @export var attribute_component_name : StringName = "GameplayVitalAttributeComponent"
 #endregion
+#region 生命周期与引擎回调
+func _init() -> void:
+	reapply_on_stack = true
+
+#endregion
 #region 内部实现
 
 func _apply(target: Node, instigator: Node, context: Dictionary) -> void:

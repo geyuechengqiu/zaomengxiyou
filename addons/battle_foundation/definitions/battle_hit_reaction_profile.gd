@@ -23,6 +23,7 @@ class_name BattleHitReactionProfile
 @export_range(0.0, 5.0) var getup_seconds: float = 0.35
 @export var getup_invulnerable: bool = false
 #endregion
+#region 公共接口
 
 func is_valid() -> bool:
 	for value in [armor_damage_multiplier, hit_landing_seconds, knockdown_seconds, getup_seconds]:
@@ -32,3 +33,4 @@ func is_valid() -> bool:
 		if not is_finite(value) or value < 0.0 or value > 1.0:
 			return false
 	return true
+#endregion

@@ -158,20 +158,23 @@ func _verify_definitions_and_rules() -> void:
 	state.enter(State.IDLE)
 	_check(state.current == State.DEAD and not state.get_permission(&"move", player.action_profile) and not state.can_jump(true, player.action_profile), "死亡终态和权限不能被技能覆盖")
 	state.dispose()
+	state.free()
 #endregion
 #region 重力、行走、奔跑、朝向与二段跳
 func _verify_motion() -> void:
+	# 修正世界速度后使用足够长的平地，避免把撞上平台侧面误判为速度不符。
+	await _fresh(Vector2(180, 648))
 	var landing_serial := player.motion.landing_serial
 	await _step(90)
 	_check(player.motion.grounded and absf(player.position.y - 650.0) < 0.3 and player.motion.landing_serial == landing_serial, "地面稳定，不重复落地、不悬空")
 	player.move_axis = 1.0
 	var before := player.position.x
 	await _step(20)
-	_check(player.action_state.current == State.MOVE and is_equal_approx(player.position.x - before, 210.0 / 3.0), "行走状态与 GAS 速度")
+	_check(player.action_state.current == State.MOVE and is_equal_approx(player.position.x - before, 420.0 / 3.0), "行走状态与 GAS 速度：原版210按2倍世界坐标换算")
 	player.running = true
 	before = player.position.x
 	await _step(20)
-	_check(player.action_state.current == State.RUN and is_equal_approx(player.position.x - before, 100.0), "独立奔跑状态与 GAS 速度")
+	_check(player.action_state.current == State.RUN and is_equal_approx(player.position.x - before, 200.0), "独立奔跑状态与 GAS 速度：原版300按2倍世界坐标换算")
 	player.move_axis = -1.0
 	await _step()
 	_check(player.animation.get_facing() == -1, "可转向状态更新朝向")
@@ -340,10 +343,8 @@ func _verify_interruptions() -> void:
 #region 实际操作意图进入五段链
 func _verify_input_chain() -> void:
 	await _fresh()
-	var operations := BattlePlayerOperations.new()
-	operations.operation_profile = load("res://data/controls/player_operations.tres")
-	player.operations = operations
-	player.add_child(operations)
+	var operations := player.operations
+	operations.enabled = true
 	operations.controller.native_input_enabled = false
 	for index in range(5):
 		operations.controller.pulse_intent(&"attack", &"verification")

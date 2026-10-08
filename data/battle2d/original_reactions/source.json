@@ -1,0 +1,387 @@
+{
+  "source": "exports/zmhj_role_stats/原始配置/Skill.json",
+  "sha256": "84dfa46b6e8d332927ffa7372733ba99bcd411b68153d90ab9e7a2dcfd2df2a1",
+  "display_scale": 2,
+  "source_fps": 30,
+  "nape_delta": 0.1,
+  "nape_gravity": 110,
+  "steps": [
+    {
+      "action": "attack1",
+      "source_skill_id": 1001010,
+      "skill_target_move": "15;40",
+      "impacts": [
+        {
+          "collisionGroup": 1,
+          "shakeOnHit": false,
+          "useParentDirection": false,
+          "setBody": false,
+          "hasDamage": true,
+          "zSort": 1,
+          "attackedMoveDir": 1,
+          "shootThrough": true,
+          "skillid": 0,
+          "delayDestroy": 0,
+          "shootSpeed": 0,
+          "followParent": true,
+          "atkInterval": 0.1,
+          "stiff": 0.4,
+          "sensor": true,
+          "mirrorAngle": false,
+          "shootTime": 0,
+          "locatePostionType": "1",
+          "targetMove": "",
+          "collisionMask": -1,
+          "material0": true,
+          "shakeFrame": "0",
+          "x": 0,
+          "y": 0,
+          "shootAssetLink": "attack1",
+          "linkParentState": true,
+          "bodyType": "kc",
+          "type": 1,
+          "shootFrame": 4,
+          "atkMax": 1
+        }
+      ],
+      "world_reactions": [
+        {
+          "hit_stun": 0.4,
+          "knockback_speed": 30.0,
+          "knockback_duration": 0.4,
+          "launch_speed": 240.0,
+          "reset_vertical_velocity": true,
+          "reaction_gravity": 1980.0
+        }
+      ]
+    },
+    {
+      "action": "attack2",
+      "source_skill_id": 1001020,
+      "skill_target_move": "15;40",
+      "impacts": [
+        {
+          "collisionGroup": 1,
+          "shakeOnHit": false,
+          "useParentDirection": false,
+          "setBody": false,
+          "hasDamage": true,
+          "zSort": 1,
+          "attackedMoveDir": 1,
+          "shootThrough": true,
+          "skillid": 0,
+          "delayDestroy": 0,
+          "shootSpeed": 0,
+          "followParent": true,
+          "atkInterval": 0.1,
+          "stiff": 0.4,
+          "sensor": true,
+          "mirrorAngle": false,
+          "shootTime": 0,
+          "locatePostionType": "1",
+          "targetMove": "",
+          "collisionMask": -1,
+          "material0": true,
+          "shakeFrame": "0",
+          "x": 0,
+          "y": 0,
+          "shootAssetLink": "attack2",
+          "linkParentState": true,
+          "bodyType": "kc",
+          "type": 1,
+          "shootFrame": 4,
+          "atkMax": 1
+        }
+      ],
+      "world_reactions": [
+        {
+          "hit_stun": 0.4,
+          "knockback_speed": 30.0,
+          "knockback_duration": 0.4,
+          "launch_speed": 240.0,
+          "reset_vertical_velocity": true,
+          "reaction_gravity": 1980.0
+        }
+      ]
+    },
+    {
+      "action": "attack3",
+      "source_skill_id": 1001030,
+      "skill_target_move": "-80;40",
+      "impacts": [
+        {
+          "collisionGroup": 1,
+          "shakeOnHit": false,
+          "useParentDirection": false,
+          "setBody": false,
+          "hasDamage": true,
+          "zSort": 1,
+          "attackedMoveDir": 1,
+          "shootThrough": true,
+          "skillid": 0,
+          "delayDestroy": 0,
+          "shootSpeed": 0,
+          "followParent": true,
+          "atkInterval": 0.1,
+          "stiff": 0.5,
+          "sensor": true,
+          "mirrorAngle": false,
+          "shootTime": 0,
+          "locatePostionType": "1",
+          "targetMove": "",
+          "collisionMask": -1,
+          "material0": true,
+          "shakeFrame": "0",
+          "x": 0,
+          "y": 0,
+          "shootAssetLink": "attack3",
+          "linkParentState": true,
+          "bodyType": "kc",
+          "type": 1,
+          "shootFrame": 2,
+          "atkMax": 1
+        }
+      ],
+      "world_reactions": [
+        {
+          "hit_stun": 0.5,
+          "knockback_speed": -160.0,
+          "knockback_duration": 0.5,
+          "launch_speed": 240.0,
+          "reset_vertical_velocity": true,
+          "reaction_gravity": 1980.0
+        }
+      ]
+    },
+    {
+      "action": "attack4",
+      "source_skill_id": 1001040,
+      "skill_target_move": null,
+      "impacts": [
+        {
+          "linkParentState": true,
+          "layer": 0,
+          "shootThrough": true,
+          "zSort": 1,
+          "attackedMoveDir": 1,
+          "hasDamage": true,
+          "skillid": 0,
+          "delayDestroy": 0,
+          "shootSpeed": 0,
+          "stiff": 0.4,
+          "atkInterval": 1,
+          "followParent": true,
+          "sensor": true,
+          "shootAssetLink": "attack4",
+          "locatePostionType": 1,
+          "targetMove": "100;40",
+          "collisionMask": -1,
+          "material0": true,
+          "shakeFrame": "0",
+          "x": 0,
+          "y": 0,
+          "shootTime": 0,
+          "collisionGroup": 1,
+          "bodyType": "kc",
+          "type": 1,
+          "scaleX": 1,
+          "shootFrame": 0,
+          "atkMax": 1,
+          "scaleY": 1
+        },
+        {
+          "linkParentState": true,
+          "layer": 0,
+          "shootThrough": true,
+          "zSort": 1,
+          "attackedMoveDir": 1,
+          "hasDamage": true,
+          "skillid": 0,
+          "delayDestroy": 0,
+          "shootSpeed": 0,
+          "stiff": 0.57,
+          "atkInterval": 1,
+          "followParent": true,
+          "sensor": true,
+          "shootAssetLink": "attack4",
+          "locatePostionType": 1,
+          "targetMove": "85;40",
+          "collisionMask": -1,
+          "material0": true,
+          "shakeFrame": "0",
+          "x": -17,
+          "type": 1,
+          "shootTime": 0,
+          "collisionGroup": 1,
+          "bodyType": "kc",
+          "y": -4,
+          "scaleX": -1,
+          "shootFrame": 8,
+          "atkMax": 1,
+          "scaleY": 1
+        }
+      ],
+      "world_reactions": [
+        {
+          "hit_stun": 0.4,
+          "knockback_speed": 200.0,
+          "knockback_duration": 0.4,
+          "launch_speed": 240.0,
+          "reset_vertical_velocity": true,
+          "reaction_gravity": 1980.0
+        },
+        {
+          "hit_stun": 0.57,
+          "knockback_speed": 170.0,
+          "knockback_duration": 0.57,
+          "launch_speed": 240.0,
+          "reset_vertical_velocity": true,
+          "reaction_gravity": 1980.0
+        }
+      ]
+    },
+    {
+      "action": "attack5",
+      "source_skill_id": 1001050,
+      "skill_target_move": "240;80",
+      "impacts": [
+        {
+          "linkParentState": true,
+          "layer": 0,
+          "hasDamage": true,
+          "zSort": 1,
+          "attackedMoveDir": 1,
+          "shootThrough": true,
+          "skillid": 0,
+          "delayDestroy": 0,
+          "shootSpeed": 0,
+          "stiff": 0.5,
+          "atkInterval": 0.1,
+          "followParent": true,
+          "sensor": true,
+          "shootTime": 0,
+          "locatePostionType": 1,
+          "shootAssetLink": "attack5",
+          "collisionMask": -1,
+          "material0": true,
+          "x": 0,
+          "y": 0,
+          "shootFrame": 6,
+          "collisionGroup": 1,
+          "bodyType": "st",
+          "type": 1,
+          "scaleX": 1,
+          "atkMax": 1,
+          "scaleY": 1
+        }
+      ],
+      "world_reactions": [
+        {
+          "hit_stun": 0.5,
+          "knockback_speed": 480.0,
+          "knockback_duration": 0.5,
+          "launch_speed": 480.0,
+          "reset_vertical_velocity": true,
+          "reaction_gravity": 1980.0
+        }
+      ]
+    },
+    {
+      "action": "run_attack",
+      "source_skill_id": 1001060,
+      "skill_target_move": "240;60",
+      "impacts": [
+        {
+          "collisionGroup": 1,
+          "shakeOnHit": false,
+          "type": 1,
+          "setBody": false,
+          "hasDamage": true,
+          "zSort": 1,
+          "attackedMoveDir": 1,
+          "shootThrough": true,
+          "skillid": 0,
+          "delayDestroy": 0,
+          "shootSpeed": 0,
+          "followParent": true,
+          "atkInterval": 0.1,
+          "stiff": 0.4,
+          "sensor": true,
+          "mirrorAngle": false,
+          "shootAssetLink": "runAttack",
+          "locatePostionType": "1",
+          "shootTime": 0,
+          "collisionMask": -1,
+          "material0": true,
+          "shakeFrame": "0",
+          "x": 0,
+          "y": 0,
+          "shootFrame": 3,
+          "linkParentState": true,
+          "bodyType": "kc",
+          "useParentDirection": false,
+          "targetMove": "",
+          "atkMax": 1
+        }
+      ],
+      "world_reactions": [
+        {
+          "hit_stun": 0.4,
+          "knockback_speed": 480.0,
+          "knockback_duration": 0.4,
+          "launch_speed": 360.0,
+          "reset_vertical_velocity": true,
+          "reaction_gravity": 1980.0
+        }
+      ]
+    },
+    {
+      "action": "jump_attack",
+      "source_skill_id": 1001070,
+      "skill_target_move": null,
+      "impacts": [
+        {
+          "collisionGroup": 1,
+          "shakeOnHit": false,
+          "useParentDirection": false,
+          "setBody": false,
+          "shootThrough": true,
+          "zSort": 1,
+          "attackedMoveDir": 1,
+          "hasDamage": true,
+          "skillid": 0,
+          "delayDestroy": 0,
+          "shootSpeed": 0,
+          "stiff": 0.3,
+          "atkInterval": 0.1,
+          "followParent": true,
+          "sensor": true,
+          "mirrorAngle": false,
+          "shootAssetLink": "jumpAttack",
+          "targetMove": "20;40",
+          "shootFrame": 5,
+          "material0": true,
+          "shakeFrame": "0",
+          "x": 0,
+          "type": 1,
+          "collisionMask": -1,
+          "linkParentState": true,
+          "bodyType": "kc",
+          "y": 0,
+          "atkMax": 1,
+          "shootTime": 0
+        }
+      ],
+      "world_reactions": [
+        {
+          "hit_stun": 0.3,
+          "knockback_speed": 40.0,
+          "knockback_duration": 0.3,
+          "launch_speed": 240.0,
+          "reset_vertical_velocity": true,
+          "reaction_gravity": 1980.0
+        }
+      ]
+    }
+  ]
+}

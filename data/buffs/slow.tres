@@ -1,0 +1,35 @@
+[gd_resource type="Resource" script_class="GameplayStatusData" format=3]
+[ext_resource type="Script" path="res://addons/gameplay_abiltiy_system/scripts/status/gameplay_status_data.gd" id="status"]
+[ext_resource type="Script" path="res://addons/gameplay_abiltiy_system/scripts/effects/gameplay_effect.gd" id="effect_type"]
+[ext_resource type="Script" path="res://addons/gameplay_abiltiy_system/scripts/status/features/status_feature.gd" id="feature_type"]
+[ext_resource type="Script" path="res://addons/battle_foundation/gas/battle_original_status_policy.gd" id="policy"]
+[ext_resource type="Script" path="res://addons/gameplay_abiltiy_system/scripts/effects/ge_attribute_modifier.gd" id="effect"]
+[ext_resource type="Script" path="res://addons/gameplay_abiltiy_system/scripts/attributes/gameplay_attribute_modifier.gd" id="modifier"]
+[sub_resource type="Resource" id="walkSpeed"]
+script = ExtResource("modifier")
+attribute_id = &"walkSpeed"
+value = -0.5
+modifier_type = 1
+[sub_resource type="Resource" id="runSpeed"]
+script = ExtResource("modifier")
+attribute_id = &"runSpeed"
+value = -0.5
+modifier_type = 1
+[sub_resource type="Resource" id="effect"]
+script = ExtResource("effect")
+modifiers = Array[ExtResource("modifier")]([SubResource("walkSpeed"), SubResource("runSpeed")])
+[sub_resource type="Resource" id="policy"]
+script = ExtResource("policy")
+replace_rule = 1
+[resource]
+script = ExtResource("status")
+status_id = &"slow"
+status_display_name = "驱魔老道-减速"
+duration = 5
+stacking_policy = SubResource("policy")
+max_stacks = 1
+stacking_group = &"original.21/speed"
+tags = Array[StringName]([&"status.debuff"])
+metadata/original_buff_id = 21004401
+metadata/original_type = 21
+apply_effects = Array[ExtResource("effect_type")]([SubResource("effect")])

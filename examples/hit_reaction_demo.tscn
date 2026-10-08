@@ -65,3 +65,6 @@ step = 1.0
 [node name="Note" type="Label" parent="HUD/ProtectionSettings/Column"]
 layout_mode = 2
 text = "调低满值可快速验收保护"
+[editable path="BattleSession/Actors/SunWukong"]
+[editable path="BattleSession/Actors/LeftDummy"]
+[editable path="BattleSession/Actors/RightDummy"]

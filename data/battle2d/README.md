@@ -1,5 +1,7 @@
 # 孙悟空 2D 动画接入数据
 
+角色组件已统一预置到角色场景：GAS 属性/Vital、技能、状态、动作状态、运动、连击、受击、保护、伤害规则、背包与输入控制器均可在场景树中查看；初始化只绑定已有节点。复用场景结构、玩家控制权与新角色接入见 [角色组件说明](character-components.md)。
+
 新增 [run_attack.tres](run_attack.tres) 与 [jump_attack.tres](jump_attack.tres)，跑步或空中按攻击进入独立 Core 状态，读取原动画时长、命中帧、倍率与 SWF 判定框。第四段支持窗口内一次反向转身，保留本段运动方向并决定第五段方向。编辑步骤、规则与原始来源见 [上下文攻击说明](wukong-context-attacks.md)。
 
 训练木桩已采用参考悟空造型的 SVG 和预置受伤时间轴，所有战斗样例复用 [wooden_dummy.tscn](dummy/wooden_dummy.tscn)。外观、身体/底座注册点、表情覆盖层和受伤关键帧编辑见 [木桩说明](dummy/README.md)。
@@ -32,7 +34,7 @@
 
 动画在独立表现场景编辑；攻击范围修改技能时间线事件的 hit_rect、hit_scale_x/y 和 hit_offset。所有技能复用一个 CollisionShape2D，预览及实际命中从技能定义更新几何，步骤见 [可视化编辑说明](../animation/README.md)。
 
-初始攻击 26、防御 5、最大生命 275、最大法力 100、步行 210、奔跑 300、水抗 -20、火抗 20、跳跃属性 -178、保护阈值 50000，均来自原版 Role.json 的 2001 条目。原版编号只用于溯源，保存在 source_mapping.json 的 source_character_id/source_skill_id；运行时配置和调用使用上述业务 ID。原表没有的耐久属性使用 0；成长与 EXP 已接入独立属性计算链。当前生命、技能计时、姿态和外观不写回定义。
+初始攻击 26、防御 5、最大生命 275、最大法力 100、步行 420、奔跑 600（原版210/300按2倍战斗坐标换算）、水抗 -20、火抗 20、跳跃属性 -178、保护阈值 50000，除速度进行世界坐标换算外均来自原版 Role.json 的 2001 条目。原版编号只用于溯源，保存在 source_mapping.json 的 source_character_id/source_skill_id；运行时配置和调用使用上述业务 ID。原表没有的耐久属性使用 0；成长与 EXP 已接入独立属性计算链。当前生命、技能计时、姿态和外观不写回定义。
 
 ```gdscript
 var session := BattleSystem.create_session(self, "res://data/battle2d/manifest.json", 2001)
@@ -47,3 +49,5 @@ actor.animation.set_skins([&"套装/2", &"武器/weapon2"])
 平台样例的重力和跳跃使用 Godot 像素/秒参数；原版 -178 的运动单位来自旧引擎，不能直接作为本场景跳跃速度。完整接口、规则分离、挂点、皮肤组合和操作说明见 [动画适配层 README](../../addons/battle_foundation/animation/README.md)。
 
 五段连击、二段跳、运动与状态条件表见 [阶段四 README](../../addons/battle_foundation/movement/README.md)。场景入口：[wukong_platform_demo.tscn](../../examples/wukong_platform_demo.tscn)。验收入口：[verify_wukong_animation.tscn](../../examples/verify_wukong_animation.tscn)、[verify_stage_four.tscn](../../examples/verify_stage_four.tscn)。均使用现有带 Spine 模块的 Godot 引擎。
+
+阶段10 [Buff 场景索引](buffs/manifest.json) 复用原版伤害与保护场景定义，增加 [原版 Buff 资源](../buffs/README.md)。角色/怪物节点均使用已有 GameplayStatusComponent，无需附加第二套 Buff 节点。

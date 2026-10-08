@@ -114,6 +114,12 @@ func _validate_definition(category: String, id: String, data: Resource) -> bool:
 				if feature == null or feature_names.has(feature.feature_name):
 					return _fail("技能 Feature 无效或重复：" + id)
 				feature_names[feature.feature_name] = true
+				if feature is BattleSkillCooldownFeature and not BattleSkillLevelValues.is_valid(feature.durations):
+					return _fail("技能等级冷却配置无效：" + id)
+				if feature is CostFeature:
+					for cost in feature.costs:
+						if cost is BattleSkillManaCost and (cost.skill_id != data.ability_id or not BattleSkillLevelValues.is_valid(cost.amounts)):
+							return _fail("技能等级消耗配置无效：" + id)
 				if feature is BattleFrameTimelineFeature and not feature.is_configuration_valid():
 					return _fail("技能素材帧事件配置无效：" + id)
 				if feature is BattleFrameTimelineFeature and feature.commit_resources and data.execution_tree != null:
@@ -122,8 +128,15 @@ func _validate_definition(category: String, id: String, data: Resource) -> bool:
 			if not data is GameplayStatusData:
 				return _fail("状态应使用 GAS 定义：" + id)
 			resource_id = data.status_id
-			if not is_finite(data.duration) or data.duration < -1.0:
-				return _fail("状态持续时间无效：" + id)
+			if not is_finite(data.duration) or data.duration < -1.0 or data.max_stacks < 1 or not is_finite(data.initial_update_delta) or data.initial_update_delta < 0.0:
+				return _fail("状态持续时间/层数/初始推进无效：" + id)
+			for feature in data.features:
+				if feature == null:
+					return _fail("状态 Feature 无效：" + id)
+				if feature is FeaturePeriodicEffects and (not is_finite(feature.period) or feature.period <= 0.0):
+					return _fail("状态周期无效：" + id)
+				if feature is BattleTriggerFeature and (not is_finite(feature.cooldown) or feature.cooldown < 0.0 or not is_finite(feature.chance) or feature.chance < 0.0 or feature.chance > 1.0 or not is_finite(feature.health_threshold) or feature.health_threshold < 0.0 or feature.health_threshold > 1.0):
+					return _fail("战斗触发条件无效：" + id)
 		"equipment":
 			if not data is BattleEquipmentDefinition:
 				return _fail("装备定义类型错误：" + id)
@@ -143,6 +156,9 @@ func _validate_references(definitions: Dictionary) -> bool:
 		for feature in skill.features:
 			if not feature is BattleFrameTimelineFeature:
 				continue
+			for status_id in feature.initial_status_ids:
+				if not definitions.statuses.has(status_id):
+					return _fail("技能引用了未登记起手状态：" + String(status_id))
 			for branch in feature.branch_windows:
 				if not definitions.skills.has(branch.target_ability_id):
 					return _fail("派生引用了未登记技能：" + String(branch.target_ability_id))

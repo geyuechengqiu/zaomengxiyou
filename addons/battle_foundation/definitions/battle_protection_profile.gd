@@ -26,6 +26,8 @@ class_name BattleProtectionProfile
 @export var blocks_status: bool = false
 @export var counts_while_active: bool = false
 #endregion
+#region 公共接口
 
 func is_valid() -> bool:
 	return (maximum_override == -1 or maximum_override > 0) and is_finite(multiplayer_bonus) and multiplayer_bonus >= 0.0 and is_finite(inactivity_reset_seconds) and inactivity_reset_seconds >= 0.0 and is_finite(protect_seconds) and protect_seconds >= 0.0
+#endregion

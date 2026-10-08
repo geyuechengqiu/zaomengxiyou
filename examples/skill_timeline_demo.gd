@@ -22,5 +22,5 @@ func _process(_delta: float) -> void:
 	var skill := player.abilities.get_ability_instance(&"sunwukong_timeline_attack")
 	var cooldown := skill.get_feature("CooldownFeature") as CooldownFeature if skill != null else null
 	var remaining := cooldown.get_cooldown_remaining(skill) if cooldown != null else 0.0
-	info.text = "状态 %s · 阶段 %s · 攻击 %.0f · 魔法 %.0f · 冷却 %.0fms\n左木桩 %.0f / 500 · 右木桩 %.0f / 500 · 命中 %d%s" % [player.action_state.get_name(), player.attack_instance.phase if player.attack_instance != null else &"idle", player.attributes.get_value(&"atk"), player.attributes.get_vital_value(&"mana"), remaining * 1000.0, dummies[0].attributes.get_vital_value(&"health"), dummies[1].attributes.get_vital_value(&"health"), total_hits, "（暂停）" if session.clock.paused else ""]
+	info.text = "状态 %s · 阶段 %s · 攻击 %.0f · 魔法 %.0f · 冷却 %.0fms\n左木桩 %.0f / 500 · 右木桩 %.0f / 500 · 命中 %d%s" % [player.action_state.get_state_name(), player.attack_instance.phase if player.attack_instance != null else &"idle", player.attributes.get_value(&"atk"), player.attributes.get_vital_value(&"mana"), remaining * 1000.0, dummies[0].attributes.get_vital_value(&"health"), dummies[1].attributes.get_vital_value(&"health"), total_hits, "（暂停）" if session.clock.paused else ""]
 #endregion

@@ -1,8 +1,11 @@
 extends SceneTree
+#region 类型与常量
 ## 通过 Godot 自身保存当前版本的编辑器设置，不手工重写整个设置文件。
 ## 仅由启动脚本在用户关闭编辑器后执行；辅助工程没有游戏插件或自动加载。
 
 const SINGLE_WINDOW_SETTING := "interface/editor/display/single_window_mode"
+#endregion
+#region 内部实现
 
 func _initialize() -> void:
 	call_deferred("_configure")
@@ -38,3 +41,4 @@ func _configure() -> void:
 		return
 	print("PASS single-window setting saved: %s; backup: %s" % [path, backup])
 	quit(0)
+#endregion

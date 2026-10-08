@@ -1,6 +1,6 @@
 # 全部源码与资源索引
 
-由 [generate_source_index.mjs](generate_source_index.mjs) 从当前文件生成。本文列出全部 134 个 GDScript 文件（含编辑器入口、示例和 UI），不是仅按关键词挑选核心类。实现行为与限制见 [插件 README](../README.md)；本索引只提取声明，不推断逻辑。
+由 [generate_source_index.mjs](generate_source_index.mjs) 从当前文件生成。本文列出全部 135 个 GDScript 文件（含编辑器入口、示例和 UI），不是仅按关键词挑选核心类。实现行为与限制见 [插件 README](../README.md)；本索引只提取声明，不推断逻辑。
 
 公开方法指名称不以下划线开头的方法；导出字段包含多行 export 注解的声明，运行时内部字段需进入源码查看。无 class_name 的脚本以文件名标识；Autoload 名称由 plugin.gd 注册。
 
@@ -166,7 +166,7 @@
 | --- | --- | --- | --- | --- |
 | [GameplayAbilityComponent](../scripts/components/gameplay_ability_component.gd) | `Node` | `_initial_abilities`<br>`externally_driven` | `advance_simulation()`<br>`initialize()`<br>`match_input()`<br>`learn_ability()`<br>`forget_ability()`<br>`disable_ability()`<br>`enable_ability()`<br>`get_ability_instance()`<br>`get_all_ability_instances()`<br>`can_activate_ability()`<br>`try_activate_ability()`<br>`cancel_ability()`<br>`get_current_casting_ability()`<br>`get_all_ability_ids()`<br>`has_ability()`<br>`request_ability_preview()`<br>`cancel_ability_preview()`<br>`has_targeting_ability()`<br>`get_current_targeting_ability()` | `ability_learned`<br>`ability_forgotten`<br>`ability_activated`<br>`ability_completed` |
 | [GameplayAttributeComponent](../scripts/components/gameplay_attribute_component.gd) | `Node` | `_active_sets` | `initialize()`<br>`get_value()`<br>`get_attribute()`<br>`set_base_value()`<br>`has_attribute()`<br>`add_modifier()`<br>`remove_modifier()`<br>`remove_modifiers_by_source()`<br>`get_level()`<br>`set_level()`<br>`begin_update()`<br>`end_update()` | `attribute_value_changed`<br>`level_changed`<br>`attributes_recalculated` |
-| [GameplayStatusComponent](../scripts/components/gameplay_status_component.gd) | `Node` | `externally_driven`<br>`filter_events_by_owner` | `advance_simulation()`<br>`apply_status()`<br>`remove_status()`<br>`remove_statuses_by_tags()`<br>`get_active_statuses()`<br>`get_status()`<br>`has_status()`<br>`get_random_status()`<br>`handle_event()` | `status_applied`<br>`status_removed`<br>`status_stacked` |
+| [GameplayStatusComponent](../scripts/components/gameplay_status_component.gd) | `Node` | `externally_driven`<br>`filter_events_by_owner` | `advance_simulation()`<br>`apply_status()`<br>`remove_instance()`<br>`remove_status()`<br>`clear_statuses()`<br>`remove_statuses_by_tags()`<br>`get_active_statuses()`<br>`get_status()`<br>`has_status()`<br>`get_random_status()`<br>`handle_event()` | `status_applied`<br>`status_removed`<br>`status_stacked` |
 | [GameplayVitalAttributeComponent](../scripts/components/gameplay_vital_attribute_component.gd) | `GameplayAttributeComponent` | `_vitals`<br>`externally_driven` | `advance_simulation()`<br>`initialize()`<br>`has_vital()`<br>`get_vital()`<br>`get_vital_value()`<br>`has_sufficient_vital()`<br>`get_vital_percent()`<br>`modify_vital()` | `vital_value_changed`<br>`vital_depleted` |
 
 ## scripts/cues
@@ -183,16 +183,17 @@
 
 | 文件 / 类型 | 基类 | 导出配置 | 公开方法 | 信号 |
 | --- | --- | --- | --- | --- |
-| [DamageInfo](../scripts/damage/damage_info.gd) | `RefCounted` | — | — | — |
-| [DamageLogicStrategy](../scripts/damage/damage_logic_strategy.gd) | `Resource` | — | `calculate()` | — |
+| [DamageInfo](../scripts/damage/damage_info.gd) | `RefCounted` | — | `scale_damage()`<br>`record()`<br>`to_dictionary()` | — |
+| [DamageLogicStrategy](../scripts/damage/damage_logic_strategy.gd) | `Resource` | — | `calculate()`<br>`calculate_result()`<br>`resolves_invulnerability()` | — |
 | [SimpleDamageLogic](../scripts/damage/simple_damage_logic.gd) | `DamageLogicStrategy` | `attack_attribute`<br>`defense_attribute`<br>`crit_rate_attribute`<br>`crit_multiplier` | `calculate()` | — |
 
 ## scripts/effects
 
 | 文件 / 类型 | 基类 | 导出配置 | 公开方法 | 信号 |
 | --- | --- | --- | --- | --- |
-| [GameplayEffect](../scripts/effects/gameplay_effect.gd) | `Resource` | `filters`<br>`sub_effects`<br>`target_required_tags`<br>`target_blocked_tags`<br>`cue` | `apply()`<br>`remove()` | — |
+| [GameplayEffect](../scripts/effects/gameplay_effect.gd) | `Resource` | `filters`<br>`reapply_on_stack`<br>`sub_effects`<br>`target_required_tags`<br>`target_blocked_tags`<br>`cue` | `apply()`<br>`remove()` | — |
 | [GameplayEffectModifier](../scripts/effects/gameplay_effect_modifier.gd) | `Resource` | `ability_id`<br>`damage_multiplier`<br>`heal_multiplier`<br>`duration_multiplier`<br>`duration_add`<br>`range_multiplier` | `affects_ability()`<br>`apply_to_context()` | — |
+| [GameplayTriggerGuard](../scripts/effects/gameplay_trigger_guard.gd) | `RefCounted` | — | `enter()`<br>`leave()` | — |
 | [GE_ApplyDamage](../scripts/effects/ge_apply_damage.gd) | `GameplayEffect` | `damage_multiplier`<br>`invulnerable_block_tag`<br>`damage_strategy`<br>`vital_comp_name`<br>`vital_id` | — | — |
 | [GE_ApplyStatus](../scripts/effects/ge_apply_status.gd) | `GameplayEffect` | `status_data`<br>`stacks` | — | — |
 | [GE_AttributeModifier](../scripts/effects/ge_attribute_modifier.gd) | `GameplayEffect` | `modifiers`<br>`source_id`<br>`attribute_component_name` | — | — |
@@ -232,7 +233,7 @@
 
 | 文件 / 类型 | 基类 | 导出配置 | 公开方法 | 信号 |
 | --- | --- | --- | --- | --- |
-| [damage_calculator.gd](../scripts/singletons/damage_calculator.gd) | `Node` | — | `set_strategy()`<br>`calculate_final_damage()` | — |
+| [damage_calculator.gd](../scripts/singletons/damage_calculator.gd) | `Node` | — | `set_strategy()`<br>`calculate_final_damage()`<br>`calculate_damage()`<br>`resolve_strategy()` | — |
 | [gameplay_ability_system.gd](../scripts/singletons/gameplay_ability_system.gd) | `Node` | `smart_cast` | `get_component_by_interface()` | — |
 | [gameplay_cue_manager.gd](../scripts/singletons/gameplay_cue_manager.gd) | `Node` | — | `execute_cue()`<br>`stop_cue()` | — |
 | [gameplay_tag_manager.gd](../scripts/singletons/gameplay_tag_manager.gd) | `Node` | — | `initialize()`<br>`register_tag()`<br>`register_tags()`<br>`register_tags_from_directory()`<br>`unregister_tag()`<br>`add_tag()`<br>`remove_tag()`<br>`force_remove_tag()`<br>`clear_all_tags()`<br>`add_tags()`<br>`remove_tags()`<br>`clear_query_cache()`<br>`has_tag()`<br>`has_any_tag()`<br>`has_all_tags()`<br>`get_tag_count()`<br>`get_all_tags()`<br>`get_tag_inheritance_chain()`<br>`get_tag_exclusions()`<br>`get_tag_resource()`<br>`get_all_tag_resources()`<br>`is_tag_registered()`<br>`validate_tag()`<br>`validate_tag_list()`<br>`tag_inherits_from()`<br>`print_debug_status()` | `tag_added`<br>`tag_removed` |
@@ -249,15 +250,15 @@
 | 文件 / 类型 | 基类 | 导出配置 | 公开方法 | 信号 |
 | --- | --- | --- | --- | --- |
 | [FeatureEventListener](../scripts/status/features/feature_event_listener.gd) | `StatusFeature` | `trigger_on_events`<br>`event_triggered_effects` | `can_trigger_on_event()`<br>`has_event_listening()` | — |
-| [FeaturePeriodicEffects](../scripts/status/features/feature_periodic_effects.gd) | `StatusFeature` | `period`<br>`periodic_effects` | — | — |
+| [FeaturePeriodicEffects](../scripts/status/features/feature_periodic_effects.gd) | `StatusFeature` | `period`<br>`trigger_on_apply`<br>`periodic_effects` | — | — |
 | [StatusFeature](../scripts/status/features/status_feature.gd) | `Resource` | `feature_name` | `apply_feature()`<br>`update_feature()`<br>`remove_feature()`<br>`handle_event()`<br>`can_trigger_on_event()`<br>`has_event_listening()` | — |
 
 ## scripts/status
 
 | 文件 / 类型 | 基类 | 导出配置 | 公开方法 | 信号 |
 | --- | --- | --- | --- | --- |
-| [GameplayStatusData](../scripts/status/gameplay_status_data.gd) | `Resource` | `status_id`<br>`status_display_name`<br>`status_description`<br>`duration`<br>`duration_policy`<br>`icon`<br>`tags`<br>`apply_effects`<br>`remove_effects`<br>`features`<br>`stacking_policy`<br>`max_stacks`<br>`priority`<br>`cue` | `can_trigger_on_event()`<br>`has_event_listening()` | — |
-| [GameplayStatusInstance](../scripts/status/gameplay_status_instance.gd) | `RefCounted` | — | `apply()`<br>`remove()`<br>`update()`<br>`add_stack()`<br>`handle_event()`<br>`refresh_duration()`<br>`accumulate_duration()`<br>`apply_effects()`<br>`get_feature_storage()`<br>`has_event_listening()` | `status_completed` |
+| [GameplayStatusData](../scripts/status/gameplay_status_data.gd) | `Resource` | `status_id`<br>`status_display_name`<br>`status_description`<br>`duration`<br>`duration_policy`<br>`icon`<br>`tags`<br>`apply_effects`<br>`remove_effects`<br>`features`<br>`stacking_policy`<br>`max_stacks`<br>`stacking_group`<br>`remove_on_death`<br>`initial_update_delta`<br>`priority`<br>`cue` | `can_trigger_on_event()`<br>`has_event_listening()` | — |
+| [GameplayStatusInstance](../scripts/status/gameplay_status_instance.gd) | `RefCounted` | — | `apply()`<br>`remove()`<br>`update()`<br>`add_stack()`<br>`handle_event()`<br>`refresh_duration()`<br>`accumulate_duration()`<br>`apply_effects()`<br>`apply_effects_to()`<br>`get_feature_storage()`<br>`has_event_listening()` | `status_completed` |
 
 ## scripts/status/stacking
 
@@ -267,7 +268,7 @@
 | [StackingIntensity](../scripts/status/stacking/stacking_intensity.gd) | `StatusStackingPolicy` | — | — | — |
 | [StackingRefreshAndStack](../scripts/status/stacking/stacking_refresh_and_stack.gd) | `StatusStackingPolicy` | — | — | — |
 | [StackingRefreshDuration](../scripts/status/stacking/stacking_refresh_duration.gd) | `StatusStackingPolicy` | — | — | — |
-| [StatusStackingPolicy](../scripts/status/stacking/status_stacking_policy.gd) | `Resource` | — | `handle_stacking()` | — |
+| [StatusStackingPolicy](../scripts/status/stacking/status_stacking_policy.gd) | `Resource` | — | `allows_parallel_instances()`<br>`handle_stacking()` | — |
 
 ## scripts/tags
 

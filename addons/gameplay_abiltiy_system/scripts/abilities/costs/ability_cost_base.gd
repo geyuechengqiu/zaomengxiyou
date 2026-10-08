@@ -15,6 +15,13 @@ class_name AbilityCostBase
 func can_pay(ability_comp: Node, instigator: Node) -> bool:
 	return _can_pay(ability_comp, instigator)
 
+## 可选释放快照；固定消耗器继续沿用原有入口。
+func can_pay_context(ability_comp: Node, instigator: Node, _context: Dictionary) -> bool:
+	return can_pay(ability_comp, instigator)
+
+func try_pay_context(ability_comp: Node, instigator: Node, _context: Dictionary) -> bool:
+	return try_pay(ability_comp, instigator)
+
 ## 尝试支付消耗（实际消耗资源）
 ## [param] ability_comp: GameplayAbilityComponent 能力组件
 ## [param] instigator: Node 施法者

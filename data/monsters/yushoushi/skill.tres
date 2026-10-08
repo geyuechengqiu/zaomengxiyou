@@ -1,0 +1,38 @@
+[gd_resource type="Resource" script_class="GameplayAbilityDefinition" format=3]
+[ext_resource type="Script" path="res://addons/gameplay_abiltiy_system/scripts/abilities/gameplay_ability_definition.gd" id="definition"]
+[ext_resource type="Script" path="res://addons/gameplay_abiltiy_system/scripts/abilities/features/gameplay_ability_feature.gd" id="feature"]
+[ext_resource type="Script" path="res://addons/gameplay_abiltiy_system/scripts/abilities/features/cooldown_feature.gd" id="cooldown"]
+[ext_resource type="Script" path="res://addons/battle_foundation/gas/battle_frame_timeline_feature.gd" id="timeline"]
+[ext_resource type="Script" path="res://addons/battle_foundation/definitions/battle_attack_segment.gd" id="segment"]
+[sub_resource type="Resource" id="Cooldown"]
+script = ExtResource("cooldown")
+cooldown_duration = 5.0
+[sub_resource type="Resource" id="Segment1"]
+script = ExtResource("segment")
+segment_id = &"skill1_1"
+hit_index = 1
+start_frame = 36
+end_frame = 40
+action = &"attack_1"
+hit_rect = Rect2(42.1, -114.0, 210.9, 73.05)
+hit_rect_frames = Dictionary[int, Rect2]({36: Rect2(42.1, -114.0, 210.9, 73.05), 37: Rect2(54.1, -117.95, 211.9, 83.0), 38: Rect2(73.15, -130.95, 186.9, 96.0), 39: Rect2(73.15, -130.95, 186.9, 96.0)})
+hit_stun = 0.5
+protection_skill_id = "2000100"
+knockback_mode = "displacement"
+knockback_distance = -100.0
+knockback_duration = 0.1
+reaction_type = "knockback"
+[sub_resource type="Resource" id="Timeline"]
+script = ExtResource("timeline")
+duration_frames = 53
+animation_action = &"attack_1"
+commit_resources = true
+attack_segments = Array[ExtResource("segment")]([SubResource("Segment1")])
+[resource]
+script = ExtResource("definition")
+ability_id = &"yushoushi_skill1"
+ability_name = "驭禽使"
+features = Array[ExtResource("feature")]([SubResource("Cooldown"), SubResource("Timeline")])
+metadata/original_skill_id = 2000100
+metadata/original_skill_cd = 0.0
+metadata/original_ai_attack_wait = 5.0

@@ -1,3 +1,4 @@
+// #region 脚本实现
 // Offline, deterministic import. Reads original exports; never modifies the source repo.
 import fs from 'node:fs';
 import path from 'node:path';
@@ -27,3 +28,4 @@ const out = path.join(projectRoot, 'data/protection');
 fs.mkdirSync(out, { recursive: true });
 fs.writeFileSync(path.join(out, 'original_protection.json'), JSON.stringify({version:1, bosses, skills, ability_ids, provenance}, null, 2)+'\n');
 console.log(`Imported ${Object.keys(bosses).length} Boss definitions and ${Object.keys(skills).length} protection skill definitions`);
+// #endregion

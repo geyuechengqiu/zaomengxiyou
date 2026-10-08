@@ -83,18 +83,12 @@ func respawn() -> void:
 	right_target.animation.set_facing(-1)
 	left_target.animation.set_skins([&"套装/2", &"武器/weapon2"])
 	right_target.animation.set_skins([&"套装/7_7", &"武器/weapon7_7"])
-	inventory = C_Inventory.new()
-	inventory.name = "Inventory"
-	player.add_child(inventory)
-	player.attributes.bind_inventory(inventory)
+	inventory = player.inventory
 	player.attributes.snapshot_changed.connect(_on_attributes_changed)
 	_on_attributes_changed(player.attributes.get_snapshot())
+	operations = player.operations
+	operations.enabled = enable_player_controls
 	if enable_player_controls:
-		operations = BattlePlayerOperations.new()
-		operations.operation_profile = load("res://data/controls/player_operations.tres") as CoreOperationProfile
-		operations.name = "PlayerOperations"
-		player.operations = operations
-		player.add_child(operations)
 		operations.operation_observed.connect(_on_operation)
 		operation_menu.bind_controller(operations.controller)
 	outfit_index = -1
@@ -148,7 +142,7 @@ func _process(_delta: float) -> void:
 	if not is_instance_valid(player):
 		return
 	var anim := player.animation
-	info.text = "战斗状态  %s     动作  %s     进度  %3.0f%% / %.0fms\n生命  %.0f / %.0f     脚底  (%.0f, %.0f)     朝向  %s     时钟  %.0fms  缩放%.0f%%%s\n左靶生命  %.0f     右靶生命  %.0f     外观  %s" % [player.action_state.get_name(), anim.get_current_action(), anim.get_playback_progress() * 100, anim.get_action_duration(anim.get_current_action()) * 1000.0, player.attributes.get_vital_value(&"health"), player.attributes.get_value(&"hpMax"), player.position.x, player.position.y, "右" if anim.get_facing() > 0 else "左", session.clock.elapsed * 1000.0, session.clock.time_scale * 100.0, "（暂停）" if session.clock.paused else "", left_target.attributes.get_vital_value(&"health"), right_target.attributes.get_vital_value(&"health"), ", ".join(anim.get_skin_names())]
+	info.text = "战斗状态  %s     动作  %s     进度  %3.0f%% / %.0fms\n生命  %.0f / %.0f     脚底  (%.0f, %.0f)     朝向  %s     时钟  %.0fms  缩放%.0f%%%s\n左靶生命  %.0f     右靶生命  %.0f     外观  %s" % [player.action_state.get_state_name(), anim.get_current_action(), anim.get_playback_progress() * 100, anim.get_action_duration(anim.get_current_action()) * 1000.0, player.attributes.get_vital_value(&"health"), player.attributes.get_value(&"hpMax"), player.position.x, player.position.y, "右" if anim.get_facing() > 0 else "左", session.clock.elapsed * 1000.0, session.clock.time_scale * 100.0, "（暂停）" if session.clock.paused else "", left_target.attributes.get_vital_value(&"health"), right_target.attributes.get_vital_value(&"health"), ", ".join(anim.get_skin_names())]
 	if is_instance_valid(operations):
 		info.text += "\n操作意图  %s     缓存  %d" % [last_operation, operations.controller.peek_buffered_intents().size()]
 		var bindings := CoreSystem.operation_manager.bindings

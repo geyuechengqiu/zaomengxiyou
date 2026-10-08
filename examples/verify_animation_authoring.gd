@@ -48,14 +48,25 @@ func _verify_static_scene() -> void:
 	var box := visual.get_node("AttackHitbox") as BattleHitbox2D
 	_check(track.get_child_count() == 1 and nested != null, "进入场景树前就存在原生轨道播放器")
 	_check(visual.get_children().filter(func(node): return node is BattleHitbox2D).size() == 1 and box.get_child_count() == 1 and box.is_configuration_valid(), "场景只保存一个攻击框和一个形状")
-	_check(box.preview_abilities.size() == 5, "编辑器引用技能数据而不是保存多套形状")
-	_check(master.get_animation_list().size() == 14, "主播放器保存全部十四个语义动作")
+	var preview_valid := box.preview_abilities.size() == 13
+	for definition in box.preview_abilities:
+		var found := false
+		if definition != null:
+			for feature in definition.features:
+				if feature is BattleFrameTimelineFeature:
+					found = visual.profile.animations.has(feature.animation_action)
+		preview_valid = preview_valid and found
+	_check(preview_valid, "编辑器引用五普攻、跑攻、跳攻和六个技能动作数据")
+	_check(master.get_animation_list().size() == visual.profile.animations.size(), "主播放器保存配置中的全部语义动作")
 	for action in visual.profile.animations:
 		var clip := master.get_animation(action)
 		var source: String = visual.profile.animations[action]
 		_check(clip.track_get_type(0) == Animation.TYPE_ANIMATION and visual.get_node(clip.track_get_path(0)) == nested, "主动画通过原生子播放器选择动作：" + String(action))
 		var native: String = clip.track_get_key_value(0, 0)
-		_check(native == source + ("_looped" if visual.profile.looping_actions.has(action) else "") and nested.has_animation(native), "原生动作轨道存在且循环映射正确：" + String(action))
+		var repeating_body := visual.profile.looping_actions.has(action) or action in [&"skill2", &"skill4"]
+		_check(native == source + ("_looped" if repeating_body else "") and nested.has_animation(native), "原生动作轨道存在且循环映射正确：" + String(action))
+		if action in [&"skill2", &"skill4"]:
+			_check(clip.loop_mode == Animation.LOOP_NONE and SpineTimelinePose.is_looping(nested.get_animation(native)), "短身体循环不延长技能主时间轴：" + String(action))
 		_check(clip.length > 0.0, "主时间轴保存可编辑的语义动作时长：" + String(action))
 	add_child(visual)
 	_check(track.get_child_count() == 1 and track.get_child(0) == nested and visual.get_animation_player() == master, "运行时复用预置播放器，没有额外创建")
@@ -71,6 +82,7 @@ func _verify_skill_geometry() -> void:
 	var collision := box.get_node("CollisionShape2D") as CollisionShape2D
 	var shape := collision.shape
 	var other_collision := demo.right_target.attack_hitbox.get_node("CollisionShape2D") as CollisionShape2D
+	var other_size: Vector2 = other_collision.shape.size
 	_check(shape != other_collision.shape and shape.resource_local_to_scene, "角色实例的形状独立，更新不会影响另一个角色")
 	var definition := player.abilities.get_ability_instance(&"sunwukong_attack1").get_definition()
 	var timeline := definition.features[1] as BattleFrameTimelineFeature
@@ -94,7 +106,7 @@ func _verify_skill_geometry() -> void:
 	collision.position = Vector2(999, 999)
 	collision.shape.size = Vector2(9999, 9999)
 	_check(player.get_attack_rect_local(context).is_equal_approx(Rect2(100, -130, 60, 80)), "直接改形状不会覆盖技能数据，下次查询自动恢复")
-	_check(other_collision.shape.size.is_equal_approx(Vector2(534, 199.9)), "当前角色技能修改与形状更新不影响另一个角色")
+	_check(other_collision.shape.size.is_equal_approx(other_size), "当前角色技能修改与形状更新不影响另一个角色")
 	_check((load("res://data/battle2d/attack1.tres") as GameplayAbilityDefinition).features[1].events[0].payload == original, "私有 GAS 定义修改不写回共享技能资源")
 	marker.payload = original
 	for index in range(1, 6):

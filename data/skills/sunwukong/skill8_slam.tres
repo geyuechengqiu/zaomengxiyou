@@ -1,0 +1,37 @@
+[gd_resource type="Resource" script_class="GameplayAbilityDefinition" format=3]
+[ext_resource type="Script" path="res://addons/gameplay_abiltiy_system/scripts/abilities/gameplay_ability_definition.gd" id="definition"]
+[ext_resource type="Script" path="res://addons/gameplay_abiltiy_system/scripts/abilities/features/gameplay_ability_feature.gd" id="feature"]
+[ext_resource type="Script" path="res://addons/gameplay_abiltiy_system/scripts/abilities/features/cost_feature.gd" id="cost"]
+[ext_resource type="Script" path="res://addons/gameplay_abiltiy_system/scripts/abilities/costs/ability_cost_base.gd" id="cost_type"]
+[ext_resource type="Script" path="res://addons/battle_foundation/gas/battle_skill_mana_cost.gd" id="mana"]
+[ext_resource type="Script" path="res://addons/battle_foundation/gas/battle_skill_cooldown_feature.gd" id="cooldown"]
+[ext_resource type="Script" path="res://addons/battle_foundation/gas/battle_frame_timeline_feature.gd" id="timeline"]
+[ext_resource type="Script" path="res://addons/battle_foundation/definitions/battle_attack_segment.gd" id="segment"]
+[ext_resource type="Script" path="res://addons/battle_foundation/definitions/battle_skill_branch.gd" id="branch"]
+[ext_resource type="Script" path="res://addons/battle_foundation/definitions/battle_skill_motion.gd" id="motion"]
+[sub_resource type="Resource" id="Mana"]
+script = ExtResource("mana")
+skill_id = &"sunwukong_skill8_slam"
+amounts = Array[float]([0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0])
+[sub_resource type="Resource" id="Cost"]
+script = ExtResource("cost")
+costs = Array[ExtResource("cost_type")]([SubResource("Mana")])
+[sub_resource type="Resource" id="Cooldown"]
+script = ExtResource("cooldown")
+cooldown_duration = 0.0
+durations = Array[float]([0.0, 0.0])
+[sub_resource type="Resource" id="Timeline"]
+script = ExtResource("timeline")
+duration_frames = 1
+animation_action = &"skill8"
+commit_resources = true
+can_use_in_air = true
+interrupt_actions = Array[StringName]([&"attack_1", &"attack_2", &"attack_3", &"attack_4", &"attack_5"])
+initial_status_ids = Array[StringName]([&"sunwukong_buff_6000501"])
+action_rules = {"move": false, "jump": false, "turn": false}
+[resource]
+script = ExtResource("definition")
+ability_id = &"sunwukong_skill8_slam"
+ability_name = "火魔斩-砸地"
+features = Array[ExtResource("feature")]([SubResource("Cost"), SubResource("Cooldown"), SubResource("Timeline")])
+metadata/original_skill_id = 1101081

@@ -2,6 +2,11 @@
 
 [ext_resource type="Script" path="res://addons/battle_foundation/runtime/battle_entity.gd" id="1"]
 
+[ext_resource type="Script" path="res://addons/battle_foundation/runtime/battle_attribute_component.gd" id="component_GameplayVitalAttributeComponent"]
+[ext_resource type="Script" path="res://addons/gameplay_abiltiy_system/scripts/components/gameplay_ability_component.gd" id="component_GameplayAbilityComponent"]
+[ext_resource type="Script" path="res://addons/gameplay_abiltiy_system/scripts/components/gameplay_status_component.gd" id="component_GameplayStatusComponent"]
+[ext_resource type="Script" path="res://addons/battle_foundation/combat/battle_damage_rules_component.gd" id="component_DamageRules"]
+
 [sub_resource type="CapsuleShape3D" id="Shape"]
 radius = 0.3
 height = 1.4
@@ -12,3 +17,19 @@ script = ExtResource("1")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 position = Vector3(0, 0.7, 0)
 shape = SubResource("Shape")
+
+[node name="GameplayVitalAttributeComponent" type="Node" parent="."]
+script = ExtResource("component_GameplayVitalAttributeComponent")
+externally_driven = true
+
+[node name="GameplayAbilityComponent" type="Node" parent="."]
+script = ExtResource("component_GameplayAbilityComponent")
+externally_driven = true
+
+[node name="GameplayStatusComponent" type="Node" parent="."]
+script = ExtResource("component_GameplayStatusComponent")
+externally_driven = true
+filter_events_by_owner = true
+
+[node name="DamageRules" type="Node" parent="."]
+script = ExtResource("component_DamageRules")

@@ -6,24 +6,27 @@ class_name FeaturePeriodicEffects
 ## 在指定周期触发效果
 
 @export var period: float = 1.0  # 周期时间（秒）
+@export var trigger_on_apply: bool = false
 @export var periodic_effects: Array[GameplayEffect] = []
 #endregion
 #region 内部实现
 
 func _apply_feature(instance: GameplayStatusInstance, context: Dictionary) -> void:
 	_set_timer(instance, 0.0)
+	if trigger_on_apply:
+		instance.apply_effects(periodic_effects, {"status_periodic": true})
 
 func _update_feature(instance: GameplayStatusInstance, delta: float) -> void:
-	if period <= 0.0 or periodic_effects.is_empty():
+	if not is_finite(period) or period <= 0.0 or periodic_effects.is_empty():
 		return
 
 	var timer = _get_timer(instance) + delta
 	_set_timer(instance, timer)
 
-	if timer >= period:
-		_set_timer(instance, timer - period)
-		# 触发周期性效果
-		instance.apply_effects(periodic_effects)
+	while timer + 0.000000001 >= period and not instance.removed:
+		timer = maxf(0.0, timer - period)
+		_set_timer(instance, timer)
+		instance.apply_effects(periodic_effects, {"status_periodic": true})
 
 ## 获取计时器（从实例中读取）
 func _get_timer(instance: GameplayStatusInstance) -> float:

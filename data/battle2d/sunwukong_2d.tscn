@@ -1,9 +1,22 @@
-[gd_scene format=3]
-[ext_resource type="Script" path="res://addons/battle_foundation/runtime/battle_entity_2d.gd" id="entity"]
-[ext_resource type="PackedScene" path="res://data/animation/sunwukong_visual.tscn" id="visual"]
-[ext_resource type="Resource" path="res://data/battle2d/sunwukong_actions.tres" id="actions"]
-[ext_resource type="Script" path="res://addons/battle_foundation/movement/battle_hurtbox_2d.gd" id="hurtbox"]
-[ext_resource type="PackedScene" path="res://addons/battle_foundation/presentation/combat_feedback_2d.tscn" id="feedback"]
+[gd_scene format=3 uid="uid://dvpcce2hna5oc"]
+
+[ext_resource type="Resource" uid="uid://bsaofsrec4vo" path="res://data/battle2d/sunwukong_actions.tres" id="actions"]
+[ext_resource type="Script" uid="uid://cxrmihsy5kb06" path="res://addons/battle_foundation/runtime/battle_action_state_2d.gd" id="component_ActionState"]
+[ext_resource type="Script" uid="uid://vosygjd4cpv7" path="res://addons/battle_foundation/runtime/battle_combo_state.gd" id="component_ComboState"]
+[ext_resource type="Script" uid="uid://dw6pbx6ug7ud7" path="res://addons/battle_foundation/combat/battle_damage_rules_component.gd" id="component_DamageRules"]
+[ext_resource type="Script" uid="uid://n8p5beakef7b" path="res://addons/gameplay_abiltiy_system/scripts/components/gameplay_ability_component.gd" id="component_GameplayAbilityComponent"]
+[ext_resource type="Script" uid="uid://b6hkniyhlhrsf" path="res://addons/gameplay_abiltiy_system/scripts/components/gameplay_status_component.gd" id="component_GameplayStatusComponent"]
+[ext_resource type="Script" uid="uid://cea1apq6pvlmp" path="res://addons/battle_foundation/runtime/battle_attribute_component.gd" id="component_GameplayVitalAttributeComponent"]
+[ext_resource type="Script" uid="uid://bicr1hcycakxb" path="res://addons/battle_foundation/combat/battle_hit_reaction_controller_2d.gd" id="component_HitReactionController"]
+[ext_resource type="Script" uid="uid://cpxaj0hrrf8q0" path="res://addons/simple_inventory/src/core/C_Inventory.gd" id="component_Inventory"]
+[ext_resource type="Script" uid="uid://pusqtp2e6bgt" path="res://addons/battle_foundation/runtime/battle_motion_controller_2d.gd" id="component_MotionController"]
+[ext_resource type="Script" uid="uid://bcwcoxsr2ywmt" path="res://addons/battle_foundation/combat/battle_protection_system.gd" id="component_ProtectionSystem"]
+[ext_resource type="Script" uid="uid://bxdee48rg8khy" path="res://addons/battle_foundation/runtime/battle_entity_2d.gd" id="entity"]
+[ext_resource type="Script" uid="uid://bub8f66j00mfc" path="res://addons/battle_foundation/movement/battle_hurtbox_2d.gd" id="hurtbox"]
+[ext_resource type="Script" uid="uid://de1ptsybyejr" path="res://addons/godot_core_system-0.0.4/source/operation_system/operation_controller.gd" id="operation_controller"]
+[ext_resource type="Resource" path="res://data/controls/player_operations.tres" id="operation_profile"]
+[ext_resource type="Script" uid="uid://cejsmre475mvk" path="res://addons/battle_foundation/input/battle_player_operations.gd" id="player_operations"]
+[ext_resource type="PackedScene" uid="uid://djhbcr3yyxe42" path="res://data/animation/sunwukong_visual.tscn" id="visual"]
 
 [sub_resource type="CapsuleShape2D" id="body"]
 radius = 22.0
@@ -13,27 +26,109 @@ height = 180.0
 resource_local_to_scene = true
 size = Vector2(44, 180)
 
-[node name="SunWukong" type="CharacterBody2D"]
+[node name="SunWukong" type="CharacterBody2D" unique_id=196081415]
 collision_layer = 2
-collision_mask = 1
 script = ExtResource("entity")
 action_profile = ExtResource("actions")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1641850943]
 position = Vector2(0, -90)
 shape = SubResource("body")
 
-[node name="AnimationAdapter" parent="." instance=ExtResource("visual")]
+[node name="AnimationAdapter" parent="." unique_id=939249748 instance=ExtResource("visual")]
 
-[node name="Hurtbox" type="Area2D" parent="."]
+[node name="Hurtbox" type="Area2D" parent="." unique_id=836526951]
 collision_layer = 0
 collision_mask = 0
 monitoring = false
 monitorable = false
 script = ExtResource("hurtbox")
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" unique_id=874424027]
 position = Vector2(0, -90)
 shape = SubResource("hurt")
 disabled = true
 
-[node name="CombatFeedback" parent="." instance=ExtResource("feedback")]
+[node name="GameplayVitalAttributeComponent" type="Node" parent="." unique_id=2108239414]
+script = ExtResource("component_GameplayVitalAttributeComponent")
+base_values = Dictionary[StringName, float]({
+&"atk": 26.0,
+&"critical": 0.0,
+&"darkResist": 0.0,
+&"dodge": 0.0,
+&"enduranceMax": 0.0,
+&"exp": 0.0,
+&"fireResist": 20.0,
+&"guardian": 0.0,
+&"hit": 0.0,
+&"hpMax": 275.0,
+&"jumpSpeed1": -178.0,
+&"jumpSpeed2": -178.0,
+&"lightResist": 0.0,
+&"lucky": 0.0,
+&"mpMax": 100.0,
+&"phyDef": 5.0,
+&"protectPoint": 50000.0,
+&"rayResist": 0.0,
+&"reEndurance": 0.0,
+&"reHP": 0.0,
+&"reMP": 0.0,
+&"reduceEndurance": 0.0,
+&"runSpeed": 600.0,
+&"soilResist": 0.0,
+&"toughness": 0.0,
+&"walkSpeed": 420.0,
+&"waterResist": -20.0,
+&"windResist": 0.0,
+&"woodResist": 0.0
+})
+initial_level_override = 1
+externally_driven = true
+
+[node name="GameplayAbilityComponent" type="Node" parent="." unique_id=1856026278]
+script = ExtResource("component_GameplayAbilityComponent")
+externally_driven = true
+
+[node name="GameplayStatusComponent" type="Node" parent="." unique_id=1443781889]
+script = ExtResource("component_GameplayStatusComponent")
+externally_driven = true
+filter_events_by_owner = true
+
+[node name="DamageRules" type="Node" parent="." unique_id=2119492154]
+script = ExtResource("component_DamageRules")
+
+[node name="ActionState" type="Node" parent="." unique_id=1969202496]
+script = ExtResource("component_ActionState")
+
+[node name="MotionController" type="Node" parent="." unique_id=785393108]
+script = ExtResource("component_MotionController")
+
+[node name="ComboState" type="Node" parent="." unique_id=973645308]
+script = ExtResource("component_ComboState")
+
+[node name="HitReactionController" type="Node" parent="." unique_id=2017139343]
+script = ExtResource("component_HitReactionController")
+
+[node name="ProtectionSystem" type="Node" parent="." unique_id=91471158]
+script = ExtResource("component_ProtectionSystem")
+
+[node name="Inventory" type="Node" parent="." unique_id=1025194930]
+script = ExtResource("component_Inventory")
+
+[node name="PlayerOperations" type="Node" parent="." unique_id=1198386844]
+script = ExtResource("player_operations")
+operation_profile = ExtResource("operation_profile")
+ability_slots = Dictionary[StringName, StringName]({
+&"skill_1": &"sunwukong_skill1",
+&"skill_2": &"sunwukong_skill2",
+&"skill_3": &"sunwukong_skill3",
+&"skill_4": &"sunwukong_skill4",
+&"skill_5": &"sunwukong_skill8",
+&"wushuang": &"sunwukong_wushuang"
+})
+enabled = false
+
+[node name="OperationController" type="Node" parent="PlayerOperations" unique_id=1447058652]
+script = ExtResource("operation_controller")
+profile = ExtResource("operation_profile")
+externally_driven = true

@@ -63,7 +63,7 @@
 <path d="M660 960H1120Q1130 960 1130 970V1036H650V970Q650 960 660 960Z" fill="#e9f8f2"/>
 <text x="670" y="985" class="type" text-anchor="start">«Node» 活跃状态容器</text><text x="670" y="1018" class="name" text-anchor="start">GameplayStatusComponent</text>
 <path d="M650 1036H1130" stroke="#c4cdd9"/>
-<text x="670" y="1067" class="body" text-anchor="start">_active_statuses: Dictionary</text>
+<text x="670" y="1067" class="body" text-anchor="start">_active_statuses: Array[Instance]</text>
 <path d="M650 1080H1130" stroke="#e0e5ee"/>
 <text x="670" y="1107" class="body" text-anchor="start">apply_status() / remove_status()</text><text x="670" y="1134" class="body" text-anchor="start">_process(delta) / handle_event()</text></g></a><a href="../scripts/components/gameplay_attribute_component.gd"><title>components/gameplay_attribute_component.gd</title><g><rect x="1250" y="960" width="480" height="210" rx="10" fill="white" stroke="#8191a8" stroke-width="1.5"/>
 <path d="M1260 960H1720Q1730 960 1730 970V1036H1250V970Q1250 960 1260 960Z" fill="#e9f8f2"/>

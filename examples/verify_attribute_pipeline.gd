@@ -190,7 +190,7 @@ func _verify_monster_isolation() -> void:
 	_equal((load("res://data/attribute/progression/sunwukong.tres") as BattleAttributeProgression).growth_per_level[&"atk"], 5.25, "配置成长数据没有污染")
 	var definition := demo.session.catalog.instantiate_definition("monsters", &"属性验收怪物") as BattleEntityDefinition
 	definition.initial_level = 5
-	var initial := BattleEntity.new()
+	var initial := definition.scene.instantiate() as BattleEntity
 	initial.initialize_battle(demo.session, &"test/initial-level", definition)
 	demo.session.add_child(initial)
 	_equal(initial.attributes.get_level(), 5, "配置初始等级通过统一入口装配")

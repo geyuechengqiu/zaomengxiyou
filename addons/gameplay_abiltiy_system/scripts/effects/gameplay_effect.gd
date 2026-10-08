@@ -8,6 +8,8 @@ class_name GameplayEffect
 
 # --- 过滤与组合 ---
 @export var filters: Array[GameplayFilterData] = []  ## 过滤器，如果为空，则不过滤
+## 仅可撤销的持续效果在叠层时重新应用，瞬时伤害/治疗不会重放。
+@export var reapply_on_stack: bool = false
 @export var sub_effects: Array[GameplayEffect] = []  ## 子效果，支持效果组合
 
 # --- 标签要求（标签系统集成）---
@@ -35,8 +37,11 @@ class_name GameplayEffect
 ## [param] instigator: Node 施法者节点
 ## [param] context: 效果执行上下文
 func apply(target: Node, instigator: Node, context: Dictionary = {}) -> void:
+	if not GameplayTriggerGuard.enter():
+		return
 	# 1. 检查过滤器（如果被过滤，直接返回）
 	if not _check_filters(target, instigator, context):
+		GameplayTriggerGuard.leave()
 		return
 	
 	# 2. 执行具体逻辑（子类实现）
@@ -48,17 +53,21 @@ func apply(target: Node, instigator: Node, context: Dictionary = {}) -> void:
 
 	# 4. 递归应用子效果
 	_apply_sub_effects(target, instigator, context)
+	GameplayTriggerGuard.leave()
 
 ## 移除效果（核心入口）
 ## [param] target: Node 目标节点
 ## [param] instigator: Node 施法者节点
 ## [param] context: 效果执行上下文
 func remove(target: Node, instigator: Node, context: Dictionary = {}) -> void:
+	if not GameplayTriggerGuard.enter():
+		return
 	# 1. 执行具体移除逻辑（子类实现，默认空实现）
 	_remove(target, instigator, context)
 	
 	# 2. 递归移除子效果
 	_remove_sub_effects(target, instigator, context)
+	GameplayTriggerGuard.leave()
 #endregion
 #region 内部实现
 

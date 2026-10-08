@@ -13,6 +13,39 @@ scene_manifest_path = "res://data/battle2d/original_damage/manifest.json"
 [node name="SunWukong" parent="BattleSession/Actors" parent_id_path=PackedInt32Array(2039907037) index="0" unique_id=215774442]
 action_profile = ExtResource("actions")
 
+[node name="GameplayVitalAttributeComponent" parent="BattleSession/Actors/SunWukong"]
+base_values = Dictionary[StringName, float]({
+&"atk": 100.0,
+&"phyDef": 5.0,
+&"hpMax": 275.0,
+&"mpMax": 100.0,
+&"reHP": 0.0,
+&"reMP": 0.0,
+&"hit": 0.0,
+&"dodge": 0.0,
+&"critical": 0.0,
+&"toughness": 0.0,
+&"lucky": 0.0,
+&"guardian": 0.0,
+&"lightResist": 0.0,
+&"darkResist": 0.0,
+&"waterResist": -20.0,
+&"fireResist": 20.0,
+&"woodResist": 0.0,
+&"soilResist": 0.0,
+&"windResist": 0.0,
+&"rayResist": 0.0,
+&"walkSpeed": 210.0,
+&"runSpeed": 300.0,
+&"jumpSpeed1": -178.0,
+&"jumpSpeed2": -178.0,
+&"enduranceMax": 0.0,
+&"reEndurance": 0.0,
+&"reduceEndurance": 0.0,
+&"protectPoint": 50000.0,
+&"exp": 0.0
+})
+
 [node name="Panel" parent="HUD" parent_id_path=PackedInt32Array(1371758860) index="0" unique_id=368405760]
 offset_top = 408.0
 offset_bottom = 578.0
@@ -28,3 +61,6 @@ offset_top = 18.0
 offset_bottom = 78.0
 text = "A / D 移动 · K 二段跳 · 跑步/跳跃时 J 攻击 · 连按 J 五连击 · Esc 改键
 第四段8～16帧内新按反方向可转身一次；本段继续前移，第五段沿新朝向攻击。"
+[editable path="BattleSession/Actors/SunWukong"]
+[editable path="BattleSession/Actors/LeftDummy"]
+[editable path="BattleSession/Actors/RightDummy"]

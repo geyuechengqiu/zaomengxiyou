@@ -39,6 +39,6 @@ func _ready() -> void:
 	await RenderingServer.frame_post_draw
 	var path := "res://addons/battle_foundation/docs/wukong-" + sample + ".png"
 	assert(get_viewport().get_texture().get_image().save_png(path) == OK)
-	print("PASS GPU Wukong capture ", sample, " state=", player.action_state.get_name(), " facing=", player.animation.get_facing(), " velocity=", player.velocity)
+	print("PASS GPU Wukong capture ", sample, " state=", player.action_state.get_state_name(), " facing=", player.animation.get_facing(), " velocity=", player.velocity)
 	get_tree().quit()
 #endregion

@@ -309,6 +309,8 @@ func _verify_role_and_gui() -> void:
 	await _step(1.0 / 60.0, 6)
 	var player: BattleEntity2D = demo.player
 	var controls: CoreOperationController = demo.operations.controller
+	# 这里专门验收未装配语义槽；角色现已默认装配五个真实技能。
+	demo.operations.ability_slots.clear()
 	await _send(KEY_J)
 	await _send(KEY_J, false)
 	await _step(0.016)
@@ -442,6 +444,9 @@ func _verify_role_and_gui() -> void:
 	branches.operation_profile.buffered_intents.append(&"character_special")
 	player.operations = branches
 	demo.operations = branches
+	var replacement_controller := CoreOperationController.new()
+	replacement_controller.name = "OperationController"
+	branches.add_child(replacement_controller)
 	player.add_child(branches)
 	demo.operation_menu.bind_controller(branches.controller)
 	await _send(KEY_V)

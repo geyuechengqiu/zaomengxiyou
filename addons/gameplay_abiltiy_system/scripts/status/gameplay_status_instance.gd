@@ -7,8 +7,14 @@ class_name GameplayStatusInstance
 
 var status_data: GameplayStatusData
 var owner_component: GameplayStatusComponent  ## 状态组件
-var instigator: Node  ## 施加者
+var _instigator_ref: WeakRef
+var instigator: Node:
+	get: return _instigator_ref.get_ref() as Node if _instigator_ref != null else null
+var removed: bool = false
+var elapsed: float = 0.0
 var stacks: int = 1
+## 被动技能的所有权分组，避免遗忘一个技能误移除其它来源。
+var owner_source_id: StringName = &""
 
 # 计时管理（由组件统一管理，这里只存储剩余时间）
 var remaining_duration: float = -1.0  ## 剩余持续时间，-1 表示永久，0 表示已过期
@@ -30,7 +36,7 @@ signal status_completed(status_instance: GameplayStatusInstance)
 func _init(gsd: GameplayStatusData, p_owner_component: GameplayStatusComponent, p_instigator: Node, p_stacks: int) -> void:
 	status_data = gsd
 	owner_component = p_owner_component
-	instigator = p_instigator
+	_instigator_ref = weakref(p_instigator) if is_instance_valid(p_instigator) else null
 	stacks = p_stacks
 #endregion
 #region 公共接口
@@ -39,6 +45,13 @@ func _init(gsd: GameplayStatusData, p_owner_component: GameplayStatusComponent, 
 func apply(context: Dictionary = {}) -> void:
 	# 保存上下文（用于周期性效果和移除时效果）
 	_cached_context = context.duplicate()
+	_cached_context["effect_state"] = {}
+	if status_data.duration != 0.0:
+		if is_instance_valid(status_data.duration_policy):
+			_duration_policy = status_data.duration_policy.duplicate()
+			_duration_policy.initialize(self, status_data.duration)
+		_remove_mutually_exclusive_statuses()
+		_apply_status_tags()
 
 	# 在 context 中添加 source_id（用于效果系统识别来源）
 	if not context.has("source_id"):
@@ -49,6 +62,8 @@ func apply(context: Dictionary = {}) -> void:
 
 	# 应用所有的feature
 	for feature in status_data.features:
+		if removed:
+			return
 		if is_instance_valid(feature):
 			feature.apply_feature(self, context)
 
@@ -57,28 +72,22 @@ func apply(context: Dictionary = {}) -> void:
 		status_completed.emit(self)
 		return
 
-	# 初始化持续时间策略
-	if is_instance_valid(status_data.duration_policy):
-		_duration_policy = status_data.duration_policy.duplicate()
-		_duration_policy.initialize(self, status_data.duration)
-
-	# 【关键】在应用状态前，先移除互斥状态
-	_remove_mutually_exclusive_statuses()
-
-	# 应用状态标签（标签系统集成）
-	_apply_status_tags()
-
 	# 执行状态 Cue（视觉反馈）
 	_execute_status_cue()
+	if status_data.initial_update_delta > 0.0 and update(status_data.initial_update_delta):
+		owner_component.remove_instance(self, &"expired")
 
 ## 状态被移除时，移除所有效果
-func remove() -> void:
+func remove(reason: StringName = &"removed") -> void:
+	if removed:
+		return
+	removed = true
+	_cached_context["remove_reason"] = reason
 	# 1. 应用移除时效果（用于其他清理逻辑，如视觉效果、事件触发等）
 	var remove_context = _cached_context.duplicate()
 	remove_context["stacks"] = stacks
 	# 确保 source_id 存在（用于效果系统识别来源）
-	if not remove_context.has("source_id"):
-		remove_context["source_id"] = _get_source_instance_id()
+	remove_context["source_id"] = _get_source_instance_id()
 	_apply_effects(status_data.remove_effects, remove_context)
 	_remove_effects(status_data.apply_effects, remove_context)
 
@@ -98,54 +107,62 @@ func remove() -> void:
 
 	# 4. 发出完成信号（持续状态在移除时完成）
 	status_completed.emit(self)
+	_cached_context.clear()
+	owner_component = null
+	_instigator_ref = null
 
 ## 更新状态（由组件在 _process 中调用）
 ## [param] delta: float 帧时间
 ## [return] bool 是否已过期（需要移除）
 func update(delta: float) -> bool:
-	# 更新持续时间
-	if is_instance_valid(_duration_policy):
-		if _duration_policy.update(self, delta):
-			return true
-
-	# 更新所有 Feature
+	if removed:
+		return true
+	var active_delta := minf(delta, maxf(0.0, remaining_duration)) if _duration_policy != null and status_data.duration > 0.0 else delta
+	elapsed += active_delta
+	# 先执行截至到期点的周期事件，再过期；低帧率不漏最后一次周期。
 	for feature in status_data.features:
+		if removed:
+			return true
 		if is_instance_valid(feature):
-			feature.update_feature(self, delta)
-	
-	return false
+			feature.update_feature(self, active_delta)
+	return removed or (_duration_policy != null and _duration_policy.update(self, delta))
 
 ## 增加层数
 ## 在一个属性事务中撤销旧层效果，再按新层数应用，避免残留与中间状态通知。
 func add_stack(amount: int = 1, is_refresh_duration: bool = true) -> void:
-	if stacks < status_data.max_stacks:
+	if removed or amount <= 0:
+		return
+	var next := mini(stacks + amount, status_data.max_stacks)
+	if next != stacks:
 		var attributes := _get_attribute_component()
 		if attributes != null:
 			attributes.begin_update()
-		# 1. 移除旧的效果
-		var context = _cached_context.duplicate()
+		var context := _cached_context.duplicate()
 		context["source_id"] = _get_source_instance_id()
-		_apply_effects(status_data.remove_effects, context)
-		_remove_effects(status_data.apply_effects, context)
-
-		# 2. 增加层数
-		stacks = min(stacks + amount, status_data.max_stacks)
-
-		# 3. 重新应用效果（使用新层数）
+		_refresh_stack_effects(status_data.apply_effects, context, false)
+		stacks = next
 		context["stacks"] = stacks
-		_apply_effects(status_data.apply_effects, context)
+		_refresh_stack_effects(status_data.apply_effects, context, true)
 		if attributes != null:
 			attributes.end_update()
-
-	# 4. 刷新持续时间
 	if is_refresh_duration:
 		refresh_duration()
+
+func _refresh_stack_effects(effects: Array[GameplayEffect], context: Dictionary, applying: bool) -> void:
+	for effect in effects:
+		if effect.reapply_on_stack:
+			if applying:
+				_apply_effects([effect], context)
+			else:
+				_remove_effects([effect], context)
+		else:
+			_refresh_stack_effects(effect.sub_effects, context, applying)
 
 ## 处理事件（用于事件监听型效果）
 ## 此方法用于处理通过统一事件系统触发的事件
 func handle_event(event_id: StringName, context: Dictionary) -> void:
 	# 检查状态是否应该响应这个事件
-	if not status_data.can_trigger_on_event(event_id):
+	if removed or not status_data.can_trigger_on_event(event_id):
 		return
 
 	# 调用持续时间策略的handle_event方法
@@ -154,22 +171,28 @@ func handle_event(event_id: StringName, context: Dictionary) -> void:
 
 	# 让所有 Feature 处理事件
 	for feature in status_data.features:
+		if removed:
+			return
 		if is_instance_valid(feature):
 			feature.handle_event(self, event_id, context)
 
 ## 刷新持续时间
 func refresh_duration() -> void:
 	if is_instance_valid(_duration_policy) and status_data.duration > 0:
+		elapsed = 0.0
 		_duration_policy.refresh(self, status_data.duration)
 
 ## 累加持续时间
-func accumulate_duration() -> void:
+func accumulate_duration(amount: float = -1.0) -> void:
 	if is_instance_valid(_duration_policy) and status_data.duration > 0:
-		_duration_policy.accumulate(self, status_data.duration)
+		_duration_policy.accumulate(self, amount if amount >= 0.0 else status_data.duration)
 
 ## 应用方法（公开）
 func apply_effects(effects: Array[GameplayEffect], context: Dictionary = {}) -> void:
 	_apply_effects(effects, context)
+
+func apply_effects_to(effects: Array[GameplayEffect], target: Node, source: Node, context: Dictionary = {}) -> void:
+	_apply_effects(effects, context, target, source)
 
 ## 获取特性数据
 func get_feature_storage(feature: StatusFeature) -> Dictionary:
@@ -185,24 +208,27 @@ func has_event_listening() -> bool:
 #region 内部实现
 
 ## 应用效果
-func _apply_effects(effects: Array[GameplayEffect], context: Dictionary = {}) -> void:
+func _apply_effects(effects: Array[GameplayEffect], context: Dictionary = {}, recipient: Node = null, source: Node = null) -> void:
 	if not is_instance_valid(owner_component):
 		return
 
-	var target = owner_component.get_parent()
+	var target: Node = recipient if recipient != null else owner_component.get_parent()
 	if not is_instance_valid(target):
 		return
 	
-	_cached_context.merge(context, true)
-	# 在context中添加stacks信息
-	_cached_context["stacks"] = stacks
-	_cached_context["source_id"] = _get_source_instance_id()
+	var execution_context := _cached_context.duplicate()
+	execution_context.merge(context, true)
+	execution_context["stacks"] = stacks
+	execution_context["source_id"] = _get_source_instance_id()
+	execution_context["effect_state"] = _cached_context["effect_state"]
 	var attributes := _get_attribute_component()
 	if attributes != null:
 		attributes.begin_update()
 
 	# 应用所有的果
 	for effect_template in effects:
+		if removed and not context.has("remove_reason"):
+			break
 		if not is_instance_valid(effect_template):
 			continue
 		
@@ -212,7 +238,7 @@ func _apply_effects(effects: Array[GameplayEffect], context: Dictionary = {}) ->
 			continue
 		
 		# 应用效果（瞬时操作，不存储）
-		effect_clone.apply(target, instigator, _cached_context)
+		effect_clone.apply(target, source if source != null else instigator, execution_context)
 	if attributes != null:
 		attributes.end_update()
 
@@ -225,7 +251,8 @@ func _remove_effects(effects: Array[GameplayEffect], context: Dictionary) -> voi
 	if not is_instance_valid(target):
 		return
 	
-	# 在context中添加stacks信息
+	# 在context中添加实例来源和层数
+	context["source_id"] = _get_source_instance_id()
 	context["stacks"] = stacks
 	var attributes := _get_attribute_component()
 	if attributes != null:

@@ -1,10 +1,26 @@
 # 插件效果演示
 
+悟空普通无双表现已接入 Core 空格意图与 GAS 状态：周身 `#FF3000` 红色辉光按原版30 FPS脉动，每0.2秒捕获人物残影，1秒线性淡出。打开第一关或五技能演示按空格，默认持续15秒；当前为表现预览入口，怒气蓄满门槛与无双属性加成尚未接入。节点预置、固定快照池，支持移动、转身、换装、暂停、停顿及死亡清理。[原版依据、配置和验收](data/effects/wushuang/README.md)。
+
+悟空移动已统一2倍战斗坐标：行走420、跑步600世界像素/秒，对应原版210/300。第一关五连击、跑攻、跳攻改用原版逐段受击速度和时长，第三段保留拉回，第四段两击分别覆盖冲量；不再套用阶段9验收用的倒地与击退配置。[速度调整入口](data/animation/sunwukong-config.md)、[原版击退参数与实测距离](data/battle2d/original_reactions/README.md)。
+
+悟空转职前的 **升龙斩（Y）、烈焰闪（U）、火眼金睛（I）、烈焰风暴（O）**，以及 **火魔斩（L）** 已按原版接入。打开 [五技能演示](examples/wukong_skills_demo.tscn) 按 F6，W/S 调整火眼金睛，烈焰风暴期间再按 O 追加重劈；J 仍使用五连击。MP/CD 等级表、原版 AB、技能状态、独立砸地与特效时序复用现有插件，所有视觉节点预置，继续共用一个攻击框。[原版依据、技能参数及编辑步骤](data/skills/sunwukong/README.md)、[联合类图](addons/battle_foundation/docs/wukong-basic-skills.svg)。
+
+阶段 11 已接入普通怪物与可扩展 AI。按 F5 运行 [碧玉径小怪场景](examples/first_level_demo.tscn)：32 个编辑器预置小怪（16 剑舞、16 驭兽使）使用原版属性、动作图集、攻击特效与逐帧 AB 判定；近战追击、远程出手退步、巡逻、返回活动范围和跳跃共用 Core 操作意图及动作规则，伤害、Buff、死亡与独立冷却复用 GAS。支持调整每种怪物的行为策略、低生命逃离和目标选择。[配置与新增怪物步骤](data/monsters/README.md)、[AI实现与原版范围](addons/battle_foundation/ai/README.md)、[联合类图](addons/battle_foundation/docs/monster-ai.svg)。当前地形用于小怪验收，原关卡机关、Boss、补给与刷怪波次留待关卡阶段。
+
+阶段 10 已接入 GAS Buff、被动与 Core 战斗触发。打开 [Buff 测试场景](examples/buff_demo.tscn) 按 F6 运行，选择悟空或木桩后施加加攻、减速、眩晕、持续伤害、护盾、无敌、霸体、反伤与吸血；“被动组合”演示释放、命中、受击、生命阈值和击杀触发。支持独立实例、叠层、刷新、覆盖、周期补算、死亡/离场清理；眩晕进入 Core STUN，吸血按原版盾前伤害计算，反伤不重复触发普通命中被动。[配置与原版依据](addons/battle_foundation/combat/buffs-triggers.md)、[资源目录](data/buffs/README.md)、[联合类图](addons/battle_foundation/docs/buffs-triggers.svg)。
+
+伤害跳字、怪物血条、保护条和通用受击闪光集中在 `BattleSession/BattlePresentation`，全场共用一个跳字对象池；悟空和木桩场景已移除公共反馈节点。[节点归属与编辑说明](addons/battle_foundation/presentation/README.md)。
+
+悟空属性可直接在角色的 **GameplayVitalAttributeComponent → Scene Attributes → Base Values** 中修改，**Initial Level Override** 编辑初始等级；保存后重新运行即可用于面板、成长与战斗。原版伤害样例的攻击100也已移到组件配置，不再由启动脚本覆盖。[编辑步骤与基础/最终值说明](data/battle2d/character-components.md#直接编辑悟空属性)。
+
+角色组件已统一预置到角色场景：GAS 属性/Vital、技能、状态、动作状态、运动、连击、受击、保护、伤害规则、背包与输入控制器均可在场景树中查看；初始化只绑定已有节点。复用场景结构、玩家控制权与新角色接入见 [角色组件说明](data/battle2d/character-components.md)。
+
 孙悟空已接入原版跑攻、跳攻动画与独立 Core 状态：跑步或空中按 J 发动对应攻击。第四段新增可配置的 [8,16) 素材帧转身窗，窗口内新按反方向仅转身一次，身体与特效翻转、当前位移方向保留，第五段沿新朝向释放。动作、技能、转身参数及实际渲染见 [跑攻、跳攻与第四段转身](data/battle2d/wukong-context-attacks.md)。
 
 游戏内怪物头顶血条已替换为原版62×6背景及60×4生命贴图：出生隐藏、受伤显现、0.6秒残血补间、2秒自动隐藏、最低4%显示及死亡隐藏。伤害跳字使用共享图集、有界节点池及原版连续Quad.easeOut Tween曲线采样，保持原轨迹、时长、随机规则与命中数量。实际GPU压力测试每战斗秒生成3600条、同时约3180条时，完整帧P95约12.59ms；单帧骤增5000条仍有峰值。配置、预热与实测边界见 [跳字高并发性能](data/effects/damage-number-performance.md)。原版边界、时间规则、编辑入口与实测范围见 [原版血条与跳字说明](data/effects/monster-health-bar.md)。
 
-阶段 9 已实现独立受击反应与保护条。F5 运行 [受击与保护演示](examples/hit_reaction_demo.tscn)：连按 J 五连击观察硬直、击退、击飞、落地倒地与起身；目标模式可切换普通、霸体、无敌和免伤但允许动作反应。左上输入框分别编辑东皇太一 25000、商羊 35000 的保护满值；同目标同技能跨施放累计命中，触发后重置计数。物理经过墙体/平台扫掠，受击停顿统一冻结战斗时钟。配置与实现见 [阶段9详细说明](addons/battle_foundation/combat/hit-reaction-protection.md) 和 [原版保护数据](data/protection/README.md)，自动验收 199 项及 13 套既有回归通过。
+阶段 9 已实现独立受击反应与保护条。F6 运行 [受击与保护演示](examples/hit_reaction_demo.tscn)：连按 J 五连击观察硬直、击退、击飞、落地倒地与起身；目标模式可切换普通、霸体、无敌和免伤但允许动作反应。左上输入框分别编辑东皇太一 25000、商羊 35000 的保护满值；同目标同技能跨施放累计命中，触发后重置计数。物理经过墙体/平台扫掠，受击停顿统一冻结战斗时钟。配置与实现见 [阶段9详细说明](addons/battle_foundation/combat/hit-reaction-protection.md) 和 [原版保护数据](data/protection/README.md)，自动验收 199 项及 13 套既有回归通过。
 
 训练木桩已按悟空的猴脸、棕帽金箍与黄色护衣重绘为 SVG，并加入预置 AnimationPlayer 受伤动画：身体倾斜、压缩、回弹与表情变化，底座保持固定。连续命中会重新播放，暂停与慢动作跟随战斗时钟；打开 [木桩场景](data/battle2d/dummy/wooden_dummy.tscn) 即可编辑和预览，详见 [木桩外观与动画说明](data/battle2d/dummy/README.md)。
 
@@ -14,9 +30,9 @@
 
 阶段 7 已接入现有 GAS 技能时间轴：[三段技能预置场景](examples/skill_timeline_demo.tscn) 按 F6 运行，J 释放三段，后摇前再次按 J 派生，支持独立倍率/附伤/击退/浮空、持续间隔与次数、消耗冷却和取消清理。所有攻击段复用一个判定框，117项验收通过。实现、编辑方法、时序与边界见 [阶段7说明](addons/battle_foundation/combat/skill-timeline.md) 和 [联合类图](addons/battle_foundation/docs/skill-timeline.svg)。三段数值为验收配置，原五连击与单段场景保留，伤害默认已升级到阶段8原版策略。
 
-孙悟空 [表现场景](data/animation/sunwukong_visual.tscn) 通过主 AnimationPlayer 预览十六个动作，所有技能统一使用一个 AttackHitbox / CollisionShape2D，判定范围读取当前 GAS 技能数据。修改技能事件的 hit_rect、缩放和偏移即可调整预览与实际命中。[编辑步骤、新角色接入与类图](data/animation/README.md)。
+孙悟空 [表现场景](data/animation/sunwukong_visual.tscn) 通过主 AnimationPlayer 预览二十二个动作，所有技能统一使用一个 AttackHitbox / CollisionShape2D，判定范围读取当前 GAS 技能数据。修改技能事件或攻击段的 hit_rect、缩放和偏移即可调整预览与实际命中。[编辑步骤、新角色接入与类图](data/animation/README.md)。
 
-使用带原生 Spine 模块的 Godot 4.7 或更新版本打开 `project.godot`，按 F5 运行阶段9受击与保护测试场景，或按 F6 运行所选示例。插件综合演示仍可单独运行 `examples/plugin_showcase.tscn`。
+使用带原生 Spine 模块的 Godot 4.7 或更新版本打开 `project.godot`，按 F5 运行碧玉径小怪场景，或按 F6 运行所选示例。插件综合演示仍可单独运行 `examples/plugin_showcase.tscn`。
 
 Windows 编辑器若偶发 `Failed to create Windows OS window`、`Failed to create sub window` 或 `INVALID_WINDOW_ID`，先保存并关闭编辑器，再通过 [单窗口启动脚本](tools/open_editor_single_window.ps1) 打开本项目：
 
@@ -134,7 +150,7 @@ powershell -ExecutionPolicy Bypass -File .\tools\open_editor_single_window.ps1 -
 
 阶段 6 已完成 [单段普攻与最小战斗闭环](addons/battle_foundation/combat/README.md)：Core 输入与动作状态 → GAS 命中窗口 → 独立受击区域 → 属性伤害/HealthVital 扣血 → 生命条与飘字 → 待机。每次施放保存攻击者、阵营、攻击编号和窗口命中集合，持续重叠只结算一次；单一攻击框继续读取技能数据并随朝向镜像。
 
-打开 [single_attack_demo.tscn](examples/single_attack_demo.tscn) 按 F6，或按 F5。画面采用原版 **940×590**，保持宽高比；角色、木桩、地形、摄像机、HUD、GAS 组件、输入控制器、完整菜单和特效均预置在场景中，启动时不创建节点。J 单段普攻，按钮可测试打中/打空/击杀并重载场景。已导出 [原版受击特效](assets/effects/hurt_effect_all/README.md)，11 帧、30 FPS，保留注册点和透明结尾，支持编辑器 AnimationPlayer 预览与统一暂停。64 项闭环/预置场景/特效验收及 8 项重载检查通过，已检查实际 D3D12 画面。Esc 菜单支持改键并阻断攻击，独立配置不改变原五连击。
+打开 [single_attack_demo.tscn](examples/single_attack_demo.tscn) 按 F6。画面采用原版 **940×590**，保持宽高比；角色、木桩、地形、摄像机、HUD、GAS 组件、输入控制器、完整菜单和特效均预置在场景中，启动时不创建节点。J 单段普攻，按钮可测试打中/打空/击杀并重载场景。已导出 [原版受击特效](assets/effects/hurt_effect_all/README.md)，11 帧、30 FPS，保留注册点和透明结尾，支持编辑器 AnimationPlayer 预览与统一暂停。64 项闭环/预置场景/特效验收及 8 项重载检查通过，已检查实际 D3D12 画面。Esc 菜单支持改键并阻断攻击，独立配置不改变原五连击。
 
 ![单段攻击联合类图](addons/battle_foundation/docs/single-attack-runtime.svg)
 

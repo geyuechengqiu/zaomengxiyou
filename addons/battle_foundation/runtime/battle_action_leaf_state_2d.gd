@@ -1,9 +1,9 @@
 extends BaseState
 class_name BattleActionLeafState2D
 #region Core 叶子状态与实例数据
-enum Kind { IDLE, MOVE, JUMP, ATTACK, HURT, DEAD, RUN, TAKEOFF, LAND, LAUNCHED, AIR_HURT, HIT_LAND, KNOCKDOWN, GETUP, PROTECT, RUN_ATTACK, JUMP_ATTACK }
+enum Kind { IDLE, MOVE, JUMP, ATTACK, HURT, DEAD, RUN, TAKEOFF, LAND, LAUNCHED, AIR_HURT, HIT_LAND, KNOCKDOWN, GETUP, PROTECT, RUN_ATTACK, JUMP_ATTACK, STUN }
 enum OperationResult { ACCEPTED, RETRY, UNAVAILABLE, NOT_HANDLED }
-const NAMES: Array[StringName] = [&"IDLE", &"MOVE", &"AIR", &"ATTACK", &"HURT", &"DEAD", &"RUN", &"TAKEOFF", &"LAND", &"LAUNCHED", &"AIR_HURT", &"HIT_LAND", &"KNOCKDOWN", &"GETUP", &"PROTECT", &"RUN_ATTACK", &"JUMP_ATTACK"]
+const NAMES: Array[StringName] = [&"IDLE", &"MOVE", &"AIR", &"ATTACK", &"HURT", &"DEAD", &"RUN", &"TAKEOFF", &"LAND", &"LAUNCHED", &"AIR_HURT", &"HIT_LAND", &"KNOCKDOWN", &"GETUP", &"PROTECT", &"RUN_ATTACK", &"JUMP_ATTACK", &"STUN"]
 var kind: Kind = Kind.IDLE
 var elapsed: float = 0.0
 var active_rules: Dictionary = {}
@@ -59,7 +59,7 @@ func _physics_update(delta: float) -> void:
 	elapsed += delta
 	var machine: Variant = state_machine
 	var profile: BattleActionProfile2D = machine.profile
-	if profile == null or kind == Kind.DEAD:
+	if profile == null or kind in [Kind.DEAD, Kind.STUN]:
 		return
 	if kind in [Kind.ATTACK, Kind.RUN_ATTACK, Kind.JUMP_ATTACK] and machine.attack_active:
 		return
@@ -139,7 +139,7 @@ func get_permission(permission: StringName, profile: BattleActionProfile2D) -> b
 func can_interrupt(attack_kind: StringName, priority: int, armored: bool, profile: BattleActionProfile2D) -> bool:
 	if attack_kind == &"death":
 		return true
-	if kind == Kind.DEAD or (armored and attack_kind == &"normal"):
+	if kind in [Kind.DEAD, Kind.STUN] or (armored and attack_kind == &"normal"):
 		return false
 	var rules: Dictionary = profile.state_rules.get(StringName(Kind.keys()[kind]), {})
 	var allowed: Array = active_rules.get("interrupt_kinds", rules.get("interrupt_kinds", [&"normal", &"heavy", &"launch"]))

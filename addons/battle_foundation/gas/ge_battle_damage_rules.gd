@@ -4,6 +4,9 @@ class_name GE_BattleDamageRules
 @export var rules: Dictionary = {}
 @export var shield_amount: float = 0.0
 
+func _init() -> void:
+	reapply_on_stack = true
+
 func _apply(target: Node, _instigator: Node, context: Dictionary) -> void:
 	if not target.has_method("get_damage_rules"):
 		return

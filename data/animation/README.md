@@ -1,5 +1,7 @@
 # 角色动画预览与单一攻击判定框
 
+角色运行组件已预置到物理角色场景，动画适配器与判定框仍在 visual 子树中编辑；详见 [角色组件说明](../battle2d/character-components.md)。
+
 [sunwukong_visual.tscn](sunwukong_visual.tscn) 保存角色与攻击特效 SpineSprite、SpineAnimationTrack、主与原生子 AnimationPlayer，以及**一个** AttackHitbox / CollisionShape2D。[角色物理场景](../battle2d/sunwukong_2d.tscn) 实例化此表现场景。所有技能、所有命中序号复用同一节点与矩形形状，运行时不创建额外判定框。五段普攻的原版触发帧、特效编辑和跳跃/移速调参见 [孙悟空配置说明](sunwukong-config.md)。
 
 动画结构参考本机 `godot-spine-example/test_sunwukong.tscn`，来源与哈希见 [visual_source_mapping.json](visual_source_mapping.json)。主 AnimationPlayer 的 Animation 类型轨道控制原生子播放器，通过 SpineAnimationTrack 驱动姿态。[Spine 官方说明](https://esotericsoftware.com/spine-godot#SpineAnimationTrack)
@@ -9,17 +11,23 @@ AnimationAdapter                 SpineAnimationAdapter：语义动作接口
 ├─ SpineVisual                   SpineSprite：骨架、注册点、皮肤
 │  └─ SpineAnimationTrack         原生辅助节点
 │     └─ SpineVisual Track 0      原生 AnimationPlayer：素材动作及循环版本
-├─ AnimationPlayer               主播放器：16 个语义动作
+├─ AnimationPlayer               主播放器：22 个语义动作
+├─ WushuangEffect                预置红光与6个GPU快照槽，独立于动作播放器
 ├─ AttackHitbox                  BattleHitbox2D：所有技能共用
 │  └─ CollisionShape2D           唯一 RectangleShape2D，由技能数据填充
 └─ AttackEffects                 2 倍素材比例，随角色朝向镜像
    ├─ Primary                    五段普攻、跑攻、跳攻原版特效，各自原生轨道与子播放器
-   └─ Secondary                  第四段第8帧特效，偏移(-17,-4)、缩放(-1,1)
+   ├─ Secondary                  第四段第8帧特效，偏移(-17,-4)、缩放(-1,1)
+   ├─ SkillPrimary               五个主动技能的主特效、射线
+   ├─ SkillSecondary             眼部、火魔斩砸地等第二特效
+   └─ BeamEnd                    火眼金睛末端特效
 ```
 
 ![动画与单一判定框联合类图](../../addons/battle_foundation/docs/animation-authoring.svg)
 
 跑攻 `run_attack` 与跳攻 `jump_attack` 也已预置身体、特效与单一攻击框轨道；原帧号、独立状态和第四段转身规则见 [上下文攻击说明](../battle2d/wukong-context-attacks.md)。
+
+`skill1/2/3/4/4_1/8` 同样在主播放器预览。主动技能的攻击框读取 `BattleFrameTimelineFeature.attack_segments`，字段、原帧时机、射线转向及火魔斩尾帧见 [基础技能说明](../skills/sunwukong/README.md)。技能循环片段由主动画选择原生 `_looped` clip，动作是否结束仍由技能时间轴决定。
 
 ## 编辑技能判定并预览
 
@@ -47,6 +55,8 @@ Core 的 battle.attack.impact 携带技能 ID、攻击编号、命中序号与�
 缺少命中数据或矩形无效时，查询返回空范围并清理有效标记，不沿用前一技能/前一击的形状。Area2D 物理监测关闭、CollisionShape2D 为 disabled，实际判定主动读取几何，不依赖物理 overlap。编辑器预览不执行伤害或授予战斗许可。原五连击仍为六次素材帧事件的瞬时查询；阶段 6 可使用 hit_window_frames 配置有限持续窗口，见 [单段战斗说明](../../addons/battle_foundation/combat/README.md)。原版 sensor 完整生命周期尚未迁移。
 
 ## 动画时钟与实例隔离
+
+普通无双的红光与残影由 GAS 状态驱动，角色继续播放当前动作。表现节点在身体前绘制、在地形之后绘制，避免负 z_index 被背景遮盖。快照冻结已解算骨骼、朝向和皮肤，只消费一次战斗 delta，配置与原版规则见 [普通无双说明](../effects/wushuang/README.md)。
 
 战斗通过 play_action(&"attack_1") 等语义动作调用适配器，主播放器的 play/advance 选择原生 clip，并把播放时间同步到 Spine。游戏中播放器和 Spine 使用手动模式，唯一推进来源为 BattleClock 的 combat delta；编辑器由原生辅助节点处理时间轴预览。
 

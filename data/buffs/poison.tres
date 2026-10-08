@@ -1,0 +1,33 @@
+[gd_resource type="Resource" script_class="GameplayStatusData" format=3]
+[ext_resource type="Script" path="res://addons/gameplay_abiltiy_system/scripts/status/gameplay_status_data.gd" id="status"]
+[ext_resource type="Script" path="res://addons/gameplay_abiltiy_system/scripts/effects/gameplay_effect.gd" id="effect_type"]
+[ext_resource type="Script" path="res://addons/gameplay_abiltiy_system/scripts/status/features/status_feature.gd" id="feature_type"]
+[ext_resource type="Script" path="res://addons/battle_foundation/gas/battle_original_status_policy.gd" id="policy"]
+[ext_resource type="Script" path="res://addons/battle_foundation/gas/ge_original_periodic_vital.gd" id="effect"]
+[ext_resource type="Script" path="res://addons/gameplay_abiltiy_system/scripts/status/features/feature_periodic_effects.gd" id="periodic"]
+[sub_resource type="Resource" id="effect"]
+script = ExtResource("effect")
+health_ratio = -0.02
+attack_ratio = 0
+fixed_delta = 0
+[sub_resource type="Resource" id="periodic"]
+script = ExtResource("periodic")
+feature_name = "poison_tick"
+period = 1
+periodic_effects = Array[ExtResource("effect_type")]([SubResource("effect")])
+[sub_resource type="Resource" id="policy"]
+script = ExtResource("policy")
+replace_rule = 2
+[resource]
+script = ExtResource("status")
+status_id = &"poison"
+status_display_name = "紫色中毒"
+duration = 5.1
+stacking_policy = SubResource("policy")
+max_stacks = 1
+stacking_group = &"original.50191/hp"
+tags = Array[StringName]([&"status.debuff"])
+metadata/original_buff_id = 5019101
+metadata/original_type = 5
+initial_update_delta = 0.03333333333333333
+features = Array[ExtResource("feature_type")]([SubResource("periodic")])

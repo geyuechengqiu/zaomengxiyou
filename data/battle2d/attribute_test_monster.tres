@@ -5,11 +5,13 @@
 [ext_resource type="Resource" path="res://data/attribute/progression/sunwukong.tres" id="progression"]
 [ext_resource type="Resource" path="res://data/attribute/vitals/health.tres" id="health"]
 [ext_resource type="Resource" path="res://data/attribute/vitals/mana.tres" id="mana"]
+[ext_resource type="PackedScene" path="res://data/battle/scenes/sample_entity.tscn" id="scene"]
 [resource]
 script = ExtResource("script")
 definition_id = &"属性验收怪物"
 display_name = "属性隔离验收怪物（复用悟空数值）"
 faction_id = &"enemy"
+scene = ExtResource("scene")
 attribute_set = ExtResource("attributes")
 progression = ExtResource("progression")
 vitals = Array[ExtResource("vital_type")]([ExtResource("health"), ExtResource("mana")])

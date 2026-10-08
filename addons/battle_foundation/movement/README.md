@@ -51,7 +51,7 @@ actor.request_attack()
 actor.try_jump()
 ```
 
-实体清理/离树时注销机器，Core 调用 stop/dispose；战斗机器随后断开叶子的 `state_machine` / `agent` 所属引用并清空状态集合，避免 RefCounted 循环引用。脱离实体自行创建 `BattleActionState2D.new()` 时，拥有者同样必须在结束使用后调用 `dispose()`。
+实体清理/离树时注销机器，Core 调用 stop/dispose；战斗机器随后断开叶子的 `state_machine` / `agent` 所属引用并清空状态集合，避免 RefCounted 循环引用。ActionState 现为角色场景预置 Node，退出或释放时自动注销并清理；节点结构见 [角色组件说明](../../../data/battle2d/character-components.md)。独立测试手动创建未入树节点时，结束后调用 `free()`；`get_state_name()` 查询战斗状态，Node 的 `get_name()` 查询节点名。
 
 [verify_wukong_state_machine.tscn](../../../examples/verify_wukong_state_machine.tscn) 已通过 46 项检查：真实 Core 状态对象、注册/agent 隔离、生命周期顺序、转换消息、单一时钟、连击重入、死亡守卫、拒绝通知及重复重生/直接释放的注销与引用清理；原有阶段四验收继续覆盖运动和完整五段连击。
 

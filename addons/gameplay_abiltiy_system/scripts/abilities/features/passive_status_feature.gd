@@ -25,6 +25,7 @@ func on_learned(ability: GameplayAbilityInstance, ability_comp: Node) -> void:
 
 	var context = {
 		"source_id": ability.get_definition().ability_id,
+		"status_owner_source": ability.get_definition().ability_id,
 		"ability_instance": ability
 	}
 
@@ -34,7 +35,11 @@ func on_learned(ability: GameplayAbilityInstance, ability_comp: Node) -> void:
 			continue
 		
 		var stacks : int = statuses[status_data]
-		status_comp.apply_status(status_data, instigator, stacks, context)
+		var instance := status_comp.apply_status(status_data, instigator, stacks, context)
+		if instance != null:
+			var owned: Array = ability.get_meta(feature_name + "_owned_instances", [])
+			owned.append(weakref(instance))
+			ability.set_meta(feature_name + "_owned_instances", owned)
 
 		# 将状态ID存储到黑板，以便遗忘时移除
 		var status_id = status_data.status_id
@@ -51,16 +56,15 @@ func on_forgotten(ability: GameplayAbilityInstance, ability_comp: Node) -> void:
 	if not is_instance_valid(status_comp):
 		return
 
-	# 获取已应用的状态ID列表
-	var applied_statuses = _get_applied_statuses(ability)
-
-	# 移除所有已应用的状态
-	for status_id in applied_statuses:
-		if not status_id.is_empty():
-			status_comp.remove_status(status_id)
-
-	# 清空已应用状态列表
+	# 只移除本技能实际施加的实例，不误删同ID的其它技能或道具Buff。
+	var owned: Array = ability.get_meta(feature_name + "_owned_instances", [])
+	for reference: WeakRef in owned:
+		var instance := reference.get_ref() as GameplayStatusInstance
+		if instance != null:
+			status_comp.remove_instance(instance, &"forgotten")
+	ability.set_meta(feature_name + "_owned_instances", [])
 	_set_applied_statuses(ability, [])
+
 #endregion
 #region 内部实现
 

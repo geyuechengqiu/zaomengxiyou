@@ -15,6 +15,23 @@ class_name BattleFrameTimelineFeature
 @export var action_rules: Dictionary = {"move": false, "jump": false, "turn": false}
 ## 行为树技能保持原有提交方式；分段技能由此时间轴提交 GAS 消耗与冷却。
 @export var commit_resources: bool = false
+## 技能使用位置与原版可打断动作；普通攻击保持现有默认规则。
+@export var can_use_in_air: bool = false
+@export var can_use_on_ground: bool = true
+@export var interrupt_actions: Array[StringName] = []
+@export var initial_status_ids: Array[StringName] = []
+## 可选原版特效尾帧；不延长战斗动作，不产生命中，新技能/受击/死亡立即取消。
+@export var effect_tail_frames: int = 0
+@export_group("Directional Beam")
+@export var aim_segment_index: int = 0
+@export var aim_speed_degrees: float = 60.0
+@export var aim_min_degrees: float = -30.0
+@export var aim_max_degrees: float = 15.0
+## 均指向场景预置特效；坐标、长度由保存的AnimationPlayer轨道管理。
+@export var aim_effect_paths: Array[NodePath] = []
+@export var aim_head_bone: StringName = &""
+@export var aim_tip_path: NodePath = NodePath()
+@export var aim_length: float = 0.0
 #endregion
 #region GAS 生命周期
 func _init() -> void:
@@ -78,7 +95,7 @@ func on_completed(ability: GameplayAbilityInstance) -> void:
 	if is_instance_valid(owner) and owner.has_method("get_attack_instance"):
 		var attack: BattleAttackInstance = owner.get_attack_instance()
 		if attack != null and attack.active and attack.ability_id == ability.get_definition().ability_id:
-			owner.finish_timeline_cast(attack, &"cancelled" if ability.completion_status == BTNode.Status.FAILURE else &"completed")
+			owner.finish_timeline_cast(attack, &"cancelled" if ability.completion_status == BTNode.Status.FAILURE else &"completed", float(_get_data(ability, "visual_spill", 0.0)))
 #endregion
 #region 按时间排序重放跨帧攻击与事件
 func _update_segments(ability: GameplayAbilityInstance, delta: float) -> void:
@@ -100,6 +117,10 @@ func _update_segments(ability: GameplayAbilityInstance, delta: float) -> void:
 		var cooldown := ability.get_feature("CooldownFeature") as CooldownFeature
 		if cooldown != null and not context.get("skip_cooldown", false):
 			cooldown.start_cooldown(ability)
+		for id in initial_status_ids:
+			owner.apply_status_definition(id, owner)
+			if not _is_current(ability, owner, cast):
+				return
 		owner.publish_battle_event(&"battle.skill.committed", {"attack_id": cast.attack_id, "ability_id": cast.ability_id})
 		if not _is_current(ability, owner, cast):
 			return
@@ -125,14 +146,17 @@ func _update_segments(ability: GameplayAbilityInstance, delta: float) -> void:
 				var segment: BattleAttackSegment = item.segment
 				if cast.phase == &"startup":
 					cast.phase = &"active"
-				var context := segment.get_payload()
+				var context := segment.get_payload_at_frame(float(item.time) * source_fps)
 				context["timeline_sample"] = true
 				context["sample_time"] = item.time
 				context["window_start"] = segment.start_frame / source_fps
 				context["window_end"] = segment.end_frame / source_fps
 				_emit_context(ability, &"battle.attack.impact", context, float(item.time) * source_fps)
-				var interval := segment.hit_interval if segment.hit_interval > 0.0 else 1.0 / source_fps
+				# 几何采样与目标再次命中间隔分离；冲刺途中进入范围的目标也必须检测。
+				var interval := 1.0 / source_fps
 				var next := float(item.time) + interval
+				if segment.hit_interval > 0.0:
+					next = cast.next_hit_deadline(segment.hit_index, float(item.time), segment.maximum_hits, next)
 				if next + 0.000000001 < segment.end_frame / source_fps:
 					pending.append({"time": next, "kind": "sample", "segment": segment, "order": item.order})
 			"close":
@@ -151,6 +175,7 @@ func _update_segments(ability: GameplayAbilityInstance, delta: float) -> void:
 		return
 	_set_data(ability, "elapsed", until)
 	if until + 0.000000001 >= duration_frames / source_fps:
+		_set_data(ability, "visual_spill", maxf(0.0, previous + delta - until))
 		ability.end_ability()
 
 func _is_current(ability: GameplayAbilityInstance, owner: BattleEntity2D, cast: BattleAttackInstance) -> bool:
@@ -161,7 +186,9 @@ func uses_cast_timeline() -> bool:
 #endregion
 #region 校验与帧事件
 func is_configuration_valid() -> bool:
-	if not is_finite(source_fps) or source_fps <= 0.0 or duration_frames <= 0:
+	if not is_finite(source_fps) or source_fps <= 0.0 or duration_frames <= 0 or effect_tail_frames < 0:
+		return false
+	if not is_finite(aim_speed_degrees) or aim_speed_degrees < 0.0 or not is_finite(aim_min_degrees) or not is_finite(aim_max_degrees) or aim_min_degrees > aim_max_degrees or not is_finite(aim_length) or aim_length < 0.0:
 		return false
 	var previous := -1
 	for marker in events:
@@ -183,6 +210,8 @@ func is_configuration_valid() -> bool:
 	for branch in branch_windows:
 		if branch == null or not branch.is_valid(duration_frames):
 			return false
+	if aim_segment_index != 0 and not indices.has(aim_segment_index):
+		return false
 	for window in motion_windows:
 		if window == null or not window.is_valid(duration_frames):
 			return false

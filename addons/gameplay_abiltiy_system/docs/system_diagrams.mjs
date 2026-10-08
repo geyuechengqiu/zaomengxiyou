@@ -112,21 +112,21 @@ export function generateSystemDiagrams({ diagram, text, card, edge, legend, step
       '恢复速率需显式配置属性键；Mana、Health 模板中的默认恢复键均未开启。']);
 
   module('status-system.svg','状态系统：容器、生命周期、Feature 与策略',[
-    [c('GameplayStatusComponent','components/gameplay_status_component.gd',['_active_statuses: Dictionary','_has_event_listening_statuses: bool'],['apply_status() / remove_status()','_process() / handle_event()'],'Node','runtime'),
+    [c('GameplayStatusComponent','components/gameplay_status_component.gd',['_active_statuses: Array[Instance]','定义克隆 / 分组 / 来源所有权'],['apply_status() / remove_instance()','advance_simulation() / handle_event()'],'Node','runtime'),
      c('GameplayStatusInstance','status/gameplay_status_instance.gd',['stacks / remaining_duration','_cached_context / _feature_storage'],['apply() / update() / remove()','add_stack() / apply_effects()'],'RefCounted','runtime'),
      c('GameplayStatusData','status/gameplay_status_data.gd',['apply_effects / remove_effects / tags','features / duration / max_stacks'],['duration_policy / stacking_policy'])],
     [c('StatusDurationPolicy','status/duration/status_duration_policy.gd',[],['initialize() / update() / refresh()','accumulate() / handle_event()'],'abstract Resource'),
      c('StatusFeature','status/features/status_feature.gd',[],['apply_feature() / update_feature()','remove_feature() / handle_event()']),
      c('StatusStackingPolicy','status/stacking/status_stacking_policy.gd',[],['handle_stacking(old, new, stacks, ctx)'],'abstract Resource')],
     [c('DurationNaturalTime','status/duration/duration_natural_time.gd',['remaining_duration > 0 才递减','负时长视为永久'],['到期返回 true'],'Resource : StatusDurationPolicy'),
-     c('FeaturePeriodicEffects','status/features/feature_periodic_effects.gd',['period / periodic_effects','timer 存在状态实例中'],['每次更新最多触发一次'],'Resource : StatusFeature'),
+     c('FeaturePeriodicEffects','status/features/feature_periodic_effects.gd',['period / periodic_effects','timer 存在状态实例中'],['补齐截止到期的全部周期'],'Resource : StatusFeature'),
      c('StackingRefreshDuration','status/stacking/stacking_refresh_duration.gd',[],['仅刷新持续时间'],'Resource : StatusStackingPolicy')],
     [c('StackingIntensity','status/stacking/stacking_intensity.gd',[],['add_stack(new, true)'],'Resource : StatusStackingPolicy'),
      c('FeatureEventListener','status/features/feature_event_listener.gd',['trigger_on_events','event_triggered_effects'],['事件匹配 → instance.apply_effects()'],'Resource : StatusFeature'),
      c('StackingRefreshAndStack','status/stacking/stacking_refresh_and_stack.gd',[],['refresh() → add_stack(new, false)'],'Resource : StatusStackingPolicy')],
     [null,null,c('StackingAccumulateDuration','status/stacking/stacking_accumulate_duration.gd',[],['仅累加时间，不增加层数'],'Resource : StatusStackingPolicy')]
   ],[
-    ['GameplayStatusComponent','GameplayStatusInstance','owned','按状态 ID 保存'],
+    ['GameplayStatusComponent','GameplayStatusInstance','owned','按实例身份保存'],
     ['GameplayStatusInstance','GameplayStatusData','shared','status_data 1'],
     ['GameplayStatusInstance','StatusFeature','shared','features 0..*'],
     ['GameplayStatusData','StatusStackingPolicy','shared','堆叠策略 0..1'],
@@ -135,8 +135,8 @@ export function generateSystemDiagrams({ diagram, text, card, edge, legend, step
     ['FeaturePeriodicEffects','StatusFeature','inherit'],
     ['StackingRefreshDuration','StatusStackingPolicy','inherit'],
     ['FeatureEventListener','StatusFeature','inherit']
-  ],['状态实例持有模板引用、独立持续时间策略副本和 Feature 私有存储；效果执行时逐个深复制。',
-      '优先级：高替换、低拒绝、相等交给堆叠策略。叠层会先清旧效果，再按新层数重施效果。',
+  ],['状态实例持有独立定义图、持续时间策略副本和 Feature 私有存储；效果执行时逐个深复制。',
+      '优先级：高替换、低拒绝、相等交给堆叠策略。叠层仅重施可撤销的持续效果，不重放瞬时伤害/治疗。',
       '到期先移出活跃表，再执行移除效果、清理修改器 / Feature / 标签 / 状态 Cue。']);
 
   const effectChildren=[

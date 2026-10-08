@@ -1,0 +1,73 @@
+[gd_resource type="Resource" script_class="GameplayAbilityDefinition" format=3 uid="uid://ctc08ngsrgxu6"]
+
+[ext_resource type="Script" uid="uid://dm30yy8ucnbot" path="res://addons/battle_foundation/definitions/battle_frame_event.gd" id="8_kuh0u"]
+[ext_resource type="Script" uid="uid://ud4ug2ylqdo2" path="res://addons/battle_foundation/definitions/battle_skill_branch.gd" id="branch"]
+[ext_resource type="Script" uid="uid://dg5napbfppfb3" path="res://addons/battle_foundation/gas/battle_skill_cooldown_feature.gd" id="cooldown"]
+[ext_resource type="Script" uid="uid://chls772x4fojc" path="res://addons/gameplay_abiltiy_system/scripts/abilities/features/cost_feature.gd" id="cost"]
+[ext_resource type="Script" uid="uid://cmn60ti1qd07f" path="res://addons/gameplay_abiltiy_system/scripts/abilities/costs/ability_cost_base.gd" id="cost_type"]
+[ext_resource type="Script" uid="uid://bm4h231fb21pv" path="res://addons/gameplay_abiltiy_system/scripts/abilities/gameplay_ability_definition.gd" id="definition"]
+[ext_resource type="Script" uid="uid://cm0x3pewlrveo" path="res://addons/gameplay_abiltiy_system/scripts/abilities/features/gameplay_ability_feature.gd" id="feature"]
+[ext_resource type="Script" uid="uid://jxo0f6fi7ad" path="res://addons/battle_foundation/gas/battle_skill_mana_cost.gd" id="mana"]
+[ext_resource type="Script" uid="uid://b1047b2i0w3jx" path="res://addons/battle_foundation/definitions/battle_skill_motion.gd" id="motion"]
+[ext_resource type="Script" uid="uid://ctus3t2tt37o6" path="res://addons/battle_foundation/definitions/battle_attack_segment.gd" id="segment"]
+[ext_resource type="Script" uid="uid://daneexb55k8ae" path="res://addons/battle_foundation/gas/battle_frame_timeline_feature.gd" id="timeline"]
+
+[sub_resource type="Resource" id="Mana"]
+script = ExtResource("mana")
+skill_id = &"sunwukong_skill2"
+amounts = Array[float]([0.0, 28.0, 55.0, 89.0, 130.0, 176.0, 198.0, 249.0, 305.0, 364.0, 426.0, 491.0, 533.0, 622.0, 719.0, 822.0, 933.0, 1050.0, 1109.0, 1237.0, 1372.0, 1513.0, 1662.0, 1818.0, 1894.0, 2060.0, 2233.0, 2413.0, 2600.0, 2793.0, 2981.0, 3242.0, 3517.0, 3806.0, 4111.0, 4430.0, 4587.0, 4894.0, 5213.0, 5544.0, 5887.0, 6242.0, 6436.0, 6812.0, 7200.0, 7601.0, 8015.0, 8443.0, 8677.0, 9126.0, 9589.0])
+
+[sub_resource type="Resource" id="Cost"]
+script = ExtResource("cost")
+costs = Array[ExtResource("cost_type")]([SubResource("Mana")])
+
+[sub_resource type="Resource" id="Cooldown"]
+script = ExtResource("cooldown")
+durations = Array[float]([0.0, 3.4, 3.2, 3.1, 2.9, 2.8, 2.6, 2.5, 2.3, 2.2, 2.0, 1.9, 1.7, 1.6, 1.4, 1.3, 1.1, 1.1, 1.1, 1.1, 1.1, 1.1, 1.1, 1.1, 1.1, 1.1, 1.1, 1.1, 1.1, 1.1, 1.1, 1.1, 1.1, 1.1, 1.1, 1.1, 1.1, 1.1, 1.1, 1.1, 1.1, 1.1, 1.1, 1.1, 1.1, 1.1, 1.1, 1.1, 1.1, 1.1, 1.1])
+cooldown_duration = 3.4
+
+[sub_resource type="Resource" id="Hit1"]
+script = ExtResource("segment")
+segment_id = &"skill2_hit_1"
+start_frame = 0
+end_frame = 15
+action = &"skill2"
+hit_rect = Rect2(-114, -107.95, 209, 148.95)
+damage_multiplier = 0.765
+hit_interval = 1.0
+knockback_speed = 40.0
+knockback_duration = 0.2
+launch_speed = 240.0
+reset_vertical_velocity = true
+reaction_gravity = 1980.0
+hit_stun = 0.2
+protection_skill_id = "1101020"
+
+[sub_resource type="Resource" id="Dash"]
+script = ExtResource("motion")
+end_frame = 15
+velocity = Vector2(800, 0)
+
+[sub_resource type="Resource" id="Timeline"]
+script = ExtResource("timeline")
+duration_frames = 15
+attack_segments = Array[ExtResource("segment")]([SubResource("Hit1")])
+motion_windows = Array[ExtResource("motion")]([SubResource("Dash")])
+animation_action = &"skill2"
+action_rules = {
+"gravity_scale": 0.0,
+"jump": false,
+"move": false,
+"turn": false
+}
+commit_resources = true
+can_use_in_air = true
+interrupt_actions = Array[StringName]([&"attack_1", &"attack_2", &"attack_3", &"attack_4", &"attack_5"])
+initial_status_ids = Array[StringName]([&"sunwukong_buff_6000201"])
+
+[resource]
+script = ExtResource("definition")
+ability_id = &"sunwukong_skill2"
+ability_name = "烈焰闪"
+features = Array[ExtResource("feature")]([SubResource("Cost"), SubResource("Cooldown"), SubResource("Timeline")])
+metadata/original_skill_id = 1101020

@@ -1,8 +1,11 @@
-extends RefCounted
+extends Node
 class_name BattleHitReactionController2D
+#region 配置与运行状态
 ## 收到一次已裁决的命中后只处理动作/物理，不计算 HP，也不靠动画回调解锁。
 
 var _owner: WeakRef
+#endregion
+#region 公共接口
 
 func bind(actor: BattleEntity2D) -> void:
 	_owner = weakref(actor)
@@ -10,6 +13,7 @@ func bind(actor: BattleEntity2D) -> void:
 func is_armored(actor: BattleEntity2D) -> bool:
 	return actor.super_armor or bool(actor.action_state.active_rules.get("super_armor", false)) or TagManager.has_tag(actor, &"state.super_armor") or (actor.protection.active and actor.protection.profile.use_as_armor)
 
+#endregion
 #region 无敌与保护分别明确阻止的效果
 func get_policy(actor: BattleEntity2D) -> Dictionary:
 	var definition := actor.reaction_profile
@@ -62,7 +66,7 @@ func resolve(info: DamageInfo, context: Dictionary, kind: StringName, priority: 
 		# 保护可以只防硬直却允许位移，不把 Core 的高打断门槛当位移免疫。
 		allow_motion = reaction_type != &"none"
 	if allow_motion:
-		actor.motion.apply_impulse(horizontal, duration, launch)
+		actor.motion.apply_impulse(horizontal, duration, launch, float(context.get("reaction_gravity", -1.0)), bool(context.get("reset_vertical_velocity", false)))
 		result.displacement_applied = (not is_zero_approx(horizontal) and duration > 0.0) or launch > 0.0
 	if policy.reaction and can_interrupt and reaction_type != &"none" and (stun > 0.0 or launch > 0.0 or reaction_type == &"knockdown"):
 		actor.cancel_skill(&"interrupted")
@@ -95,7 +99,7 @@ func _get_direction(actor: BattleEntity2D, attacker: Node, context: Dictionary) 
 #region 保护动作不等于免伤：清理技能/预约，使用真实 Core 叶子锁定
 func start_protection() -> bool:
 	var actor := _owner.get_ref() as BattleEntity2D
-	if actor == null or not actor.is_alive() or not actor.protection.profile.protection_action_enabled:
+	if actor == null or not actor.is_alive() or TagManager.has_tag(actor, &"state.stunned") or not actor.protection.profile.protection_action_enabled:
 		return false
 	var definition := actor.protection.profile
 	if not definition.protect_ability_id.is_empty() and (not actor.abilities.has_ability(definition.protect_ability_id) or not actor.abilities.can_activate_ability(definition.protect_ability_id, {})):

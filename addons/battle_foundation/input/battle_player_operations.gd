@@ -4,8 +4,8 @@ class_name BattlePlayerOperations
 const Result = BattleActionLeafState2D.OperationResult
 signal operation_observed(intent: CoreOperationIntent)
 @export var operation_profile: CoreOperationProfile
-## 指向预置 CoreOperationController；留空保留工厂兼容入口。
-@export var controller_path: NodePath
+## 指向角色场景中预置的 CoreOperationController。
+@export var controller_path: NodePath = ^"OperationController"
 ## skill_1..skill_5 / magic_weapon / wushuang 等语义槽位到 GAS 技能 ID。
 @export var ability_slots: Dictionary[StringName, StringName] = {}
 @export var device_filter: int = -1
@@ -24,23 +24,17 @@ func _ready() -> void:
 	assert(actor != null and operation_profile != null, "玩家操作需要 2D 战斗实体与操作配置")
 	assert(CoreSystem.operation_manager != null, "请启用 Core operation_manager")
 	var id := StringName("%s/operations" % actor.entity_id)
-	if not controller_path.is_empty():
-		controller = get_node(controller_path) as CoreOperationController
-		assert(controller != null)
-		var installed: bool = CoreSystem.operation_manager.bindings.install_profile(operation_profile)
-		assert(installed)
-		controller.profile = operation_profile
-		controller.device_filter = device_filter
-		var registered: bool = CoreSystem.operation_manager.register_controller(id, controller)
-		assert(registered)
-	else:
-		controller = CoreSystem.operation_manager.create_controller(id, operation_profile, device_filter)
-	assert(controller != null)
+	controller = get_node_or_null(controller_path) as CoreOperationController
+	assert(controller != null, "角色场景必须预置 OperationController")
+	var installed: bool = CoreSystem.operation_manager.bindings.install_profile(operation_profile)
+	assert(installed)
+	controller.profile = operation_profile
+	controller.device_filter = device_filter
+	var registered: bool = CoreSystem.operation_manager.register_controller(id, controller)
+	assert(registered)
 	controller.externally_driven = true
 	controller.intent_emitted.connect(_on_intent)
 	controller.control_changed.connect(_on_control_changed)
-	if controller.get_parent() == null:
-		add_child(controller)
 	actor.operations = self
 	controller.set_control_blocked(&"ownership", not enabled)
 
@@ -55,6 +49,7 @@ func set_control_blocked(reason: StringName, blocked: bool) -> void:
 func _on_control_changed(available: bool, _reasons: Array) -> void:
 	if not available:
 		actor.action_state.clear_operation_state()
+		actor.skill_aim_axis = 0.0
 		_phases.clear()
 
 func _exit_tree() -> void:
@@ -72,6 +67,7 @@ func advance_simulation(_delta: float) -> void:
 	_phases.clear()
 	# 按序合并连续意图与缓存，短按必须先分发 pressed 再分发 released。
 	commands.sort_custom(func(left: CoreOperationIntent, right: CoreOperationIntent): return left.sequence < right.sequence)
+	actor.skill_aim_axis = -1.0 if controller.is_pressed(&"move_up") else (1.0 if controller.is_pressed(&"move_down") else 0.0)
 	for intent in commands:
 		if intent.phase != CoreOperationIntent.Phase.PRESSED:
 			actor.action_state.handle_operation(intent, ability_slots)

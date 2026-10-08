@@ -48,6 +48,7 @@ func calculate_result(target: Node, instigator: Node, context: Dictionary) -> Da
 		return info
 	var skill := _skill(ctx)
 	var level := maxi(1, int(ctx.get("skill_level", ar.skill_levels.get(ctx.get("ability_id", &""), 1)))) + int(ctx.get("buff_level", 0))
+	ctx["lifesteal_skill_multiplier"] = float(skill.get("skillDefault", 1.0)) + float(skill.get("skillAdd", 0.0)) * (level - 1)
 	var cheat: Dictionary = ctx.get("secret_bonus", {})
 	var hit := float(attacker.hit) + float(attacker.base.hit) * float(cheat.get("hit", 0.0))
 	var diff := hit / float(dp.hitAttribute) - float(defender.dodge) / float(ap.dodgeAttribute)
@@ -142,11 +143,19 @@ func _resolve_application(info: DamageInfo, target: Node, notify_received: Calla
 		info.true_damage *= ratio
 	_hook(&"damage_buffs", ar, tr, info, target, ctx)
 	## 原版吸血发生在盾前，使用这一阶段数值；不是实际扣血。
-	var life_steal := ar.get_number(&"lifeStealRatio") * maxf(0.0, info.normal_damage + info.true_damage)
+	info.lifesteal_basis = maxf(0.0, info.normal_damage + info.true_damage)
+	var life_steal := ar.get_number(&"lifeStealRatio") * info.lifesteal_basis
+	var life_cap := ar.get_number(&"lifeStealCap", INF)
+	if is_finite(life_cap):
+		life_steal = minf(life_steal, maxf(0.0, life_cap * float(ctx.get("lifesteal_skill_multiplier", 1.0))))
+	info.lifesteal_requested = life_steal
 	if life_steal > 0.0 and is_instance_valid(attacker):
 		var comp := GameplayAbilitySystem.get_component_by_interface(attacker, "GameplayVitalAttributeComponent")
 		if comp != null and comp.get_vital(&"health") is HealthVital:
-			(comp.get_vital(&"health") as HealthVital).heal(life_steal)
+			var health := comp.get_vital(&"health") as HealthVital
+			var hp := health.current_value
+			health.heal(life_steal)
+			info.lifesteal_actual = maxf(0.0, health.current_value - hp)
 	info.record(&"lifesteal", {"requested_heal": life_steal})
 	_hook(&"lifesteal", ar, tr, info, target, ctx)
 	info.normal_damage += ar.get_number(&"extraDamage")

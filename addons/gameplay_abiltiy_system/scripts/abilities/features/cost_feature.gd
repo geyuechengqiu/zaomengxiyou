@@ -31,7 +31,7 @@ func can_activate(ability_instance: GameplayAbilityInstance, context: Dictionary
 	for cost in costs:
 		if not is_instance_valid(cost):
 			continue
-		if not cost.can_pay(ability_comp, instigator):
+		if not cost.can_pay_context(ability_comp, instigator, context):
 			return false
 
 	return true
@@ -51,7 +51,7 @@ func try_pay(ability_instance: GameplayAbilityInstance, context: Dictionary) -> 
 		if not is_instance_valid(cost):
 			continue
 		# 尝试支付消耗
-		if not cost.try_pay(ability_comp, instigator):
+		if not cost.try_pay_context(ability_comp, instigator, context):
 			return false
 	return true
 #endregion

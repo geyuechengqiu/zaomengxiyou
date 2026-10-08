@@ -26,8 +26,11 @@ var attack_hitbox: BattleHitbox2D
 var hurtbox: BattleHurtbox2D
 var attack_instance: BattleAttackInstance
 var _attack_serial: int = 0
-var feedback: BattleCombatFeedback2D
-var action_state := BattleActionState2D.new()
+## 兼容查询入口：视图归战斗场景所有，角色不持有、不推进公共表现。
+var feedback: BattleCombatFeedback2D:
+	get:
+		return session.presentation.get_feedback(self) if is_instance_valid(session) and is_instance_valid(session.presentation) else null
+var action_state: BattleActionState2D
 var move_axis: float:
 	get:
 		return action_state.machine.move_axis
@@ -42,21 +45,51 @@ var last_impact_time: float = -1.0
 var _impact_display: float = 0.0
 var _cleaned: bool = false
 var operations: BattlePlayerOperations
-var motion := BattleMotionController2D.new()
-var combo := BattleComboState.new()
+var ai_controller: BattleAIController2D
+var skill_aim_axis: float = 0.0
+var motion: BattleMotionController2D
+var combo: BattleComboState
 var super_armor: bool = false
 var _active_skill_id: StringName = &""
 var _impact_context: Dictionary = {}
 ## 兼容旧固定增量监控，不作为当前保护条；当前条查询 protection.score。
 var received_protection: float = 0.0
-var reactions := BattleHitReactionController2D.new()
-var protection := BattleProtectionSystem.new()
+var reactions: BattleHitReactionController2D
+var protection: BattleProtectionSystem
 var _pending_derived_skill: Dictionary = {}
-var damage_rules := BattleDamageRules.new()
+var damage_rules: BattleDamageRules
+var inventory: C_Inventory
 ## 可设置固定随机输入/技能等级；每个实体独立，时间轴参数优先。
 @export var damage_context: Dictionary = {}
 #endregion
 #region 初始化与清理
+func get_component_configuration_error(data: BattleEntityDefinition = null) -> String:
+	var error := BattleGASBinding.get_configuration_error(self, data)
+	if not error.is_empty():
+		return error
+	for spec in [[^"ActionState", BattleActionState2D], [^"MotionController", BattleMotionController2D], [^"ComboState", BattleComboState], [^"HitReactionController", BattleHitReactionController2D], [^"ProtectionSystem", BattleProtectionSystem]]:
+		if not is_instance_of(get_node_or_null(spec[0]), spec[1]):
+			return "2D 实体场景缺少或类型错误的预置组件：" + str(spec[0])
+	var input := get_node_or_null(^"PlayerOperations") as BattlePlayerOperations
+	if input != null and not input.get_node_or_null(input.controller_path) is CoreOperationController:
+		return "角色场景必须预置 PlayerOperations/OperationController"
+	var ai := get_node_or_null(^"AIController")
+	if ai != null and (not ai is BattleAIController2D or ai.profile == null or not ai.profile.is_valid()):
+		return "AIController必须使用BattleAIController2D和有效的AI配置"
+	return ""
+
+func _bind_scene_components() -> void:
+	assert(get_component_configuration_error().is_empty(), get_component_configuration_error())
+	action_state = get_node(^"ActionState") as BattleActionState2D
+	motion = get_node(^"MotionController") as BattleMotionController2D
+	combo = get_node(^"ComboState") as BattleComboState
+	reactions = get_node(^"HitReactionController") as BattleHitReactionController2D
+	protection = get_node(^"ProtectionSystem") as BattleProtectionSystem
+	damage_rules = (get_node(^"DamageRules") as BattleDamageRulesComponent).rules
+	inventory = get_node_or_null(^"Inventory") as C_Inventory
+	operations = get_node_or_null(^"PlayerOperations") as BattlePlayerOperations
+	ai_controller = get_node_or_null(^"AIController") as BattleAIController2D
+
 func _enter_tree() -> void:
 	if entity_id.is_empty() and not scene_definition_id.is_empty():
 		var owner_session := get_node_or_null(scene_session_path) as BattleSession
@@ -66,6 +99,7 @@ func _enter_tree() -> void:
 
 func initialize_battle(owner_session: BattleSession, id: StringName, data: BattleEntityDefinition) -> void:
 	assert(entity_id.is_empty(), "战斗实体不能重复初始化")
+	_bind_scene_components()
 	session = owner_session
 	entity_id = id
 	definition_id = data.definition_id
@@ -80,6 +114,7 @@ func initialize_battle(owner_session: BattleSession, id: StringName, data: Battl
 		apply_status_definition(status_id, self)
 
 func _ready() -> void:
+	_bind_scene_components()
 	motion.body = self
 	assert(reaction_profile != null and reaction_profile.is_valid(), "目标受击反应配置无效")
 	reactions.bind(self)
@@ -92,12 +127,20 @@ func _ready() -> void:
 	assert(attack_hitbox != null and attack_hitbox.is_configuration_valid(), "2D 实体需要单一攻击判定框")
 	hurtbox = get_node_or_null(hurtbox_path) as BattleHurtbox2D
 	assert(hurtbox != null and hurtbox.is_configuration_valid(), "2D 实体需要独立的受击区域")
-	feedback = get_node_or_null(^"CombatFeedback") as BattleCombatFeedback2D
 	animation.action_completed.connect(_on_animation_completed)
 	animation.play_action(&"idle")
 	action_state.machine.state_changed.connect(_on_action_state_changed)
 	action_state.bind(self)
+	statuses.status_applied.connect(func(_id, _instance): _sync_status_control())
+	statuses.status_removed.connect(func(_id): _sync_status_control())
+	_sync_status_control()
+	if ai_controller != null:
+		ai_controller.bind(self)
+	if inventory != null:
+		attributes.bind_inventory(inventory)
 	CoreSystem.event_bus.event_pushed.connect(_on_core_event)
+	if session.presentation != null:
+		session.presentation.register_actor(self)
 
 func cleanup_battle() -> void:
 	if _cleaned:
@@ -105,6 +148,7 @@ func cleanup_battle() -> void:
 	_cleaned = true
 	_finish_attack(&"despawned")
 	BattleGASBinding.cleanup(abilities, statuses)
+	if animation != null: animation.clear_status_visuals()
 	damage_rules.clear()
 	protection.clear()
 	if action_state.machine.state_changed.is_connected(_on_action_state_changed):
@@ -125,6 +169,8 @@ func advance_simulation(delta: float) -> void:
 	if delta <= 0.0 or animation == null:
 		return
 	protection.advance(delta)
+	if is_instance_valid(ai_controller):
+		ai_controller.advance_simulation(delta)
 	if is_instance_valid(operations):
 		operations.advance_simulation(delta)
 	var movable := action_state.get_permission(&"move", action_profile)
@@ -136,7 +182,7 @@ func advance_simulation(delta: float) -> void:
 		# 帧窗口结束所在 tick 只执行窗口内的技能位移，避免额外多走一整 tick。
 		var active_delta := minf(delta, step.root_motion_frames / step.source_fps - action_state.elapsed)
 		horizontal += step.root_motion_speed * combo.motion_facing * active_delta / delta
-	motion.advance(delta, horizontal, action_profile)
+	motion.advance(delta, horizontal, action_profile, float(action_state.active_rules.get("gravity_scale", 1.0)))
 	action_state.grounded = motion.grounded
 	if action_state.current == BattleActionState2D.State.JUMP_ATTACK and motion.just_landed:
 		_cancel_abilities(&"landed")
@@ -166,10 +212,9 @@ func advance_simulation(delta: float) -> void:
 	action_state.advance(delta, action_profile, not is_zero_approx(move_axis), running, motion.just_landed, attack_active)
 	_advance_combo()
 	_update_animation_command()
+	animation.advance_status_visuals(delta)
 	_impact_display = maxf(0.0, _impact_display - delta)
 	queue_redraw()
-	if feedback != null:
-		feedback.advance_feedback(delta)
 	if not _pending_derived_skill.is_empty():
 		var next := _pending_derived_skill.duplicate(true)
 		_pending_derived_skill.clear()
@@ -183,7 +228,7 @@ func _update_animation_command() -> void:
 		BattleActionState2D.State.TAKEOFF, BattleActionState2D.State.JUMP: action = &"fall" if velocity.y > 0.0 else (&"jump_2" if motion.jump_count >= 2 else &"jump")
 		BattleActionState2D.State.LAND: action = &"land"
 		BattleActionState2D.State.ATTACK, BattleActionState2D.State.RUN_ATTACK, BattleActionState2D.State.JUMP_ATTACK: action = combo.get_step().action if combo.is_active() else StringName(action_state.active_rules.get("animation", &"attack_1"))
-		BattleActionState2D.State.HURT: action = &"hurt"
+		BattleActionState2D.State.HURT, BattleActionState2D.State.STUN: action = &"hurt"
 		BattleActionState2D.State.LAUNCHED: action = &"launched"
 		BattleActionState2D.State.AIR_HURT: action = &"air_hurt"
 		BattleActionState2D.State.HIT_LAND: action = &"hit_land"
@@ -245,11 +290,15 @@ func try_jump() -> bool:
 func try_activate_skill(id: StringName, context: Dictionary = {}) -> bool:
 	if session.is_simulation_blocked() or not is_alive() or not abilities.has_ability(id):
 		return false
+	# 普通无双的表现状态无需进入攻击动作，保留当前连击/移动和技能时间轴。
+	if abilities.get_ability_instance(id).get_feature("BattleStatusActivationFeature") != null:
+		return abilities.can_activate_ability(id, context) and abilities.try_activate_ability(id, context)
 	if combo.definition != null:
 		for index in range(combo.definition.steps.size()):
 			if combo.definition.steps[index].ability_id == id:
 				return _start_combo_step(index, false, context)
 	var target_state := BattleActionState2D.State.ATTACK
+	var timeline := abilities.get_ability_instance(id).get_feature("BattleFrameTimelineFeature") as BattleFrameTimelineFeature
 	if id == action_profile.jump_attack_skill_id:
 		if motion.grounded or action_state.current not in [BattleActionState2D.State.TAKEOFF, BattleActionState2D.State.JUMP]:
 			return false
@@ -258,8 +307,21 @@ func try_activate_skill(id: StringName, context: Dictionary = {}) -> bool:
 		if not motion.grounded or action_state.current != BattleActionState2D.State.RUN:
 			return false
 		target_state = BattleActionState2D.State.RUN_ATTACK
-	elif not action_state.can_attack(is_alive()):
+	else:
+		var free_state := action_state.current in [BattleActionState2D.State.IDLE, BattleActionState2D.State.MOVE, BattleActionState2D.State.RUN, BattleActionState2D.State.LAND, BattleActionState2D.State.TAKEOFF, BattleActionState2D.State.JUMP]
+		var can_interrupt := _is_attack_state() and timeline != null and timeline.interrupt_actions.has(animation.get_current_action())
+		var location_allowed := (timeline == null or timeline.can_use_on_ground) if motion.grounded else (timeline != null and timeline.can_use_in_air)
+		# 只有已通过派生窗口校验的子技能能继承原释放地点。
+		if context.has("derived_from"):
+			location_allowed = true
+		if not location_allowed or (not free_state and not can_interrupt):
+			return false
+	context = context.duplicate(true)
+	context["skill_level"] = BattleSkillLevelValues.get_level(self, id, context)
+	if not abilities.can_activate_ability(id, context):
 		return false
+	if _is_attack_state():
+		_cancel_abilities(&"skill_interrupt")
 	if action_state.get_permission(&"turn", action_profile) and not is_zero_approx(move_axis):
 		animation.set_facing(1 if move_axis > 0.0 else -1)
 	if not abilities.can_activate_ability(id, context) or not abilities.try_activate_ability(id, context):
@@ -275,6 +337,8 @@ func try_activate_skill(id: StringName, context: Dictionary = {}) -> bool:
 		rules.merge(context.get("action_rules", {}), true)
 		rules["animation"] = started_attack.timeline.animation_action
 	action_state.enter(target_state, rules)
+	if is_zero_approx(float(rules.get("gravity_scale", 1.0))):
+		velocity.y = 0.0
 	# Core 通知是同步的；进入状态时被打断不能覆盖受击/死亡动画。
 	if attack_instance != started_attack or not started_attack.active or action_state.current != target_state:
 		return false
@@ -356,7 +420,7 @@ func receive_damage_info(info: DamageInfo, interrupt_kind: StringName = &"normal
 	info.set_meta(&"hit_context", hit_context.duplicate(true))
 	info.set_meta(&"reaction_deferred", true)
 	var policy := reactions.get_policy(self)
-	if not policy.damage:
+	if not policy.damage and not bool(hit_context.get("bypass_damage_policy", false)):
 		# 真正的无敌在 Vital 前截断；不消耗护盾、不吸血，也不运行伤害 Buff。
 		info.applied = true
 		info.is_immune = true
@@ -367,10 +431,10 @@ func receive_damage_info(info: DamageInfo, interrupt_kind: StringName = &"normal
 		info.hp_before = attributes.get_vital_value(&"health")
 		info.hp_after = info.hp_before
 	else:
-		info.set_meta(&"battle_received_damage_multiplier", reaction_profile.armor_damage_multiplier if reactions.is_armored(self) else 1.0)
+		info.set_meta(&"battle_received_damage_multiplier", reaction_profile.armor_damage_multiplier if reactions.is_armored(self) and not bool(hit_context.get("bypass_armor_multiplier", false)) else 1.0)
 		(attributes.get_vital(&"health") as HealthVital).apply_damage(info, self)
 	var effects := {"reaction_applied": false, "displacement_applied": false, "protection_increment": 0}
-	if not info.is_dodged:
+	if not info.is_dodged and bool(hit_context.get("apply_hit_reaction", true)):
 		if is_alive():
 			if policy.status:
 				for status_id in hit_context.get("status_ids", []):
@@ -389,6 +453,9 @@ func receive_damage_info(info: DamageInfo, interrupt_kind: StringName = &"normal
 		if policy.hit_stop:
 			session.request_hit_stop(maxf(0.0, float(hit_context.get("hit_stop_seconds", 0.0))))
 	info.set_meta(&"hit_effects", effects)
+	if info.applied:
+		session.publish_damage_result(info, self, hit_context)
+	cleanup_death_statuses()
 	return info.actual_hp_loss
 
 func _cancel_abilities(reason: StringName = &"cancelled") -> void:
@@ -413,6 +480,8 @@ func _on_vital_depleted(id: StringName) -> void:
 	if animation != null:
 		animation.play_action(&"death", true)
 	publish_battle_event(&"battle.entity_died")
+	# Fatal hit仍完成受击/击杀触发；直接修改Vital的死亡由延迟入口兜底。
+	call_deferred(&"cleanup_death_statuses")
 
 func _on_damage_applied(info: DamageInfo, _damage: float) -> void:
 	# 统一命中入口稍后独立裁决；兼容直接通过 GAS Vital 扣血的外部效果。
@@ -445,7 +514,12 @@ func _get_attack_hitbox(context: Dictionary) -> BattleHitbox2D:
 			attack_hitbox.clear_geometry()
 		return null
 	attack_hitbox.source_unit_scale = animation.profile.display_scale
-	return attack_hitbox if attack_hitbox.configure_skill(instance.get_definition(), int(context.get("hit_index", 1))) else null
+	var frame := float(context.get("sample_time", context.get("skill_time", 0.0))) * float(context.get("source_fps", action_profile.source_fps))
+	var index := int(context.get("hit_index", 1))
+	var overrides := {}
+	if attack_instance != null and attack_instance.active and attack_instance.timeline != null and attack_instance.timeline.aim_segment_index == index:
+		overrides["hit_rotation"] = deg_to_rad(attack_instance.aim_degrees)
+	return attack_hitbox if attack_hitbox.configure_skill(instance.get_definition(), index, frame, overrides) else null
 
 func get_attack_rect_global(context: Dictionary = {}) -> Rect2:
 	return global_transform * get_attack_rect_local(context)
@@ -567,6 +641,7 @@ func _sample_attack_window(context: Dictionary) -> void:
 			continue
 		var hit_context := context.duplicate(true)
 		hit_context["attack_facing"] = current_attack.facing
+		hit_context["defer_attack_feedback"] = true
 		var calculation_context := damage_context.duplicate(true)
 		calculation_context.merge(hit_context, true)
 		var info := DamageCalculator.calculate_damage(target, self, calculation_context)
@@ -583,6 +658,7 @@ func advance_timeline_motion(cast: BattleAttackInstance, until: float) -> void:
 	if attack_instance != cast or not cast.active:
 		return
 	var displacement := cast.get_motion_between(cast.elapsed, until)
+	var previous_elapsed := cast.elapsed
 	var animation_delta := maxf(0.0, until - cast.elapsed)
 	var landing_serial := motion.landing_serial
 	motion.sweep_skill_displacement(displacement, action_profile)
@@ -593,24 +669,42 @@ func advance_timeline_motion(cast: BattleAttackInstance, until: float) -> void:
 		return
 	cast.elapsed = until
 	animation.advance_animation(animation_delta)
+	if cast.timeline != null and cast.timeline.aim_segment_index > 0:
+		var aim_delta := 0.0
+		var aiming := false
+		for segment in cast.timeline.attack_segments:
+			if segment.hit_index == cast.timeline.aim_segment_index:
+				var start := segment.start_frame / cast.timeline.source_fps
+				var end := segment.end_frame / cast.timeline.source_fps
+				aim_delta = maxf(0.0, minf(until,end)-maxf(previous_elapsed,start))
+				aiming = until + 0.000000001 >= start and until + 0.000000001 < end
+				break
+		cast.aim_degrees = clampf(cast.aim_degrees + skill_aim_axis * cast.timeline.aim_speed_degrees * aim_delta, cast.timeline.aim_min_degrees, cast.timeline.aim_max_degrees)
+		if aiming and animation is SpineAnimationAdapter:
+			animation.apply_skill_aim(cast.timeline, cast.aim_degrees)
 	if motion.landing_serial != landing_serial:
 		publish_battle_event(&"battle.motion.landed", {"landing_serial": motion.landing_serial})
 
 func cancel_skill(reason: StringName = &"cancelled") -> void:
+	if animation is SpineAnimationAdapter:
+		animation.clear_effect_tail()
 	_cancel_abilities(reason)
 	if _is_attack_state():
 		action_state.advance(0.0, action_profile, not is_zero_approx(move_axis), running)
 		_update_animation_command()
 
-func finish_timeline_cast(cast: BattleAttackInstance, reason: StringName = &"completed") -> void:
+func finish_timeline_cast(cast: BattleAttackInstance, reason: StringName = &"completed", visual_spill: float = 0.0) -> void:
 	if attack_instance == cast and cast.active:
+		if reason == &"completed" and cast.timeline.effect_tail_frames > 0 and animation is SpineAnimationAdapter:
+			animation.begin_effect_tail(cast.timeline.animation_action, cast.elapsed + visual_spill, (cast.timeline.duration_frames + cast.timeline.effect_tail_frames) / cast.timeline.source_fps)
 		_finish_attack(reason)
 
 func request_skill_operation(operation: StringName, id: StringName) -> bool:
 	if session.is_simulation_blocked() or not is_alive():
 		return false
 	if _is_attack_state() and attack_instance != null:
-		return attack_instance.buffer_operation(operation)
+		if attack_instance.buffer_operation(operation):
+			return true
 	return try_activate_skill(id, {"operation": operation})
 
 func consume_skill_branch(cast: BattleAttackInstance) -> void:
@@ -649,6 +743,8 @@ func apply_status_definition(id: StringName, instigator: Node = null) -> Gamepla
 func accepts_status_event(context: Dictionary) -> bool:
 	if context.has("battle_id") and context.battle_id != session.battle_id:
 		return false
+	if context.has("battle_id") and (context.get("source_entity_id", &"") == entity_id or context.get("target_entity_id", &"") == entity_id):
+		return true
 	if context.has("entity"):
 		return context.entity == self
 	if context.get("target_entity_id", &"") != &"":
@@ -683,4 +779,32 @@ func _draw() -> void:
 			continue
 		var point := to_local(animation.get_socket_global_transform(socket).origin)
 		draw_circle(point, 3, Color("ffd080"))
+#endregion
+
+#region Buff控制由标签与Core动作状态联合裁决
+func can_use_ability(_id: StringName, _context: Dictionary = {}) -> bool:
+	return not _cleaned and is_alive() and not TagManager.has_tag(self, &"state.stunned")
+
+func can_receive_status(data: GameplayStatusData) -> bool:
+	if _cleaned or not is_alive():
+		return false
+	return not (data.tags.has(&"status.debuff") and (TagManager.has_tag(self, &"state.invulnerable") or (reactions._owner != null and not reactions.get_policy(self).status)))
+
+func cleanup_death_statuses() -> void:
+	if is_instance_valid(statuses) and not is_alive():
+		statuses.clear_statuses(&"death")
+
+func _sync_status_control() -> void:
+	if action_state.registration_id.is_empty() or not is_alive():
+		return
+	if TagManager.has_tag(self, &"state.stunned"):
+		if action_state.current != BattleActionState2D.State.STUN:
+			cancel_skill(&"stunned")
+			motion.clear_impulse()
+			velocity.x = 0.0
+			action_state.enter(BattleActionState2D.State.STUN)
+			refresh_action_animation(true)
+	elif action_state.current == BattleActionState2D.State.STUN:
+		action_state.enter(BattleActionState2D.State.IDLE if motion.grounded else BattleActionState2D.State.JUMP)
+		refresh_action_animation(true)
 #endregion

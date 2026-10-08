@@ -2,6 +2,10 @@
 extends Resource
 class_name StatusStackingPolicy
 #region 公共接口
+## 原版replaceRule=3等策略允许同组保留独立实例与计时。
+func allows_parallel_instances() -> bool:
+	return false
+
 
 ## 堆叠策略基类（抽象类）
 ## 定义当相同状态重复施加时的处理逻辑

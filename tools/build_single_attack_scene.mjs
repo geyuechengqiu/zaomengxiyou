@@ -38,13 +38,9 @@ const scene = ['[gd_scene format=3]',ext('Script','examples/single_attack_demo.g
   ext('Script','addons/battle_foundation/runtime/battle_session.gd','session'),
   ext('PackedScene','data/battle2d/single_attack/sunwukong_2d.tscn','wukong'),
   ext('PackedScene','data/battle2d/dummy/wooden_dummy.tscn','dummy'),
-  ext('Script','addons/battle_foundation/runtime/battle_attribute_component.gd','attributes'),
-  ext('Script','addons/gameplay_abiltiy_system/scripts/components/gameplay_ability_component.gd','abilities'),
-  ext('Script','addons/gameplay_abiltiy_system/scripts/components/gameplay_status_component.gd','statuses'),
-  ext('Script','addons/battle_foundation/input/battle_player_operations.gd','operations'),
-  ext('Script','addons/godot_core_system-0.0.4/source/operation_system/operation_controller.gd','controller'),
-  ext('Resource','data/controls/player_operations.tres','controls'),
   ext('PackedScene','addons/battle_foundation/input/battle_operation_menu.tscn','menu'),
+  ext('PackedScene','addons/battle_foundation/presentation/battle_presentation_2d.tscn','presentation'),
+  ext('PackedScene','addons/battle_foundation/presentation/combat_feedback_2d.tscn','feedback_view'),
   '[sub_resource type="RectangleShape2D" id="ground"]','size = Vector2(2800, 400)',
   '[sub_resource type="RectangleShape2D" id="wall"]','size = Vector2(30, 400)',
   '[sub_resource type="RectangleShape2D" id="platform"]','size = Vector2(260, 20)',
@@ -55,6 +51,10 @@ const scene = ['[gd_scene format=3]',ext('Script','examples/single_attack_demo.g
   ...node('Sky','ColorRect','Background',['anchors_preset = 15','anchor_right = 1.0','anchor_bottom = 1.0','mouse_filter = 2','color = Color(0.045, 0.09, 0.14, 1)']),
   ...node('Camera2D','Camera2D','.', ['position = Vector2(400, 450)','zoom = Vector2(0.5, 0.5)']),
   ...node('BattleSession','Node3D','.', ['script = ExtResource("session")','scene_manifest_path = "res://data/battle2d/single_attack/manifest.json"','scene_seed = 6001']),
+  ...instance('BattlePresentation','BattleSession','presentation'),
+  ...instance('SunWukongFeedback','BattleSession/BattlePresentation/EntityViews','feedback_view',['actor_path = NodePath("../../../Actors/SunWukong")']),
+  ...instance('LeftDummyFeedback','BattleSession/BattlePresentation/EntityViews','feedback_view',['actor_path = NodePath("../../../Actors/LeftDummy")']),
+  ...instance('RightDummyFeedback','BattleSession/BattlePresentation/EntityViews','feedback_view',['actor_path = NodePath("../../../Actors/RightDummy")']),
   ...node('Terrain','Node2D','BattleSession')];
 for(let i=0;i<6;i++) {
   const x=-700+i*420;
@@ -75,12 +75,8 @@ scene.push(...node('Platform','StaticBody2D','BattleSession/Terrain',['position 
   ...node('Actors','Node2D','BattleSession'));
 for(const [name,type,id,x,category] of [['SunWukong','wukong','孙悟空',400,'characters'],['LeftDummy','dummy','木桩',110,'monsters'],['RightDummy','dummy','木桩',690,'monsters']]) {
   const parent=`BattleSession/Actors/${name}`;
-  scene.push(...instance(name,'BattleSession/Actors',type,[`position = Vector2(${x},650)`,`scene_definition_id = &"${id}"`,`scene_category = "${category}"`]),
-    ...node('GameplayVitalAttributeComponent','Node',parent,['script = ExtResource("attributes")','externally_driven = true']),
-    ...node('GameplayAbilityComponent','Node',parent,['script = ExtResource("abilities")','externally_driven = true']),
-    ...node('GameplayStatusComponent','Node',parent,['script = ExtResource("statuses")','externally_driven = true','filter_events_by_owner = true']));
-  if(type==='wukong') scene.push(...node('PlayerOperations','Node',parent,['script = ExtResource("operations")','operation_profile = ExtResource("controls")','controller_path = NodePath("OperationController")']),
-    ...node('OperationController','Node',`${parent}/PlayerOperations`,['script = ExtResource("controller")','profile = ExtResource("controls")','externally_driven = true']));
+  scene.push(...instance(name,'BattleSession/Actors',type,[`position = Vector2(${x},650)`,`scene_definition_id = &"${id}"`,`scene_category = "${category}"`]));
+  if(type==='wukong') scene.push(`[node name="PlayerOperations" parent="${parent}"]`, 'enabled = true');
 }
 scene.push(...node('HUD','CanvasLayer','.', ['layer = 10']),
   ...node('Panel','PanelContainer','HUD',['offset_left = 16.0','offset_top = 12.0','offset_right = 924.0','offset_bottom = 158.0','theme_override_styles/panel = SubResource("panel")']),
@@ -96,6 +92,8 @@ scene.push(...node('Help','Label','HUD',['offset_left = 24.0','offset_top = 506.
   'text = "A / D 移动 · K 二段跳 · J 单段普攻 · Esc 菜单 / 改键\n黄色：技能攻击范围；蓝色：编辑器受击框；原版受击特效为 30 FPS。"']),
   ...node('MenuLayer','CanvasLayer','.', ['layer = 30']),
   ...instance('OperationMenu','MenuLayer','menu'));
+scene.push('[editable path="BattleSession/BattlePresentation"]');
+for (const name of ['SunWukong','LeftDummy','RightDummy']) scene.push(`[editable path="BattleSession/Actors/${name}"]`);
 write('examples/single_attack_demo.tscn',scene);
 console.log('Built scene-authored combat arena and menu for the original 940×590 viewport.');
 // #endregion

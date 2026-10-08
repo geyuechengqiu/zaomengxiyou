@@ -74,7 +74,7 @@ func _on_event(id: String, payload: Array) -> void:
 func _process(_delta: float) -> void:
 	if not is_instance_valid(player) or not is_instance_valid(dummies[0]) or not is_instance_valid(dummies[1]):
 		return
-	info.text = "状态 %s · 攻击 %.0f · 朝向 %s · 命中 %d\n左木桩 %.0f / 70 · 右木桩 %.0f / 70 · 时间 %.0fms%s" % [player.action_state.get_name(), player.attributes.get_value(&"atk"), "右" if player.animation.get_facing() > 0 else "左", total_hits, dummies[0].attributes.get_vital_value(&"health"), dummies[1].attributes.get_vital_value(&"health"), session.clock.elapsed * 1000.0, "（暂停）" if session.clock.paused else ""]
+	info.text = "状态 %s · 攻击 %.0f · 朝向 %s · 命中 %d\n左木桩 %.0f / 70 · 右木桩 %.0f / 70 · 时间 %.0fms%s" % [player.action_state.get_state_name(), player.attributes.get_value(&"atk"), "右" if player.animation.get_facing() > 0 else "左", total_hits, dummies[0].attributes.get_vital_value(&"health"), dummies[1].attributes.get_vital_value(&"health"), session.clock.elapsed * 1000.0, "（暂停）" if session.clock.paused else ""]
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed and not event.echo and event.physical_keycode == KEY_ESCAPE and menu != null:

@@ -100,7 +100,7 @@ effects += classCard(50,600,'GE_ApplyDamage','«Resource» 伤害操作',['damag
 effects += classCard(650,600,'GE_ApplyStatus','«Resource» 状态操作',['status_data: GameplayStatusData','stacks: int'],['_apply(): status_comp.apply_status()'],'effect','effects/ge_apply_status.gd');
 effects += classCard(1250,600,'GE_AttributeModifier','«Resource» 属性操作',['modifiers: Array[AttributeModifier]','source_id: StringName'],['_apply() / _remove()'],'effect','effects/ge_attribute_modifier.gd');
 effects += classCard(50,960,'HealthVital','«Resource» 运行时生命值',['current_value / is_alive'],['apply_damage(info, owner)','damage_received / damage_applied'],'runtime','attributes/vitals/health_vital.gd',210);
-effects += classCard(650,960,'GameplayStatusComponent','«Node» 活跃状态容器',['_active_statuses: Dictionary'],['apply_status() / remove_status()','_process(delta) / handle_event()'],'runtime','components/gameplay_status_component.gd',210);
+effects += classCard(650,960,'GameplayStatusComponent','«Node» 活跃状态容器',['_active_statuses: Array[Instance]'],['apply_status() / remove_status()','_process(delta) / handle_event()'],'runtime','components/gameplay_status_component.gd',210);
 effects += classCard(1250,960,'GameplayAttributeComponent','«Node» 属性与修改器',['_attributes: Dictionary'],['add_modifier(mod)','remove_modifiers_by_source(id)'],'runtime','components/gameplay_attribute_component.gd',210);
 effects += classCard(50,1300,'DamageCalculator','«autoload Node» 策略调度',['_strategy: DamageLogicStrategy'],['calculate_final_damage(...)'],'service','singletons/damage_calculator.gd',210);
 effects += classCard(650,1300,'GameplayStatusInstance','«RefCounted» 状态生命周期',['status_data / stacks / context'],['apply() / update() / remove()','apply_effects(): 克隆后调用效果'],'runtime','status/gameplay_status_instance.gd',210);
@@ -132,9 +132,9 @@ flow += step(80,390,730,160,'2  GameplayEffect._check_filters()',['逐个 filter
 flow += step(80,610,730,160,'3  子类 _apply()',['伤害：策略计算 → DamageInfo → HealthVital.apply_damage','治疗 / 属性 / 状态 / 魔法场 / 位移等操作'],'effect');
 flow += step(80,830,730,130,'4  执行可选 Cue',['GameplayCueManager.execute_cue(cue, target, context)','读取逻辑写入的 final_damage 等数据'],'config');
 flow += step(80,1020,730,130,'5  子效果逐个递归执行',['子效果也 duplicate(true)，再进入自己的 apply()','子效果与父效果共享当前 context'],'effect');
-flow += step(980,200,740,160,'A  GE_ApplyStatus / 直接 apply_status()',['优先级检查 → 堆叠策略 → 创建状态实例','同 ID 堆叠被处理时不创建新实例，返回 null'],'effect');
-flow += step(980,430,740,160,'B  GameplayStatusInstance.apply()',['缓存 context，注入 stacks / source_id，执行 apply_effects','初始化 Feature、持续时间、状态标签和独立 Cue']);
-flow += step(980,660,740,190,'C  GameplayStatusComponent._process(delta)',['先更新 duration_policy；到期即安排移除','未到期则更新 FeaturePeriodicEffects 等 Feature','周期或事件效果仍进入左侧的完整 apply() 流程']);
+flow += step(980,200,740,160,'A  GE_ApplyStatus / 直接 apply_status()',['优先级检查 → 堆叠策略 → 创建状态实例','按分组裁决；叠层/刷新返回保留的实例'],'effect');
+flow += step(980,430,740,160,'B  GameplayStatusInstance.apply()',['克隆定义；独立缓存和 effect_state；实例 source_id','先初始化时长与标签，再进入效果/Feature/Cue']);
+flow += step(980,660,740,190,'C  GameplayStatusComponent._process(delta)',['先补算截止到期的全部周期，再执行到期移除','事件采用快照和移除守卫，不污染初始上下文','周期或事件效果仍进入左侧的完整 apply() 流程']);
 flow += step(980,950,740,200,'D  remove_status() → instance.remove()',['应用 remove_effects，再 remove 原 apply_effects','移除 Feature 存储、状态标签，停止状态 Cue','发出 status_completed / status_removed 信号']);
 for (const [a,b] of [[330,390],[550,610],[770,830],[960,1020]]) flow += edge(`M445 ${a}V${b}`);
 for (const [a,b] of [[360,430],[590,660],[850,950]]) flow += edge(`M1350 ${a}V${b}`);
@@ -145,7 +145,7 @@ flow += `<rect x="80" y="1220" width="1640" height="170" rx="12" fill="#f0f4fa"/
 ${text(105,1260,'顺序与生命周期要点','step')}
 ${text(105,1298,'apply() 不返回执行结果；子类提前 return 后，基类仍可能继续播放 Cue 和执行子效果。','note')}
 ${text(105,1333,'remove() 默认不撤销伤害或治疗，也不自动停止效果 Cue；状态 Cue 由状态实例单独清理。','note')}
-${text(105,1368,'duration = 0 提前完成；空 status_id 不入活跃表；叠加时 add_stack() 会重新应用 apply_effects。','note')}`;
+${text(105,1368,'duration=0 仅瞬时；叠层只重放持续效果；实例身份清理不误删新状态。','note')}`;
 diagram('effect-runtime.svg',1800,1440,'效果运行流程','调用顺序与实际实现一致；细节及当前限制见 README · 虚线表示条件退出或跨系统调用',flow);
 
 generateSystemDiagrams({ diagram, text, card, edge, legend, step });

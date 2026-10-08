@@ -1,4 +1,4 @@
-extends RefCounted
+extends Node
 class_name BattleComboState
 #region 实例独立连击状态
 var definition: BattleComboDefinition

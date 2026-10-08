@@ -1,4 +1,4 @@
-extends RefCounted
+extends Node
 class_name BattleMotionController2D
 #region 独立速度、接触与跳跃预算
 var body: CharacterBody2D
@@ -12,6 +12,7 @@ var landing_serial: int = 0
 var jump_serial: int = 0
 var impulse_speed: float = 0.0
 var impulse_remaining: float = 0.0
+var reaction_gravity: float = -1.0
 #endregion
 #region 跳跃入口
 func can_jump(maximum_jumps: int) -> bool:
@@ -62,19 +63,22 @@ func sweep_skill_displacement(displacement: Vector2, profile: BattleActionProfil
 	elif not grounded and was_grounded:
 		jumps_used = maxi(jumps_used, 1)
 
-func apply_impulse(horizontal: float, duration: float, launch: float) -> void:
+func apply_impulse(horizontal: float, duration: float, launch: float, gravity: float = -1.0, reset_vertical: bool = false) -> void:
 	impulse_speed = horizontal
 	impulse_remaining = duration
-	if launch > 0.0:
+	if launch > 0.0 or reset_vertical:
 		body.velocity.y = -launch
+		reaction_gravity = gravity
+	if launch > 0.0:
 		grounded = false
 		jumps_used = maxi(jumps_used, 1)
 
 func clear_impulse() -> void:
 	impulse_speed = 0.0
 	impulse_remaining = 0.0
+	reaction_gravity = -1.0
 
-func advance(delta: float, horizontal_speed: float, profile: BattleActionProfile2D) -> void:
+func advance(delta: float, horizontal_speed: float, profile: BattleActionProfile2D, gravity_scale: float = 1.0) -> void:
 	just_landed = false
 	on_wall = false
 	on_ceiling = false
@@ -86,7 +90,8 @@ func advance(delta: float, horizontal_speed: float, profile: BattleActionProfile
 		var impulse_delta := minf(step_delta, impulse_remaining)
 		body.velocity.x = horizontal_speed + impulse_speed * impulse_delta / step_delta
 		impulse_remaining = maxf(0.0, impulse_remaining - step_delta)
-		body.velocity.y = minf(body.velocity.y + profile.gravity * step_delta, profile.maximum_fall_speed)
+		var gravity := reaction_gravity if reaction_gravity >= 0.0 else profile.gravity
+		body.velocity.y = minf(body.velocity.y + gravity * gravity_scale * step_delta, profile.maximum_fall_speed)
 		var remaining := body.velocity * step_delta
 		for iteration in range(6):
 			var collision := body.move_and_collide(remaining)
@@ -114,7 +119,9 @@ func advance(delta: float, horizontal_speed: float, profile: BattleActionProfile
 			just_landed = true
 			landing_serial += 1
 			jumps_used = 0
-		elif not grounded and was_grounded:
+		if grounded:
+			reaction_gravity = -1.0
+		elif was_grounded:
 			# 走下边缘消耗地面起跳额度，只保留一次空中跳跃。
 			jumps_used = maxi(jumps_used, 1)
 #endregion

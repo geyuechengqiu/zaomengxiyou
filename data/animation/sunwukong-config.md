@@ -1,5 +1,9 @@
 # 孙悟空攻击特效与运动配置
 
+转职前四技能与火魔斩的按键、MP/CD、技能等级、攻击段、射线、特效轨道和原版来源见 [基础技能配置](../skills/sunwukong/README.md)。本页继续说明五连击特效与跳跃/移动参数。
+
+角色运行组件已预置到物理角色场景，动画适配器与判定框仍在 visual 子树中编辑；详见 [角色组件说明](../battle2d/character-components.md)。
+
 跑攻、跳攻与第四段一次转身已接入，操作、配置、来源与实际渲染见 [上下文攻击说明](../battle2d/wukong-context-attacks.md)。
 
 ## 五段普攻特效
@@ -45,8 +49,8 @@
 
 | 想调整的行为 | 资源 | 字段与当前值 |
 | --- | --- | --- |
-| 行走速度 | [sunwukong_attributes.tres](../battle2d/sunwukong_attributes.tres) | attributes 中 `walkSpeed` = 210 |
-| 奔跑速度 | 同上 | `runSpeed` = 300；同方向双击进入奔跑 |
+| 行走速度 | [角色场景](../battle2d/sunwukong_2d.tscn) 的 GameplayVitalAttributeComponent | Scene Attributes → Base Values → `walkSpeed` = 420 世界像素/秒，对应原版210 |
+| 奔跑速度 | 同上 | Base Values → `runSpeed` = 600 世界像素/秒，对应原版300；同方向双击进入奔跑 |
 | 第一跳速度 | [sunwukong_actions.tres](../battle2d/sunwukong_actions.tres) | `jump_velocity` = -720 |
 | 第二跳速度 | 同上 | `second_jump_velocity` = -720 |
 | 跳跃次数 | 同上 | `maximum_jumps` = 2；改成 1 为单跳 |
@@ -63,11 +67,17 @@
 
 速度单位为世界像素/秒，重力为世界像素/秒²。Godot 的 Y 轴向下，所以跳跃速度为负；绝对值越大，跳得越高。其他参数不变时，提高重力会更快下落并降低跳高；无碰撞、无二跳时近似跳高为 `jump_velocity² / (2 × gravity)`。例如 -620、1500 对应约 128 世界像素；-820 对应约 224 世界像素。
 
-**属性表中的 `jumpSpeed1` / `jumpSpeed2` 保存原版 -178 数据，当前平台运动控制器实际读取动作配置的 `jump_velocity` / `second_jump_velocity`。调跳跃请改动作配置。**行走和奔跑实际读取 GAS 最终属性，Buff、装备或临时加成也会影响速度。角色显示比例与 Camera2D Zoom 只影响看到的尺寸，不代替运动参数。
+**属性表中的 `jumpSpeed1` / `jumpSpeed2` 保存原版 -178 数据，当前平台运动控制器实际读取动作配置的 `jump_velocity` / `second_jump_velocity`。调跳跃请改动作配置。**组件编辑步骤见 [角色属性配置](../battle2d/character-components.md#直接编辑悟空属性)。组件填写的基础值优先于原属性集资源；删除对应键可恢复定义默认值。行走和奔跑实际读取 GAS 最终属性，Buff、装备或临时加成也会影响速度。角色显示比例与 Camera2D Zoom 只影响看到的尺寸，不代替运动参数。
 
 平台展示与 F5 原版伤害场景使用 `sunwukong_actions.tres`。单段攻击样例覆盖为 [single_attack/actions.tres](../battle2d/single_attack/actions.tres)，其两次跳跃速度目前为 **-820**；三段时间轴样例使用 [skill_timeline/actions.tres](../battle2d/skill_timeline/actions.tres)。改配置前选中具体场景的 SunWukong，确认 **Action Profile** 指向哪个资源。同一资源的修改会影响所有引用它的场景；为某场景单独调参时复制资源并替换该引用。
 
-运行时增益和 GM 修改应走实例入口，例如 `player.attributes.set_base_value(&"walkSpeed", 260.0)`；不要改共享属性定义资源。修改保存资源后重新运行场景，使实体重新载入配置。
+当前地图、人物与怪物统一使用原版2倍世界坐标；第一关镜头缩放0.5，因此奔跑600世界像素/秒显示为300像素/秒。移动控制器直接读取最终属性，不再额外乘比例。填写场景属性时应使用世界速度，不能再次填写原版300，否则会慢一半。场景 Base Values 优先于 `sunwukong_attributes.tres`，这两处默认值已同步。
+
+运行时增益和 GM 修改应走实例入口，例如 `player.attributes.set_base_value(&"walkSpeed", 520.0)`；不要改共享属性定义资源。修改保存资源后重新运行场景，使实体重新载入配置。
+
+## 普通无双表现配置
+
+在角色 `AnimationAdapter/WushuangEffect` 修改 `Glow Color`（默认 `#FF3000`）、`Spawn Interval`（0.2秒）和 `Ghost Lifetime`（1秒）。默认持续时间在 [normal_wushuang_visual.tres](../buffs/normal_wushuang_visual.tres) 的 Duration；空格映射仍通过 Esc 操作菜单调整。若延长残影寿命或缩短采样间隔，需要在 [无双场景](../effects/wushuang/sunwukong_wushuang.tscn) 手动增加预置快照槽，使槽数至少为 `ceil(寿命/间隔)+1`。具体来源、层序和新角色接入见 [无双说明](../effects/wushuang/README.md)。
 
 ## 验收
 

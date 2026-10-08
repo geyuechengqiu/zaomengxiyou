@@ -124,7 +124,7 @@ manifest.definitions.skills.sunwukong_timeline_attack = 'res://data/battle2d/ski
 manifest.definitions.monsters['木桩'] = 'res://data/battle2d/skill_timeline/dummy.tres';
 manifest.definitions.statuses.attribute_test_buff = 'res://data/battle2d/statuses/attribute_test_buff.tres';
 write('manifest.json', JSON.stringify(manifest, null, 2));
-// 生成独立场景，保留源场景中已预置的 GAS 和输入节点。
+// 生成独立场景；GAS、控制器与运行组件继承自角色场景。
 let scene = fs.readFileSync(path.join(root, 'examples/single_attack_demo.tscn'), 'utf8')
   .replace(/ uid="uid:\/\/[^\"]+"/g, '')
   .replace('res://examples/single_attack_demo.gd', 'res://examples/skill_timeline_demo.gd')
@@ -135,7 +135,7 @@ let scene = fs.readFileSync(path.join(root, 'examples/single_attack_demo.tscn'),
   .replace('孙悟空 · 单段普攻测试', '阶段7 · 技能时间轴、派生与三段攻击')
   .replace('攻击 [J]', '三段攻击 J')
   .replace(/text = "A \/ D 移动[^\"]*"/, 'text = "A / D 移动 · K 跳跃 · J 三段攻击 · 再按 J 后摇派生 · Esc 菜单\n三段：0.5× / 1×+3 / 1.5×+5 · 不同击退，末段浮空 · 消耗10魔法"')
-  .replace('controller_path = NodePath("OperationController")', 'controller_path = NodePath("OperationController")\nability_slots = {&"skill_1": &"sunwukong_timeline_attack"}');
+  .replace('[node name="PlayerOperations" parent="BattleSession/Actors/SunWukong"]', '[node name="PlayerOperations" parent="BattleSession/Actors/SunWukong"]\nability_slots = {&"skill_1": &"sunwukong_timeline_attack"}');
 scene += '\n[node name="Cancel" type="Button" parent="HUD/Panel/Column/Buttons"]\nlayout_mode = 2\nfocus_mode = 0\ntext = "取消技能"\n';
 fs.writeFileSync(path.join(root, 'examples/skill_timeline_demo.tscn'), scene);
 console.log('Generated authored stage 7 resources and scene.');

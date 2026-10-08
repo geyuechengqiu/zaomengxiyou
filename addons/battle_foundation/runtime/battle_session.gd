@@ -12,11 +12,15 @@ var _entities: Dictionary = {}
 var _entity_serial: int = 0
 var _equipment_serial: int = 0
 var _event_sequence: int = 0
+var _damage_serial: int = 0
 var _configured: bool = false
 var _event_bus: Node
 var _level_root: Node
 var _advancing: bool = false
 var _pending_hit_stop: float = 0.0
+## 公共战斗表现必须由场景预置；不挂载于任何角色。
+var presentation: BattlePresentation2D:
+	get: return get_node_or_null(^"BattlePresentation") as BattlePresentation2D
 ## 可在 .tscn 中预置会话；留空保留原工厂配置方式。
 @export_file("*.json") var scene_manifest_path: String = ""
 @export var scene_seed: int = 0
@@ -65,12 +69,19 @@ func spawn_entity(category: String, id: StringName, at: Vector3 = Vector3.ZERO, 
 	if data == null:
 		last_error = catalog.last_error
 		return null
-	var node: Node = data.scene.instantiate() if data.scene != null else BattleEntity.new()
+	if data.scene == null:
+		last_error = "实体定义必须引用预置组件的角色场景：" + str(id)
+		return null
+	var node: Node = data.scene.instantiate()
 	if not node is BattleEntity:
 		node.free()
 		last_error = "实体场景根节点必须继承 BattleEntity"
 		return null
 	var entity := node as BattleEntity
+	last_error = entity.get_component_configuration_error(data)
+	if not last_error.is_empty():
+		entity.free()
+		return null
 	_entity_serial += 1
 	var runtime_id := StringName("%s/entity/%d" % [battle_id, _entity_serial])
 	entity.position = at
@@ -92,12 +103,19 @@ func spawn_entity_2d(category: String, id: StringName, at: Vector2 = Vector2.ZER
 	if data == null:
 		last_error = catalog.last_error
 		return null
-	var node: Node = data.scene.instantiate() if data.scene != null else BattleEntity2D.new()
+	if data.scene == null:
+		last_error = "2D 实体定义必须引用预置组件的角色场景：" + str(id)
+		return null
+	var node: Node = data.scene.instantiate()
 	if not node is BattleEntity2D:
 		node.free()
 		last_error = "2D 实体场景根节点必须继承 BattleEntity2D"
 		return null
 	var entity := node as BattleEntity2D
+	last_error = entity.get_component_configuration_error(data)
+	if not last_error.is_empty():
+		entity.free()
+		return null
 	_entity_serial += 1
 	entity.position = at
 	var runtime_id := StringName("%s/entity/%d" % [battle_id, _entity_serial])
@@ -122,6 +140,9 @@ func register_scene_entity_2d(entity: BattleEntity2D, category: String, id: Stri
 	if data == null:
 		last_error = catalog.last_error
 		return false
+	last_error = entity.get_component_configuration_error(data)
+	if not last_error.is_empty():
+		return false
 	_entity_serial += 1
 	var runtime_id := StringName("%s/entity/%d" % [battle_id, _entity_serial])
 	entity.initialize_battle(self, runtime_id, data)
@@ -139,6 +160,8 @@ func despawn_entity(id: StringName) -> void:
 		return
 	entity.cleanup_battle()
 	publish_event(&"battle.entity_despawned", null, entity)
+	if presentation != null:
+		presentation.remove_actor(id)
 	_entities.erase(id)
 	entity.queue_free()
 
@@ -177,6 +200,20 @@ func start_level(id: StringName) -> bool:
 	publish_event(&"battle.level_started", null, null, {"level_id": id})
 	return true
 
+## 编辑器预置的2D关卡沿用目录与生命周期，不在启动时创建角色/地形节点。
+func register_scene_level(id: StringName, level_root: Node) -> bool:
+	if not _configured or not current_level_id.is_empty() or level_root == null or level_root.get_parent() != self:
+		last_error = "预置关卡必须直接属于已配置且尚未开始关卡的BattleSession"
+		return false
+	var data := catalog.instantiate_definition("levels", id) as BattleLevelDefinition
+	if data == null:
+		last_error = catalog.last_error
+		return false
+	_level_root = level_root
+	current_level_id = id
+	publish_event(&"battle.level_started", null, null, {"level_id": id})
+	return true
+
 func clear_battle() -> void:
 	for id in _entities.keys():
 		despawn_entity(id)
@@ -184,6 +221,8 @@ func clear_battle() -> void:
 		_level_root.queue_free()
 	_level_root = null
 	current_level_id = &""
+	if presentation != null:
+		presentation.clear_presentations()
 #endregion
 #region 时间入口
 ## 测试可关闭 set_physics_process(false) 后显式推进，不允许递归重入。
@@ -200,6 +239,8 @@ func advance_physics(unscaled_delta: float) -> void:
 		for entity in _entities.values():
 			if is_instance_valid(entity) and not entity.is_queued_for_deletion():
 				entity.advance_simulation(delta)
+	if presentation != null:
+		presentation.advance_presentation(delta)
 	# 同一 tick 的所有目标先完成命中，停顿从下一个物理 tick 开始。
 	# 不能让第一个目标请求停顿后，后面的目标因为 blocked 而漏结算。
 	if _pending_hit_stop > 0.0:
@@ -266,7 +307,47 @@ func _on_core_event(event_id: String, payload: Array) -> void:
 	if info != null and (info.instigator is BattleEntity or info.instigator is BattleEntity2D):
 		source = info.instigator
 	publish_event(StringName("battle.gas." + event_id), source, entity, context)
+	if event_id == "ability_activated":
+		publish_event(&"battle.skill.cast", entity, entity, context)
+	elif event_id == "damage_applied" and info != null and not bool(info.get_meta(&"reaction_deferred", false)):
+		publish_damage_result(info, entity, info.get_meta(&"hit_context", {}))
+		if entity.has_method("cleanup_death_statuses"):
+			entity.cleanup_death_statuses()
 
 func _on_entity_exiting(id: StringName) -> void:
+	if presentation != null:
+		presentation.remove_actor(id)
 	_entities.erase(id)
+#endregion
+
+#region 伤害结果与次生伤害的公共触发入口
+func publish_damage_result(info: DamageInfo, target: Node, context: Dictionary = {}) -> void:
+	_damage_serial += 1
+	var result := context.duplicate()
+	result.merge(info.to_dictionary(), true)
+	result["damage"] = info.actual_hp_loss
+	result["damage_id"] = StringName("%s/damage/%d" % [battle_id, _damage_serial])
+	result["damage_kind"] = StringName(context.get("damage_kind", &"attack"))
+	result["trigger_chain"] = context.get("trigger_chain", []).duplicate()
+	var source: Node = info.instigator if is_instance_valid(info.instigator) else null
+	if not info.is_dodged and not info.is_immune and info.final_damage > 0.0:
+		publish_event(&"battle.hit.effective", source, target, result)
+	publish_event(&"battle.damage.settled", source, target, result)
+	if info.actual_hp_loss > 0.0:
+		publish_event(&"battle.damage.received", source, target, result)
+	if info.hp_before > 0.0 and info.hp_after <= 0.0 and info.actual_hp_loss > 0.0:
+		publish_event(&"battle.entity.killed", source, target, result)
+
+## DoT/反伤沿用原版直接扣生命，不再次计算防御、暴击、护盾或吸血。
+## 原版反伤使用resolved_damage，属于次生伤害，不重新触发同一被动链。
+func apply_secondary_damage(target: Node, source: Node, amount: float, kind: StringName, parent_context: Dictionary = {}) -> DamageInfo:
+	var info := DamageInfo.new(source)
+	info.single_use = true
+	info.final_damage = maxf(0.0, amount)
+	info.normal_damage = info.final_damage
+	info.calculated_damage = info.final_damage
+	var context := {"damage_kind": kind, "trigger_chain": parent_context.get("trigger_chain", []).duplicate(), "source_status_id": parent_context.get("source_id", &""), "apply_hit_reaction": false, "has_hit_effect": false, "reaction_type": &"none", "bypass_armor_multiplier": true, "bypass_damage_policy": kind == &"periodic"}
+	if target.has_method("receive_damage_info"):
+		target.receive_damage_info(info, &"normal", 0, context)
+	return info
 #endregion

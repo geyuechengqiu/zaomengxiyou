@@ -44,20 +44,23 @@ func _get_configuration_warnings() -> PackedStringArray:
 func is_configuration_valid() -> bool:
 	return _get_configuration_warnings().is_empty()
 
-func find_impact_payload(definition: GameplayAbilityDefinition, index: int) -> Dictionary:
+func find_impact_payload(definition: GameplayAbilityDefinition, index: int, source_frame: float = -1.0) -> Dictionary:
 	if definition != null:
 		for feature in definition.features:
 			if feature is BattleFrameTimelineFeature:
 				for segment in feature.attack_segments:
 					if segment != null and segment.hit_index == index:
-						return segment.get_payload()
+						return segment.get_payload_at_frame(source_frame) if source_frame >= 0.0 else segment.get_payload()
 				for marker in feature.events:
 					if marker != null and marker.event_id == &"battle.attack.impact" and int(marker.payload.get("hit_index", 1)) == index:
 						return marker.payload
 	return {}
 
-func configure_skill(definition: GameplayAbilityDefinition, index: int = 1) -> bool:
-	var payload := find_impact_payload(definition, index)
+func configure_skill(definition: GameplayAbilityDefinition, index: int = 1, source_frame: float = -1.0, geometry_overrides: Dictionary = {}) -> bool:
+	var payload := find_impact_payload(definition, index, source_frame)
+	if not payload.is_empty():
+		payload = payload.duplicate(true)
+		payload.merge(geometry_overrides, true)
 	if payload.is_empty() or not _apply_payload(payload):
 		clear_geometry()
 		return false
@@ -86,7 +89,7 @@ func _refresh_preview() -> void:
 				if chosen == null or (segment.start_frame / feature.source_fps <= preview_time + 0.000000001 and segment.start_frame >= chosen.start_frame):
 					chosen = segment
 			if chosen != null:
-				configure_skill(definition, chosen.hit_index)
+				configure_skill(definition, chosen.hit_index, preview_time * feature.source_fps)
 				return
 			var selected: BattleFrameEvent
 			for marker in feature.events:
@@ -108,15 +111,17 @@ func _apply_payload(payload: Dictionary) -> bool:
 	var scale_x: float = payload.get("hit_scale_x", 1.0)
 	var scale_y: float = payload.get("hit_scale_y", 1.0)
 	var offset: Vector2 = payload.get("hit_offset", Vector2.ZERO)
-	if not is_finite(source_unit_scale) or source_unit_scale <= 0.0 or not is_finite(scale_x) or not is_finite(scale_y) or not offset.is_finite() or not rect.position.is_finite() or not rect.size.is_finite() or rect.size.x <= 0.0 or rect.size.y <= 0.0:
+	var angle := float(payload.get("hit_rotation", 0.0))
+	if not is_finite(angle) or not is_finite(source_unit_scale) or source_unit_scale <= 0.0 or not is_finite(scale_x) or not is_finite(scale_y) or not offset.is_finite() or not rect.position.is_finite() or not rect.size.is_finite() or rect.size.x <= 0.0 or rect.size.y <= 0.0:
 		return false
 	# 原版负 scaleX 是显示镜像；只有正值缩放伤害框，朝向另行处理。
 	var scales := Vector2(scale_x if scale_x > 0.0 else 1.0, scale_y if scale_y > 0.0 else 1.0)
-	rect = Rect2((rect.position * scales + offset) * source_unit_scale, rect.size * scales * source_unit_scale)
-	var changed: bool = not _valid_geometry or collision.position != rect.get_center() or collision.shape.size != rect.size or collision.rotation != 0.0 or collision.scale != Vector2.ONE or transform != Transform2D.IDENTITY
+	rect = Rect2(rect.position * scales * source_unit_scale, rect.size * scales * source_unit_scale)
+	var center := rect.get_center().rotated(angle) + offset * source_unit_scale
+	var changed: bool = not _valid_geometry or collision.position != center or collision.shape.size != rect.size or collision.rotation != angle or collision.scale != Vector2.ONE or transform != Transform2D.IDENTITY
 	if changed:
 		transform = Transform2D.IDENTITY
-		collision.transform = Transform2D(0.0, rect.get_center())
+		collision.transform = Transform2D(angle, center)
 		collision.shape.size = rect.size
 	_valid_geometry = true
 	visible = true

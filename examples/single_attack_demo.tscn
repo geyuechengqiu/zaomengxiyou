@@ -1,18 +1,15 @@
 [gd_scene format=3 uid="uid://wmwnj75nw53o"]
 
-[ext_resource type="Script" uid="uid://n8p5beakef7b" path="res://addons/gameplay_abiltiy_system/scripts/components/gameplay_ability_component.gd" id="abilities"]
-[ext_resource type="Script" uid="uid://cea1apq6pvlmp" path="res://addons/battle_foundation/runtime/battle_attribute_component.gd" id="attributes"]
-[ext_resource type="Script" uid="uid://de1ptsybyejr" path="res://addons/godot_core_system-0.0.4/source/operation_system/operation_controller.gd" id="controller"]
-[ext_resource type="Resource" path="res://data/controls/player_operations.tres" id="controls"]
 [ext_resource type="PackedScene" path="res://data/battle2d/dummy/wooden_dummy.tscn" id="dummy"]
 [ext_resource type="PackedScene" path="res://addons/battle_foundation/input/battle_operation_menu.tscn" id="menu"]
-[ext_resource type="Script" uid="uid://cejsmre475mvk" path="res://addons/battle_foundation/input/battle_player_operations.gd" id="operations"]
 [ext_resource type="Script" uid="uid://bojpin5w8rk26" path="res://examples/single_attack_demo.gd" id="script"]
 [ext_resource type="Script" uid="uid://cp8lkcidkxi3c" path="res://addons/battle_foundation/runtime/battle_session.gd" id="session"]
-[ext_resource type="Script" uid="uid://b6hkniyhlhrsf" path="res://addons/gameplay_abiltiy_system/scripts/components/gameplay_status_component.gd" id="statuses"]
 [ext_resource type="PackedScene" path="res://data/battle2d/single_attack/sunwukong_2d.tscn" id="wukong"]
 
 [ext_resource type="Resource" path="res://data/damage/original_strategy.tres" id="damage_strategy"]
+
+[ext_resource type="PackedScene" path="res://addons/battle_foundation/presentation/battle_presentation_2d.tscn" id="presentation"]
+[ext_resource type="PackedScene" path="res://addons/battle_foundation/presentation/combat_feedback_2d.tscn" id="feedback_view"]
 
 [sub_resource type="RectangleShape2D" id="ground"]
 size = Vector2(2800, 400)
@@ -53,6 +50,17 @@ script = ExtResource("session")
 damage_strategy = ExtResource("damage_strategy")
 scene_manifest_path = "res://data/battle2d/single_attack/manifest.json"
 scene_seed = 6001
+
+[node name="BattlePresentation" parent="BattleSession" instance=ExtResource("presentation")]
+
+[node name="SunWukongFeedback" parent="BattleSession/BattlePresentation/EntityViews" instance=ExtResource("feedback_view")]
+actor_path = NodePath("../../../Actors/SunWukong")
+
+[node name="LeftDummyFeedback" parent="BattleSession/BattlePresentation/EntityViews" instance=ExtResource("feedback_view")]
+actor_path = NodePath("../../../Actors/LeftDummy")
+
+[node name="RightDummyFeedback" parent="BattleSession/BattlePresentation/EntityViews" instance=ExtResource("feedback_view")]
+actor_path = NodePath("../../../Actors/RightDummy")
 
 [node name="Terrain" type="Node2D" parent="BattleSession" unique_id=1125340613]
 
@@ -135,64 +143,18 @@ polygon = PackedVector2Array(-130, -10, 130, -10, 130, 10, -130, 10)
 position = Vector2(400, 650)
 scene_definition_id = &"孙悟空"
 
-[node name="GameplayVitalAttributeComponent" type="Node" parent="BattleSession/Actors/SunWukong" unique_id=1148543648]
-script = ExtResource("attributes")
-externally_driven = true
-
-[node name="GameplayAbilityComponent" type="Node" parent="BattleSession/Actors/SunWukong" unique_id=1369396151]
-script = ExtResource("abilities")
-externally_driven = true
-
-[node name="GameplayStatusComponent" type="Node" parent="BattleSession/Actors/SunWukong" unique_id=149019847]
-script = ExtResource("statuses")
-externally_driven = true
-filter_events_by_owner = true
-
-[node name="PlayerOperations" type="Node" parent="BattleSession/Actors/SunWukong" unique_id=153778525]
-script = ExtResource("operations")
-operation_profile = ExtResource("controls")
-controller_path = NodePath("OperationController")
-
-[node name="OperationController" type="Node" parent="BattleSession/Actors/SunWukong/PlayerOperations" unique_id=782067667]
-script = ExtResource("controller")
-profile = ExtResource("controls")
-externally_driven = true
+[node name="PlayerOperations" parent="BattleSession/Actors/SunWukong"]
+enabled = true
 
 [node name="LeftDummy" parent="BattleSession/Actors" unique_id=2061580595 instance=ExtResource("dummy")]
 position = Vector2(110, 650)
 scene_definition_id = &"木桩"
 scene_category = "monsters"
 
-[node name="GameplayVitalAttributeComponent" type="Node" parent="BattleSession/Actors/LeftDummy" unique_id=777245975]
-script = ExtResource("attributes")
-externally_driven = true
-
-[node name="GameplayAbilityComponent" type="Node" parent="BattleSession/Actors/LeftDummy" unique_id=1021585182]
-script = ExtResource("abilities")
-externally_driven = true
-
-[node name="GameplayStatusComponent" type="Node" parent="BattleSession/Actors/LeftDummy" unique_id=382660741]
-script = ExtResource("statuses")
-externally_driven = true
-filter_events_by_owner = true
-
 [node name="RightDummy" parent="BattleSession/Actors" unique_id=194518912 instance=ExtResource("dummy")]
 position = Vector2(690, 650)
 scene_definition_id = &"木桩"
 scene_category = "monsters"
-
-[node name="GameplayVitalAttributeComponent" type="Node" parent="BattleSession/Actors/RightDummy" unique_id=190324478]
-script = ExtResource("attributes")
-externally_driven = true
-
-[node name="GameplayAbilityComponent" type="Node" parent="BattleSession/Actors/RightDummy" unique_id=2120963698]
-script = ExtResource("abilities")
-externally_driven = true
-
-[node name="GameplayStatusComponent" type="Node" parent="BattleSession/Actors/RightDummy" unique_id=853981197]
-script = ExtResource("statuses")
-externally_driven = true
-filter_events_by_owner = true
 
 [node name="HUD" type="CanvasLayer" parent="." unique_id=1371758860]
 layer = 10
@@ -282,3 +244,8 @@ text = "A / D 移动 · K 二段跳 · J 单段普攻 · Esc 菜单 / 改键
 layer = 30
 
 [node name="OperationMenu" parent="MenuLayer" unique_id=1622449180 instance=ExtResource("menu")]
+[editable path="BattleSession/Actors/SunWukong"]
+[editable path="BattleSession/Actors/LeftDummy"]
+[editable path="BattleSession/Actors/RightDummy"]
+
+[editable path="BattleSession/BattlePresentation"]

@@ -20,7 +20,7 @@ class_name GameplayStatusData
 # --- 效果配置 ---
 @export_group("Effects")
 ## 状态应用时触发的效果（一次性效果）
-## 这些效果只在状态被应用时触发一次，不会在层数叠加时重新触发
+## 瞬时效果仅施加时触发；reapply_on_stack=true的持续效果在叠层时撤销后重新应用
 ## 例如：初始伤害、治疗、一次性视觉效果
 @export var apply_effects: Array[GameplayEffect] = []
 ## 状态移除时触发的效果
@@ -37,6 +37,11 @@ class_name GameplayStatusData
 @export_group("Stacking")
 @export var stacking_policy: StatusStackingPolicy = StackingRefreshDuration.new()
 @export var max_stacks: int = 1
+## 同组不同ID也按叠加策略裁决；空值按status_id匹配。
+@export var stacking_group: StringName = &""
+@export var remove_on_death: bool = true
+## 原版isImmediate会预推进一个素材帧，0表示不预推进。
+@export var initial_update_delta: float = 0.0
 
 # --- 状态关系 ---
 @export_group("Status Relations")

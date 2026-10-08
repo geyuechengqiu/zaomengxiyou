@@ -12,7 +12,7 @@ func create_session(parent: Node, manifest_path: String = "", seed_value: int = 
 	if path.is_empty() or not is_instance_valid(parent):
 		push_error("BattleSystem 需要有效 parent 和 manifest_path")
 		return null
-	var session := BattleSession.new()
+	var session := load("res://addons/battle_foundation/runtime/battle_session.tscn").instantiate() as BattleSession
 	if not configure_scene_session(session, path, seed_value):
 		push_error(session.last_error)
 		session.free()
@@ -22,7 +22,7 @@ func create_session(parent: Node, manifest_path: String = "", seed_value: int = 
 
 ## 场景预置会话和工厂共用编号、配置及用户时间选项；不创建节点。
 func configure_scene_session(session: BattleSession, manifest_path: String, seed_value: int) -> bool:
-	for tag: GameplayTag in [preload("res://addons/battle_foundation/gas/tags/invulnerable.tres"), preload("res://addons/battle_foundation/gas/tags/super_armor.tres")]:
+	for tag: GameplayTag in [preload("res://addons/battle_foundation/gas/tags/invulnerable.tres"), preload("res://addons/battle_foundation/gas/tags/super_armor.tres"), preload("res://addons/battle_foundation/gas/tags/stunned.tres"), preload("res://addons/battle_foundation/gas/tags/buff.tres"), preload("res://addons/battle_foundation/gas/tags/debuff.tres")]:
 		if not TagManager.is_tag_registered(tag.id):
 			TagManager.register_tag(tag)
 	if _prefix.is_empty():

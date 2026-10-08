@@ -10,21 +10,27 @@ var abilities: GameplayAbilityComponent
 var statuses: GameplayStatusComponent
 var _definition: BattleEntityDefinition
 var _cleaned: bool = false
-var damage_rules := BattleDamageRules.new()
+var damage_rules: BattleDamageRules
 #endregion
 #region 初始化
+func get_component_configuration_error(data: BattleEntityDefinition = null) -> String:
+	return BattleGASBinding.get_configuration_error(self, data)
+
 ## 每次 spawn 只能初始化一次；定义由 Catalog 创建为该实体独占的资源图。
 func initialize_battle(owner_session: BattleSession, id: StringName, data: BattleEntityDefinition) -> void:
 	assert(entity_id.is_empty(), "战斗实体不能重复初始化")
+	assert(get_component_configuration_error(data).is_empty(), get_component_configuration_error(data))
 	session = owner_session
 	entity_id = id
 	definition_id = data.definition_id
 	faction_id = data.faction_id
 	_definition = data
+	damage_rules = (get_node(^"DamageRules") as BattleDamageRulesComponent).rules
 	var components := BattleGASBinding.attach(self, session, data)
 	attributes = components[0]
 	abilities = components[1]
 	statuses = components[2]
+	attributes.vital_depleted.connect(_on_vital_depleted)
 	for status_id in data.initial_status_ids:
 		apply_status_definition(status_id, self)
 #endregion
@@ -33,7 +39,7 @@ func advance_simulation(delta: float) -> void:
 	if delta <= 0.0 or not is_instance_valid(session):
 		return
 	## 位移与碰撞在固定物理 tick 中进行，用缩放后的位移，保留原始 velocity。
-	if not velocity.is_zero_approx():
+	if is_alive() and not TagManager.has_tag(self, &"state.stunned") and not velocity.is_zero_approx():
 		move_and_collide(velocity * delta)
 	abilities.advance_simulation(delta)
 	statuses.advance_simulation(delta)
@@ -70,6 +76,8 @@ func get_damage_strategy() -> DamageLogicStrategy:
 func accepts_status_event(context: Dictionary) -> bool:
 	if context.has("battle_id") and context.battle_id != session.battle_id:
 		return false
+	if context.has("battle_id") and (context.get("source_entity_id", &"") == entity_id or context.get("target_entity_id", &"") == entity_id):
+		return true
 	if context.has("entity"):
 		return context.entity == self
 	if context.has("target_entity_id") and context.target_entity_id != &"":
@@ -96,4 +104,46 @@ func cleanup_battle() -> void:
 
 func _exit_tree() -> void:
 	cleanup_battle()
+#endregion
+
+#region 共用状态与伤害结果入口
+func is_alive() -> bool:
+	return attributes != null and attributes.get_vital_value(&"health") > 0.0
+
+func can_use_ability(_id: StringName, _context: Dictionary = {}) -> bool:
+	return not _cleaned and is_alive() and not TagManager.has_tag(self, &"state.stunned")
+
+func can_receive_status(data: GameplayStatusData) -> bool:
+	return not _cleaned and is_alive() and not (data.tags.has(&"status.debuff") and TagManager.has_tag(self, &"state.invulnerable"))
+
+func receive_damage_info(info: DamageInfo, _kind: StringName = &"normal", _priority: int = 60, context: Dictionary = {}) -> float:
+	if session.is_simulation_blocked() or not is_alive():
+		return 0.0
+	if info.applied and info.single_use:
+		return info.actual_hp_loss
+	info.set_meta(&"reaction_deferred", true)
+	if TagManager.has_tag(self, &"state.invulnerable") and not bool(context.get("bypass_damage_policy", false)):
+		info.applied = true
+		info.is_immune = true
+		info.final_damage = 0.0
+		info.normal_damage = 0.0
+		info.true_damage = 0.0
+		info.hp_before = attributes.get_vital_value(&"health")
+		info.hp_after = info.hp_before
+	else:
+		(attributes.get_vital(&"health") as HealthVital).apply_damage(info, self)
+	session.publish_damage_result(info, self, context)
+	cleanup_death_statuses()
+	return info.actual_hp_loss
+
+func _on_vital_depleted(id: StringName) -> void:
+	if id == &"health":
+		for skill_id in abilities.get_all_ability_ids():
+			abilities.get_ability_instance(skill_id).end_ability()
+		publish_battle_event(&"battle.entity_died")
+		call_deferred(&"cleanup_death_statuses")
+
+func cleanup_death_statuses() -> void:
+	if is_instance_valid(statuses) and not is_alive():
+		statuses.clear_statuses(&"death")
 #endregion

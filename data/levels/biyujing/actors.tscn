@@ -1,0 +1,188 @@
+[gd_scene format=3]
+[ext_resource type="PackedScene" path="res://data/battle2d/sunwukong_2d.tscn" id="player"]
+[ext_resource type="PackedScene" path="res://data/monsters/jianwu/monster.tscn" id="jianwu"]
+[ext_resource type="PackedScene" path="res://data/monsters/yushoushi/monster.tscn" id="yushoushi"]
+[sub_resource type="RectangleShape2D" id="ground"]
+size = Vector2(10944, 400)
+[sub_resource type="RectangleShape2D" id="wall"]
+size = Vector2(40, 700)
+[sub_resource type="RectangleShape2D" id="obstacle"]
+size = Vector2(90, 55)
+[node name="Actors" type="Node2D"]
+[node name="Terrain" type="Node2D" parent="."]
+[node name="Ground" type="StaticBody2D" parent="Terrain"]
+position = Vector2(5472, 850)
+collision_mask = 2
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Terrain/Ground"]
+shape = SubResource("ground")
+[node name="Surface" type="Polygon2D" parent="Terrain/Ground"]
+polygon = PackedVector2Array(-5472,-200, 5472,-200, 5472,200, -5472,200)
+color = Color(0.15, 0.3, 0.22, 1)
+[node name="Grass" type="Polygon2D" parent="Terrain/Ground"]
+polygon = PackedVector2Array(-5472,-200, 5472,-200, 5472,-188, -5472,-188)
+color = Color(0.45, 0.72, 0.41, 1)
+[node name="Wall0" type="StaticBody2D" parent="Terrain"]
+position = Vector2(0, 300)
+collision_mask = 2
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Terrain/Wall0"]
+shape = SubResource("wall")
+[node name="Wall1" type="StaticBody2D" parent="Terrain"]
+position = Vector2(10944, 300)
+collision_mask = 2
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Terrain/Wall1"]
+shape = SubResource("wall")
+[node name="Obstacle0" type="StaticBody2D" parent="Terrain"]
+position = Vector2(3000, 622.5)
+collision_mask = 2
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Terrain/Obstacle0"]
+shape = SubResource("obstacle")
+[node name="Rock" type="Polygon2D" parent="Terrain/Obstacle0"]
+polygon = PackedVector2Array(-45,27.5, -45,-27.5, 45,-27.5, 45,27.5)
+color = Color(0.35, 0.4, 0.3, 1)
+[node name="Obstacle1" type="StaticBody2D" parent="Terrain"]
+position = Vector2(6000, 622.5)
+collision_mask = 2
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Terrain/Obstacle1"]
+shape = SubResource("obstacle")
+[node name="Rock" type="Polygon2D" parent="Terrain/Obstacle1"]
+polygon = PackedVector2Array(-45,27.5, -45,-27.5, 45,-27.5, 45,27.5)
+color = Color(0.35, 0.4, 0.3, 1)
+[node name="Obstacle2" type="StaticBody2D" parent="Terrain"]
+position = Vector2(8500, 622.5)
+collision_mask = 2
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Terrain/Obstacle2"]
+shape = SubResource("obstacle")
+[node name="Rock" type="Polygon2D" parent="Terrain/Obstacle2"]
+polygon = PackedVector2Array(-45,27.5, -45,-27.5, 45,-27.5, 45,27.5)
+color = Color(0.35, 0.4, 0.3, 1)
+[node name="SunWukong" parent="." instance=ExtResource("player")]
+position = Vector2(650, 650)
+scene_definition_id = &"孙悟空"
+[node name="Sword01" parent="." instance=ExtResource("jianwu")]
+position = Vector2(1050, 650)
+scene_definition_id = &"剑舞"
+scene_category = "monsters"
+[node name="Beast01" parent="." instance=ExtResource("yushoushi")]
+position = Vector2(1310, 650)
+scene_definition_id = &"驭兽使"
+scene_category = "monsters"
+[node name="Sword02" parent="." instance=ExtResource("jianwu")]
+position = Vector2(1650, 650)
+scene_definition_id = &"剑舞"
+scene_category = "monsters"
+[node name="Beast02" parent="." instance=ExtResource("yushoushi")]
+position = Vector2(1910, 650)
+scene_definition_id = &"驭兽使"
+scene_category = "monsters"
+[node name="Sword03" parent="." instance=ExtResource("jianwu")]
+position = Vector2(2250, 650)
+scene_definition_id = &"剑舞"
+scene_category = "monsters"
+[node name="Beast03" parent="." instance=ExtResource("yushoushi")]
+position = Vector2(2510, 650)
+scene_definition_id = &"驭兽使"
+scene_category = "monsters"
+[node name="Sword04" parent="." instance=ExtResource("jianwu")]
+position = Vector2(2850, 650)
+scene_definition_id = &"剑舞"
+scene_category = "monsters"
+[node name="Beast04" parent="." instance=ExtResource("yushoushi")]
+position = Vector2(3110, 650)
+scene_definition_id = &"驭兽使"
+scene_category = "monsters"
+[node name="Sword05" parent="." instance=ExtResource("jianwu")]
+position = Vector2(3450, 650)
+scene_definition_id = &"剑舞"
+scene_category = "monsters"
+[node name="Beast05" parent="." instance=ExtResource("yushoushi")]
+position = Vector2(3710, 650)
+scene_definition_id = &"驭兽使"
+scene_category = "monsters"
+[node name="Sword06" parent="." instance=ExtResource("jianwu")]
+position = Vector2(4050, 650)
+scene_definition_id = &"剑舞"
+scene_category = "monsters"
+[node name="Beast06" parent="." instance=ExtResource("yushoushi")]
+position = Vector2(4310, 650)
+scene_definition_id = &"驭兽使"
+scene_category = "monsters"
+[node name="Sword07" parent="." instance=ExtResource("jianwu")]
+position = Vector2(4650, 650)
+scene_definition_id = &"剑舞"
+scene_category = "monsters"
+[node name="Beast07" parent="." instance=ExtResource("yushoushi")]
+position = Vector2(4910, 650)
+scene_definition_id = &"驭兽使"
+scene_category = "monsters"
+[node name="Sword08" parent="." instance=ExtResource("jianwu")]
+position = Vector2(5250, 650)
+scene_definition_id = &"剑舞"
+scene_category = "monsters"
+[node name="Beast08" parent="." instance=ExtResource("yushoushi")]
+position = Vector2(5510, 650)
+scene_definition_id = &"驭兽使"
+scene_category = "monsters"
+[node name="Sword09" parent="." instance=ExtResource("jianwu")]
+position = Vector2(5850, 650)
+scene_definition_id = &"剑舞"
+scene_category = "monsters"
+[node name="Beast09" parent="." instance=ExtResource("yushoushi")]
+position = Vector2(6110, 650)
+scene_definition_id = &"驭兽使"
+scene_category = "monsters"
+[node name="Sword10" parent="." instance=ExtResource("jianwu")]
+position = Vector2(6450, 650)
+scene_definition_id = &"剑舞"
+scene_category = "monsters"
+[node name="Beast10" parent="." instance=ExtResource("yushoushi")]
+position = Vector2(6710, 650)
+scene_definition_id = &"驭兽使"
+scene_category = "monsters"
+[node name="Sword11" parent="." instance=ExtResource("jianwu")]
+position = Vector2(7050, 650)
+scene_definition_id = &"剑舞"
+scene_category = "monsters"
+[node name="Beast11" parent="." instance=ExtResource("yushoushi")]
+position = Vector2(7310, 650)
+scene_definition_id = &"驭兽使"
+scene_category = "monsters"
+[node name="Sword12" parent="." instance=ExtResource("jianwu")]
+position = Vector2(7650, 650)
+scene_definition_id = &"剑舞"
+scene_category = "monsters"
+[node name="Beast12" parent="." instance=ExtResource("yushoushi")]
+position = Vector2(7910, 650)
+scene_definition_id = &"驭兽使"
+scene_category = "monsters"
+[node name="Sword13" parent="." instance=ExtResource("jianwu")]
+position = Vector2(8250, 650)
+scene_definition_id = &"剑舞"
+scene_category = "monsters"
+[node name="Beast13" parent="." instance=ExtResource("yushoushi")]
+position = Vector2(8510, 650)
+scene_definition_id = &"驭兽使"
+scene_category = "monsters"
+[node name="Sword14" parent="." instance=ExtResource("jianwu")]
+position = Vector2(8850, 650)
+scene_definition_id = &"剑舞"
+scene_category = "monsters"
+[node name="Beast14" parent="." instance=ExtResource("yushoushi")]
+position = Vector2(9110, 650)
+scene_definition_id = &"驭兽使"
+scene_category = "monsters"
+[node name="Sword15" parent="." instance=ExtResource("jianwu")]
+position = Vector2(9450, 650)
+scene_definition_id = &"剑舞"
+scene_category = "monsters"
+[node name="Beast15" parent="." instance=ExtResource("yushoushi")]
+position = Vector2(9710, 650)
+scene_definition_id = &"驭兽使"
+scene_category = "monsters"
+[node name="Sword16" parent="." instance=ExtResource("jianwu")]
+position = Vector2(10050, 650)
+scene_definition_id = &"剑舞"
+scene_category = "monsters"
+[node name="Beast16" parent="." instance=ExtResource("yushoushi")]
+position = Vector2(10310, 650)
+scene_definition_id = &"驭兽使"
+scene_category = "monsters"

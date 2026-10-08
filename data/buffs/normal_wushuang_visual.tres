@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="GameplayStatusData" format=3]
+[ext_resource type="Script" path="res://addons/gameplay_abiltiy_system/scripts/status/gameplay_status_data.gd" id="script"]
+[ext_resource type="Script" path="res://addons/battle_foundation/gas/battle_original_status_policy.gd" id="policy"]
+[sub_resource type="Resource" id="Policy"]
+script = ExtResource("policy")
+replace_rule = 0
+[resource]
+script = ExtResource("script")
+status_id = &"normal_wushuang_visual"
+status_display_name = "普通无双表现"
+status_description = "角色原版颜色辉光与0.2秒采样、1秒线性淡出的残影"
+duration = 15.0
+stacking_policy = SubResource("Policy")
+max_stacks = 1
+metadata/original_xp_type = 1

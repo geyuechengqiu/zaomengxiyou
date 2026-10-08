@@ -2,6 +2,8 @@
 
 2026-10-08 使用项目实际 `damage_number.tscn`、原版14组数字贴图、CombatFeedback生成入口和GPU渲染测试。原实现每次命中实例化/释放节点、创建4个属性Tweener与一个间隔；独立PNG导致大量纹理切换。已改为共享图集、节点复用和直接采样相同的Tween曲线。
 
+公共表现迁移后，所有目标共用 `BattleSession/BattlePresentation/DamageNumbers/Rows` 的有界缓存与活动数组，BattleSession 每个 tick 统一推进一次，单个目标离场不会打断已经发出的数字。原版图集、0.9 秒 Tween 曲线与逐次命中显示保持一致。[公共管理器配置](../../addons/battle_foundation/presentation/README.md)。以下 GPU 数据为迁移前对象池重构的基准，并非本次迁移重新测量。
+
 ## 测试条件与结果
 
 Godot 4.7.2 自定义Spine构建，Ryzen 9 8940HX，RTX 5060 Laptop GPU，D3D12 Forward+，940×590视口，关闭垂直同步和帧率上限。测试场景继承伤害样例，禁用玩家操作和自动战斗推进，保留原场景的角色、地图、反馈绘制。混合11种样式与1～5位数字，每轮48帧；不包含大量怪物AI、弹道或完整战斗逻辑。

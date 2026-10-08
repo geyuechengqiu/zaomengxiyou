@@ -1,0 +1,6 @@
+[gd_resource type="Resource" script_class="GameplayTag" format=3]
+[ext_resource type="Script" path="res://addons/gameplay_abiltiy_system/scripts/tags/gameplay_tag.gd" id="tag"]
+[resource]
+script = ExtResource("tag")
+id = &"state.stunned"
+display_name = "眩晕"

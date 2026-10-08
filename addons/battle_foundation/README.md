@@ -1,10 +1,20 @@
 # Battle Foundation · 战斗基础、动画与操作控制
 
+普通无双表现复用 Core 空格意图和 GAS 状态，新增无动作状态技能 `BattleStatusActivationFeature`、预置 `BattleWushuangEffect2D` 及原生姿态快照 `BattleSpinePoseMirror2D`。红光与残影独立于动作播放器，固定池消费战斗时钟，支持实例隔离与死亡/离场清理；当前预览持续15秒，怒气门槛和属性加成待接入。[原版依据与配置](../../data/effects/wushuang/README.md)。
+
+新增 [悟空转职前四技能与火魔斩](../../data/skills/sunwukong/README.md)：原版 MP/CD 等级表、空中限制、原素材 AB、精确重复命中、射线转向、冲刺扫掠、风暴追加重劈、独立砸地与 3 帧视觉尾部。通过现有 Core/GAS/Spine 接入，没有第二套技能或判定系统。[五技能演示](../../examples/wukong_skills_demo.tscn)、[联合类图](docs/wukong-basic-skills.svg)、[验收](../../examples/verify_wukong_skills.tscn)。新增 BattleSkillManaCost / BattleSkillCooldownFeature 为本次技能等级快照读取原版消耗与冷却，不修改共享配置。
+
+阶段 11 新增 [普通怪物与AI](ai/README.md)：编辑器预置两类碧玉径小怪，复用Core操作意图/动作状态、GAS技能与独立冷却、属性/Vital、Buff、受击和死亡。AI配置通过Policy/TargetSelector扩展；原版图集由AnimationPlayer播放，兽形攻击支持同段逐帧AB判定。F5入口为 [first_level_demo.tscn](../../examples/first_level_demo.tscn)；[怪物配置与新增步骤](../../data/monsters/README.md)。
+
+阶段 10 新增 [Buff、被动与战斗触发](combat/buffs-triggers.md)，复用并重构 GAS Status/Effect/PassiveStatusFeature，接入 Core STUN、标签引用计数、统一周期时钟、原版吸血/反伤与死亡/离场清理。打开 examples/buff_demo.tscn 按F6验收，节点与控件预置，全部定义位于业务 data/buffs。
+
+角色的 GAS、动作、运动、连击、受击、保护与输入组件已预置到角色 PackedScene，运行时只绑定并初始化。节点树、生命周期及迁移入口见 [角色组件说明](../../data/battle2d/character-components.md)。
+
 阶段 9 新增 [受击、击退、浮空与独立保护条](combat/hit-reaction-protection.md)：HP 与动作分离，霸体受伤倍率、无敌效果策略可配置，真实 Core 叶子管理击飞/下落/落地/倒地/起身；保护满值读取各 Boss protectPoint 或显式覆盖，同目标同技能累计并在触发后重置。演示 [hit_reaction_demo.tscn](../../examples/hit_reaction_demo.tscn)，自动验收 199 项及 13 套既有回归通过。
 
 阶段 8 使用 GAS 策略 + Attribute/Vital/Status/Effect + Core 事件完成原版通用伤害链；等级评分沿用原版EXP，界面统一整数。原版盾后补1、真实伤害与吸血顺序、角色回调和结果字段见 [详细说明](combat/original-damage.md)。
 
-原版伤害样例已恢复五连击，并接入115张原版数字贴图、闪避/真实伤害随机偏移和 AnimationPlayer 上飘淡出；普通与真实伤害分开生成实例。窗口放大后的重复拉伸已修复。预览、源码依据与78项验收见 [跳字说明](../../data/effects/README.md)。
+原版伤害样例已恢复五连击，并接入115张原版数字贴图、闪避/真实伤害随机偏移及共享对象池曲线驱动上飘淡出；普通与真实伤害分开生成实例。窗口放大后的重复拉伸已修复。预览、源码依据与78项验收见 [跳字说明](../../data/effects/README.md)。
 
 阶段 7 见 [技能时间轴、连招与多段攻击](combat/skill-timeline.md)：扩展现有 BattleFrameTimelineFeature，新增攻击段/派生/位移资源，每次施放独立保存命中次数与下次命中时间；接入 GAS Cost/Cooldown、Status/Effect、Core 状态反应和预置对象回收。[三段演示](../../examples/skill_timeline_demo.tscn)、[验收](../../examples/verify_skill_timeline.tscn)、[联合类图](docs/skill-timeline.svg)。
 
@@ -41,7 +51,7 @@
 
 ![运动与状态联合类图](docs/motion-state.svg)
 
-动作状态使用 Core `BaseStateMachine` / `BaseState` 实现；每实体登记真实机器和十五个独立叶子（原九种 + 阶段9六种），保持单一 combat delta。`BattleActionState2D` 是语义兼容入口，查询 Core 当前叶子，不再维护另一份状态。继承、生命周期、死亡守卫和注销说明见 [动作状态机接入](movement/README.md#动作状态接入-core-插件状态机)；验收入口 [verify_wukong_state_machine.tscn](../../examples/verify_wukong_state_machine.tscn)。
+动作状态使用 Core `BaseStateMachine` / `BaseState` 实现；每实体登记真实机器和十八个独立叶子（原九种 + 阶段9六种 + 跑攻/跳攻 + Buff眩晕），保持单一 combat delta。`BattleActionState2D` 是语义兼容入口，查询 Core 当前叶子，不再维护另一份状态。继承、生命周期、死亡守卫和注销说明见 [动作状态机接入](movement/README.md#动作状态接入-core-插件状态机)；验收入口 [verify_wukong_state_machine.tscn](../../examples/verify_wukong_state_machine.tscn)。
 
 ## 为什么需要补充插件
 
@@ -219,7 +229,8 @@ GAS `BTWait` 已改为累计传入 delta，消除真实毫秒时钟绕过战斗�
 | [BattleComboState](runtime/battle_combo_state.gd) | 独立连击段号、下一段预约与施放序号 |
 | [BattleAttackInstance](runtime/battle_attack_instance.gd) | 攻击编号、攻击者/阵营、持续窗口与每击目标去重 |
 | [BattleHurtbox2D](movement/battle_hurtbox_2d.gd) | 与移动物理体分开的可编辑受击区域 |
-| [BattleCombatFeedback2D](presentation/battle_combat_feedback_2d.gd) | 生命条、实际扣血飘字与战斗时钟推进 |
+| [BattlePresentation2D](presentation/battle_presentation_2d.gd) | 公共战斗表现：集中分发命中反馈、全场跳字对象池与统一时钟；[配置说明](presentation/README.md) |
+| [BattleCombatFeedback2D](presentation/battle_combat_feedback_2d.gd) | 战斗场景中每个目标的血条、保护条与受击反馈视图 |
 | [CharacterAnimationProfile](animation/character_animation_profile.gd) | 只读动作映射、皮肤、脚底偏移和语义挂点 |
 | [CharacterAnimationAdapter](animation/character_animation_adapter.gd) | 独立抽象动画接口及通知，无战斗规则 |
 | [SpineAnimationAdapter](animation/spine_animation_adapter.gd) | 原生 Spine 手动播放、组合皮肤、镜像、挂点和调试查询 |

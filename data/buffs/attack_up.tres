@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="GameplayStatusData" format=3]
+[ext_resource type="Script" path="res://addons/gameplay_abiltiy_system/scripts/status/gameplay_status_data.gd" id="status"]
+[ext_resource type="Script" path="res://addons/gameplay_abiltiy_system/scripts/effects/gameplay_effect.gd" id="effect_type"]
+[ext_resource type="Script" path="res://addons/gameplay_abiltiy_system/scripts/status/features/status_feature.gd" id="feature_type"]
+[ext_resource type="Script" path="res://addons/battle_foundation/gas/battle_original_status_policy.gd" id="policy"]
+[ext_resource type="Script" path="res://addons/battle_foundation/gas/ge_original_buff_attribute.gd" id="effect"]
+[sub_resource type="Resource" id="effect"]
+script = ExtResource("effect")
+attribute_id = &"atk"
+ratio = 0.2
+fixed_bonus = 0
+[sub_resource type="Resource" id="policy"]
+script = ExtResource("policy")
+replace_rule = 1
+[resource]
+script = ExtResource("status")
+status_id = &"attack_up"
+status_display_name = "心月狐-提高攻击"
+duration = 10
+stacking_policy = SubResource("policy")
+max_stacks = 1
+stacking_group = &"original.80307/atk"
+tags = Array[StringName]([&"status.buff"])
+metadata/original_buff_id = 8030701
+metadata/original_type = 8
+apply_effects = Array[ExtResource("effect_type")]([SubResource("effect")])

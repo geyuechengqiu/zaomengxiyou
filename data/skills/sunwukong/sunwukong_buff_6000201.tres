@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="GameplayStatusData" format=3]
+[ext_resource type="Script" path="res://addons/gameplay_abiltiy_system/scripts/status/gameplay_status_data.gd" id="status"]
+[ext_resource type="Script" path="res://addons/battle_foundation/gas/battle_original_status_policy.gd" id="policy"]
+[sub_resource type="Resource" id="Policy"]
+script = ExtResource("policy")
+replace_rule = 3
+[resource]
+script = ExtResource("status")
+status_id = &"sunwukong_buff_6000201"
+status_display_name = "悟空-烈焰闪-霸体"
+duration = 0.5
+stacking_policy = SubResource("Policy")
+tags = Array[StringName]([&"status.buff", &"state.super_armor"])
+metadata/original_buff_id = 6000201

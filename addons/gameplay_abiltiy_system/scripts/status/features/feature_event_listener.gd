@@ -23,6 +23,10 @@ func _handle_event(instance: GameplayStatusInstance, event_id: StringName, conte
 	if not trigger_on_events.has(event_id):
 		return
 
-	# 触发事件效果
+	var state := instance.get_feature_storage(self)
+	if bool(state.get("busy", false)):
+		return
+	state["busy"] = true
 	instance.apply_effects(event_triggered_effects, context)
+	state["busy"] = false
 #endregion

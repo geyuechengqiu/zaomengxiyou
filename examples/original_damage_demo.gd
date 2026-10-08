@@ -25,8 +25,8 @@ func set_sample(index: int) -> void:
 		player.cancel_skill()
 	sample_index = index
 	player.damage_rules.clear()
-	player.attributes.set_base_value(&"atk", 100.0)
-	player.attributes.set_base_value(&"critical", 156.25 if index == 1 else 0.0)
+	player.attributes.set_base_value(&"atk", player.attributes.get_initial_base_value(&"atk", 100.0))
+	player.attributes.set_base_value(&"critical", 156.25 if index == 1 else player.attributes.get_initial_base_value(&"critical"))
 	player.damage_context = {"random_values": {"calDamage": 0.5, "baojiRatio": 0.5, "calPhysicalDamage": 0.5}}
 	for dummy in dummies:
 		dummy.damage_rules.clear()
@@ -68,5 +68,5 @@ func _process(_delta: float) -> void:
 	if not is_instance_valid(player):
 		return
 	var parameters: Dictionary = session.damage_strategy.get_level_parameters(player.attributes.current_level)
-	info.text = "等级%d · 攻击%d · 状态%s · 命中%d\n暴击评分%d / 换算%d · 左生命%d · 右生命%d" % [player.attributes.current_level, roundi(player.attributes.get_value(&"atk")), player.action_state.get_name(), total_hits, roundi(player.attributes.get_value(&"critical")), roundi(parameters.criticalMax), roundi(dummies[0].attributes.get_vital_value(&"health")), roundi(dummies[1].attributes.get_vital_value(&"health"))]
+	info.text = "等级%d · 攻击%d · 状态%s · 命中%d\n暴击评分%d / 换算%d · 左生命%d · 右生命%d" % [player.attributes.current_level, roundi(player.attributes.get_value(&"atk")), player.action_state.get_state_name(), total_hits, roundi(player.attributes.get_value(&"critical")), roundi(parameters.criticalMax), roundi(dummies[0].attributes.get_vital_value(&"health")), roundi(dummies[1].attributes.get_vital_value(&"health"))]
 #endregion

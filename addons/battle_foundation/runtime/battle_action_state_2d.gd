@@ -1,4 +1,4 @@
-extends RefCounted
+extends Node
 class_name BattleActionState2D
 #region 兼容入口：状态与时间只读取 Core 当前叶子
 const State = BattleActionLeafState2D.Kind
@@ -53,6 +53,14 @@ func dispose() -> void:
 	registration_id = &""
 	_manager = null
 
+func _exit_tree() -> void:
+	dispose()
+
+func _notification(what: int) -> void:
+	# 编辑器/资源校验中，实例可能从未入树就被释放。
+	if what == NOTIFICATION_PREDELETE:
+		dispose()
+
 func _get_leaf() -> BattleActionLeafState2D:
 	return machine.current_state as BattleActionLeafState2D
 #endregion
@@ -92,6 +100,6 @@ func advance(delta: float, profile: BattleActionProfile2D, moving: bool, running
 	machine.attack_active = attack_active
 	machine.physics_update(delta)
 
-func get_name() -> String:
+func get_state_name() -> String:
 	return String(machine.get_current_state_name())
 #endregion

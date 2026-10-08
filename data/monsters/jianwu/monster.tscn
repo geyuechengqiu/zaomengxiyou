@@ -1,0 +1,91 @@
+[gd_scene format=3]
+[ext_resource type="Script" path="res://addons/battle_foundation/runtime/battle_entity_2d.gd" id="entity"]
+[ext_resource type="PackedScene" path="res://data/monsters/jianwu/visual.tscn" id="visual"]
+[ext_resource type="Resource" path="res://data/monsters/jianwu/actions.tres" id="actions"]
+[ext_resource type="Script" path="res://addons/battle_foundation/movement/battle_hurtbox_2d.gd" id="hurtbox"]
+
+[ext_resource type="Script" path="res://addons/battle_foundation/runtime/battle_attribute_component.gd" id="component_GameplayVitalAttributeComponent"]
+[ext_resource type="Script" path="res://addons/gameplay_abiltiy_system/scripts/components/gameplay_ability_component.gd" id="component_GameplayAbilityComponent"]
+[ext_resource type="Script" path="res://addons/gameplay_abiltiy_system/scripts/components/gameplay_status_component.gd" id="component_GameplayStatusComponent"]
+[ext_resource type="Script" path="res://addons/battle_foundation/combat/battle_damage_rules_component.gd" id="component_DamageRules"]
+[ext_resource type="Script" path="res://addons/battle_foundation/runtime/battle_action_state_2d.gd" id="component_ActionState"]
+[ext_resource type="Script" path="res://addons/battle_foundation/runtime/battle_motion_controller_2d.gd" id="component_MotionController"]
+[ext_resource type="Script" path="res://addons/battle_foundation/runtime/battle_combo_state.gd" id="component_ComboState"]
+[ext_resource type="Script" path="res://addons/battle_foundation/combat/battle_hit_reaction_controller_2d.gd" id="component_HitReactionController"]
+[ext_resource type="Script" path="res://addons/battle_foundation/combat/battle_protection_system.gd" id="component_ProtectionSystem"]
+[ext_resource type="Script" path="res://addons/simple_inventory/src/core/C_Inventory.gd" id="component_Inventory"]
+
+
+[ext_resource type="Script" path="res://addons/battle_foundation/ai/battle_ai_controller_2d.gd" id="ai"]
+[ext_resource type="Resource" path="res://data/monsters/jianwu/ai.tres" id="ai_profile"]
+
+[sub_resource type="CapsuleShape2D" id="body"]
+radius = 22.0
+height = 220.0
+
+[sub_resource type="RectangleShape2D" id="hurt"]
+resource_local_to_scene = true
+size = Vector2(200.0, 224.0)
+
+[node name="Monster" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 1
+script = ExtResource("entity")
+action_profile = ExtResource("actions")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -110)
+shape = SubResource("body")
+
+[node name="AnimationAdapter" parent="." instance=ExtResource("visual")]
+
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 0
+monitoring = false
+monitorable = false
+script = ExtResource("hurtbox")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(0.0, -154.0)
+shape = SubResource("hurt")
+disabled = true
+
+
+[node name="GameplayVitalAttributeComponent" type="Node" parent="."]
+script = ExtResource("component_GameplayVitalAttributeComponent")
+initial_level_override = 0
+externally_driven = true
+
+[node name="GameplayAbilityComponent" type="Node" parent="."]
+script = ExtResource("component_GameplayAbilityComponent")
+externally_driven = true
+
+[node name="GameplayStatusComponent" type="Node" parent="."]
+script = ExtResource("component_GameplayStatusComponent")
+externally_driven = true
+filter_events_by_owner = true
+
+[node name="DamageRules" type="Node" parent="."]
+script = ExtResource("component_DamageRules")
+
+[node name="ActionState" type="Node" parent="."]
+script = ExtResource("component_ActionState")
+
+[node name="MotionController" type="Node" parent="."]
+script = ExtResource("component_MotionController")
+
+[node name="ComboState" type="Node" parent="."]
+script = ExtResource("component_ComboState")
+
+[node name="HitReactionController" type="Node" parent="."]
+script = ExtResource("component_HitReactionController")
+
+[node name="ProtectionSystem" type="Node" parent="."]
+script = ExtResource("component_ProtectionSystem")
+
+[node name="Inventory" type="Node" parent="."]
+script = ExtResource("component_Inventory")
+
+[node name="AIController" type="Node" parent="."]
+script = ExtResource("ai")
+profile = ExtResource("ai_profile")

@@ -1,11 +1,14 @@
 @tool
 extends EditorPlugin
+#region 生命周期与引擎回调
 ## 在无插件辅助工程中自动退出：反复显示/隐藏弹窗，不开启原生子窗口。
 
 func _enter_tree() -> void:
 	# 只在显式验证时启动，普通配置进程不会打开弹窗。
 	if "--verify-window-mode" in OS.get_cmdline_user_args():
 		call_deferred("_verify")
+#endregion
+#region 内部实现
 
 func _verify() -> void:
 	if not Engine.is_editor_hint():
@@ -44,3 +47,4 @@ func _verify() -> void:
 	await get_tree().process_frame
 	print("PASS editor single-window: 30 popup show/hide cycles; no native subwindows")
 	get_tree().quit(0)
+#endregion
