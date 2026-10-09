@@ -1,0 +1,63 @@
+[gd_scene format=3]
+[ext_resource type="Script" path="res://examples/level_progression_demo.gd" id="script"]
+[ext_resource type="Script" path="res://addons/battle_foundation/runtime/battle_session.gd" id="session"]
+[ext_resource type="Script" path="res://addons/battle_foundation/level/battle_level_instance_2d.gd" id="flow"]
+[ext_resource type="PackedScene" path="res://data/levels/biyujing/progression/map.tscn" id="map"]
+[ext_resource type="Resource" path="res://data/damage/original_strategy.tres" id="damage"]
+[ext_resource type="PackedScene" path="res://addons/battle_foundation/presentation/battle_presentation_2d.tscn" id="presentation"]
+[ext_resource type="PackedScene" path="res://addons/battle_foundation/presentation/combat_feedback_2d.tscn" id="feedback"]
+[ext_resource type="PackedScene" path="res://addons/battle_foundation/input/battle_operation_menu.tscn" id="menu"]
+[ext_resource type="PackedScene" path="res://addons/battle_foundation/camera/battle_camera_rig_2d.tscn" id="camera_rig"]
+[ext_resource type="Script" path="res://addons/battle_foundation/camera/battle_phantom_camera_host.gd" id="camera_host"]
+[node name="LevelProgressionDemo" type="Node2D"]
+process_mode = 3
+script = ExtResource("script")
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(940, 626)
+zoom = Vector2(0.5, 0.5)
+[node name="PhantomCameraHost" type="Node" parent="Camera2D"]
+script = ExtResource("camera_host")
+interpolation_mode = 3
+phantom_root_path = NodePath("../../BattleSession/CameraRig")
+[node name="BattleSession" type="Node3D" parent="."]
+script = ExtResource("session")
+scene_manifest_path = "res://data/levels/biyujing/progression/manifest.json"
+scene_seed = 12001
+damage_strategy = ExtResource("damage")
+[node name="CameraRig" parent="BattleSession" instance=ExtResource("camera_rig")]
+[node name="BattlePresentation" parent="BattleSession" instance=ExtResource("presentation")]
+[node name="SunWukongFeedback" parent="BattleSession/BattlePresentation/EntityViews" instance=ExtResource("feedback")]
+actor_path = NodePath("../../../Actors/SunWukong")
+[node name="Actors" parent="BattleSession" instance=ExtResource("map")]
+[node name="LevelInstance" type="Node" parent="BattleSession"]
+script = ExtResource("flow")
+[node name="HUD" type="CanvasLayer" parent="."]
+layer = 20
+[node name="Panel" type="PanelContainer" parent="HUD"]
+offset_left = 14.0
+offset_top = 104.0
+offset_right = 836.0
+offset_bottom = 164.0
+[node name="Column" type="VBoxContainer" parent="HUD/Panel"]
+layout_mode = 2
+[node name="Info" type="Label" parent="HUD/Panel/Column"]
+layout_mode = 2
+text = "碧玉径 · 孙悟空与玉石琵琶精"
+[node name="Message" type="Label" parent="HUD/Panel/Column"]
+layout_mode = 2
+text = "击败敌人，继续向右前进。"
+[node name="Restart" type="Button" parent="HUD"]
+offset_left = 850.0
+offset_top = 8.0
+offset_right = 926.0
+offset_bottom = 44.0
+focus_mode = 0
+text = "重开关卡"
+[node name="Help" type="Label" parent="HUD"]
+offset_left = 14.0
+offset_top = 555.0
+offset_right = 926.0
+offset_bottom = 580.0
+theme_override_font_sizes/font_size = 16
+text = "A/D移动 · K跳跃 · J普攻 · Y/U/I/O/L技能 · 空格无双 · W/↑进入最终出口 · Esc改键/暂停"
+[node name="OperationMenu" parent="HUD" instance=ExtResource("menu")]

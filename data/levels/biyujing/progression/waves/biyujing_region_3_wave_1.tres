@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="BattleWaveDefinition" format=3]
+[ext_resource type="Script" path="res://addons/battle_foundation/level/battle_wave_definition.gd" id="script"]
+[resource]
+script = ExtResource("script")
+wave_id = &"biyujing_region_3_wave_1"
+region_id = &"biyujing_region_3"
+plan_ids = Array[StringName]([&"screen3_birth9", &"screen3_birth11"])

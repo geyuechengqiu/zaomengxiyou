@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="BattleSpawnPlanDefinition" format=3]
+[ext_resource type="Script" path="res://addons/battle_foundation/level/battle_spawn_plan_definition.gd" id="script"]
+[resource]
+script = ExtResource("script")
+plan_id = &"screen1_birth3"
+spawn_point_id = &"screen1_birth3"
+monster_ids = Array[StringName]([&"驭兽使", &"驭兽使"])
+delay_seconds = 0.0
+interval_seconds = 1.0
+facing = -1
+after_created_plan_ids = Array[StringName]([&"screen1_birth1"])
+after_dead_plan_ids = Array[StringName]([])
+metadata/original_birth_id = 3

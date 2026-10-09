@@ -1,0 +1,16 @@
+[gd_scene format=3]
+[ext_resource type="Script" path="res://addons/battle_foundation/camera/battle_camera_rig_2d.gd" id="rig"]
+[ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="pcam"]
+[node name="CameraRig" type="Node"]
+script = ExtResource("rig")
+[node name="FollowTarget" type="Marker2D" parent="."]
+position = Vector2(940,626)
+[node name="PlayerCamera" type="Node2D" parent="." node_paths=PackedStringArray("follow_target")]
+position = Vector2(940,626)
+script = ExtResource("pcam")
+priority = 10
+follow_mode = 1
+follow_target = NodePath("../FollowTarget")
+zoom = Vector2(0.5,0.5)
+tween_on_load = false
+inactive_update_mode = 1

@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="BattleBossObjectDefinition" format=3]
+[ext_resource type="Script" path="res://addons/battle_foundation/boss/battle_boss_object_definition.gd" id="script"]
+[resource]
+script = ExtResource("script")
+object_id = &"pipa_notes"
+kind = "projectile"
+animation = &"skill2_1"
+continuation_animation = &""
+formation_seconds = 0
+lifetime = 1
+speed = 650
+spawn_offset = Vector2(100,-50)
+angles = Array[float]([-40, -20, 0, 20, 40])
+linked_to_action = true
+through_targets = false
+maximum_hits = 1
+hit_interval = 0.1
+damage_context = {"protection_skill_id": "2001110", "hit_stun": 0.5, "reaction_gravity": 1980, "reset_vertical_velocity": true, "knockback_speed": 80, "launch_speed": 360, "knockback_duration": 0.5, "reaction_type": "launch"}
+hit_rects = Dictionary[int, Rect2]({0: Rect2(-34.05, -24.5, 63.05, 46), 1: Rect2(-34.05, -24.5, 63.05, 46), 2: Rect2(-34.05, -24.5, 63.05, 46), 3: Rect2(-34.05, -24.5, 63.05, 46), 4: Rect2(-34.05, -24.5, 63.05, 46), 5: Rect2(-34.05, -24.5, 63.05, 46)})

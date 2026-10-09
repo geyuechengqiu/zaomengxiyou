@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="BattleRegionDefinition" format=3]
+[ext_resource type="Script" path="res://addons/battle_foundation/level/battle_region_definition.gd" id="script"]
+[resource]
+script = ExtResource("script")
+region_id = &"biyujing_region_4"
+display_name = "碧玉径 · 区域4"
+bounds = Rect2(6720.0, 0.0, 2176.0, 1216.0)
+entry_rect = Rect2(6800.0, 64.0, 128.0, 1024.0)
+exit_rect = Rect2(8800.0, 0, 96, 1216)
+wave_ids = Array[StringName]([&"biyujing_region_4_wave_1"])
+automatic_exit = true
+camera_transition_margin = 844.0
+metadata/original_screen = 4

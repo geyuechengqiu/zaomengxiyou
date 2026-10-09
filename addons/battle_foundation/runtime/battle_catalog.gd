@@ -146,6 +146,7 @@ func _validate_definition(category: String, id: String, data: Resource) -> bool:
 		"levels":
 			if not data is BattleLevelDefinition:
 				return _fail("关卡定义类型错误：" + id)
+			if not data.get_progression_error().is_empty(): return _fail(data.get_progression_error())
 			resource_id = data.definition_id
 	if resource_id != StringName(id):
 		return _fail("索引 ID 与资源定义 ID 不一致：" + id)
@@ -177,6 +178,9 @@ func _validate_references(definitions: Dictionary) -> bool:
 				if not definitions.statuses.has(status_id):
 					return _fail("实体引用了未登记状态：" + String(status_id))
 	for level: BattleLevelDefinition in definitions.levels.values():
+		for plan in level.spawn_plans:
+			for monster_id in plan.monster_ids:
+				if not definitions.monsters.has(monster_id): return _fail("出生计划引用了未登记怪物：" + String(monster_id))
 		for spawn: BattleSpawnDefinition in level.spawns:
 			if spawn == null or not ["characters", "monsters"].has(spawn.category):
 				return _fail("关卡出生定义类型错误")

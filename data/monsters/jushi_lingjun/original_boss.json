@@ -1,0 +1,1261 @@
+{
+  "sources": [
+    {
+      "path": "games/zmhj-g5/cache/assets/man/11106/1_V226.swf",
+      "sha256": "e0ddc88b4a58abb97a271248337442b894a5eafa420701fbb50045596f120abe"
+    },
+    {
+      "path": "games/zmhj-g5/cache/assets/ui/mission_20260406_1.swf",
+      "sha256": "60944248515768281bc82c2e20e267711bf2922967c54029133c36c3c35b9862"
+    },
+    {
+      "path": "games/zmhj-g5/cache/assets/music/bg/boss_01.swf",
+      "sha256": "15916f2f0390fdc1b60ea94c70949b04d79cc645f200111a2857e8e35d45570b"
+    },
+    {
+      "path": "games/zmhj-g5/cache/assets/music/hs.swf",
+      "sha256": "20b15dc7d840d0f2011881f727927bfaa4eb72e224a6d8e0040ac5cfbc114049"
+    },
+    {
+      "path": "games/zmhj-g5/cache/assets/icon/skill/dialog/2001110.png",
+      "sha256": "84a040e1bdd3aafe63cda97605d9524ca7a152bc6cffc0db8420bb84fbc45e37"
+    },
+    {
+      "path": "games/zmhj-g5/cache/assets/icon/skill/dialog/2001120.png",
+      "sha256": "f9f4c77bf69157400d297fcf204ab226e932c9e442f9d9ae082f2bca438e18d7"
+    },
+    {
+      "path": "out/zmhj-equip-skill-diag/viewers/component/SkillComing.as",
+      "sha256": "747722bf403d25a51652deca8899c2f56c74766dba54d3120435f042892f8a94"
+    },
+    {
+      "path": "out/zmhj-equip-skill-diag/viewers/component/BossBleed.as",
+      "sha256": "106822c8c0b8f6224a3417188d4552ed913ff01068086c4fb1656de0104b083e"
+    },
+    {
+      "path": "out/zmhj-equip-skill-diag/com/wdcgame/engine/entitys/AIHpProtectControl.as",
+      "sha256": "2f2182d35d52b53b3abbfdff13774bc49c2c90d4f0e1b1588675ec4b12222400"
+    }
+  ],
+  "monster": {
+    "skillLev": "1;1;1;1;1",
+    "atk": 30,
+    "name": "玉石琵琶精",
+    "critical": 0,
+    "soilResist": 10,
+    "classType": 0,
+    "dungeonLevel": 1,
+    "darkResist": 0,
+    "superArmor": 0,
+    "level": 3,
+    "attack2": 0,
+    "actionSuperArmor": "skill1;skill2;skill3",
+    "guardian": 0,
+    "powerMax": 0,
+    "dieOpen": 0,
+    "alwaysShowHP": 0,
+    "skill2": 2001110,
+    "bySuckBleed": 0,
+    "bodySize": 30,
+    "protectPoint": 25000,
+    "attack1": 0,
+    "hpMax": 1167,
+    "wuDiAlpha": 1,
+    "resourceId": 11106,
+    "skill4": 0,
+    "walkSpeed": 200,
+    "showAppear": 0,
+    "hitEffOffset": "0;-53",
+    "viewRangePatorl": "-490;-262;980;300",
+    "rayResist": 0,
+    "showProtect": 1,
+    "showName": 1,
+    "showHP": 0,
+    "actType": 0,
+    "isHatredZero": 0,
+    "fireResist": -10,
+    "bornTalkID": -1,
+    "moveType": 1,
+    "toughness": 0,
+    "stopActionByDS": 1,
+    "boss": 1,
+    "collisonItemWall": 1,
+    "reHP": 1,
+    "aiId": 10009,
+    "attack3": 0,
+    "useHurtNum": 0,
+    "phyDef": 5,
+    "dieTalkID": -1,
+    "hit": 0,
+    "showBatiEff": 1,
+    "dieSkill": -1,
+    "petId": -1,
+    "collisionGround": 1,
+    "windResist": 0,
+    "hpBarOffset": "0;-100",
+    "skill1": 2001100,
+    "isMigration": 1,
+    "appearSkill": -1,
+    "dodge": 0,
+    "lucky": 0,
+    "bodyRec": "-89;-156;178;137",
+    "targetCenter": -1,
+    "bySuckMp": 0,
+    "skill3": 2001120,
+    "woodResist": 0,
+    "typeId": -1,
+    "shapeChangeID": -1,
+    "waterResist": 0,
+    "skill5": 0,
+    "addBuff": 1,
+    "bleedOffset": "0;-60",
+    "id": 10601,
+    "protectSkill": 1900010,
+    "editSort": 10601,
+    "lightResist": 0,
+    "randomMove": 150,
+    "attack4": 0,
+    "aiDelay": 0,
+    "friendlyAiId": 0,
+    "showAssa": 1,
+    "collisionWall": 1
+  },
+  "resource": {
+    "normal": "11106/1_V226.swf",
+    "resourceType": 11,
+    "id": 11106,
+    "scale": 1
+  },
+  "skills": {
+    "2001100": {
+      "subPowerMax": 0,
+      "sort": 0,
+      "name": "震颤之音",
+      "summonNumMax": -1,
+      "skillAddLevelMax": 0,
+      "mpHurt": 0,
+      "type": 1,
+      "skillCountAdd": "0",
+      "addPowerMax": 0,
+      "addPowerNum": 0,
+      "stiff": 0.5,
+      "atkInterval": 0,
+      "priority": 0,
+      "worldBossCD": 0,
+      "hideLvInfo": 0,
+      "containSummoned": 1,
+      "iconId": -1,
+      "initLv": 1,
+      "addXP": 0,
+      "targetMove": "800;100",
+      "stiffPriority": 10,
+      "protectPointB": 3334,
+      "skillToward": 0,
+      "consumeXP": 0,
+      "atkRange": "-150;-176;300;205",
+      "pvpProtectPoint": 3334,
+      "consumeMP": "0",
+      "summonMonster": 0,
+      "canUseInGround": 1,
+      "isProtectPointAdd": 1,
+      "canWalk": 0,
+      "attackedMoveDir": 2,
+      "skillAdd": 0,
+      "alone": "0",
+      "pvpProtectPointB": 3334,
+      "cd": 0,
+      "param": {
+        "s": [
+          {
+            "skillid": 0,
+            "type": 1,
+            "y": 0,
+            "shootSpeed": 0,
+            "zSort": 1,
+            "followParent": true,
+            "shootThrough": true,
+            "shootTime": 0,
+            "shootFrame": 0,
+            "shootAssetLink": "skill1_1",
+            "x": 0
+          }
+        ]
+      },
+      "pvpDisable": 0,
+      "addXPMax": 0,
+      "canUseInSKy": 0,
+      "showInUsing": 0,
+      "actType": 0,
+      "summonMonsterInherit": 0,
+      "isAoyiSkill": 0,
+      "hitRangeType": 0,
+      "consumeHP": 0,
+      "isAttOneMan": "0",
+      "summonCoord": 0,
+      "skillDefault": 0.5,
+      "ringMaxCount": -1,
+      "hurtDelay": 0,
+      "ringDefault": 0.5,
+      "id": 2001100,
+      "atkMax": 1,
+      "protectPoint": 3334
+    },
+    "2001110": {
+      "subPowerMax": 0,
+      "sort": 0,
+      "name": "琵琶之伤",
+      "summonNumMax": -1,
+      "skillAddLevelMax": 0,
+      "mpHurt": 0,
+      "type": 1,
+      "skillCountAdd": "0",
+      "addPowerMax": 0,
+      "addPowerNum": 0,
+      "atkInterval": 0,
+      "priority": 0,
+      "worldBossCD": 0,
+      "hideLvInfo": 0,
+      "containSummoned": 1,
+      "iconId": -1,
+      "initLv": 1,
+      "addXP": 0,
+      "stiffPriority": 10,
+      "protectPointB": 3334,
+      "dialogIcon": 2001110,
+      "skillToward": 0,
+      "consumeXP": 0,
+      "atkRange": "-195;-284;667;393",
+      "pvpProtectPoint": 3334,
+      "consumeMP": "0",
+      "summonMonster": 0,
+      "canUseInGround": 1,
+      "isProtectPointAdd": 1,
+      "canWalk": 0,
+      "attackedMoveDir": 1,
+      "skillAdd": 0,
+      "alone": "0",
+      "pvpProtectPointB": 3334,
+      "cd": 0,
+      "param": {
+        "s": [
+          {
+            "collisionGroup": 1,
+            "shakeOnHit": false,
+            "type": 2,
+            "isBackTomeOnHit": false,
+            "setBody": false,
+            "hasDamage": true,
+            "zSort": 1,
+            "attackedMoveDir": 1,
+            "shootThrough": false,
+            "skillid": 0,
+            "isBackTome": false,
+            "isToTarget": false,
+            "arrowDisTime": 0,
+            "followParent": false,
+            "atkInterval": 0.1,
+            "delayDestroy": 0.1,
+            "isBackTomeOnTimeUp": false,
+            "shootSpeed": 650,
+            "stiff": 0.5,
+            "sensor": true,
+            "mirrorAngle": false,
+            "shootAssetLink": "skill2_1",
+            "locatePostionType": "1",
+            "backTomeOffse": "0;0",
+            "arrowNum": 5,
+            "shootTime": 1,
+            "collisionMask": -1,
+            "useParentPos": false,
+            "material0": true,
+            "rotationByVel": true,
+            "x": 100,
+            "shield": false,
+            "useParentDirection": false,
+            "shootFrame": 24,
+            "shakeFrame": "0",
+            "targetMove": "40;60",
+            "linkParentState": true,
+            "bodyType": "st",
+            "y": -50,
+            "arrowAngle": 0,
+            "bullet": false,
+            "atkMax": 1,
+            "arrowDisAngle": 20
+          },
+          {
+            "collisionGroup": 1,
+            "shakeOnHit": false,
+            "type": 1,
+            "setBody": false,
+            "hasDamage": true,
+            "zSort": 1,
+            "attackedMoveDir": 1,
+            "shootThrough": true,
+            "skillid": 0,
+            "delayDestroy": 0,
+            "shootSpeed": 0,
+            "followParent": true,
+            "atkInterval": 0.1,
+            "stiff": 1,
+            "sensor": true,
+            "mirrorAngle": false,
+            "shootTime": 0,
+            "locatePostionType": "1",
+            "targetMove": "",
+            "collisionMask": -1,
+            "material0": true,
+            "shakeFrame": "0",
+            "x": 0,
+            "y": 0,
+            "shootAssetLink": "skill2_2",
+            "linkParentState": true,
+            "bodyType": "kc",
+            "useParentDirection": false,
+            "shootFrame": 0,
+            "atkMax": 1
+          }
+        ]
+      },
+      "pvpDisable": 0,
+      "addXPMax": 0,
+      "canUseInSKy": 0,
+      "showInUsing": 0,
+      "actType": 0,
+      "summonMonsterInherit": 0,
+      "isAoyiSkill": 0,
+      "hitRangeType": 0,
+      "consumeHP": 0,
+      "isAttOneMan": "0",
+      "summonCoord": 0,
+      "skillDefault": 0.2,
+      "ringMaxCount": -1,
+      "hurtDelay": 0,
+      "ringDefault": 0.2,
+      "id": 2001110,
+      "atkMax": 1,
+      "protectPoint": 3334
+    },
+    "2001120": {
+      "subPowerMax": 0,
+      "sort": 0,
+      "name": "玉石之墙",
+      "summonNumMax": -1,
+      "skillAddLevelMax": 0,
+      "mpHurt": 0,
+      "type": 1,
+      "skillCountAdd": "0",
+      "addPowerMax": 0,
+      "addPowerNum": 0,
+      "stiff": 0.3,
+      "atkInterval": 0,
+      "priority": 0,
+      "worldBossCD": 0,
+      "hideLvInfo": 0,
+      "containSummoned": 1,
+      "iconId": -1,
+      "initLv": 1,
+      "addXP": 0,
+      "stiffPriority": 10,
+      "protectPointB": 5001,
+      "dialogIcon": 2001120,
+      "skillToward": 0,
+      "consumeXP": 0,
+      "atkRange": "-165;-210;641;238",
+      "pvpProtectPoint": 5001,
+      "consumeMP": "0",
+      "summonMonster": 0,
+      "canUseInGround": 1,
+      "isProtectPointAdd": 1,
+      "canWalk": 0,
+      "attackedMoveDir": 1,
+      "skillAdd": 0,
+      "alone": "0",
+      "pvpProtectPointB": 5001,
+      "cd": 0,
+      "param": {
+        "s": [
+          {
+            "arrowDisTime": 0,
+            "setBody": false,
+            "shootThrough": true,
+            "isBackTome": false,
+            "skillid": 0,
+            "zSort": 1,
+            "isToTarget": false,
+            "followParent": false,
+            "delayDestroy": 0,
+            "shootSpeed": 0,
+            "sensor": true,
+            "arrowNum": 1,
+            "shootTime": 0,
+            "next": {
+              "arrowDisTime": 0,
+              "setBody": true,
+              "shootThrough": true,
+              "isBackTome": false,
+              "skillid": 0,
+              "zSort": 1,
+              "isToTarget": false,
+              "followParent": false,
+              "delayDestroy": 0,
+              "shootSpeed": 0,
+              "sensor": false,
+              "arrowNum": 1,
+              "shootAssetLink": "skill3_2",
+              "shootTime": 5,
+              "collisionMask": -1,
+              "material0": true,
+              "rotationByVel": false,
+              "x": 0,
+              "type": 2,
+              "shootFrame": 0,
+              "shakeFrame": "0",
+              "collisionGroup": 256,
+              "bodyType": "kc",
+              "y": 0,
+              "arrowAngle": 0,
+              "arrowDisAngle": 0
+            },
+            "shootAssetLink": "skill3_1",
+            "collisionMask": -1,
+            "material0": true,
+            "rotationByVel": false,
+            "x": 225,
+            "type": 2,
+            "shootFrame": 19,
+            "shakeFrame": "0",
+            "collisionGroup": 1,
+            "bodyType": "st",
+            "y": -5,
+            "arrowAngle": 0,
+            "arrowDisAngle": 0
+          }
+        ]
+      },
+      "pvpDisable": 0,
+      "addXPMax": 0,
+      "canUseInSKy": 0,
+      "showInUsing": 0,
+      "actType": 0,
+      "summonMonsterInherit": 0,
+      "isAoyiSkill": 0,
+      "hitRangeType": 0,
+      "consumeHP": 0,
+      "isAttOneMan": "0",
+      "summonCoord": 0,
+      "skillDefault": 1.5,
+      "ringMaxCount": -1,
+      "hurtDelay": 0,
+      "ringDefault": 1.5,
+      "id": 2001120,
+      "atkMax": 0,
+      "protectPoint": 5001
+    },
+    "1900010": {
+      "subPowerMax": 0,
+      "sort": 0,
+      "name": "角色通用保护技",
+      "summonNumMax": -1,
+      "skillAddLevelMax": 0,
+      "mpHurt": 0,
+      "type": 0,
+      "skillCountAdd": "0",
+      "addPowerMax": 0,
+      "addPowerNum": 0,
+      "stiff": 0.3,
+      "atkInterval": 0,
+      "priority": 0,
+      "worldBossCD": 0,
+      "myBuff": "10001;270002;200002",
+      "containSummoned": 1,
+      "iconId": -1,
+      "initLv": 0,
+      "hideLvInfo": 0,
+      "addXP": 0,
+      "stiffPriority": 10,
+      "protectPointB": 0,
+      "skillToward": 0,
+      "consumeXP": 10000,
+      "atkRange": "-900;-600;1800;1200",
+      "pvpProtectPoint": 0,
+      "pvpRingDefault": 1,
+      "consumeMP": 0,
+      "pvpRingMaxCount": -1,
+      "canUseInGround": 1,
+      "isProtectPointAdd": 1,
+      "canWalk": 0,
+      "attackedMoveDir": 1,
+      "skillAdd": 0,
+      "alone": "0",
+      "pvpProtectPointB": 0,
+      "cd": 0,
+      "param": {
+        "s": []
+      },
+      "pvpDisable": 0,
+      "addXPMax": 0,
+      "canUseInSKy": 0,
+      "showInUsing": 0,
+      "actType": 0,
+      "summonMonsterInherit": 0,
+      "myBuffLevInterval": "1000;1000;1000",
+      "hitRangeType": 0,
+      "consumeHP": 0,
+      "isAttOneMan": "0",
+      "isAoyiSkill": 0,
+      "skillDefault": 1,
+      "ringMaxCount": -1,
+      "hurtDelay": 0,
+      "ringDefault": 1,
+      "id": 1900010,
+      "atkMax": 1,
+      "protectPoint": 0
+    }
+  },
+  "ai": {
+    "id": 10009,
+    "name": "玉石琵琶",
+    "children": [
+      {
+        "id": 1,
+        "children": [
+          {
+            "id": 101,
+            "children": []
+          },
+          {
+            "id": 104,
+            "children": []
+          },
+          {
+            "id": 111,
+            "children": []
+          },
+          {
+            "id": 107,
+            "children": []
+          },
+          {
+            "id": 106,
+            "children": []
+          },
+          {
+            "id": 201,
+            "children": []
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "children": [
+          {
+            "id": 112,
+            "children": []
+          },
+          {
+            "id": 103,
+            "children": []
+          },
+          {
+            "id": 104,
+            "children": []
+          },
+          {
+            "id": 106,
+            "children": []
+          },
+          {
+            "id": 113,
+            "children": []
+          },
+          {
+            "id": 205,
+            "children": []
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "children": [
+          {
+            "id": 103,
+            "children": []
+          },
+          {
+            "id": 104,
+            "children": []
+          },
+          {
+            "id": 106,
+            "children": []
+          },
+          {
+            "id": 113,
+            "children": []
+          },
+          {
+            "id": 114,
+            "children": []
+          },
+          {
+            "id": 111005,
+            "children": []
+          },
+          {
+            "id": 2042,
+            "children": []
+          },
+          {
+            "id": 207001002,
+            "children": []
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "children": [
+          {
+            "id": 103,
+            "children": []
+          },
+          {
+            "id": 104,
+            "children": []
+          },
+          {
+            "id": 106,
+            "children": []
+          },
+          {
+            "id": 113,
+            "children": []
+          },
+          {
+            "id": 114,
+            "children": []
+          },
+          {
+            "id": 111010,
+            "children": []
+          },
+          {
+            "id": 6,
+            "children": [
+              {
+                "id": 3,
+                "children": [
+                  {
+                    "id": 2041,
+                    "children": []
+                  },
+                  {
+                    "id": 207001002,
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "id": 3,
+                "children": [
+                  {
+                    "id": 2043,
+                    "children": []
+                  },
+                  {
+                    "id": 207001002,
+                    "children": []
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "behavior": [
+    {
+      "id": "6",
+      "name": "RandChild",
+      "value": null,
+      "type": "sel",
+      "des": " 随机取个节点 "
+    },
+    {
+      "id": "2041",
+      "name": "GotoSkill1",
+      "value": "skill1",
+      "type": "ac",
+      "des": "技能1"
+    },
+    {
+      "id": "2042",
+      "name": "GotoSkill2",
+      "value": "skill2",
+      "type": "ac",
+      "des": "技能2"
+    },
+    {
+      "id": "2043",
+      "name": "GotoSkill3",
+      "value": "skill3",
+      "type": "ac",
+      "des": "技能3"
+    },
+    {
+      "id": "207001002",
+      "name": "GotoAway",
+      "value": "1;2",
+      "type": "ac",
+      "des": "远离1-2秒"
+    },
+    {
+      "id": "111005",
+      "name": "GetAttCD",
+      "type": "con",
+      "value": "5",
+      "des": "技能冷却5秒"
+    },
+    {
+      "id": "111010",
+      "name": "GetAttCD",
+      "type": "con",
+      "value": "10",
+      "des": "技能冷却10秒"
+    }
+  ],
+  "animations": {
+    "dead": 39,
+    "hurtStand": 34,
+    "idle": 30,
+    "skill1": 38,
+    "skill1_1": 38,
+    "skill2": 44,
+    "skill2_1": 6,
+    "skill2_2": 44,
+    "skill3": 30,
+    "skill3_1": 12,
+    "skill3_2": 15,
+    "walk": 26
+  },
+  "bounds": {
+    "skill1_1": [
+      {
+        "name": "ab_skill1_10015",
+        "x": "-150",
+        "y": "-176.95",
+        "width": "300",
+        "height": "205.95",
+        "frame": 15
+      },
+      {
+        "name": "ab_skill1_10016",
+        "x": "-150",
+        "y": "-176.95",
+        "width": "300",
+        "height": "205.95",
+        "frame": 16
+      },
+      {
+        "name": "ab_skill1_10017",
+        "x": "-150",
+        "y": "-176.95",
+        "width": "300",
+        "height": "205.95",
+        "frame": 17
+      },
+      {
+        "name": "ab_skill1_10018",
+        "x": "-150",
+        "y": "-176.95",
+        "width": "300",
+        "height": "205.95",
+        "frame": 18
+      },
+      {
+        "name": "ab_skill1_10019",
+        "x": "-150",
+        "y": "-176.95",
+        "width": "300",
+        "height": "205.95",
+        "frame": 19
+      },
+      {
+        "name": "ab_skill1_10020",
+        "x": "-150",
+        "y": "-176.95",
+        "width": "300",
+        "height": "205.95",
+        "frame": 20
+      },
+      {
+        "name": "ab_skill1_10021",
+        "x": "-150",
+        "y": "-176.95",
+        "width": "300",
+        "height": "205.95",
+        "frame": 21
+      },
+      {
+        "name": "ab_skill1_10022",
+        "x": "-150",
+        "y": "-176.95",
+        "width": "300",
+        "height": "205.95",
+        "frame": 22
+      },
+      {
+        "name": "ab_skill1_10023",
+        "x": "-150",
+        "y": "-176.95",
+        "width": "300",
+        "height": "205.95",
+        "frame": 23
+      },
+      {
+        "name": "ab_skill1_10024",
+        "x": "-150",
+        "y": "-176.95",
+        "width": "300",
+        "height": "205.95",
+        "frame": 24
+      },
+      {
+        "name": "ab_skill1_10025",
+        "x": "-150",
+        "y": "-176.95",
+        "width": "300",
+        "height": "205.95",
+        "frame": 25
+      },
+      {
+        "name": "ab_skill1_10026",
+        "x": "-150",
+        "y": "-176.95",
+        "width": "300",
+        "height": "205.95",
+        "frame": 26
+      },
+      {
+        "name": "ab_skill1_10027",
+        "x": "-150",
+        "y": "-176.95",
+        "width": "300",
+        "height": "205.95",
+        "frame": 27
+      },
+      {
+        "name": "ab_skill1_10028",
+        "x": "-150",
+        "y": "-176.95",
+        "width": "300",
+        "height": "205.95",
+        "frame": 28
+      },
+      {
+        "name": "ab_skill1_10029",
+        "x": "-150",
+        "y": "-176.95",
+        "width": "300",
+        "height": "205.95",
+        "frame": 29
+      },
+      {
+        "name": "ab_skill1_10030",
+        "x": "-150",
+        "y": "-176.95",
+        "width": "300",
+        "height": "205.95",
+        "frame": 30
+      },
+      {
+        "name": "ab_skill1_10031",
+        "x": "-150",
+        "y": "-176.95",
+        "width": "300",
+        "height": "205",
+        "frame": 31
+      },
+      {
+        "name": "ab_skill1_10032",
+        "x": "-150",
+        "y": "-176.95",
+        "width": "300",
+        "height": "205",
+        "frame": 32
+      }
+    ],
+    "skill2_1": [
+      {
+        "name": "ab_skill2_10000",
+        "x": "-34.05",
+        "y": "-24.5",
+        "width": "63.05",
+        "height": "46",
+        "frame": 0
+      },
+      {
+        "name": "ab_skill2_10001",
+        "x": "-34.05",
+        "y": "-24.5",
+        "width": "63.05",
+        "height": "46",
+        "frame": 1
+      },
+      {
+        "name": "ab_skill2_10002",
+        "x": "-34.05",
+        "y": "-24.5",
+        "width": "63.05",
+        "height": "46",
+        "frame": 2
+      },
+      {
+        "name": "ab_skill2_10003",
+        "x": "-34.05",
+        "y": "-24.5",
+        "width": "63.05",
+        "height": "46",
+        "frame": 3
+      },
+      {
+        "name": "ab_skill2_10004",
+        "x": "-34.05",
+        "y": "-24.5",
+        "width": "63.05",
+        "height": "46",
+        "frame": 4
+      },
+      {
+        "name": "ab_skill2_10005",
+        "x": "-34.05",
+        "y": "-24.5",
+        "width": "63.05",
+        "height": "46",
+        "frame": 5
+      }
+    ],
+    "skill2_2": [
+      {
+        "name": "ab_skill2_20019",
+        "x": "-5.05",
+        "y": "-100.95",
+        "width": "143.05",
+        "height": "104.4",
+        "frame": 19
+      },
+      {
+        "name": "ab_skill2_20020",
+        "x": "-5.05",
+        "y": "-100.95",
+        "width": "143.05",
+        "height": "104.4",
+        "frame": 20
+      },
+      {
+        "name": "ab_skill2_20021",
+        "x": "-5.05",
+        "y": "-100.95",
+        "width": "143.05",
+        "height": "104.4",
+        "frame": 21
+      },
+      {
+        "name": "ab_skill2_20022",
+        "x": "-5.05",
+        "y": "-100.95",
+        "width": "143.05",
+        "height": "104.4",
+        "frame": 22
+      },
+      {
+        "name": "ab_skill2_20023",
+        "x": "-5.05",
+        "y": "-100.95",
+        "width": "143.05",
+        "height": "104.4",
+        "frame": 23
+      },
+      {
+        "name": "ab_skill2_20024",
+        "x": "-5.05",
+        "y": "-100.95",
+        "width": "143.05",
+        "height": "104.4",
+        "frame": 24
+      },
+      {
+        "name": "ab_skill2_20025",
+        "x": "-5.05",
+        "y": "-100.95",
+        "width": "143.05",
+        "height": "104.4",
+        "frame": 25
+      },
+      {
+        "name": "ab_skill2_20026",
+        "x": "-5.05",
+        "y": "-100.95",
+        "width": "143.05",
+        "height": "104.4",
+        "frame": 26
+      },
+      {
+        "name": "ab_skill2_20027",
+        "x": "-5.05",
+        "y": "-100.95",
+        "width": "143.05",
+        "height": "104.4",
+        "frame": 27
+      }
+    ],
+    "skill3_1": [
+      {
+        "name": "ab_skill3_10000",
+        "x": "-43.15",
+        "y": "-8.35",
+        "width": "79.25",
+        "height": "29.7",
+        "frame": 0
+      },
+      {
+        "name": "ab_skill3_10001",
+        "x": "-43.15",
+        "y": "-21.55",
+        "width": "79.25",
+        "height": "42.9",
+        "frame": 1
+      },
+      {
+        "name": "ab_skill3_10002",
+        "x": "-43.15",
+        "y": "-34.7",
+        "width": "79.25",
+        "height": "56.05",
+        "frame": 2
+      },
+      {
+        "name": "ab_skill3_10003",
+        "x": "-43.15",
+        "y": "-47.9",
+        "width": "79.25",
+        "height": "69.25",
+        "frame": 3
+      },
+      {
+        "name": "ab_skill3_10004",
+        "x": "-43.15",
+        "y": "-61.05",
+        "width": "79.25",
+        "height": "82.4",
+        "frame": 4
+      },
+      {
+        "name": "ab_skill3_10005",
+        "x": "-43.15",
+        "y": "-74.25",
+        "width": "79.25",
+        "height": "95.6",
+        "frame": 5
+      },
+      {
+        "name": "ab_skill3_10006",
+        "x": "-43.15",
+        "y": "-87.4",
+        "width": "79.25",
+        "height": "108.75",
+        "frame": 6
+      },
+      {
+        "name": "ab_skill3_10007",
+        "x": "-43.15",
+        "y": "-100.6",
+        "width": "79.25",
+        "height": "121.95",
+        "frame": 7
+      },
+      {
+        "name": "ab_skill3_10008",
+        "x": "-43.15",
+        "y": "-113.75",
+        "width": "79.25",
+        "height": "135.1",
+        "frame": 8
+      },
+      {
+        "name": "ab_skill3_10009",
+        "x": "-43.15",
+        "y": "-126.95",
+        "width": "79.25",
+        "height": "148.3",
+        "frame": 9
+      },
+      {
+        "name": "ab_skill3_10010",
+        "x": "-43.15",
+        "y": "-140.1",
+        "width": "79.25",
+        "height": "161.45",
+        "frame": 10
+      },
+      {
+        "name": "ab_skill3_10011",
+        "x": "-43.15",
+        "y": "-153.3",
+        "width": "79.25",
+        "height": "174.65",
+        "frame": 11
+      }
+    ],
+    "skill3_2": [
+      {
+        "name": "ab_skill3_20000",
+        "x": "-33",
+        "y": "-157.55",
+        "width": "66",
+        "height": "177.05",
+        "frame": 0
+      },
+      {
+        "name": "ab_skill3_20001",
+        "x": "-33",
+        "y": "-157.55",
+        "width": "66",
+        "height": "177.05",
+        "frame": 1
+      },
+      {
+        "name": "ab_skill3_20002",
+        "x": "-33",
+        "y": "-157.55",
+        "width": "66",
+        "height": "177.05",
+        "frame": 2
+      },
+      {
+        "name": "ab_skill3_20003",
+        "x": "-33",
+        "y": "-157.55",
+        "width": "66",
+        "height": "177.05",
+        "frame": 3
+      },
+      {
+        "name": "ab_skill3_20004",
+        "x": "-33",
+        "y": "-157.55",
+        "width": "66",
+        "height": "177.05",
+        "frame": 4
+      },
+      {
+        "name": "ab_skill3_20005",
+        "x": "-33",
+        "y": "-157.55",
+        "width": "66",
+        "height": "177.05",
+        "frame": 5
+      },
+      {
+        "name": "ab_skill3_20006",
+        "x": "-33",
+        "y": "-157.55",
+        "width": "66",
+        "height": "177.05",
+        "frame": 6
+      },
+      {
+        "name": "ab_skill3_20007",
+        "x": "-33",
+        "y": "-157.55",
+        "width": "66",
+        "height": "177.05",
+        "frame": 7
+      },
+      {
+        "name": "ab_skill3_20008",
+        "x": "-33",
+        "y": "-157.55",
+        "width": "66",
+        "height": "177.05",
+        "frame": 8
+      },
+      {
+        "name": "ab_skill3_20009",
+        "x": "-33",
+        "y": "-157.55",
+        "width": "66",
+        "height": "177.05",
+        "frame": 9
+      },
+      {
+        "name": "ab_skill3_20010",
+        "x": "-33",
+        "y": "-157.55",
+        "width": "66",
+        "height": "177.05",
+        "frame": 10
+      },
+      {
+        "name": "ab_skill3_20011",
+        "x": "-33",
+        "y": "-157.55",
+        "width": "66",
+        "height": "177.05",
+        "frame": 11
+      },
+      {
+        "name": "ab_skill3_20012",
+        "x": "-33",
+        "y": "-157.55",
+        "width": "66",
+        "height": "177.05",
+        "frame": 12
+      },
+      {
+        "name": "ab_skill3_20013",
+        "x": "-33",
+        "y": "-157.55",
+        "width": "66",
+        "height": "177.05",
+        "frame": 13
+      },
+      {
+        "name": "ab_skill3_20014",
+        "x": "-33",
+        "y": "-157.55",
+        "width": "66",
+        "height": "177.05",
+        "frame": 14
+      }
+    ]
+  },
+  "sounds": [
+    {
+      "name": "music",
+      "file": "boss_01.mp3",
+      "sha256": "1acc0dc246e8ad331b3d32038e2f263c39ec0fad57c70329fe0b0bed72dfcba7"
+    },
+    {
+      "name": "hit",
+      "file": "hit.mp3",
+      "sha256": "fc98c6e341d862bb8f61f07b3a0dda8ccb97a2014c8498f4014f61ca24260895"
+    },
+    {
+      "name": "win",
+      "file": "win.mp3",
+      "sha256": "607a64ca565c529166d7100e6a5e65776bc6cab76342c3d88da034c5dd036cc8"
+    },
+    {
+      "name": "lose",
+      "file": "lose.mp3",
+      "sha256": "ba226f0e94cc02d55151b833b5dc88cb7631b9eab72b448ac60756692c2a970a"
+    }
+  ],
+  "scope": {
+    "hp_phases": false,
+    "monster_summoning": false,
+    "ordinary_boss": true
+  }
+}

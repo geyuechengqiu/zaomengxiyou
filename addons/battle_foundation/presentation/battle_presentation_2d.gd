@@ -26,6 +26,9 @@ func register_actor(actor: BattleEntity2D) -> void:
 		view = feedback_scene.instantiate() as BattleCombatFeedback2D
 		entity_views.add_child(view)
 	_views[actor.entity_id] = view
+	if actor.ai_controller is BattleBossController2D:
+		view.health_bar_enabled = false
+		view.show_protection_bar = false
 	view.bind_actor(actor, self)
 
 func get_feedback(actor: BattleEntity2D) -> BattleCombatFeedback2D:
@@ -44,12 +47,18 @@ func clear_presentations() -> void:
 	for id in _views.keys():
 		remove_actor(id)
 	number_rows.clear_numbers()
+	var boss := get_node_or_null(^"BossFeedback") as BattleBossFeedback2D
+	if boss != null: boss.clear_feedback()
 
 func advance_presentation(delta: float) -> void:
 	for view: BattleCombatFeedback2D in _views.values():
 		view.advance_feedback(delta)
 	# 每场战斗每个 tick 仅推进一次，数量与目标数无关。
 	number_rows.advance_numbers(delta)
+	var boss := get_node_or_null(^"BossFeedback") as BattleBossFeedback2D
+	if boss != null:
+		boss.advance_feedback(delta)
+		boss.synchronize_pause(_session.is_simulation_blocked())
 
 func _on_event(id: String, payload: Array) -> void:
 	if id not in ["battle.attack.hit", "battle.damage.settled"] or payload.size() != 1 or not payload[0] is Dictionary:

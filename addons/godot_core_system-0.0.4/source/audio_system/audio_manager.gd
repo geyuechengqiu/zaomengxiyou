@@ -70,6 +70,17 @@ func _ready() -> void:
 #endregion
 #region 公共接口
 
+## 角色/关卡场景预置播放器接入Core音量总线；节点仍由原场景管理。
+## 不写入全局工厂池，不修改播放器的设计音量，不影响其他战斗会话。
+func bind_scene_player(player: AudioStreamPlayer, type: AudioType) -> bool:
+	if not is_instance_valid(player) or not DEFAULT_BUSES.has(type):
+		return false
+	var bus: String = DEFAULT_BUSES[type]
+	if AudioServer.get_bus_index(bus) < 0:
+		return false
+	player.bus = bus
+	return true
+
 ## 预加载音频资源
 ## [param path] 音频路径
 ## [param type] 音频类型

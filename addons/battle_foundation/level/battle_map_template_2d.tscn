@@ -1,0 +1,11 @@
+[gd_scene format=3]
+[ext_resource type="Script" path="res://addons/battle_foundation/level/battle_map_2d.gd" id="script"]
+[node name="Map" type="Node2D"]
+script = ExtResource("script")
+[node name="Visuals" type="Node2D" parent="."]
+[node name="Terrain" type="Node2D" parent="."]
+[node name="SpawnPoints" type="Node2D" parent="."]
+[node name="Gates" type="Node2D" parent="."]
+[node name="Landmarks" type="Node2D" parent="."]
+[node name="PlayerBirth" type="Marker2D" parent="."]
+position = Vector2(240,1056)

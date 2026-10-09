@@ -1,0 +1,115 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="1240" viewBox="0 0 1800 1240"><defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#566780"/></marker></defs><rect width="1800" height="1240" fill="#f5f7fb"/><g font-family="Microsoft YaHei,Segoe UI,sans-serif" fill="#182840">
+<text x="40" y="48" font-size="32" fill="#182840">阶段13 · Boss技能、阶段与播报</text>
+<text x="40" y="81" font-size="20" fill="#53647d">通用怪物 + 专属配置；复用Core/GAS，定义与运行实例分离，节点和对象池在场景中预置</text>
+<rect x="40" y="120" width="400" height="225" rx="10" fill="white" stroke="#345b9a" stroke-width="2"/><rect x="40" y="120" width="400" height="65" rx="10" fill="#345b9a"/>
+<text x="54" y="147" font-size="19" fill="white">Boss行为定义</text>
+<text x="54" y="171" font-size="16" fill="white">BattleBossProfile : Resource</text>
+<text x="54" y="213" font-size="17" fill="#182840">skills / phases（原Boss为空）</text>
+<text x="54" y="240" font-size="17" fill="#182840">health_bar_count / maximum_summons</text>
+<text x="54" y="267" font-size="17" fill="#182840">intro_seconds / completion_condition</text>
+<text x="54" y="294" font-size="17" fill="#182840">is_valid()：唯一ID、阈值顺序</text>
+<rect x="480" y="120" width="400" height="225" rx="10" fill="white" stroke="#345b9a" stroke-width="2"/><rect x="480" y="120" width="400" height="65" rx="10" fill="#345b9a"/>
+<text x="494" y="147" font-size="19" fill="white">技能选择规则</text>
+<text x="494" y="171" font-size="16" fill="white">BattleBossSkillRule : Resource</text>
+<text x="494" y="213" font-size="17" fill="#182840">ability_id / priority / weight</text>
+<text x="494" y="240" font-size="17" fill="#182840">cooldown_group / group_cooldown</text>
+<text x="494" y="267" font-size="17" fill="#182840">距离 / 血量 / 阶段 / 前置条件</text>
+<text x="494" y="294" font-size="17" fill="#182840">announcement / lead / warning_rect</text>
+<rect x="920" y="120" width="400" height="225" rx="10" fill="white" stroke="#345b9a" stroke-width="2"/><rect x="920" y="120" width="400" height="65" rx="10" fill="#345b9a"/>
+<text x="934" y="147" font-size="19" fill="white">血量阶段定义</text>
+<text x="934" y="171" font-size="16" fill="white">BattleBossPhase : Resource</text>
+<text x="934" y="213" font-size="17" fill="#182840">phase_id / health_ratio</text>
+<text x="934" y="240" font-size="17" fill="#182840">entry_ability_id / required_conditions</text>
+<text x="934" y="267" font-size="17" fill="#182840">invulnerable_during_entry</text>
+<text x="934" y="294" font-size="17" fill="#182840">scene_event（Core场景动作）</text>
+<rect x="1360" y="120" width="400" height="225" rx="10" fill="white" stroke="#345b9a" stroke-width="2"/><rect x="1360" y="120" width="400" height="65" rx="10" fill="#345b9a"/>
+<text x="1374" y="147" font-size="19" fill="white">弹道与石墙定义</text>
+<text x="1374" y="171" font-size="16" fill="white">BattleBossObjectDefinition : Resource</text>
+<text x="1374" y="213" font-size="17" fill="#182840">源动作 / 逐帧AB / 生成位置 / 速度</text>
+<text x="1374" y="240" font-size="17" fill="#182840">formation_seconds / lifetime</text>
+<text x="1374" y="267" font-size="17" fill="#182840">angles / linked_to_action</text>
+<text x="1374" y="294" font-size="17" fill="#182840">最大次数 / 间隔 / 伤害上下文</text>
+<path d="M440 230H480" fill="none" stroke="#566780" stroke-width="2" marker-end="url(#arrow)" />
+<text x="445" y="215" font-size="16" fill="#435575">拥有</text>
+<path d="M240 120V103H1120V120" fill="none" stroke="#566780" stroke-width="2" marker-end="url(#arrow)" />
+<text x="816" y="98" font-size="16" fill="#435575">拥有阶段列表</text>
+<rect x="40" y="430" width="400" height="265" rx="10" fill="white" stroke="#25806d" stroke-width="2"/><rect x="40" y="430" width="400" height="65" rx="10" fill="#25806d"/>
+<text x="54" y="457" font-size="19" fill="white">Boss行为实例</text>
+<text x="54" y="481" font-size="16" fill="white">BattleBossController2D : BattleAIController2D</text>
+<text x="54" y="523" font-size="17" fill="#182840">索敌/追击/退步 → Core操作意图</text>
+<text x="54" y="550" font-size="17" fill="#182840">独立冷却组、播报请求、阶段锁存</text>
+<text x="54" y="577" font-size="17" fill="#182840">summons / summon_total / deaths</text>
+<text x="54" y="604" font-size="17" fill="#182840">阈值达到 + 前置满足 → 一次转换</text>
+<text x="54" y="631" font-size="17" fill="#182840">死亡/取消/离场 → 统一回收</text>
+<rect x="480" y="430" width="400" height="265" rx="10" fill="white" stroke="#25806d" stroke-width="2"/><rect x="480" y="430" width="400" height="65" rx="10" fill="#25806d"/>
+<text x="494" y="457" font-size="19" fill="white">通用角色与技能释放</text>
+<text x="494" y="481" font-size="16" fill="white">BattleEntity2D + GAS/BattleAttackInstance</text>
+<text x="494" y="523" font-size="17" fill="#182840">Core状态机校验 ai_skill 意图</text>
+<text x="494" y="550" font-size="17" fill="#182840">GAS冷却/费用 + 素材帧Timeline</text>
+<text x="494" y="577" font-size="17" fill="#182840">AnimationPlayer播放原动作</text>
+<text x="494" y="604" font-size="17" fill="#182840">resolve_attack_hit()共享伤害入口</text>
+<text x="494" y="631" font-size="17" fill="#182840">每次释放ID → 标记/取消事件</text>
+<rect x="920" y="430" width="400" height="265" rx="10" fill="white" stroke="#25806d" stroke-width="2"/><rect x="920" y="430" width="400" height="65" rx="10" fill="#25806d"/>
+<text x="934" y="457" font-size="19" fill="white">场景对象池与独立对象</text>
+<text x="934" y="481" font-size="16" fill="white">BattleBossObjectPool2D / WorldObject2D</text>
+<text x="934" y="523" font-size="17" fill="#182840">预置5音符 + 3石墙（玉石琵琶精）</text>
+<text x="934" y="550" font-size="17" fill="#182840">对象/目标独立次数与下次命中时间</text>
+<text x="934" y="577" font-size="17" fill="#182840">30FPS子步 + 连续扫掠 + 地形阻挡</text>
+<text x="934" y="604" font-size="17" fill="#182840">石墙成形后启用StaticBody碰撞</text>
+<text x="934" y="631" font-size="17" fill="#182840">正常结束遵循联动；取消清理全部</text>
+<rect x="1360" y="430" width="400" height="265" rx="10" fill="white" stroke="#25806d" stroke-width="2"/><rect x="1360" y="430" width="400" height="65" rx="10" fill="#25806d"/>
+<text x="1374" y="457" font-size="19" fill="white">全场公共Boss表现</text>
+<text x="1374" y="481" font-size="16" fill="white">BattleBossFeedback2D : Node2D</text>
+<text x="1374" y="523" font-size="17" fill="#182840">原Boss血条/保护条：0.6/0.3秒</text>
+<text x="1374" y="550" font-size="17" fill="#182840">原横幅轨迹与可选前置预警</text>
+<text x="1374" y="577" font-size="17" fill="#182840">Core音量总线 / 原BGM及命中声</text>
+<text x="1374" y="604" font-size="17" fill="#182840">可编辑镜头反馈、结束归还偏移</text>
+<text x="1374" y="631" font-size="17" fill="#182840">不挂在悟空；不决定战斗规则</text>
+<path d="M240 345V430" fill="none" stroke="#566780" stroke-width="2" marker-end="url(#arrow)" stroke-dasharray="6 5"/>
+<text x="255" y="389" font-size="16" fill="#435575">只读配置</text>
+<path d="M680 345V390H260V430" fill="none" stroke="#566780" stroke-width="2" marker-end="url(#arrow)" stroke-dasharray="6 5"/>
+<text x="483" y="382" font-size="16" fill="#435575">选择规则</text>
+<path d="M1120 345V407H280V430" fill="none" stroke="#566780" stroke-width="2" marker-end="url(#arrow)" stroke-dasharray="6 5"/>
+<text x="904" y="402" font-size="16" fill="#435575">阶段配置</text>
+<path d="M1560 345V383H1140V430" fill="none" stroke="#566780" stroke-width="2" marker-end="url(#arrow)" stroke-dasharray="6 5"/>
+<text x="1375" y="373" font-size="16" fill="#435575">对象定义</text>
+<path d="M440 545H480" fill="none" stroke="#566780" stroke-width="2" marker-end="url(#arrow)" />
+<text x="444" y="530" font-size="16" fill="#435575">意图</text>
+<path d="M880 545H920" fill="none" stroke="#566780" stroke-width="2" marker-end="url(#arrow)" />
+<text x="877" y="530" font-size="16" fill="#435575">帧事件</text>
+<path d="M1320 545H1360" fill="none" stroke="#566780" stroke-width="2" marker-end="url(#arrow)" />
+<text x="1317" y="530" font-size="16" fill="#435575">Core</text>
+<rect x="40" y="733" width="1720" height="60" rx="9" fill="#fff0db" stroke="#daaa66"/>
+<text x="60" y="770" font-size="23" fill="#182840">播报时间 ≠ 命中时间：原Boss播报与动作同刻开始，真实攻击由30FPS素材帧与独立对象决定</text>
+<text x="40" y="830" font-size="23" fill="#182840">原版玉石琵琶精：三技能时序（秒）</text>
+<path d="M680 850V1170" stroke="#d9e1ed"/>
+<text x="675" y="871" font-size="16" fill="#53647d">0</text>
+<path d="M846.6666666666666 850V1170" stroke="#d9e1ed"/>
+<text x="841.6666666666666" y="871" font-size="16" fill="#53647d">1</text>
+<path d="M1013.3333333333333 850V1170" stroke="#d9e1ed"/>
+<text x="1008.3333333333333" y="871" font-size="16" fill="#53647d">2</text>
+<path d="M1180 850V1170" stroke="#d9e1ed"/>
+<text x="1175" y="871" font-size="16" fill="#53647d">3</text>
+<path d="M1346.6666666666665 850V1170" stroke="#d9e1ed"/>
+<text x="1341.6666666666665" y="871" font-size="16" fill="#53647d">4</text>
+<path d="M1513.3333333333333 850V1170" stroke="#d9e1ed"/>
+<text x="1508.3333333333333" y="871" font-size="16" fill="#53647d">5</text>
+<path d="M1680 850V1170" stroke="#d9e1ed"/>
+<text x="1675" y="871" font-size="16" fill="#53647d">6</text>
+<text x="40" y="910" font-size="18" fill="#182840">震颤之音 · 38帧动作 · 第15–32帧近身一次命中</text>
+<rect x="680" y="910" width="211.1111111111111" height="18" rx="3" fill="#8097b6"/>
+<text x="685" y="903" font-size="15" fill="#8097b6">动作</text>
+<rect x="763.3333333333334" y="945" width="100.00000000000001" height="18" rx="3" fill="#bb5c43"/>
+<text x="768.3333333333334" y="938" font-size="15" fill="#bb5c43">AB有效</text>
+<text x="40" y="1010" font-size="18" fill="#182840">琵琶之伤 · 44帧动作 · 第24帧发射5枚音符</text>
+<rect x="680" y="1010" width="244.4444444444444" height="18" rx="3" fill="#8097b6"/>
+<text x="685" y="1003" font-size="15" fill="#8097b6">动作</text>
+<rect x="813.3333333333334" y="1045" width="111.11111111111109" height="18" rx="3" fill="#bb5c43"/>
+<text x="818.3333333333334" y="1038" font-size="15" fill="#bb5c43">音符：父动作结束回收</text>
+<text x="40" y="1110" font-size="18" fill="#182840">玉石之墙 · 第19帧生成 · 12帧成形 + 5秒实体</text>
+<rect x="785.5555555555555" y="1110" width="66.66666666666669" height="18" rx="3" fill="#d8a33a"/>
+<text x="790.5555555555555" y="1103" font-size="15" fill="#d8a33a">成形</text>
+<rect x="852.2222222222222" y="1146" width="833.3333333333333" height="18" rx="3" fill="#25806d"/>
+<text x="857.2222222222222" y="1139" font-size="15" fill="#25806d">实体碰撞与持续命中，独立于30帧动作</text>
+<text x="40" y="1210" font-size="20" fill="#53647d">唯一BattleClock → AI/GAS/对象/表现；Core事件 → 属性/Vital/Buff/受击/关卡出口；阶段与召唤通用能力单独验收</text>
+</g></svg>

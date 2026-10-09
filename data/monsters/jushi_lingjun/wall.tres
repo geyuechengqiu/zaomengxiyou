@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="BattleBossObjectDefinition" format=3]
+[ext_resource type="Script" path="res://addons/battle_foundation/boss/battle_boss_object_definition.gd" id="script"]
+[resource]
+script = ExtResource("script")
+object_id = &"jade_wall"
+kind = "wall"
+animation = &"skill3_1"
+continuation_animation = &"skill3_2"
+formation_seconds = 0.4
+lifetime = 5.4
+speed = 0
+spawn_offset = Vector2(225,-5)
+angles = Array[float]([0.0])
+linked_to_action = false
+through_targets = true
+maximum_hits = 0
+hit_interval = 0.1
+damage_context = {"protection_skill_id": "2001120", "hit_stun": 0.3, "reaction_gravity": 1980, "reset_vertical_velocity": true, "knockback_speed": 0, "launch_speed": 0, "knockback_duration": 0.3, "reaction_type": "hurt"}
+hit_rects = Dictionary[int, Rect2]({0: Rect2(-43.15, -8.35, 79.25, 29.7), 1: Rect2(-43.15, -21.55, 79.25, 42.9), 2: Rect2(-43.15, -34.7, 79.25, 56.05), 3: Rect2(-43.15, -47.9, 79.25, 69.25), 4: Rect2(-43.15, -61.05, 79.25, 82.4), 5: Rect2(-43.15, -74.25, 79.25, 95.6), 6: Rect2(-43.15, -87.4, 79.25, 108.75), 7: Rect2(-43.15, -100.6, 79.25, 121.95), 8: Rect2(-43.15, -113.75, 79.25, 135.1), 9: Rect2(-43.15, -126.95, 79.25, 148.3), 10: Rect2(-43.15, -140.1, 79.25, 161.45), 11: Rect2(-43.15, -153.3, 79.25, 174.65)})
+continuation_rects = Dictionary[int, Rect2]({0: Rect2(-33, -157.55, 66, 177.05), 1: Rect2(-33, -157.55, 66, 177.05), 2: Rect2(-33, -157.55, 66, 177.05), 3: Rect2(-33, -157.55, 66, 177.05), 4: Rect2(-33, -157.55, 66, 177.05), 5: Rect2(-33, -157.55, 66, 177.05), 6: Rect2(-33, -157.55, 66, 177.05), 7: Rect2(-33, -157.55, 66, 177.05), 8: Rect2(-33, -157.55, 66, 177.05), 9: Rect2(-33, -157.55, 66, 177.05), 10: Rect2(-33, -157.55, 66, 177.05), 11: Rect2(-33, -157.55, 66, 177.05), 12: Rect2(-33, -157.55, 66, 177.05), 13: Rect2(-33, -157.55, 66, 177.05), 14: Rect2(-33, -157.55, 66, 177.05)})

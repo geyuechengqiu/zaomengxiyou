@@ -5,3 +5,7 @@
 
 # Local IDE settings
 .idea/
+
+# Python offline import tools
+__pycache__/
+*.pyc

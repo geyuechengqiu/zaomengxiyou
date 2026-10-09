@@ -61,6 +61,11 @@ var damage_rules: BattleDamageRules
 var inventory: C_Inventory
 ## 可设置固定随机输入/技能等级；每个实体独立，时间轴参数优先。
 @export var damage_context: Dictionary = {}
+var spawn_remaining: float = 0.0
+var _spawn_collision_layer: int = 0
+var _spawn_collision_mask: int = 0
+var _spawning: bool = false
+var _spawn_animation_visible: bool = true
 #endregion
 #region 初始化与清理
 func get_component_configuration_error(data: BattleEntityDefinition = null) -> String:
@@ -76,6 +81,8 @@ func get_component_configuration_error(data: BattleEntityDefinition = null) -> S
 	var ai := get_node_or_null(^"AIController")
 	if ai != null and (not ai is BattleAIController2D or ai.profile == null or not ai.profile.is_valid()):
 		return "AIController必须使用BattleAIController2D和有效的AI配置"
+	if ai is BattleBossController2D and (ai.boss_profile == null or not ai.boss_profile.is_valid() or not get_node_or_null(^"BossObjects") is BattleBossObjectPool2D):
+		return "Boss必须预置有效行为配置和完整时间轴对象池"
 	return ""
 
 func _bind_scene_components() -> void:
@@ -146,6 +153,8 @@ func cleanup_battle() -> void:
 	if _cleaned:
 		return
 	_cleaned = true
+	_finish_spawn_appearance()
+	if ai_controller != null and ai_controller.has_method("cleanup_boss"): ai_controller.cleanup_boss()
 	_finish_attack(&"despawned")
 	BattleGASBinding.cleanup(abilities, statuses)
 	if animation != null: animation.clear_status_visuals()
@@ -161,6 +170,33 @@ func _exit_tree() -> void:
 	cleanup_battle()
 #endregion
 #region 固定物理与动画时间
+## 关卡刷怪/召唤在完整节点初始化后调用；原版showAppear=0直接开始。
+func begin_spawn_appearance(kind: int) -> bool:
+	if _spawning or _cleaned or not is_alive() or feedback == null: return false
+	var duration := feedback.appearance.play_appearance(kind)
+	if duration <= 0: return false
+	_spawning = true
+	spawn_remaining = duration
+	_spawn_collision_layer = collision_layer
+	_spawn_collision_mask = collision_mask
+	_spawn_animation_visible = animation.visible
+	animation.visible = false
+	collision_layer = 0
+	collision_mask = 0
+	return true
+
+func is_spawning() -> bool:
+	return _spawning
+
+func _finish_spawn_appearance() -> void:
+	if not _spawning: return
+	_spawning = false
+	spawn_remaining = 0
+	if feedback != null: feedback.appearance.clear_effect()
+	if is_instance_valid(animation): animation.visible = _spawn_animation_visible
+	collision_layer = _spawn_collision_layer
+	collision_mask = _spawn_collision_mask
+
 func advance_input(unscaled_delta: float) -> void:
 	if is_instance_valid(operations):
 		operations.advance_input(unscaled_delta)
@@ -168,6 +204,15 @@ func advance_input(unscaled_delta: float) -> void:
 func advance_simulation(delta: float) -> void:
 	if delta <= 0.0 or animation == null:
 		return
+	if spawn_remaining > 0:
+		if not is_alive(): _finish_spawn_appearance()
+		else:
+			var used := minf(delta, spawn_remaining)
+			if feedback != null: feedback.appearance.advance_effect(used)
+			spawn_remaining = maxf(0, spawn_remaining-used)
+			delta -= used
+			if spawn_remaining <= 0: _finish_spawn_appearance()
+			if delta <= 0: return
 	protection.advance(delta)
 	if is_instance_valid(ai_controller):
 		ai_controller.advance_simulation(delta)
@@ -201,6 +246,7 @@ func advance_simulation(delta: float) -> void:
 	if attack_instance != null and attack_instance.active and (attack_instance.timeline == null or not attack_instance.timeline.uses_cast_timeline()):
 		attack_instance.elapsed += delta
 	abilities.advance_simulation(delta)
+	if ai_controller != null and ai_controller.has_method("advance_post_simulation"): ai_controller.advance_post_simulation(delta)
 	_advance_attack_windows()
 	if attack_instance != null and attack_instance.active:
 		attack_instance.advance_objects(delta)
@@ -251,7 +297,7 @@ func is_alive() -> bool:
 	return attributes.get_vital_value(&"health") > 0.0 and action_state.current != BattleActionState2D.State.DEAD
 
 func try_attack() -> bool:
-	if session.is_simulation_blocked() or not is_alive():
+	if session.is_simulation_blocked() or is_spawning() or not is_alive():
 		return false
 	if not motion.grounded and action_state.current in [BattleActionState2D.State.TAKEOFF, BattleActionState2D.State.JUMP]:
 		return try_activate_skill(action_profile.jump_attack_skill_id) if not action_profile.jump_attack_skill_id.is_empty() else false
@@ -262,7 +308,7 @@ func try_attack() -> bool:
 	return _start_combo_step(0) if combo.definition != null else try_activate_skill(action_profile.attack_skill_id)
 
 func request_attack() -> bool:
-	if session.is_simulation_blocked() or not is_alive():
+	if session.is_simulation_blocked() or is_spawning() or not is_alive():
 		return false
 	if action_state.current == BattleActionState2D.State.ATTACK and combo.is_active():
 		return combo.queue_next()
@@ -276,7 +322,7 @@ func cancel_operation_commands() -> void:
 		attack_instance.buffered_operations.clear()
 
 func try_jump() -> bool:
-	if session.is_simulation_blocked() or not action_state.can_jump(is_alive(), action_profile) or not motion.can_jump(action_profile.maximum_jumps):
+	if session.is_simulation_blocked() or is_spawning() or not action_state.can_jump(is_alive(), action_profile) or not motion.can_jump(action_profile.maximum_jumps):
 		return false
 	if not motion.jump(action_profile):
 		return false
@@ -288,7 +334,7 @@ func try_jump() -> bool:
 	return true
 
 func try_activate_skill(id: StringName, context: Dictionary = {}) -> bool:
-	if session.is_simulation_blocked() or not is_alive() or not abilities.has_ability(id):
+	if session.is_simulation_blocked() or is_spawning() or not is_alive() or not abilities.has_ability(id):
 		return false
 	# 普通无双的表现状态无需进入攻击动作，保留当前连击/移动和技能时间轴。
 	if abilities.get_ability_instance(id).get_feature("BattleStatusActivationFeature") != null:
@@ -349,7 +395,7 @@ func try_activate_skill(id: StringName, context: Dictionary = {}) -> bool:
 func _start_combo_step(index: int, continuing: bool = false, context: Dictionary = {}) -> bool:
 	if combo.definition == null or index < 0 or index >= combo.definition.steps.size():
 		return false
-	if session.is_simulation_blocked() or not is_alive() or not motion.grounded or (not continuing and not action_state.can_attack(true)):
+	if session.is_simulation_blocked() or is_spawning() or not is_alive() or not motion.grounded or (not continuing and not action_state.can_attack(true)):
 		return false
 	var step: BattleAttackStep2D = combo.definition.steps[index]
 	if not abilities.has_ability(step.ability_id) or not abilities.can_activate_ability(step.ability_id, context):
@@ -376,7 +422,7 @@ func _is_attack_state() -> bool:
 	return action_state.current in [BattleActionState2D.State.ATTACK, BattleActionState2D.State.RUN_ATTACK, BattleActionState2D.State.JUMP_ATTACK]
 
 func try_turn_combo(direction: int) -> bool:
-	if session.is_simulation_blocked() or not is_alive() or action_state.current != BattleActionState2D.State.ATTACK or not combo.is_active() or combo.turn_used:
+	if session.is_simulation_blocked() or is_spawning() or not is_alive() or action_state.current != BattleActionState2D.State.ATTACK or not combo.is_active() or combo.turn_used:
 		return false
 	var step := combo.get_step()
 	if direction == 0 or direction == animation.get_facing() or attack_instance == null or not attack_instance.active or not step.contains_turn_time(attack_instance.elapsed):
@@ -411,7 +457,7 @@ func receive_damage(amount: float, instigator: Node = null, interrupt_kind: Stri
 	return receive_damage_info(info, interrupt_kind, interrupt_priority, hit_context)
 
 func receive_damage_info(info: DamageInfo, interrupt_kind: StringName = &"normal", interrupt_priority: int = 60, hit_context: Dictionary = {}) -> float:
-	if session.is_simulation_blocked() or not is_alive():
+	if session.is_simulation_blocked() or is_spawning() or not is_alive():
 		return 0.0
 	if info.applied and info.single_use:
 		return info.actual_hp_loss
@@ -467,6 +513,7 @@ func _cancel_abilities(reason: StringName = &"cancelled") -> void:
 		abilities.get_ability_instance(id).end_ability()
 
 func _on_vital_depleted(id: StringName) -> void:
+	if id == &"health": _finish_spawn_appearance()
 	if id != &"health":
 		return
 	_cancel_abilities(&"death")
@@ -633,24 +680,31 @@ func _sample_attack_window(context: Dictionary) -> void:
 	for target in session.get_entities():
 		if not current_attack.active or current_attack != attack_instance or not is_alive() or session.is_simulation_blocked():
 			break
-		if not target is BattleEntity2D or target == self or not target.is_alive() or target.is_queued_for_deletion():
+		if not target is BattleEntity2D or target == self or not target.is_alive() or target.is_spawning() or target.is_queued_for_deletion():
 			continue
 		if not session.factions.is_hostile(current_attack.faction_id, target.faction_id) or not hitbox.intersects_hurtbox(self, animation.get_facing(), target.hurtbox):
 			continue
 		if not current_attack.register_hit(int(context.get("hit_index", 1)), target.entity_id, context):
 			continue
 		var hit_context := context.duplicate(true)
-		hit_context["attack_facing"] = current_attack.facing
-		hit_context["defer_attack_feedback"] = true
-		var calculation_context := damage_context.duplicate(true)
-		calculation_context.merge(hit_context, true)
-		var info := DamageCalculator.calculate_damage(target, self, calculation_context)
-		var damage: float = target.receive_damage_info(info, StringName(context.get("interrupt_kind", &"normal")), int(context.get("interrupt_priority", 60)), hit_context)
-		var result := hit_context.duplicate(true)
-		result.merge(info.to_dictionary(), true)
-		result.merge(info.get_meta(&"hit_effects", {}), true)
-		result.merge({"attack_id": current_attack.attack_id, "damage": damage, "sample_time": context.get("sample_time", current_attack.elapsed), "target_hit_count": current_attack.hit_targets["%d/%s" % [int(context.get("hit_index", 1)), target.entity_id]].count}, true)
-		session.publish_event(&"battle.attack.hit", self, target, result)
+		hit_context.merge({"attack_facing": current_attack.facing, "attack_id": current_attack.attack_id, "sample_time": context.get("sample_time", current_attack.elapsed), "target_hit_count": current_attack.hit_targets["%d/%s" % [int(context.get("hit_index", 1)), target.entity_id]].count}, true)
+		resolve_attack_hit(target, hit_context)
+
+## 身体攻击与独立弹道/场景对象共用GAS、受击、保护、被动及反馈入口。
+func resolve_attack_hit(target: BattleEntity2D, context: Dictionary) -> Dictionary:
+	if not is_alive() or is_spawning() or not is_instance_valid(target) or not target.is_alive() or target.is_spawning() or session.is_simulation_blocked(): return {}
+	var hit_context := context.duplicate(true)
+	hit_context["defer_attack_feedback"] = true
+	var calculation_context := damage_context.duplicate(true)
+	calculation_context.merge(hit_context, true)
+	var info := DamageCalculator.calculate_damage(target, self, calculation_context)
+	var damage: float = target.receive_damage_info(info, StringName(context.get("interrupt_kind", &"normal")), int(context.get("interrupt_priority", 60)), hit_context)
+	var result := hit_context.duplicate(true)
+	result.merge(info.to_dictionary(), true)
+	result.merge(info.get_meta(&"hit_effects", {}), true)
+	result["damage"] = damage
+	session.publish_event(&"battle.attack.hit", self, target, result)
+	return result
 
 #endregion
 #region 时间轴取消与操作派生入口
@@ -700,7 +754,7 @@ func finish_timeline_cast(cast: BattleAttackInstance, reason: StringName = &"com
 		_finish_attack(reason)
 
 func request_skill_operation(operation: StringName, id: StringName) -> bool:
-	if session.is_simulation_blocked() or not is_alive():
+	if session.is_simulation_blocked() or is_spawning() or not is_alive():
 		return false
 	if _is_attack_state() and attack_instance != null:
 		if attack_instance.buffer_operation(operation):
@@ -783,10 +837,10 @@ func _draw() -> void:
 
 #region Buff控制由标签与Core动作状态联合裁决
 func can_use_ability(_id: StringName, _context: Dictionary = {}) -> bool:
-	return not _cleaned and is_alive() and not TagManager.has_tag(self, &"state.stunned")
+	return not _cleaned and not is_spawning() and is_alive() and not TagManager.has_tag(self, &"state.stunned")
 
 func can_receive_status(data: GameplayStatusData) -> bool:
-	if _cleaned or not is_alive():
+	if _cleaned or is_spawning() or not is_alive():
 		return false
 	return not (data.tags.has(&"status.debuff") and (TagManager.has_tag(self, &"state.invulnerable") or (reactions._owner != null and not reactions.get_policy(self).status)))
 

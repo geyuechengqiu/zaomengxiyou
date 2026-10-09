@@ -1,0 +1,1964 @@
+{
+  "original_repository": "D:\\UserData\\Downloads\\game\\Speculum-4399-master",
+  "sources": [
+    {
+      "path": "games/zmhj-g5/cache/assets/map/No_1-1_V283.tmx",
+      "sha256": "97d0e6646a793a73c1e44e58490225c709ffadfcb4d616e157c89091ce836e1c"
+    },
+    {
+      "path": "out/zmhj-equip-skill-diag/com/wdcgame/engine/model/MonsterBirthVO.as",
+      "sha256": "eb1bb19ab9923c578d76e3c23b05723c7a3bfd2cd8a03f4a23e1e3b6f3575826"
+    },
+    {
+      "path": "out/zmhj-equip-skill-diag/com/wdcgame/engine/managers/ManCreateManager.as",
+      "sha256": "cb50e9d7e3b521f8f00ca410498e7460ba4cf42a545e43be264693a8cc47bcf4"
+    },
+    {
+      "path": "out/zmhj-equip-skill-diag/com/wdcgame/engine/managers/TriggerMonsterVO.as",
+      "sha256": "4b000e946fafa6e5785a394ade5ae93f4444f2cb342347ae48c744990c1f8e6b"
+    },
+    {
+      "path": "out/zmhj-equip-skill-diag/prefabs/scripts/GatewayEntity.as",
+      "sha256": "78571b942730f5a3299135efc43c5c994decafe6256d614b2709944d0f0150a0"
+    }
+  ],
+  "objects": [
+    {
+      "id": "18",
+      "name": "第五屏",
+      "type": "ScreenRange",
+      "x": "4448",
+      "y": "0",
+      "width": "1024",
+      "height": "608",
+      "properties": {
+        "screen": "5"
+      }
+    },
+    {
+      "id": "17",
+      "name": "第四屏",
+      "type": "ScreenRange",
+      "x": "3360",
+      "y": "0",
+      "width": "1088",
+      "height": "608",
+      "properties": {
+        "screen": "4"
+      }
+    },
+    {
+      "id": "16",
+      "name": "第三屏",
+      "type": "ScreenRange",
+      "x": "2272",
+      "y": "0",
+      "width": "1088",
+      "height": "608",
+      "properties": {
+        "screen": "3"
+      }
+    },
+    {
+      "id": "15",
+      "name": "第二屏",
+      "type": "ScreenRange",
+      "x": "1184",
+      "y": "0",
+      "width": "1088",
+      "height": "608",
+      "properties": {
+        "screen": "2"
+      }
+    },
+    {
+      "id": "9",
+      "name": "第一屏",
+      "type": "ScreenRange",
+      "x": "0",
+      "y": "0",
+      "width": "1184",
+      "height": "608",
+      "properties": {
+        "screen": "1"
+      }
+    },
+    {
+      "id": "107",
+      "name": "复活点",
+      "type": "RevivePoint",
+      "x": "512",
+      "y": "480",
+      "width": "32",
+      "height": "32",
+      "properties": {
+        "screen": "1"
+      }
+    },
+    {
+      "id": "108",
+      "name": "复活点",
+      "type": "RevivePoint",
+      "x": "1728",
+      "y": "480",
+      "width": "32",
+      "height": "32",
+      "properties": {
+        "screen": "2"
+      }
+    },
+    {
+      "id": "110",
+      "name": "复活点",
+      "type": "RevivePoint",
+      "x": "2848",
+      "y": "480",
+      "width": "32",
+      "height": "32",
+      "properties": {
+        "screen": "3"
+      }
+    },
+    {
+      "id": "111",
+      "name": "复活点",
+      "type": "RevivePoint",
+      "x": "3872",
+      "y": "480",
+      "width": "32",
+      "height": "32",
+      "properties": {
+        "screen": "4"
+      }
+    },
+    {
+      "id": "113",
+      "name": "复活点",
+      "type": "RevivePoint",
+      "x": "4950",
+      "y": "480",
+      "width": "32",
+      "height": "32",
+      "properties": {
+        "screen": "5"
+      }
+    },
+    {
+      "id": "84",
+      "name": "17琵琶",
+      "type": "manCreater",
+      "x": "4800",
+      "y": "480",
+      "width": "32",
+      "height": "32",
+      "properties": {
+        "createAfterPoint": "0",
+        "createAfterPointDeadAll": "",
+        "delayTime": "0",
+        "direction": "-1",
+        "id": "17",
+        "interval": "0",
+        "mIds": "10501",
+        "mNums": "1"
+      }
+    },
+    {
+      "id": "79",
+      "name": "BOSS触发器",
+      "type": "monsterTrigger",
+      "x": "5100",
+      "y": "32",
+      "width": "500",
+      "height": "512",
+      "properties": {
+        "points": "14;16;17;105;1051",
+        "screen": "5",
+        "whoTriggerTag": "player"
+      }
+    },
+    {
+      "id": "59",
+      "name": "16_4屏2波-驭禽",
+      "type": "manCreater",
+      "x": "5216",
+      "y": "352",
+      "width": "32",
+      "height": "32",
+      "properties": {
+        "createAfterPoint": "0",
+        "createAfterPointDeadAll": "",
+        "delayTime": "0",
+        "direction": "-1",
+        "id": "16",
+        "interval": "1",
+        "mIds": "10201",
+        "mNums": "2"
+      }
+    },
+    {
+      "id": "75",
+      "name": "14_4屏2波-剑舞",
+      "type": "manCreater",
+      "x": "4640",
+      "y": "352",
+      "width": "32",
+      "height": "32",
+      "properties": {
+        "createAfterPoint": "0",
+        "createAfterPointDeadAll": "",
+        "delayTime": "0",
+        "direction": "1",
+        "id": "14",
+        "interval": "1",
+        "mIds": "10101",
+        "mNums": "2"
+      }
+    },
+    {
+      "id": "65",
+      "name": "15_4屏1波-驭禽",
+      "type": "manCreater",
+      "x": "4160",
+      "y": "352",
+      "width": "32",
+      "height": "32",
+      "properties": {
+        "createAfterPoint": "13",
+        "delayTime": "0",
+        "direction": "-1",
+        "id": "15",
+        "interval": "1",
+        "mIds": "10201",
+        "mNums": "2"
+      }
+    },
+    {
+      "id": "74",
+      "name": "13_4屏1波-剑舞",
+      "type": "manCreater",
+      "x": "3776",
+      "y": "352",
+      "width": "32",
+      "height": "32",
+      "properties": {
+        "createAfterPoint": "0",
+        "delayTime": "0",
+        "direction": "1",
+        "id": "13",
+        "interval": "1",
+        "mIds": "10101",
+        "mNums": "2"
+      }
+    },
+    {
+      "id": "60",
+      "name": "第四屏怪物触发器",
+      "type": "monsterTrigger",
+      "x": "3400",
+      "y": "32",
+      "width": "64",
+      "height": "512",
+      "properties": {
+        "points": "13;15;104",
+        "screen": "4",
+        "whoTriggerTag": "player"
+      }
+    },
+    {
+      "id": "78",
+      "name": "12_3屏2波-驭禽",
+      "type": "manCreater",
+      "x": "3136",
+      "y": "352",
+      "width": "32",
+      "height": "32",
+      "properties": {
+        "createAfterPoint": "0",
+        "createAfterPointDeadAll": "9;11",
+        "delayTime": "0",
+        "direction": "-1",
+        "id": "12",
+        "interval": "1",
+        "mIds": "10201",
+        "mNums": "2"
+      }
+    },
+    {
+      "id": "73",
+      "name": "10_3屏2波-剑舞",
+      "type": "manCreater",
+      "x": "2720",
+      "y": "352",
+      "width": "32",
+      "height": "32",
+      "properties": {
+        "createAfterPoint": "0",
+        "createAfterPointDeadAll": "9;11",
+        "delayTime": "0",
+        "direction": "1",
+        "id": "10",
+        "interval": "1",
+        "mIds": "10101",
+        "mNums": "2"
+      }
+    },
+    {
+      "id": "77",
+      "name": "11_3屏1波-驭禽",
+      "type": "manCreater",
+      "x": "3104",
+      "y": "320",
+      "width": "32",
+      "height": "32",
+      "properties": {
+        "createAfterPoint": "9",
+        "delayTime": "0",
+        "direction": "-1",
+        "id": "11",
+        "interval": "1",
+        "mIds": "10201",
+        "mNums": "2"
+      }
+    },
+    {
+      "id": "62",
+      "name": "09_3屏1波-剑舞",
+      "type": "manCreater",
+      "x": "2624",
+      "y": "320",
+      "width": "32",
+      "height": "32",
+      "properties": {
+        "createAfterPoint": "0",
+        "delayTime": "0",
+        "direction": "1",
+        "id": "9",
+        "interval": "1",
+        "mIds": "10101",
+        "mNums": "2"
+      }
+    },
+    {
+      "id": "61",
+      "name": "第三屏怪物触发器",
+      "type": "monsterTrigger",
+      "x": "2304",
+      "y": "32",
+      "width": "64",
+      "height": "512",
+      "properties": {
+        "points": "9;10;11;12;103",
+        "screen": "3",
+        "whoTriggerTag": "player"
+      }
+    },
+    {
+      "id": "69",
+      "name": "08_2屏2波-驭禽",
+      "type": "manCreater",
+      "x": "2080",
+      "y": "352",
+      "width": "32",
+      "height": "32",
+      "properties": {
+        "createAfterPoint": "0",
+        "createAfterPointDeadAll": "5;7",
+        "delayTime": "0",
+        "direction": "-1",
+        "id": "8",
+        "interval": "1",
+        "mIds": "10201",
+        "mNums": "2"
+      }
+    },
+    {
+      "id": "63",
+      "name": "06_2屏2波-剑舞",
+      "type": "manCreater",
+      "x": "1696",
+      "y": "352",
+      "width": "32",
+      "height": "32",
+      "properties": {
+        "createAfterPoint": "0",
+        "createAfterPointDeadAll": "5;7",
+        "delayTime": "0",
+        "direction": "1",
+        "id": "6",
+        "interval": "1",
+        "mIds": "10101",
+        "mNums": "2"
+      }
+    },
+    {
+      "id": "66",
+      "name": "07_2屏1波-驭禽",
+      "type": "manCreater",
+      "x": "1888",
+      "y": "320",
+      "width": "32",
+      "height": "32",
+      "properties": {
+        "createAfterPoint": "5",
+        "delayTime": "0",
+        "direction": "-1",
+        "id": "7",
+        "interval": "1",
+        "mIds": "10201",
+        "mNums": "2"
+      }
+    },
+    {
+      "id": "72",
+      "name": "05_2屏1波-剑舞",
+      "type": "manCreater",
+      "x": "1568",
+      "y": "320",
+      "width": "32",
+      "height": "32",
+      "properties": {
+        "createAfterPoint": "0",
+        "delayTime": "0",
+        "direction": "1",
+        "id": "5",
+        "interval": "1",
+        "mIds": "10101",
+        "mNums": "2"
+      }
+    },
+    {
+      "id": "70",
+      "name": "第二屏怪物触发器",
+      "type": "monsterTrigger",
+      "x": "1248",
+      "y": "24",
+      "width": "64",
+      "height": "512",
+      "properties": {
+        "points": "5;6;7;8;102",
+        "screen": "2",
+        "whoTriggerTag": "player"
+      }
+    },
+    {
+      "id": "68",
+      "name": "04_1屏2波-驭禽",
+      "type": "manCreater",
+      "x": "736",
+      "y": "352",
+      "width": "32",
+      "height": "32",
+      "properties": {
+        "createAfterPoint": "0",
+        "createAfterPointDeadAll": "1;3",
+        "delayTime": "0",
+        "direction": "-1",
+        "id": "4",
+        "interval": "1",
+        "mIds": "10201",
+        "mNums": "2"
+      }
+    },
+    {
+      "id": "64",
+      "name": "02_1屏2波-剑舞",
+      "type": "manCreater",
+      "x": "448",
+      "y": "352",
+      "width": "32",
+      "height": "32",
+      "properties": {
+        "createAfterPoint": "0",
+        "createAfterPointDeadAll": "1;3",
+        "delayTime": "0",
+        "direction": "1",
+        "id": "2",
+        "interval": "1",
+        "mIds": "10101",
+        "mNums": "2"
+      }
+    },
+    {
+      "id": "67",
+      "name": "03_1屏1波-驭禽",
+      "type": "manCreater",
+      "x": "640",
+      "y": "320",
+      "width": "32",
+      "height": "32",
+      "properties": {
+        "createAfterPoint": "1",
+        "delayTime": "0",
+        "direction": "-1",
+        "id": "3",
+        "interval": "1",
+        "mIds": "10201",
+        "mNums": "2"
+      }
+    },
+    {
+      "id": "76",
+      "name": "01_1屏1波-剑舞",
+      "type": "manCreater",
+      "x": "320",
+      "y": "320",
+      "width": "32",
+      "height": "32",
+      "properties": {
+        "createAfterPoint": "0",
+        "delayTime": "0",
+        "direction": "1",
+        "id": "1",
+        "interval": "1",
+        "mIds": "10101",
+        "mNums": "2"
+      }
+    },
+    {
+      "id": "71",
+      "name": "第一屏怪物触发器",
+      "type": "monsterTrigger",
+      "x": "120",
+      "y": "32",
+      "width": "64",
+      "height": "512",
+      "properties": {
+        "points": "1;2;3;4;101",
+        "screen": "1",
+        "whoTriggerTag": "player"
+      }
+    },
+    {
+      "id": "115",
+      "name": "友方大剑触发器",
+      "type": "monsterTrigger",
+      "x": "576",
+      "y": "672",
+      "width": "64",
+      "height": "32",
+      "properties": {
+        "points": "99",
+        "screen": "0",
+        "whoTriggerTag": "player"
+      }
+    },
+    {
+      "id": "116",
+      "name": "大剑NPC",
+      "type": "manCreater",
+      "x": "483",
+      "y": "390",
+      "width": "32",
+      "height": "32",
+      "properties": {
+        "campId": "1",
+        "createAfterPoint": "0",
+        "delayTime": "0",
+        "direction": "1",
+        "id": "99",
+        "interval": "0",
+        "mIds": "10401",
+        "mNums": "1"
+      }
+    },
+    {
+      "id": "135",
+      "name": "1051-补给飞龙-蓝瓶",
+      "type": "manCreater",
+      "x": "5350",
+      "y": "384",
+      "width": "32",
+      "height": "32",
+      "properties": {
+        "delayTime": "15",
+        "direction": "-1",
+        "id": "1051",
+        "includeScreen": "false",
+        "interval": "1",
+        "mIds": "11301",
+        "mNums": "1"
+      }
+    },
+    {
+      "id": "129",
+      "name": "105-补给飞龙-蓝瓶",
+      "type": "manCreater",
+      "x": "5350",
+      "y": "384",
+      "width": "32",
+      "height": "32",
+      "properties": {
+        "delayTime": "2",
+        "direction": "-1",
+        "id": "105",
+        "includeScreen": "false",
+        "interval": "1",
+        "mIds": "11301",
+        "mNums": "1"
+      }
+    },
+    {
+      "id": "130",
+      "name": "104-补给飞龙-蓝瓶",
+      "type": "manCreater",
+      "x": "4300",
+      "y": "384",
+      "width": "32",
+      "height": "32",
+      "properties": {
+        "delayTime": "2",
+        "direction": "-1",
+        "id": "104",
+        "includeScreen": "false",
+        "interval": "1",
+        "mIds": "11301",
+        "mNums": "1"
+      }
+    },
+    {
+      "id": "131",
+      "name": "103-补给飞龙-蓝瓶",
+      "type": "manCreater",
+      "x": "3200",
+      "y": "384",
+      "width": "32",
+      "height": "32",
+      "properties": {
+        "delayTime": "2",
+        "direction": "-1",
+        "id": "103",
+        "includeScreen": "false",
+        "interval": "1",
+        "mIds": "11301",
+        "mNums": "1"
+      }
+    },
+    {
+      "id": "132",
+      "name": "102-补给飞龙-蓝瓶",
+      "type": "manCreater",
+      "x": "2100",
+      "y": "384",
+      "width": "32",
+      "height": "32",
+      "properties": {
+        "delayTime": "2",
+        "direction": "-1",
+        "id": "102",
+        "includeScreen": "false",
+        "interval": "1",
+        "mIds": "11301",
+        "mNums": "1"
+      }
+    },
+    {
+      "id": "133",
+      "name": "101-补给飞龙-蓝瓶",
+      "type": "manCreater",
+      "x": "1000",
+      "y": "384",
+      "width": "32",
+      "height": "32",
+      "properties": {
+        "delayTime": "2",
+        "direction": "-1",
+        "id": "101",
+        "includeScreen": "false",
+        "interval": "1",
+        "mIds": "11301",
+        "mNums": "1"
+      }
+    },
+    {
+      "id": "7",
+      "name": "出口",
+      "type": "Gateway",
+      "x": "5024",
+      "y": "460",
+      "width": "128",
+      "height": "128",
+      "properties": {
+        "bId": "0",
+        "howEnter_auto": "false",
+        "howEnter_key": "w",
+        "howOpen_AllClear": "false",
+        "howOpen_BossDead": "false",
+        "howOpen_MidsDead": "10601",
+        "itemId": "1001",
+        "opened": "false",
+        "prefabs": "Gateway",
+        "whoCanEnterTag": "player;horse",
+        "zSort": "0"
+      }
+    },
+    {
+      "id": "8",
+      "name": "角色出生点",
+      "type": "birth",
+      "x": "128",
+      "y": "492",
+      "width": "32",
+      "height": "32",
+      "properties": {}
+    },
+    {
+      "id": "114",
+      "name": "大剑物件",
+      "type": "BattleItem",
+      "x": "483",
+      "y": "390",
+      "width": "32",
+      "height": "32",
+      "properties": {
+        "active": "true",
+        "afterDeadTriggerNames": "友方大剑触发器",
+        "body": "true",
+        "campId": "2",
+        "canDestroy": "false",
+        "hitEffOffset": "0;-100",
+        "hitNum": "3",
+        "itemId": "1207",
+        "shapeType": "Polygon",
+        "triggerInToDead": "true"
+      }
+    },
+    {
+      "id": "124",
+      "name": "按住蓄力",
+      "type": "KeyTrigger",
+      "x": "432",
+      "y": "64",
+      "width": "128",
+      "height": "360",
+      "properties": {
+        "active": "true",
+        "afterDeadTriggerNames": "大剑物件;召唤法宝提示;箭头",
+        "body": "true",
+        "bodyType": "st",
+        "key": "w|up",
+        "pressTime": "2",
+        "script": "prefabs.scripts.Keytrigger0_2Entity",
+        "shapeType": "Polygon",
+        "whoTriggerTag": "player"
+      }
+    },
+    {
+      "id": "125",
+      "name": "召唤法宝提示",
+      "type": "Image",
+      "x": "466",
+      "y": "112",
+      "width": "64",
+      "height": "56",
+      "properties": {
+        "active": "true",
+        "script": "prefabs.scripts.HowToPlay",
+        "spriteRender": "map.召唤法宝提示",
+        "triggerInToDead": "true"
+      }
+    },
+    {
+      "id": "126",
+      "name": "箭头",
+      "type": "Image",
+      "x": "461",
+      "y": "154",
+      "width": "32",
+      "height": "32",
+      "properties": {
+        "active": "true",
+        "mcRender": "map.箭头",
+        "script": "prefabs.scripts.HowToPlay",
+        "spriteRender": "",
+        "triggerInToDead": "true"
+      }
+    },
+    {
+      "id": "127",
+      "name": "常规音乐",
+      "type": "BgMusic",
+      "x": "48",
+      "y": "144",
+      "width": "192",
+      "height": "448",
+      "properties": {
+        "url": "music/bg/No_1-3.swf"
+      }
+    },
+    {
+      "id": "128",
+      "name": "BOSS",
+      "type": "BgMusic",
+      "x": "5100",
+      "y": "32",
+      "width": "500",
+      "height": "512",
+      "properties": {
+        "url": "music/bg/boss_01.swf"
+      }
+    },
+    {
+      "id": "156",
+      "name": "碰到传送",
+      "type": "Transfer",
+      "x": "0",
+      "y": "0",
+      "width": "4400",
+      "height": "610",
+      "properties": {
+        "active": "false",
+        "delayTime": "0",
+        "pos": "4800;480",
+        "shapeType": "Polygon",
+        "tranObjs": "player;horse;pet;monster"
+      }
+    },
+    {
+      "id": "155",
+      "name": "触发第四屏传送",
+      "type": "Trigger",
+      "x": "5100",
+      "y": "0",
+      "width": "500",
+      "height": "600",
+      "properties": {
+        "active": "true",
+        "body": "true",
+        "deleteAfterEnter": "true",
+        "prefabs": "Trigger",
+        "shapeType": "Polygon",
+        "triggerNames": "碰到传送",
+        "whoTriggerTag": "player"
+      }
+    },
+    {
+      "id": "1",
+      "name": "天花板",
+      "type": "ground",
+      "x": "-64",
+      "y": "-32",
+      "width": "5600",
+      "height": "64",
+      "properties": {
+        "dynamicFriction": "1",
+        "elasticity": "0",
+        "staticFriction": "2",
+        "tag": "ground"
+      }
+    },
+    {
+      "id": "2",
+      "name": "地板1",
+      "type": "ground",
+      "x": "-64",
+      "y": "528",
+      "width": "5600",
+      "height": "64",
+      "properties": {
+        "dynamicFriction": "1",
+        "elasticity": "0",
+        "staticFriction": "2",
+        "tag": "ground"
+      }
+    },
+    {
+      "id": "5",
+      "name": "墙壁2",
+      "type": "ground",
+      "x": "-64",
+      "y": "32",
+      "width": "64",
+      "height": "512",
+      "properties": {
+        "dynamicFriction": "1",
+        "elasticity": "0",
+        "staticFriction": "2",
+        "tag": "wall"
+      }
+    },
+    {
+      "id": "6",
+      "name": "墙壁1",
+      "type": "ground",
+      "x": "5472",
+      "y": "32",
+      "width": "64",
+      "height": "512",
+      "properties": {
+        "dynamicFriction": "0",
+        "elasticity": "0",
+        "staticFriction": "0",
+        "tag": "wall"
+      }
+    },
+    {
+      "id": "81",
+      "name": "灯台",
+      "type": "floor",
+      "x": "-32",
+      "y": "410",
+      "width": "64",
+      "height": "16",
+      "properties": {
+        "dynamicFriction": "0",
+        "elasticity": "0",
+        "staticFriction": "0",
+        "tag": "ground"
+      }
+    },
+    {
+      "id": "86",
+      "name": "灯台",
+      "type": "floor",
+      "x": "467",
+      "y": "410",
+      "width": "64",
+      "height": "16",
+      "properties": {
+        "dynamicFriction": "0",
+        "elasticity": "0",
+        "staticFriction": "0",
+        "tag": "ground"
+      }
+    },
+    {
+      "id": "88",
+      "name": "灯台",
+      "type": "floor",
+      "x": "963",
+      "y": "410",
+      "width": "64",
+      "height": "16",
+      "properties": {
+        "dynamicFriction": "0",
+        "elasticity": "0",
+        "staticFriction": "0",
+        "tag": "ground"
+      }
+    },
+    {
+      "id": "90",
+      "name": "灯台",
+      "type": "floor",
+      "x": "1465",
+      "y": "410",
+      "width": "64",
+      "height": "16",
+      "properties": {
+        "dynamicFriction": "0",
+        "elasticity": "0",
+        "staticFriction": "0",
+        "tag": "ground"
+      }
+    },
+    {
+      "id": "92",
+      "name": "灯台",
+      "type": "floor",
+      "x": "1959",
+      "y": "410",
+      "width": "64",
+      "height": "16",
+      "properties": {
+        "dynamicFriction": "0",
+        "elasticity": "0",
+        "staticFriction": "0",
+        "tag": "ground"
+      }
+    },
+    {
+      "id": "94",
+      "name": "灯台",
+      "type": "floor",
+      "x": "2459",
+      "y": "410",
+      "width": "64",
+      "height": "16",
+      "properties": {
+        "dynamicFriction": "0",
+        "elasticity": "0",
+        "staticFriction": "0",
+        "tag": "ground"
+      }
+    },
+    {
+      "id": "96",
+      "name": "灯台",
+      "type": "floor",
+      "x": "2958",
+      "y": "410",
+      "width": "64",
+      "height": "16",
+      "properties": {
+        "dynamicFriction": "0",
+        "elasticity": "0",
+        "staticFriction": "0",
+        "tag": "ground"
+      }
+    },
+    {
+      "id": "98",
+      "name": "灯台",
+      "type": "floor",
+      "x": "3456",
+      "y": "410",
+      "width": "64",
+      "height": "16",
+      "properties": {
+        "dynamicFriction": "0",
+        "elasticity": "0",
+        "staticFriction": "0",
+        "tag": "ground"
+      }
+    },
+    {
+      "id": "100",
+      "name": "灯台",
+      "type": "floor",
+      "x": "3958",
+      "y": "410",
+      "width": "64",
+      "height": "16",
+      "properties": {
+        "dynamicFriction": "0",
+        "elasticity": "0",
+        "staticFriction": "0",
+        "tag": "ground"
+      }
+    }
+  ],
+  "dungeon": {
+    "freeResurrection": -1,
+    "countdown": null,
+    "classType": null,
+    "closeMagicWeapon": 0,
+    "showItemIds": "110101001;110102001;110103001;110104001;110105001;110106001;101002000",
+    "name": "碧玉径",
+    "powerMin": -1,
+    "consume_type": "-1",
+    "closeWeaponSpirit": 0,
+    "getStar": 1,
+    "inheritPrevPlayerXP": 0,
+    "dailyCountMax": -1,
+    "closeRoleSkill": 0,
+    "sceneId": 1,
+    "canTakePetBadge": 1,
+    "showRoleArrow": null,
+    "fromId": -1,
+    "replayBId": 0,
+    "fightPowerRevised": null,
+    "teamMaxNum": 1,
+    "teamMinNum": 1,
+    "closeSkills": "0",
+    "fixedAttribute": 0,
+    "dungeonEquips": -1,
+    "canCarryItemIds": null,
+    "videoRole": "http://my.4399.com/forums/thread-59275715",
+    "needLevel": 1,
+    "countdownMode": null,
+    "closePet": 0,
+    "bagLimit": null,
+    "treasureShareId": null,
+    "canTakeMaster": 1,
+    "onlineCopy": 0,
+    "vipCountMax": "-1",
+    "autoTakeItemIds": null,
+    "shareScreen": 1,
+    "closeType": 2,
+    "finishBId": 0,
+    "canTakeMonsterCard": 1,
+    "closeFairy": 0,
+    "cameraFollow": null,
+    "enableSceneBuff": 1,
+    "fixedUserAttribute": 0,
+    "monsterNum": "16;16;1;1;1;6",
+    "bindUserKeyboard": 1,
+    "isShow": 1,
+    "isShowList": 0,
+    "difficult": 0,
+    "resurrection": -1,
+    "swfURL": null,
+    "canRetry": 1,
+    "consume_subType": "-1",
+    "mapURL": "No_1-1_V283",
+    "nextId": 2,
+    "cheatintegral": 1,
+    "canReviveAuto": 1,
+    "fixPos": "-1",
+    "canTakeWingSkill": 1,
+    "powerMin2": -1,
+    "prevId": "-1",
+    "completeTime": 10,
+    "canVipResurrection": 1,
+    "dropId": "1,2;1,2;-1;-1;1001;148",
+    "battleBuffs": null,
+    "powerMin3": 2475,
+    "cheatlevel": 6,
+    "comefromId": "-1",
+    "activityId": -1,
+    "canTakeItem": 1,
+    "itemIds": "1207;1001",
+    "width": 5472,
+    "inheritPrevPlayerProperty": 0,
+    "height": 600,
+    "type": null,
+    "preloadMonsterRes": null,
+    "id": 1,
+    "icon": "-1",
+    "mapsURL": null,
+    "custom": null,
+    "personalView": null,
+    "monsterID": "10101;10201;10401;10501;10601;11301",
+    "consume_count": -1,
+    "isShowWifi": null
+  },
+  "boss_assets": {
+    "revival_vessel": {
+      "configuration": {
+        "skillLev": "1;1;1;1;1",
+        "atk": 27,
+        "name": "第01关-场景琵琶",
+        "critical": 0,
+        "soilResist": 10,
+        "classType": 0,
+        "dungeonLevel": 1,
+        "darkResist": 0,
+        "superArmor": 1,
+        "level": 3,
+        "attack2": 0,
+        "showAppear": 1,
+        "guardian": 0,
+        "powerMax": 0,
+        "dieOpen": 0,
+        "alwaysShowHP": 0,
+        "skill2": 0,
+        "bySuckBleed": 0,
+        "bodySize": 30,
+        "protectPoint": 100000,
+        "attack1": 0,
+        "hpMax": 263,
+        "wuDiAlpha": 1,
+        "resourceId": 11105,
+        "skill4": 0,
+        "walkSpeed": 100,
+        "hitEffOffset": "23;-56",
+        "viewRangePatorl": "-200;-200;400;400",
+        "rayResist": 0,
+        "showProtect": 1,
+        "showName": 1,
+        "showHP": 1,
+        "actType": 0,
+        "isHatredZero": 0,
+        "fireResist": -10,
+        "bornTalkID": -1,
+        "moveType": 1,
+        "toughness": 0,
+        "stopActionByDS": 1,
+        "boss": 0,
+        "collisonItemWall": 1,
+        "reHP": 1,
+        "aiId": 10028,
+        "attack3": 0,
+        "useHurtNum": 0,
+        "phyDef": 5,
+        "dieTalkID": -1,
+        "hit": 0,
+        "showBatiEff": 0,
+        "dieSkill": 2001001,
+        "petId": -1,
+        "collisionGround": 1,
+        "windResist": 0,
+        "hpBarOffset": "0;-100",
+        "skill1": 2001000,
+        "isMigration": 1,
+        "appearSkill": -1,
+        "dodge": 0,
+        "lucky": 0,
+        "bodyRec": "-73;-135;146;114",
+        "targetCenter": -1,
+        "bySuckMp": 0,
+        "skill3": 0,
+        "woodResist": 0,
+        "typeId": -1,
+        "shapeChangeID": -1,
+        "waterResist": 0,
+        "skill5": 0,
+        "addBuff": 1,
+        "bleedOffset": "0;-60",
+        "id": 10501,
+        "protectSkill": 0,
+        "editSort": 10501,
+        "lightResist": 0,
+        "randomMove": 150,
+        "attack4": 0,
+        "aiDelay": 0,
+        "friendlyAiId": 0,
+        "collisionWall": 1
+      },
+      "primary_skill": {
+        "subPowerMax": 0,
+        "sort": 0,
+        "isAoyiSkill": 0,
+        "name": "琵琶回复",
+        "summonNumMax": -1,
+        "skillAddLevelMax": 0,
+        "mpHurt": 0,
+        "type": 0,
+        "skillCountAdd": "0",
+        "addPowerMax": 0,
+        "addPowerNum": 0,
+        "stiff": 0.3,
+        "atkInterval": 0,
+        "priority": 0,
+        "worldBossCD": 0,
+        "myBuff": "50004",
+        "containSummoned": 1,
+        "iconId": -1,
+        "initLv": 1,
+        "hideLvInfo": 0,
+        "addXP": 0,
+        "stiffPriority": 10,
+        "protectPointB": 0,
+        "skillToward": 0,
+        "consumeXP": 0,
+        "atkRange": "-437;-316;896;376",
+        "pvpProtectPoint": 0,
+        "consumeMP": "0",
+        "summonMonster": 0,
+        "canUseInGround": 1,
+        "isProtectPointAdd": 1,
+        "canWalk": 0,
+        "attackedMoveDir": 1,
+        "skillAdd": 0,
+        "alone": "0",
+        "pvpProtectPointB": 0,
+        "cd": 0,
+        "param": {
+          "s": [
+            {
+              "skillid": 0,
+              "type": 7,
+              "shootAssetLink": "skill1_1",
+              "shootSpeed": 0,
+              "zSort": 1,
+              "followParent": true,
+              "shootThrough": true,
+              "y": 0,
+              "shootFrame": 0,
+              "shootTime": 0,
+              "x": 0
+            }
+          ]
+        },
+        "pvpDisable": 0,
+        "addXPMax": 0,
+        "canUseInSKy": 0,
+        "showInUsing": 0,
+        "actType": 0,
+        "summonMonsterInherit": 0,
+        "myBuffLevInterval": "100000",
+        "hitRangeType": 0,
+        "consumeHP": 0,
+        "isAttOneMan": "0",
+        "summonCoord": 0,
+        "skillDefault": 0,
+        "ringMaxCount": -1,
+        "hurtDelay": 0,
+        "ringDefault": 0,
+        "id": 2001000,
+        "atkMax": 0,
+        "protectPoint": 0
+      },
+      "atlas": {
+        "sha256": "322626914ba6e364c04677775fb3f8e581af19a538e57b2fb81f9d9b7a73d118",
+        "animations": {
+          "dead": 28,
+          "hurtStand": 8,
+          "idle": 24,
+          "skill1": 34,
+          "skill1_1": 34,
+          "walk": 24
+        },
+        "attack_bounds": {
+          "skill1_1": [
+            {
+              "name": "ab_skill1_10000",
+              "x": "-352.05",
+              "y": "-170.6",
+              "width": "703",
+              "height": "215",
+              "source_frame": 0
+            },
+            {
+              "name": "ab_skill1_10001",
+              "x": "-352.05",
+              "y": "-170.6",
+              "width": "703",
+              "height": "215",
+              "source_frame": 1
+            },
+            {
+              "name": "ab_skill1_10002",
+              "x": "-352.05",
+              "y": "-170.6",
+              "width": "703",
+              "height": "215",
+              "source_frame": 2
+            },
+            {
+              "name": "ab_skill1_10003",
+              "x": "-352.05",
+              "y": "-170.6",
+              "width": "703",
+              "height": "215",
+              "source_frame": 3
+            },
+            {
+              "name": "ab_skill1_10004",
+              "x": "-352.05",
+              "y": "-170.6",
+              "width": "703",
+              "height": "215",
+              "source_frame": 4
+            },
+            {
+              "name": "ab_skill1_10005",
+              "x": "-352.05",
+              "y": "-170.6",
+              "width": "703",
+              "height": "215",
+              "source_frame": 5
+            },
+            {
+              "name": "ab_skill1_10006",
+              "x": "-352.05",
+              "y": "-170.6",
+              "width": "703",
+              "height": "215",
+              "source_frame": 6
+            },
+            {
+              "name": "ab_skill1_10007",
+              "x": "-352.05",
+              "y": "-170.6",
+              "width": "703",
+              "height": "215",
+              "source_frame": 7
+            },
+            {
+              "name": "ab_skill1_10008",
+              "x": "-352.05",
+              "y": "-170.6",
+              "width": "703",
+              "height": "215",
+              "source_frame": 8
+            },
+            {
+              "name": "ab_skill1_10009",
+              "x": "-352.05",
+              "y": "-170.6",
+              "width": "703",
+              "height": "215",
+              "source_frame": 9
+            },
+            {
+              "name": "ab_skill1_10010",
+              "x": "-352.05",
+              "y": "-170.6",
+              "width": "703",
+              "height": "215",
+              "source_frame": 10
+            },
+            {
+              "name": "ab_skill1_10011",
+              "x": "-352.05",
+              "y": "-170.6",
+              "width": "703",
+              "height": "215",
+              "source_frame": 11
+            },
+            {
+              "name": "ab_skill1_10012",
+              "x": "-352.05",
+              "y": "-170.6",
+              "width": "703",
+              "height": "215",
+              "source_frame": 12
+            },
+            {
+              "name": "ab_skill1_10013",
+              "x": "-352.05",
+              "y": "-170.6",
+              "width": "703",
+              "height": "215",
+              "source_frame": 13
+            },
+            {
+              "name": "ab_skill1_10014",
+              "x": "-352.05",
+              "y": "-170.6",
+              "width": "703",
+              "height": "215",
+              "source_frame": 14
+            },
+            {
+              "name": "ab_skill1_10015",
+              "x": "-352.05",
+              "y": "-170.6",
+              "width": "703",
+              "height": "215",
+              "source_frame": 15
+            },
+            {
+              "name": "ab_skill1_10016",
+              "x": "-352.05",
+              "y": "-170.6",
+              "width": "703",
+              "height": "215",
+              "source_frame": 16
+            },
+            {
+              "name": "ab_skill1_10017",
+              "x": "-352.05",
+              "y": "-170.6",
+              "width": "703",
+              "height": "215",
+              "source_frame": 17
+            },
+            {
+              "name": "ab_skill1_10018",
+              "x": "-352.05",
+              "y": "-170.6",
+              "width": "703",
+              "height": "215",
+              "source_frame": 18
+            },
+            {
+              "name": "ab_skill1_10019",
+              "x": "-352.05",
+              "y": "-170.6",
+              "width": "703",
+              "height": "215",
+              "source_frame": 19
+            },
+            {
+              "name": "ab_skill1_10020",
+              "x": "-352.05",
+              "y": "-170.6",
+              "width": "703",
+              "height": "215",
+              "source_frame": 20
+            },
+            {
+              "name": "ab_skill1_10021",
+              "x": "-352.05",
+              "y": "-170.6",
+              "width": "703",
+              "height": "215",
+              "source_frame": 21
+            },
+            {
+              "name": "ab_skill1_10022",
+              "x": "-352.05",
+              "y": "-170.6",
+              "width": "703",
+              "height": "215",
+              "source_frame": 22
+            },
+            {
+              "name": "ab_skill1_10023",
+              "x": "-352.05",
+              "y": "-170.6",
+              "width": "703",
+              "height": "215",
+              "source_frame": 23
+            },
+            {
+              "name": "ab_skill1_10024",
+              "x": "-352.05",
+              "y": "-170.6",
+              "width": "703",
+              "height": "215",
+              "source_frame": 24
+            },
+            {
+              "name": "ab_skill1_10025",
+              "x": "-352.05",
+              "y": "-170.6",
+              "width": "703",
+              "height": "215",
+              "source_frame": 25
+            },
+            {
+              "name": "ab_skill1_10026",
+              "x": "-352.05",
+              "y": "-170.6",
+              "width": "703",
+              "height": "215",
+              "source_frame": 26
+            },
+            {
+              "name": "ab_skill1_10027",
+              "x": "-352.05",
+              "y": "-170.6",
+              "width": "703",
+              "height": "215",
+              "source_frame": 27
+            },
+            {
+              "name": "ab_skill1_10028",
+              "x": "-352.05",
+              "y": "-170.6",
+              "width": "703",
+              "height": "215",
+              "source_frame": 28
+            },
+            {
+              "name": "ab_skill1_10029",
+              "x": "-352.05",
+              "y": "-170.6",
+              "width": "703",
+              "height": "215",
+              "source_frame": 29
+            },
+            {
+              "name": "ab_skill1_10030",
+              "x": "-352.05",
+              "y": "-170.6",
+              "width": "703",
+              "height": "215",
+              "source_frame": 30
+            },
+            {
+              "name": "ab_skill1_10031",
+              "x": "-352.05",
+              "y": "-170.6",
+              "width": "703",
+              "height": "215",
+              "source_frame": 31
+            },
+            {
+              "name": "ab_skill1_10032",
+              "x": "-352.05",
+              "y": "-170.6",
+              "width": "703",
+              "height": "215",
+              "source_frame": 32
+            },
+            {
+              "name": "ab_skill1_10033",
+              "x": "-352.05",
+              "y": "-170.6",
+              "width": "703",
+              "height": "215",
+              "source_frame": 33
+            }
+          ]
+        }
+      },
+      "source": "games/zmhj-g5/cache/assets/man/11105/1_V05.swf"
+    },
+    "jushi_lingjun": {
+      "configuration": {
+        "skillLev": "1;1;1;1;1",
+        "atk": 30,
+        "name": "玉石琵琶精",
+        "critical": 0,
+        "soilResist": 10,
+        "classType": 0,
+        "dungeonLevel": 1,
+        "darkResist": 0,
+        "superArmor": 0,
+        "level": 3,
+        "attack2": 0,
+        "actionSuperArmor": "skill1;skill2;skill3",
+        "guardian": 0,
+        "powerMax": 0,
+        "dieOpen": 0,
+        "alwaysShowHP": 0,
+        "skill2": 2001110,
+        "bySuckBleed": 0,
+        "bodySize": 30,
+        "protectPoint": 25000,
+        "attack1": 0,
+        "hpMax": 1167,
+        "wuDiAlpha": 1,
+        "resourceId": 11106,
+        "skill4": 0,
+        "walkSpeed": 200,
+        "showAppear": 0,
+        "hitEffOffset": "0;-53",
+        "viewRangePatorl": "-490;-262;980;300",
+        "rayResist": 0,
+        "showProtect": 1,
+        "showName": 1,
+        "showHP": 0,
+        "actType": 0,
+        "isHatredZero": 0,
+        "fireResist": -10,
+        "bornTalkID": -1,
+        "moveType": 1,
+        "toughness": 0,
+        "stopActionByDS": 1,
+        "boss": 1,
+        "collisonItemWall": 1,
+        "reHP": 1,
+        "aiId": 10009,
+        "attack3": 0,
+        "useHurtNum": 0,
+        "phyDef": 5,
+        "dieTalkID": -1,
+        "hit": 0,
+        "showBatiEff": 1,
+        "dieSkill": -1,
+        "petId": -1,
+        "collisionGround": 1,
+        "windResist": 0,
+        "hpBarOffset": "0;-100",
+        "skill1": 2001100,
+        "isMigration": 1,
+        "appearSkill": -1,
+        "dodge": 0,
+        "lucky": 0,
+        "bodyRec": "-89;-156;178;137",
+        "targetCenter": -1,
+        "bySuckMp": 0,
+        "skill3": 2001120,
+        "woodResist": 0,
+        "typeId": -1,
+        "shapeChangeID": -1,
+        "waterResist": 0,
+        "skill5": 0,
+        "addBuff": 1,
+        "bleedOffset": "0;-60",
+        "id": 10601,
+        "protectSkill": 1900010,
+        "editSort": 10601,
+        "lightResist": 0,
+        "randomMove": 150,
+        "attack4": 0,
+        "aiDelay": 0,
+        "friendlyAiId": 0,
+        "showAssa": 1,
+        "collisionWall": 1
+      },
+      "primary_skill": {
+        "subPowerMax": 0,
+        "sort": 0,
+        "name": "震颤之音",
+        "summonNumMax": -1,
+        "skillAddLevelMax": 0,
+        "mpHurt": 0,
+        "type": 1,
+        "skillCountAdd": "0",
+        "addPowerMax": 0,
+        "addPowerNum": 0,
+        "stiff": 0.5,
+        "atkInterval": 0,
+        "priority": 0,
+        "worldBossCD": 0,
+        "hideLvInfo": 0,
+        "containSummoned": 1,
+        "iconId": -1,
+        "initLv": 1,
+        "addXP": 0,
+        "targetMove": "800;100",
+        "stiffPriority": 10,
+        "protectPointB": 3334,
+        "skillToward": 0,
+        "consumeXP": 0,
+        "atkRange": "-150;-176;300;205",
+        "pvpProtectPoint": 3334,
+        "consumeMP": "0",
+        "summonMonster": 0,
+        "canUseInGround": 1,
+        "isProtectPointAdd": 1,
+        "canWalk": 0,
+        "attackedMoveDir": 2,
+        "skillAdd": 0,
+        "alone": "0",
+        "pvpProtectPointB": 3334,
+        "cd": 0,
+        "param": {
+          "s": [
+            {
+              "skillid": 0,
+              "type": 1,
+              "y": 0,
+              "shootSpeed": 0,
+              "zSort": 1,
+              "followParent": true,
+              "shootThrough": true,
+              "shootTime": 0,
+              "shootFrame": 0,
+              "shootAssetLink": "skill1_1",
+              "x": 0
+            }
+          ]
+        },
+        "pvpDisable": 0,
+        "addXPMax": 0,
+        "canUseInSKy": 0,
+        "showInUsing": 0,
+        "actType": 0,
+        "summonMonsterInherit": 0,
+        "isAoyiSkill": 0,
+        "hitRangeType": 0,
+        "consumeHP": 0,
+        "isAttOneMan": "0",
+        "summonCoord": 0,
+        "skillDefault": 0.5,
+        "ringMaxCount": -1,
+        "hurtDelay": 0,
+        "ringDefault": 0.5,
+        "id": 2001100,
+        "atkMax": 1,
+        "protectPoint": 3334
+      },
+      "atlas": {
+        "sha256": "e0ddc88b4a58abb97a271248337442b894a5eafa420701fbb50045596f120abe",
+        "animations": {
+          "dead": 39,
+          "hurtStand": 34,
+          "idle": 30,
+          "skill1": 38,
+          "skill1_1": 38,
+          "skill2": 44,
+          "skill2_1": 6,
+          "skill2_2": 44,
+          "skill3": 30,
+          "skill3_1": 12,
+          "skill3_2": 15,
+          "walk": 26
+        },
+        "attack_bounds": {
+          "skill1_1": [
+            {
+              "name": "ab_skill1_10015",
+              "x": "-150",
+              "y": "-176.95",
+              "width": "300",
+              "height": "205.95",
+              "source_frame": 15
+            },
+            {
+              "name": "ab_skill1_10016",
+              "x": "-150",
+              "y": "-176.95",
+              "width": "300",
+              "height": "205.95",
+              "source_frame": 16
+            },
+            {
+              "name": "ab_skill1_10017",
+              "x": "-150",
+              "y": "-176.95",
+              "width": "300",
+              "height": "205.95",
+              "source_frame": 17
+            },
+            {
+              "name": "ab_skill1_10018",
+              "x": "-150",
+              "y": "-176.95",
+              "width": "300",
+              "height": "205.95",
+              "source_frame": 18
+            },
+            {
+              "name": "ab_skill1_10019",
+              "x": "-150",
+              "y": "-176.95",
+              "width": "300",
+              "height": "205.95",
+              "source_frame": 19
+            },
+            {
+              "name": "ab_skill1_10020",
+              "x": "-150",
+              "y": "-176.95",
+              "width": "300",
+              "height": "205.95",
+              "source_frame": 20
+            },
+            {
+              "name": "ab_skill1_10021",
+              "x": "-150",
+              "y": "-176.95",
+              "width": "300",
+              "height": "205.95",
+              "source_frame": 21
+            },
+            {
+              "name": "ab_skill1_10022",
+              "x": "-150",
+              "y": "-176.95",
+              "width": "300",
+              "height": "205.95",
+              "source_frame": 22
+            },
+            {
+              "name": "ab_skill1_10023",
+              "x": "-150",
+              "y": "-176.95",
+              "width": "300",
+              "height": "205.95",
+              "source_frame": 23
+            },
+            {
+              "name": "ab_skill1_10024",
+              "x": "-150",
+              "y": "-176.95",
+              "width": "300",
+              "height": "205.95",
+              "source_frame": 24
+            },
+            {
+              "name": "ab_skill1_10025",
+              "x": "-150",
+              "y": "-176.95",
+              "width": "300",
+              "height": "205.95",
+              "source_frame": 25
+            },
+            {
+              "name": "ab_skill1_10026",
+              "x": "-150",
+              "y": "-176.95",
+              "width": "300",
+              "height": "205.95",
+              "source_frame": 26
+            },
+            {
+              "name": "ab_skill1_10027",
+              "x": "-150",
+              "y": "-176.95",
+              "width": "300",
+              "height": "205.95",
+              "source_frame": 27
+            },
+            {
+              "name": "ab_skill1_10028",
+              "x": "-150",
+              "y": "-176.95",
+              "width": "300",
+              "height": "205.95",
+              "source_frame": 28
+            },
+            {
+              "name": "ab_skill1_10029",
+              "x": "-150",
+              "y": "-176.95",
+              "width": "300",
+              "height": "205.95",
+              "source_frame": 29
+            },
+            {
+              "name": "ab_skill1_10030",
+              "x": "-150",
+              "y": "-176.95",
+              "width": "300",
+              "height": "205.95",
+              "source_frame": 30
+            },
+            {
+              "name": "ab_skill1_10031",
+              "x": "-150",
+              "y": "-176.95",
+              "width": "300",
+              "height": "205",
+              "source_frame": 31
+            },
+            {
+              "name": "ab_skill1_10032",
+              "x": "-150",
+              "y": "-176.95",
+              "width": "300",
+              "height": "205",
+              "source_frame": 32
+            }
+          ]
+        }
+      },
+      "source": "games/zmhj-g5/cache/assets/man/11106/1_V226.swf"
+    }
+  },
+  "container_death_skill": {
+    "subPowerMax": 0,
+    "sort": 0,
+    "describe": "场景琵琶死亡后，变成玉石琵琶",
+    "name": "琵琶dead召唤",
+    "summonNumMax": -1,
+    "skillAddLevelMax": 0,
+    "mpHurt": 0,
+    "type": 0,
+    "skillCountAdd": "0",
+    "addPowerMax": 0,
+    "addPowerNum": 0,
+    "atkInterval": 0,
+    "priority": 0,
+    "worldBossCD": 0,
+    "hideLvInfo": 0,
+    "containSummoned": 1,
+    "iconId": -1,
+    "addXP": 0,
+    "stiffPriority": 10,
+    "protectPointB": 0,
+    "skillToward": 0,
+    "consumeXP": 0,
+    "atkRange": "-200;-100;400;100",
+    "pvpProtectPoint": 0,
+    "consumeMP": "0",
+    "summonMonster": 0,
+    "canUseInGround": 1,
+    "isProtectPointAdd": 1,
+    "canWalk": 0,
+    "attackedMoveDir": 1,
+    "skillAdd": 0,
+    "alone": "0",
+    "pvpProtectPointB": 0,
+    "cd": 0,
+    "param": {
+      "s": [
+        {
+          "arrowNum": 1,
+          "summonCoordType": "1",
+          "hurtAfterParHurtRatio": 0,
+          "summonSurvivalTime": 0,
+          "summonCoord": "0;0;0;0",
+          "summonDeadWay_Idle": 0,
+          "type": 9,
+          "shootFrame": 25,
+          "hatre": 0,
+          "summonScaleXFaceMid": 0,
+          "mid": 10601,
+          "summonDeadWay_AttackAfter": false
+        }
+      ]
+    },
+    "pvpDisable": 0,
+    "addXPMax": 0,
+    "canUseInSKy": 0,
+    "showInUsing": 0,
+    "actType": 0,
+    "summonMonsterInherit": 0,
+    "isAoyiSkill": 0,
+    "hitRangeType": 0,
+    "consumeHP": 0,
+    "isAttOneMan": "0",
+    "summonCoord": 0,
+    "skillDefault": 0,
+    "ringMaxCount": -1,
+    "hurtDelay": 0,
+    "ringDefault": 0,
+    "id": 2001001,
+    "atkMax": 0,
+    "protectPoint": 0
+  },
+  "unit_scale": 2,
+  "omissions": [
+    "Optional healing pots (includeScreen=false) and NPC interaction are audited, not imported."
+  ],
+  "map_visual_source": "res://assets/maps/biyujing/original_source.json",
+  "boss_implementation": "Stage 13 original three skills and dedicated controller: data/monsters/jushi_lingjun/README.md"
+}

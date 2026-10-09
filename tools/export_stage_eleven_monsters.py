@@ -257,7 +257,7 @@ profile = ExtResource("ai_profile")
     write(base+'/monster.tscn',scene)
     entity = (PROJECT/'data/battle2d/dummy/wooden_dummy.tres').read_text(encoding='utf-8')
     entity = entity.replace('data/battle2d/dummy/attributes.tres',base+'/attributes.tres').replace('data/battle2d/dummy/wooden_dummy.tscn',base+'/monster.tscn').replace('&"木桩"',f'&"{cfg["name"].split("-")[-1]}"').replace('战斗验收木桩',cfg['name'])
-    entity += f'initial_level = {cfg["level"]}\nability_ids = Array[StringName]([&"{name}_skill1"])\nmetadata/original_monster_id = {cfg["id"]}\nmetadata/original_resource_id = {cfg["resourceId"]}\n'
+    entity += f'initial_level = {cfg["level"]}\nability_ids = Array[StringName]([&"{name}_skill1"])\nmetadata/original_monster_id = {cfg["id"]}\nmetadata/original_resource_id = {cfg["resourceId"]}\nmetadata/original_show_appear = {int(cfg.get("showAppear",0))}\n'
     write(base+'/definition.tres',entity)
 #endregion
 

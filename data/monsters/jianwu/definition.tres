@@ -16,3 +16,4 @@ initial_level = 2
 ability_ids = Array[StringName]([&"jianwu_skill1"])
 metadata/original_monster_id = 10101
 metadata/original_resource_id = 11101
+metadata/original_show_appear = 1

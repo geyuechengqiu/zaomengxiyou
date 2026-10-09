@@ -1,0 +1,42 @@
+{
+  "sources": [
+    {
+      "path": "out/zmhj-equip-skill-diag/com/wdcgame/engine/ui/Camera2.as",
+      "sha256": "955759a6556e4bd1f16d811fba9765e3497580ac993e56249c5409f620b913c9"
+    },
+    {
+      "path": "out/zmhj-equip-skill-diag/viewers/container/BattleMapBase.as",
+      "sha256": "2ada3d2cfefd594430ba81fef57a0268dce77fa7576d30a1fc3e997eddd76d50"
+    },
+    {
+      "path": "out/zmhj-equip-skill-diag/com/wdcgame/engine/model/LevelParam.as",
+      "sha256": "41c876beedd5940c20410be6e05564bb20dd51a926a99c47788dfc36bbf34127"
+    },
+    {
+      "path": "out/zmhj-equip-skill-diag/com/wdcgame/engine/core/GameFrame.as",
+      "sha256": "3c77c6a9c49be94369c2f65bcc2d4eaf24f445b445b91b4bfa8d37b6dd3a703e"
+    },
+    {
+      "path": "games/zmhj-g5/cache/assets/map/No_1-1_V283.tmx",
+      "sha256": "97d0e6646a793a73c1e44e58490225c709ffadfcb4d616e157c89091ce836e1c"
+    }
+  ],
+  "source_fps": 30,
+  "world_unit_scale": 2,
+  "initial_move_speed": 1,
+  "next_screen_move_speed": 0.2,
+  "rules": [
+    "BattleMapBase.GotoNextScreen default argument is 0.2; calls Camera2.gotoNextScreen before incrementing LevelParam.nowScreen.",
+    "Camera2.doInAdvance centers living players, clamps to current ScreenRange, then lerps old view translation by _moveSpeed.",
+    "Camera2._goingNext/_lasetX preserves the old viewport start and ratchets the desired left edge until reaching the new region minimum.",
+    "The normal transition does not restore _moveSpeed to 1.",
+    "Camera2.advanceTime returns when all follow targets are dead."
+  ],
+  "local_plugin": {
+    "name": "Phantom Camera",
+    "version": "0.11.0.3",
+    "third_party_code_modified": false
+  },
+  "implementation": "preauthored FollowTarget -> native PhantomCamera2D GLUED -> scoped native PhantomCameraHost MANUAL -> Camera2D",
+  "timing": "alpha = 1 - pow(1 - source_weight, source_fps * combat_delta); exact for constant targets, samples moving targets at Godot physics ticks"
+}

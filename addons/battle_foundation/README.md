@@ -1,10 +1,20 @@
 # Battle Foundation · 战斗基础、动画与操作控制
 
+[原版Boss栏、怪物出场和清屏后提前移镜](boss/original-presentation.md)已接入F5首关，可在预置场景和区域配置调整。
+
+新增 [原版镜头跟随与Phantom Camera接入](camera/README.md)：预置CameraRig/Host/PCam，原版源帧插值与过区左边界约束，唯一战斗时钟、会话隔离和连续地图视差。普通过区不瞬移、不切换地图场景。[验收](../../examples/verify_camera_follow.tscn)。
+
+新增 [可复用连续地图模板与原版首关美术](level/map-template.md)：地图/视觉继承场景预置远、中、地面及近景，原生Parallax2D按可见左上角滚动，云动画统一消费BattleClock。碧玉径五区域共用同一地图，保留原碰撞/刷怪/出口；支持编辑贴图、拼接、视差与遮挡。[验收](../../examples/verify_map_visual.tscn)。
+
+阶段13新增 [Boss行为、阶段与公共表现](boss/README.md)：普通玉石琵琶精三技能按原素材帧执行，预置扇形音符/实体石墙，复用Core/GAS/伤害与受击，加入原版横幅、三层血条、保护、BGM/命中声和镜头反馈。通用配置另支持阶段阈值/机关条件/召唤及一次性回收。F5碧玉径已经可用实际初始悟空完整击败Boss并通关。[Boss配置](../../data/monsters/jushi_lingjun/README.md)、[类图与时序](docs/boss.svg)、[验收](../../examples/verify_boss.tscn)。
+
+阶段12新增 [关卡实例、区域、出生计划与通关](level/README.md)，复用现有Core定义索引/事件、BattleClock、GAS/Vital和怪物AI。碧玉径按原TMX导入五区域与完整必要出生依赖，独立跟踪计划生成与目标死亡，完成条件、出口、镜头和胜利统一管理。[配置](../../data/levels/biyujing/progression/README.md)、[联合类图](docs/level-progression.svg)、[验收](../../examples/verify_level_progression.tscn)。F5入口改为新关卡，旧阶段11场景继续作为AI验收。
+
 普通无双表现复用 Core 空格意图和 GAS 状态，新增无动作状态技能 `BattleStatusActivationFeature`、预置 `BattleWushuangEffect2D` 及原生姿态快照 `BattleSpinePoseMirror2D`。红光与残影独立于动作播放器，固定池消费战斗时钟，支持实例隔离与死亡/离场清理；当前预览持续15秒，怒气门槛和属性加成待接入。[原版依据与配置](../../data/effects/wushuang/README.md)。
 
 新增 [悟空转职前四技能与火魔斩](../../data/skills/sunwukong/README.md)：原版 MP/CD 等级表、空中限制、原素材 AB、精确重复命中、射线转向、冲刺扫掠、风暴追加重劈、独立砸地与 3 帧视觉尾部。通过现有 Core/GAS/Spine 接入，没有第二套技能或判定系统。[五技能演示](../../examples/wukong_skills_demo.tscn)、[联合类图](docs/wukong-basic-skills.svg)、[验收](../../examples/verify_wukong_skills.tscn)。新增 BattleSkillManaCost / BattleSkillCooldownFeature 为本次技能等级快照读取原版消耗与冷却，不修改共享配置。
 
-阶段 11 新增 [普通怪物与AI](ai/README.md)：编辑器预置两类碧玉径小怪，复用Core操作意图/动作状态、GAS技能与独立冷却、属性/Vital、Buff、受击和死亡。AI配置通过Policy/TargetSelector扩展；原版图集由AnimationPlayer播放，兽形攻击支持同段逐帧AB判定。F5入口为 [first_level_demo.tscn](../../examples/first_level_demo.tscn)；[怪物配置与新增步骤](../../data/monsters/README.md)。
+阶段 11 新增 [普通怪物与AI](ai/README.md)：编辑器预置两类碧玉径小怪，复用Core操作意图/动作状态、GAS技能与独立冷却、属性/Vital、Buff、受击和死亡。AI配置通过Policy/TargetSelector扩展；原版图集由AnimationPlayer播放，兽形攻击支持同段逐帧AB判定。F6独立AI入口为 [first_level_demo.tscn](../../examples/first_level_demo.tscn)；[怪物配置与新增步骤](../../data/monsters/README.md)。
 
 阶段 10 新增 [Buff、被动与战斗触发](combat/buffs-triggers.md)，复用并重构 GAS Status/Effect/PassiveStatusFeature，接入 Core STUN、标签引用计数、统一周期时钟、原版吸血/反伤与死亡/离场清理。打开 examples/buff_demo.tscn 按F6验收，节点与控件预置，全部定义位于业务 data/buffs。
 

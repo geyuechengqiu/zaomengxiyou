@@ -21,6 +21,10 @@ var _pending_hit_stop: float = 0.0
 ## 公共战斗表现必须由场景预置；不挂载于任何角色。
 var presentation: BattlePresentation2D:
 	get: return get_node_or_null(^"BattlePresentation") as BattlePresentation2D
+var level_instance: BattleLevelInstance2D:
+	get: return get_node_or_null(^"LevelInstance") as BattleLevelInstance2D
+var camera_rig: BattleCameraRig2D:
+	get: return get_node_or_null(^"CameraRig") as BattleCameraRig2D
 ## 可在 .tscn 中预置会话；留空保留原工厂配置方式。
 @export_file("*.json") var scene_manifest_path: String = ""
 @export var scene_seed: int = 0
@@ -95,7 +99,7 @@ func spawn_entity(category: String, id: StringName, at: Vector3 = Vector3.ZERO, 
 	publish_event(&"battle.entity_spawned", null, entity, {"definition_id": id, "category": category})
 	return entity
 
-func spawn_entity_2d(category: String, id: StringName, at: Vector2 = Vector2.ZERO, faction_override: StringName = &"") -> BattleEntity2D:
+func spawn_entity_2d(category: String, id: StringName, at: Vector2 = Vector2.ZERO, faction_override: StringName = &"", play_appearance: bool = false) -> BattleEntity2D:
 	if not _configured or not ["characters", "monsters"].has(category):
 		last_error = "战斗未配置或实体类别无效"
 		return null
@@ -125,6 +129,7 @@ func spawn_entity_2d(category: String, id: StringName, at: Vector2 = Vector2.ZER
 	_entities[runtime_id] = entity
 	entity.tree_exiting.connect(_on_entity_exiting.bind(runtime_id), CONNECT_ONE_SHOT)
 	add_child(entity)
+	if play_appearance and category == "monsters": entity.begin_spawn_appearance(int(data.get_meta(&"original_show_appear", 0)))
 	publish_event(&"battle.entity_spawned", null, entity, {"definition_id": id, "category": category})
 	return entity
 
@@ -183,6 +188,9 @@ func start_level(id: StringName) -> bool:
 	if data == null:
 		last_error = catalog.last_error
 		return false
+	if not data.regions.is_empty() and level_instance == null:
+		last_error = "区域关卡必须预置LevelInstance组件"
+		return false
 	if data.scene != null:
 		_level_root = data.scene.instantiate()
 		add_child(_level_root)
@@ -196,6 +204,10 @@ func start_level(id: StringName) -> bool:
 				_level_root.queue_free()
 			return false
 		spawned.append(entity.entity_id)
+	if not data.regions.is_empty() and not level_instance.start(data):
+		last_error = level_instance.last_error
+		clear_battle()
+		return false
 	current_level_id = id
 	publish_event(&"battle.level_started", null, null, {"level_id": id})
 	return true
@@ -210,11 +222,21 @@ func register_scene_level(id: StringName, level_root: Node) -> bool:
 		last_error = catalog.last_error
 		return false
 	_level_root = level_root
+	if not data.regions.is_empty() and level_instance == null:
+		last_error = "区域关卡必须预置LevelInstance组件"
+		_level_root = null
+		return false
+	if level_instance != null and not data.regions.is_empty() and not level_instance.start(data):
+		last_error = level_instance.last_error
+		_level_root = null
+		return false
 	current_level_id = id
 	publish_event(&"battle.level_started", null, null, {"level_id": id})
 	return true
 
 func clear_battle() -> void:
+	if level_instance != null: level_instance.stop()
+	if camera_rig != null: camera_rig.stop()
 	for id in _entities.keys():
 		despawn_entity(id)
 	if is_instance_valid(_level_root):
@@ -239,8 +261,14 @@ func advance_physics(unscaled_delta: float) -> void:
 		for entity in _entities.values():
 			if is_instance_valid(entity) and not entity.is_queued_for_deletion():
 				entity.advance_simulation(delta)
+	if is_instance_valid(_level_root) and _level_root is BattleMap2D:
+		_level_root.advance_visuals(delta)
 	if presentation != null:
 		presentation.advance_presentation(delta)
+	if level_instance != null:
+		level_instance.advance_level(delta)
+	if camera_rig != null:
+		camera_rig.advance_camera(delta)
 	# 同一 tick 的所有目标先完成命中，停顿从下一个物理 tick 开始。
 	# 不能让第一个目标请求停顿后，后面的目标因为 blocked 而漏结算。
 	if _pending_hit_stop > 0.0:

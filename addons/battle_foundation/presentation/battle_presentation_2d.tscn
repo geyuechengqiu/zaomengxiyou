@@ -3,11 +3,13 @@
 [ext_resource type="PackedScene" path="res://addons/battle_foundation/presentation/combat_feedback_2d.tscn" id="feedback"]
 [ext_resource type="PackedScene" path="res://data/effects/damage_number.tscn" id="number"]
 [ext_resource type="Script" path="res://addons/battle_foundation/presentation/battle_damage_number_layer_2d.gd" id="rows"]
+[ext_resource type="PackedScene" path="res://addons/battle_foundation/boss/battle_boss_feedback_2d.tscn" id="boss"]
 [node name="BattlePresentation" type="Node2D"]
 z_index = 5
 script = ExtResource("script")
 feedback_scene = ExtResource("feedback")
 number_scene = ExtResource("number")
+[node name="BossFeedback" parent="." instance=ExtResource("boss")]
 [node name="EntityViews" type="Node2D" parent="."]
 [node name="DamageNumbers" type="CanvasLayer" parent="."]
 layer = 10

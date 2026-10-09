@@ -1,0 +1,20 @@
+[gd_scene format=3]
+[ext_resource type="Script" path="res://addons/battle_foundation/level/battle_map_visual_2d.gd" id="script"]
+[node name="MapVisual" type="Node2D"]
+script = ExtResource("script")
+[node name="FarBackground" type="Parallax2D" parent="."]
+z_index = -40
+scroll_scale = Vector2(0.04,1)
+ignore_camera_scroll = true
+[node name="MiddleBackground" type="Parallax2D" parent="."]
+z_index = -30
+scroll_scale = Vector2(0.1,1)
+ignore_camera_scroll = true
+[node name="FixedMiddle" type="Parallax2D" parent="."]
+z_index = -20
+scroll_scale = Vector2(0,1)
+ignore_camera_scroll = true
+[node name="GroundArtwork" type="Node2D" parent="."]
+z_index = -10
+[node name="ForegroundOccluders" type="Node2D" parent="."]
+z_index = 20

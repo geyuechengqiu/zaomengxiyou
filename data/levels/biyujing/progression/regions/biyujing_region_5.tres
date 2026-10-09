@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="BattleRegionDefinition" format=3]
+[ext_resource type="Script" path="res://addons/battle_foundation/level/battle_region_definition.gd" id="script"]
+[resource]
+script = ExtResource("script")
+region_id = &"biyujing_region_5"
+display_name = "碧玉径 · 区域5"
+bounds = Rect2(8896.0, 0.0, 2048.0, 1216.0)
+entry_rect = Rect2(10200.0, 64.0, 1000.0, 1024.0)
+exit_rect = Rect2(10048.0, 920.0, 256.0, 256.0)
+wave_ids = Array[StringName]([&"biyujing_region_5_wave_1", &"biyujing_region_5_boss"])
+automatic_exit = false
+metadata/original_screen = 5

@@ -1,0 +1,39 @@
+[gd_resource type="Resource" script_class="GameplayAbilityDefinition" format=3]
+[ext_resource type="Script" path="res://addons/gameplay_abiltiy_system/scripts/abilities/gameplay_ability_definition.gd" id="definition"]
+[ext_resource type="Script" path="res://addons/gameplay_abiltiy_system/scripts/abilities/features/gameplay_ability_feature.gd" id="feature"]
+[ext_resource type="Script" path="res://addons/gameplay_abiltiy_system/scripts/abilities/features/cooldown_feature.gd" id="cooldown"]
+[ext_resource type="Script" path="res://addons/battle_foundation/gas/battle_frame_timeline_feature.gd" id="timeline"]
+[ext_resource type="Script" path="res://addons/battle_foundation/definitions/battle_attack_segment.gd" id="segment"]
+[ext_resource type="Script" path="res://addons/battle_foundation/definitions/battle_frame_event.gd" id="event"]
+[sub_resource type="Resource" id="Cooldown"]
+script = ExtResource("cooldown")
+cooldown_duration = 10.0
+[sub_resource type="Resource" id="Segment"]
+script = ExtResource("segment")
+segment_id = &"skill1_1"
+hit_index = 1
+start_frame = 15
+end_frame = 33
+action = &"attack_1"
+hit_rect = Rect2(-150, -176.95, 300, 205.95)
+hit_rect_frames = Dictionary[int, Rect2]({15: Rect2(-150, -176.95, 300, 205.95), 16: Rect2(-150, -176.95, 300, 205.95), 17: Rect2(-150, -176.95, 300, 205.95), 18: Rect2(-150, -176.95, 300, 205.95), 19: Rect2(-150, -176.95, 300, 205.95), 20: Rect2(-150, -176.95, 300, 205.95), 21: Rect2(-150, -176.95, 300, 205.95), 22: Rect2(-150, -176.95, 300, 205.95), 23: Rect2(-150, -176.95, 300, 205.95), 24: Rect2(-150, -176.95, 300, 205.95), 25: Rect2(-150, -176.95, 300, 205.95), 26: Rect2(-150, -176.95, 300, 205.95), 27: Rect2(-150, -176.95, 300, 205.95), 28: Rect2(-150, -176.95, 300, 205.95), 29: Rect2(-150, -176.95, 300, 205.95), 30: Rect2(-150, -176.95, 300, 205.95), 31: Rect2(-150, -176.95, 300, 205), 32: Rect2(-150, -176.95, 300, 205)})
+hit_stun = 0.5
+knockback_speed = 1600.0
+knockback_duration = 0.5
+launch_speed = 600.0
+reset_vertical_velocity = true
+reaction_gravity = 1980.0
+protection_skill_id = "2001100"
+[sub_resource type="Resource" id="Timeline"]
+script = ExtResource("timeline")
+duration_frames = 38
+animation_action = &"attack_1"
+commit_resources = true
+action_rules = {"move": false, "jump": false, "turn": false, "super_armor": true}
+attack_segments = Array[ExtResource("segment")]([SubResource("Segment")])
+[resource]
+script = ExtResource("definition")
+ability_id = &"jushi_lingjun_skill1"
+ability_name = "震颤之音"
+features = Array[ExtResource("feature")]([SubResource("Cooldown"),SubResource("Timeline")])
+metadata/original_skill_id = 2001100

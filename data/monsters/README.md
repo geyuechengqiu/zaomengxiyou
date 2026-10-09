@@ -1,6 +1,10 @@
 # 第一关普通怪物配置
 
-F5 运行 `examples/first_level_demo.tscn`；A/D 移动、K 跳跃、J 普攻/跑攻/跳攻，Esc 暂停和改键。场景中的按钮可以对附近小怪施加眩晕或减速，用于观察 AI 是否遵守动作权限。伤害跳字、原版血条与受击特效全部由 `BattleSession/BattlePresentation` 管理。
+普通玉石琵琶精现已接入阶段13三技能、独立对象池与原版公共Boss表现；[Boss配置与扩展步骤](jushi_lingjun/README.md)、[插件实现](../../addons/battle_foundation/boss/README.md)。F5可完整经过普通怪物、容器和Boss后确认通关。
+
+F5入口已切换到 [阶段12区域关卡](../../examples/level_progression_demo.tscn)，按原版出生计划生成怪物并推进出口。下述32只预置小怪场景仍用于独立AI测试，F6运行。[区域/刷怪/通关配置](../levels/biyujing/progression/README.md)。
+
+F6 运行 `examples/first_level_demo.tscn`；A/D 移动、K 跳跃、J 普攻/跑攻/跳攻，Esc 暂停和改键。场景中的按钮可以对附近小怪施加眩晕或减速，用于观察 AI 是否遵守动作权限。伤害跳字、原版血条与受击特效全部由 `BattleSession/BattlePresentation` 管理。
 
 ## 实际原版身份
 

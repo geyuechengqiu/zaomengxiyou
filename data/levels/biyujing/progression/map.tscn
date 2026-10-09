@@ -1,0 +1,264 @@
+[gd_scene format=3]
+[ext_resource type="PackedScene" path="res://data/battle2d/sunwukong_2d.tscn" id="player"]
+[ext_resource type="Script" path="res://addons/battle_foundation/level/battle_spawn_point_2d.gd" id="point"]
+[ext_resource type="Script" path="res://addons/battle_foundation/level/battle_region_gate_2d.gd" id="gate"]
+[ext_resource type="PackedScene" path="res://addons/battle_foundation/level/battle_map_template_2d.tscn" id="map_template"]
+[ext_resource type="PackedScene" path="res://data/levels/biyujing/progression/visual.tscn" id="visuals"]
+[sub_resource type="RectangleShape2D" id="ground0"]
+size = Vector2(11200.0, 128.0)
+[sub_resource type="RectangleShape2D" id="ground1"]
+size = Vector2(11200.0, 128.0)
+[sub_resource type="RectangleShape2D" id="ground2"]
+size = Vector2(128.0, 1024.0)
+[sub_resource type="RectangleShape2D" id="ground3"]
+size = Vector2(128.0, 1024.0)
+[sub_resource type="RectangleShape2D" id="ground4"]
+size = Vector2(128.0, 32.0)
+[sub_resource type="RectangleShape2D" id="ground5"]
+size = Vector2(128.0, 32.0)
+[sub_resource type="RectangleShape2D" id="ground6"]
+size = Vector2(128.0, 32.0)
+[sub_resource type="RectangleShape2D" id="ground7"]
+size = Vector2(128.0, 32.0)
+[sub_resource type="RectangleShape2D" id="ground8"]
+size = Vector2(128.0, 32.0)
+[sub_resource type="RectangleShape2D" id="ground9"]
+size = Vector2(128.0, 32.0)
+[sub_resource type="RectangleShape2D" id="ground10"]
+size = Vector2(128.0, 32.0)
+[sub_resource type="RectangleShape2D" id="ground11"]
+size = Vector2(128.0, 32.0)
+[sub_resource type="RectangleShape2D" id="ground12"]
+size = Vector2(128.0, 32.0)
+[sub_resource type="RectangleShape2D" id="gate_shape"]
+size = Vector2(20, 1280)
+[node name="Actors" instance=ExtResource("map_template")]
+[node name="BiyujingVisual" parent="Visuals" instance=ExtResource("visuals")]
+[node name="Ground0" type="StaticBody2D" parent="Terrain"]
+position = Vector2(5472.0, 0.0)
+collision_mask = 2
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Terrain/Ground0"]
+shape = SubResource("ground0")
+[node name="Ground1" type="StaticBody2D" parent="Terrain"]
+position = Vector2(5472.0, 1120.0)
+collision_mask = 2
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Terrain/Ground1"]
+shape = SubResource("ground1")
+[node name="Ground2" type="StaticBody2D" parent="Terrain"]
+position = Vector2(-64.0, 576.0)
+collision_mask = 2
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Terrain/Ground2"]
+shape = SubResource("ground2")
+[node name="Ground3" type="StaticBody2D" parent="Terrain"]
+position = Vector2(11008.0, 576.0)
+collision_mask = 2
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Terrain/Ground3"]
+shape = SubResource("ground3")
+[node name="Ground4" type="StaticBody2D" parent="Terrain"]
+position = Vector2(0.0, 836.0)
+collision_mask = 2
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Terrain/Ground4"]
+shape = SubResource("ground4")
+one_way_collision = true
+[node name="Ground5" type="StaticBody2D" parent="Terrain"]
+position = Vector2(998.0, 836.0)
+collision_mask = 2
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Terrain/Ground5"]
+shape = SubResource("ground5")
+one_way_collision = true
+[node name="Ground6" type="StaticBody2D" parent="Terrain"]
+position = Vector2(1990.0, 836.0)
+collision_mask = 2
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Terrain/Ground6"]
+shape = SubResource("ground6")
+one_way_collision = true
+[node name="Ground7" type="StaticBody2D" parent="Terrain"]
+position = Vector2(2994.0, 836.0)
+collision_mask = 2
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Terrain/Ground7"]
+shape = SubResource("ground7")
+one_way_collision = true
+[node name="Ground8" type="StaticBody2D" parent="Terrain"]
+position = Vector2(3982.0, 836.0)
+collision_mask = 2
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Terrain/Ground8"]
+shape = SubResource("ground8")
+one_way_collision = true
+[node name="Ground9" type="StaticBody2D" parent="Terrain"]
+position = Vector2(4982.0, 836.0)
+collision_mask = 2
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Terrain/Ground9"]
+shape = SubResource("ground9")
+one_way_collision = true
+[node name="Ground10" type="StaticBody2D" parent="Terrain"]
+position = Vector2(5980.0, 836.0)
+collision_mask = 2
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Terrain/Ground10"]
+shape = SubResource("ground10")
+one_way_collision = true
+[node name="Ground11" type="StaticBody2D" parent="Terrain"]
+position = Vector2(6976.0, 836.0)
+collision_mask = 2
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Terrain/Ground11"]
+shape = SubResource("ground11")
+one_way_collision = true
+[node name="Ground12" type="StaticBody2D" parent="Terrain"]
+position = Vector2(7980.0, 836.0)
+collision_mask = 2
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Terrain/Ground12"]
+shape = SubResource("ground12")
+one_way_collision = true
+[node name="SunWukong" parent="." instance=ExtResource("player")]
+position = Vector2(256.0, 984.0)
+scene_definition_id = &"孙悟空"
+[node name="screen1_birth1" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(640.0, 640.0)
+script = ExtResource("point")
+spawn_point_id = &"screen1_birth1"
+[node name="screen1_birth2" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(896.0, 704.0)
+script = ExtResource("point")
+spawn_point_id = &"screen1_birth2"
+[node name="screen1_birth3" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(1280.0, 640.0)
+script = ExtResource("point")
+spawn_point_id = &"screen1_birth3"
+[node name="screen1_birth4" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(1472.0, 704.0)
+script = ExtResource("point")
+spawn_point_id = &"screen1_birth4"
+[node name="screen2_birth5" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(3136.0, 640.0)
+script = ExtResource("point")
+spawn_point_id = &"screen2_birth5"
+[node name="screen2_birth6" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(3392.0, 704.0)
+script = ExtResource("point")
+spawn_point_id = &"screen2_birth6"
+[node name="screen2_birth7" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(3776.0, 640.0)
+script = ExtResource("point")
+spawn_point_id = &"screen2_birth7"
+[node name="screen2_birth8" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(4160.0, 704.0)
+script = ExtResource("point")
+spawn_point_id = &"screen2_birth8"
+[node name="screen3_birth9" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(5248.0, 640.0)
+script = ExtResource("point")
+spawn_point_id = &"screen3_birth9"
+[node name="screen3_birth10" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(5440.0, 704.0)
+script = ExtResource("point")
+spawn_point_id = &"screen3_birth10"
+[node name="screen3_birth11" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(6208.0, 640.0)
+script = ExtResource("point")
+spawn_point_id = &"screen3_birth11"
+[node name="screen3_birth12" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(6272.0, 704.0)
+script = ExtResource("point")
+spawn_point_id = &"screen3_birth12"
+[node name="screen4_birth13" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(7552.0, 704.0)
+script = ExtResource("point")
+spawn_point_id = &"screen4_birth13"
+[node name="screen5_birth14" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(9280.0, 704.0)
+script = ExtResource("point")
+spawn_point_id = &"screen5_birth14"
+[node name="screen4_birth15" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(8320.0, 704.0)
+script = ExtResource("point")
+spawn_point_id = &"screen4_birth15"
+[node name="screen5_birth16" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(10432.0, 704.0)
+script = ExtResource("point")
+spawn_point_id = &"screen5_birth16"
+[node name="revival_vessel_birth" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(9600.0, 960.0)
+script = ExtResource("point")
+spawn_point_id = &"revival_vessel_birth"
+[node name="Gate1" type="StaticBody2D" parent="Gates"]
+position = Vector2(2358.0, 576)
+collision_layer = 1
+collision_mask = 2
+script = ExtResource("gate")
+region_id = &"biyujing_region_1"
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Gates/Gate1"]
+shape = SubResource("gate_shape")
+[node name="Barrier" type="Polygon2D" parent="Gates/Gate1"]
+polygon = PackedVector2Array(-10,-640, 10,-640, 10,640, -10,640)
+color = Color(0.9, 0.35, 0.18, 0.7)
+[node name="Label" type="Label" parent="Gates/Gate1"]
+position = Vector2(-230,-450)
+text = "区域未完成"
+theme_override_font_sizes/font_size = 30
+[node name="Gate2" type="StaticBody2D" parent="Gates"]
+position = Vector2(4534.0, 576)
+collision_layer = 1
+collision_mask = 2
+script = ExtResource("gate")
+region_id = &"biyujing_region_2"
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Gates/Gate2"]
+shape = SubResource("gate_shape")
+[node name="Barrier" type="Polygon2D" parent="Gates/Gate2"]
+polygon = PackedVector2Array(-10,-640, 10,-640, 10,640, -10,640)
+color = Color(0.9, 0.35, 0.18, 0.7)
+[node name="Label" type="Label" parent="Gates/Gate2"]
+position = Vector2(-230,-450)
+text = "区域未完成"
+theme_override_font_sizes/font_size = 30
+[node name="Gate3" type="StaticBody2D" parent="Gates"]
+position = Vector2(6710.0, 576)
+collision_layer = 1
+collision_mask = 2
+script = ExtResource("gate")
+region_id = &"biyujing_region_3"
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Gates/Gate3"]
+shape = SubResource("gate_shape")
+[node name="Barrier" type="Polygon2D" parent="Gates/Gate3"]
+polygon = PackedVector2Array(-10,-640, 10,-640, 10,640, -10,640)
+color = Color(0.9, 0.35, 0.18, 0.7)
+[node name="Label" type="Label" parent="Gates/Gate3"]
+position = Vector2(-230,-450)
+text = "区域未完成"
+theme_override_font_sizes/font_size = 30
+[node name="Gate4" type="StaticBody2D" parent="Gates"]
+position = Vector2(8886.0, 576)
+collision_layer = 1
+collision_mask = 2
+script = ExtResource("gate")
+region_id = &"biyujing_region_4"
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Gates/Gate4"]
+shape = SubResource("gate_shape")
+[node name="Barrier" type="Polygon2D" parent="Gates/Gate4"]
+polygon = PackedVector2Array(-10,-640, 10,-640, 10,640, -10,640)
+color = Color(0.9, 0.35, 0.18, 0.7)
+[node name="Label" type="Label" parent="Gates/Gate4"]
+position = Vector2(-230,-450)
+text = "区域未完成"
+theme_override_font_sizes/font_size = 30
+[node name="Gate5" type="StaticBody2D" parent="Gates"]
+position = Vector2(10934.0, 576)
+collision_layer = 1
+collision_mask = 2
+script = ExtResource("gate")
+region_id = &"biyujing_region_5"
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Gates/Gate5"]
+shape = SubResource("gate_shape")
+[node name="Barrier" type="Polygon2D" parent="Gates/Gate5"]
+polygon = PackedVector2Array(-10,-640, 10,-640, 10,640, -10,640)
+color = Color(0.9, 0.35, 0.18, 0.7)
+[node name="Label" type="Label" parent="Gates/Gate5"]
+position = Vector2(-230,-450)
+text = "区域未完成"
+theme_override_font_sizes/font_size = 30
+[node name="FinalExit" type="Marker2D" parent="."]
+position = Vector2(10176, 1056)
+[node name="Label" type="Label" parent="FinalExit"]
+position = Vector2(-120,-150)
+text = "出口：开启后按W / ↑"
+theme_override_font_sizes/font_size = 26
+[node name="PlayerBirth" parent="."]
+position = Vector2(256.0, 984.0)

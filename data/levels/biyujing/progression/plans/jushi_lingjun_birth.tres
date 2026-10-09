@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="BattleSpawnPlanDefinition" format=3]
+[ext_resource type="Script" path="res://addons/battle_foundation/level/battle_spawn_plan_definition.gd" id="script"]
+[resource]
+script = ExtResource("script")
+plan_id = &"jushi_lingjun_birth"
+spawn_point_id = &"revival_vessel_birth"
+monster_ids = Array[StringName]([&"巨石灵君"])
+after_dead_plan_ids = Array[StringName]([&"revival_vessel_birth"])
+delay_seconds = 0.833333333
+is_boss = true
+facing = -1
+metadata/original_death_skill_id = 2001001
+metadata/original_source_frame = 25

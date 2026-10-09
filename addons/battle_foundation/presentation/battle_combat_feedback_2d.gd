@@ -20,12 +20,14 @@ var _actor: BattleEntity2D:
 @export var always_show_health_bar: bool = false
 @export var show_player_health_bar: bool = false
 @export var show_health_values: bool = false
+@export var show_protection_bar: bool = true
 @onready var _health: BattleMonsterHealthBar2D = $HealthBar
 @onready var _label: Label = $HealthLabel
 @onready var _damage: Label = $DamageLabel
 @onready var _protection_bar: ProgressBar = $ProtectionBar
 @onready var _protection_label: Label = $ProtectionLabel
 @onready var hit_effect: BattleHitEffect2D = $HitEffect
+@onready var appearance: BattleMonsterAppearance2D = $MonsterAppearance
 var remaining: float = 0.0
 var last_damage: float = 0.0
 var hit_count: int = 0
@@ -58,6 +60,7 @@ func _on_damage_received(_info: DamageInfo) -> void:
 	_setup_complete = true
 
 func unbind_actor() -> void:
+	if is_instance_valid(appearance): appearance.clear_effect()
 	var actor := _actor
 	if is_instance_valid(actor) and is_instance_valid(actor.attributes):
 		if actor.attributes.snapshot_changed.is_connected(_refresh_health):
@@ -133,7 +136,7 @@ func _format_value(value: float) -> String:
 
 func _refresh_protection() -> void:
 	var protection := _actor.protection
-	var show_bar := protection.profile != null and protection.profile.enabled and protection.show_protect and _actor.is_alive()
+	var show_bar := show_protection_bar and protection.profile != null and protection.profile.enabled and protection.show_protect and _actor.is_alive()
 	_protection_bar.visible = show_bar
 	_protection_label.visible = show_bar
 	if show_bar:

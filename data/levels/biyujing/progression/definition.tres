@@ -1,0 +1,47 @@
+[gd_resource type="Resource" script_class="BattleLevelDefinition" format=3]
+[ext_resource type="Script" path="res://addons/battle_foundation/definitions/battle_level_definition.gd" id="script"]
+[ext_resource type="PackedScene" path="res://data/levels/biyujing/progression/map.tscn" id="scene"]
+[ext_resource type="Script" path="res://addons/battle_foundation/level/battle_region_definition.gd" id="regions_type"]
+[ext_resource type="Resource" path="res://data/levels/biyujing/progression/regions/biyujing_region_1.tres" id="biyujing_region_1"]
+[ext_resource type="Resource" path="res://data/levels/biyujing/progression/regions/biyujing_region_2.tres" id="biyujing_region_2"]
+[ext_resource type="Resource" path="res://data/levels/biyujing/progression/regions/biyujing_region_3.tres" id="biyujing_region_3"]
+[ext_resource type="Resource" path="res://data/levels/biyujing/progression/regions/biyujing_region_4.tres" id="biyujing_region_4"]
+[ext_resource type="Resource" path="res://data/levels/biyujing/progression/regions/biyujing_region_5.tres" id="biyujing_region_5"]
+[ext_resource type="Script" path="res://addons/battle_foundation/level/battle_wave_definition.gd" id="waves_type"]
+[ext_resource type="Resource" path="res://data/levels/biyujing/progression/waves/biyujing_region_1_wave_1.tres" id="biyujing_region_1_wave_1"]
+[ext_resource type="Resource" path="res://data/levels/biyujing/progression/waves/biyujing_region_1_wave_2.tres" id="biyujing_region_1_wave_2"]
+[ext_resource type="Resource" path="res://data/levels/biyujing/progression/waves/biyujing_region_2_wave_1.tres" id="biyujing_region_2_wave_1"]
+[ext_resource type="Resource" path="res://data/levels/biyujing/progression/waves/biyujing_region_2_wave_2.tres" id="biyujing_region_2_wave_2"]
+[ext_resource type="Resource" path="res://data/levels/biyujing/progression/waves/biyujing_region_3_wave_1.tres" id="biyujing_region_3_wave_1"]
+[ext_resource type="Resource" path="res://data/levels/biyujing/progression/waves/biyujing_region_3_wave_2.tres" id="biyujing_region_3_wave_2"]
+[ext_resource type="Resource" path="res://data/levels/biyujing/progression/waves/biyujing_region_4_wave_1.tres" id="biyujing_region_4_wave_1"]
+[ext_resource type="Resource" path="res://data/levels/biyujing/progression/waves/biyujing_region_5_wave_1.tres" id="biyujing_region_5_wave_1"]
+[ext_resource type="Resource" path="res://data/levels/biyujing/progression/waves/biyujing_region_5_boss.tres" id="biyujing_region_5_boss"]
+[ext_resource type="Script" path="res://addons/battle_foundation/level/battle_spawn_plan_definition.gd" id="plans_type"]
+[ext_resource type="Resource" path="res://data/levels/biyujing/progression/plans/screen1_birth1.tres" id="screen1_birth1"]
+[ext_resource type="Resource" path="res://data/levels/biyujing/progression/plans/screen1_birth2.tres" id="screen1_birth2"]
+[ext_resource type="Resource" path="res://data/levels/biyujing/progression/plans/screen1_birth3.tres" id="screen1_birth3"]
+[ext_resource type="Resource" path="res://data/levels/biyujing/progression/plans/screen1_birth4.tres" id="screen1_birth4"]
+[ext_resource type="Resource" path="res://data/levels/biyujing/progression/plans/screen2_birth5.tres" id="screen2_birth5"]
+[ext_resource type="Resource" path="res://data/levels/biyujing/progression/plans/screen2_birth6.tres" id="screen2_birth6"]
+[ext_resource type="Resource" path="res://data/levels/biyujing/progression/plans/screen2_birth7.tres" id="screen2_birth7"]
+[ext_resource type="Resource" path="res://data/levels/biyujing/progression/plans/screen2_birth8.tres" id="screen2_birth8"]
+[ext_resource type="Resource" path="res://data/levels/biyujing/progression/plans/screen3_birth9.tres" id="screen3_birth9"]
+[ext_resource type="Resource" path="res://data/levels/biyujing/progression/plans/screen3_birth10.tres" id="screen3_birth10"]
+[ext_resource type="Resource" path="res://data/levels/biyujing/progression/plans/screen3_birth11.tres" id="screen3_birth11"]
+[ext_resource type="Resource" path="res://data/levels/biyujing/progression/plans/screen3_birth12.tres" id="screen3_birth12"]
+[ext_resource type="Resource" path="res://data/levels/biyujing/progression/plans/screen4_birth13.tres" id="screen4_birth13"]
+[ext_resource type="Resource" path="res://data/levels/biyujing/progression/plans/screen5_birth14.tres" id="screen5_birth14"]
+[ext_resource type="Resource" path="res://data/levels/biyujing/progression/plans/screen4_birth15.tres" id="screen4_birth15"]
+[ext_resource type="Resource" path="res://data/levels/biyujing/progression/plans/screen5_birth16.tres" id="screen5_birth16"]
+[ext_resource type="Resource" path="res://data/levels/biyujing/progression/plans/revival_vessel_birth.tres" id="revival_vessel_birth"]
+[ext_resource type="Resource" path="res://data/levels/biyujing/progression/plans/jushi_lingjun_birth.tres" id="jushi_lingjun_birth"]
+[resource]
+script = ExtResource("script")
+definition_id = &"碧玉径"
+display_name = "碧玉径 · 原版区域与出生计划"
+scene = ExtResource("scene")
+regions = Array[ExtResource("regions_type")]([ExtResource("biyujing_region_1"), ExtResource("biyujing_region_2"), ExtResource("biyujing_region_3"), ExtResource("biyujing_region_4"), ExtResource("biyujing_region_5")])
+waves = Array[ExtResource("waves_type")]([ExtResource("biyujing_region_1_wave_1"), ExtResource("biyujing_region_1_wave_2"), ExtResource("biyujing_region_2_wave_1"), ExtResource("biyujing_region_2_wave_2"), ExtResource("biyujing_region_3_wave_1"), ExtResource("biyujing_region_3_wave_2"), ExtResource("biyujing_region_4_wave_1"), ExtResource("biyujing_region_5_wave_1"), ExtResource("biyujing_region_5_boss")])
+spawn_plans = Array[ExtResource("plans_type")]([ExtResource("screen1_birth1"), ExtResource("screen1_birth2"), ExtResource("screen1_birth3"), ExtResource("screen1_birth4"), ExtResource("screen2_birth5"), ExtResource("screen2_birth6"), ExtResource("screen2_birth7"), ExtResource("screen2_birth8"), ExtResource("screen3_birth9"), ExtResource("screen3_birth10"), ExtResource("screen3_birth11"), ExtResource("screen3_birth12"), ExtResource("screen4_birth13"), ExtResource("screen5_birth14"), ExtResource("screen4_birth15"), ExtResource("screen5_birth16"), ExtResource("revival_vessel_birth"), ExtResource("jushi_lingjun_birth")])
+required_boss_plan_ids = Array[StringName]([&"jushi_lingjun_birth"])

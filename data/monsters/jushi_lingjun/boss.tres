@@ -1,0 +1,32 @@
+[gd_resource type="Resource" script_class="BattleBossProfile" format=3]
+[ext_resource type="Script" path="res://addons/battle_foundation/boss/battle_boss_profile.gd" id="profile"]
+[ext_resource type="Script" path="res://addons/battle_foundation/boss/battle_boss_skill_rule.gd" id="rule"]
+[ext_resource type="Texture2D" path="res://assets/ui/boss/2001110.png" id="banner2"]
+[ext_resource type="Texture2D" path="res://assets/ui/boss/2001120.png" id="banner3"]
+[sub_resource type="Resource" id="Rule1"]
+script = ExtResource("rule")
+ability_id = &"jushi_lingjun_skill1"
+priority = 0
+cooldown_group = &"alternate"
+group_cooldown = 10.0
+attack_range = 300
+[sub_resource type="Resource" id="Rule2"]
+script = ExtResource("rule")
+ability_id = &"jushi_lingjun_skill2"
+priority = 1
+cooldown_group = &"pipa"
+group_cooldown = 5.0
+attack_range = 1000
+announcement = ExtResource("banner2")
+[sub_resource type="Resource" id="Rule3"]
+script = ExtResource("rule")
+ability_id = &"jushi_lingjun_skill3"
+priority = 0
+cooldown_group = &"alternate"
+group_cooldown = 10.0
+attack_range = 700
+announcement = ExtResource("banner3")
+[resource]
+script = ExtResource("profile")
+display_name = "玉石琵琶精"
+skills = Array[ExtResource("rule")]([SubResource("Rule1"),SubResource("Rule2"),SubResource("Rule3")])

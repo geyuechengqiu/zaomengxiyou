@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="BattleAIProfile2D" format=3]
+[ext_resource type="Script" path="res://addons/battle_foundation/ai/battle_ai_profile_2d.gd" id="profile"]
+[ext_resource type="Script" path="res://addons/battle_foundation/ai/battle_basic_ai_policy_2d.gd" id="policy"]
+[ext_resource type="Script" path="res://addons/battle_foundation/ai/battle_ai_target_selector_2d.gd" id="selector"]
+[sub_resource type="Resource" id="Policy"]
+script = ExtResource("policy")
+combat_style = "melee"
+[sub_resource type="Resource" id="Selector"]
+script = ExtResource("selector")
+[resource]
+script = ExtResource("profile")
+policy = SubResource("Policy")
+target_selector = SubResource("Selector")
+attack_skill_id = &"jushi_lingjun_skill1"
+attack_range = 180.0
+attack_vertical_range = 150.0
+minimum_attack_distance = 0.0
+retreat_chance = 0.5
+retreat_minimum = 1.0
+retreat_maximum = 2.0
+original_ai_id = 10009

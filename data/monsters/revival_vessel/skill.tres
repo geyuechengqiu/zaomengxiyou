@@ -1,0 +1,38 @@
+[gd_resource type="Resource" script_class="GameplayAbilityDefinition" format=3]
+[ext_resource type="Script" path="res://addons/gameplay_abiltiy_system/scripts/abilities/gameplay_ability_definition.gd" id="definition"]
+[ext_resource type="Script" path="res://addons/gameplay_abiltiy_system/scripts/abilities/features/gameplay_ability_feature.gd" id="feature"]
+[ext_resource type="Script" path="res://addons/gameplay_abiltiy_system/scripts/abilities/features/cooldown_feature.gd" id="cooldown"]
+[ext_resource type="Script" path="res://addons/battle_foundation/gas/battle_frame_timeline_feature.gd" id="timeline"]
+[ext_resource type="Script" path="res://addons/battle_foundation/definitions/battle_attack_segment.gd" id="segment"]
+[sub_resource type="Resource" id="Cooldown"]
+script = ExtResource("cooldown")
+cooldown_duration = 5.0
+[sub_resource type="Resource" id="Segment1"]
+script = ExtResource("segment")
+segment_id = &"skill1_1"
+hit_index = 1
+start_frame = 0
+end_frame = 34
+action = &"attack_1"
+hit_rect = Rect2(-352.05, -170.6, 703.0, 215.0)
+hit_rect_frames = Dictionary[int, Rect2]({0: Rect2(-352.05, -170.6, 703.0, 215.0), 1: Rect2(-352.05, -170.6, 703.0, 215.0), 2: Rect2(-352.05, -170.6, 703.0, 215.0), 3: Rect2(-352.05, -170.6, 703.0, 215.0), 4: Rect2(-352.05, -170.6, 703.0, 215.0), 5: Rect2(-352.05, -170.6, 703.0, 215.0), 6: Rect2(-352.05, -170.6, 703.0, 215.0), 7: Rect2(-352.05, -170.6, 703.0, 215.0), 8: Rect2(-352.05, -170.6, 703.0, 215.0), 9: Rect2(-352.05, -170.6, 703.0, 215.0), 10: Rect2(-352.05, -170.6, 703.0, 215.0), 11: Rect2(-352.05, -170.6, 703.0, 215.0), 12: Rect2(-352.05, -170.6, 703.0, 215.0), 13: Rect2(-352.05, -170.6, 703.0, 215.0), 14: Rect2(-352.05, -170.6, 703.0, 215.0), 15: Rect2(-352.05, -170.6, 703.0, 215.0), 16: Rect2(-352.05, -170.6, 703.0, 215.0), 17: Rect2(-352.05, -170.6, 703.0, 215.0), 18: Rect2(-352.05, -170.6, 703.0, 215.0), 19: Rect2(-352.05, -170.6, 703.0, 215.0), 20: Rect2(-352.05, -170.6, 703.0, 215.0), 21: Rect2(-352.05, -170.6, 703.0, 215.0), 22: Rect2(-352.05, -170.6, 703.0, 215.0), 23: Rect2(-352.05, -170.6, 703.0, 215.0), 24: Rect2(-352.05, -170.6, 703.0, 215.0), 25: Rect2(-352.05, -170.6, 703.0, 215.0), 26: Rect2(-352.05, -170.6, 703.0, 215.0), 27: Rect2(-352.05, -170.6, 703.0, 215.0), 28: Rect2(-352.05, -170.6, 703.0, 215.0), 29: Rect2(-352.05, -170.6, 703.0, 215.0), 30: Rect2(-352.05, -170.6, 703.0, 215.0), 31: Rect2(-352.05, -170.6, 703.0, 215.0), 32: Rect2(-352.05, -170.6, 703.0, 215.0), 33: Rect2(-352.05, -170.6, 703.0, 215.0)})
+hit_stun = 0.2
+protection_skill_id = "2001000"
+knockback_mode = "displacement"
+knockback_distance = 50.0
+knockback_duration = 0.1
+reaction_type = "knockback"
+[sub_resource type="Resource" id="Timeline"]
+script = ExtResource("timeline")
+duration_frames = 34
+animation_action = &"attack_1"
+commit_resources = true
+attack_segments = Array[ExtResource("segment")]([SubResource("Segment1")])
+[resource]
+script = ExtResource("definition")
+ability_id = &"revival_vessel_skill1"
+ability_name = "琵琶回复"
+features = Array[ExtResource("feature")]([SubResource("Cooldown"), SubResource("Timeline")])
+metadata/original_skill_id = 2001000
+metadata/original_skill_cd = 0.0
+metadata/original_ai_attack_wait = 5.0

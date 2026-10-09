@@ -1,12 +1,22 @@
 # 插件效果演示
 
+Boss栏已按原版挂在画面顶部中央，第一关显示“玉石琵琶精”，使用原名字体、三条生命计数、火抗降低/土抗提高图标及保护条。剑舞、驭兽使和复苏容器接入原25帧出场动画。清屏后进入区域右侧半屏即可平滑移镜，无需走到边缘；延迟出生仍锁定。[原版依据、可编辑节点和调参入口](addons/battle_foundation/boss/original-presentation.md)。
+
+首关镜头已使用Phantom Camera复刻原版跟随：过区保留当前画面，按原30FPS的0.2系数推进，过渡期间保留左边界棘轮，完成后锁定新区；跳跃遵守原地图高度裁剪，暂停/慢动作/停顿统一消费BattleClock。所有镜头组件和锚点预置。[原版依据、配置及验收](addons/battle_foundation/camera/README.md)。
+
+第一关已接入原版碧玉径远景、宫殿中景、201帧动态云层、连续地板与近景遮挡。五个区域共用一张10944×1216的连续地图；美术、碰撞、出生点和门均在编辑器预置，区域推进只解锁镜头与刷怪。[地图与视觉模板、复用步骤](addons/battle_foundation/level/map-template.md)、[整图场景](data/levels/biyujing/progression/map.tscn)、[美术编辑场景](data/levels/biyujing/progression/visual.tscn)。F5直接运行完整关卡。
+
+阶段13已形成首个可玩关卡：F5运行 [碧玉径](examples/level_progression_demo.tscn)，悟空经过五区域、32只普通怪物及复苏容器，最后挑战玉石琵琶精并确认出口通关。Boss接入原版三技能、五枚扇形音符、成形后持续5秒的实体石墙、原版技能播报、三层血条/保护条、BGM及命中/胜负声音；使用现有Core状态机/事件/音量总线与GAS属性/技能/伤害系统，所有组件及技能对象节点预置。支持其他Boss配置血量阶段、机关前置、预警和GAS时间轴召唤；普通玉石琵琶精原版无阶段/召唤，主线保持原配置。[Boss编辑入口](data/monsters/jushi_lingjun/README.md)、[系统实现及原版范围](addons/battle_foundation/boss/README.md)、[SVG类图与时序](addons/battle_foundation/docs/boss.svg)。真实初始悟空（等级1、生命275、攻击26）仅用五连击打通34个目标，剩余生命55。
+
+阶段12已接入 [碧玉径关卡](examples/level_progression_demo.tscn)，F5运行。按原始TMX配置五区域、九波次、十八出生计划：进入触发、延迟/间隔生成、出生完毕依赖、指定出生点全死依赖统一使用战斗时钟。第一波全死但第二波尚未出现时仍锁门；全部计划、目标及额外条件满足后才解锁出口和镜头。末区击破复苏容器，第25源帧生成玉石琵琶精；击败后在出口按W/↑确认，死亡统计、开门、胜利均去重。[配置入口](data/levels/biyujing/progression/README.md)、[实现与原版范围](addons/battle_foundation/level/README.md)、[联合类图](addons/battle_foundation/docs/level-progression.svg)。地图碰撞/出生点/出口和原版分层美术均预置，五区域沿同一张连续地图推进；Boss现已接入阶段13三技能与专属行为。
+
 悟空普通无双表现已接入 Core 空格意图与 GAS 状态：周身 `#FF3000` 红色辉光按原版30 FPS脉动，每0.2秒捕获人物残影，1秒线性淡出。打开第一关或五技能演示按空格，默认持续15秒；当前为表现预览入口，怒气蓄满门槛与无双属性加成尚未接入。节点预置、固定快照池，支持移动、转身、换装、暂停、停顿及死亡清理。[原版依据、配置和验收](data/effects/wushuang/README.md)。
 
 悟空移动已统一2倍战斗坐标：行走420、跑步600世界像素/秒，对应原版210/300。第一关五连击、跑攻、跳攻改用原版逐段受击速度和时长，第三段保留拉回，第四段两击分别覆盖冲量；不再套用阶段9验收用的倒地与击退配置。[速度调整入口](data/animation/sunwukong-config.md)、[原版击退参数与实测距离](data/battle2d/original_reactions/README.md)。
 
 悟空转职前的 **升龙斩（Y）、烈焰闪（U）、火眼金睛（I）、烈焰风暴（O）**，以及 **火魔斩（L）** 已按原版接入。打开 [五技能演示](examples/wukong_skills_demo.tscn) 按 F6，W/S 调整火眼金睛，烈焰风暴期间再按 O 追加重劈；J 仍使用五连击。MP/CD 等级表、原版 AB、技能状态、独立砸地与特效时序复用现有插件，所有视觉节点预置，继续共用一个攻击框。[原版依据、技能参数及编辑步骤](data/skills/sunwukong/README.md)、[联合类图](addons/battle_foundation/docs/wukong-basic-skills.svg)。
 
-阶段 11 已接入普通怪物与可扩展 AI。按 F5 运行 [碧玉径小怪场景](examples/first_level_demo.tscn)：32 个编辑器预置小怪（16 剑舞、16 驭兽使）使用原版属性、动作图集、攻击特效与逐帧 AB 判定；近战追击、远程出手退步、巡逻、返回活动范围和跳跃共用 Core 操作意图及动作规则，伤害、Buff、死亡与独立冷却复用 GAS。支持调整每种怪物的行为策略、低生命逃离和目标选择。[配置与新增怪物步骤](data/monsters/README.md)、[AI实现与原版范围](addons/battle_foundation/ai/README.md)、[联合类图](addons/battle_foundation/docs/monster-ai.svg)。当前地形用于小怪验收，原关卡机关、Boss、补给与刷怪波次留待关卡阶段。
+阶段 11 已接入普通怪物与可扩展 AI。按 F6 运行 [碧玉径小怪场景](examples/first_level_demo.tscn)：32 个编辑器预置小怪（16 剑舞、16 驭兽使）使用原版属性、动作图集、攻击特效与逐帧 AB 判定；近战追击、远程出手退步、巡逻、返回活动范围和跳跃共用 Core 操作意图及动作规则，伤害、Buff、死亡与独立冷却复用 GAS。支持调整每种怪物的行为策略、低生命逃离和目标选择。[配置与新增怪物步骤](data/monsters/README.md)、[AI实现与原版范围](addons/battle_foundation/ai/README.md)、[联合类图](addons/battle_foundation/docs/monster-ai.svg)。此场景保留为预置小怪AI验收；区域刷怪、地图碰撞与Boss通关流程使用上方阶段12场景。
 
 阶段 10 已接入 GAS Buff、被动与 Core 战斗触发。打开 [Buff 测试场景](examples/buff_demo.tscn) 按 F6 运行，选择悟空或木桩后施加加攻、减速、眩晕、持续伤害、护盾、无敌、霸体、反伤与吸血；“被动组合”演示释放、命中、受击、生命阈值和击杀触发。支持独立实例、叠层、刷新、覆盖、周期补算、死亡/离场清理；眩晕进入 Core STUN，吸血按原版盾前伤害计算，反伤不重复触发普通命中被动。[配置与原版依据](addons/battle_foundation/combat/buffs-triggers.md)、[资源目录](data/buffs/README.md)、[联合类图](addons/battle_foundation/docs/buffs-triggers.svg)。
 
@@ -32,7 +42,7 @@
 
 孙悟空 [表现场景](data/animation/sunwukong_visual.tscn) 通过主 AnimationPlayer 预览二十二个动作，所有技能统一使用一个 AttackHitbox / CollisionShape2D，判定范围读取当前 GAS 技能数据。修改技能事件或攻击段的 hit_rect、缩放和偏移即可调整预览与实际命中。[编辑步骤、新角色接入与类图](data/animation/README.md)。
 
-使用带原生 Spine 模块的 Godot 4.7 或更新版本打开 `project.godot`，按 F5 运行碧玉径小怪场景，或按 F6 运行所选示例。插件综合演示仍可单独运行 `examples/plugin_showcase.tscn`。
+使用带原生 Spine 模块的 Godot 4.7 或更新版本打开 `project.godot`，按 F5 运行碧玉径完整关卡，或按 F6 运行所选示例。插件综合演示仍可单独运行 `examples/plugin_showcase.tscn`。
 
 Windows 编辑器若偶发 `Failed to create Windows OS window`、`Failed to create sub window` 或 `INVALID_WINDOW_ID`，先保存并关闭编辑器，再通过 [单窗口启动脚本](tools/open_editor_single_window.ps1) 打开本项目：
 

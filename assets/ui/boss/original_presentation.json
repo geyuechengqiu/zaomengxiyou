@@ -1,0 +1,156 @@
+{
+  "sources": [
+    {
+      "path": "games/zmhj-g5/cache/assets/ui/mission_20260406_1.swf",
+      "sha256": "60944248515768281bc82c2e20e267711bf2922967c54029133c36c3c35b9862"
+    },
+    {
+      "path": "out/zmhj-equip-skill-diag/prefabs/Monster1.as",
+      "sha256": "9d163407fd774ed3df8b0739ccbefb1c75999b93520adba45c90b7d1b7a5617b"
+    },
+    {
+      "path": "out/zmhj-equip-skill-diag/com/wdcgame/engine/managers/ResourceManager.as",
+      "sha256": "cdc6f784769da801df773a28536db300db9516376b0f221de3365308cae12a37"
+    },
+    {
+      "path": "out/zmhj-equip-skill-diag/com/wdcgame/engine/animation/MovieClipAdvance.as",
+      "sha256": "37fbadd684a43f3c0f20ac3d98527035aa6cce3c4d4685caea6f7c6c5fd762eb"
+    },
+    {
+      "path": "out/zmhj-equip-skill-diag/viewers/component/BossBleed.as",
+      "sha256": "106822c8c0b8f6224a3417188d4552ed913ff01068086c4fb1656de0104b083e"
+    },
+    {
+      "path": "out/zmhj-equip-skill-diag/viewers/container/layers/BattleTopLayer.as",
+      "sha256": "52701cde3e66b9623c47d3a1699d6e5c74481a341085fb93b3e840371a502201"
+    },
+    {
+      "path": "out/zmhj-equip-skill-diag/models/constants/ResistType.as",
+      "sha256": "11dbac3884af0cd7da894820ff156e90847bdd4715849cad2718efa52130a45a"
+    },
+    {
+      "path": "games/zmhj-g5/cache/assets/ui/font_20260629_1.swf",
+      "sha256": "3d79ef52f8ec70ac2cf944f3b797052be13627f657c37b360b287f72d9e58c5c"
+    },
+    {
+      "path": "games/zmhj-g5/cache/assets/icon/resist/lightResistAdd.png",
+      "sha256": "546ad8d1a3d12b840cc54c8243b4a61bfe6ad0a5e341f4773face6dc1b78ee94"
+    },
+    {
+      "path": "games/zmhj-g5/cache/assets/icon/resist/lightResistRemove.png",
+      "sha256": "eb73b7887517c40a4796edca47b9522b95b874de393a1282ade887469c82e729"
+    },
+    {
+      "path": "games/zmhj-g5/cache/assets/icon/resist/darkResistAdd.png",
+      "sha256": "2ce34325ce6775e80df101d5a687a3a3d2b88b981564f478dbedce2ef86e51ca"
+    },
+    {
+      "path": "games/zmhj-g5/cache/assets/icon/resist/darkResistRemove.png",
+      "sha256": "34783a725b86aa348b9f77d46c4ef0677dc37b83f97ca1f5ff4928a727728f56"
+    },
+    {
+      "path": "games/zmhj-g5/cache/assets/icon/resist/waterResistAdd.png",
+      "sha256": "dab9af4dd735299ef9d5fb7c59b633dc820830ffff43b8f9e047a2e7e0b9dc53"
+    },
+    {
+      "path": "games/zmhj-g5/cache/assets/icon/resist/waterResistRemove.png",
+      "sha256": "748b68aeb5bcae01e088d2b5e6449c8bb38fc2d17b4891507d558736eed1255d"
+    },
+    {
+      "path": "games/zmhj-g5/cache/assets/icon/resist/fireResistAdd.png",
+      "sha256": "7e0f76ed2bac6f893f44a752d8a58ed8dbdd50a481fcc1b00e89816280e535bd"
+    },
+    {
+      "path": "games/zmhj-g5/cache/assets/icon/resist/fireResistRemove.png",
+      "sha256": "b331b2057e5810df35cf1a2daec39e6ce9238c4031fe29e6674c57721e8dccfe"
+    },
+    {
+      "path": "games/zmhj-g5/cache/assets/icon/resist/woodResistAdd.png",
+      "sha256": "5ee894a4e64b4aa053a0d1d2994be0870f6445f5f016a2807351fe48c54c95e3"
+    },
+    {
+      "path": "games/zmhj-g5/cache/assets/icon/resist/woodResistRemove.png",
+      "sha256": "05f55101dd2abe772ba1eb517d1458fe663185caa04d2cafa36d9a3d4ca1c363"
+    },
+    {
+      "path": "games/zmhj-g5/cache/assets/icon/resist/soilResistAdd.png",
+      "sha256": "7bc25705dcb0d1ae1eb5eb20f98919e7e7802aa0e39a19c5bafad2b0356a670e"
+    },
+    {
+      "path": "games/zmhj-g5/cache/assets/icon/resist/soilResistRemove.png",
+      "sha256": "d11779668f7602f94c349160c1b91b2d8d4658d8426cdb4d8ca3212a9e03081f"
+    },
+    {
+      "path": "games/zmhj-g5/cache/assets/icon/resist/windResistAdd.png",
+      "sha256": "e5217162d47f0853829f231903a6b7e7024c5fe0609303853f45a8335aa9d60b"
+    },
+    {
+      "path": "games/zmhj-g5/cache/assets/icon/resist/windResistRemove.png",
+      "sha256": "6ec7b69eb27b31c41a08749980b8c7ff4085009a70af8e4b5bbbd186e3c05d9c"
+    },
+    {
+      "path": "games/zmhj-g5/cache/assets/icon/resist/rayResistAdd.png",
+      "sha256": "bfc4d5ef5ec999f06cfe40cf2b57dc0597b1583a080794271ff35e3a1bc940f5"
+    },
+    {
+      "path": "games/zmhj-g5/cache/assets/icon/resist/rayResistRemove.png",
+      "sha256": "a8b0161aae55cf5bc92a34abdc5e8d2fd8573c6db101bef1e7469208fa9f7d68"
+    }
+  ],
+  "boss_anchor": [
+    470,
+    36
+  ],
+  "frame_registration": [
+    -129.2,
+    13.8
+  ],
+  "name_registration": [
+    -97,
+    2
+  ],
+  "count_registration": [
+    21.95,
+    23.2
+  ],
+  "protect_registration": [
+    -97.35,
+    42.8
+  ],
+  "resistance_order": [
+    "lightResist",
+    "darkResist",
+    "waterResist",
+    "fireResist",
+    "woodResist",
+    "soilResist",
+    "windResist",
+    "rayResist"
+  ],
+  "appearance": {
+    "symbol": "appear1",
+    "frames": 25,
+    "fps": 30,
+    "duration": 0.8333333333333334,
+    "registration": [
+      -92.05,
+      -140
+    ],
+    "frame_size": [
+      199,
+      198
+    ],
+    "atlas_cell": [
+      203,
+      202
+    ],
+    "columns": 5,
+    "world_scale": 2,
+    "loop": false,
+    "start_actor_after_completion": true
+  },
+  "protect_container": [
+    -97.35,
+    47.3
+  ]
+}
