@@ -310,23 +310,28 @@ func _verify_all_regions_and_boss() -> void:
 	var boss := _living(&"jushi_lingjun_birth")[0]
 	_check(boss.definition_id == &"巨石灵君" and boss.attributes.get_value(&"hpMax") == 1167, "真正原版Boss身份、生命与独立实例")
 	_kill(boss)
-	await _step(0.01)
+	await _step(0.1) # 斩败按原30Hz抽帧，首个战斗帧需等待两帧。
 	_check(last.completed and not last.exit_open and flow.state == BattleLevelInstance2D.State.RUNNING, "Boss死亡后还需要关卡额外条件")
 	flow.set_condition(&"关卡机关")
-	await _step(0.01)
+	await _step(0.1)
 	_check(last.exit_open and flow.state == BattleLevelInstance2D.State.RUNNING and flow.death_count == 34, "全部计划完成与条件满足后开最终出口，但尚未确认通关")
+	await _step(2.1) # 原斩败59帧结束后才允许最终出口操作。
 	_move_player(last.definition.exit_rect.get_center().x)
 	player.operations.enabled = true
 	demo.menu.set_open(true)
 	Input.parse_input_event(_key(KEY_W, true))
+	await get_tree().process_frame
 	await _step()
 	Input.parse_input_event(_key(KEY_W, false))
+	await get_tree().process_frame
 	demo.menu.set_open(false)
 	await _step()
 	_check(flow.state == BattleLevelInstance2D.State.RUNNING, "菜单内W不会同时确认通关")
 	Input.parse_input_event(_key(KEY_W, true))
+	await get_tree().process_frame
 	await _step()
 	Input.parse_input_event(_key(KEY_W, false))
+	await get_tree().process_frame
 	await _step()
 	_check(flow.state == BattleLevelInstance2D.State.WON and _events("battle.level.victory") == 1, "Core上方向意图确认原版最终出口：位置%s，暂停%s，控制%s" % [player.global_position, session.clock.paused, player.operations.controller.has_control()])
 	_check(not flow.request_exit(player) and not flow.set_condition(&"关卡机关"), "胜利后不能重复进入出口或修改结算条件")

@@ -1,0 +1,1582 @@
+[gd_scene format=3]
+[ext_resource type="FontFile" path="res://assets/ui/boss/count.ttf" id="R1"]
+[ext_resource type="FontFile" path="res://addons/simple_inventory/assets/fonts/SourceHanSansSC-Regular-2.otf" id="R2"]
+[ext_resource type="Script" path="res://addons/battle_foundation/ui/battle_original_hud.gd" id="R3"]
+[ext_resource type="Shader" path="res://addons/battle_foundation/ui/original_icon_gray.gdshader" id="R4"]
+[ext_resource type="PackedScene" path="res://data/ui/inventory.tscn" id="R5"]
+[ext_resource type="SpriteFrames" path="res://data/ui/skill_cooldown_frames.tres" id="R6"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/player_frame.png" id="R7"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/bar_background.png" id="R8"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/hp_fill.png" id="R9"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/bar_background.png" id="R10"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/mp_fill.png" id="R11"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/bar_background.png" id="R12"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/exp_fill.png" id="R13"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/sunwukong_head.png" id="R14"]
+[ext_resource type="Shader" path="res://addons/battle_foundation/ui/portrait_circle.gdshader" id="R15"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/skill_frame.png" id="R16"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/rage_background.png" id="R17"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/rage_fill.png" id="R18"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/wushuang_base.png" id="R19"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/wushuang_idle.png" id="R20"]
+[ext_resource type="PackedScene" path="res://data/ui/wushuang_full.tscn" id="R21"]
+[ext_resource type="PackedScene" path="res://data/ui/wushuang_prompt.tscn" id="R22"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/skill_1.png" id="R23"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/skill_2.png" id="R24"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/skill_3.png" id="R25"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/skill_4.png" id="R26"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/skill_8.png" id="R27"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/button_0.png" id="R28"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/button_1.png" id="R29"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/button_2.png" id="R30"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/tips_background.png" id="R31"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/warn_background.png" id="R32"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/warn_background.png" id="R33"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/warn_background.png" id="R34"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/warn_background.png" id="R35"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/warn_background.png" id="R36"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/warn_background.png" id="R37"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/warn_background.png" id="R38"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/warn_background.png" id="R39"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/warn_background.png" id="R40"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/warn_background.png" id="R41"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/warn_background.png" id="R42"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/warn_background.png" id="R43"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/warn_background.png" id="R44"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/warn_background.png" id="R45"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/warn_background.png" id="R46"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/warn_background.png" id="R47"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/warn_background.png" id="R48"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/warn_background.png" id="R49"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/warn_background.png" id="R50"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/warn_background.png" id="R51"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/warn_background.png" id="R52"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/warn_background.png" id="R53"]
+[ext_resource type="PackedScene" path="res://data/ui/next_screen.tscn" id="next_screen"]
+[sub_resource type="ShaderMaterial" id="DisabledIcon"]
+shader = ExtResource("R4")
+[sub_resource type="ShaderMaterial" id="PortraitMask"]
+shader = ExtResource("R15")
+[sub_resource type="StyleBoxTexture" id="Button0"]
+texture = ExtResource("R28")
+texture_margin_left = 7.0
+texture_margin_right = 7.0
+texture_margin_top = 7.0
+texture_margin_bottom = 7.0
+[sub_resource type="StyleBoxTexture" id="Button1"]
+texture = ExtResource("R29")
+texture_margin_left = 7.0
+texture_margin_right = 7.0
+texture_margin_top = 7.0
+texture_margin_bottom = 7.0
+[sub_resource type="StyleBoxTexture" id="Button2"]
+texture = ExtResource("R30")
+texture_margin_left = 7.0
+texture_margin_right = 7.0
+texture_margin_top = 7.0
+texture_margin_bottom = 7.0
+[node name="BattleHUD" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("R3")
+disabled_icon_material = SubResource("DisabledIcon")
+[node name="Player" type="Control" parent="."]
+mouse_filter = 2
+[node name="Frame" type="TextureRect" parent="Player"]
+offset_left = 0
+offset_top = 0
+offset_right = 247
+offset_bottom = 87
+mouse_filter = 2
+expand_mode = 1
+texture = ExtResource("R7")
+
+[node name="HP" type="TextureProgressBar" parent="Player"]
+offset_left = 76.0
+offset_top = 20
+offset_right = 225.0
+offset_bottom = 33
+mouse_filter = 2
+max_value = 1.0
+step = 0.001
+texture_under = ExtResource("R8")
+texture_progress = ExtResource("R9")
+texture_progress_offset = Vector2(1,1)
+[node name="MP" type="TextureProgressBar" parent="Player"]
+offset_left = 76.0
+offset_top = 34
+offset_right = 225.0
+offset_bottom = 47
+mouse_filter = 2
+max_value = 1.0
+step = 0.001
+texture_under = ExtResource("R10")
+texture_progress = ExtResource("R11")
+texture_progress_offset = Vector2(1,1)
+[node name="EXP" type="TextureProgressBar" parent="Player"]
+offset_left = 76.0
+offset_top = 48
+offset_right = 225.0
+offset_bottom = 61
+mouse_filter = 2
+max_value = 1.0
+step = 0.001
+texture_under = ExtResource("R12")
+texture_progress = ExtResource("R13")
+texture_progress_offset = Vector2(1,1)
+[node name="Head" type="TextureRect" parent="Player"]
+offset_left = 8
+offset_top = 10
+offset_right = 68
+offset_bottom = 70
+mouse_filter = 2
+expand_mode = 1
+texture = ExtResource("R14")
+stretch_mode = 5
+material = SubResource("PortraitMask")
+[node name="HPTitle" type="Label" parent="Player"]
+offset_left = 82
+offset_top = 19
+offset_right = 107
+offset_bottom = 34
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("R1")
+theme_override_font_sizes/font_size = 10
+theme_override_colors/font_color = Color(1,1,1,1)
+text = "HP"
+horizontal_alignment = 0
+vertical_alignment = 1
+[node name="HPText" type="Label" parent="Player"]
+offset_left = 105
+offset_top = 19
+offset_right = 214
+offset_bottom = 34
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("R1")
+theme_override_font_sizes/font_size = 10
+theme_override_colors/font_color = Color(1,1,1,1)
+text = "0/0"
+horizontal_alignment = 1
+vertical_alignment = 1
+[node name="MPTitle" type="Label" parent="Player"]
+offset_left = 82
+offset_top = 32
+offset_right = 107
+offset_bottom = 47
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("R1")
+theme_override_font_sizes/font_size = 10
+theme_override_colors/font_color = Color(1,1,1,1)
+text = "MP"
+horizontal_alignment = 0
+vertical_alignment = 1
+[node name="MPText" type="Label" parent="Player"]
+offset_left = 105
+offset_top = 32
+offset_right = 214
+offset_bottom = 47
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("R1")
+theme_override_font_sizes/font_size = 10
+theme_override_colors/font_color = Color(1,1,1,1)
+text = "0/0"
+horizontal_alignment = 1
+vertical_alignment = 1
+[node name="EXPTitle" type="Label" parent="Player"]
+offset_left = 82
+offset_top = 46
+offset_right = 107
+offset_bottom = 61
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("R1")
+theme_override_font_sizes/font_size = 10
+theme_override_colors/font_color = Color(1,1,1,1)
+text = "EXP"
+horizontal_alignment = 0
+vertical_alignment = 1
+[node name="EXPText" type="Label" parent="Player"]
+offset_left = 105
+offset_top = 46
+offset_right = 214
+offset_bottom = 61
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("R1")
+theme_override_font_sizes/font_size = 10
+theme_override_colors/font_color = Color(1,1,1,1)
+text = "0/0"
+horizontal_alignment = 1
+vertical_alignment = 1
+[node name="Level" type="Label" parent="Player"]
+offset_left = 3.5
+offset_top = 65
+offset_right = 26.5
+offset_bottom = 88
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("R1")
+theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(1,1,1,1)
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 1
+[node name="StatusIcons" type="Control" parent="Player"]
+mouse_filter = 2
+[node name="Status0" type="Control" parent="Player/StatusIcons"]
+visible = false
+offset_left = 75
+offset_top = 60.0
+offset_right = 103
+offset_bottom = 88.0
+mouse_filter = 1
+[node name="Icon" type="TextureRect" parent="Player/StatusIcons/Status0"]
+offset_right = 28.0
+offset_bottom = 28.0
+mouse_filter = 2
+expand_mode = 1
+[node name="Count" type="Label" parent="Player/StatusIcons/Status0"]
+offset_left = 0
+offset_top = 10
+offset_right = 28
+offset_bottom = 26
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("R1")
+theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(1,1,1,1)
+text = ""
+horizontal_alignment = 2
+vertical_alignment = 1
+
+theme_override_colors/font_outline_color = Color(0,0,0,1)
+theme_override_constants/outline_size = 2
+[node name="Status1" type="Control" parent="Player/StatusIcons"]
+visible = false
+offset_left = 107
+offset_top = 60.0
+offset_right = 135
+offset_bottom = 88.0
+mouse_filter = 1
+[node name="Icon" type="TextureRect" parent="Player/StatusIcons/Status1"]
+offset_right = 28.0
+offset_bottom = 28.0
+mouse_filter = 2
+expand_mode = 1
+[node name="Count" type="Label" parent="Player/StatusIcons/Status1"]
+offset_left = 0
+offset_top = 10
+offset_right = 28
+offset_bottom = 26
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("R1")
+theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(1,1,1,1)
+text = ""
+horizontal_alignment = 2
+vertical_alignment = 1
+
+theme_override_colors/font_outline_color = Color(0,0,0,1)
+theme_override_constants/outline_size = 2
+[node name="Status2" type="Control" parent="Player/StatusIcons"]
+visible = false
+offset_left = 139
+offset_top = 60.0
+offset_right = 167
+offset_bottom = 88.0
+mouse_filter = 1
+[node name="Icon" type="TextureRect" parent="Player/StatusIcons/Status2"]
+offset_right = 28.0
+offset_bottom = 28.0
+mouse_filter = 2
+expand_mode = 1
+[node name="Count" type="Label" parent="Player/StatusIcons/Status2"]
+offset_left = 0
+offset_top = 10
+offset_right = 28
+offset_bottom = 26
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("R1")
+theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(1,1,1,1)
+text = ""
+horizontal_alignment = 2
+vertical_alignment = 1
+
+theme_override_colors/font_outline_color = Color(0,0,0,1)
+theme_override_constants/outline_size = 2
+[node name="Status3" type="Control" parent="Player/StatusIcons"]
+visible = false
+offset_left = 171
+offset_top = 60.0
+offset_right = 199
+offset_bottom = 88.0
+mouse_filter = 1
+[node name="Icon" type="TextureRect" parent="Player/StatusIcons/Status3"]
+offset_right = 28.0
+offset_bottom = 28.0
+mouse_filter = 2
+expand_mode = 1
+[node name="Count" type="Label" parent="Player/StatusIcons/Status3"]
+offset_left = 0
+offset_top = 10
+offset_right = 28
+offset_bottom = 26
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("R1")
+theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(1,1,1,1)
+text = ""
+horizontal_alignment = 2
+vertical_alignment = 1
+
+theme_override_colors/font_outline_color = Color(0,0,0,1)
+theme_override_constants/outline_size = 2
+[node name="Status4" type="Control" parent="Player/StatusIcons"]
+visible = false
+offset_left = 203
+offset_top = 60.0
+offset_right = 231
+offset_bottom = 88.0
+mouse_filter = 1
+[node name="Icon" type="TextureRect" parent="Player/StatusIcons/Status4"]
+offset_right = 28.0
+offset_bottom = 28.0
+mouse_filter = 2
+expand_mode = 1
+[node name="Count" type="Label" parent="Player/StatusIcons/Status4"]
+offset_left = 0
+offset_top = 10
+offset_right = 28
+offset_bottom = 26
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("R1")
+theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(1,1,1,1)
+text = ""
+horizontal_alignment = 2
+vertical_alignment = 1
+
+theme_override_colors/font_outline_color = Color(0,0,0,1)
+theme_override_constants/outline_size = 2
+[node name="Status5" type="Control" parent="Player/StatusIcons"]
+visible = false
+offset_left = 235
+offset_top = 60.0
+offset_right = 263
+offset_bottom = 88.0
+mouse_filter = 1
+[node name="Icon" type="TextureRect" parent="Player/StatusIcons/Status5"]
+offset_right = 28.0
+offset_bottom = 28.0
+mouse_filter = 2
+expand_mode = 1
+[node name="Count" type="Label" parent="Player/StatusIcons/Status5"]
+offset_left = 0
+offset_top = 10
+offset_right = 28
+offset_bottom = 26
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("R1")
+theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(1,1,1,1)
+text = ""
+horizontal_alignment = 2
+vertical_alignment = 1
+
+theme_override_colors/font_outline_color = Color(0,0,0,1)
+theme_override_constants/outline_size = 2
+[node name="Status6" type="Control" parent="Player/StatusIcons"]
+visible = false
+offset_left = 267
+offset_top = 60.0
+offset_right = 295
+offset_bottom = 88.0
+mouse_filter = 1
+[node name="Icon" type="TextureRect" parent="Player/StatusIcons/Status6"]
+offset_right = 28.0
+offset_bottom = 28.0
+mouse_filter = 2
+expand_mode = 1
+[node name="Count" type="Label" parent="Player/StatusIcons/Status6"]
+offset_left = 0
+offset_top = 10
+offset_right = 28
+offset_bottom = 26
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("R1")
+theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(1,1,1,1)
+text = ""
+horizontal_alignment = 2
+vertical_alignment = 1
+
+theme_override_colors/font_outline_color = Color(0,0,0,1)
+theme_override_constants/outline_size = 2
+[node name="Status7" type="Control" parent="Player/StatusIcons"]
+visible = false
+offset_left = 299
+offset_top = 60.0
+offset_right = 327
+offset_bottom = 88.0
+mouse_filter = 1
+[node name="Icon" type="TextureRect" parent="Player/StatusIcons/Status7"]
+offset_right = 28.0
+offset_bottom = 28.0
+mouse_filter = 2
+expand_mode = 1
+[node name="Count" type="Label" parent="Player/StatusIcons/Status7"]
+offset_left = 0
+offset_top = 10
+offset_right = 28
+offset_bottom = 26
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("R1")
+theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(1,1,1,1)
+text = ""
+horizontal_alignment = 2
+vertical_alignment = 1
+
+theme_override_colors/font_outline_color = Color(0,0,0,1)
+theme_override_constants/outline_size = 2
+[node name="Status8" type="Control" parent="Player/StatusIcons"]
+visible = false
+offset_left = 331
+offset_top = 60.0
+offset_right = 359
+offset_bottom = 88.0
+mouse_filter = 1
+[node name="Icon" type="TextureRect" parent="Player/StatusIcons/Status8"]
+offset_right = 28.0
+offset_bottom = 28.0
+mouse_filter = 2
+expand_mode = 1
+[node name="Count" type="Label" parent="Player/StatusIcons/Status8"]
+offset_left = 0
+offset_top = 10
+offset_right = 28
+offset_bottom = 26
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("R1")
+theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(1,1,1,1)
+text = ""
+horizontal_alignment = 2
+vertical_alignment = 1
+
+theme_override_colors/font_outline_color = Color(0,0,0,1)
+theme_override_constants/outline_size = 2
+[node name="Status9" type="Control" parent="Player/StatusIcons"]
+visible = false
+offset_left = 363
+offset_top = 60.0
+offset_right = 391
+offset_bottom = 88.0
+mouse_filter = 1
+[node name="Icon" type="TextureRect" parent="Player/StatusIcons/Status9"]
+offset_right = 28.0
+offset_bottom = 28.0
+mouse_filter = 2
+expand_mode = 1
+[node name="Count" type="Label" parent="Player/StatusIcons/Status9"]
+offset_left = 0
+offset_top = 10
+offset_right = 28
+offset_bottom = 26
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("R1")
+theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(1,1,1,1)
+text = ""
+horizontal_alignment = 2
+vertical_alignment = 1
+
+theme_override_colors/font_outline_color = Color(0,0,0,1)
+theme_override_constants/outline_size = 2
+[node name="Status10" type="Control" parent="Player/StatusIcons"]
+visible = false
+offset_left = 395
+offset_top = 60.0
+offset_right = 423
+offset_bottom = 88.0
+mouse_filter = 1
+[node name="Icon" type="TextureRect" parent="Player/StatusIcons/Status10"]
+offset_right = 28.0
+offset_bottom = 28.0
+mouse_filter = 2
+expand_mode = 1
+[node name="Count" type="Label" parent="Player/StatusIcons/Status10"]
+offset_left = 0
+offset_top = 10
+offset_right = 28
+offset_bottom = 26
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("R1")
+theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(1,1,1,1)
+text = ""
+horizontal_alignment = 2
+vertical_alignment = 1
+
+theme_override_colors/font_outline_color = Color(0,0,0,1)
+theme_override_constants/outline_size = 2
+[node name="Status11" type="Control" parent="Player/StatusIcons"]
+visible = false
+offset_left = 427
+offset_top = 60.0
+offset_right = 455
+offset_bottom = 88.0
+mouse_filter = 1
+[node name="Icon" type="TextureRect" parent="Player/StatusIcons/Status11"]
+offset_right = 28.0
+offset_bottom = 28.0
+mouse_filter = 2
+expand_mode = 1
+[node name="Count" type="Label" parent="Player/StatusIcons/Status11"]
+offset_left = 0
+offset_top = 10
+offset_right = 28
+offset_bottom = 26
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("R1")
+theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(1,1,1,1)
+text = ""
+horizontal_alignment = 2
+vertical_alignment = 1
+
+theme_override_colors/font_outline_color = Color(0,0,0,1)
+theme_override_constants/outline_size = 2
+[node name="Status12" type="Control" parent="Player/StatusIcons"]
+visible = false
+offset_left = 459
+offset_top = 60.0
+offset_right = 487
+offset_bottom = 88.0
+mouse_filter = 1
+[node name="Icon" type="TextureRect" parent="Player/StatusIcons/Status12"]
+offset_right = 28.0
+offset_bottom = 28.0
+mouse_filter = 2
+expand_mode = 1
+[node name="Count" type="Label" parent="Player/StatusIcons/Status12"]
+offset_left = 0
+offset_top = 10
+offset_right = 28
+offset_bottom = 26
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("R1")
+theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(1,1,1,1)
+text = ""
+horizontal_alignment = 2
+vertical_alignment = 1
+
+theme_override_colors/font_outline_color = Color(0,0,0,1)
+theme_override_constants/outline_size = 2
+[node name="Status13" type="Control" parent="Player/StatusIcons"]
+visible = false
+offset_left = 491
+offset_top = 60.0
+offset_right = 519
+offset_bottom = 88.0
+mouse_filter = 1
+[node name="Icon" type="TextureRect" parent="Player/StatusIcons/Status13"]
+offset_right = 28.0
+offset_bottom = 28.0
+mouse_filter = 2
+expand_mode = 1
+[node name="Count" type="Label" parent="Player/StatusIcons/Status13"]
+offset_left = 0
+offset_top = 10
+offset_right = 28
+offset_bottom = 26
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("R1")
+theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(1,1,1,1)
+text = ""
+horizontal_alignment = 2
+vertical_alignment = 1
+
+theme_override_colors/font_outline_color = Color(0,0,0,1)
+theme_override_constants/outline_size = 2
+[node name="Status14" type="Control" parent="Player/StatusIcons"]
+visible = false
+offset_left = 523
+offset_top = 60.0
+offset_right = 551
+offset_bottom = 88.0
+mouse_filter = 1
+[node name="Icon" type="TextureRect" parent="Player/StatusIcons/Status14"]
+offset_right = 28.0
+offset_bottom = 28.0
+mouse_filter = 2
+expand_mode = 1
+[node name="Count" type="Label" parent="Player/StatusIcons/Status14"]
+offset_left = 0
+offset_top = 10
+offset_right = 28
+offset_bottom = 26
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("R1")
+theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(1,1,1,1)
+text = ""
+horizontal_alignment = 2
+vertical_alignment = 1
+
+theme_override_colors/font_outline_color = Color(0,0,0,1)
+theme_override_constants/outline_size = 2
+[node name="Status15" type="Control" parent="Player/StatusIcons"]
+visible = false
+offset_left = 555
+offset_top = 60.0
+offset_right = 583
+offset_bottom = 88.0
+mouse_filter = 1
+[node name="Icon" type="TextureRect" parent="Player/StatusIcons/Status15"]
+offset_right = 28.0
+offset_bottom = 28.0
+mouse_filter = 2
+expand_mode = 1
+[node name="Count" type="Label" parent="Player/StatusIcons/Status15"]
+offset_left = 0
+offset_top = 10
+offset_right = 28
+offset_bottom = 26
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("R1")
+theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(1,1,1,1)
+text = ""
+horizontal_alignment = 2
+vertical_alignment = 1
+
+theme_override_colors/font_outline_color = Color(0,0,0,1)
+theme_override_constants/outline_size = 2
+[node name="Skills" type="Control" parent="."]
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -70.0
+offset_bottom = -70.0
+mouse_filter = 2
+[node name="Frame" type="TextureRect" parent="Skills"]
+offset_left = 0
+offset_top = -77
+offset_right = 284
+offset_bottom = 69
+mouse_filter = 2
+expand_mode = 1
+texture = ExtResource("R16")
+
+[node name="Rage" type="TextureProgressBar" parent="Skills"]
+offset_left = 61.0
+offset_top = 56.0
+offset_right = 270.0
+offset_bottom = 67.0
+mouse_filter = 2
+max_value = 1.0
+step = 0.001
+texture_under = ExtResource("R17")
+texture_progress = ExtResource("R18")
+fill_mode = 1
+[node name="WushuangBase" type="TextureRect" parent="Skills"]
+offset_left = 0.75
+offset_top = 10.85
+offset_right = 55.75
+offset_bottom = 65.85
+mouse_filter = 2
+expand_mode = 1
+texture = ExtResource("R19")
+
+[node name="WushuangIdle" type="TextureRect" parent="Skills"]
+offset_left = 3
+offset_top = 12
+offset_right = 60
+offset_bottom = 69
+mouse_filter = 2
+expand_mode = 1
+texture = ExtResource("R20")
+
+[node name="WushuangFull" parent="Skills" instance=ExtResource("R21")]
+position = Vector2(32,21)
+[node name="WushuangPrompt" parent="Skills" instance=ExtResource("R22")]
+position = Vector2(5.25,39.35)
+[node name="Slots" type="Control" parent="Skills"]
+mouse_filter = 2
+[node name="Slot0" type="Control" parent="Skills/Slots"]
+offset_left = 66
+offset_top = 18.95
+offset_right = 102
+offset_bottom = 54.95
+mouse_filter = 1
+[node name="Icon" type="TextureRect" parent="Skills/Slots/Slot0"]
+offset_left = 0
+offset_top = 0
+offset_right = 36
+offset_bottom = 36
+mouse_filter = 2
+expand_mode = 1
+texture = ExtResource("R23")
+
+[node name="Cooldown" type="AnimatedSprite2D" parent="Skills/Slots/Slot0"]
+visible = false
+position = Vector2(-8.35,-7.7)
+centered = false
+sprite_frames = ExtResource("R6")
+animation = &"cooldown"
+[node name="Key" type="Label" parent="Skills/Slots/Slot0"]
+offset_left = 18
+offset_top = 17
+offset_right = 36
+offset_bottom = 37
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("R1")
+theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(1,1,1,1)
+text = ""
+horizontal_alignment = 2
+vertical_alignment = 1
+
+theme_override_colors/font_outline_color = Color(0,0,0,1)
+theme_override_constants/outline_size = 2
+[node name="Slot1" type="Control" parent="Skills/Slots"]
+offset_left = 107
+offset_top = 18.95
+offset_right = 143
+offset_bottom = 54.95
+mouse_filter = 1
+[node name="Icon" type="TextureRect" parent="Skills/Slots/Slot1"]
+offset_left = 0
+offset_top = 0
+offset_right = 36
+offset_bottom = 36
+mouse_filter = 2
+expand_mode = 1
+texture = ExtResource("R24")
+
+[node name="Cooldown" type="AnimatedSprite2D" parent="Skills/Slots/Slot1"]
+visible = false
+position = Vector2(-8.35,-7.7)
+centered = false
+sprite_frames = ExtResource("R6")
+animation = &"cooldown"
+[node name="Key" type="Label" parent="Skills/Slots/Slot1"]
+offset_left = 18
+offset_top = 17
+offset_right = 36
+offset_bottom = 37
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("R1")
+theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(1,1,1,1)
+text = ""
+horizontal_alignment = 2
+vertical_alignment = 1
+
+theme_override_colors/font_outline_color = Color(0,0,0,1)
+theme_override_constants/outline_size = 2
+[node name="Slot2" type="Control" parent="Skills/Slots"]
+offset_left = 148
+offset_top = 18.95
+offset_right = 184
+offset_bottom = 54.95
+mouse_filter = 1
+[node name="Icon" type="TextureRect" parent="Skills/Slots/Slot2"]
+offset_left = 0
+offset_top = 0
+offset_right = 36
+offset_bottom = 36
+mouse_filter = 2
+expand_mode = 1
+texture = ExtResource("R25")
+
+[node name="Cooldown" type="AnimatedSprite2D" parent="Skills/Slots/Slot2"]
+visible = false
+position = Vector2(-8.35,-7.7)
+centered = false
+sprite_frames = ExtResource("R6")
+animation = &"cooldown"
+[node name="Key" type="Label" parent="Skills/Slots/Slot2"]
+offset_left = 18
+offset_top = 17
+offset_right = 36
+offset_bottom = 37
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("R1")
+theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(1,1,1,1)
+text = ""
+horizontal_alignment = 2
+vertical_alignment = 1
+
+theme_override_colors/font_outline_color = Color(0,0,0,1)
+theme_override_constants/outline_size = 2
+[node name="Slot3" type="Control" parent="Skills/Slots"]
+offset_left = 189
+offset_top = 18.95
+offset_right = 225
+offset_bottom = 54.95
+mouse_filter = 1
+[node name="Icon" type="TextureRect" parent="Skills/Slots/Slot3"]
+offset_left = 0
+offset_top = 0
+offset_right = 36
+offset_bottom = 36
+mouse_filter = 2
+expand_mode = 1
+texture = ExtResource("R26")
+
+[node name="Cooldown" type="AnimatedSprite2D" parent="Skills/Slots/Slot3"]
+visible = false
+position = Vector2(-8.35,-7.7)
+centered = false
+sprite_frames = ExtResource("R6")
+animation = &"cooldown"
+[node name="Key" type="Label" parent="Skills/Slots/Slot3"]
+offset_left = 18
+offset_top = 17
+offset_right = 36
+offset_bottom = 37
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("R1")
+theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(1,1,1,1)
+text = ""
+horizontal_alignment = 2
+vertical_alignment = 1
+
+theme_override_colors/font_outline_color = Color(0,0,0,1)
+theme_override_constants/outline_size = 2
+[node name="Slot4" type="Control" parent="Skills/Slots"]
+offset_left = 230
+offset_top = 18.95
+offset_right = 266
+offset_bottom = 54.95
+mouse_filter = 1
+[node name="Icon" type="TextureRect" parent="Skills/Slots/Slot4"]
+offset_left = 0
+offset_top = 0
+offset_right = 36
+offset_bottom = 36
+mouse_filter = 2
+expand_mode = 1
+texture = ExtResource("R27")
+
+[node name="Cooldown" type="AnimatedSprite2D" parent="Skills/Slots/Slot4"]
+visible = false
+position = Vector2(-8.35,-7.7)
+centered = false
+sprite_frames = ExtResource("R6")
+animation = &"cooldown"
+[node name="Key" type="Label" parent="Skills/Slots/Slot4"]
+offset_left = 18
+offset_top = 17
+offset_right = 36
+offset_bottom = 37
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("R1")
+theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(1,1,1,1)
+text = ""
+horizontal_alignment = 2
+vertical_alignment = 1
+
+theme_override_colors/font_outline_color = Color(0,0,0,1)
+theme_override_constants/outline_size = 2
+[node name="ItemKey0" type="Label" parent="Skills"]
+offset_left = 24
+offset_top = -60
+offset_right = 40
+offset_bottom = -40
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("R1")
+theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(1,1,1,1)
+text = "Q"
+horizontal_alignment = 0
+vertical_alignment = 1
+
+theme_override_colors/font_outline_color = Color(0,0,0,1)
+theme_override_constants/outline_size = 2
+[node name="ItemKey1" type="Label" parent="Skills"]
+offset_left = 24
+offset_top = -20
+offset_right = 40
+offset_bottom = 0
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("R1")
+theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(1,1,1,1)
+text = "E"
+horizontal_alignment = 0
+vertical_alignment = 1
+
+theme_override_colors/font_outline_color = Color(0,0,0,1)
+theme_override_constants/outline_size = 2
+[node name="WushuangKey" type="Label" parent="Skills"]
+offset_left = 0
+offset_top = 22
+offset_right = 62
+offset_bottom = 42
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("R2")
+theme_override_font_sizes/font_size = 12
+theme_override_colors/font_color = Color(1,1,1,1)
+text = "空格"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+visible = false
+[node name="BagButton" type="Button" parent="."]
+offset_left = 824
+offset_top = 520
+offset_right = 912
+offset_bottom = 558
+focus_mode = 0
+theme_override_fonts/font = ExtResource("R2")
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = SubResource("Button0")
+theme_override_styles/hover = SubResource("Button1")
+theme_override_styles/pressed = SubResource("Button2")
+text = "背包 B"
+[node name="SkillTooltip" type="Control" parent="."]
+visible = false
+offset_right = 290.0
+offset_bottom = 110.0
+mouse_filter = 2
+[node name="Background" type="NinePatchRect" parent="SkillTooltip"]
+offset_left = 0
+offset_top = 0
+offset_right = 290
+offset_bottom = 110
+mouse_filter = 2
+texture = ExtResource("R31")
+patch_margin_left = 25
+patch_margin_top = 20
+patch_margin_right = 25
+patch_margin_bottom = 20
+
+[node name="Text" type="Label" parent="SkillTooltip"]
+offset_left = 12
+offset_top = 10
+offset_right = 278
+offset_bottom = 100
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("R2")
+theme_override_font_sizes/font_size = 16
+theme_override_colors/font_color = Color(0.372549,0.117647,0.019608,1)
+text = ""
+horizontal_alignment = 0
+vertical_alignment = 1
+[node name="Inventory" parent="." instance=ExtResource("R5")]
+[node name="Notifications" type="Control" parent="."]
+mouse_filter = 2
+[node name="Notice0" type="Control" parent="Notifications"]
+visible = false
+mouse_filter = 2
+[node name="Background" type="NinePatchRect" parent="Notifications/Notice0"]
+offset_left = 300
+offset_top = 267.5
+offset_right = 640
+offset_bottom = 322.5
+mouse_filter = 2
+texture = ExtResource("R32")
+patch_margin_left = 78
+patch_margin_top = 18
+patch_margin_right = 79
+patch_margin_bottom = 18
+
+[node name="Text" type="Label" parent="Notifications/Notice0"]
+offset_left = 314
+offset_top = 276
+offset_right = 626
+offset_bottom = 312
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("R2")
+theme_override_font_sizes/font_size = 20
+theme_override_colors/font_color = Color(0.372549,0.117647,0.019608,1)
+text = ""
+horizontal_alignment = 1
+vertical_alignment = 1
+[node name="Notice1" type="Control" parent="Notifications"]
+visible = false
+mouse_filter = 2
+[node name="Background" type="NinePatchRect" parent="Notifications/Notice1"]
+offset_left = 300
+offset_top = 267.5
+offset_right = 640
+offset_bottom = 322.5
+mouse_filter = 2
+texture = ExtResource("R33")
+patch_margin_left = 78
+patch_margin_top = 18
+patch_margin_right = 79
+patch_margin_bottom = 18
+
+[node name="Text" type="Label" parent="Notifications/Notice1"]
+offset_left = 314
+offset_top = 276
+offset_right = 626
+offset_bottom = 312
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("R2")
+theme_override_font_sizes/font_size = 20
+theme_override_colors/font_color = Color(0.372549,0.117647,0.019608,1)
+text = ""
+horizontal_alignment = 1
+vertical_alignment = 1
+[node name="Notice2" type="Control" parent="Notifications"]
+visible = false
+mouse_filter = 2
+[node name="Background" type="NinePatchRect" parent="Notifications/Notice2"]
+offset_left = 300
+offset_top = 267.5
+offset_right = 640
+offset_bottom = 322.5
+mouse_filter = 2
+texture = ExtResource("R34")
+patch_margin_left = 78
+patch_margin_top = 18
+patch_margin_right = 79
+patch_margin_bottom = 18
+
+[node name="Text" type="Label" parent="Notifications/Notice2"]
+offset_left = 314
+offset_top = 276
+offset_right = 626
+offset_bottom = 312
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("R2")
+theme_override_font_sizes/font_size = 20
+theme_override_colors/font_color = Color(0.372549,0.117647,0.019608,1)
+text = ""
+horizontal_alignment = 1
+vertical_alignment = 1
+[node name="Notice3" type="Control" parent="Notifications"]
+visible = false
+mouse_filter = 2
+[node name="Background" type="NinePatchRect" parent="Notifications/Notice3"]
+offset_left = 300
+offset_top = 267.5
+offset_right = 640
+offset_bottom = 322.5
+mouse_filter = 2
+texture = ExtResource("R35")
+patch_margin_left = 78
+patch_margin_top = 18
+patch_margin_right = 79
+patch_margin_bottom = 18
+
+[node name="Text" type="Label" parent="Notifications/Notice3"]
+offset_left = 314
+offset_top = 276
+offset_right = 626
+offset_bottom = 312
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("R2")
+theme_override_font_sizes/font_size = 20
+theme_override_colors/font_color = Color(0.372549,0.117647,0.019608,1)
+text = ""
+horizontal_alignment = 1
+vertical_alignment = 1
+[node name="Notice4" type="Control" parent="Notifications"]
+visible = false
+mouse_filter = 2
+[node name="Background" type="NinePatchRect" parent="Notifications/Notice4"]
+offset_left = 300
+offset_top = 267.5
+offset_right = 640
+offset_bottom = 322.5
+mouse_filter = 2
+texture = ExtResource("R36")
+patch_margin_left = 78
+patch_margin_top = 18
+patch_margin_right = 79
+patch_margin_bottom = 18
+
+[node name="Text" type="Label" parent="Notifications/Notice4"]
+offset_left = 314
+offset_top = 276
+offset_right = 626
+offset_bottom = 312
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("R2")
+theme_override_font_sizes/font_size = 20
+theme_override_colors/font_color = Color(0.372549,0.117647,0.019608,1)
+text = ""
+horizontal_alignment = 1
+vertical_alignment = 1
+[node name="Notice5" type="Control" parent="Notifications"]
+visible = false
+mouse_filter = 2
+[node name="Background" type="NinePatchRect" parent="Notifications/Notice5"]
+offset_left = 300
+offset_top = 267.5
+offset_right = 640
+offset_bottom = 322.5
+mouse_filter = 2
+texture = ExtResource("R37")
+patch_margin_left = 78
+patch_margin_top = 18
+patch_margin_right = 79
+patch_margin_bottom = 18
+
+[node name="Text" type="Label" parent="Notifications/Notice5"]
+offset_left = 314
+offset_top = 276
+offset_right = 626
+offset_bottom = 312
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("R2")
+theme_override_font_sizes/font_size = 20
+theme_override_colors/font_color = Color(0.372549,0.117647,0.019608,1)
+text = ""
+horizontal_alignment = 1
+vertical_alignment = 1
+[node name="Notice6" type="Control" parent="Notifications"]
+visible = false
+mouse_filter = 2
+[node name="Background" type="NinePatchRect" parent="Notifications/Notice6"]
+offset_left = 300
+offset_top = 267.5
+offset_right = 640
+offset_bottom = 322.5
+mouse_filter = 2
+texture = ExtResource("R38")
+patch_margin_left = 78
+patch_margin_top = 18
+patch_margin_right = 79
+patch_margin_bottom = 18
+
+[node name="Text" type="Label" parent="Notifications/Notice6"]
+offset_left = 314
+offset_top = 276
+offset_right = 626
+offset_bottom = 312
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("R2")
+theme_override_font_sizes/font_size = 20
+theme_override_colors/font_color = Color(0.372549,0.117647,0.019608,1)
+text = ""
+horizontal_alignment = 1
+vertical_alignment = 1
+[node name="Notice7" type="Control" parent="Notifications"]
+visible = false
+mouse_filter = 2
+[node name="Background" type="NinePatchRect" parent="Notifications/Notice7"]
+offset_left = 300
+offset_top = 267.5
+offset_right = 640
+offset_bottom = 322.5
+mouse_filter = 2
+texture = ExtResource("R39")
+patch_margin_left = 78
+patch_margin_top = 18
+patch_margin_right = 79
+patch_margin_bottom = 18
+
+[node name="Text" type="Label" parent="Notifications/Notice7"]
+offset_left = 314
+offset_top = 276
+offset_right = 626
+offset_bottom = 312
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("R2")
+theme_override_font_sizes/font_size = 20
+theme_override_colors/font_color = Color(0.372549,0.117647,0.019608,1)
+text = ""
+horizontal_alignment = 1
+vertical_alignment = 1
+[node name="Notice8" type="Control" parent="Notifications"]
+visible = false
+mouse_filter = 2
+[node name="Background" type="NinePatchRect" parent="Notifications/Notice8"]
+offset_left = 300
+offset_top = 267.5
+offset_right = 640
+offset_bottom = 322.5
+mouse_filter = 2
+texture = ExtResource("R40")
+patch_margin_left = 78
+patch_margin_top = 18
+patch_margin_right = 79
+patch_margin_bottom = 18
+
+[node name="Text" type="Label" parent="Notifications/Notice8"]
+offset_left = 314
+offset_top = 276
+offset_right = 626
+offset_bottom = 312
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("R2")
+theme_override_font_sizes/font_size = 20
+theme_override_colors/font_color = Color(0.372549,0.117647,0.019608,1)
+text = ""
+horizontal_alignment = 1
+vertical_alignment = 1
+[node name="Notice9" type="Control" parent="Notifications"]
+visible = false
+mouse_filter = 2
+[node name="Background" type="NinePatchRect" parent="Notifications/Notice9"]
+offset_left = 300
+offset_top = 267.5
+offset_right = 640
+offset_bottom = 322.5
+mouse_filter = 2
+texture = ExtResource("R41")
+patch_margin_left = 78
+patch_margin_top = 18
+patch_margin_right = 79
+patch_margin_bottom = 18
+
+[node name="Text" type="Label" parent="Notifications/Notice9"]
+offset_left = 314
+offset_top = 276
+offset_right = 626
+offset_bottom = 312
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("R2")
+theme_override_font_sizes/font_size = 20
+theme_override_colors/font_color = Color(0.372549,0.117647,0.019608,1)
+text = ""
+horizontal_alignment = 1
+vertical_alignment = 1
+[node name="Notice10" type="Control" parent="Notifications"]
+visible = false
+mouse_filter = 2
+[node name="Background" type="NinePatchRect" parent="Notifications/Notice10"]
+offset_left = 300
+offset_top = 267.5
+offset_right = 640
+offset_bottom = 322.5
+mouse_filter = 2
+texture = ExtResource("R42")
+patch_margin_left = 78
+patch_margin_top = 18
+patch_margin_right = 79
+patch_margin_bottom = 18
+
+[node name="Text" type="Label" parent="Notifications/Notice10"]
+offset_left = 314
+offset_top = 276
+offset_right = 626
+offset_bottom = 312
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("R2")
+theme_override_font_sizes/font_size = 20
+theme_override_colors/font_color = Color(0.372549,0.117647,0.019608,1)
+text = ""
+horizontal_alignment = 1
+vertical_alignment = 1
+[node name="Notice11" type="Control" parent="Notifications"]
+visible = false
+mouse_filter = 2
+[node name="Background" type="NinePatchRect" parent="Notifications/Notice11"]
+offset_left = 300
+offset_top = 267.5
+offset_right = 640
+offset_bottom = 322.5
+mouse_filter = 2
+texture = ExtResource("R43")
+patch_margin_left = 78
+patch_margin_top = 18
+patch_margin_right = 79
+patch_margin_bottom = 18
+
+[node name="Text" type="Label" parent="Notifications/Notice11"]
+offset_left = 314
+offset_top = 276
+offset_right = 626
+offset_bottom = 312
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("R2")
+theme_override_font_sizes/font_size = 20
+theme_override_colors/font_color = Color(0.372549,0.117647,0.019608,1)
+text = ""
+horizontal_alignment = 1
+vertical_alignment = 1
+[node name="Notice12" type="Control" parent="Notifications"]
+visible = false
+mouse_filter = 2
+[node name="Background" type="NinePatchRect" parent="Notifications/Notice12"]
+offset_left = 300
+offset_top = 267.5
+offset_right = 640
+offset_bottom = 322.5
+mouse_filter = 2
+texture = ExtResource("R44")
+patch_margin_left = 78
+patch_margin_top = 18
+patch_margin_right = 79
+patch_margin_bottom = 18
+
+[node name="Text" type="Label" parent="Notifications/Notice12"]
+offset_left = 314
+offset_top = 276
+offset_right = 626
+offset_bottom = 312
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("R2")
+theme_override_font_sizes/font_size = 20
+theme_override_colors/font_color = Color(0.372549,0.117647,0.019608,1)
+text = ""
+horizontal_alignment = 1
+vertical_alignment = 1
+[node name="Notice13" type="Control" parent="Notifications"]
+visible = false
+mouse_filter = 2
+[node name="Background" type="NinePatchRect" parent="Notifications/Notice13"]
+offset_left = 300
+offset_top = 267.5
+offset_right = 640
+offset_bottom = 322.5
+mouse_filter = 2
+texture = ExtResource("R45")
+patch_margin_left = 78
+patch_margin_top = 18
+patch_margin_right = 79
+patch_margin_bottom = 18
+
+[node name="Text" type="Label" parent="Notifications/Notice13"]
+offset_left = 314
+offset_top = 276
+offset_right = 626
+offset_bottom = 312
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("R2")
+theme_override_font_sizes/font_size = 20
+theme_override_colors/font_color = Color(0.372549,0.117647,0.019608,1)
+text = ""
+horizontal_alignment = 1
+vertical_alignment = 1
+[node name="Notice14" type="Control" parent="Notifications"]
+visible = false
+mouse_filter = 2
+[node name="Background" type="NinePatchRect" parent="Notifications/Notice14"]
+offset_left = 300
+offset_top = 267.5
+offset_right = 640
+offset_bottom = 322.5
+mouse_filter = 2
+texture = ExtResource("R46")
+patch_margin_left = 78
+patch_margin_top = 18
+patch_margin_right = 79
+patch_margin_bottom = 18
+
+[node name="Text" type="Label" parent="Notifications/Notice14"]
+offset_left = 314
+offset_top = 276
+offset_right = 626
+offset_bottom = 312
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("R2")
+theme_override_font_sizes/font_size = 20
+theme_override_colors/font_color = Color(0.372549,0.117647,0.019608,1)
+text = ""
+horizontal_alignment = 1
+vertical_alignment = 1
+[node name="Notice15" type="Control" parent="Notifications"]
+visible = false
+mouse_filter = 2
+[node name="Background" type="NinePatchRect" parent="Notifications/Notice15"]
+offset_left = 300
+offset_top = 267.5
+offset_right = 640
+offset_bottom = 322.5
+mouse_filter = 2
+texture = ExtResource("R47")
+patch_margin_left = 78
+patch_margin_top = 18
+patch_margin_right = 79
+patch_margin_bottom = 18
+
+[node name="Text" type="Label" parent="Notifications/Notice15"]
+offset_left = 314
+offset_top = 276
+offset_right = 626
+offset_bottom = 312
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("R2")
+theme_override_font_sizes/font_size = 20
+theme_override_colors/font_color = Color(0.372549,0.117647,0.019608,1)
+text = ""
+horizontal_alignment = 1
+vertical_alignment = 1
+[node name="Notice16" type="Control" parent="Notifications"]
+visible = false
+mouse_filter = 2
+[node name="Background" type="NinePatchRect" parent="Notifications/Notice16"]
+offset_left = 300
+offset_top = 267.5
+offset_right = 640
+offset_bottom = 322.5
+mouse_filter = 2
+texture = ExtResource("R48")
+patch_margin_left = 78
+patch_margin_top = 18
+patch_margin_right = 79
+patch_margin_bottom = 18
+
+[node name="Text" type="Label" parent="Notifications/Notice16"]
+offset_left = 314
+offset_top = 276
+offset_right = 626
+offset_bottom = 312
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("R2")
+theme_override_font_sizes/font_size = 20
+theme_override_colors/font_color = Color(0.372549,0.117647,0.019608,1)
+text = ""
+horizontal_alignment = 1
+vertical_alignment = 1
+[node name="Notice17" type="Control" parent="Notifications"]
+visible = false
+mouse_filter = 2
+[node name="Background" type="NinePatchRect" parent="Notifications/Notice17"]
+offset_left = 300
+offset_top = 267.5
+offset_right = 640
+offset_bottom = 322.5
+mouse_filter = 2
+texture = ExtResource("R49")
+patch_margin_left = 78
+patch_margin_top = 18
+patch_margin_right = 79
+patch_margin_bottom = 18
+
+[node name="Text" type="Label" parent="Notifications/Notice17"]
+offset_left = 314
+offset_top = 276
+offset_right = 626
+offset_bottom = 312
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("R2")
+theme_override_font_sizes/font_size = 20
+theme_override_colors/font_color = Color(0.372549,0.117647,0.019608,1)
+text = ""
+horizontal_alignment = 1
+vertical_alignment = 1
+[node name="Notice18" type="Control" parent="Notifications"]
+visible = false
+mouse_filter = 2
+[node name="Background" type="NinePatchRect" parent="Notifications/Notice18"]
+offset_left = 300
+offset_top = 267.5
+offset_right = 640
+offset_bottom = 322.5
+mouse_filter = 2
+texture = ExtResource("R50")
+patch_margin_left = 78
+patch_margin_top = 18
+patch_margin_right = 79
+patch_margin_bottom = 18
+
+[node name="Text" type="Label" parent="Notifications/Notice18"]
+offset_left = 314
+offset_top = 276
+offset_right = 626
+offset_bottom = 312
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("R2")
+theme_override_font_sizes/font_size = 20
+theme_override_colors/font_color = Color(0.372549,0.117647,0.019608,1)
+text = ""
+horizontal_alignment = 1
+vertical_alignment = 1
+[node name="Notice19" type="Control" parent="Notifications"]
+visible = false
+mouse_filter = 2
+[node name="Background" type="NinePatchRect" parent="Notifications/Notice19"]
+offset_left = 300
+offset_top = 267.5
+offset_right = 640
+offset_bottom = 322.5
+mouse_filter = 2
+texture = ExtResource("R51")
+patch_margin_left = 78
+patch_margin_top = 18
+patch_margin_right = 79
+patch_margin_bottom = 18
+
+[node name="Text" type="Label" parent="Notifications/Notice19"]
+offset_left = 314
+offset_top = 276
+offset_right = 626
+offset_bottom = 312
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("R2")
+theme_override_font_sizes/font_size = 20
+theme_override_colors/font_color = Color(0.372549,0.117647,0.019608,1)
+text = ""
+horizontal_alignment = 1
+vertical_alignment = 1
+[node name="Notice20" type="Control" parent="Notifications"]
+visible = false
+mouse_filter = 2
+[node name="Background" type="NinePatchRect" parent="Notifications/Notice20"]
+offset_left = 300
+offset_top = 267.5
+offset_right = 640
+offset_bottom = 322.5
+mouse_filter = 2
+texture = ExtResource("R52")
+patch_margin_left = 78
+patch_margin_top = 18
+patch_margin_right = 79
+patch_margin_bottom = 18
+
+[node name="Text" type="Label" parent="Notifications/Notice20"]
+offset_left = 314
+offset_top = 276
+offset_right = 626
+offset_bottom = 312
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("R2")
+theme_override_font_sizes/font_size = 20
+theme_override_colors/font_color = Color(0.372549,0.117647,0.019608,1)
+text = ""
+horizontal_alignment = 1
+vertical_alignment = 1
+[node name="Notice21" type="Control" parent="Notifications"]
+visible = false
+mouse_filter = 2
+[node name="Background" type="NinePatchRect" parent="Notifications/Notice21"]
+offset_left = 300
+offset_top = 267.5
+offset_right = 640
+offset_bottom = 322.5
+mouse_filter = 2
+texture = ExtResource("R53")
+patch_margin_left = 78
+patch_margin_top = 18
+patch_margin_right = 79
+patch_margin_bottom = 18
+
+[node name="Text" type="Label" parent="Notifications/Notice21"]
+offset_left = 314
+offset_top = 276
+offset_right = 626
+offset_bottom = 312
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("R2")
+theme_override_font_sizes/font_size = 20
+theme_override_colors/font_color = Color(0.372549,0.117647,0.019608,1)
+text = ""
+horizontal_alignment = 1
+vertical_alignment = 1
+[node name="NextScreen" type="Control" parent="."]
+layout_mode = 0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+[node name="Animation" parent="NextScreen" instance=ExtResource("next_screen")]

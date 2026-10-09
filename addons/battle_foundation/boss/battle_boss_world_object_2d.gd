@@ -5,6 +5,7 @@ class_name BattleBossWorldObject2D
 @onready var player: AnimationPlayer = $AnimationPlayer
 @onready var obstacle: StaticBody2D = $Obstacle
 @onready var collision: CollisionShape2D = $Obstacle/CollisionShape2D
+@onready var visual: Node2D = $Visual
 var active: bool = false
 var attack_id: StringName
 var age: float = 0.0
@@ -31,6 +32,7 @@ func activate(actor: BattleEntity2D, cast: BattleAttackInstance, angle: float, m
 	attacker = weakref(actor)
 	attack_id = cast.attack_id
 	facing = cast.facing
+	visual.scale = Vector2(-2.0 if definition.kind == "wall" and facing < 0 else 2.0, 2.0)
 	age = 0
 	_continuation = false
 	hits.clear()
@@ -92,6 +94,8 @@ func _update_geometry() -> void:
 		_geometry = Rect2()
 		return
 	_geometry = Rect2(rows[chosen].position*2, rows[chosen].size*2)
+	if definition.kind == "wall" and facing < 0:
+		_geometry.position.x = -_geometry.end.x
 	if definition.kind == "wall" and _continuation:
 		(collision.shape as RectangleShape2D).size = _geometry.size
 		collision.position = _geometry.get_center()

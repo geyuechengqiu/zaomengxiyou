@@ -30,6 +30,12 @@ enum ITEM_TYPE {
 		quantity = clamp(value, 0, max_stack)
 @export var weight = 0
 @export var attributes : Dictionary[String, float] = {} # 存储属性如 {"strength": 10, "health": 50}
+@export_group("Original Game Definition")
+## 原版定义只读；放入OriginalInventory时复制为独立运行实例。
+@export var item_id: StringName
+@export var original_data: Dictionary = {}
+var runtime_id: int = 0
+var locked: bool = false
 #endregion
 #region 信号
 
@@ -55,5 +61,5 @@ func merge(other_item: Item) -> bool:
 
 ## 能否合并
 func can_merge_with(other_item: Item) -> bool:
-	return self.name == other_item.name
+	return other_item != null and max_stack > 1 and category == other_item.category and item_id == other_item.item_id and name == other_item.name and attributes == other_item.attributes and locked == other_item.locked
 #endregion

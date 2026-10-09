@@ -1,5 +1,7 @@
 # 玉石琵琶精配置
 
+本次已修复石墙/音符负注册点的缩放：场景为 `Visual(scale=2)/Sprite2D`，AnimationPlayer 控制子 Sprite 的原帧和位置；不要再单独给 Sprite 设置2倍缩放。Boss 死亡播放共享原版斩败，完成计划后开启原36帧发光出口；播报不再被已开始动作的取消清掉。[修复依据与 UI 编辑位置](../../ui/README.md)。
+
 原Monster/10601名称已修正为“玉石琵琶精”，显示同步原版；原有定义ID`巨石灵君`及`jushi_lingjun`文件路径作为兼容索引保留。[居中血条、原抗性图标与出场说明](../../../addons/battle_foundation/boss/original-presentation.md)。
 
 主线F5运行 [碧玉径](../../../examples/level_progression_demo.tscn)。末区击破复苏容器后，按原死亡技能第25帧延迟生成Boss；击败Boss并完成区域后，在地面出口按W/↑确认通关。

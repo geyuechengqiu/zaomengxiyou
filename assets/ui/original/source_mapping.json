@@ -1,0 +1,201 @@
+{
+  "sources": [
+    {
+      "path": "games/zmhj-g5/cache/assets/data/cg1_20260921_1.swf",
+      "sha256": "754e4db204d396151fedd0a510aa80f3283a616b29c4a3483ed1f4deb1c0c8c3"
+    },
+    {
+      "path": "games/zmhj-g5/cache/assets/icon/head/2001_1.png",
+      "sha256": "f54223f1e74ca698fa8ee9417b235e142587ff08b8c69d782fbfa5c52b4b3fec"
+    },
+    {
+      "path": "games/zmhj-g5/cache/assets/icon/prop/110101001_d.png",
+      "sha256": "4d18db656b5f60f6a76976d17ac90c6b23d061c8d515bab426ddd6b591ca89c9"
+    },
+    {
+      "path": "games/zmhj-g5/cache/assets/icon/prop/110101002_d.png",
+      "sha256": "0d73deffdd9b8e0f14a54e54ef43c544a95469726dc89e1c0cc55cd7151b4194"
+    },
+    {
+      "path": "games/zmhj-g5/cache/assets/icon/prop/110101003_d.png",
+      "sha256": "3dc1cda693d894ffcc3d5cb45b29aa0dcfaf2ed248728684edee9bbf29f5d697"
+    },
+    {
+      "path": "games/zmhj-g5/cache/assets/icon/role/createBody2001.png",
+      "sha256": "f72d689ce00ef4af6a8f1f63dfeb972a61a555e95bc84aeb636a3e463303ec47"
+    },
+    {
+      "path": "games/zmhj-g5/cache/assets/icon/skill/min/1101010.png",
+      "sha256": "0b67ff65dd77a0935c362fd7c0886eebf1d1ca3669c591f8752a1a45024f3c3b"
+    },
+    {
+      "path": "games/zmhj-g5/cache/assets/icon/skill/min/1101020.png",
+      "sha256": "c2b82b16600e0fbe30195968873469290cd592a1073f780dd9bb46bd46f101f4"
+    },
+    {
+      "path": "games/zmhj-g5/cache/assets/icon/skill/min/1101030.png",
+      "sha256": "4e28d9720a6238ef143348580c93dad90672d6b7605fc6b2d942d3feead0ef04"
+    },
+    {
+      "path": "games/zmhj-g5/cache/assets/icon/skill/min/1101040.png",
+      "sha256": "1c160c753516ccf26d2b3a728ac7e2d251bd9ecd19629fd5aceec48f0d6afaff"
+    },
+    {
+      "path": "games/zmhj-g5/cache/assets/icon/skill/min/1101080.png",
+      "sha256": "a8df5fc9a6f0b72dc27a1bd54bb291bb20a886da317256636ec17028b8d2d995"
+    },
+    {
+      "path": "games/zmhj-g5/cache/assets/item/1001/1.swf",
+      "sha256": "c7d05c895e7b882cb4002c890483a6bcaee3647957d166b193d974ec451f3231"
+    },
+    {
+      "path": "games/zmhj-g5/cache/assets/module/backpack_20260817_1.swf",
+      "sha256": "0ca3eeb641de59477d38a807d9770eaf6e6712692a848c03da578898d397b084"
+    },
+    {
+      "path": "games/zmhj-g5/cache/assets/module/material_20260831_1.swf",
+      "sha256": "9b5ff7fe25225a1eb48b038b01b204e81aa129f5803b23b6be9057b5a9333955"
+    },
+    {
+      "path": "games/zmhj-g5/cache/assets/ui/mission_20260406_1.swf",
+      "sha256": "60944248515768281bc82c2e20e267711bf2922967c54029133c36c3c35b9862"
+    },
+    {
+      "path": "out/zmhj-equip-skill-diag/com/wdcgame/display/components/BuffEffectEntity.as",
+      "sha256": "5fe31b93877e992ebf53546f798b8f4e8a8502ee18f45aec0ddb16c1bf1c6800"
+    },
+    {
+      "path": "out/zmhj-equip-skill-diag/com/wdcgame/filters/Filter.as",
+      "sha256": "fa0172ddd1e92fd65cce8b186f0ef0a3195e2009200bf04ee54520b861b65ce7"
+    },
+    {
+      "path": "out/zmhj-equip-skill-diag/com/wdcgame/net/SimulateServerFrame.as",
+      "sha256": "7b3586fbe28cb1db310624fb6006950840d7f7d7562cd9b8134e2932dd540515"
+    },
+    {
+      "path": "out/zmhj-equip-skill-diag/controllers/battle/StageClearCmd.as",
+      "sha256": "987c1c9022685a849ef6e289a957dd7206dcbc782e15ed590827e9bf8294d6c3"
+    },
+    {
+      "path": "out/zmhj-equip-skill-diag/controllers/item/SellItemCmd.as",
+      "sha256": "86738dbab1f97d8b77ada1b739b3598767f51dd9d3e0befbbd58631c30bb0f72"
+    },
+    {
+      "path": "out/zmhj-equip-skill-diag/models/vo/players/BagVO.as",
+      "sha256": "079661273f8edab597788b5a40bbacccf95469172b523d24f07e589b49b1e825"
+    },
+    {
+      "path": "out/zmhj-equip-skill-diag/modules/abc/TextAttrManager.as",
+      "sha256": "b1b3c31522f673e263e074de6505c9c97dfb646c8e31605a95e0db7a5ff680d5"
+    },
+    {
+      "path": "out/zmhj-equip-skill-diag/modules/backpack/view/BagMediator.as",
+      "sha256": "3303138c1c1bd8648f72bad429ebd9e9e5ba7c2ea16129ff8d9789f1dd0b2d5c"
+    },
+    {
+      "path": "out/zmhj-equip-skill-diag/modules/backpack/view/BagView.as",
+      "sha256": "eb6cfa3bbffc84bbb53739551e47572733452edbbd09abf42687c091e76d352b"
+    },
+    {
+      "path": "out/zmhj-equip-skill-diag/modules/backpack/view/BodyView.as",
+      "sha256": "e4f3de203979660855dc064c2bfccf0391313c049950b0e48cd7c02c00428e16"
+    },
+    {
+      "path": "out/zmhj-equip-skill-diag/modules/utils/CreateComponent.as",
+      "sha256": "ee94293b1611d8c767381a6475483c845775f248c5e3f4b111148bf040c9dedb"
+    },
+    {
+      "path": "out/zmhj-equip-skill-diag/modules/utils/Unify.as",
+      "sha256": "aa94316e33db0df3e0ff5f863fdb2f14f11289a8b3ef656d8ee0c2a7e0e67848"
+    },
+    {
+      "path": "out/zmhj-equip-skill-diag/org/moon/AutoWarnBar.as",
+      "sha256": "54af3662965976609be24aad40e397b8a62022f092d5e61debf88265d10747f6"
+    },
+    {
+      "path": "out/zmhj-equip-skill-diag/org/moon/TipsManager.as",
+      "sha256": "99ef657089f524590711e26ee42fe1b19fe8deae2813d0681496cdf6ee811a59"
+    },
+    {
+      "path": "out/zmhj-equip-skill-diag/org/moon/utils/Scale9Image.as",
+      "sha256": "5f1e3619e1af8efdc2fb1a808f809e9e60e5d1bd8d9981a488cafe3ed08531bf"
+    },
+    {
+      "path": "out/zmhj-equip-skill-diag/viewers/component/SkillComing.as",
+      "sha256": "747722bf403d25a51652deca8899c2f56c74766dba54d3120435f042892f8a94"
+    },
+    {
+      "path": "out/zmhj-equip-skill-diag/viewers/container/BattleMapBase.as",
+      "sha256": "2ada3d2cfefd594430ba81fef57a0268dce77fa7576d30a1fc3e997eddd76d50"
+    },
+    {
+      "path": "out/zmhj-equip-skill-diag/viewers/container/uis/RoleInfoViewer.as",
+      "sha256": "5a84c8c9394073bfa1bbc1288ac56953731978a52e5aa7296a15812b0c0f2e9e"
+    },
+    {
+      "path": "out/zmhj-equip-skill-diag/viewers/container/uis/RoleSkillView.as",
+      "sha256": "9198a9f2d89b9ae0acbdcbffa657e0bb7601b5095a09ab91bdb5dab56bf36f2e"
+    }
+  ],
+  "fps": 30,
+  "viewport": [
+    940,
+    590
+  ],
+  "execution_frames": 59,
+  "cooldown_frames": 103,
+  "next_screen_frames": 60,
+  "wushuang_full_frames": 15,
+  "wushuang_prompt_frames": 6,
+  "wushuang_mask_anchor": [
+    208,
+    5.5
+  ],
+  "wushuang_mask_scale_duration": 1,
+  "player_info_origin": [
+    0,
+    0
+  ],
+  "skill_bar_origin": [
+    0,
+    520
+  ],
+  "bag_grid_origin": [
+    483,
+    118
+  ],
+  "bag_page_size": 25,
+  "bag_grid_columns": 5,
+  "bag_grid_gap": 5,
+  "tabs": [
+    "equipment",
+    "material",
+    "consumable",
+    "fashion"
+  ],
+  "sort": [
+    "quality_desc",
+    "id_asc"
+  ],
+  "gateway": {
+    "source": "games/zmhj-g5/cache/assets/item/1001/1.swf",
+    "frames": 36,
+    "fps": 30,
+    "world_scale": 2,
+    "first_pivot": [
+      88.8,
+      166.95
+    ]
+  },
+  "notification": {
+    "wait_seconds": 1.5,
+    "fade_seconds": 1,
+    "rise_pixels": 100,
+    "curve": "QuadOut",
+    "pending_limit": 11,
+    "preauthored_slots": 22,
+    "common_text_color": "#5F1E05"
+  },
+  "bag_max_capacity": 500,
+  "sell_discount": 0.2
+}

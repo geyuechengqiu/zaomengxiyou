@@ -1,5 +1,7 @@
 # Battle Foundation · 战斗基础、动画与操作控制
 
+新增 [原版战斗 HUD、斩败、发光出口和背包](../../data/ui/README.md)：共享 BattleOriginalHUD/StageFeedback 接 Core 事件、GAS 快照及技能实例；原图集动画预置，背包使用扩展 Simple Inventory，换装属性与 Spine 外观统一通知，提示使用独立 UI 时钟。F5 首关按 B 查看；[验收](../../examples/verify_original_battle_ui.tscn)。
+
 [原版Boss栏、怪物出场和清屏后提前移镜](boss/original-presentation.md)已接入F5首关，可在预置场景和区域配置调整。
 
 新增 [原版镜头跟随与Phantom Camera接入](camera/README.md)：预置CameraRig/Host/PCam，原版源帧插值与过区左边界约束，唯一战斗时钟、会话隔离和连续地图视差。普通过区不瞬移、不切换地图场景。[验收](../../examples/verify_camera_follow.tscn)。
@@ -10,7 +12,7 @@
 
 阶段12新增 [关卡实例、区域、出生计划与通关](level/README.md)，复用现有Core定义索引/事件、BattleClock、GAS/Vital和怪物AI。碧玉径按原TMX导入五区域与完整必要出生依赖，独立跟踪计划生成与目标死亡，完成条件、出口、镜头和胜利统一管理。[配置](../../data/levels/biyujing/progression/README.md)、[联合类图](docs/level-progression.svg)、[验收](../../examples/verify_level_progression.tscn)。F5入口改为新关卡，旧阶段11场景继续作为AI验收。
 
-普通无双表现复用 Core 空格意图和 GAS 状态，新增无动作状态技能 `BattleStatusActivationFeature`、预置 `BattleWushuangEffect2D` 及原生姿态快照 `BattleSpinePoseMirror2D`。红光与残影独立于动作播放器，固定池消费战斗时钟，支持实例隔离与死亡/离场清理；当前预览持续15秒，怒气门槛和属性加成待接入。[原版依据与配置](../../data/effects/wushuang/README.md)。
+普通无双表现复用 Core 空格意图和 GAS 状态，新增无动作状态技能 `BattleStatusActivationFeature`、预置 `BattleWushuangEffect2D` 及原生姿态快照 `BattleSpinePoseMirror2D`。红光与残影独立于动作播放器，固定池消费战斗时钟，支持实例隔离与死亡/离场清理；预置 `BattleWushuangController` 协调 GAS rage Vital、释放实例怒气预算与增益；满10000释放，15秒消耗，原版伤害/移速/暴击及起手霸体同步撤销，满值HUD播放原15帧火焰和6帧空格提示，怒气条采用原1秒QuadOut缓动。[原版依据与配置](../../data/effects/wushuang/README.md)。
 
 新增 [悟空转职前四技能与火魔斩](../../data/skills/sunwukong/README.md)：原版 MP/CD 等级表、空中限制、原素材 AB、精确重复命中、射线转向、冲刺扫掠、风暴追加重劈、独立砸地与 3 帧视觉尾部。通过现有 Core/GAS/Spine 接入，没有第二套技能或判定系统。[五技能演示](../../examples/wukong_skills_demo.tscn)、[联合类图](docs/wukong-basic-skills.svg)、[验收](../../examples/verify_wukong_skills.tscn)。新增 BattleSkillManaCost / BattleSkillCooldownFeature 为本次技能等级快照读取原版消耗与冷却，不修改共享配置。
 

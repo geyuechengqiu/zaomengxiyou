@@ -23,7 +23,7 @@ F5运行碧玉径。第一关Monster/10601的原名称是**玉石琵琶精**，R
 | 布局、字号、贴图 | `battle_boss_feedback_2d.tscn → HUD/BossBar`的预置节点 |
 | 数字诊断 | `BossFeedback → Show Debug Values`，默认关闭；原HUD不叠加HP/保护数值标签 |
 
-演示的调试面板移到Boss栏下方，避免遮住顶部原版名称和血条。Boss反馈仍属于全场共享的BattlePresentation，角色只提供状态和属性。
+主线的旧调试面板已隐藏，避免遮住原版技能播报。Boss反馈仍属于全场共享的BattlePresentation，角色只提供状态和属性。空保护条使用 mission shape1326 的深蓝底 `texture_under`，青色填充使用 shape1330 的 `texture_progress`；原先把填充盖在空底之上的资源对应已修复。斩败、发光出口和战斗/背包 UI 见 [新说明](../../../data/ui/README.md)。
 
 ## 原版怪物出场
 

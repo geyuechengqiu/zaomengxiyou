@@ -22,6 +22,7 @@ func capture() -> void:
 		scene.session.advance_physics(1.0 / 60.0)
 	var player = scene.player
 	player.position.x = 400
+	player.wushuang.add_rage(10000)
 	if not player.try_activate_skill(&"sunwukong_wushuang"):
 		push_error("无双技能激活失败")
 		quit(1)

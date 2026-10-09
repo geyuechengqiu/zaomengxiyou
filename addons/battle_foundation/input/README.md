@@ -21,7 +21,7 @@
 
 Core 继续与旧 InputManager 并列。这个角色入口不轮询全局 `Input.is_action_pressed()`，不依赖旧 InputManager 的事件过滤、墙钟缓存或只发出候选事件的 KeyRemapHandler。原模块的实现边界见 [Core 实现分析](../../godot_core_system-0.0.4/docs/implementation-analysis.md)。
 
-空格无双槽已装配 `sunwukong_wushuang`，直接预览15秒红光与残影；怒气门槛和无双数值加成尚未接入，详见 [普通无双说明](../../../data/effects/wushuang/README.md)。
+空格无双槽已装配 `sunwukong_wushuang`，战斗命中蓄满10000后释放15秒红光、残影与原版移速/伤害/暴击增益；获取和消耗由独立GAS Vital管理，详见 [普通无双说明](../../../data/effects/wushuang/README.md)。
 
 ## 默认操作
 
@@ -38,7 +38,7 @@ Core 继续与旧 InputManager 并列。这个角色入口不轮询全局 `Input
 | item_1 / item_2 | Q / E | 道具角色分支 |
 | pet_toggle / mount_toggle | F / Z | 宠物 / 坐骑角色分支 |
 
-当前样例装配五段普攻，按下调用 `request_attack()`：空闲时发动第一段，攻击中预约下一段；HELD 不自动连击。预约由战斗实例保留到当前段结束，菜单/失焦/暂停会撤回预约。二段跳预算和连击打断由 [运动与动作系统](../movement/README.md) 判断。其余槽位能完整发送按下、持有、释放意图，未配置的槽位消费后报告 UNAVAILABLE。法宝效果、无双数值、宠物和坐骑业务不在控制器中伪造。道具也可以配置 GAS 技能或由角色分支接管。
+当前样例装配五段普攻，按下调用 `request_attack()`：空闲时发动第一段，攻击中预约下一段；HELD 不自动连击。预约由战斗实例保留到当前段结束，菜单/失焦/暂停会撤回预约。二段跳预算和连击打断由 [运动与动作系统](../movement/README.md) 判断。其余槽位能完整发送按下、持有、释放意图，未配置的槽位消费后报告 UNAVAILABLE。法宝、宠物和坐骑效果由所装配的业务技能决定；无双规则在 BattleWushuangController 与 GAS 中执行。道具也可以配置 GAS 技能或由角色分支接管。
 
 演示保留 Esc、反引号、1/2 和 F1/F2/F3/F4/F8/F9/F10/F11，避免菜单/控制台/换装/调试同时触发业务操作。F1 受击，F2 死亡，F4 重生，F8 镜像，F9 暂停，F10 慢动作，F11 停顿，F3 注册点；1/2 换套装/武器。这些是场景测试入口，实际游戏可以在独立 Profile 中改保留键。
 

@@ -1,0 +1,77 @@
+[gd_scene format=3]
+[ext_resource type="Script" path="res://addons/battle_foundation/ui/original_ui_animation_2d.gd" id="script"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/zs.png" id="atlas"]
+[sub_resource type="AtlasTexture" id="Frame0"]
+atlas = ExtResource("atlas")
+region = Rect2(2, 2, 1, 1)
+filter_clip = true
+[sub_resource type="AtlasTexture" id="Frame1"]
+atlas = ExtResource("atlas")
+region = Rect2(7, 2, 46, 134)
+filter_clip = true
+[sub_resource type="AtlasTexture" id="Frame2"]
+atlas = ExtResource("atlas")
+region = Rect2(57, 2, 80, 134)
+filter_clip = true
+[sub_resource type="AtlasTexture" id="Frame3"]
+atlas = ExtResource("atlas")
+region = Rect2(141, 2, 113, 146)
+filter_clip = true
+[sub_resource type="AtlasTexture" id="Frame4"]
+atlas = ExtResource("atlas")
+region = Rect2(258, 2, 471, 442)
+filter_clip = true
+[sub_resource type="AtlasTexture" id="Frame5"]
+atlas = ExtResource("atlas")
+region = Rect2(733, 2, 403, 382)
+filter_clip = true
+[sub_resource type="AtlasTexture" id="Frame6"]
+atlas = ExtResource("atlas")
+region = Rect2(1140, 2, 375, 315)
+filter_clip = true
+[sub_resource type="AtlasTexture" id="Frame7"]
+atlas = ExtResource("atlas")
+region = Rect2(1519, 2, 475, 249)
+filter_clip = true
+[sub_resource type="AtlasTexture" id="Frame8"]
+atlas = ExtResource("atlas")
+region = Rect2(2, 448, 475, 214)
+filter_clip = true
+[sub_resource type="AtlasTexture" id="Frame9"]
+atlas = ExtResource("atlas")
+region = Rect2(481, 448, 475, 214)
+filter_clip = true
+[sub_resource type="AtlasTexture" id="Frame10"]
+atlas = ExtResource("atlas")
+region = Rect2(960, 448, 475, 214)
+filter_clip = true
+[sub_resource type="AtlasTexture" id="Frame11"]
+atlas = ExtResource("atlas")
+region = Rect2(1439, 448, 475, 214)
+filter_clip = true
+[sub_resource type="AtlasTexture" id="Frame12"]
+atlas = ExtResource("atlas")
+region = Rect2(2, 666, 475, 214)
+filter_clip = true
+[sub_resource type="Animation" id="Clip"]
+length = 1.966666667
+loop_mode = 0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 0
+tracks/0/keys = {"times": PackedFloat32Array(0.000000000, 0.033333333, 0.066666667, 0.100000000, 0.133333333, 0.166666667, 0.200000000, 0.233333333, 0.266666667, 0.300000000, 0.333333333, 0.366666667, 0.400000000, 0.433333333, 0.466666667, 0.500000000, 0.533333333, 0.566666667, 0.600000000, 0.633333333, 0.666666667, 0.700000000, 0.733333333, 0.766666667, 0.800000000, 0.833333333, 0.866666667, 0.900000000, 0.933333333, 0.966666667, 1.000000000, 1.033333333, 1.066666667, 1.100000000, 1.133333333, 1.166666667, 1.200000000, 1.233333333, 1.266666667, 1.300000000, 1.333333333, 1.366666667, 1.400000000, 1.433333333, 1.466666667, 1.500000000, 1.533333333, 1.566666667, 1.600000000, 1.633333333, 1.666666667, 1.700000000, 1.733333333, 1.766666667, 1.800000000, 1.833333333, 1.866666667, 1.900000000, 1.933333333), "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1), "update": 1, "values": [SubResource("Frame0"), SubResource("Frame1"), SubResource("Frame2"), SubResource("Frame3"), SubResource("Frame4"), SubResource("Frame5"), SubResource("Frame6"), SubResource("Frame7"), SubResource("Frame8"), SubResource("Frame9"), SubResource("Frame10"), SubResource("Frame11"), SubResource("Frame12"), SubResource("Frame12"), SubResource("Frame12"), SubResource("Frame12"), SubResource("Frame12"), SubResource("Frame12"), SubResource("Frame12"), SubResource("Frame12"), SubResource("Frame12"), SubResource("Frame12"), SubResource("Frame12"), SubResource("Frame12"), SubResource("Frame12"), SubResource("Frame12"), SubResource("Frame12"), SubResource("Frame12"), SubResource("Frame12"), SubResource("Frame12"), SubResource("Frame12"), SubResource("Frame12"), SubResource("Frame12"), SubResource("Frame12"), SubResource("Frame12"), SubResource("Frame12"), SubResource("Frame12"), SubResource("Frame12"), SubResource("Frame12"), SubResource("Frame12"), SubResource("Frame12"), SubResource("Frame12"), SubResource("Frame12"), SubResource("Frame12"), SubResource("Frame12"), SubResource("Frame12"), SubResource("Frame12"), SubResource("Frame12"), SubResource("Frame12"), SubResource("Frame12"), SubResource("Frame12"), SubResource("Frame12"), SubResource("Frame12"), SubResource("Frame12"), SubResource("Frame12"), SubResource("Frame12"), SubResource("Frame12"), SubResource("Frame12"), SubResource("Frame12")]}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite2D:position")
+tracks/1/interp = 0
+tracks/1/keys = {"times": PackedFloat32Array(0.000000000, 0.033333333, 0.066666667, 0.100000000, 0.133333333, 0.166666667, 0.200000000, 0.233333333, 0.266666667, 0.300000000, 0.333333333, 0.366666667, 0.400000000, 0.433333333, 0.466666667, 0.500000000, 0.533333333, 0.566666667, 0.600000000, 0.633333333, 0.666666667, 0.700000000, 0.733333333, 0.766666667, 0.800000000, 0.833333333, 0.866666667, 0.900000000, 0.933333333, 0.966666667, 1.000000000, 1.033333333, 1.066666667, 1.100000000, 1.133333333, 1.166666667, 1.200000000, 1.233333333, 1.266666667, 1.300000000, 1.333333333, 1.366666667, 1.400000000, 1.433333333, 1.466666667, 1.500000000, 1.533333333, 1.566666667, 1.600000000, 1.633333333, 1.666666667, 1.700000000, 1.733333333, 1.766666667, 1.800000000, 1.833333333, 1.866666667, 1.900000000, 1.933333333), "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1), "update": 1, "values": [Vector2(-329.3, -224.55), Vector2(-200.3, -48.55000000000001), Vector2(-200.3, -36.55000000000001), Vector2(-200.3, -48.55000000000001), Vector2(-275.3, -222.55), Vector2(-240.3, -190.55), Vector2(-205.3, -157.55), Vector2(-200.3, -124.55000000000001), Vector2(-200.3, -116.55000000000001), Vector2(-200.3, -116.55000000000001), Vector2(-200.3, -116.55000000000001), Vector2(-200.3, -116.55000000000001), Vector2(-200.3, -116.55000000000001), Vector2(-200.3, -116.55000000000001), Vector2(-200.3, -116.55000000000001), Vector2(-200.3, -116.55000000000001), Vector2(-200.3, -116.55000000000001), Vector2(-200.3, -116.55000000000001), Vector2(-200.3, -116.55000000000001), Vector2(-200.3, -116.55000000000001), Vector2(-200.3, -116.55000000000001), Vector2(-200.3, -116.55000000000001), Vector2(-200.3, -116.55000000000001), Vector2(-200.3, -116.55000000000001), Vector2(-200.3, -116.55000000000001), Vector2(-200.3, -116.55000000000001), Vector2(-200.3, -116.55000000000001), Vector2(-200.3, -116.55000000000001), Vector2(-200.3, -116.55000000000001), Vector2(-200.3, -116.55000000000001), Vector2(-200.3, -116.55000000000001), Vector2(-200.3, -116.55000000000001), Vector2(-200.3, -116.55000000000001), Vector2(-200.3, -116.55000000000001), Vector2(-200.3, -116.55000000000001), Vector2(-200.3, -116.55000000000001), Vector2(-200.3, -116.55000000000001), Vector2(-200.3, -116.55000000000001), Vector2(-200.3, -116.55000000000001), Vector2(-200.3, -116.55000000000001), Vector2(-200.3, -116.55000000000001), Vector2(-200.3, -116.55000000000001), Vector2(-200.3, -116.55000000000001), Vector2(-200.3, -116.55000000000001), Vector2(-200.3, -116.55000000000001), Vector2(-200.3, -116.55000000000001), Vector2(-200.3, -116.55000000000001), Vector2(-200.3, -116.55000000000001), Vector2(-200.3, -116.55000000000001), Vector2(-200.3, -116.55000000000001), Vector2(-200.3, -116.55000000000001), Vector2(-200.3, -116.55000000000001), Vector2(-200.3, -116.55000000000001), Vector2(-200.3, -116.55000000000001), Vector2(-200.3, -116.55000000000001), Vector2(-200.3, -116.55000000000001), Vector2(-200.3, -116.55000000000001), Vector2(-200.3, -116.55000000000001), Vector2(-200.3, -116.55000000000001)]}
+[sub_resource type="AnimationLibrary" id="Library"]
+_data = {&"zs": SubResource("Clip")}
+[node name="zs" type="Node2D"]
+visible = false
+script = ExtResource("script")
+clip = &"zs"
+[node name="Sprite2D" type="Sprite2D" parent="."]
+centered = false
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+callback_mode_process = 2
+libraries/ = SubResource("Library")

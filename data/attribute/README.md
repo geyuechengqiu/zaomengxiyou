@@ -96,3 +96,5 @@ GAS 现有 SimpleDamageLogic 只执行攻击减防御和上下文倍率；上述
 ```
 
 [验证脚本](../../examples/verify_base_attributes.gd) 检查 28 个定义、5 个属性集、2 个 Vital 模板的加载、唯一 ID、原版 ID 与文件名、评分与负值、上限/恢复、来源修改器、多实体隔离及默认伤害策略读取 atk / phyDef，失败返回非零退出码。
+
+孙悟空属性集另加入原Common的 `xpMax=10000`，当前无双值保存在独立 `rage` Vital（入场0），与角色经验 `exp` 分开。预置WushuangController与GAS状态实现获取/消耗/原版增益，详见 [普通无双规则](../effects/wushuang/README.md)。

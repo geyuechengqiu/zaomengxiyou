@@ -1,0 +1,85 @@
+[gd_scene format=3]
+[ext_resource type="Script" path="res://addons/battle_foundation/ui/original_ui_animation_2d.gd" id="script"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/wushuang_full.png" id="atlas"]
+[sub_resource type="AtlasTexture" id="Frame0"]
+atlas = ExtResource("atlas")
+region = Rect2(2, 2, 107, 125)
+filter_clip = true
+[sub_resource type="AtlasTexture" id="Frame1"]
+atlas = ExtResource("atlas")
+region = Rect2(113, 2, 107, 124)
+filter_clip = true
+[sub_resource type="AtlasTexture" id="Frame2"]
+atlas = ExtResource("atlas")
+region = Rect2(224, 2, 107, 124)
+filter_clip = true
+[sub_resource type="AtlasTexture" id="Frame3"]
+atlas = ExtResource("atlas")
+region = Rect2(335, 2, 107, 123)
+filter_clip = true
+[sub_resource type="AtlasTexture" id="Frame4"]
+atlas = ExtResource("atlas")
+region = Rect2(446, 2, 107, 121)
+filter_clip = true
+[sub_resource type="AtlasTexture" id="Frame5"]
+atlas = ExtResource("atlas")
+region = Rect2(557, 2, 107, 120)
+filter_clip = true
+[sub_resource type="AtlasTexture" id="Frame6"]
+atlas = ExtResource("atlas")
+region = Rect2(668, 2, 107, 123)
+filter_clip = true
+[sub_resource type="AtlasTexture" id="Frame7"]
+atlas = ExtResource("atlas")
+region = Rect2(779, 2, 107, 126)
+filter_clip = true
+[sub_resource type="AtlasTexture" id="Frame8"]
+atlas = ExtResource("atlas")
+region = Rect2(890, 2, 107, 123)
+filter_clip = true
+[sub_resource type="AtlasTexture" id="Frame9"]
+atlas = ExtResource("atlas")
+region = Rect2(1001, 2, 107, 123)
+filter_clip = true
+[sub_resource type="AtlasTexture" id="Frame10"]
+atlas = ExtResource("atlas")
+region = Rect2(1112, 2, 107, 123)
+filter_clip = true
+[sub_resource type="AtlasTexture" id="Frame11"]
+atlas = ExtResource("atlas")
+region = Rect2(1223, 2, 107, 123)
+filter_clip = true
+[sub_resource type="AtlasTexture" id="Frame12"]
+atlas = ExtResource("atlas")
+region = Rect2(1334, 2, 107, 123)
+filter_clip = true
+[sub_resource type="AtlasTexture" id="Frame13"]
+atlas = ExtResource("atlas")
+region = Rect2(1445, 2, 107, 124)
+filter_clip = true
+[sub_resource type="AtlasTexture" id="Frame14"]
+atlas = ExtResource("atlas")
+region = Rect2(1556, 2, 107, 124)
+filter_clip = true
+[sub_resource type="Animation" id="Clip"]
+length = 0.500000000
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 0
+tracks/0/keys = {"times": PackedFloat32Array(0.000000000, 0.033333333, 0.066666667, 0.100000000, 0.133333333, 0.166666667, 0.200000000, 0.233333333, 0.266666667, 0.300000000, 0.333333333, 0.366666667, 0.400000000, 0.433333333, 0.466666667), "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1), "update": 1, "values": [SubResource("Frame0"), SubResource("Frame1"), SubResource("Frame2"), SubResource("Frame3"), SubResource("Frame4"), SubResource("Frame5"), SubResource("Frame6"), SubResource("Frame7"), SubResource("Frame8"), SubResource("Frame9"), SubResource("Frame10"), SubResource("Frame11"), SubResource("Frame12"), SubResource("Frame13"), SubResource("Frame14")]}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite2D:position")
+tracks/1/interp = 0
+tracks/1/keys = {"times": PackedFloat32Array(0.000000000, 0.033333333, 0.066666667, 0.100000000, 0.133333333, 0.166666667, 0.200000000, 0.233333333, 0.266666667, 0.300000000, 0.333333333, 0.366666667, 0.400000000, 0.433333333, 0.466666667), "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1), "update": 1, "values": [Vector2(-53.5, -62), Vector2(-53.5, -61), Vector2(-53.5, -61), Vector2(-53.5, -60), Vector2(-53.5, -58), Vector2(-53.5, -57), Vector2(-53.5, -60), Vector2(-53.5, -63), Vector2(-53.5, -60), Vector2(-53.5, -60), Vector2(-53.5, -60), Vector2(-53.5, -60), Vector2(-53.5, -60), Vector2(-53.5, -61), Vector2(-53.5, -61)]}
+[sub_resource type="AnimationLibrary" id="Library"]
+_data = {&"wushuang_full": SubResource("Clip")}
+[node name="wushuang_full" type="Node2D"]
+visible = false
+script = ExtResource("script")
+clip = &"wushuang_full"
+[node name="Sprite2D" type="Sprite2D" parent="."]
+centered = false
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+callback_mode_process = 2
+libraries/ = SubResource("Library")

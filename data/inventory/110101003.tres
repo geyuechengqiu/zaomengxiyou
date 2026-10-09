@@ -1,0 +1,103 @@
+[gd_resource type="Resource" script_class="BattleInventoryEquipment" format=3 uid="uid://hj0mcqt6mv78"]
+
+[ext_resource type="Script" uid="uid://umn6e5ncnv34" path="res://addons/battle_foundation/definitions/battle_equipment_definition.gd" id="equip"]
+[ext_resource type="Texture2D" uid="uid://lho1jprdn8b5" path="res://assets/ui/original/item_110101003.png" id="icon"]
+[ext_resource type="Script" uid="uid://bxnwsngemp233" path="res://addons/battle_foundation/definitions/battle_inventory_equipment.gd" id="item"]
+[ext_resource type="Script" uid="uid://bj8wgemc4twgi" path="res://addons/gameplay_abiltiy_system/scripts/attributes/gameplay_attribute_modifier.gd" id="modifier"]
+
+[sub_resource type="Resource" id="Mod0"]
+script = ExtResource("modifier")
+attribute_id = &"atk"
+value = 6.0
+
+[sub_resource type="Resource" id="Mod1"]
+script = ExtResource("modifier")
+attribute_id = &"critical"
+value = 3.0
+
+[sub_resource type="Resource" id="Equipment"]
+script = ExtResource("equip")
+definition_id = &"110101003"
+display_name = "封魔棒"
+attribute_modifiers = Array[ExtResource("modifier")]([SubResource("Mod0"), SubResource("Mod1")])
+
+[resource]
+script = ExtResource("item")
+battle_definition = SubResource("Equipment")
+appearance_skin = &"武器/weapon1"
+equip_type = 6
+name = "封魔棒"
+icon = ExtResource("icon")
+description = "魔由心生，棒喝可除"
+category = 2
+item_id = &"110101003"
+original_data = {
+"atk": "6;15",
+"atkAdd": 7.4,
+"bodySize": 75,
+"buffSceneId": "-1",
+"critical": "3;5",
+"criticalAdd": 2.3,
+"custom": null,
+"darkResist": "0",
+"darkResistAdd": 0,
+"describe": "魔由心生，棒喝可除",
+"dodge": "0",
+"dodgeAdd": 0,
+"equExtractId": 0,
+"equType": 0,
+"fireResist": "0",
+"fireResistAdd": 0,
+"guardian": "0",
+"guardianAdd": 0,
+"handbookOrder": 6,
+"hit": "0",
+"hitAdd": 0,
+"hole": "1;1",
+"holeLevMax": 6,
+"hpMax": "0",
+"hpMaxAdd": 0,
+"id": "110101003",
+"isAdvance": 1,
+"isReset": 0,
+"isShowHandbook": 1,
+"lightResist": "0",
+"lightResistAdd": 0,
+"lucky": "0",
+"luckyAdd": 0,
+"mpMax": "0",
+"mpMaxAdd": 0,
+"name": "封魔棒",
+"noShowSpirit": 1,
+"part": "weapon",
+"phyDef": "0",
+"phyDefAdd": 0,
+"price": 150,
+"protectionAttribute": "-1",
+"protectionItem": "-1",
+"quality": 1,
+"rayResist": "0",
+"rayResistAdd": 0,
+"reHP": "0",
+"reHPAdd": 0,
+"reMP": "0",
+"reMPAdd": 0,
+"recastAttr": "-1",
+"refineMax": 6,
+"replace": 1,
+"resourceId": 8006,
+"roleConditions": 1,
+"series": 2,
+"skillId": "-1",
+"soilResist": "0",
+"soilResistAdd": 0,
+"toughness": "0",
+"toughnessAdd": 0,
+"type": "equipment",
+"waterResist": "0",
+"waterResistAdd": 0,
+"windResist": "0",
+"windResistAdd": 0,
+"woodResist": "0",
+"woodResistAdd": 0
+}

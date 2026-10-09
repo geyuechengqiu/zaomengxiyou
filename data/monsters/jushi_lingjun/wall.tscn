@@ -1649,22 +1649,22 @@ filter_clip = true
 length = 0.400000000
 loop_mode = 0
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/path = NodePath("Visual/Sprite2D:texture")
 tracks/0/interp = 0
 tracks/0/keys = {"times": PackedFloat32Array(0.000000000, 0.033333333, 0.066666667, 0.100000000, 0.133333333, 0.166666667, 0.200000000, 0.233333333, 0.266666667, 0.300000000, 0.333333333, 0.366666667), "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1), "update": 1, "values": [SubResource("Frame_303"), SubResource("Frame_304"), SubResource("Frame_305"), SubResource("Frame_306"), SubResource("Frame_307"), SubResource("Frame_308"), SubResource("Frame_309"), SubResource("Frame_310"), SubResource("Frame_311"), SubResource("Frame_312"), SubResource("Frame_313"), SubResource("Frame_314")]}
 tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite2D:position")
+tracks/1/path = NodePath("Visual/Sprite2D:position")
 tracks/1/interp = 0
 tracks/1/keys = {"times": PackedFloat32Array(0.000000000, 0.033333333, 0.066666667, 0.100000000, 0.133333333, 0.166666667, 0.200000000, 0.233333333, 0.266666667, 0.300000000, 0.333333333, 0.366666667), "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1), "update": 1, "values": [Vector2(-69.95, -173.0), Vector2(-69.95, -173.0), Vector2(-69.95, -173.0), Vector2(-69.95, -173.0), Vector2(-69.95, -173.0), Vector2(-69.95, -173.0), Vector2(-69.95, -173.0), Vector2(-69.95, -173.0), Vector2(-69.95, -173.0), Vector2(-69.95, -173.0), Vector2(-69.95, -173.0), Vector2(-69.95, -173.0)]}
 [sub_resource type="Animation" id="skill3_2"]
 length = 0.500000000
 loop_mode = 1
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/path = NodePath("Visual/Sprite2D:texture")
 tracks/0/interp = 0
 tracks/0/keys = {"times": PackedFloat32Array(0.000000000, 0.033333333, 0.066666667, 0.100000000, 0.133333333, 0.166666667, 0.200000000, 0.233333333, 0.266666667, 0.300000000, 0.333333333, 0.366666667, 0.400000000, 0.433333333, 0.466666667), "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1), "update": 1, "values": [SubResource("Frame_315"), SubResource("Frame_316"), SubResource("Frame_317"), SubResource("Frame_318"), SubResource("Frame_319"), SubResource("Frame_320"), SubResource("Frame_321"), SubResource("Frame_322"), SubResource("Frame_323"), SubResource("Frame_324"), SubResource("Frame_325"), SubResource("Frame_326"), SubResource("Frame_327"), SubResource("Frame_328"), SubResource("Frame_329")]}
 tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite2D:position")
+tracks/1/path = NodePath("Visual/Sprite2D:position")
 tracks/1/interp = 0
 tracks/1/keys = {"times": PackedFloat32Array(0.000000000, 0.033333333, 0.066666667, 0.100000000, 0.133333333, 0.166666667, 0.200000000, 0.233333333, 0.266666667, 0.300000000, 0.333333333, 0.366666667, 0.400000000, 0.433333333, 0.466666667), "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1), "update": 1, "values": [Vector2(-48.95, -161.55), Vector2(-48.95, -161.55), Vector2(-48.95, -161.55), Vector2(-48.95, -161.55), Vector2(-48.95, -161.55), Vector2(-48.95, -161.55), Vector2(-48.95, -161.55), Vector2(-48.95, -161.55), Vector2(-48.95, -161.55), Vector2(-48.95, -161.55), Vector2(-48.95, -161.55), Vector2(-48.95, -161.55), Vector2(-48.95, -161.55), Vector2(-48.95, -161.55), Vector2(-48.95, -161.55)]}
 [sub_resource type="AnimationLibrary" id="Library"]
@@ -1676,9 +1676,10 @@ size = Vector2(132,354)
 visible = false
 script = ExtResource("script")
 definition = ExtResource("definition")
-[node name="Sprite2D" type="Sprite2D" parent="."]
-centered = false
+[node name="Visual" type="Node2D" parent="."]
 scale = Vector2(2,2)
+[node name="Sprite2D" type="Sprite2D" parent="Visual"]
+centered = false
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries/ = SubResource("Library")
 [node name="Obstacle" type="StaticBody2D" parent="."]

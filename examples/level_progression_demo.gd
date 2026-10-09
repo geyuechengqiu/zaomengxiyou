@@ -8,14 +8,19 @@ extends Node2D
 @onready var camera: Camera2D = $Camera2D
 @onready var info: Label = $HUD/Panel/Column/Info
 @onready var message: Label = $HUD/Panel/Column/Message
+@onready var original_hud: BattleOriginalHUD = $HUD/BattleHUD
 
 func _ready() -> void:
 	player.operations.enabled = enable_player_controls
 	menu.bind_controller(player.operations.controller)
-	menu.menu_changed.connect(func(open: bool): session.set_paused(open))
 	assert(session.register_scene_level(&"碧玉径", $BattleSession/Actors), session.last_error)
+	original_hud.bind_actor(player)
+	original_hud.inventory_changed.connect(func(open: bool): session.set_paused(open or menu.visible))
+	menu.menu_changed.connect(func(open: bool): session.set_paused(open or original_hud.inventory_view.visible))
 	$HUD/Restart.pressed.connect(func(): get_tree().reload_current_scene())
 	CoreSystem.event_bus.event_pushed.connect(_on_event)
+	# 原版游戏UI不被调试日志遮住；打开控制台时仍可查日志。
+	Panku.module_manager.get_module("native_logger").set_overlay_display_mode(PankuModuleNativeLogger.ScreenOverlayDisplayMode.ShowIfShellVisible)
 
 func _process(_delta: float) -> void:
 	if not is_instance_valid(player) or flow.regions.is_empty(): return
@@ -28,8 +33,13 @@ func _process(_delta: float) -> void:
 	else: message.text = "击败区域内的敌人，继续向右前进。"
 
 func _unhandled_input(event: InputEvent) -> void:
+	if event is InputEventKey and event.pressed and not event.echo and event.keycode == KEY_B and not menu.visible:
+		original_hud.set_inventory_open(not original_hud.inventory_view.visible)
+		get_viewport().set_input_as_handled()
+		return
 	if event is InputEventKey and event.pressed and not event.echo and event.keycode == KEY_ESCAPE:
-		menu.set_open(not menu.visible)
+		if original_hud.inventory_view.visible: original_hud.set_inventory_open(false)
+		else: menu.set_open(not menu.visible)
 		get_viewport().set_input_as_handled()
 
 func _on_event(id: String, payload: Array) -> void:

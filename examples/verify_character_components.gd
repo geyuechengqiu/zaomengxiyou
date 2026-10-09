@@ -45,7 +45,7 @@ func _verify_packed_scenes() -> void:
 		var actor: Node = arena.get_node("BattleSession/Actors/" + name)
 		for component_name in GAS_NODES:
 			_check(actor.get_node(NodePath(component_name)).scene_file_path.is_empty(), "场景组件继承自角色，不新增另一份实例")
-		_check(actor.get_child_count() == (14 if name == "SunWukong" else 12), "战斗场景未重复追加组件或产生自动命名后缀")
+		_check(actor.get_child_count() == (15 if name == "SunWukong" else 12), "战斗场景未重复追加组件或产生自动命名后缀")
 	arena.free()
 #endregion
 #region 绑定节点身份不变，各实体运行状态独立
@@ -55,7 +55,7 @@ func _verify_binding_and_isolation() -> void:
 	var definition := session.catalog.instantiate_definition("characters", &"孙悟空") as BattleEntityDefinition
 	var actor := definition.scene.instantiate() as BattleEntity2D
 	var identities := {}
-	for name in GAS_NODES + ACTION_NODES + ["Inventory", "PlayerOperations"]:
+	for name in GAS_NODES + ACTION_NODES + ["Inventory", "PlayerOperations", "WushuangController"]:
 		identities[name] = actor.get_node(NodePath(name)).get_instance_id()
 	var count := actor.get_child_count()
 	actor.initialize_battle(session, &"verification/authored", definition)

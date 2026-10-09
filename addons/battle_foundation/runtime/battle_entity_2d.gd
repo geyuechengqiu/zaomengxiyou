@@ -44,6 +44,7 @@ var running: bool:
 var last_impact_time: float = -1.0
 var _impact_display: float = 0.0
 var _cleaned: bool = false
+var wushuang: BattleWushuangController
 var operations: BattlePlayerOperations
 var ai_controller: BattleAIController2D
 var skill_aim_axis: float = 0.0
@@ -96,6 +97,7 @@ func _bind_scene_components() -> void:
 	inventory = get_node_or_null(^"Inventory") as C_Inventory
 	operations = get_node_or_null(^"PlayerOperations") as BattlePlayerOperations
 	ai_controller = get_node_or_null(^"AIController") as BattleAIController2D
+	wushuang = get_node_or_null(^"WushuangController") as BattleWushuangController
 
 func _enter_tree() -> void:
 	if entity_id.is_empty() and not scene_definition_id.is_empty():
@@ -123,6 +125,7 @@ func initialize_battle(owner_session: BattleSession, id: StringName, data: Battl
 func _ready() -> void:
 	_bind_scene_components()
 	motion.body = self
+	if wushuang != null: wushuang.bind(self)
 	assert(reaction_profile != null and reaction_profile.is_valid(), "目标受击反应配置无效")
 	reactions.bind(self)
 	assert(protection.configure(self, protection_profile), protection.last_error)
@@ -145,9 +148,16 @@ func _ready() -> void:
 		ai_controller.bind(self)
 	if inventory != null:
 		attributes.bind_inventory(inventory)
+		inventory.equip_changed.connect(_on_equipment_appearance_changed)
 	CoreSystem.event_bus.event_pushed.connect(_on_core_event)
 	if session.presentation != null:
 		session.presentation.register_actor(self)
+
+func _on_equipment_appearance_changed(slot: StringName, item: Equip) -> void:
+	if not animation is SpineAnimationAdapter or slot not in [&"armor", &"helmet", &"weapon"]: return
+	var skin: StringName = item.appearance_skin if item is BattleInventoryEquipment else &""
+	if not skin.is_empty() and not animation.get_available_skins().has(skin): return
+	animation.set_equipment_skin(slot, skin)
 
 func cleanup_battle() -> void:
 	if _cleaned:
@@ -156,6 +166,7 @@ func cleanup_battle() -> void:
 	_finish_spawn_appearance()
 	if ai_controller != null and ai_controller.has_method("cleanup_boss"): ai_controller.cleanup_boss()
 	_finish_attack(&"despawned")
+	if wushuang != null: wushuang.clear()
 	BattleGASBinding.cleanup(abilities, statuses)
 	if animation != null: animation.clear_status_visuals()
 	damage_rules.clear()
@@ -250,6 +261,7 @@ func advance_simulation(delta: float) -> void:
 	_advance_attack_windows()
 	if attack_instance != null and attack_instance.active:
 		attack_instance.advance_objects(delta)
+	if wushuang != null: wushuang.advance_simulation(delta)
 	statuses.advance_simulation(delta)
 	attributes.advance_simulation(delta)
 	var active_skill := abilities.get_ability_instance(_active_skill_id) if not _active_skill_id.is_empty() else null
@@ -336,7 +348,7 @@ func try_jump() -> bool:
 func try_activate_skill(id: StringName, context: Dictionary = {}) -> bool:
 	if session.is_simulation_blocked() or is_spawning() or not is_alive() or not abilities.has_ability(id):
 		return false
-	# 普通无双的表现状态无需进入攻击动作，保留当前连击/移动和技能时间轴。
+	# 无动作状态技能（包括无双）无需进入攻击动作，保留当前连击/移动和技能时间轴。
 	if abilities.get_ability_instance(id).get_feature("BattleStatusActivationFeature") != null:
 		return abilities.can_activate_ability(id, context) and abilities.try_activate_ability(id, context)
 	if combo.definition != null:
@@ -516,6 +528,7 @@ func _on_vital_depleted(id: StringName) -> void:
 	if id == &"health": _finish_spawn_appearance()
 	if id != &"health":
 		return
+	if wushuang != null: wushuang.clear()
 	_cancel_abilities(&"death")
 	action_state.enter(BattleActionState2D.State.DEAD)
 	move_axis = 0.0
@@ -697,8 +710,10 @@ func resolve_attack_hit(target: BattleEntity2D, context: Dictionary) -> Dictiona
 	hit_context["defer_attack_feedback"] = true
 	var calculation_context := damage_context.duplicate(true)
 	calculation_context.merge(hit_context, true)
+	var rage_cast := attack_instance
 	var info := DamageCalculator.calculate_damage(target, self, calculation_context)
 	var damage: float = target.receive_damage_info(info, StringName(context.get("interrupt_kind", &"normal")), int(context.get("interrupt_priority", 60)), hit_context)
+	BattleWushuangController.register_attack_hit(self, target, rage_cast, info, hit_context)
 	var result := hit_context.duplicate(true)
 	result.merge(info.to_dictionary(), true)
 	result.merge(info.get_meta(&"hit_effects", {}), true)
@@ -756,6 +771,8 @@ func finish_timeline_cast(cast: BattleAttackInstance, reason: StringName = &"com
 func request_skill_operation(operation: StringName, id: StringName) -> bool:
 	if session.is_simulation_blocked() or is_spawning() or not is_alive():
 		return false
+	if abilities.has_ability(id) and abilities.get_ability_instance(id).get_feature("BattleStatusActivationFeature") != null:
+		return try_activate_skill(id, {"operation": operation})
 	if _is_attack_state() and attack_instance != null:
 		if attack_instance.buffer_operation(operation):
 			return true

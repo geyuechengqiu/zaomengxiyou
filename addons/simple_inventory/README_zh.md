@@ -1,5 +1,7 @@
 # GodotGear
 
+本项目增加 `OriginalInventory extends C_Inventory`，用于复刻上古天地篇四类独立容量、25格分页、品质排序、锁定出售、原消耗扩容和原子换装。角色场景直接预置该节点；定义入库深复制，数量和装备状态不污染共享资源。`equip_changed` 接现有 GAS 属性入口与角色皮肤，视图只调用插件操作。基础 C_Inventory 的无效索引、非持有装备和空引用处理也已修正，旧接口保留。[物品配置](../../data/inventory/README.md)、[原版 UI、规则与范围](../../data/ui/README.md)。OriginalInventory 的恢复道具/角色条件桥接使用 Battle Foundation；通用 C_Inventory 不依赖该桥接。
+
 一个轻量级、灵活的 Godot 4.x 背包系统插件
 
 ![Godot v4.x](https://img.shields.io/badge/Godot-v4.x-blue)

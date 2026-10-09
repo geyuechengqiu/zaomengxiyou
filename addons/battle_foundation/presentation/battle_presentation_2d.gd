@@ -49,6 +49,16 @@ func clear_presentations() -> void:
 	number_rows.clear_numbers()
 	var boss := get_node_or_null(^"BossFeedback") as BattleBossFeedback2D
 	if boss != null: boss.clear_feedback()
+	var stage := get_node_or_null(^"StageFeedback") as BattleStageFeedback
+	if stage != null: stage.clear_feedback()
+
+func filter_combat_delta(delta: float) -> float:
+	var stage := get_node_or_null(^"StageFeedback") as BattleStageFeedback
+	return stage.filter_combat_delta(delta) if stage != null else delta
+
+func advance_ui(delta: float) -> void:
+	var stage := get_node_or_null(^"StageFeedback") as BattleStageFeedback
+	if stage != null: stage.advance_ui(delta)
 
 func advance_presentation(delta: float) -> void:
 	for view: BattleCombatFeedback2D in _views.values():

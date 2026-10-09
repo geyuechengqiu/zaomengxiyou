@@ -15,6 +15,8 @@ var phase: StringName = &"startup"
 var committed: bool = false
 var aim_degrees: float = 0.0
 var hit_count: int = 0
+## 原版addXPTotal属于本次释放，不能写回共用技能资源。
+var rage_awarded: float = 0.0
 var timeline: BattleFrameTimelineFeature
 var buffered_operations: Dictionary = {}
 var owned_objects: Array[WeakRef] = []

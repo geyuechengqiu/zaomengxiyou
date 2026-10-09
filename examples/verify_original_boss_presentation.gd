@@ -53,7 +53,7 @@ func verify_hud() -> void:
 	check(is_equal_approx((second.position+second.size/2).x-(first.position+first.size/2).x,30), "原抗性图标中心间隔30")
 	check(first.tooltip_text == "火抗 -10" and second.tooltip_text == "土抗 +10", "抗性值为整数")
 	check(not feedback.resistance_slots.get_child(2).visible, "零抗性不占位")
-	check(feedback.protect.texture_over != null and feedback.protect.value == 0, "零保护值仍保留原空条边框")
+	check(feedback.protect.texture_under != null and feedback.protect.texture_under.resource_path.ends_with("protect_background.png") and feedback.protect.value == 0, "零保护值使用原1326深蓝空条，1330仅作填充")
 	boss.attributes.set_base_value(&"fireResist", 0)
 	await step(0.01)
 	check(first.texture.resource_path.ends_with("soilResistAdd.png") and not second.visible, "统一属性入口改变后图标即时整理")

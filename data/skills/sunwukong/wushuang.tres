@@ -1,15 +1,17 @@
 [gd_resource type="Resource" script_class="GameplayAbilityDefinition" format=3]
 [ext_resource type="Script" path="res://addons/gameplay_abiltiy_system/scripts/abilities/gameplay_ability_definition.gd" id="script"]
 [ext_resource type="Script" path="res://addons/gameplay_abiltiy_system/scripts/abilities/features/gameplay_ability_feature.gd" id="feature_type"]
-[ext_resource type="Script" path="res://addons/battle_foundation/gas/battle_status_activation_feature.gd" id="feature"]
+[ext_resource type="Script" path="res://addons/battle_foundation/gas/battle_wushuang_activation_feature.gd" id="feature"]
 [ext_resource type="Resource" path="res://data/buffs/normal_wushuang_visual.tres" id="status"]
+[ext_resource type="Resource" path="res://data/buffs/sunwukong_wushuang_armor.tres" id="armor"]
 [sub_resource type="Resource" id="Activation"]
 script = ExtResource("feature")
 status = ExtResource("status")
+startup_armor = ExtResource("armor")
 [resource]
 script = ExtResource("script")
 ability_id = &"sunwukong_wushuang"
-ability_name = "普通无双表现"
+ability_name = "悟空无双"
 features = Array[ExtResource("feature_type")]([SubResource("Activation")])
 metadata/original_xp_type = 1
-metadata/preview_activation = true
+metadata/original_skill_id = 1201010

@@ -21,7 +21,7 @@ func request_hit_stop(seconds: float) -> void:
 	if is_finite(seconds) and seconds > 0.0:
 		hit_stop_remaining = maxf(hit_stop_remaining, seconds)
 
-func advance(unscaled_delta: float, tree_paused: bool = false) -> float:
+func advance(unscaled_delta: float, tree_paused: bool = false, combat_delta_filter: Callable = Callable()) -> float:
 	last_delta = 0.0
 	if not is_finite(unscaled_delta) or unscaled_delta <= 0.0 or paused or tree_paused:
 		return 0.0
@@ -29,6 +29,7 @@ func advance(unscaled_delta: float, tree_paused: bool = false) -> float:
 	var stopped := minf(hit_stop_remaining, unscaled_delta)
 	hit_stop_remaining = maxf(0.0, hit_stop_remaining - stopped)
 	last_delta = (unscaled_delta - stopped) * time_scale
+	if combat_delta_filter.is_valid(): last_delta = combat_delta_filter.call(last_delta)
 	elapsed += last_delta
 	return last_delta
 #endregion

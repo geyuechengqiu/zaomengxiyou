@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://cm0x3pewlrveo" path="res://addons/gameplay_abiltiy_system/scripts/abilities/features/gameplay_ability_feature.gd" id="feature"]
 [ext_resource type="Script" uid="uid://jxo0f6fi7ad" path="res://addons/battle_foundation/gas/battle_skill_mana_cost.gd" id="mana"]
 [ext_resource type="Script" uid="uid://b1047b2i0w3jx" path="res://addons/battle_foundation/definitions/battle_skill_motion.gd" id="motion"]
+[ext_resource type="Texture2D" uid="uid://1f2ayssw3g3s" path="res://assets/ui/original/skill_4.png" id="original_icon"]
 [ext_resource type="Script" uid="uid://ctus3t2tt37o6" path="res://addons/battle_foundation/definitions/battle_attack_segment.gd" id="segment"]
 [ext_resource type="Script" uid="uid://daneexb55k8ae" path="res://addons/battle_foundation/gas/battle_frame_timeline_feature.gd" id="timeline"]
 
@@ -72,5 +73,6 @@ initial_status_ids = Array[StringName]([&"sunwukong_buff_6000301"])
 script = ExtResource("definition")
 ability_id = &"sunwukong_skill4"
 ability_name = "烈焰风暴"
+icon = ExtResource("original_icon")
 features = Array[ExtResource("feature")]([SubResource("Cost"), SubResource("Cooldown"), SubResource("Timeline")])
 metadata/original_skill_id = 1101040

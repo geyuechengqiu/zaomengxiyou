@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="BattleRageVital" format=3]
+[ext_resource type="Script" path="res://addons/battle_foundation/gas/battle_rage_vital.gd" id="script"]
+[resource]
+script = ExtResource("script")
+vital_id = &"rage"
+display_name = "无双值"
+max_value_attribute = &"xpMax"

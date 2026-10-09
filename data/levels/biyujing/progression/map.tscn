@@ -4,6 +4,7 @@
 [ext_resource type="Script" path="res://addons/battle_foundation/level/battle_region_gate_2d.gd" id="gate"]
 [ext_resource type="PackedScene" path="res://addons/battle_foundation/level/battle_map_template_2d.tscn" id="map_template"]
 [ext_resource type="PackedScene" path="res://data/levels/biyujing/progression/visual.tscn" id="visuals"]
+[ext_resource type="PackedScene" path="res://data/ui/gateway.tscn" id="gateway_visual"]
 [sub_resource type="RectangleShape2D" id="ground0"]
 size = Vector2(11200.0, 128.0)
 [sub_resource type="RectangleShape2D" id="ground1"]
@@ -191,6 +192,7 @@ shape = SubResource("gate_shape")
 polygon = PackedVector2Array(-10,-640, 10,-640, 10,640, -10,640)
 color = Color(0.9, 0.35, 0.18, 0.7)
 [node name="Label" type="Label" parent="Gates/Gate1"]
+visible = false
 position = Vector2(-230,-450)
 text = "区域未完成"
 theme_override_font_sizes/font_size = 30
@@ -206,6 +208,7 @@ shape = SubResource("gate_shape")
 polygon = PackedVector2Array(-10,-640, 10,-640, 10,640, -10,640)
 color = Color(0.9, 0.35, 0.18, 0.7)
 [node name="Label" type="Label" parent="Gates/Gate2"]
+visible = false
 position = Vector2(-230,-450)
 text = "区域未完成"
 theme_override_font_sizes/font_size = 30
@@ -221,6 +224,7 @@ shape = SubResource("gate_shape")
 polygon = PackedVector2Array(-10,-640, 10,-640, 10,640, -10,640)
 color = Color(0.9, 0.35, 0.18, 0.7)
 [node name="Label" type="Label" parent="Gates/Gate3"]
+visible = false
 position = Vector2(-230,-450)
 text = "区域未完成"
 theme_override_font_sizes/font_size = 30
@@ -236,6 +240,7 @@ shape = SubResource("gate_shape")
 polygon = PackedVector2Array(-10,-640, 10,-640, 10,640, -10,640)
 color = Color(0.9, 0.35, 0.18, 0.7)
 [node name="Label" type="Label" parent="Gates/Gate4"]
+visible = false
 position = Vector2(-230,-450)
 text = "区域未完成"
 theme_override_font_sizes/font_size = 30
@@ -251,14 +256,17 @@ shape = SubResource("gate_shape")
 polygon = PackedVector2Array(-10,-640, 10,-640, 10,640, -10,640)
 color = Color(0.9, 0.35, 0.18, 0.7)
 [node name="Label" type="Label" parent="Gates/Gate5"]
+visible = false
 position = Vector2(-230,-450)
 text = "区域未完成"
 theme_override_font_sizes/font_size = 30
 [node name="FinalExit" type="Marker2D" parent="."]
 position = Vector2(10176, 1056)
 [node name="Label" type="Label" parent="FinalExit"]
+visible = false
 position = Vector2(-120,-150)
 text = "出口：开启后按W / ↑"
 theme_override_font_sizes/font_size = 26
 [node name="PlayerBirth" parent="."]
 position = Vector2(256.0, 984.0)
+[node name="Gateway" parent="FinalExit" instance=ExtResource("gateway_visual")]

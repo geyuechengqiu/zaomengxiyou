@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" path="res://data/battle2d/sunwukong_2d.tscn" id="scene"]
 [ext_resource type="Resource" path="res://data/attribute/progression/sunwukong.tres" id="progression"]
 
+[ext_resource type="Resource" path="res://data/attribute/vitals/rage.tres" id="rage"]
 [resource]
 script = ExtResource("script")
 definition_id = &"孙悟空"
@@ -15,5 +16,5 @@ faction_id = &"player"
 scene = ExtResource("scene")
 attribute_set = ExtResource("attributes")
 progression = ExtResource("progression")
-vitals = Array[ExtResource("vital_type")]([ExtResource("health"), ExtResource("mana")])
+vitals = Array[ExtResource("vital_type")]([ExtResource("health"), ExtResource("mana"), ExtResource("rage")])
 ability_ids = Array[StringName]([&"sunwukong_attack1", &"sunwukong_attack2", &"sunwukong_attack3", &"sunwukong_attack4", &"sunwukong_attack5", &"sunwukong_run_attack", &"sunwukong_jump_attack", &"sunwukong_skill1", &"sunwukong_skill2", &"sunwukong_skill3", &"sunwukong_skill4", &"sunwukong_skill4_1", &"sunwukong_skill8", &"sunwukong_skill8_slam", &"sunwukong_wushuang"])

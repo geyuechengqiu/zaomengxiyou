@@ -1,15 +1,44 @@
 [gd_resource type="Resource" script_class="GameplayStatusData" format=3]
 [ext_resource type="Script" path="res://addons/gameplay_abiltiy_system/scripts/status/gameplay_status_data.gd" id="script"]
 [ext_resource type="Script" path="res://addons/battle_foundation/gas/battle_original_status_policy.gd" id="policy"]
+[ext_resource type="Script" path="res://addons/gameplay_abiltiy_system/scripts/effects/gameplay_effect.gd" id="effect_type"]
+[ext_resource type="Script" path="res://addons/gameplay_abiltiy_system/scripts/effects/ge_attribute_modifier.gd" id="modifier_effect"]
+[ext_resource type="Script" path="res://addons/gameplay_abiltiy_system/scripts/attributes/gameplay_attribute_modifier.gd" id="modifier"]
+[ext_resource type="Script" path="res://addons/battle_foundation/gas/ge_original_buff_attribute.gd" id="crit_effect"]
+[ext_resource type="Script" path="res://addons/battle_foundation/gas/ge_battle_damage_rules.gd" id="damage_effect"]
+[sub_resource type="Resource" id="Walk"]
+script = ExtResource("modifier")
+attribute_id = &"walkSpeed"
+value = 0.3
+modifier_type = 1
+[sub_resource type="Resource" id="Run"]
+script = ExtResource("modifier")
+attribute_id = &"runSpeed"
+value = 0.3
+modifier_type = 1
+[sub_resource type="Resource" id="Speed"]
+script = ExtResource("modifier_effect")
+modifiers = Array[ExtResource("modifier")]([SubResource("Walk"), SubResource("Run")])
+[sub_resource type="Resource" id="Critical"]
+script = ExtResource("crit_effect")
+attribute_id = &"critical"
+ratio = 0.2
+fixed_bonus = 72.0
+[sub_resource type="Resource" id="Damage"]
+script = ExtResource("damage_effect")
+rules = {&"atkDmgRate": 30.0}
 [sub_resource type="Resource" id="Policy"]
 script = ExtResource("policy")
 replace_rule = 0
 [resource]
 script = ExtResource("script")
 status_id = &"normal_wushuang_visual"
-status_display_name = "普通无双表现"
-status_description = "角色原版颜色辉光与0.2秒采样、1秒线性淡出的残影"
+status_display_name = "悟空无双"
+status_description = "15秒移速+30%、伤害增幅+30%、暴击属性+释放时的20%+72；红光与残影"
 duration = 15.0
 stacking_policy = SubResource("Policy")
 max_stacks = 1
 metadata/original_xp_type = 1
+tags = Array[StringName]([&"status.buff"])
+apply_effects = Array[ExtResource("effect_type")]([SubResource("Speed"), SubResource("Critical"), SubResource("Damage")])
+metadata/original_buff_ids = PackedInt32Array(21000101, 23000101, 8000201)

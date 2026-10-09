@@ -1,6 +1,10 @@
 [gd_scene format=3 uid="uid://dvpcce2hna5oc"]
 
+[ext_resource type="Script" uid="uid://81t6vkwvxdxa" path="res://addons/simple_inventory/src/core/Item.gd" id="15_a0weu"]
 [ext_resource type="Resource" uid="uid://bsaofsrec4vo" path="res://data/battle2d/sunwukong_actions.tres" id="actions"]
+[ext_resource type="Resource" uid="uid://dw4uvwk6kum1b" path="res://data/inventory/110101001.tres" id="bag_armor"]
+[ext_resource type="Resource" uid="uid://c0281s88wiopx" path="res://data/inventory/110101002.tres" id="bag_helmet"]
+[ext_resource type="Resource" uid="uid://hj0mcqt6mv78" path="res://data/inventory/110101003.tres" id="bag_weapon"]
 [ext_resource type="Script" uid="uid://cxrmihsy5kb06" path="res://addons/battle_foundation/runtime/battle_action_state_2d.gd" id="component_ActionState"]
 [ext_resource type="Script" uid="uid://vosygjd4cpv7" path="res://addons/battle_foundation/runtime/battle_combo_state.gd" id="component_ComboState"]
 [ext_resource type="Script" uid="uid://dw6pbx6ug7ud7" path="res://addons/battle_foundation/combat/battle_damage_rules_component.gd" id="component_DamageRules"]
@@ -8,15 +12,17 @@
 [ext_resource type="Script" uid="uid://b6hkniyhlhrsf" path="res://addons/gameplay_abiltiy_system/scripts/components/gameplay_status_component.gd" id="component_GameplayStatusComponent"]
 [ext_resource type="Script" uid="uid://cea1apq6pvlmp" path="res://addons/battle_foundation/runtime/battle_attribute_component.gd" id="component_GameplayVitalAttributeComponent"]
 [ext_resource type="Script" uid="uid://bicr1hcycakxb" path="res://addons/battle_foundation/combat/battle_hit_reaction_controller_2d.gd" id="component_HitReactionController"]
-[ext_resource type="Script" uid="uid://cpxaj0hrrf8q0" path="res://addons/simple_inventory/src/core/C_Inventory.gd" id="component_Inventory"]
+[ext_resource type="Script" uid="uid://dan0jfrselm17" path="res://addons/simple_inventory/src/core/original_inventory.gd" id="component_Inventory"]
 [ext_resource type="Script" uid="uid://pusqtp2e6bgt" path="res://addons/battle_foundation/runtime/battle_motion_controller_2d.gd" id="component_MotionController"]
 [ext_resource type="Script" uid="uid://bcwcoxsr2ywmt" path="res://addons/battle_foundation/combat/battle_protection_system.gd" id="component_ProtectionSystem"]
 [ext_resource type="Script" uid="uid://bxdee48rg8khy" path="res://addons/battle_foundation/runtime/battle_entity_2d.gd" id="entity"]
 [ext_resource type="Script" uid="uid://bub8f66j00mfc" path="res://addons/battle_foundation/movement/battle_hurtbox_2d.gd" id="hurtbox"]
 [ext_resource type="Script" uid="uid://de1ptsybyejr" path="res://addons/godot_core_system-0.0.4/source/operation_system/operation_controller.gd" id="operation_controller"]
 [ext_resource type="Resource" path="res://data/controls/player_operations.tres" id="operation_profile"]
+[ext_resource type="JSON" path="res://data/inventory/original_rules.json" id="original_bag_rules"]
 [ext_resource type="Script" uid="uid://cejsmre475mvk" path="res://addons/battle_foundation/input/battle_player_operations.gd" id="player_operations"]
 [ext_resource type="PackedScene" uid="uid://djhbcr3yyxe42" path="res://data/animation/sunwukong_visual.tscn" id="visual"]
+[ext_resource type="Script" uid="uid://bftymfsrppn7b" path="res://addons/battle_foundation/runtime/battle_wushuang_controller.gd" id="wushuang_controller"]
 
 [sub_resource type="CapsuleShape2D" id="body"]
 radius = 22.0
@@ -72,7 +78,7 @@ base_values = Dictionary[StringName, float]({
 &"rayResist": 0.0,
 &"reEndurance": 0.0,
 &"reHP": 0.0,
-&"reMP": 0.0,
+&"reMP": 100.0,
 &"reduceEndurance": 0.0,
 &"runSpeed": 600.0,
 &"soilResist": 0.0,
@@ -114,6 +120,8 @@ script = ExtResource("component_ProtectionSystem")
 
 [node name="Inventory" type="Node" parent="." unique_id=1025194930]
 script = ExtResource("component_Inventory")
+initial_items = Array[ExtResource("15_a0weu")]([ExtResource("bag_armor"), ExtResource("bag_helmet"), ExtResource("bag_weapon")])
+original_rules = ExtResource("original_bag_rules")
 
 [node name="PlayerOperations" type="Node" parent="." unique_id=1198386844]
 script = ExtResource("player_operations")
@@ -132,3 +140,6 @@ enabled = false
 script = ExtResource("operation_controller")
 profile = ExtResource("operation_profile")
 externally_driven = true
+
+[node name="WushuangController" type="Node" parent="." unique_id=833789916]
+script = ExtResource("wushuang_controller")

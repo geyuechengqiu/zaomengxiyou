@@ -17,8 +17,8 @@ ui = PROJECT/'assets/ui/boss'
 for font, name in [(55,'count'),(1333,'name')]: shutil.copyfile(OUTPUT/f'font-{font}.ttf',ui/f'{name}.ttf')
 if not (OUTPUT/'boss-name.ttf').is_file(): raise RuntimeError('Original font library does not contain the Boss name')
 shutil.copyfile(OUTPUT/'boss-name.ttf',ui/'name.ttf')
-shutil.copyfile(OUTPUT/'protect-shapes/1326.png',ui/'protect_fill.png')
-shutil.copyfile(OUTPUT/'protect-shapes/1330.png',ui/'protect_border.png')
+shutil.copyfile(OUTPUT/'protect-shapes/1326.png',ui/'protect_background.png')
+shutil.copyfile(OUTPUT/'protect-shapes/1330.png',ui/'protect_fill.png')
 resists = ['lightResist','darkResist','waterResist','fireResist','woodResist','soilResist','windResist','rayResist']
 icons = ui/'resist'; icons.mkdir(parents=True,exist_ok=True)
 for key in resists:
@@ -65,7 +65,7 @@ text=text.replace('path="res://assets/ui/boss/protect.png"','path="res://assets/
 resources='[ext_resource type="FontFile" path="res://assets/ui/boss/name.ttf" id="font_name"]\n[ext_resource type="FontFile" path="res://assets/ui/boss/count.ttf" id="font_count"]\n'
 for key in resists:
     for sign in ['Add','Remove']: resources+=f'[ext_resource type="Texture2D" path="res://assets/ui/boss/resist/{key}{sign}.png" id="resist_{key}{sign}"]\n'
-resources+='[ext_resource type="Texture2D" path="res://assets/ui/boss/protect_border.png" id="protect_border"]\n'
+resources+='[ext_resource type="Texture2D" path="res://assets/ui/boss/protect_background.png" id="protect_border"]\n'
 text=text.replace('[node name="BossFeedback"',resources+'[node name="BossFeedback"',1)
 text=re.sub(r'^resistance_(?:add|remove)_textures = .*\n','',text,flags=re.M)
 for sign,prop in [('Add','add'),('Remove','remove')]:
@@ -145,7 +145,7 @@ mouse_filter = 2
 max_value = 1.0
 step = 0.001
 texture_progress = ExtResource("protect")
-texture_over = ExtResource("protect_border")
+texture_under = ExtResource("protect_border")
 [node name="ProtectionValue" type="Label" parent="HUD/BossBar"]
 visible = false
 offset_left = -99.0

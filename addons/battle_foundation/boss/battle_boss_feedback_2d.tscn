@@ -27,7 +27,7 @@
 [ext_resource type="Texture2D" path="res://assets/ui/boss/resist/windResistRemove.png" id="resist_windResistRemove"]
 [ext_resource type="Texture2D" path="res://assets/ui/boss/resist/rayResistAdd.png" id="resist_rayResistAdd"]
 [ext_resource type="Texture2D" path="res://assets/ui/boss/resist/rayResistRemove.png" id="resist_rayResistRemove"]
-[ext_resource type="Texture2D" path="res://assets/ui/boss/protect_border.png" id="protect_border"]
+[ext_resource type="Texture2D" path="res://assets/ui/boss/protect_background.png" id="protect_border"]
 [node name="BossFeedback" type="Node2D"]
 script = ExtResource("script")
 resistance_remove_textures = Array[Texture2D]([ExtResource("resist_lightResistRemove"), ExtResource("resist_darkResistRemove"), ExtResource("resist_waterResistRemove"), ExtResource("resist_fireResistRemove"), ExtResource("resist_woodResistRemove"), ExtResource("resist_soilResistRemove"), ExtResource("resist_windResistRemove"), ExtResource("resist_rayResistRemove")])
@@ -111,7 +111,7 @@ mouse_filter = 2
 max_value = 1.0
 step = 0.001
 texture_progress = ExtResource("protect")
-texture_over = ExtResource("protect_border")
+texture_under = ExtResource("protect_border")
 [node name="ProtectionValue" type="Label" parent="HUD/BossBar"]
 visible = false
 offset_left = -99.0

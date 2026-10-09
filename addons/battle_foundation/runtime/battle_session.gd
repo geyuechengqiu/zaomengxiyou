@@ -256,7 +256,9 @@ func advance_physics(unscaled_delta: float) -> void:
 	for entity in _entities.values():
 		if is_instance_valid(entity) and not entity.is_queued_for_deletion() and entity.has_method("advance_input"):
 			entity.advance_input(unscaled_delta)
-	var delta := clock.advance(unscaled_delta, is_inside_tree() and get_tree().paused)
+	# 命中停顿始终消耗未缩放时间，斩败抽帧只过滤随后真正推进的战斗时间。
+	var filter := presentation.filter_combat_delta if presentation != null else Callable()
+	var delta := clock.advance(unscaled_delta, is_inside_tree() and get_tree().paused, filter)
 	if delta > 0.0:
 		for entity in _entities.values():
 			if is_instance_valid(entity) and not entity.is_queued_for_deletion():
@@ -265,6 +267,7 @@ func advance_physics(unscaled_delta: float) -> void:
 		_level_root.advance_visuals(delta)
 	if presentation != null:
 		presentation.advance_presentation(delta)
+		presentation.advance_ui(unscaled_delta if not clock.paused and not (is_inside_tree() and get_tree().paused) else 0.0)
 	if level_instance != null:
 		level_instance.advance_level(delta)
 	if camera_rig != null:

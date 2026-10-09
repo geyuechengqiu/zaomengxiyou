@@ -29,6 +29,7 @@ signal equip_changed(equip_slot_name : StringName, equip : Equip)
 #region 生命周期与引擎回调
 
 func _ready() -> void:
+	equip_slots = equip_slots.duplicate(true)
 	items.resize(MAX_SLOT_COUNT)
 #endregion
 #region 公共接口
@@ -52,7 +53,7 @@ func remove_item(remove_item: Item) -> void:
 
 ## 获取道具
 func get_item(index: int) -> Item:
-	return items[index]
+	return items[index] if index >= 0 and index < items.size() else null
 
 ## 获取空的索引
 func get_empty_index() -> int:
@@ -97,11 +98,12 @@ func sort_items_by_type():
 
 ## 使用道具
 func use_item(item : Item) -> void:
-	if item.category == Item.ITEM_TYPE.EQUIPMENT:
+	if item != null and item is Equip and item.category == Item.ITEM_TYPE.EQUIPMENT:
 		equip_item(item)
 
 ## 装备道具
 func equip_item(equip : Equip) -> void:
+	if equip == null or not items.has(equip) or _get_equip_slot_name(equip).is_empty(): return
 	items[items.find(equip)] = null
 	var empty_slot : StringName = _get_empty_equip_slot_name(equip)
 	if empty_slot == "":
@@ -118,6 +120,7 @@ func equip_item(equip : Equip) -> void:
 
 ## 卸载装备
 func unequip_item(equip : Equip) -> void:
+	if equip == null or _get_equip_slot(equip).is_empty(): return
 	if get_empty_index() == -1 : return
 	var slot : StringName = _get_equip_slot(equip)
 	equip_slots[slot][1] = null

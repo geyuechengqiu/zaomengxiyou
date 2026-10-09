@@ -1,0 +1,279 @@
+{
+  "xpMax": 10000,
+  "hpToXP": 5,
+  "duration": 15,
+  "victimAwardCalls": 2,
+  "skills": {
+    "sunwukong_attack1": {
+      "original_skill_id": 1001010,
+      "addXP": 111,
+      "addXPMax": 111,
+      "atkMax": 1
+    },
+    "sunwukong_attack2": {
+      "original_skill_id": 1001020,
+      "addXP": 111,
+      "addXPMax": 111,
+      "atkMax": 1
+    },
+    "sunwukong_attack3": {
+      "original_skill_id": 1001030,
+      "addXP": 133,
+      "addXPMax": 133,
+      "atkMax": 1
+    },
+    "sunwukong_attack4": {
+      "original_skill_id": 1001040,
+      "addXP": 50,
+      "addXPMax": 200,
+      "atkMax": 2
+    },
+    "sunwukong_attack5": {
+      "original_skill_id": 1001050,
+      "addXP": 222,
+      "addXPMax": 222,
+      "atkMax": 1
+    },
+    "sunwukong_run_attack": {
+      "original_skill_id": 1001060,
+      "addXP": 133,
+      "addXPMax": 133,
+      "atkMax": 1
+    },
+    "sunwukong_jump_attack": {
+      "original_skill_id": 1001070,
+      "addXP": 144,
+      "addXPMax": 144,
+      "atkMax": 1
+    },
+    "jianwu_skill1": {
+      "original_skill_id": 2000200,
+      "addXP": 0,
+      "addXPMax": 0,
+      "atkMax": 1
+    },
+    "yushoushi_skill1": {
+      "original_skill_id": 2000100,
+      "addXP": 0,
+      "addXPMax": 0,
+      "atkMax": 5
+    },
+    "sunwukong_skill1": {
+      "original_skill_id": 1101010,
+      "addXP": 533,
+      "addXPMax": 533,
+      "atkMax": 1
+    },
+    "sunwukong_skill2": {
+      "original_skill_id": 1101020,
+      "addXP": 666,
+      "addXPMax": 666,
+      "atkMax": 1
+    },
+    "sunwukong_skill3": {
+      "original_skill_id": 1101030,
+      "addXP": 186,
+      "addXPMax": 932,
+      "atkMax": 1
+    },
+    "sunwukong_skill4": {
+      "original_skill_id": 1101040,
+      "addXP": 133,
+      "addXPMax": 666,
+      "atkMax": 5
+    },
+    "sunwukong_skill4_1": {
+      "original_skill_id": 1101041,
+      "addXP": 666,
+      "addXPMax": 666,
+      "atkMax": 1
+    },
+    "sunwukong_skill8": {
+      "original_skill_id": 1101080,
+      "addXP": 222,
+      "addXPMax": 1332,
+      "atkMax": 5
+    },
+    "sunwukong_skill8_slam": {
+      "original_skill_id": 1101081,
+      "addXP": 666,
+      "addXPMax": 666,
+      "atkMax": 1
+    },
+    "revival_vessel_skill1": {
+      "original_skill_id": 2001000,
+      "addXP": 0,
+      "addXPMax": 0,
+      "atkMax": 0
+    },
+    "jushi_lingjun_skill1": {
+      "original_skill_id": 2001100,
+      "addXP": 0,
+      "addXPMax": 0,
+      "atkMax": 1
+    },
+    "jushi_lingjun_skill2": {
+      "original_skill_id": 2001110,
+      "addXP": 0,
+      "addXPMax": 0,
+      "atkMax": 1
+    },
+    "jushi_lingjun_skill3": {
+      "original_skill_id": 2001120,
+      "addXP": 0,
+      "addXPMax": 0,
+      "atkMax": 0
+    }
+  },
+  "buffs": {
+    "6000601": {
+      "describe": "基础无双-霸体",
+      "resistType": 0,
+      "totalTime": 1,
+      "name": "霸体",
+      "targets": 0,
+      "pvpBuffHpProtectRatio": 1,
+      "stackReplace": 0,
+      "toward": 0,
+      "orderDisplay": 1,
+      "replaceRule": 3,
+      "show1Effect": 0,
+      "sceneBuffId": -1,
+      "stackMax": 0,
+      "showValueOnHead": 1,
+      "effectTag": "0",
+      "isMulPVPreHp": 1,
+      "destroyBySend": 0,
+      "multiple": 1,
+      "resourceId": 0,
+      "toWho": 1,
+      "group": 6,
+      "interval": 0,
+      "triggerNum": 1,
+      "recCd": 0,
+      "isImmediate": 0,
+      "type": 6,
+      "id": 6000601,
+      "isIntervalDelay": 1,
+      "isDebuff": 0,
+      "triggerByHurtTargets": "0",
+      "summonCanAdd": 0
+    },
+    "21000101": {
+      "describe": "无双-加速",
+      "resistType": 0,
+      "totalTime": 15,
+      "name": "移除负面BUFF",
+      "targets": 0,
+      "pvpBuffHpProtectRatio": 1,
+      "stackReplace": 0,
+      "toward": 0,
+      "orderDisplay": 1,
+      "attributeV1": 0.3,
+      "replaceRule": 3,
+      "show1Effect": 0,
+      "sceneBuffId": -1,
+      "stackMax": 0,
+      "showValueOnHead": 1,
+      "effectTag": "0",
+      "buffGrade": 9,
+      "isMulPVPreHp": 1,
+      "destroyBySend": 0,
+      "multiple": 1,
+      "resourceId": 0,
+      "toWho": 1,
+      "group": 21,
+      "interval": 0,
+      "triggerNum": 1,
+      "recCd": 0,
+      "isImmediate": 0,
+      "type": 21,
+      "id": 21000101,
+      "isIntervalDelay": 1,
+      "attributeT": "speed",
+      "isDebuff": 0,
+      "triggerByHurtTargets": "0",
+      "summonCanAdd": 0
+    },
+    "23000101": {
+      "describe": "无双-伤害",
+      "resistType": 0,
+      "totalTime": 15,
+      "name": "伤害",
+      "attributeV3": 30,
+      "pvpBuffHpProtectRatio": 1,
+      "stackReplace": 0,
+      "toward": 0,
+      "orderDisplay": 1,
+      "attributeV1": 0,
+      "targets": 0,
+      "replaceRule": 3,
+      "show1Effect": 0,
+      "sceneBuffId": -1,
+      "stackMax": 0,
+      "showValueOnHead": 1,
+      "effectTag": "0",
+      "isMulPVPreHp": 1,
+      "destroyBySend": 0,
+      "multiple": 1,
+      "resourceId": 0,
+      "toWho": 1,
+      "group": 23,
+      "attributeV2": 0,
+      "interval": 0,
+      "triggerNum": 1,
+      "recCd": 0,
+      "isImmediate": 0,
+      "type": 23,
+      "id": 23000101,
+      "isIntervalDelay": 1,
+      "attributeT": "dmgRate",
+      "isDebuff": 0,
+      "triggerByHurtTargets": "0",
+      "summonCanAdd": 0
+    },
+    "8000201": {
+      "describe": "悟空基础无双-暴击",
+      "resistType": 0,
+      "totalTime": 15,
+      "name": "暴击",
+      "attributeV3": 72,
+      "pvpBuffHpProtectRatio": 1,
+      "stackReplace": 0,
+      "toward": 0,
+      "orderDisplay": 1,
+      "attributeV1": 0.2,
+      "targets": 0,
+      "replaceRule": 3,
+      "show1Effect": 0,
+      "sceneBuffId": -1,
+      "stackMax": 0,
+      "showValueOnHead": 1,
+      "effectTag": "0",
+      "isMulPVPreHp": 1,
+      "destroyBySend": 0,
+      "multiple": 1,
+      "resourceId": 0,
+      "toWho": 1,
+      "group": 8,
+      "interval": 0,
+      "triggerNum": 1,
+      "recCd": 0,
+      "isImmediate": 0,
+      "type": 8,
+      "id": 8000201,
+      "isIntervalDelay": 1,
+      "attributeT": "critical",
+      "isDebuff": 0,
+      "triggerByHurtTargets": "0",
+      "summonCanAdd": 0
+    }
+  },
+  "sources": [
+    "out/zmhj-equip-skill-diag/models/managers/BattleModelManager.as:checkHurtManData/calXP",
+    "out/zmhj-equip-skill-diag/models/vo/UserVO.as:doInAdvanceTime",
+    "out/zmhj-equip-skill-diag/com/wdcgame/engine/model/UserVOBase.as:updateXP",
+    "out/zmhj-equip-skill-diag/viewers/container/uis/RoleSkillView.as:updateXPPer",
+    "Common/Role/Skill/Buff in cg1 configuration archive"
+  ]
+}

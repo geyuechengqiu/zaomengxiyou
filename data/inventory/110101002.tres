@@ -1,0 +1,104 @@
+[gd_resource type="Resource" script_class="BattleInventoryEquipment" format=3 uid="uid://c0281s88wiopx"]
+
+[ext_resource type="Script" uid="uid://umn6e5ncnv34" path="res://addons/battle_foundation/definitions/battle_equipment_definition.gd" id="equip"]
+[ext_resource type="Texture2D" uid="uid://c7wvbt3lrd00j" path="res://assets/ui/original/item_110101002.png" id="icon"]
+[ext_resource type="Script" uid="uid://bxnwsngemp233" path="res://addons/battle_foundation/definitions/battle_inventory_equipment.gd" id="item"]
+[ext_resource type="Script" uid="uid://bj8wgemc4twgi" path="res://addons/gameplay_abiltiy_system/scripts/attributes/gameplay_attribute_modifier.gd" id="modifier"]
+
+[sub_resource type="Resource" id="Mod0"]
+script = ExtResource("modifier")
+attribute_id = &"mpMax"
+value = 10.0
+
+[sub_resource type="Resource" id="Mod1"]
+script = ExtResource("modifier")
+attribute_id = &"phyDef"
+value = 2.0
+
+[sub_resource type="Resource" id="Equipment"]
+script = ExtResource("equip")
+definition_id = &"110101002"
+display_name = "封戾冠"
+slot_id = &"helmet"
+attribute_modifiers = Array[ExtResource("modifier")]([SubResource("Mod0"), SubResource("Mod1")])
+
+[resource]
+script = ExtResource("item")
+battle_definition = SubResource("Equipment")
+appearance_skin = &"头盔/helmet1"
+equip_type = 2
+name = "封戾冠"
+icon = ExtResource("icon")
+description = "戾气满身，心平可止"
+category = 2
+item_id = &"110101002"
+original_data = {
+"atk": "0",
+"atkAdd": 0,
+"bodySize": 75,
+"buffSceneId": "-1",
+"critical": "0",
+"criticalAdd": 0,
+"custom": null,
+"darkResist": "0",
+"darkResistAdd": 0,
+"describe": "戾气满身，心平可止",
+"dodge": "0",
+"dodgeAdd": 0,
+"equExtractId": 0,
+"equType": 0,
+"fireResist": "0",
+"fireResistAdd": 0,
+"guardian": "0",
+"guardianAdd": 0,
+"handbookOrder": 5,
+"hit": "0",
+"hitAdd": 0,
+"hole": "1;1",
+"holeLevMax": 6,
+"hpMax": "0",
+"hpMaxAdd": 0,
+"id": "110101002",
+"isAdvance": 1,
+"isReset": 0,
+"isShowHandbook": 1,
+"lightResist": "0",
+"lightResistAdd": 0,
+"lucky": "0",
+"luckyAdd": 0,
+"mpMax": "10;28",
+"mpMaxAdd": 14.1,
+"name": "封戾冠",
+"noShowSpirit": 1,
+"part": "helmet",
+"phyDef": "2;2",
+"phyDefAdd": 0.7,
+"price": 150,
+"protectionAttribute": "-1",
+"protectionItem": "-1",
+"quality": 1,
+"rayResist": "0",
+"rayResistAdd": 0,
+"reHP": "0",
+"reHPAdd": 0,
+"reMP": "0",
+"reMPAdd": 0,
+"recastAttr": "-1",
+"refineMax": 6,
+"replace": 1,
+"resourceId": 8005,
+"roleConditions": 1,
+"series": 2,
+"skillId": "-1",
+"soilResist": "0",
+"soilResistAdd": 0,
+"toughness": "0",
+"toughnessAdd": 0,
+"type": "equipment",
+"waterResist": "0",
+"waterResistAdd": 0,
+"windResist": "0",
+"windResistAdd": 0,
+"woodResist": "0",
+"woodResistAdd": 0
+}

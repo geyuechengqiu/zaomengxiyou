@@ -8,6 +8,14 @@ class_name BattleMap2D
 func advance_visuals(delta: float) -> void:
 	for child in $Visuals.get_children():
 		if child is BattleMapVisual2D: child.advance_visuals(delta)
+	var gateway := get_node_or_null(^"FinalExit/Gateway") as OriginalUIAnimation2D
+	if gateway != null: gateway.advance_effect(delta)
+
+func set_final_exit_open(open: bool) -> void:
+	var gateway := get_node_or_null(^"FinalExit/Gateway") as OriginalUIAnimation2D
+	if gateway == null: return
+	if open and not gateway.active: gateway.play_effect()
+	elif not open: gateway.stop_effect()
 
 func _get_configuration_warnings() -> PackedStringArray:
 	var warnings := PackedStringArray()

@@ -32,6 +32,7 @@ var _session: BattleSession
 var _boss: WeakRef
 var _request_id: int = -1
 var _request_actor: StringName
+var _announcement_started: bool = false
 var banner_age: float = INF
 var announcement_count: int = 0
 var warning_remaining: float = 0.0
@@ -196,6 +197,7 @@ func _on_event(id: String, payload: Array) -> void:
 	elif id == "battle.boss.announced":
 		_request_id = data.request_id
 		_request_actor = data.source_entity_id
+		_announcement_started = false
 		banner.texture = data.get("announcement") as Texture2D
 		banner_age = 0
 		banner.position = Vector2(-100,80)
@@ -210,8 +212,11 @@ func _on_event(id: String, payload: Array) -> void:
 			for index in range(points.size()): points[index] = origin+Vector2(points[index].x*int(data.facing),points[index].y)
 			warning.polygon = points
 			warning.visible = warning_remaining > 0
+	elif id == "battle.boss.action_started" and data.source_entity_id == _request_actor and data.request_id == _request_id:
+		_announcement_started = true
 	elif id == "battle.boss.announcement_cancelled" and data.source_entity_id == _request_actor and data.request_id == _request_id:
-		banner.visible = false
+		# 原版SkillComing由独立UI时间轴播放；动作被打断不删除已开始的播报。
+		if not _announcement_started: banner.visible = false
 		warning.visible = false
 		warning_remaining = 0
 	elif id == "battle.boss.objects_spawned" and data.object_id == &"jade_wall": _start_shake()

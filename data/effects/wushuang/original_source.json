@@ -3,7 +3,7 @@
   "business_character_id": "孙悟空",
   "business_ability_id": "sunwukong_wushuang",
   "original_role_id_for_traceability_only": "2001",
-  "scope": "ordinary xpType=1 visual appearance; rage gate/drain meter/combat buffs are not implemented",
+  "scope": "ordinary xpType=1 original visual + combat rage budgets/full gate/drain, GAS damage/speed/critical/startup armor and original full HUD animation",
   "sources": [
     {
       "path": "exports/zmhj_character_state_control/sources/prefabs/scripts/ManEntity.as",
@@ -24,6 +24,18 @@
     {
       "path": "exports/zmhj_role_stats/原始配置/Role.json",
       "sha256": "cd3444fb3e21a6aba6e122c57aed382cde9873ea2451d3d288285c06d1c0cadd"
+    },
+    {
+      "path": "out/zmhj-equip-skill-diag/models/managers/BattleModelManager.as",
+      "sha256": "d253316c1057dd3f6609bebb3ad666912a78e56216e50e4210660a990d65e63e"
+    },
+    {
+      "path": "out/zmhj-equip-skill-diag/com/wdcgame/engine/model/UserVOBase.as",
+      "sha256": "60909e954e33558532dd10799e25b0373a85a57697740e982f7ccd8f9af706a8"
+    },
+    {
+      "path": "out/zmhj-equip-skill-diag/viewers/container/uis/RoleSkillView.as",
+      "sha256": "9198a9f2d89b9ae0acbdcbffa657e0bb7601b5095a09ab91bdb5dab56bf36f2e"
     }
   ],
   "parameters": {
@@ -58,5 +70,10 @@
     "Snapshot includes body/skin/weapon and solved head pose, not independent attack VFX.",
     "Large delta samples interpolate age/position but share current solved pose.",
     "Original zSort-100+serial replaced by scene draw order behind body and above terrain."
+  ],
+  "combat_rules": "combat_rules.json",
+  "ui_scenes": [
+    "res://data/ui/wushuang_full.tscn",
+    "res://data/ui/wushuang_prompt.tscn"
   ]
 }

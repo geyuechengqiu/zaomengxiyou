@@ -75,6 +75,8 @@ func start(data: BattleLevelDefinition) -> bool:
 	_player.attributes.vital_depleted.connect(_on_player_depleted)
 	CoreSystem.event_bus.event_pushed.connect(_on_event)
 	state = State.RUNNING
+	var map := _player.get_parent() as BattleMap2D
+	if map != null: map.set_final_exit_open(false)
 	_refresh_camera(true)
 	return true
 
@@ -85,6 +87,8 @@ func _configuration_failure(message: String) -> bool:
 	return false
 
 func stop() -> void:
+	var map := _player.get_parent() as BattleMap2D if is_instance_valid(_player) else null
+	if map != null: map.set_final_exit_open(false)
 	state = State.STOPPED
 	var rig := get_node_or_null(camera_rig_path) as BattleCameraRig2D
 	if rig != null: rig.stop()
@@ -109,9 +113,12 @@ func _exit_tree() -> void:
 #endregion
 #region 进入区域、战斗时钟调度与完成检查
 func advance_level(delta: float) -> void:
-	if state != State.RUNNING or delta <= 0.0:
+	if state != State.RUNNING:
 		_pending_exit = false
 		return
+	if delta <= 0.0:
+		if _session.clock.paused or get_tree().paused: _pending_exit = false
+		return # 抽帧/命中停顿不丢弃已经收到的出口按下意图。
 	if not is_instance_valid(_player) or not _player.is_alive():
 		_fail("玩家死亡或离场")
 		return
@@ -143,6 +150,9 @@ func advance_level(delta: float) -> void:
 		if instance.completed and not instance.exit_open and (instance != regions[-1] or _level_conditions_met()):
 			instance.exit_open = true
 			_gates[instance.definition.region_id].set_locked(false)
+			if instance == regions[-1]:
+				var map := _player.get_parent() as BattleMap2D
+				if map != null: map.set_final_exit_open(true)
 			_emit(&"battle.region.exit_opened", {"region_id": instance.definition.region_id})
 	if region.exit_open and region.definition.automatic_exit and region.definition.get_automatic_exit_rect().has_point(now): request_exit(_player, true)
 	elif _pending_exit: request_exit(_player)
@@ -271,6 +281,8 @@ func request_exit(actor: BattleEntity2D, automatic: bool = false) -> bool:
 	if automatic and region.definition.automatic_exit and current_region_index < regions.size()-1: exit_rect = region.definition.get_automatic_exit_rect()
 	if region.exited or not region.exit_open or not exit_rect.has_point(actor.global_position): return false
 	if current_region_index == regions.size() - 1:
+		var stage := _session.presentation.get_node_or_null(^"StageFeedback") as BattleStageFeedback if _session.presentation != null else null
+		if stage != null and stage.is_execution_playing(): return false
 		for item in regions:
 			if not item.completed: return false
 		if not _level_conditions_met(): return false

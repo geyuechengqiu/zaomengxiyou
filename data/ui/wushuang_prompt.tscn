@@ -1,0 +1,37 @@
+[gd_scene format=3]
+[ext_resource type="Script" path="res://addons/battle_foundation/ui/original_ui_animation_2d.gd" id="script"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/wushuang_prompt.png" id="atlas"]
+[sub_resource type="AtlasTexture" id="Frame0"]
+atlas = ExtResource("atlas")
+region = Rect2(2, 2, 50, 24)
+filter_clip = true
+[sub_resource type="AtlasTexture" id="Frame1"]
+atlas = ExtResource("atlas")
+region = Rect2(56, 2, 50, 24)
+filter_clip = true
+[sub_resource type="AtlasTexture" id="Frame2"]
+atlas = ExtResource("atlas")
+region = Rect2(110, 2, 50, 24)
+filter_clip = true
+[sub_resource type="Animation" id="Clip"]
+length = 0.200000000
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 0
+tracks/0/keys = {"times": PackedFloat32Array(0.000000000, 0.033333333, 0.066666667, 0.100000000, 0.133333333, 0.166666667), "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1), "update": 1, "values": [SubResource("Frame0"), SubResource("Frame0"), SubResource("Frame1"), SubResource("Frame1"), SubResource("Frame2"), SubResource("Frame2")]}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite2D:position")
+tracks/1/interp = 0
+tracks/1/keys = {"times": PackedFloat32Array(0.000000000, 0.033333333, 0.066666667, 0.100000000, 0.133333333, 0.166666667), "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1), "update": 1, "values": [Vector2(0, 1), Vector2(0, 1), Vector2(0, 1), Vector2(0, 1), Vector2(0, 1), Vector2(0, 1)]}
+[sub_resource type="AnimationLibrary" id="Library"]
+_data = {&"wushuang_prompt": SubResource("Clip")}
+[node name="wushuang_prompt" type="Node2D"]
+visible = false
+script = ExtResource("script")
+clip = &"wushuang_prompt"
+[node name="Sprite2D" type="Sprite2D" parent="."]
+centered = false
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+callback_mode_process = 2
+libraries/ = SubResource("Library")

@@ -1,0 +1,32 @@
+[
+  {
+    "ability_id": "sunwukong_skill1",
+    "name": "升龙斩",
+    "icon": "res://assets/ui/original/skill_1.png",
+    "source_skill_id": 1101010
+  },
+  {
+    "ability_id": "sunwukong_skill2",
+    "name": "烈焰闪",
+    "icon": "res://assets/ui/original/skill_2.png",
+    "source_skill_id": 1101020
+  },
+  {
+    "ability_id": "sunwukong_skill3",
+    "name": "火眼金睛",
+    "icon": "res://assets/ui/original/skill_3.png",
+    "source_skill_id": 1101030
+  },
+  {
+    "ability_id": "sunwukong_skill4",
+    "name": "烈焰风暴",
+    "icon": "res://assets/ui/original/skill_4.png",
+    "source_skill_id": 1101040
+  },
+  {
+    "ability_id": "sunwukong_skill8",
+    "name": "火魔斩",
+    "icon": "res://assets/ui/original/skill_8.png",
+    "source_skill_id": 1101080
+  }
+]
