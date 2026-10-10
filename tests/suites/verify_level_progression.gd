@@ -153,10 +153,17 @@ func _verify_original_waves() -> void:
 	var third: BattleSpawnPlanInstance = flow.plans[&"screen1_birth3"]
 	var gate := demo.get_node("BattleSession/Actors/Gates/Gate1") as BattleRegionGate2D
 	_check(flow.regions[0].entered and first.next_due > flow.elapsed and _living().is_empty() and gate.locked, "进入触发区后延迟未出生时仍锁门")
+	_check(session.camera_rig.combat_locked, "区域已经触发但怪物尚在延迟出生，横向镜头保持锁定")
 	await _step(0.9)
 	_check(first.created == 0, "原版首只等待delay+interval")
 	await _step(0.1)
 	_check(first.created == 1 and not first.generation_complete(), "首只出现，计划仍未出生完毕")
+	var locked_center: float = demo.camera.get_screen_center_position().x
+	for x in [1800,1000]:
+		_move_player(x)
+		session.camera_rig.advance_camera(1)
+		_check(is_equal_approx(demo.camera.get_screen_center_position().x,locked_center), "当前区域有活怪时向左右走均无法移动镜头")
+	_move_player(256)
 	_kill(_living(&"screen1_birth1")[0])
 	_check(not first.all_dead() and gate.locked, "当前唯一活怪死去，不代表计划完成")
 	await _step(1.0)
@@ -167,6 +174,7 @@ func _verify_original_waves() -> void:
 	for actor in _living(): _kill(actor)
 	await _step(0.01)
 	_check(_living().is_empty() and flow.waves[&"biyujing_region_1_wave_1"].completed and not flow.regions[0].completed and gate.locked, "第一波全死、第二波尚未出现，出口保持锁定")
+	_check(session.camera_rig.combat_locked, "第一波全死但第二波未完成，左右镜头仍锁定")
 	_check(flow.plans[&"screen1_birth2"].started and flow.plans[&"screen1_birth4"].started, "指定两个出生点全死触发第二波")
 	_move_player(2200)
 	player.move_axis = 1
@@ -180,6 +188,7 @@ func _verify_original_waves() -> void:
 	for actor in _living(): _kill(actor)
 	await _step(0.01)
 	_check(flow.regions[0].completed and flow.regions[0].exit_open and not gate.locked and gate.shape.disabled, "全部计划及目标完成才打开门与碰撞")
+	_check(not session.camera_rig.combat_locked, "全部计划与目标完成后才恢复镜头移动")
 	await _step(0.1)
 	_check(_events("battle.region.completed", "region_id", &"biyujing_region_1") == 1 and _events("battle.region.exit_opened", "region_id", &"biyujing_region_1") == 1, "区域完成及出口开启只通知一次")
 	var camera_before: Vector2 = demo.camera.get_screen_center_position()
@@ -206,6 +215,17 @@ func _verify_original_waves() -> void:
 	_check(absf(demo.camera.global_position.x - lerpf(camera_before.x,1000.0,0.2)) < 0.01 and demo.camera.global_position.x < camera_before.x, "真实清怪过区后回头，镜头向左平滑跟随人物")
 	_check(demo.camera.get_screen_center_position().is_equal_approx(demo.camera.global_position) and demo.camera.limit_left == 0, "已清区域左边界持续开放，实际画面不被新区左限界阻挡")
 	_check(flow.current_region_index == 1 and demo.camera.limit_right == 4544 and _events("battle.region.exited") == 1, "反向镜头跟随不重复切区，也不提前解锁后续区域")
+	_move_player(2500)
+	await _step(0.01)
+	_check(flow.regions[1].entered and session.camera_rig.combat_locked, "实际进入第二区触发出生计划后重新锁定左右镜头")
+	await _step(1)
+	var combat_center := session.camera_rig.center.x
+	_move_player(4000)
+	await _step(0.1)
+	_check(is_equal_approx(session.camera_rig._target().x,3308) and session.camera_rig.center.x >= combat_center, "新区有怪时镜头只完成固定位置过渡，不跟随向右移动")
+	_move_player(1000)
+	await _step(0.1)
+	_check(is_equal_approx(session.camera_rig._target().x,3308), "新区有怪时回头不再拉走战斗镜头")
 #endregion
 #region 低帧率、暂停、慢动作、停顿和窄触发区
 func _verify_low_fps() -> void:

@@ -15,6 +15,8 @@ class_name BattleCameraRig2D
 var region_bounds: Rect2
 var center: Vector2
 var going_next: bool = false
+var combat_locked: bool = false
+var _locked_x: float
 var _unlocked_left: float
 var _weight: float
 var _configured: bool = false
@@ -28,6 +30,7 @@ func _ready() -> void:
 func set_region_bounds(bounds: Rect2, initial: bool = false) -> void:
 	assert(bounds.size.x > 0 and bounds.size.y > 0 and bounds.position.is_finite() and bounds.size.is_finite())
 	region_bounds = bounds
+	combat_locked = false
 	if initial or not _configured:
 		_configured = true
 		_unlocked_left = bounds.position.x
@@ -44,6 +47,13 @@ func set_region_bounds(bounds: Rect2, initial: bool = false) -> void:
 		_unlocked_left = minf(_unlocked_left, bounds.position.x)
 	_sync_limits()
 
+func set_combat_locked(locked: bool) -> void:
+	if combat_locked == locked or not _configured: return
+	combat_locked = locked
+	if locked:
+		# 刚进入新区时允许旧画面平滑抵达新区左缘，之后不再跟随横向移动。
+		_locked_x = _clamp_target(center, region_bounds.position.x).x
+
 func _view_size() -> Vector2:
 	return _camera.get_viewport_rect().size / _pcam.zoom
 
@@ -58,7 +68,9 @@ func _clamp_target(position: Vector2, left: float) -> Vector2:
 		clampf(position.y,min_y,max_y) if min_y <= max_y else region_bounds.get_center().y)
 
 func _target() -> Vector2:
-	return _clamp_target(_player.global_position, _unlocked_left)
+	var target := _clamp_target(_player.global_position, _unlocked_left)
+	if combat_locked: target.x = _locked_x
+	return target
 
 func _sync_limits() -> void:
 	# 跟随目标与插件硬限界使用同一个已开放左边界，回头时不会被新区左缘截住。
@@ -88,4 +100,5 @@ func advance_camera(delta: float) -> void:
 func stop() -> void:
 	_configured = false
 	going_next = false
+	combat_locked = false
 #endregion

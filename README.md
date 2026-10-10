@@ -22,7 +22,7 @@ F5 运行正式入口 [碧玉径](game/levels/biyujing.tscn)。需要带 **Spine
 
 Boss栏已按原版挂在画面顶部中央，第一关显示“玉石琵琶精”，使用原名字体、三条生命计数、火抗降低/土抗提高图标及保护条。剑舞、驭兽使和复苏容器接入原25帧出场动画。清屏后进入区域右侧半屏即可平滑移镜，无需走到边缘；延迟出生仍锁定。[原版依据、可编辑节点和调参入口](addons/battle_foundation/boss/original-presentation.md)。
 
-首关镜头使用Phantom Camera和原30FPS的0.2系数平滑跟随，过区保留当前画面。已开放区域支持回头跟随，未通关区域右边界仍锁定；跳跃遵守原地图高度裁剪，暂停/慢动作/停顿统一消费BattleClock。所有镜头组件和锚点预置。[原版依据、配置及验收](addons/battle_foundation/camera/README.md)。
+首关镜头使用Phantom Camera和原30FPS的0.2系数平滑跟随，过区保留当前画面。进入战斗区域后左右镜头均锁定，延迟波次期间也不解锁；区域完整清理后恢复双向跟随。进入下一战斗区域时平滑抵达固定画面并再次锁定，未通关区域右边界仍受限；跳跃遵守原地图高度裁剪，暂停/慢动作/停顿统一消费BattleClock。所有镜头组件和锚点预置。[原版依据、配置及验收](addons/battle_foundation/camera/README.md)。
 
 第一关已接入原版碧玉径远景、宫殿中景、201帧动态云层、连续地板与近景遮挡。五个区域共用一张10944×1216的连续地图；美术、碰撞、出生点和门均在编辑器预置，区域推进只解锁镜头与刷怪。[地图与视觉模板、复用步骤](addons/battle_foundation/level/map-template.md)、[整图场景](data/levels/biyujing/progression/map.tscn)、[美术编辑场景](data/levels/biyujing/progression/visual.tscn)。F5直接运行完整关卡。
 

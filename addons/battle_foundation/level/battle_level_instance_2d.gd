@@ -131,6 +131,7 @@ func advance_level(delta: float) -> void:
 		region.entered_at = elapsed
 		_emit(&"battle.region.entered", {"region_id": region.definition.region_id})
 	_previous_position = now
+	_sync_camera_lock()
 	# 所有定时事件使用绝对combat时间，低帧率补发并跨计划按到期时间排序。
 	while state == State.RUNNING:
 		_refresh_waves()
@@ -155,6 +156,7 @@ func advance_level(delta: float) -> void:
 				var map := _player.get_parent() as BattleMap2D
 				if map != null: map.set_final_exit_open(true)
 			_emit(&"battle.region.exit_opened", {"region_id": instance.definition.region_id})
+	_sync_camera_lock()
 	if forward_step and region.exit_open and region.definition.automatic_exit and region.definition.get_automatic_exit_rect().has_point(now): request_exit(_player, true)
 	elif _pending_exit: request_exit(_player)
 	_pending_exit = false
@@ -303,6 +305,7 @@ func _refresh_camera(initial: bool = false) -> void:
 	var rig := get_node_or_null(camera_rig_path) as BattleCameraRig2D
 	if rig != null:
 		rig.set_region_bounds(regions[current_region_index].definition.bounds,initial)
+		_sync_camera_lock()
 		return
 	var camera := get_node_or_null(camera_path) as Camera2D
 	if camera != null:
@@ -310,6 +313,13 @@ func _refresh_camera(initial: bool = false) -> void:
 		camera.limit_right = ceili(regions[current_region_index].definition.bounds.end.x)
 		camera.limit_top = floori(regions[current_region_index].definition.bounds.position.y)
 		camera.limit_bottom = ceili(regions[current_region_index].definition.bounds.end.y)
+
+func _sync_camera_lock() -> void:
+	var rig := get_node_or_null(camera_rig_path) as BattleCameraRig2D
+	if rig == null or regions.is_empty(): return
+	var region := regions[current_region_index]
+	# 零活怪可能仍有延迟出生或完成条件，必须沿用区域完整通关判定。
+	rig.set_combat_locked(region.entered and not region.completed)
 
 func _crosses(rect: Rect2, from: Vector2, to: Vector2) -> bool:
 	if rect.has_point(from) or rect.has_point(to): return true

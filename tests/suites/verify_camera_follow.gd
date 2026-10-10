@@ -56,6 +56,7 @@ func _ready() -> void:
 	check(scene.camera.get_screen_center_position().is_equal_approx(Vector2(940,626)), "原版地面跟随时可见上缘为36世界像素")
 	_verify_follow()
 	_verify_transition()
+	_verify_combat_lock()
 	_verify_rates()
 	await _verify_clocks()
 	await _verify_scope()
@@ -119,6 +120,40 @@ func _verify_transition() -> void:
 	var center := rig.center
 	rig.advance_camera(0)
 	check(rig.center == center, "零delta不重新定位")
+#endregion
+#region 战斗区域双向锁定与平滑入区
+func _verify_combat_lock() -> void:
+	player_at(1200)
+	rig.set_region_bounds(FIRST,true)
+	rig.advance_camera(1.0/30.0)
+	rig.set_combat_locked(true)
+	var locked := rig.center.x
+	for x in [1000,2000,1000]:
+		player_at(x)
+		rig.advance_camera(1)
+		check(is_equal_approx(rig.center.x,locked) and is_equal_approx(scene.camera.get_screen_center_position().x,locked), "区域未清理时向左或向右移动均不推动实际镜头")
+	rig.set_combat_locked(false)
+	for x in [1400,1000]:
+		player_at(x)
+		rig.advance_camera(1)
+		check(is_equal_approx(rig.center.x,x), "区域清理后恢复左右跟随")
+	reset_transition()
+	var before := rig.center.x
+	rig.set_combat_locked(true)
+	check(is_equal_approx(rig.center.x,before), "新区战斗锁定不瞬移")
+	player_at(2500)
+	rig.advance_camera(1.0/30.0)
+	check(is_equal_approx(rig.center.x,lerpf(before,3308,0.2)), "新区锁定只平滑过渡到固定战斗画面")
+	player_at(4400)
+	rig.set_combat_locked(true)
+	rig.advance_camera(10)
+	check(is_equal_approx(rig.center.x,3308) and not rig.going_next, "重复同步锁定不重新采样目标，平滑过区完成后保持锁定")
+	player_at(1000)
+	rig.advance_camera(10)
+	check(is_equal_approx(rig.center.x,3308), "新区域尚未清理时回头不能拉走镜头")
+	rig.set_combat_locked(false)
+	rig.advance_camera(10)
+	check(is_equal_approx(rig.center.x,1000), "新区清理后可以返回已清区域")
 #endregion
 #region 更新频率、暂停、慢动作与受击停顿
 func _verify_rates() -> void:
