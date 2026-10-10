@@ -2,7 +2,7 @@
 
 [原版Boss栏、怪物出场和清屏后提前移镜](../boss/original-presentation.md)已接入F5首关，可在预置场景和区域配置调整。
 
-F5运行 [碧玉径关卡](../../../examples/level_progression_demo.tscn)。地图碰撞、平台、人物、出生点、出口、镜头、公共表现与关卡控制器均预置在场景中；怪物按出生计划实例化已有完整角色场景，不动态拼装组件。地图来自原始 `No_1-1_V283.tmx` 的碰撞矩形、单向平台、ScreenRange、monsterTrigger 与 manCreater。场景显示940×590，世界坐标为原版2倍，镜头缩放0.5。旧 [阶段11场景](../../../examples/first_level_demo.tscn) 仍是32只预置小怪的独立AI测试，按F6运行。
+F5运行 [碧玉径关卡](../../../game/levels/biyujing.tscn)。地图碰撞、平台、人物、出生点、出口、镜头、公共表现与关卡控制器均预置在场景中；怪物按出生计划实例化已有完整角色场景，不动态拼装组件。地图来自原始 `No_1-1_V283.tmx` 的碰撞矩形、单向平台、ScreenRange、monsterTrigger 与 manCreater。场景显示940×590，世界坐标为原版2倍，镜头缩放0.5。旧 [阶段11场景](../../../tests/fixtures/first_level_demo.tscn) 仍是32只预置小怪的独立AI测试，按F6运行。
 
 ![关卡与现有插件的联合类图](../docs/level-progression.svg)
 
@@ -73,9 +73,9 @@ Core事件：`battle.region.entered/completed/exit_opened/exited`、`battle.wave
 
 ## 验收
 
-[verify_level_progression](../../../examples/verify_level_progression.gd)使用真实预置地图、碰撞、GAS伤害、Core输入及会话，检查延迟第二波锁门、物理门阻挡、完整五区域、Boss延迟、额外条件、低帧率顺序、暂停/慢动作/停顿、菜单不通关、一次性通知、可选计划、异常出生、死亡/离场清理和关卡实例隔离。
+[verify_level_progression](../../../tests/suites/verify_level_progression.gd)使用真实预置地图、碰撞、GAS伤害、Core输入及会话，检查延迟第二波锁门、物理门阻挡、完整五区域、Boss延迟、额外条件、低帧率顺序、暂停/慢动作/停顿、菜单不通关、一次性通知、可选计划、异常出生、死亡/离场清理和关卡实例隔离。
 
 ```powershell
-& '<带Spine模块的Godot.exe>' --headless --path . res://examples/verify_level_progression.tscn
+& '<带Spine模块的Godot.exe>' --headless --path . res://tests/suites/verify_level_progression.tscn
 & './tools/verify_stage_eight.ps1' -Godot '<带Spine模块的Godot.exe>'
 ```

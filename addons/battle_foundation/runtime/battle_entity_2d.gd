@@ -6,6 +6,9 @@ class_name BattleEntity2D
 @export var attack_hitbox_path: NodePath = ^"AnimationAdapter/AttackHitbox"
 @export var hurtbox_path: NodePath = ^"Hurtbox"
 @export var show_registration: bool = true
+## 怪物播放一次死亡动作后隐藏并停止运动；关卡出生统计仍保留实体ID。
+@export var hide_after_death: bool = false
+var _death_visual_remaining: float = 0.0
 @export_group("Hit Reaction / Protection")
 @export var reaction_profile: BattleHitReactionProfile = BattleHitReactionProfile.new()
 ## 留空不启用保护条，保留阶段6—8的独立示例。
@@ -148,16 +151,29 @@ func _ready() -> void:
 		ai_controller.bind(self)
 	if inventory != null:
 		attributes.bind_inventory(inventory)
-		inventory.equip_changed.connect(_on_equipment_appearance_changed)
+		if inventory is OriginalInventory:
+			inventory.appearance_changed.connect(_on_inventory_appearance_changed)
+		else:
+			inventory.equip_changed.connect(_on_equipment_appearance_changed)
 	CoreSystem.event_bus.event_pushed.connect(_on_core_event)
 	if session.presentation != null:
 		session.presentation.register_actor(self)
 
 func _on_equipment_appearance_changed(slot: StringName, item: Equip) -> void:
+	if inventory is OriginalInventory:
+		_on_inventory_appearance_changed()
+		return
 	if not animation is SpineAnimationAdapter or slot not in [&"armor", &"helmet", &"weapon"]: return
 	var skin: StringName = item.appearance_skin if item is BattleInventoryEquipment else &""
 	if not skin.is_empty() and not animation.get_available_skins().has(skin): return
 	animation.set_equipment_skin(slot, skin)
+
+func _on_inventory_appearance_changed() -> void:
+	if not inventory is OriginalInventory or not animation is SpineAnimationAdapter: return
+	for part: StringName in [&"armor", &"helmet", &"weapon"]:
+		var skin: StringName = inventory.get_equipment_appearance(part)
+		if not skin.is_empty() and not animation.get_available_skins().has(skin): continue
+		animation.set_equipment_skin(part, skin)
 
 func cleanup_battle() -> void:
 	if _cleaned:
@@ -215,6 +231,17 @@ func advance_input(unscaled_delta: float) -> void:
 func advance_simulation(delta: float) -> void:
 	if delta <= 0.0 or animation == null:
 		return
+	if hide_after_death and not is_alive():
+		if ai_controller != null: ai_controller.advance_simulation(delta)
+		if _death_visual_remaining > 0:
+			_death_visual_remaining = maxf(0, _death_visual_remaining - delta)
+			animation.advance_animation(delta)
+		if _death_visual_remaining <= 0:
+			hide()
+			collision_layer = 0
+			collision_mask = 0
+			if feedback != null: feedback.hide()
+		return
 	if spawn_remaining > 0:
 		if not is_alive(): _finish_spawn_appearance()
 		else:
@@ -271,6 +298,7 @@ func advance_simulation(delta: float) -> void:
 	_advance_combo()
 	_update_animation_command()
 	animation.advance_status_visuals(delta)
+	protection.refresh_visual()
 	_impact_display = maxf(0.0, _impact_display - delta)
 	queue_redraw()
 	if not _pending_derived_skill.is_empty():
@@ -389,6 +417,7 @@ func try_activate_skill(id: StringName, context: Dictionary = {}) -> bool:
 	_active_skill_id = id
 	_begin_attack(id)
 	var started_attack := attack_instance
+	started_attack.initiating_operation = StringName(context.get("operation", &""))
 	var rules: Dictionary = context.get("action_rules", {}).duplicate(true)
 	if started_attack.timeline != null:
 		rules = started_attack.timeline.action_rules.duplicate(true)
@@ -528,6 +557,7 @@ func _on_vital_depleted(id: StringName) -> void:
 	if id == &"health": _finish_spawn_appearance()
 	if id != &"health":
 		return
+	if action_state.current == BattleActionState2D.State.DEAD: return
 	if wushuang != null: wushuang.clear()
 	_cancel_abilities(&"death")
 	action_state.enter(BattleActionState2D.State.DEAD)
@@ -539,6 +569,7 @@ func _on_vital_depleted(id: StringName) -> void:
 		operations.set_control_blocked(&"dead", true)
 	if animation != null:
 		animation.play_action(&"death", true)
+		_death_visual_remaining = maxf(0.0, animation.get_action_duration(&"death"))
 	publish_battle_event(&"battle.entity_died")
 	# Fatal hit仍完成受击/击杀触发；直接修改Vital的死亡由延迟入口兜底。
 	call_deferred(&"cleanup_death_statuses")
@@ -655,6 +686,12 @@ func _finish_attack(reason: StringName) -> void:
 	if attack_instance == null or not attack_instance.active:
 		return
 	attack_instance.close()
+	if reason == &"completed" and action_state.current == BattleActionState2D.State.RUN_ATTACK:
+		# 跑攻结束回待机，旧方向/Shift/双击不能让下一帧自动恢复奔跑。
+		if is_instance_valid(operations): operations.finish_run_attack()
+		move_axis = 0.0
+		running = false
+		action_state.enter(BattleActionState2D.State.IDLE if motion.grounded else BattleActionState2D.State.JUMP)
 	_impact_display = 0.0
 	_impact_context.clear()
 	if attack_hitbox != null:
@@ -778,6 +815,14 @@ func request_skill_operation(operation: StringName, id: StringName) -> bool:
 			return true
 	return try_activate_skill(id, {"operation": operation})
 
+func release_skill_operation(operation: StringName = &"") -> bool:
+	if attack_instance == null or not attack_instance.active or attack_instance.timeline == null or not attack_instance.timeline.cancel_on_input_release:
+		return false
+	if not operation.is_empty() and attack_instance.initiating_operation != operation:
+		return false
+	cancel_skill(&"input_released" if not operation.is_empty() else &"control_lost")
+	return true
+
 func consume_skill_branch(cast: BattleAttackInstance) -> void:
 	if attack_instance != cast or not cast.active or session.is_simulation_blocked():
 		return
@@ -859,7 +904,7 @@ func can_use_ability(_id: StringName, _context: Dictionary = {}) -> bool:
 func can_receive_status(data: GameplayStatusData) -> bool:
 	if _cleaned or is_spawning() or not is_alive():
 		return false
-	return not (data.tags.has(&"status.debuff") and (TagManager.has_tag(self, &"state.invulnerable") or (reactions._owner != null and not reactions.get_policy(self).status)))
+	return not (data.tags.has(&"status.debuff") and (TagManager.has_tag(self, &"state.invulnerable") or TagManager.has_tag(self, &"state.debuff_immune") or (reactions._owner != null and not reactions.get_policy(self).status)))
 
 func cleanup_death_statuses() -> void:
 	if is_instance_valid(statuses) and not is_alive():

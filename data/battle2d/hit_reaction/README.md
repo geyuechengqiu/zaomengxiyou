@@ -1,6 +1,6 @@
 # 阶段 9 测试预设
 
-本目录 manifest 只给 [hit_reaction_demo.tscn](../../../examples/hit_reaction_demo.tscn) 使用；原五连击、单段、阶段7技能和阶段8伤害场景仍引用原来的 manifest。
+本目录 manifest 只给 [hit_reaction_demo.tscn](../../../tests/fixtures/hit_reaction_demo.tscn) 使用；原五连击、单段、阶段7技能和阶段8伤害场景仍引用原来的 manifest。
 
 attack1～5 保留原技能帧、矩形、伤害和第四段两次命中，在每次命中 payload 增加反应参数。以下是可编辑的验收值，不是原版 Flash 物理参数；保护增量仍读取原版技能表。
 

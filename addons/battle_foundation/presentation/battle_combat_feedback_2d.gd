@@ -175,4 +175,10 @@ func _show_original_numbers(data: Dictionary) -> void:
 func _spawn_number(value: int, style: String, at: Vector2) -> void:
 	# 保持逻辑视口到自定义CanvasLayer/Rows的局部转换。
 	number_rows.spawn_number(number_scene, value, style, number_rows.make_canvas_position_local(at))
+
+func show_supply_recovery(vital_id: StringName, amount: int) -> void:
+	if not original_numbers_enabled or amount <= 0 or _actor == null or vital_id not in [&"health", &"mana"]: return
+	var screen_position := _actor.get_canvas_transform() * (_actor.global_position + Vector2(0, -60) * hit_effect_unit_scale)
+	screen_position += Vector2(bleed_offset.x * _actor.animation.get_facing(), bleed_offset.y)
+	_spawn_number(amount, "heal" if vital_id == &"health" else "mana", screen_position)
 #endregion

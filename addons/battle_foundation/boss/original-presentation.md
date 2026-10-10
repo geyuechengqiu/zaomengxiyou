@@ -53,4 +53,4 @@ session.spawn_entity_2d("monsters", &"剑舞", at, &"", true)
 
 贴图、字体、注册点、图标顺序与原源码SHA256见[original_presentation.json](../../../assets/ui/boss/original_presentation.json)。原SWF只读导出，未执行Flash；[导出脚本](../../../tools/import_original_boss_presentation.py)可独立重跑，不重建技能或地图。
 
-[原版表现验收](../../../examples/verify_original_boss_presentation.tscn)检查布局、名称字体、抗性更新、生命保护插值、25帧出场、控制限制、暂停/慢动作/停顿、低帧率、死亡/离场和提前范围。关卡验收实际在x=1800自动切区，同时验证延迟第二波不会提前开门。GPU截图工具验证940×590及窗口变化后的实际HUD和出场动画。
+[原版表现验收](../../../tests/suites/verify_original_boss_presentation.tscn)检查布局、名称字体、抗性更新、生命保护插值、25帧出场、控制限制、暂停/慢动作/停顿、低帧率、死亡/离场和提前范围。关卡验收实际在x=1800自动切区，同时验证延迟第二波不会提前开门。GPU截图工具验证940×590及窗口变化后的实际HUD和出场动画。

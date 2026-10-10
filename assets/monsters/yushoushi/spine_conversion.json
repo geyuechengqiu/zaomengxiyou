@@ -1,0 +1,24 @@
+{
+  "source_scene_sha256": "17b45d2383911d78cd57ac3ac4910aeec8c12e91486651c1be38d258f311ca4a",
+  "source_atlas_sha256": "79a585e8483d3b4bd24139322bdaadf81e3fcc6d3254837cb0340f9529af15a7",
+  "format": "Spine 4.3 attachment timelines",
+  "fps": 30,
+  "actions": {
+    "idle": 0.666666667,
+    "move": 0.8,
+    "run": 0.8,
+    "jump": 0.666666667,
+    "jump_2": 0.666666667,
+    "fall": 0.666666667,
+    "land": 0.666666667,
+    "hurt": 1.333333333,
+    "death": 1.166666667,
+    "attack_1": 1.766666667
+  },
+  "layers": [
+    "Body",
+    "Effect1",
+    "Effect2"
+  ],
+  "regions": 53
+}

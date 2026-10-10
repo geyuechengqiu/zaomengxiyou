@@ -57,11 +57,19 @@ export(MISSION,'roleInfo1,roleSkill1', PROJECT/'.cleanup-backup/battle-ui-backgr
 export(MATERIAL,'min_body,lock,warn_background,tips_background,menu_background,menu_button_background')
 export(BACKPACK,'bagPanel', PROJECT/'.cleanup-backup/battle-ui-background', True)
 export(BACKPACK,'mainPanel,bodyPanel,#186,#189,#192,#195')
+export(MATERIAL,'fonts',PROJECT/'.cleanup-backup/bag-fonts')
+export(MATERIAL,'fight_number,button_num_bg,btn_prev,btn_next',PROJECT/'.cleanup-backup/bag-controls')
+export(BACKPACK,'#312,#147',PROJECT/'.cleanup-backup/bag-controls')
+export(BACKPACK,'bodyPanel',PROJECT/'.cleanup-backup/bag-body-clean',True)
+export(BACKPACK,'#66',PROJECT/'.cleanup-backup/bag-exp-background')
+copy('#66','bag_experience_background.png',PROJECT/'.cleanup-backup/bag-exp-background')
+for frame in range(10): copy('fight_number',f'fight_digit_{frame}.png',PROJECT/'.cleanup-backup/bag-controls',frame)
+dump('data/ui/fight_power_weights.json',{'source':'PowerAttribute[1]; FightPowerManager.getFightPowerByItemVo','weights':{k:config['PowerAttribute']['1'][k] for k in ['hpMax','mpMax','atk','phyDef','hit','dodge','critical','toughness','lucky','guardian','reHP','reMP']}})
 for symbol,name in [('roleInfo1','player_frame.png'),('roleSkill1','skill_frame.png'),('bagPanel','bag_panel.png')]: copy(symbol,name,PROJECT/'.cleanup-backup/battle-ui-background')
 for symbol,name in [('mainPanel','bag_window.png'),('bodyPanel','body_panel.png'),('warn_background','warn_background.png'),('tips_background','tips_background.png'),('menu_background','menu_background.png'),('#161','bar_background.png'),('#869','hp_fill.png'),('#875','mp_fill.png'),('#879','exp_fill.png'),('#703','rage_background.png'),('#707','rage_fill.png'),('lock','lock.png')]: copy(symbol,name)
 for index, id in enumerate([186,189,192,195]):
     for frame in range(3): copy('#'+str(id),f'tab_{index}_{frame}.png',frame=frame)
-for frame in range(8): copy('min_body',f'slot_{frame}.png',frame=frame)
+for frame in range(11): copy('min_body',f'slot_{frame}.png',frame=frame)
 for frame in range(3): copy('menu_button_background',f'button_{frame}.png',frame=frame)
 original_copy('icon/head/2001_1.png','sunwukong_head.png')
 original_copy('icon/role/createBody2001.png','sunwukong_body.png')
@@ -145,7 +153,7 @@ item_rows=[]
 equip_ids=['110101001','110101002','110101003']
 for id in equip_ids:
     data=config['Equipment'][id];resource=config['Resource'][str(data['resourceId'])]
-    icon_key=next(k for k in ['icon1','icon2','icon3'] if k in resource)
+    icon_key=next(k for k in ['icon2','icon1','icon3'] if k in resource)
     icon=original_copy('icon/'+resource[icon_key],f'item_{id}.png')
     modifiers=[]
     for key in ['hpMax','mpMax','atk','phyDef','reHP','reMP','hit','dodge','critical','toughness','lucky','guardian']:

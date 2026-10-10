@@ -22,6 +22,8 @@ func create_session(parent: Node, manifest_path: String = "", seed_value: int = 
 
 ## 场景预置会话和工厂共用编号、配置及用户时间选项；不创建节点。
 func configure_scene_session(session: BattleSession, manifest_path: String, seed_value: int) -> bool:
+	var immunity_tag: GameplayTag = preload("res://addons/battle_foundation/gas/tags/debuff_immune.tres")
+	if not TagManager.is_tag_registered(immunity_tag.id): TagManager.register_tag(immunity_tag)
 	for tag: GameplayTag in [preload("res://addons/battle_foundation/gas/tags/invulnerable.tres"), preload("res://addons/battle_foundation/gas/tags/super_armor.tres"), preload("res://addons/battle_foundation/gas/tags/stunned.tres"), preload("res://addons/battle_foundation/gas/tags/buff.tres"), preload("res://addons/battle_foundation/gas/tags/debuff.tres")]:
 		if not TagManager.is_tag_registered(tag.id):
 			TagManager.register_tag(tag)

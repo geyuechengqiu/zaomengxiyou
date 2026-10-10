@@ -18,6 +18,7 @@
 [ext_resource type="Script" path="res://addons/battle_foundation/ai/battle_ai_controller_2d.gd" id="ai"]
 [ext_resource type="Resource" path="res://data/monsters/revival_vessel/ai.tres" id="ai_profile"]
 
+[ext_resource type="Resource" path="res://data/monsters/revival_vessel/protection.tres" id="protect_profile"]
 [sub_resource type="CapsuleShape2D" id="body"]
 radius = 22.0
 height = 220.0
@@ -29,6 +30,8 @@ size = Vector2(292.0, 228.0)
 [node name="Monster" type="CharacterBody2D" unique_id=196081415]
 collision_layer = 2
 script = ExtResource("entity")
+hide_after_death = true
+protection_profile = ExtResource("protect_profile")
 super_armor = true
 action_profile = ExtResource("actions")
 

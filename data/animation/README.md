@@ -44,7 +44,7 @@ AnimationAdapter                 SpineAnimationAdapter：语义动作接口
 
 在 Godot 打开 `data/animation/sunwukong_visual.tscn`，进入 2D 视图，选择根节点下的 **AnimationPlayer**，播放或拖动 idle/move/attack_1～attack_5 等动作。主轨道传递预览动作和时间；AttackHitbox 从 `preview_abilities` 中查找相应技能，并按技能的素材帧时间选择当前命中数据。第四段到第 8 帧时，同一个框更新为第二击的偏移，向后拖动会恢复第一击。修改技能命中帧后，预览切换时间会跟着变化，无需再编辑独立的切框轨道。攻击动作在首个命中帧之前也显示第一击的范围，方便对齐；非攻击动作隐藏判定框。
 
-选择 `AttackHitbox/CollisionShape2D` 可检查位置和尺寸；这些值由技能数据自动更新。要调整攻击范围，请修改上表的技能字段，直接拖动形状的修改会在下次刷新时被技能数据覆盖。也可在 AttackHitbox Inspector 设置 preview_action / preview_time，预览某动作的指定时刻。保存技能资源，在 [横版平台演示](../../examples/wukong_platform_demo.tscn) 按 F6，J 测试连击、F3 显示实际范围、F8 检查镜像。
+选择 `AttackHitbox/CollisionShape2D` 可检查位置和尺寸；这些值由技能数据自动更新。要调整攻击范围，请修改上表的技能字段，直接拖动形状的修改会在下次刷新时被技能数据覆盖。也可在 AttackHitbox Inspector 设置 preview_action / preview_time，预览某动作的指定时刻。保存技能资源，在 [横版平台演示](../../tests/fixtures/wukong_platform_demo.tscn) 按 F6，J 测试连击、F3 显示实际范围、F8 检查镜像。
 
 ## 运行时判定
 
@@ -77,8 +77,8 @@ Core 的 battle.attack.impact 携带技能 ID、攻击编号、命中序号与�
 ## 验证
 
 ```powershell
-& '<带 Spine 模块的 Godot 路径>' --headless --path . res://examples/verify_animation_authoring.tscn
+& '<带 Spine 模块的 Godot 路径>' --headless --path . res://tests/suites/verify_animation_authoring.tscn
 & '<带 Spine 模块的 Godot 路径>' --headless --editor --path . --script tools/verify_editor_animation_authoring.gd
 ```
 
-[运行时验收](../../examples/verify_animation_authoring.gd) 检查单一节点/形状复用、技能数据生效、实例隔离、正缩放/偏移/镜像、无效数据清理和真实 GAS 伤害；[编辑器验收](../../tools/verify_editor_animation_authoring.gd) 打开真实编辑场景，验证十四个动作前后拖动和技能数据驱动的统一框。既有动画、连击、输入和状态机验收保留。
+[运行时验收](../../tests/suites/verify_animation_authoring.gd) 检查单一节点/形状复用、技能数据生效、实例隔离、正缩放/偏移/镜像、无效数据清理和真实 GAS 伤害；[编辑器验收](../../tools/verify_editor_animation_authoring.gd) 打开真实编辑场景，验证十四个动作前后拖动和技能数据驱动的统一框。既有动画、连击、输入和状态机验收保留。

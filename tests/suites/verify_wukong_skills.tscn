@@ -1,0 +1,4 @@
+[gd_scene format=3]
+[ext_resource type="Script" path="res://tests/suites/verify_wukong_skills.gd" id="script"]
+[node name="VerifyWukongSkills" type="Node"]
+script = ExtResource("script")

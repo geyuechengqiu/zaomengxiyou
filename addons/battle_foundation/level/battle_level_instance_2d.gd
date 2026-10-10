@@ -125,6 +125,7 @@ func advance_level(delta: float) -> void:
 	elapsed += delta
 	var region := regions[current_region_index]
 	var now := _player.global_position
+	var forward_step := now.x > _previous_position.x + 0.0001
 	if not region.entered and _crosses(region.definition.entry_rect, _previous_position, now):
 		region.entered = true
 		region.entered_at = elapsed
@@ -154,7 +155,7 @@ func advance_level(delta: float) -> void:
 				var map := _player.get_parent() as BattleMap2D
 				if map != null: map.set_final_exit_open(true)
 			_emit(&"battle.region.exit_opened", {"region_id": instance.definition.region_id})
-	if region.exit_open and region.definition.automatic_exit and region.definition.get_automatic_exit_rect().has_point(now): request_exit(_player, true)
+	if forward_step and region.exit_open and region.definition.automatic_exit and region.definition.get_automatic_exit_rect().has_point(now): request_exit(_player, true)
 	elif _pending_exit: request_exit(_player)
 	_pending_exit = false
 

@@ -95,9 +95,9 @@ def main():
     data+=birth_node
     write(BASE+'/map.tscn',data)
     # Main scene no longer draws the temporary green mountains/background.
-    main=PROJECT/'examples/level_progression_demo.tscn';data=main.read_text(encoding='utf8')
+    main=PROJECT/'game/levels/biyujing.tscn';data=main.read_text(encoding='utf8')
     data=re.sub(r'\[node name="Background".*?(?=\[node name="Camera2D")','',data,flags=re.S)
-    write('examples/level_progression_demo.tscn',data)
+    write('game/levels/biyujing.tscn',data)
     sources=['games/zmhj-g5/cache/assets/map/No_1-1_V283.swf','games/zmhj-g5/cache/assets/map/No_1-1_V283.tmx','out/zmhj-equip-skill-diag/com/wdcgame/tile/TMXTileMap.as','out/zmhj-equip-skill-diag/com/wdcgame/tile/display/TMXLayer.as','out/zmhj-equip-skill-diag/com/wdcgame/tile/utils/TMXResource.as','out/zmhj-equip-skill-diag/viewers/container/BattleMapBase.as','out/zmhj-equip-skill-diag/com/wdcgame/engine/animation/MovieClipAdvance.as','out/zmhj-equip-skill-diag/com/wdcgame/engine/core/GameFrame.as']
     evidence={'sources':[{'path':s,'sha256':digest(original/s)} for s in sources],'textures':assets,'layers':layers,'cloud_animation':{'source_frames':cloud_frames,'source_fps':30,'symbol_id':11,'child_symbol_id':10,'bitmap_id':8,'frames':cloud_rows},'authored_sprites':instance_count,'world_bounds':[0,0,10944,1216],'unit_scale':2,'scroll_scale_rule':'Godot scroll_scale = 1 - original speedX; isFixedX -> scroll_scale.x=0','depth_order':'layer1 -> layer2 -> layer3 -> actors -> layer4','continuous_map':True}
     write(ASSETS+'/original_source.json',json.dumps(evidence,ensure_ascii=False,indent=2)+'\n')

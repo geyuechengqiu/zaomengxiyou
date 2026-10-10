@@ -83,6 +83,8 @@ scene = ['[gd_scene format=3]',
          '[node name="Glyphs" type="Node2D" parent="."]', 'script = ExtResource("glyphs")', 'library = ExtResource("library_resource")']
 (project / "data/effects/damage_number.tscn").write_text("\n".join(scene) + "\n", encoding="utf-8")
 from build_damage_number_atlas import build
+from export_supply_numbers import export as export_supply_numbers
+export_supply_numbers()
 build(project)
 print(f'Exported {len(records)} verified original glyphs in {len(groups)} groups; Tween-only damage-number scene')
 #endregion

@@ -19,7 +19,7 @@ func _count_nodes(node: Node) -> int:
 
 func _verify() -> void:
 	var core := root.get_node("CoreSystem")
-	var loaded := change_scene_to_file("res://examples/single_attack_demo.tscn")
+	var loaded := change_scene_to_file("res://tests/fixtures/single_attack_demo.tscn")
 	_check(loaded == OK, "能够直接打开预置测试场景")
 	await process_frame
 	await process_frame

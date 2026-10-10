@@ -37,11 +37,14 @@ func set_open(open: bool) -> void:
 		return
 	if not open:
 		_bindings.cancel_remap()
+		CoreSystem.audio_manager.save_preferences()
 	visible = open
 	if is_instance_valid(controller):
 		controller.set_control_blocked(_reason, open)
 	if open:
-		_status.text = "选择操作后按新的按键。Esc 取消改键或关闭菜单；菜单输入不会进入角色。"
+		_status.text = "音乐与音效可分别调节或静音。选择操作后按新按键；Esc 返回游戏。"
+		var audio_settings := get_node_or_null(^"Margin/Panel/Column/AudioSettings") as BattleAudioSettings
+		if audio_settings != null: audio_settings.refresh()
 		_refresh_rows()
 		grab_focus()
 	menu_changed.emit(open)

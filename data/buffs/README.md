@@ -1,6 +1,6 @@
 # 原版 Buff 与组合被动资源
 
-九个真实原版定义和五个验收组合被动。详细算法、生命周期、触发配置、原版适用边界见 [阶段10说明](../../addons/battle_foundation/combat/buffs-triggers.md)。[测试场景](../../examples/buff_demo.tscn) 是当前 F5 入口。
+九个真实原版定义和五个验收组合被动。详细算法、生命周期、触发配置、原版适用边界见 [阶段10说明](../../addons/battle_foundation/combat/buffs-triggers.md)。[测试场景](../../tests/fixtures/buff_demo.tscn) 是当前 F5 入口。
 
 | 资源 | 用途 |
 | --- | --- |

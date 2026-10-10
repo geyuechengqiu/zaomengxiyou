@@ -17,7 +17,7 @@
 
 [快速开始](#-快速开始) •
 [文档](docs/) •
-[示例](examples/) •
+[示例](../../tests/fixtures/plugin_showcase.tscn) •
 [贡献](docs/CONTRIBUTING.md) •
 [支持与帮助](#-支持与帮助)
 
@@ -107,7 +107,7 @@ func _ready():
 
 ## 🌟 示例项目
 
-访问我们的[示例项目](examples/)，了解框架的实际应用场景和使用方式。
+访问我们的[示例项目](../../tests/fixtures/plugin_showcase.tscn)，了解框架的实际应用场景和使用方式。
 
 ### 完整游戏示例
 
@@ -147,3 +147,5 @@ func _ready():
   <strong>由 老李游戏学院 用 ❤️ 构建</strong><br>
   <sub>让游戏开发变得更简单</sub>
 </div>
+
+本项目未使用的插件自带演示已移出导入目录，正式集成与回归入口见项目 tests 目录；插件 source 保留。

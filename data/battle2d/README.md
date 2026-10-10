@@ -6,9 +6,9 @@
 
 训练木桩已采用参考悟空造型的 SVG 和预置受伤时间轴，所有战斗样例复用 [wooden_dummy.tscn](dummy/wooden_dummy.tscn)。外观、身体/底座注册点、表情覆盖层和受伤关键帧编辑见 [木桩说明](dummy/README.md)。
 
-阶段 7 新增 [skill_timeline/manifest.json](skill_timeline/manifest.json) 与 [three_hit.tres](skill_timeline/three_hit.tres)：孙悟空业务 ID 不变，技能使用 `sunwukong_timeline_attack`，可派生 `sunwukong_attack1`。三段倍率/附伤/击退、10魔法和0.8秒冷却、500生命木桩均为验收配置；原五连击定义未改动。[独立预置场景](../../examples/skill_timeline_demo.tscn) 按F6运行，资源编辑、联合类图和运行规则见 [阶段7说明](../../addons/battle_foundation/combat/skill-timeline.md)。
+阶段 7 新增 [skill_timeline/manifest.json](skill_timeline/manifest.json) 与 [three_hit.tres](skill_timeline/three_hit.tres)：孙悟空业务 ID 不变，技能使用 `sunwukong_timeline_attack`，可派生 `sunwukong_attack1`。三段倍率/附伤/击退、10魔法和0.8秒冷却、500生命木桩均为验收配置；原五连击定义未改动。[独立预置场景](../../tests/fixtures/skill_timeline_demo.tscn) 按F6运行，资源编辑、联合类图和运行规则见 [阶段7说明](../../addons/battle_foundation/combat/skill-timeline.md)。
 
-阶段 6 增加 [single_attack/manifest.json](single_attack/manifest.json)，以相同业务 ID 复用悟空场景、动画和成长，仅配置第一段技能及 [木桩](dummy/wooden_dummy.tres)。单段技能额外设置 2 个素材帧的临时命中窗口，原五连击资源保持默认瞬时查询。运行 [单段场景](../../examples/single_attack_demo.tscn)，实现与验收见 [战斗闭环 README](../../addons/battle_foundation/combat/README.md)。
+阶段 6 增加 [single_attack/manifest.json](single_attack/manifest.json)，以相同业务 ID 复用悟空场景、动画和成长，仅配置第一段技能及 [木桩](dummy/wooden_dummy.tres)。单段技能额外设置 2 个素材帧的临时命中窗口，原五连击资源保持默认瞬时查询。运行 [单段场景](../../tests/fixtures/single_attack_demo.tscn)，实现与验收见 [战斗闭环 README](../../addons/battle_foundation/combat/README.md)。
 
 单段场景现已在编辑器预置角色、木桩、地形、GAS 组件和输入节点，使用原版 940×590。普通受击的原版 PNG 与来源见 [特效资源](../../assets/effects/hurt_effect_all/README.md)，预置 AnimationPlayer 场景位于 [data/effects](../effects/hurt_effect_all.tscn)。
 
@@ -48,6 +48,6 @@ actor.animation.set_skins([&"套装/2", &"武器/weapon2"])
 
 平台样例的重力和跳跃使用 Godot 像素/秒参数；原版 -178 的运动单位来自旧引擎，不能直接作为本场景跳跃速度。完整接口、规则分离、挂点、皮肤组合和操作说明见 [动画适配层 README](../../addons/battle_foundation/animation/README.md)。
 
-五段连击、二段跳、运动与状态条件表见 [阶段四 README](../../addons/battle_foundation/movement/README.md)。场景入口：[wukong_platform_demo.tscn](../../examples/wukong_platform_demo.tscn)。验收入口：[verify_wukong_animation.tscn](../../examples/verify_wukong_animation.tscn)、[verify_stage_four.tscn](../../examples/verify_stage_four.tscn)。均使用现有带 Spine 模块的 Godot 引擎。
+五段连击、二段跳、运动与状态条件表见 [阶段四 README](../../addons/battle_foundation/movement/README.md)。场景入口：[wukong_platform_demo.tscn](../../tests/fixtures/wukong_platform_demo.tscn)。验收入口：[verify_wukong_animation.tscn](../../tests/suites/verify_wukong_animation.tscn)、[verify_stage_four.tscn](../../tests/suites/verify_stage_four.tscn)。均使用现有带 Spine 模块的 Godot 引擎。
 
 阶段10 [Buff 场景索引](buffs/manifest.json) 复用原版伤害与保护场景定义，增加 [原版 Buff 资源](../buffs/README.md)。角色/怪物节点均使用已有 GameplayStatusComponent，无需附加第二套 Buff 节点。

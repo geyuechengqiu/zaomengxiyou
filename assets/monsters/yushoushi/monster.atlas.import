@@ -1,0 +1,16 @@
+[remap]
+
+importer="spine.atlas"
+type="SpineAtlasResource"
+uid="uid://cosr6pbkvcj8k"
+path="res://.godot/imported/monster.atlas-b803ec1362e2b5a6fb288965cdb10051.spatlas"
+
+[deps]
+
+source_file="res://assets/monsters/yushoushi/monster.atlas"
+dest_files=["res://.godot/imported/monster.atlas-b803ec1362e2b5a6fb288965cdb10051.spatlas"]
+
+[params]
+
+normal_map_prefix="n"
+specular_map_prefix="s"

@@ -46,7 +46,7 @@ def slot(s,name,parent,x,y,label=''):
 #region Original 5x5 bag, four tabs, same-window popup controls and confirmation
 s=Scene();FONT=s.resource('res://addons/simple_inventory/assets/fonts/SourceHanSansSC-Regular-2.otf','FontFile')
 script=s.resource('res://addons/battle_foundation/ui/original_inventory_view.gd','Script')
-slot_refs=[s.resource(f'res://assets/ui/original/slot_{i}.png') for i in range(8)]
+slot_refs=[s.resource(f'res://assets/ui/original/slot_{i}.png') for i in range(11)]
 tab_refs=[s.resource(f'res://assets/ui/original/tab_{i}_{j}.png') for i in range(4) for j in range(3)]
 s.node('Inventory','Control','',f'visible = false\noffset_right = 940.0\noffset_bottom = 590.0\nmouse_filter = 0\nscript = {script}\nslot_textures = Array[Texture2D]([{", ".join(slot_refs)}])\ntab_textures = Array[Texture2D]([{", ".join(tab_refs)}])')
 s.rect('Window','.',0,0,940,590,'bag_window.png')
@@ -161,7 +161,7 @@ for i in range(22):
     s.label('Text',parent+'/'+name,314,276,312,36,'',size=20,color='Color(0.372549,0.117647,0.019608,1)',align=1)
 # 原前进提示预置到共享HUD中心；与普通文字提示队列独立。
 next_screen=s.resource('res://data/ui/next_screen.tscn','PackedScene')
-s.node('NextScreen','Control','.', 'layout_mode = 0\nanchors_preset = 8\nanchor_left = 0.5\nanchor_top = 0.5\nanchor_right = 0.5\nanchor_bottom = 0.5\ngrow_horizontal = 2\ngrow_vertical = 2\nmouse_filter = 2')
+s.node('NextScreen','Control','.', 'layout_mode = 1\nanchors_preset = 8\nanchor_left = 0.5\nanchor_top = 0.5\nanchor_right = 0.5\nanchor_bottom = 0.5\ngrow_horizontal = 2\ngrow_vertical = 2\nmouse_filter = 2')
 s.nodes.append(f'[node name="Animation" parent="NextScreen" instance={next_screen}]\n')
 s.save('data/ui/battle_hud.tscn')
 #endregion
@@ -200,7 +200,7 @@ print(f'Authored battle HUD, 25 editable bag slots, equipment/actions/tooltips a
 
 #region Attach preauthored scenes and inventory data to the existing playable level
 import re
-path=PROJECT/'examples/level_progression_demo.tscn';text=path.read_text('utf8')
+path=PROJECT/'game/levels/biyujing.tscn';text=path.read_text('utf8')
 if 'id="original_hud"' not in text:
     text=text.replace('[node name="LevelProgressionDemo"','[ext_resource type="PackedScene" path="res://data/ui/battle_hud.tscn" id="original_hud"]\n[node name="LevelProgressionDemo"',1)
     text+='[node name="BattleHUD" parent="HUD" instance=ExtResource("original_hud")]\n'
@@ -227,3 +227,10 @@ text=re.sub(r'(\[node name="Label" type="Label" parent="Gates/Gate[1-5]"\]\n)', 
 text=re.sub(r'(visible = false\n)+','visible = false\n',text)
 path.write_text(text,'utf8')
 #endregion
+
+# Final authored typography and original button states.
+from refine_original_inventory_ui import refine
+refine()
+if (PROJECT/'data/protection/first_level_source.json').exists():
+    from refine_combat_hud import author
+    author()

@@ -59,14 +59,14 @@ GAS begin_update/end_update 支持嵌套事务。成长、换装、多项效果�
 
 ## 平台验收与动画修复
 
-打开 [悟空平台场景](../../../examples/wukong_platform_demo.tscn)，新增等级、经验、当前/最大生命魔法、攻击、防御面板，以及 GM 升降级、获得经验、穿脱验收武器、添加/移除8秒 Buff 和耗蓝按钮。1/2键仍只演示 Spine 外观换装；属性验收装备与 Buff 使用测试数值，不冒充原版装备。
+打开 [悟空平台场景](../../../tests/fixtures/wukong_platform_demo.tscn)，新增等级、经验、当前/最大生命魔法、攻击、防御面板，以及 GM 升降级、获得经验、穿脱验收武器、添加/移除8秒 Buff 和耗蓝按钮。1/2键仍只演示 Spine 外观换装；属性验收装备与 Buff 使用测试数值，不冒充原版装备。
 
 ![成长、装备与Buff生效后的实际场景](../docs/attribute-platform.png)
 
 ```powershell
-& '<Godot 可执行文件路径>' --headless --path . res://examples/verify_attribute_pipeline.tscn
+& '<Godot 可执行文件路径>' --headless --path . res://tests/suites/verify_attribute_pipeline.tscn
 ```
 
-[验收脚本](../../../examples/verify_attribute_pipeline.gd) 检查连续升级/满级、最终取整、生命策略、背包同槽替换/卸装、Buff叠层/过期、模板及同类怪物隔离、通知、即时面板和实际普攻伤害。
+[验收脚本](../../../tests/suites/verify_attribute_pipeline.gd) 检查连续升级/满级、最终取整、生命策略、背包同槽替换/卸装、Buff叠层/过期、模板及同类怪物隔离、通知、即时面板和实际普攻伤害。
 
 人物不显示已修复：编辑后的 jump_2 主时间轴包含多个 Spine clip，适配器不再以单个原动画时长拒绝整个初始化。预置主 AnimationPlayer 决定动作和时刻，原生辅助播放器按当前关键帧的局部时间驱动骨架。保留已有编辑内容、暂停时间规则和换皮肤时长，实际 GPU 截图确认人物与攻击显示正常。

@@ -3,6 +3,8 @@ class_name BattleAttackInstance
 #region 一次施放的攻击状态
 var attack_id: StringName
 var ability_id: StringName
+## 本次施放的语义操作槽；释放按起手槽匹配，不依赖物理按键或当前槽位映射。
+var initiating_operation: StringName = &""
 var attacker_id: StringName
 var faction_id: StringName
 var attacker: WeakRef

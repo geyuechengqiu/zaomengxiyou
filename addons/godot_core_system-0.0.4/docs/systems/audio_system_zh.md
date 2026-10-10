@@ -39,7 +39,7 @@ func _ready() -> void:
 	audio.play_sound("res://assets/sfx/explosion.wav")
 
 	# 设置分类音量
-	audio.set_category_volume("music", 0.8)
+	audio.set_volume(CoreSystem.AudioManager.AudioType.MUSIC, 0.8)
 ```
 
 ## 使用示例
@@ -47,7 +47,7 @@ func _ready() -> void:
 ### 播放音频
 
 ```gdscript
-# 播放背景音乐 默认循环播放 如果音频导入时设置为循环播放，则将一直循环，哪怕loop参数设置为false
+# 默认循环；loop=false会复制并关闭本次流的循环，不修改共用资源。
 func play_background_music() -> void:
 	CoreSystem.audio_manager.play_music("res://assets/music/main_theme.ogg")
 
@@ -66,6 +66,11 @@ func play_character_voice() -> void:
 # 设置背景音乐音量
 func set_music_volume(volume: float) -> void:
 	CoreSystem.audio_manager.set_volume(CoreSystem.AudioManager.AudioType.MUSIC,volume)
+
+# 静音独立于音量；取消静音恢复原数值。
+func mute_music(muted: bool) -> void:
+	CoreSystem.audio_manager.set_muted(CoreSystem.AudioManager.AudioType.MUSIC, muted)
+	CoreSystem.audio_manager.save_preferences()
 
 ```
 
@@ -93,7 +98,7 @@ func set_music_volume(volume: float) -> void:
 ### 音频管理器 AudioManager
 
 - `play_music(path: String, fade_duration: float = 1.0, loop: bool = true) -> void`: 播放背景音乐 
-	- 注意：默认循环播放 如果音频导入时设置为循环播放，则将一直循环，哪怕loop参数设置为false
+	- 默认循环；loop=false关闭本次播放实例的循环，缓存资源保持不变。
 - `play_sound(path: String, volume: float = 1.0)`: 播放音效
 - `play_voice(path: String, volume: float = 1.0)`: 播放语音
 - `set_volume(type: AudioType, volume: float)`: 按类型设置音量

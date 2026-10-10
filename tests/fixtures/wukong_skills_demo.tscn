@@ -1,0 +1,53 @@
+[gd_scene format=3]
+[ext_resource type="PackedScene" path="res://tests/fixtures/single_attack_demo.tscn" id="base"]
+[ext_resource type="Script" path="res://tests/fixtures/wukong_skills_demo.gd" id="script"]
+[ext_resource type="Resource" path="res://data/battle2d/sunwukong_actions.tres" id="actions"]
+
+[node name="WukongSkillsDemo" instance=ExtResource("base")]
+script = ExtResource("script")
+
+[node name="BattleSession" parent="."]
+scene_manifest_path = "res://data/battle2d/original_damage/manifest.json"
+
+[node name="SunWukong" parent="BattleSession/Actors"]
+action_profile = ExtResource("actions")
+
+[node name="LeftDummy" parent="BattleSession/Actors"]
+position = Vector2(200, 650)
+[node name="GameplayVitalAttributeComponent" parent="BattleSession/Actors/LeftDummy"]
+base_values = Dictionary[StringName, float]({&"hpMax": 50000.0, &"phyDef": 5.0})
+
+[node name="RightDummy" parent="BattleSession/Actors"]
+position = Vector2(600, 650)
+[node name="GameplayVitalAttributeComponent" parent="BattleSession/Actors/RightDummy"]
+base_values = Dictionary[StringName, float]({&"hpMax": 50000.0, &"phyDef": 5.0})
+
+[node name="Title" parent="HUD/Panel/Column"]
+text = "悟空：转职前四技能 + 火魔斩"
+
+[node name="Help" parent="HUD"]
+text = "A/D移动 · Shift奔跑 · K二段跳 · J五连击 · Esc菜单/改键\nY/U/I/O/L五技能 · W/S射线转向 · 再按O追加重劈"
+
+[node name="Skills" type="HBoxContainer" parent="HUD/Panel/Column" index="2"]
+layout_mode = 2
+theme_override_constants/separation = 8
+[node name="Skill1" type="Button" parent="HUD/Panel/Column/Skills"]
+layout_mode = 2
+focus_mode = 0
+text = "升龙斩 [Y]"
+[node name="Skill2" type="Button" parent="HUD/Panel/Column/Skills"]
+layout_mode = 2
+focus_mode = 0
+text = "烈焰闪 [U]"
+[node name="Skill3" type="Button" parent="HUD/Panel/Column/Skills"]
+layout_mode = 2
+focus_mode = 0
+text = "火眼金睛 [I]"
+[node name="Skill4" type="Button" parent="HUD/Panel/Column/Skills"]
+layout_mode = 2
+focus_mode = 0
+text = "烈焰风暴 [O]"
+[node name="Skill5" type="Button" parent="HUD/Panel/Column/Skills"]
+layout_mode = 2
+focus_mode = 0
+text = "火魔斩 [L]"

@@ -4,7 +4,7 @@
 
 五区域共用一张连续地图，已经接入原版背景、动态云层、地板及近景。地图与视觉均为可编辑继承场景；[复用模板与编辑说明](../../../../addons/battle_foundation/level/map-template.md)。
 
-F5运行 [level_progression_demo.tscn](../../../../examples/level_progression_demo.tscn)。A/D移动、K二段跳、J普攻、Y/U/I/O/L技能、空格无双预览；Esc暂停/改键。完成当前区域全部出生计划与目标后，右侧门开启；最后击破复苏容器、击败玉石琵琶精，在地面出口标记处按W/↑确认通关。重开按钮重新载入场景和关卡实例。
+F5运行 [level_progression_demo.tscn](../../../../game/levels/biyujing.tscn)。A/D移动、K二段跳、J普攻、Y/U/I/O/L技能、空格无双预览；Esc暂停/改键。完成当前区域全部出生计划与目标后，右侧门开启；最后击破复苏容器、击败玉石琵琶精，在地面出口标记处按W/↑确认通关。重开按钮重新载入场景和关卡实例。
 
 系统实现、原版时序、各区关系、额外条件、事件和验收见 [关卡系统](../../../../addons/battle_foundation/level/README.md)。
 

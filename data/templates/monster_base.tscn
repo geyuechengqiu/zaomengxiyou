@@ -1,0 +1,12 @@
+[gd_scene format=3]
+[ext_resource type="PackedScene" path="res://data/templates/combatant_base.tscn" id="base"]
+[ext_resource type="PackedScene" path="res://data/monsters/jianwu/visual.tscn" id="visual"]
+[ext_resource type="Script" path="res://addons/battle_foundation/ai/battle_ai_controller_2d.gd" id="ai"]
+[ext_resource type="Resource" path="res://data/monsters/jianwu/ai.tres" id="profile"]
+[node name="MonsterTemplate" instance=ExtResource("base")]
+hide_after_death = true
+scene_category = "monsters"
+[node name="AnimationAdapter" parent="." instance=ExtResource("visual")]
+[node name="AIController" type="Node" parent="."]
+script = ExtResource("ai")
+profile = ExtResource("profile")

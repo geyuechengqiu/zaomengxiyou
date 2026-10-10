@@ -1,6 +1,6 @@
 # 阶段7三段技能验收数据
 
-[manifest.json](manifest.json) 独立登记孙悟空、三段技能、可派生普攻、两只同配置木桩和属性验收Buff。所有实体、组件、输入和临时效果已在 [场景](../../../examples/skill_timeline_demo.tscn) 中搭建。
+[manifest.json](manifest.json) 独立登记孙悟空、三段技能、可派生普攻、两只同配置木桩和属性验收Buff。所有实体、组件、输入和临时效果已在 [场景](../../../tests/fixtures/skill_timeline_demo.tscn) 中搭建。
 
 在 [three_hit.tres](three_hit.tres) 编辑 Timeline → Attack Segments / Branch Windows / Motion Windows / Events，角色仅有一个攻击框。三段分别在30FPS的第4/12/20帧生效，倍率0.5/1/1.5，附伤0/3/5，击退60/120/180，末段浮空220；资源消耗和冷却复用现有 GAS Feature。全部是测试配置，原版五连击资源保持原有数值。
 

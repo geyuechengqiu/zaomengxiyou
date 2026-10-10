@@ -15,11 +15,11 @@ class_name BattleCameraRig2D
 var region_bounds: Rect2
 var center: Vector2
 var going_next: bool = false
-var _ratchet_left: float
+var _unlocked_left: float
 var _weight: float
 var _configured: bool = false
 #endregion
-#region 首次定位、过区与原版左边界棘轮
+#region 首次定位、过区与已开放地图边界
 func _ready() -> void:
 	assert(_player != null and _camera != null and _host != null, "镜头、Host、跟随目标必须由场景预置")
 	_host.set_interpolation_mode(PhantomCameraHost.InterpolationMode.MANUAL)
@@ -30,6 +30,7 @@ func set_region_bounds(bounds: Rect2, initial: bool = false) -> void:
 	region_bounds = bounds
 	if initial or not _configured:
 		_configured = true
+		_unlocked_left = bounds.position.x
 		going_next = false
 		_weight = initial_follow_weight
 		center = _clamp_target(_player.global_position, bounds.position.x)
@@ -39,7 +40,8 @@ func set_region_bounds(bounds: Rect2, initial: bool = false) -> void:
 		# Camera2.gotoNextScreen(0.2)：保留当前画面，直到角色带镜头进入新区。
 		_weight = region_follow_weight
 		going_next = true
-		_ratchet_left = center.x - _view_size().x/2.0
+		# 已清区域仍可返回；切区只扩展右边界，不收紧已开放的左边界。
+		_unlocked_left = minf(_unlocked_left, bounds.position.x)
 	_sync_limits()
 
 func _view_size() -> Vector2:
@@ -56,20 +58,11 @@ func _clamp_target(position: Vector2, left: float) -> Vector2:
 		clampf(position.y,min_y,max_y) if min_y <= max_y else region_bounds.get_center().y)
 
 func _target() -> Vector2:
-	var left := region_bounds.position.x
-	if going_next:
-		var desired_left := _player.global_position.x-_view_size().x/2.0
-		if desired_left < left:
-			_ratchet_left = maxf(_ratchet_left,desired_left)
-			left = _ratchet_left
-		else:
-			going_next = false
-	return _clamp_target(_player.global_position,left)
+	return _clamp_target(_player.global_position, _unlocked_left)
 
 func _sync_limits() -> void:
-	# 硬限界不能立即跳到新区域左缘，否则Camera2D会绕过原版插值瞬移。
-	var visible_left := center.x-_view_size().x/2.0
-	var limits: Array[int] = [floori(minf(region_bounds.position.x,visible_left)),floori(region_bounds.position.y),ceili(region_bounds.end.x),ceili(region_bounds.end.y)]
+	# 跟随目标与插件硬限界使用同一个已开放左边界，回头时不会被新区左缘截住。
+	var limits: Array[int] = [floori(_unlocked_left),floori(region_bounds.position.y),ceili(region_bounds.end.x),ceili(region_bounds.end.y)]
 	# Host异步完成首次选镜之前也保持有效边界；位置只由插件写入。
 	for side in [SIDE_LEFT,SIDE_TOP,SIDE_RIGHT,SIDE_BOTTOM]:
 		if _pcam.get_limit(side) != limits[side]: _pcam.set_limit(side,limits[side])
@@ -83,6 +76,9 @@ func advance_camera(delta: float) -> void:
 	# 与原30FPS lerp(old,target,weight)等价，60FPS/低FPS不改变固定目标的耗时。
 	var alpha := 1.0-pow(1.0-_weight,source_fps*delta)
 	center = center.lerp(target,alpha)
+	# 按实际可见左缘结束过区；过渡标记不限制反向跟随。
+	if going_next and center.x - _view_size().x / 2.0 >= region_bounds.position.x - 0.0001:
+		going_next = false
 	_anchor.global_position = center
 	_sync_limits()
 	if is_instance_valid(_host.get_active_pcam()):

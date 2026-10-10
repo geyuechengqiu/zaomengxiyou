@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="BattleProtectionProfile" format=3]
+[ext_resource type="Script" path="res://addons/battle_foundation/definitions/battle_protection_profile.gd" id="script"]
+[resource]
+script = ExtResource("script")
+enabled = true
+original_boss_key = "Monster/10501"
+maximum_override = 100000
+inherit_original_display = false
+show_protect = true
+protection_action_enabled = false
+metadata/original_protect_skill_id = 0

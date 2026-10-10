@@ -84,7 +84,7 @@
 使用带 Spine 模块的 Godot：
 
 ```powershell
-& '<Spine-Godot.exe>' --headless --path . res://examples/verify_wukong_attack_effects.tscn
+& '<Spine-Godot.exe>' --headless --path . res://tests/suites/verify_wukong_attack_effects.tscn
 & '<Spine-Godot.exe>' --headless --editor --single-window --path . --script tools/verify_editor_wukong_attack_effects.gd
 ```
 

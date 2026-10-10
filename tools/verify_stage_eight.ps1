@@ -1,6 +1,6 @@
 param(
     [Parameter(Mandatory=$true)][string]$Godot,
-    [string[]]$Suites = @('original_battle_ui', 'original_boss_presentation', 'camera_follow', 'map_visual', 'boss', 'level_progression', 'wushuang', 'wukong_skills', 'monster_ai', 'buffs', 'hit_reaction', 'battle_presentation', 'scene_attributes', 'character_components', 'original_feedback', 'wooden_dummy', 'wukong_attack_effects', 'wukong_context_attacks', 'original_damage', 'damage_numbers', 'damage_number_pool', 'single_attack', 'skill_timeline', 'core_events', 'attribute_pipeline', 'stage_four', 'player_operations', 'wukong_state_machine', 'plugins', 'stage_one')
+    [string[]]$Suites = @('audio', 'loot_growth', 'combat_hud', 'monster_spine', 'original_battle_ui', 'original_boss_presentation', 'camera_follow', 'map_visual', 'boss', 'level_progression', 'wushuang', 'wukong_skills', 'monster_ai', 'buffs', 'hit_reaction', 'battle_presentation', 'scene_attributes', 'character_components', 'original_feedback', 'wooden_dummy', 'wukong_attack_effects', 'wukong_context_attacks', 'original_damage', 'damage_numbers', 'damage_number_pool', 'single_attack', 'skill_timeline', 'core_events', 'attribute_pipeline', 'stage_four', 'player_operations', 'wukong_state_machine', 'plugins', 'stage_one')
 )
 #region 项目根目录与隔离日志
 $ErrorActionPreference = 'Stop'
@@ -17,7 +17,7 @@ try {
         $env:APPDATA = Join-Path $logDirectory ('stage8-' + $suite + '-user')
         $env:LOCALAPPDATA = $env:APPDATA
         $taskLog = Join-Path $logDirectory ('stage8-' + $suite + '.log')
-        $arguments = @('--headless', '--path', ('"' + $taskRoot + '"'), '--log-file', ('"' + $taskLog + '"'), '--max-fps', '600', '--fixed-fps', '60', '--quit-after', '12000', ('res://examples/verify_' + $suite + '.tscn'))
+        $arguments = @('--headless', '--path', ('"' + $taskRoot + '"'), '--log-file', ('"' + $taskLog + '"'), '--max-fps', '600', '--fixed-fps', '60', '--quit-after', '12000', ('res://tests/suites/verify_' + $suite + '.tscn'))
         $process = Start-Process -FilePath $Godot -ArgumentList $arguments -WindowStyle Hidden -Wait -PassThru
         $output = Get-Content -Raw -LiteralPath $taskLog
         if ($process.ExitCode -ne 0 -or $output -match 'SCRIPT ERROR:|(?m)^ERROR:' -or $output -notmatch '(?m)^PASS') {

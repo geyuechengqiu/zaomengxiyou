@@ -21,6 +21,9 @@ TABLE = json.loads((SOURCE/'exports/zmhj_role_stats/原始配置/Skill.json').re
 BUFFS = json.loads((SOURCE/'exports/zmhj_role_stats/原始配置/Buff.json').read_text(encoding='utf-8-sig'))
 COMMON = load_config_table(SOURCE/'games/zmhj-g5', 'Common')['1']
 PHYSICS = dict(source_fps=30, nape_step=0.1, gravity=float(COMMON['gravity']), display_scale=2)
+# 火眼固定注册点与人物使用同一个原始骨架原点；人物脚底校准不能只作用于身体。
+_origin = re.search(r'skeleton_offset = Vector2\(([^,]+),\s*([^)]+)\)', (PROJECT/'data/animation/sunwukong_profile.tres').read_text('utf8'))
+BEAM_ORIGIN_OFFSET = [float(_origin[1]), float(_origin[2])] if _origin else [0.0, 0.0]
 # TargetMove.x enters normalToBodyVelocity; Y is written directly to Nape's body.
 BODY_TIME_SCALE = PHYSICS['source_fps'] * PHYSICS['nape_step']
 REACTION_GRAVITY = PHYSICS['gravity'] * BODY_TIME_SCALE**2 * PHYSICS['display_scale']
@@ -82,7 +85,8 @@ for number in [6000101,6000201,6000301,6000501,19000101]:
 SPECS = {
     'skill1':dict(duration=12,segments=[('skill1',3,10,1,1.0,0,0)]),
     'skill2':dict(duration=15,segments=[('skill2',0,15,1,1.0,0,0)],gravity=0,motion=800),
-    'skill3':dict(duration=37,segments=[('skill3',5,35,5,0.2,57,-43)]),
+    # User extension: double the cast duration and per-target cap; keep startup/cadence/recovery.
+    'skill3':dict(duration=74,segments=[('skill3',5,72,10,0.2,57,-43)]),
     'skill4':dict(duration=30,segments=[('skill4',0,30,5,0.2,0,0)],gravity=0),
     'skill4_1':dict(duration=18,segments=[('skill4_1',7,18,1,0.1,0,0)]),
     'skill8':dict(duration=43,segments=[('effect_8',0,28,5,0.18,0,0),('effect_8_1',28,43,1,1.0,0,0)]),
@@ -107,7 +111,9 @@ for action,original_id in IDS.items():
         row = original['param']['s'][index-1] if action=='skill8' else original['param']['s'][0 if action!='skill3' else 1]
         damage = TABLE['1101081'] if action=='skill8' and index==2 else original
         values = RECTS[f'ab_{asset}{start:04d}' if action=='skill8' else f'ab_{asset}0000'][:]
-        if action=='skill3': values[2] = 1200 # Skill31Control.ray() replaces only AB.width.
+        if action=='skill3':
+            values[2] = 1200 # Skill31Control.ray() replaces only AB.width.
+            x += BEAM_ORIGIN_OFFSET[0]; y += BEAM_ORIGIN_OFFSET[1]
         else:
             values[0] *= row.get('scaleX',1); values[2] *= row.get('scaleX',1)
             values[1] *= row.get('scaleY',1); values[3] *= row.get('scaleY',1)
@@ -119,7 +125,9 @@ for action,original_id in IDS.items():
             if move_time <= 0: move_time = float(row['stiff']) if float(row['stiff']) > 0 else 1.0
             text += f'knockback_speed = {sx*2}\nknockback_duration = {move_time}\nlaunch_speed = {max(0,sy)*BODY_TIME_SCALE*2}\nreset_vertical_velocity = true\nreaction_gravity = {REACTION_GRAVITY}\n'
             if row.get('attackedMoveDir')==2: text += 'knockback_direction = "away_from_attacker"\n'
-    if action=='skill2': text += '[sub_resource type="Resource" id="Dash"]\nscript = ExtResource("motion")\nstart_frame = 0\nend_frame = 15\nvelocity = Vector2(800, 0)\n'
+    if action=='skill2':
+        dash_speed = float(original['param']['s'][0]['shootSpeed']) * PHYSICS['display_scale']
+        text += f'[sub_resource type="Resource" id="Dash"]\nscript = ExtResource("motion")\nstart_frame = 0\nend_frame = 15\nvelocity = Vector2({dash_speed}, 0)\n'
     if action=='skill4': text += '[sub_resource type="Resource" id="FollowUp"]\nscript = ExtResource("branch")\noperation = &"skill_4"\ntarget_ability_id = &"sunwukong_skill4_1"\nstart_frame = 0\nend_frame = 30\nbuffer_frames = 6\n'
     text += f'[sub_resource type="Resource" id="Timeline"]\nscript = ExtResource("timeline")\nduration_frames = {spec["duration"]}\nanimation_action = &"{action if action!="skill8_slam" else "skill8"}"\ncommit_resources = true\ncan_use_in_air = {str(bool(original.get("canUseInSKy"))).lower()}\n'
     text += 'interrupt_actions = '+sn(['attack_'+str(i) for i in range(1,6)]+(['skill2'] if action=='skill1' else []))+'\n'
@@ -131,7 +139,7 @@ for action,original_id in IDS.items():
     if action=='skill2': text += 'motion_windows = Array[ExtResource("motion")]([SubResource("Dash")])\n'
     if action=='skill4': text += 'branch_windows = Array[ExtResource("branch")]([SubResource("FollowUp")])\n'
     if action=='skill8': text += 'effect_tail_frames = 3\n'
-    if action=='skill3': text += 'aim_segment_index = 1\naim_effect_paths = Array[NodePath]([NodePath("AttackEffects/SkillPrimary")])\naim_head_bone = &"mz_头2"\naim_tip_path = NodePath("AttackEffects/BeamEnd")\naim_length = 1200.0\n'
+    if action=='skill3': text += 'cancel_on_input_release = true\naim_segment_index = 1\naim_effect_paths = Array[NodePath]([NodePath("AttackEffects/SkillPrimary")])\naim_head_bone = &"mz_头2"\naim_tip_path = NodePath("AttackEffects/BeamEnd")\naim_length = 1200.0\n'
     text += f'[resource]\nscript = ExtResource("definition")\nability_id = &"{ability}"\nability_name = "{original["name"]}"\nfeatures = Array[ExtResource("feature")]([SubResource("Cost"), SubResource("Cooldown"), SubResource("Timeline")])\nmetadata/original_skill_id = {original_id}\n'
     write(f'{FOLDER}/{action}.tres',text)
 #endregion
@@ -192,9 +200,11 @@ for action,spec in SPECS.items():
     if action=='skill1': effects['SkillPrimary']=('skill1',3,10,[0,0],[1,1])
     if action=='skill2': effects['SkillPrimary']=('skill2_looped',0,15,[0,0],[1,1])
     if action=='skill3':
-        effects['SkillPrimary']=('skill3_looped',5,35,[57,-43],[1200/68,1])
-        effects['SkillSecondary']=('skill3_1_looped',5,35,[0,3],[1,1])
-        effects['BeamEnd']=('skill3_2_looped',5,35,[1257,-43],[1,1])
+        ox, oy = BEAM_ORIGIN_OFFSET
+        beam_start, beam_end = spec['segments'][0][1:3]
+        effects['SkillPrimary']=('skill3_looped',beam_start,beam_end,[57+ox,-43+oy],[1200/68,1])
+        effects['SkillSecondary']=('skill3_1_looped',beam_start,beam_end,[ox,3+oy],[1,1])
+        effects['BeamEnd']=('skill3_2_looped',beam_start,beam_end,[1257+ox,-43+oy],[1,1])
     if action=='skill4': effects['SkillPrimary']=('skill4_looped',0,30,[0,0],[1.2,1])
     if action=='skill4_1': effects['SkillPrimary']=('skill4_1',7,18,[0,0],[1,1])
     if action=='skill8':

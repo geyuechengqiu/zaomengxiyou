@@ -1,6 +1,6 @@
 # 原版怪物头顶血条与跳字补间
 
-当前 [原版伤害场景](../../examples/original_damage_demo.tscn)、单段和多段样例都复用 [怪物血条场景](monster_health_bar.tscn)，不再使用灰色 ProgressBar 或常驻生命数字。悟空默认不显示怪物头顶血条，生命值继续显示在业务面板。
+当前 [原版伤害场景](../../tests/fixtures/original_damage_demo.tscn)、单段和多段样例都复用 [怪物血条场景](monster_health_bar.tscn)，不再使用灰色 ProgressBar 或常驻生命数字。悟空默认不显示怪物头顶血条，生命值继续显示在业务面板。
 
 ![受伤后出现原版怪物血条和伤害80](../../addons/battle_foundation/docs/original-monster-bar-hit.png)
 
@@ -76,7 +76,7 @@
 
 ## 验证与重新导出
 
-[verify_original_feedback.tscn](../../examples/verify_original_feedback.tscn) 覆盖原素材尺寸、原遮罩、出生隐藏、有效伤害、重复命中、2秒计时、0.6秒残血补间、4%最低显示、同值提前返回、常显/队友/死亡、朝向、实例隔离、初始化、暂停、慢动作，以及非采样点连续跳字和低帧率清理。现有跳字八种伤害样例、左右五连击、单段攻击及技能时间轴回归继续通过。
+[verify_original_feedback.tscn](../../tests/suites/verify_original_feedback.tscn) 覆盖原素材尺寸、原遮罩、出生隐藏、有效伤害、重复命中、2秒计时、0.6秒残血补间、4%最低显示、同值提前返回、常显/队友/死亡、朝向、实例隔离、初始化、暂停、慢动作，以及非采样点连续跳字和低帧率清理。现有跳字八种伤害样例、左右五连击、单段攻击及技能时间轴回归继续通过。
 
 ```powershell
 ./tools/verify_stage_eight.ps1 -Godot '<支持Spine的Godot>' -Suites original_feedback,damage_numbers,original_damage,single_attack,wooden_dummy,skill_timeline

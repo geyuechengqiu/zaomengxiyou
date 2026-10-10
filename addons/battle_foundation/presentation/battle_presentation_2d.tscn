@@ -5,11 +5,13 @@
 [ext_resource type="Script" path="res://addons/battle_foundation/presentation/battle_damage_number_layer_2d.gd" id="rows"]
 [ext_resource type="PackedScene" path="res://addons/battle_foundation/boss/battle_boss_feedback_2d.tscn" id="boss"]
 [ext_resource type="PackedScene" path="res://addons/battle_foundation/ui/battle_stage_feedback.tscn" id="stage"]
+[ext_resource type="PackedScene" path="res://addons/battle_foundation/audio/battle_audio.tscn" id="audio"]
 [node name="BattlePresentation" type="Node2D"]
 z_index = 5
 script = ExtResource("script")
 feedback_scene = ExtResource("feedback")
 number_scene = ExtResource("number")
+[node name="Audio" parent="." instance=ExtResource("audio")]
 [node name="BossFeedback" parent="." instance=ExtResource("boss")]
 [node name="StageFeedback" parent="." instance=ExtResource("stage")]
 [node name="EntityViews" type="Node2D" parent="."]

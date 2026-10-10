@@ -1,5 +1,0 @@
-[gd_scene format=3]
-[ext_resource type="Script" path="res://examples/verify_camera_follow.gd" id="script"]
-[node name="VerifyCameraFollow" type="Node"]
-process_mode = 3
-script = ExtResource("script")

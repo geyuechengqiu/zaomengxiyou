@@ -196,7 +196,7 @@ heal.apply(target, target, {})
 # 生命值 10 → 35；这是直接效果，没有技能冷却。
 ```
 
-项目的 [plugin_showcase.gd](../../examples/plugin_showcase.gd) 把治疗配置成 `GameplayAbilityDefinition`，组合 `CooldownFeature` 与 `BTSequence(AbilityNodeCommitCooldown, AbilityNodeApplyEffect)`，用技能按钮触发；这条路径会施加 25 点治疗并进入 3 秒冷却。
+项目的 [plugin_showcase.gd](../../tests/fixtures/plugin_showcase.gd) 把治疗配置成 `GameplayAbilityDefinition`，组合 `CooldownFeature` 与 `BTSequence(AbilityNodeCommitCooldown, AbilityNodeApplyEffect)`，用技能按钮触发；这条路径会施加 25 点治疗并进入 3 秒冷却。
 
 当前 [burn_status.tres](examples/burn_status.tres) 只配置叠加、持续时间和标签，**没有周期伤害或粒子 Cue**。名称“燃烧演示”本身不会造成伤害；要做持续伤害，需添加 `FeaturePeriodicEffects` 并配置其 `periodic_effects`。
 
@@ -461,7 +461,7 @@ func _exit_tree() -> void:
     CoreSystem.event_bus.unsubscribe("damage_applied", _on_damage_applied)
 ```
 
-事件迁移验证见 [回归场景](../../examples/verify_core_events.tscn)，覆盖全部 GAS 资源和 10 类事件，以及共享伤害对象、完全减伤、死亡、自定义事件、离树/销毁退订和再入树。无需保留旧事件脚本或注册旧单例。
+事件迁移验证见 [回归场景](../../tests/suites/verify_core_events.tscn)，覆盖全部 GAS 资源和 10 类事件，以及共享伤害对象、完全减伤、死亡、自定义事件、离树/销毁退订和再入树。无需保留旧事件脚本或注册旧单例。
 
 另外两个服务分别是 `DamageCalculator` 和 `GameplayCueManager`，详见 Vital 与 Cue 两节；可选 DebugDraw 是外部独立插件的调试辅助，不在这四个 GAS 自动加载服务中。
 
@@ -529,7 +529,7 @@ UI 对应 `.tscn` 负责控件层级和唯一节点名 `%Button`、`%Icon` 等�
 在项目根目录运行：
 
 ```powershell
-& '<Godot 可执行文件路径>' --headless --path . res://examples/verify_plugins.tscn
+& '<Godot 可执行文件路径>' --headless --path . res://tests/suites/verify_plugins.tscn
 ```
 
 该场景覆盖资源加载、伤害/治疗、冷却、通用修改器、叠加/标签、背包、控制台及调试绘制；上面列出的全部边界情况并不都由该场景覆盖。

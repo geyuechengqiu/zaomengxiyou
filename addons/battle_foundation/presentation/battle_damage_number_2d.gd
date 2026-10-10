@@ -10,7 +10,7 @@ const DURATION: float = 0.9
 			return
 		number = next
 		_refresh_glyphs()
-@export_enum("normal", "critical", "true", "true_critical", "player", "dodge", "normal_double", "critical_double", "special", "kill", "heal") var style: String = "normal":
+@export_enum("normal", "critical", "true", "true_critical", "player", "dodge", "normal_double", "critical_double", "special", "kill", "heal", "mana") var style: String = "normal":
 	set(value):
 		if style == value:
 			return

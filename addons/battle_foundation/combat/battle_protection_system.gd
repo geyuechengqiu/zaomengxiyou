@@ -19,6 +19,8 @@ var last_error: String = ""
 var _owner: WeakRef
 var _skills: Dictionary = {}
 var _aliases: Dictionary = {}
+var _dimmed: bool = false
+var _original_alpha: float = 1.0
 #endregion
 #region 初始化、Boss 满值与技能配置查询
 func configure(actor: BattleEntity2D, definition: BattleProtectionProfile) -> bool:
@@ -141,6 +143,7 @@ func _reset_if_inactive() -> void:
 		_publish(&"battle.protection.reset", {"reason": &"inactivity"})
 
 func clear() -> void:
+	_restore_alpha()
 	score = 0
 	passive_score = 0
 	previous_score = 0
@@ -148,6 +151,21 @@ func clear() -> void:
 	active = false
 	active_remaining = 0.0
 	inactive_seconds = 0.0
+
+func refresh_visual() -> void:
+	var actor := _owner.get_ref() as BattleEntity2D if _owner != null else null
+	if actor == null or actor.animation == null: return
+	var dim := profile != null and profile.invulnerable_alpha and TagManager.has_tag(actor, &"state.invulnerable") and actor.is_alive()
+	if dim and not _dimmed:
+		_original_alpha = actor.animation.modulate.a
+		actor.animation.modulate.a = _original_alpha * 0.5
+		_dimmed = true
+	elif not dim: _restore_alpha()
+
+func _restore_alpha() -> void:
+	var actor := _owner.get_ref() as BattleEntity2D if _owner != null else null
+	if _dimmed and actor != null and is_instance_valid(actor.animation): actor.animation.modulate.a = _original_alpha
+	_dimmed = false
 
 func _publish(id: StringName, payload: Dictionary = {}) -> void:
 	var actor := _owner.get_ref() as BattleEntity2D if _owner != null else null

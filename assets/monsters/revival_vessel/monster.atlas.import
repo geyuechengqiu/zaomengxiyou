@@ -1,0 +1,16 @@
+[remap]
+
+importer="spine.atlas"
+type="SpineAtlasResource"
+uid="uid://8us0ccx5oo6i"
+path="res://.godot/imported/monster.atlas-42dda2dedc9c70cf835c45a866abc1d6.spatlas"
+
+[deps]
+
+source_file="res://assets/monsters/revival_vessel/monster.atlas"
+dest_files=["res://.godot/imported/monster.atlas-42dda2dedc9c70cf835c45a866abc1d6.spatlas"]
+
+[params]
+
+normal_map_prefix="n"
+specular_map_prefix="s"

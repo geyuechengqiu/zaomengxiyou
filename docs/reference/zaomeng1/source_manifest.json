@@ -1,0 +1,65 @@
+{
+  "source_directory": "D:\\UserData\\Downloads\\game\\swf单机\\这是正常flash游戏\\造梦西游1",
+  "files": [
+    {
+      "path": "1",
+      "bytes": 2770,
+      "sha256": "c5942a14f7f1db84e645397ae7296b91d39cd68663bd14ed3e70f1670630b071"
+    },
+    {
+      "path": "backpack_v2.swf",
+      "bytes": 681324,
+      "sha256": "47215d42043801243e7beae00ca4601d6040b343be8bd8a29a9c4aa4e8df17ea"
+    },
+    {
+      "path": "Monster2_v4.swf",
+      "bytes": 3391987,
+      "sha256": "42a301a5ae4222aec54dfdc4c14efced48b9ad4f979902471011ff226d8cd09b"
+    },
+    {
+      "path": "Monster3_v3.swf",
+      "bytes": 811137,
+      "sha256": "4bbb536d23f327c45a5d967fba4202dd9d08ae3e95af5469d9644d2467de841f"
+    },
+    {
+      "path": "Monster_v1.swf",
+      "bytes": 4056848,
+      "sha256": "5bd88da4211870f2ca2354b7cec8d1790747869641c11fe553910b10fe2a264a"
+    },
+    {
+      "path": "Music.swf",
+      "bytes": 2939915,
+      "sha256": "5cad2f1ef3ce592c2e9e44c631748e042d8cacae2c7571e57b1a0546998a7578"
+    },
+    {
+      "path": "OtherMat_v5.swf",
+      "bytes": 3133918,
+      "sha256": "cc969bcaa0cf2cce1fa63495a95640f2b74cfe4e9f2bc162241be02f4907c6e4"
+    },
+    {
+      "path": "Role.swf",
+      "bytes": 2387578,
+      "sha256": "850e6a30a5a4ae9e41c390eef9fcacff80fbe2a14513cd20dd7d19f886ba7b8b"
+    },
+    {
+      "path": "打开我开始玩.swf",
+      "bytes": 1957274,
+      "sha256": "a2129fa0a9b56648a0750fd78e27e031bfb39666e7b5a34d02a0a63751792c18"
+    },
+    {
+      "path": "更新公告（玩前必看）.txt",
+      "bytes": 1337,
+      "sha256": "dc307ecfa89ce6a3aa83606c8c921080611038e95a7f457f788559a6e37067c0"
+    },
+    {
+      "path": "美化包/Music.swf",
+      "bytes": 5084883,
+      "sha256": "a9d03c3529ca5779aaba9f86b043753f2213390946c9f39ae8ab3fd9303599c5"
+    },
+    {
+      "path": "美化包/Role.swf",
+      "bytes": 7046880,
+      "sha256": "701cc3f44ea3d420543bed55645e5862c239e8828a9a6ab28ef04651e2a1730c"
+    }
+  ]
+}

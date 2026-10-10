@@ -1,6 +1,11 @@
 [gd_resource type="Resource" script_class="CharacterAnimationProfile" format=3]
 [ext_resource type="Script" path="res://addons/battle_foundation/animation/character_animation_profile.gd" id="script"]
+[ext_resource type="SpineSkeletonDataResource" path="res://assets/monsters/jianwu/spinedata.tres" id="skeleton"]
 [resource]
 script = ExtResource("script")
+skeleton_data = ExtResource("skeleton")
 source_fps = 30.0
 display_scale = 2.0
+animations = Dictionary[StringName, StringName]({&"idle": &"idle", &"move": &"move", &"run": &"run", &"jump": &"jump", &"jump_2": &"jump_2", &"fall": &"fall", &"land": &"land", &"hurt": &"hurt", &"death": &"death", &"attack_1": &"attack_1"})
+looping_actions = Array[StringName]([&"idle", &"move", &"run"])
+socket_bones = Dictionary[StringName, StringName]({&"root": &"root"})

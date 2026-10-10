@@ -1,1997 +1,444 @@
 [gd_scene format=3]
-[ext_resource type="Script" path="res://addons/battle_foundation/animation/animation_player_adapter_2d.gd" id="adapter"]
+[ext_resource type="Script" path="res://addons/battle_foundation/animation/spine_animation_adapter.gd" id="adapter"]
 [ext_resource type="Resource" path="res://data/monsters/jushi_lingjun/animation.tres" id="profile"]
-[ext_resource type="Texture2D" path="res://assets/monsters/jushi_lingjun/atlas.png" id="atlas"]
 [ext_resource type="Script" path="res://addons/battle_foundation/movement/battle_hitbox_2d.gd" id="hitbox"]
 [ext_resource type="Script" path="res://addons/gameplay_abiltiy_system/scripts/abilities/gameplay_ability_definition.gd" id="definition"]
 [ext_resource type="Resource" path="res://data/monsters/jushi_lingjun/skill.tres" id="skill1"]
 [ext_resource type="Resource" path="res://data/monsters/jushi_lingjun/skill2.tres" id="skill2"]
 [ext_resource type="Resource" path="res://data/monsters/jushi_lingjun/skill3.tres" id="skill3"]
-[sub_resource type="AtlasTexture" id="Frame_0"]
-atlas = ExtResource("atlas")
-region = Rect2(2, 2, 162, 165)
-margin = Rect2(84.0, -0.0, 84.0, -0.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_1"]
-atlas = ExtResource("atlas")
-region = Rect2(164, 2, 193, 154)
-margin = Rect2(53.0, 16.0, 53.0, 16.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_2"]
-atlas = ExtResource("atlas")
-region = Rect2(164, 2, 193, 154)
-margin = Rect2(53.0, 16.0, 53.0, 16.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_3"]
-atlas = ExtResource("atlas")
-region = Rect2(357, 2, 193, 154)
-margin = Rect2(53.0, 16.0, 53.0, 16.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_4"]
-atlas = ExtResource("atlas")
-region = Rect2(550, 2, 221, 157)
-margin = Rect2(24.0, 31.0, 24.0, 31.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_5"]
-atlas = ExtResource("atlas")
-region = Rect2(550, 2, 221, 157)
-margin = Rect2(24.0, 31.0, 24.0, 31.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_6"]
-atlas = ExtResource("atlas")
-region = Rect2(550, 2, 221, 157)
-margin = Rect2(24.0, 31.0, 24.0, 31.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_7"]
-atlas = ExtResource("atlas")
-region = Rect2(771, 2, 242, 150)
-margin = Rect2(-0.0, 55.0, -0.0, 55.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_8"]
-atlas = ExtResource("atlas")
-region = Rect2(1013, 2, 242, 150)
-margin = Rect2(-0.0, 55.0, -0.0, 55.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_9"]
-atlas = ExtResource("atlas")
-region = Rect2(1013, 2, 242, 150)
-margin = Rect2(-0.0, 55.0, -0.0, 55.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_10"]
-atlas = ExtResource("atlas")
-region = Rect2(1013, 2, 242, 150)
-margin = Rect2(-0.0, 55.0, -0.0, 55.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_11"]
-atlas = ExtResource("atlas")
-region = Rect2(1013, 2, 242, 150)
-margin = Rect2(-0.0, 55.0, -0.0, 55.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_12"]
-atlas = ExtResource("atlas")
-region = Rect2(1013, 2, 242, 150)
-margin = Rect2(-0.0, 55.0, -0.0, 55.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_13"]
-atlas = ExtResource("atlas")
-region = Rect2(1255, 2, 242, 150)
-margin = Rect2(-0.0, 55.0, -0.0, 55.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_14"]
-atlas = ExtResource("atlas")
-region = Rect2(1255, 2, 242, 150)
-margin = Rect2(-0.0, 55.0, -0.0, 55.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_15"]
-atlas = ExtResource("atlas")
-region = Rect2(1255, 2, 242, 150)
-margin = Rect2(-0.0, 55.0, -0.0, 55.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_16"]
-atlas = ExtResource("atlas")
-region = Rect2(1255, 2, 242, 150)
-margin = Rect2(-0.0, 55.0, -0.0, 55.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_17"]
-atlas = ExtResource("atlas")
-region = Rect2(1255, 2, 242, 150)
-margin = Rect2(-0.0, 55.0, -0.0, 55.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_18"]
-atlas = ExtResource("atlas")
-region = Rect2(1497, 2, 242, 150)
-margin = Rect2(-0.0, 55.0, -0.0, 55.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_19"]
-atlas = ExtResource("atlas")
-region = Rect2(1497, 2, 242, 150)
-margin = Rect2(-0.0, 55.0, -0.0, 55.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_20"]
-atlas = ExtResource("atlas")
-region = Rect2(1497, 2, 242, 150)
-margin = Rect2(-0.0, 55.0, -0.0, 55.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_21"]
-atlas = ExtResource("atlas")
-region = Rect2(1497, 2, 242, 150)
-margin = Rect2(-0.0, 55.0, -0.0, 55.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_22"]
-atlas = ExtResource("atlas")
-region = Rect2(1497, 2, 242, 150)
-margin = Rect2(-0.0, 55.0, -0.0, 55.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_23"]
-atlas = ExtResource("atlas")
-region = Rect2(1739, 2, 242, 150)
-margin = Rect2(-0.0, 55.0, -0.0, 55.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_24"]
-atlas = ExtResource("atlas")
-region = Rect2(1739, 2, 242, 150)
-margin = Rect2(-0.0, 55.0, -0.0, 55.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_25"]
-atlas = ExtResource("atlas")
-region = Rect2(1739, 2, 242, 150)
-margin = Rect2(-0.0, 55.0, -0.0, 55.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_26"]
-atlas = ExtResource("atlas")
-region = Rect2(1739, 2, 242, 150)
-margin = Rect2(-0.0, 55.0, -0.0, 55.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_27"]
-atlas = ExtResource("atlas")
-region = Rect2(1739, 2, 242, 150)
-margin = Rect2(-0.0, 55.0, -0.0, 55.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_28"]
-atlas = ExtResource("atlas")
-region = Rect2(1739, 2, 242, 150)
-margin = Rect2(-0.0, 55.0, -0.0, 55.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_29"]
-atlas = ExtResource("atlas")
-region = Rect2(1739, 2, 242, 150)
-margin = Rect2(-0.0, 55.0, -0.0, 55.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_30"]
-atlas = ExtResource("atlas")
-region = Rect2(1739, 2, 242, 150)
-margin = Rect2(-0.0, 55.0, -0.0, 55.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_31"]
-atlas = ExtResource("atlas")
-region = Rect2(1739, 2, 242, 150)
-margin = Rect2(-0.0, 55.0, -0.0, 55.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_32"]
-atlas = ExtResource("atlas")
-region = Rect2(1739, 2, 242, 150)
-margin = Rect2(-0.0, 55.0, -0.0, 55.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_33"]
-atlas = ExtResource("atlas")
-region = Rect2(1739, 2, 242, 150)
-margin = Rect2(-0.0, 55.0, -0.0, 55.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_34"]
-atlas = ExtResource("atlas")
-region = Rect2(1739, 2, 242, 150)
-margin = Rect2(-0.0, 55.0, -0.0, 55.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_35"]
-atlas = ExtResource("atlas")
-region = Rect2(1739, 2, 242, 150)
-margin = Rect2(-0.0, 55.0, -0.0, 55.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_36"]
-atlas = ExtResource("atlas")
-region = Rect2(1739, 2, 242, 150)
-margin = Rect2(-0.0, 55.0, -0.0, 55.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_37"]
-atlas = ExtResource("atlas")
-region = Rect2(1739, 2, 242, 150)
-margin = Rect2(-0.0, 55.0, -0.0, 55.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_38"]
-atlas = ExtResource("atlas")
-region = Rect2(1739, 2, 242, 150)
-margin = Rect2(-0.0, 55.0, -0.0, 55.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_39"]
-atlas = ExtResource("atlas")
-region = Rect2(2, 2, 162, 165)
-margin = Rect2(-0.0, -0.0, -0.0, -0.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_40"]
-atlas = ExtResource("atlas")
-region = Rect2(2, 2, 162, 165)
-margin = Rect2(-0.0, -0.0, -0.0, -0.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_41"]
-atlas = ExtResource("atlas")
-region = Rect2(2, 2, 162, 165)
-margin = Rect2(-0.0, -0.0, -0.0, -0.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_42"]
-atlas = ExtResource("atlas")
-region = Rect2(2, 2, 162, 165)
-margin = Rect2(-0.0, -0.0, -0.0, -0.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_43"]
-atlas = ExtResource("atlas")
-region = Rect2(2, 2, 162, 165)
-margin = Rect2(-0.0, -0.0, -0.0, -0.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_44"]
-atlas = ExtResource("atlas")
-region = Rect2(2, 167, 162, 165)
-margin = Rect2(-0.0, -0.0, -0.0, -0.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_45"]
-atlas = ExtResource("atlas")
-region = Rect2(2, 167, 162, 165)
-margin = Rect2(-0.0, -0.0, -0.0, -0.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_46"]
-atlas = ExtResource("atlas")
-region = Rect2(2, 167, 162, 165)
-margin = Rect2(-0.0, -0.0, -0.0, -0.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_47"]
-atlas = ExtResource("atlas")
-region = Rect2(2, 167, 162, 165)
-margin = Rect2(-0.0, -0.0, -0.0, -0.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_48"]
-atlas = ExtResource("atlas")
-region = Rect2(2, 167, 162, 165)
-margin = Rect2(-0.0, -0.0, -0.0, -0.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_49"]
-atlas = ExtResource("atlas")
-region = Rect2(164, 167, 162, 165)
-margin = Rect2(-0.0, -0.0, -0.0, -0.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_50"]
-atlas = ExtResource("atlas")
-region = Rect2(164, 167, 162, 165)
-margin = Rect2(-0.0, -0.0, -0.0, -0.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_51"]
-atlas = ExtResource("atlas")
-region = Rect2(164, 167, 162, 165)
-margin = Rect2(-0.0, -0.0, -0.0, -0.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_52"]
-atlas = ExtResource("atlas")
-region = Rect2(164, 167, 162, 165)
-margin = Rect2(-0.0, -0.0, -0.0, -0.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_53"]
-atlas = ExtResource("atlas")
-region = Rect2(164, 167, 162, 165)
-margin = Rect2(-0.0, -0.0, -0.0, -0.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_54"]
-atlas = ExtResource("atlas")
-region = Rect2(326, 167, 162, 165)
-margin = Rect2(-0.0, -0.0, -0.0, -0.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_55"]
-atlas = ExtResource("atlas")
-region = Rect2(326, 167, 162, 165)
-margin = Rect2(-0.0, -0.0, -0.0, -0.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_56"]
-atlas = ExtResource("atlas")
-region = Rect2(326, 167, 162, 165)
-margin = Rect2(-0.0, -0.0, -0.0, -0.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_57"]
-atlas = ExtResource("atlas")
-region = Rect2(326, 167, 162, 165)
-margin = Rect2(-0.0, -0.0, -0.0, -0.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_58"]
-atlas = ExtResource("atlas")
-region = Rect2(326, 167, 162, 165)
-margin = Rect2(-0.0, -0.0, -0.0, -0.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_59"]
-atlas = ExtResource("atlas")
-region = Rect2(488, 167, 162, 165)
-margin = Rect2(-0.0, -0.0, -0.0, -0.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_60"]
-atlas = ExtResource("atlas")
-region = Rect2(488, 167, 162, 165)
-margin = Rect2(-0.0, -0.0, -0.0, -0.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_61"]
-atlas = ExtResource("atlas")
-region = Rect2(488, 167, 162, 165)
-margin = Rect2(-0.0, -0.0, -0.0, -0.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_62"]
-atlas = ExtResource("atlas")
-region = Rect2(488, 167, 162, 165)
-margin = Rect2(-0.0, -0.0, -0.0, -0.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_63"]
-atlas = ExtResource("atlas")
-region = Rect2(488, 167, 162, 165)
-margin = Rect2(-0.0, -0.0, -0.0, -0.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_64"]
-atlas = ExtResource("atlas")
-region = Rect2(488, 167, 162, 165)
-margin = Rect2(-0.0, -0.0, -0.0, -0.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_65"]
-atlas = ExtResource("atlas")
-region = Rect2(488, 167, 162, 165)
-margin = Rect2(-0.0, -0.0, -0.0, -0.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_66"]
-atlas = ExtResource("atlas")
-region = Rect2(488, 167, 162, 165)
-margin = Rect2(-0.0, -0.0, -0.0, -0.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_67"]
-atlas = ExtResource("atlas")
-region = Rect2(488, 167, 162, 165)
-margin = Rect2(-0.0, -0.0, -0.0, -0.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_68"]
-atlas = ExtResource("atlas")
-region = Rect2(488, 167, 162, 165)
-margin = Rect2(-0.0, -0.0, -0.0, -0.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_69"]
-atlas = ExtResource("atlas")
-region = Rect2(488, 167, 162, 165)
-margin = Rect2(-0.0, -0.0, -0.0, -0.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_70"]
-atlas = ExtResource("atlas")
-region = Rect2(488, 167, 162, 165)
-margin = Rect2(-0.0, -0.0, -0.0, -0.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_71"]
-atlas = ExtResource("atlas")
-region = Rect2(488, 167, 162, 165)
-margin = Rect2(-0.0, -0.0, -0.0, -0.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_72"]
-atlas = ExtResource("atlas")
-region = Rect2(488, 167, 162, 165)
-margin = Rect2(-0.0, -0.0, -0.0, -0.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_73"]
-atlas = ExtResource("atlas")
-region = Rect2(650, 167, 176, 164)
-margin = Rect2(1.0, 5.0, 1.0, 5.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_74"]
-atlas = ExtResource("atlas")
-region = Rect2(650, 167, 176, 164)
-margin = Rect2(1.0, 5.0, 1.0, 5.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_75"]
-atlas = ExtResource("atlas")
-region = Rect2(650, 167, 176, 164)
-margin = Rect2(1.0, 5.0, 1.0, 5.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_76"]
-atlas = ExtResource("atlas")
-region = Rect2(650, 167, 176, 164)
-margin = Rect2(1.0, 5.0, 1.0, 5.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_77"]
-atlas = ExtResource("atlas")
-region = Rect2(650, 167, 176, 164)
-margin = Rect2(1.0, 5.0, 1.0, 5.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_78"]
-atlas = ExtResource("atlas")
-region = Rect2(826, 167, 177, 165)
-margin = Rect2(-0.0, 3.0, -0.0, 3.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_79"]
-atlas = ExtResource("atlas")
-region = Rect2(826, 167, 177, 165)
-margin = Rect2(-0.0, 3.0, -0.0, 3.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_80"]
-atlas = ExtResource("atlas")
-region = Rect2(826, 167, 177, 165)
-margin = Rect2(-0.0, 3.0, -0.0, 3.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_81"]
-atlas = ExtResource("atlas")
-region = Rect2(826, 167, 177, 165)
-margin = Rect2(-0.0, 3.0, -0.0, 3.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_82"]
-atlas = ExtResource("atlas")
-region = Rect2(826, 167, 177, 165)
-margin = Rect2(-0.0, 3.0, -0.0, 3.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_83"]
-atlas = ExtResource("atlas")
-region = Rect2(1003, 167, 177, 165)
-margin = Rect2(-0.0, 1.0, -0.0, 1.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_84"]
-atlas = ExtResource("atlas")
-region = Rect2(1003, 167, 177, 165)
-margin = Rect2(-0.0, 1.0, -0.0, 1.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_85"]
-atlas = ExtResource("atlas")
-region = Rect2(1003, 167, 177, 165)
-margin = Rect2(-0.0, 1.0, -0.0, 1.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_86"]
-atlas = ExtResource("atlas")
-region = Rect2(1003, 167, 177, 165)
-margin = Rect2(-0.0, 1.0, -0.0, 1.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_87"]
-atlas = ExtResource("atlas")
-region = Rect2(1003, 167, 177, 165)
-margin = Rect2(-0.0, 1.0, -0.0, 1.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_88"]
-atlas = ExtResource("atlas")
-region = Rect2(1180, 167, 177, 165)
-margin = Rect2(-0.0, -0.0, -0.0, -0.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_89"]
-atlas = ExtResource("atlas")
-region = Rect2(1180, 167, 177, 165)
-margin = Rect2(-0.0, -0.0, -0.0, -0.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_90"]
-atlas = ExtResource("atlas")
-region = Rect2(1180, 167, 177, 165)
-margin = Rect2(-0.0, -0.0, -0.0, -0.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_91"]
-atlas = ExtResource("atlas")
-region = Rect2(1180, 167, 177, 165)
-margin = Rect2(-0.0, -0.0, -0.0, -0.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_92"]
-atlas = ExtResource("atlas")
-region = Rect2(1180, 167, 177, 165)
-margin = Rect2(-0.0, -0.0, -0.0, -0.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_93"]
-atlas = ExtResource("atlas")
-region = Rect2(1357, 167, 177, 164)
-margin = Rect2(-0.0, 2.0, -0.0, 2.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_94"]
-atlas = ExtResource("atlas")
-region = Rect2(1357, 167, 177, 164)
-margin = Rect2(-0.0, 2.0, -0.0, 2.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_95"]
-atlas = ExtResource("atlas")
-region = Rect2(1357, 167, 177, 164)
-margin = Rect2(-0.0, 2.0, -0.0, 2.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_96"]
-atlas = ExtResource("atlas")
-region = Rect2(1357, 167, 177, 164)
-margin = Rect2(-0.0, 2.0, -0.0, 2.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_97"]
-atlas = ExtResource("atlas")
-region = Rect2(1357, 167, 177, 164)
-margin = Rect2(-0.0, 2.0, -0.0, 2.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_98"]
-atlas = ExtResource("atlas")
-region = Rect2(1534, 167, 176, 165)
-margin = Rect2(1.0, 3.0, 1.0, 3.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_99"]
-atlas = ExtResource("atlas")
-region = Rect2(1534, 167, 176, 165)
-margin = Rect2(1.0, 3.0, 1.0, 3.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_100"]
-atlas = ExtResource("atlas")
-region = Rect2(1534, 167, 176, 165)
-margin = Rect2(1.0, 3.0, 1.0, 3.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_101"]
-atlas = ExtResource("atlas")
-region = Rect2(1534, 167, 176, 165)
-margin = Rect2(1.0, 3.0, 1.0, 3.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_102"]
-atlas = ExtResource("atlas")
-region = Rect2(1534, 167, 176, 165)
-margin = Rect2(1.0, 3.0, 1.0, 3.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_103"]
-atlas = ExtResource("atlas")
-region = Rect2(1710, 167, 176, 164)
-margin = Rect2(77.0, 49.0, 77.0, 49.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_104"]
-atlas = ExtResource("atlas")
-region = Rect2(1886, 167, 147, 170)
-margin = Rect2(93.0, 50.0, 93.0, 50.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_105"]
-atlas = ExtResource("atlas")
-region = Rect2(1886, 167, 147, 170)
-margin = Rect2(93.0, 50.0, 93.0, 50.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_106"]
-atlas = ExtResource("atlas")
-region = Rect2(1886, 167, 147, 170)
-margin = Rect2(93.0, 50.0, 93.0, 50.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_107"]
-atlas = ExtResource("atlas")
-region = Rect2(1886, 167, 147, 170)
-margin = Rect2(93.0, 50.0, 93.0, 50.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_108"]
-atlas = ExtResource("atlas")
-region = Rect2(2, 337, 214, 203)
-margin = Rect2(99.0, 54.0, 99.0, 54.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_109"]
-atlas = ExtResource("atlas")
-region = Rect2(2, 337, 214, 203)
-margin = Rect2(99.0, 54.0, 99.0, 54.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_110"]
-atlas = ExtResource("atlas")
-region = Rect2(216, 337, 214, 203)
-margin = Rect2(99.0, 54.0, 99.0, 54.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_111"]
-atlas = ExtResource("atlas")
-region = Rect2(216, 337, 214, 203)
-margin = Rect2(99.0, 54.0, 99.0, 54.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_112"]
-atlas = ExtResource("atlas")
-region = Rect2(430, 337, 214, 203)
-margin = Rect2(99.0, 54.0, 99.0, 54.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_113"]
-atlas = ExtResource("atlas")
-region = Rect2(430, 337, 214, 203)
-margin = Rect2(99.0, 54.0, 99.0, 54.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_114"]
-atlas = ExtResource("atlas")
-region = Rect2(644, 337, 214, 203)
-margin = Rect2(99.0, 54.0, 99.0, 54.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_115"]
-atlas = ExtResource("atlas")
-region = Rect2(644, 337, 214, 203)
-margin = Rect2(99.0, 54.0, 99.0, 54.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_116"]
-atlas = ExtResource("atlas")
-region = Rect2(2, 337, 214, 203)
-margin = Rect2(99.0, 54.0, 99.0, 54.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_117"]
-atlas = ExtResource("atlas")
-region = Rect2(2, 337, 214, 203)
-margin = Rect2(99.0, 54.0, 99.0, 54.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_118"]
-atlas = ExtResource("atlas")
-region = Rect2(858, 337, 275, 271)
-margin = Rect2(-0.0, -0.0, -0.0, -0.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_119"]
-atlas = ExtResource("atlas")
-region = Rect2(858, 337, 275, 271)
-margin = Rect2(-0.0, -0.0, -0.0, -0.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_120"]
-atlas = ExtResource("atlas")
-region = Rect2(1133, 337, 275, 271)
-margin = Rect2(-0.0, -0.0, -0.0, -0.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_121"]
-atlas = ExtResource("atlas")
-region = Rect2(1408, 337, 275, 271)
-margin = Rect2(-0.0, -0.0, -0.0, -0.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_122"]
-atlas = ExtResource("atlas")
-region = Rect2(1683, 337, 275, 271)
-margin = Rect2(-0.0, -0.0, -0.0, -0.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_123"]
-atlas = ExtResource("atlas")
-region = Rect2(1683, 337, 275, 271)
-margin = Rect2(-0.0, -0.0, -0.0, -0.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_124"]
-atlas = ExtResource("atlas")
-region = Rect2(2, 608, 275, 271)
-margin = Rect2(-0.0, -0.0, -0.0, -0.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_125"]
-atlas = ExtResource("atlas")
-region = Rect2(2, 608, 275, 271)
-margin = Rect2(-0.0, -0.0, -0.0, -0.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_126"]
-atlas = ExtResource("atlas")
-region = Rect2(2, 608, 275, 271)
-margin = Rect2(-0.0, -0.0, -0.0, -0.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_127"]
-atlas = ExtResource("atlas")
-region = Rect2(277, 608, 275, 271)
-margin = Rect2(-0.0, -0.0, -0.0, -0.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_128"]
-atlas = ExtResource("atlas")
-region = Rect2(277, 608, 275, 271)
-margin = Rect2(-0.0, -0.0, -0.0, -0.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_129"]
-atlas = ExtResource("atlas")
-region = Rect2(277, 608, 275, 271)
-margin = Rect2(-0.0, -0.0, -0.0, -0.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_130"]
-atlas = ExtResource("atlas")
-region = Rect2(552, 608, 275, 271)
-margin = Rect2(-0.0, -0.0, -0.0, -0.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_131"]
-atlas = ExtResource("atlas")
-region = Rect2(552, 608, 275, 271)
-margin = Rect2(-0.0, -0.0, -0.0, -0.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_132"]
-atlas = ExtResource("atlas")
-region = Rect2(552, 608, 275, 271)
-margin = Rect2(-0.0, -0.0, -0.0, -0.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_133"]
-atlas = ExtResource("atlas")
-region = Rect2(827, 608, 275, 271)
-margin = Rect2(-0.0, -0.0, -0.0, -0.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_134"]
-atlas = ExtResource("atlas")
-region = Rect2(827, 608, 275, 271)
-margin = Rect2(-0.0, -0.0, -0.0, -0.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_135"]
-atlas = ExtResource("atlas")
-region = Rect2(827, 608, 275, 271)
-margin = Rect2(-0.0, -0.0, -0.0, -0.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_136"]
-atlas = ExtResource("atlas")
-region = Rect2(1102, 608, 165, 165)
-margin = Rect2(58.0, 50.0, 58.0, 50.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_137"]
-atlas = ExtResource("atlas")
-region = Rect2(1102, 608, 165, 165)
-margin = Rect2(58.0, 50.0, 58.0, 50.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_138"]
-atlas = ExtResource("atlas")
-region = Rect2(1102, 608, 165, 165)
-margin = Rect2(58.0, 50.0, 58.0, 50.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_139"]
-atlas = ExtResource("atlas")
-region = Rect2(1102, 608, 165, 165)
-margin = Rect2(58.0, 50.0, 58.0, 50.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_140"]
-atlas = ExtResource("atlas")
-region = Rect2(1102, 608, 165, 165)
-margin = Rect2(58.0, 50.0, 58.0, 50.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_179"]
-atlas = ExtResource("atlas")
-region = Rect2(1267, 608, 176, 164)
-margin = Rect2(23.0, 64.0, 23.0, 64.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_180"]
-atlas = ExtResource("atlas")
-region = Rect2(1443, 608, 172, 258)
-margin = Rect2(14.0, -0.0, 14.0, -0.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_181"]
-atlas = ExtResource("atlas")
-region = Rect2(1443, 608, 172, 258)
-margin = Rect2(14.0, -0.0, 14.0, -0.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_182"]
-atlas = ExtResource("atlas")
-region = Rect2(1443, 608, 172, 258)
-margin = Rect2(14.0, -0.0, 14.0, -0.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_183"]
-atlas = ExtResource("atlas")
-region = Rect2(1615, 608, 179, 258)
-margin = Rect2(7.0, -0.0, 7.0, -0.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_184"]
-atlas = ExtResource("atlas")
-region = Rect2(1615, 608, 179, 258)
-margin = Rect2(7.0, -0.0, 7.0, -0.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_185"]
-atlas = ExtResource("atlas")
-region = Rect2(1615, 608, 179, 258)
-margin = Rect2(7.0, -0.0, 7.0, -0.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_186"]
-atlas = ExtResource("atlas")
-region = Rect2(1794, 608, 179, 258)
-margin = Rect2(7.0, -0.0, 7.0, -0.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_187"]
-atlas = ExtResource("atlas")
-region = Rect2(2, 879, 178, 258)
-margin = Rect2(14.0, -0.0, 14.0, -0.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_188"]
-atlas = ExtResource("atlas")
-region = Rect2(2, 879, 178, 258)
-margin = Rect2(14.0, -0.0, 14.0, -0.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_189"]
-atlas = ExtResource("atlas")
-region = Rect2(180, 879, 174, 258)
-margin = Rect2(14.0, -0.0, 14.0, -0.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_190"]
-atlas = ExtResource("atlas")
-region = Rect2(180, 879, 174, 258)
-margin = Rect2(14.0, -0.0, 14.0, -0.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_191"]
-atlas = ExtResource("atlas")
-region = Rect2(180, 879, 174, 258)
-margin = Rect2(14.0, -0.0, 14.0, -0.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_192"]
-atlas = ExtResource("atlas")
-region = Rect2(354, 879, 174, 258)
-margin = Rect2(14.0, -0.0, 14.0, -0.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_193"]
-atlas = ExtResource("atlas")
-region = Rect2(354, 879, 174, 258)
-margin = Rect2(14.0, -0.0, 14.0, -0.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_194"]
-atlas = ExtResource("atlas")
-region = Rect2(354, 879, 174, 258)
-margin = Rect2(14.0, -0.0, 14.0, -0.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_195"]
-atlas = ExtResource("atlas")
-region = Rect2(528, 879, 174, 258)
-margin = Rect2(14.0, -0.0, 14.0, -0.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_196"]
-atlas = ExtResource("atlas")
-region = Rect2(528, 879, 174, 258)
-margin = Rect2(14.0, -0.0, 14.0, -0.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_197"]
-atlas = ExtResource("atlas")
-region = Rect2(528, 879, 174, 258)
-margin = Rect2(14.0, -0.0, 14.0, -0.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_198"]
-atlas = ExtResource("atlas")
-region = Rect2(702, 879, 286, 191)
-margin = Rect2(-0.0, 69.0, -0.0, 69.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_199"]
-atlas = ExtResource("atlas")
-region = Rect2(702, 879, 286, 191)
-margin = Rect2(-0.0, 69.0, -0.0, 69.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_200"]
-atlas = ExtResource("atlas")
-region = Rect2(988, 879, 286, 188)
-margin = Rect2(-0.0, 72.0, -0.0, 72.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_201"]
-atlas = ExtResource("atlas")
-region = Rect2(988, 879, 286, 188)
-margin = Rect2(-0.0, 72.0, -0.0, 72.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_202"]
-atlas = ExtResource("atlas")
-region = Rect2(1274, 879, 286, 188)
-margin = Rect2(-0.0, 72.0, -0.0, 72.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_203"]
-atlas = ExtResource("atlas")
-region = Rect2(1274, 879, 286, 188)
-margin = Rect2(-0.0, 72.0, -0.0, 72.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_204"]
-atlas = ExtResource("atlas")
-region = Rect2(1560, 879, 286, 188)
-margin = Rect2(-0.0, 72.0, -0.0, 72.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_205"]
-atlas = ExtResource("atlas")
-region = Rect2(1560, 879, 286, 188)
-margin = Rect2(-0.0, 72.0, -0.0, 72.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_206"]
-atlas = ExtResource("atlas")
-region = Rect2(2, 1137, 286, 188)
-margin = Rect2(-0.0, 72.0, -0.0, 72.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_207"]
-atlas = ExtResource("atlas")
-region = Rect2(2, 1137, 286, 188)
-margin = Rect2(-0.0, 72.0, -0.0, 72.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_208"]
-atlas = ExtResource("atlas")
-region = Rect2(288, 1137, 155, 156)
-margin = Rect2(65.0, 72.0, 65.0, 72.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_209"]
-atlas = ExtResource("atlas")
-region = Rect2(288, 1137, 155, 156)
-margin = Rect2(65.0, 72.0, 65.0, 72.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_210"]
-atlas = ExtResource("atlas")
-region = Rect2(288, 1137, 155, 156)
-margin = Rect2(65.0, 72.0, 65.0, 72.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_211"]
-atlas = ExtResource("atlas")
-region = Rect2(288, 1137, 155, 156)
-margin = Rect2(65.0, 72.0, 65.0, 72.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_212"]
-atlas = ExtResource("atlas")
-region = Rect2(288, 1137, 155, 156)
-margin = Rect2(65.0, 72.0, 65.0, 72.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_213"]
-atlas = ExtResource("atlas")
-region = Rect2(288, 1137, 155, 156)
-margin = Rect2(65.0, 72.0, 65.0, 72.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_214"]
-atlas = ExtResource("atlas")
-region = Rect2(288, 1137, 155, 156)
-margin = Rect2(65.0, 72.0, 65.0, 72.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_215"]
-atlas = ExtResource("atlas")
-region = Rect2(288, 1137, 155, 156)
-margin = Rect2(65.0, 72.0, 65.0, 72.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_216"]
-atlas = ExtResource("atlas")
-region = Rect2(288, 1137, 155, 156)
-margin = Rect2(65.0, 72.0, 65.0, 72.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_217"]
-atlas = ExtResource("atlas")
-region = Rect2(288, 1137, 155, 156)
-margin = Rect2(65.0, 72.0, 65.0, 72.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_218"]
-atlas = ExtResource("atlas")
-region = Rect2(288, 1137, 155, 156)
-margin = Rect2(65.0, 72.0, 65.0, 72.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_219"]
-atlas = ExtResource("atlas")
-region = Rect2(288, 1137, 155, 156)
-margin = Rect2(65.0, 72.0, 65.0, 72.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_220"]
-atlas = ExtResource("atlas")
-region = Rect2(288, 1137, 155, 156)
-margin = Rect2(65.0, 72.0, 65.0, 72.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_221"]
-atlas = ExtResource("atlas")
-region = Rect2(288, 1137, 155, 156)
-margin = Rect2(65.0, 72.0, 65.0, 72.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_222"]
-atlas = ExtResource("atlas")
-region = Rect2(288, 1137, 155, 156)
-margin = Rect2(65.0, 72.0, 65.0, 72.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_223"]
-atlas = ExtResource("atlas")
-region = Rect2(443, 1137, 64, 48)
-margin = Rect2(-0.0, -0.0, -0.0, -0.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_224"]
-atlas = ExtResource("atlas")
-region = Rect2(443, 1137, 64, 48)
-margin = Rect2(-0.0, -0.0, -0.0, -0.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_225"]
-atlas = ExtResource("atlas")
-region = Rect2(507, 1137, 64, 48)
-margin = Rect2(-0.0, -0.0, -0.0, -0.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_226"]
-atlas = ExtResource("atlas")
-region = Rect2(507, 1137, 64, 48)
-margin = Rect2(-0.0, -0.0, -0.0, -0.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_227"]
-atlas = ExtResource("atlas")
-region = Rect2(571, 1137, 64, 48)
-margin = Rect2(-0.0, -0.0, -0.0, -0.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_228"]
-atlas = ExtResource("atlas")
-region = Rect2(571, 1137, 64, 48)
-margin = Rect2(-0.0, -0.0, -0.0, -0.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_273"]
-atlas = ExtResource("atlas")
-region = Rect2(635, 1137, 176, 164)
-margin = Rect2(-0.0, -0.0, -0.0, -0.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_274"]
-atlas = ExtResource("atlas")
-region = Rect2(811, 1137, 165, 157)
-margin = Rect2(12.0, 7.0, 12.0, 7.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_275"]
-atlas = ExtResource("atlas")
-region = Rect2(811, 1137, 165, 157)
-margin = Rect2(12.0, 7.0, 12.0, 7.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_276"]
-atlas = ExtResource("atlas")
-region = Rect2(976, 1137, 150, 149)
-margin = Rect2(25.0, 14.0, 25.0, 14.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_277"]
-atlas = ExtResource("atlas")
-region = Rect2(976, 1137, 150, 149)
-margin = Rect2(25.0, 14.0, 25.0, 14.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_278"]
-atlas = ExtResource("atlas")
-region = Rect2(1126, 1137, 146, 148)
-margin = Rect2(38.0, 22.0, 38.0, 22.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_279"]
-atlas = ExtResource("atlas")
-region = Rect2(1126, 1137, 146, 148)
-margin = Rect2(38.0, 22.0, 38.0, 22.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_280"]
-atlas = ExtResource("atlas")
-region = Rect2(1126, 1137, 146, 148)
-margin = Rect2(38.0, 22.0, 38.0, 22.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_281"]
-atlas = ExtResource("atlas")
-region = Rect2(1126, 1137, 146, 148)
-margin = Rect2(38.0, 22.0, 38.0, 22.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_282"]
-atlas = ExtResource("atlas")
-region = Rect2(1126, 1137, 146, 148)
-margin = Rect2(38.0, 22.0, 38.0, 22.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_283"]
-atlas = ExtResource("atlas")
-region = Rect2(1126, 1137, 146, 148)
-margin = Rect2(38.0, 22.0, 38.0, 22.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_284"]
-atlas = ExtResource("atlas")
-region = Rect2(1272, 1137, 182, 185)
-margin = Rect2(19.0, 19.0, 19.0, 19.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_285"]
-atlas = ExtResource("atlas")
-region = Rect2(1272, 1137, 182, 185)
-margin = Rect2(19.0, 19.0, 19.0, 19.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_286"]
-atlas = ExtResource("atlas")
-region = Rect2(1454, 1137, 182, 185)
-margin = Rect2(19.0, 19.0, 19.0, 19.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_287"]
-atlas = ExtResource("atlas")
-region = Rect2(1636, 1137, 182, 185)
-margin = Rect2(19.0, 19.0, 19.0, 19.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_288"]
-atlas = ExtResource("atlas")
-region = Rect2(1636, 1137, 182, 185)
-margin = Rect2(19.0, 19.0, 19.0, 19.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_289"]
-atlas = ExtResource("atlas")
-region = Rect2(1636, 1137, 182, 185)
-margin = Rect2(19.0, 19.0, 19.0, 19.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_290"]
-atlas = ExtResource("atlas")
-region = Rect2(1818, 1137, 182, 185)
-margin = Rect2(19.0, 19.0, 19.0, 19.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_291"]
-atlas = ExtResource("atlas")
-region = Rect2(1818, 1137, 182, 185)
-margin = Rect2(19.0, 19.0, 19.0, 19.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_292"]
-atlas = ExtResource("atlas")
-region = Rect2(1818, 1137, 182, 185)
-margin = Rect2(19.0, 19.0, 19.0, 19.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_293"]
-atlas = ExtResource("atlas")
-region = Rect2(2, 1325, 182, 185)
-margin = Rect2(19.0, 19.0, 19.0, 19.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_294"]
-atlas = ExtResource("atlas")
-region = Rect2(2, 1325, 182, 185)
-margin = Rect2(19.0, 19.0, 19.0, 19.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_295"]
-atlas = ExtResource("atlas")
-region = Rect2(2, 1325, 182, 185)
-margin = Rect2(19.0, 19.0, 19.0, 19.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_296"]
-atlas = ExtResource("atlas")
-region = Rect2(184, 1325, 142, 150)
-margin = Rect2(37.0, 19.0, 37.0, 19.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_297"]
-atlas = ExtResource("atlas")
-region = Rect2(184, 1325, 142, 150)
-margin = Rect2(37.0, 19.0, 37.0, 19.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_298"]
-atlas = ExtResource("atlas")
-region = Rect2(184, 1325, 142, 150)
-margin = Rect2(37.0, 19.0, 37.0, 19.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_299"]
-atlas = ExtResource("atlas")
-region = Rect2(184, 1325, 142, 150)
-margin = Rect2(37.0, 19.0, 37.0, 19.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_300"]
-atlas = ExtResource("atlas")
-region = Rect2(184, 1325, 142, 150)
-margin = Rect2(37.0, 19.0, 37.0, 19.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_301"]
-atlas = ExtResource("atlas")
-region = Rect2(184, 1325, 142, 150)
-margin = Rect2(37.0, 19.0, 37.0, 19.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_302"]
-atlas = ExtResource("atlas")
-region = Rect2(184, 1325, 142, 150)
-margin = Rect2(37.0, 19.0, 37.0, 19.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_303"]
-atlas = ExtResource("atlas")
-region = Rect2(326, 1325, 141, 230)
-margin = Rect2(-0.0, -0.0, -0.0, -0.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_304"]
-atlas = ExtResource("atlas")
-region = Rect2(326, 1325, 141, 230)
-margin = Rect2(-0.0, -0.0, -0.0, -0.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_305"]
-atlas = ExtResource("atlas")
-region = Rect2(467, 1325, 141, 230)
-margin = Rect2(-0.0, -0.0, -0.0, -0.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_306"]
-atlas = ExtResource("atlas")
-region = Rect2(467, 1325, 141, 230)
-margin = Rect2(-0.0, -0.0, -0.0, -0.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_307"]
-atlas = ExtResource("atlas")
-region = Rect2(608, 1325, 141, 230)
-margin = Rect2(-0.0, -0.0, -0.0, -0.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_308"]
-atlas = ExtResource("atlas")
-region = Rect2(608, 1325, 141, 230)
-margin = Rect2(-0.0, -0.0, -0.0, -0.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_309"]
-atlas = ExtResource("atlas")
-region = Rect2(749, 1325, 141, 230)
-margin = Rect2(-0.0, -0.0, -0.0, -0.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_310"]
-atlas = ExtResource("atlas")
-region = Rect2(749, 1325, 141, 230)
-margin = Rect2(-0.0, -0.0, -0.0, -0.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_311"]
-atlas = ExtResource("atlas")
-region = Rect2(890, 1325, 141, 230)
-margin = Rect2(-0.0, -0.0, -0.0, -0.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_312"]
-atlas = ExtResource("atlas")
-region = Rect2(890, 1325, 141, 230)
-margin = Rect2(-0.0, -0.0, -0.0, -0.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_313"]
-atlas = ExtResource("atlas")
-region = Rect2(1031, 1325, 141, 230)
-margin = Rect2(-0.0, -0.0, -0.0, -0.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_314"]
-atlas = ExtResource("atlas")
-region = Rect2(1031, 1325, 141, 230)
-margin = Rect2(-0.0, -0.0, -0.0, -0.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_315"]
-atlas = ExtResource("atlas")
-region = Rect2(1172, 1325, 95, 192)
-margin = Rect2(-0.0, -0.0, -0.0, -0.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_316"]
-atlas = ExtResource("atlas")
-region = Rect2(1172, 1325, 95, 192)
-margin = Rect2(-0.0, -0.0, -0.0, -0.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_317"]
-atlas = ExtResource("atlas")
-region = Rect2(1172, 1325, 95, 192)
-margin = Rect2(-0.0, -0.0, -0.0, -0.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_318"]
-atlas = ExtResource("atlas")
-region = Rect2(1267, 1325, 95, 192)
-margin = Rect2(-0.0, -0.0, -0.0, -0.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_319"]
-atlas = ExtResource("atlas")
-region = Rect2(1267, 1325, 95, 192)
-margin = Rect2(-0.0, -0.0, -0.0, -0.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_320"]
-atlas = ExtResource("atlas")
-region = Rect2(1267, 1325, 95, 192)
-margin = Rect2(-0.0, -0.0, -0.0, -0.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_321"]
-atlas = ExtResource("atlas")
-region = Rect2(1362, 1325, 95, 192)
-margin = Rect2(-0.0, -0.0, -0.0, -0.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_322"]
-atlas = ExtResource("atlas")
-region = Rect2(1362, 1325, 95, 192)
-margin = Rect2(-0.0, -0.0, -0.0, -0.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_323"]
-atlas = ExtResource("atlas")
-region = Rect2(1362, 1325, 95, 192)
-margin = Rect2(-0.0, -0.0, -0.0, -0.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_324"]
-atlas = ExtResource("atlas")
-region = Rect2(1457, 1325, 95, 192)
-margin = Rect2(-0.0, -0.0, -0.0, -0.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_325"]
-atlas = ExtResource("atlas")
-region = Rect2(1457, 1325, 95, 192)
-margin = Rect2(-0.0, -0.0, -0.0, -0.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_326"]
-atlas = ExtResource("atlas")
-region = Rect2(1457, 1325, 95, 192)
-margin = Rect2(-0.0, -0.0, -0.0, -0.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_327"]
-atlas = ExtResource("atlas")
-region = Rect2(1552, 1325, 95, 192)
-margin = Rect2(-0.0, -0.0, -0.0, -0.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_328"]
-atlas = ExtResource("atlas")
-region = Rect2(1552, 1325, 95, 192)
-margin = Rect2(-0.0, -0.0, -0.0, -0.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_329"]
-atlas = ExtResource("atlas")
-region = Rect2(1552, 1325, 95, 192)
-margin = Rect2(-0.0, -0.0, -0.0, -0.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_330"]
-atlas = ExtResource("atlas")
-region = Rect2(650, 167, 176, 164)
-margin = Rect2(1.0, 5.0, 1.0, 5.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_331"]
-atlas = ExtResource("atlas")
-region = Rect2(650, 167, 176, 164)
-margin = Rect2(1.0, 5.0, 1.0, 5.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_332"]
-atlas = ExtResource("atlas")
-region = Rect2(650, 167, 176, 164)
-margin = Rect2(1.0, 5.0, 1.0, 5.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_333"]
-atlas = ExtResource("atlas")
-region = Rect2(650, 167, 176, 164)
-margin = Rect2(1.0, 5.0, 1.0, 5.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_334"]
-atlas = ExtResource("atlas")
-region = Rect2(826, 167, 177, 165)
-margin = Rect2(-0.0, 3.0, -0.0, 3.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_335"]
-atlas = ExtResource("atlas")
-region = Rect2(826, 167, 177, 165)
-margin = Rect2(-0.0, 3.0, -0.0, 3.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_336"]
-atlas = ExtResource("atlas")
-region = Rect2(826, 167, 177, 165)
-margin = Rect2(-0.0, 3.0, -0.0, 3.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_337"]
-atlas = ExtResource("atlas")
-region = Rect2(826, 167, 177, 165)
-margin = Rect2(-0.0, 3.0, -0.0, 3.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_338"]
-atlas = ExtResource("atlas")
-region = Rect2(1003, 167, 177, 165)
-margin = Rect2(-0.0, 1.0, -0.0, 1.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_339"]
-atlas = ExtResource("atlas")
-region = Rect2(1003, 167, 177, 165)
-margin = Rect2(-0.0, 1.0, -0.0, 1.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_340"]
-atlas = ExtResource("atlas")
-region = Rect2(1003, 167, 177, 165)
-margin = Rect2(-0.0, 1.0, -0.0, 1.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_341"]
-atlas = ExtResource("atlas")
-region = Rect2(1003, 167, 177, 165)
-margin = Rect2(-0.0, 1.0, -0.0, 1.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_342"]
-atlas = ExtResource("atlas")
-region = Rect2(1003, 167, 177, 165)
-margin = Rect2(-0.0, 1.0, -0.0, 1.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_343"]
-atlas = ExtResource("atlas")
-region = Rect2(1180, 167, 177, 165)
-margin = Rect2(-0.0, -0.0, -0.0, -0.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_344"]
-atlas = ExtResource("atlas")
-region = Rect2(1180, 167, 177, 165)
-margin = Rect2(-0.0, -0.0, -0.0, -0.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_345"]
-atlas = ExtResource("atlas")
-region = Rect2(1180, 167, 177, 165)
-margin = Rect2(-0.0, -0.0, -0.0, -0.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_346"]
-atlas = ExtResource("atlas")
-region = Rect2(1180, 167, 177, 165)
-margin = Rect2(-0.0, -0.0, -0.0, -0.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_347"]
-atlas = ExtResource("atlas")
-region = Rect2(1357, 167, 177, 164)
-margin = Rect2(-0.0, 2.0, -0.0, 2.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_348"]
-atlas = ExtResource("atlas")
-region = Rect2(1357, 167, 177, 164)
-margin = Rect2(-0.0, 2.0, -0.0, 2.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_349"]
-atlas = ExtResource("atlas")
-region = Rect2(1357, 167, 177, 164)
-margin = Rect2(-0.0, 2.0, -0.0, 2.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_350"]
-atlas = ExtResource("atlas")
-region = Rect2(1357, 167, 177, 164)
-margin = Rect2(-0.0, 2.0, -0.0, 2.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_351"]
-atlas = ExtResource("atlas")
-region = Rect2(1534, 167, 176, 165)
-margin = Rect2(1.0, 3.0, 1.0, 3.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_352"]
-atlas = ExtResource("atlas")
-region = Rect2(1534, 167, 176, 165)
-margin = Rect2(1.0, 3.0, 1.0, 3.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_353"]
-atlas = ExtResource("atlas")
-region = Rect2(1534, 167, 176, 165)
-margin = Rect2(1.0, 3.0, 1.0, 3.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_354"]
-atlas = ExtResource("atlas")
-region = Rect2(1534, 167, 176, 165)
-margin = Rect2(1.0, 3.0, 1.0, 3.0)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="Frame_355"]
-atlas = ExtResource("atlas")
-region = Rect2(1534, 167, 176, 165)
-margin = Rect2(1.0, 3.0, 1.0, 3.0)
-filter_clip = true
-[sub_resource type="Animation" id="Anim_idle"]
-length = 1.000000000
-loop_mode = 1
+[ext_resource type="SpineSkeletonDataResource" path="res://assets/monsters/jushi_lingjun/spinedata.tres" id="spine"]
+[sub_resource type="Animation" id="Native_idle"]
+length = 1.0
 tracks/0/type = "value"
-tracks/0/path = NodePath("Visual/Body:texture")
-tracks/0/interp = 0
-tracks/0/keys = {"times": PackedFloat32Array(0.000000000, 0.033333333, 0.066666667, 0.100000000, 0.133333333, 0.166666667, 0.200000000, 0.233333333, 0.266666667, 0.300000000, 0.333333333, 0.366666667, 0.400000000, 0.433333333, 0.466666667, 0.500000000, 0.533333333, 0.566666667, 0.600000000, 0.633333333, 0.666666667, 0.700000000, 0.733333333, 0.766666667, 0.800000000, 0.833333333, 0.866666667, 0.900000000, 0.933333333, 0.966666667), "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1), "update": 1, "values": [SubResource("Frame_73"), SubResource("Frame_74"), SubResource("Frame_75"), SubResource("Frame_76"), SubResource("Frame_77"), SubResource("Frame_78"), SubResource("Frame_79"), SubResource("Frame_80"), SubResource("Frame_81"), SubResource("Frame_82"), SubResource("Frame_83"), SubResource("Frame_84"), SubResource("Frame_85"), SubResource("Frame_86"), SubResource("Frame_87"), SubResource("Frame_88"), SubResource("Frame_89"), SubResource("Frame_90"), SubResource("Frame_91"), SubResource("Frame_92"), SubResource("Frame_93"), SubResource("Frame_94"), SubResource("Frame_95"), SubResource("Frame_96"), SubResource("Frame_97"), SubResource("Frame_98"), SubResource("Frame_99"), SubResource("Frame_100"), SubResource("Frame_101"), SubResource("Frame_102")]}
+tracks/0/path = NodePath(".:animation_name")
+tracks/0/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": ["idle"]}
 tracks/1/type = "value"
-tracks/1/path = NodePath("Visual/Body:position")
-tracks/1/interp = 0
-tracks/1/keys = {"times": PackedFloat32Array(0.000000000, 0.033333333, 0.066666667, 0.100000000, 0.133333333, 0.166666667, 0.200000000, 0.233333333, 0.266666667, 0.300000000, 0.333333333, 0.366666667, 0.400000000, 0.433333333, 0.466666667, 0.500000000, 0.533333333, 0.566666667, 0.600000000, 0.633333333, 0.666666667, 0.700000000, 0.733333333, 0.766666667, 0.800000000, 0.833333333, 0.866666667, 0.900000000, 0.933333333, 0.966666667), "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1), "update": 1, "values": [Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65)]}
+tracks/1/path = NodePath(".:loop")
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [false]}
+[sub_resource type="Animation" id="Native_idle_looped"]
+length = 1.0
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:animation_name")
+tracks/0/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": ["idle"]}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:loop")
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [true]}
+[sub_resource type="Animation" id="Master_idle"]
+length = 1.0
+loop_mode = 1
+tracks/0/type = "animation"
+tracks/0/path = NodePath("SpineVisual/SpineAnimationTrack/SpineVisual Track 0")
+tracks/0/keys = {"times": PackedFloat32Array(0), "clips": PackedStringArray("idle_looped")}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AttackHitbox:preview_action")
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [&"idle"]}
 tracks/2/type = "value"
-tracks/2/path = NodePath("Visual/Effect1:visible")
-tracks/2/interp = 0
-tracks/2/keys = {"times": PackedFloat32Array(0.000000000), "transitions": PackedFloat32Array(1), "update": 1, "values": [false]}
+tracks/2/path = NodePath("AttackHitbox:preview_time")
+tracks/2/keys = {"times": PackedFloat32Array(0,1.0), "transitions": PackedFloat32Array(1,1), "update": 0, "values": [0.0,1.0]}
 tracks/3/type = "value"
-tracks/3/path = NodePath("Visual/Effect2:visible")
-tracks/3/interp = 0
-tracks/3/keys = {"times": PackedFloat32Array(0.000000000), "transitions": PackedFloat32Array(1), "update": 1, "values": [false]}
-tracks/4/type = "value"
-tracks/4/path = NodePath("Visual/ProtectGlow:visible")
-tracks/4/interp = 0
-tracks/4/keys = {"times": PackedFloat32Array(0.000000000), "transitions": PackedFloat32Array(1), "update": 1, "values": [false]}
-[sub_resource type="Animation" id="Anim_move"]
+tracks/3/path = NodePath("Visual/ProtectGlow:visible")
+tracks/3/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [false]}
+[sub_resource type="Animation" id="Native_move"]
+length = 0.866666667
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:animation_name")
+tracks/0/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": ["move"]}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:loop")
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [false]}
+[sub_resource type="Animation" id="Native_move_looped"]
+length = 0.866666667
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:animation_name")
+tracks/0/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": ["move"]}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:loop")
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [false]}
+[sub_resource type="Animation" id="Master_move"]
 length = 0.866666667
 loop_mode = 1
-tracks/0/type = "value"
-tracks/0/path = NodePath("Visual/Body:texture")
-tracks/0/interp = 0
-tracks/0/keys = {"times": PackedFloat32Array(0.000000000, 0.033333333, 0.066666667, 0.100000000, 0.133333333, 0.166666667, 0.200000000, 0.233333333, 0.266666667, 0.300000000, 0.333333333, 0.366666667, 0.400000000, 0.433333333, 0.466666667, 0.500000000, 0.533333333, 0.566666667, 0.600000000, 0.633333333, 0.666666667, 0.700000000, 0.733333333, 0.766666667, 0.800000000, 0.833333333), "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1), "update": 1, "values": [SubResource("Frame_330"), SubResource("Frame_331"), SubResource("Frame_332"), SubResource("Frame_333"), SubResource("Frame_334"), SubResource("Frame_335"), SubResource("Frame_336"), SubResource("Frame_337"), SubResource("Frame_338"), SubResource("Frame_339"), SubResource("Frame_340"), SubResource("Frame_341"), SubResource("Frame_342"), SubResource("Frame_343"), SubResource("Frame_344"), SubResource("Frame_345"), SubResource("Frame_346"), SubResource("Frame_347"), SubResource("Frame_348"), SubResource("Frame_349"), SubResource("Frame_350"), SubResource("Frame_351"), SubResource("Frame_352"), SubResource("Frame_353"), SubResource("Frame_354"), SubResource("Frame_355")]}
+tracks/0/type = "animation"
+tracks/0/path = NodePath("SpineVisual/SpineAnimationTrack/SpineVisual Track 0")
+tracks/0/keys = {"times": PackedFloat32Array(0), "clips": PackedStringArray("move_looped")}
 tracks/1/type = "value"
-tracks/1/path = NodePath("Visual/Body:position")
-tracks/1/interp = 0
-tracks/1/keys = {"times": PackedFloat32Array(0.000000000, 0.033333333, 0.066666667, 0.100000000, 0.133333333, 0.166666667, 0.200000000, 0.233333333, 0.266666667, 0.300000000, 0.333333333, 0.366666667, 0.400000000, 0.433333333, 0.466666667, 0.500000000, 0.533333333, 0.566666667, 0.600000000, 0.633333333, 0.666666667, 0.700000000, 0.733333333, 0.766666667, 0.800000000, 0.833333333), "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1), "update": 1, "values": [Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65)]}
+tracks/1/path = NodePath("AttackHitbox:preview_action")
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [&"move"]}
 tracks/2/type = "value"
-tracks/2/path = NodePath("Visual/Effect1:visible")
-tracks/2/interp = 0
-tracks/2/keys = {"times": PackedFloat32Array(0.000000000), "transitions": PackedFloat32Array(1), "update": 1, "values": [false]}
+tracks/2/path = NodePath("AttackHitbox:preview_time")
+tracks/2/keys = {"times": PackedFloat32Array(0,0.866666667), "transitions": PackedFloat32Array(1,1), "update": 0, "values": [0.0,0.866666667]}
 tracks/3/type = "value"
-tracks/3/path = NodePath("Visual/Effect2:visible")
-tracks/3/interp = 0
-tracks/3/keys = {"times": PackedFloat32Array(0.000000000), "transitions": PackedFloat32Array(1), "update": 1, "values": [false]}
-tracks/4/type = "value"
-tracks/4/path = NodePath("Visual/ProtectGlow:visible")
-tracks/4/interp = 0
-tracks/4/keys = {"times": PackedFloat32Array(0.000000000), "transitions": PackedFloat32Array(1), "update": 1, "values": [false]}
-[sub_resource type="Animation" id="Anim_run"]
+tracks/3/path = NodePath("Visual/ProtectGlow:visible")
+tracks/3/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [false]}
+[sub_resource type="Animation" id="Native_run"]
+length = 0.866666667
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:animation_name")
+tracks/0/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": ["run"]}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:loop")
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [false]}
+[sub_resource type="Animation" id="Native_run_looped"]
+length = 0.866666667
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:animation_name")
+tracks/0/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": ["run"]}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:loop")
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [false]}
+[sub_resource type="Animation" id="Master_run"]
 length = 0.866666667
 loop_mode = 1
-tracks/0/type = "value"
-tracks/0/path = NodePath("Visual/Body:texture")
-tracks/0/interp = 0
-tracks/0/keys = {"times": PackedFloat32Array(0.000000000, 0.033333333, 0.066666667, 0.100000000, 0.133333333, 0.166666667, 0.200000000, 0.233333333, 0.266666667, 0.300000000, 0.333333333, 0.366666667, 0.400000000, 0.433333333, 0.466666667, 0.500000000, 0.533333333, 0.566666667, 0.600000000, 0.633333333, 0.666666667, 0.700000000, 0.733333333, 0.766666667, 0.800000000, 0.833333333), "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1), "update": 1, "values": [SubResource("Frame_330"), SubResource("Frame_331"), SubResource("Frame_332"), SubResource("Frame_333"), SubResource("Frame_334"), SubResource("Frame_335"), SubResource("Frame_336"), SubResource("Frame_337"), SubResource("Frame_338"), SubResource("Frame_339"), SubResource("Frame_340"), SubResource("Frame_341"), SubResource("Frame_342"), SubResource("Frame_343"), SubResource("Frame_344"), SubResource("Frame_345"), SubResource("Frame_346"), SubResource("Frame_347"), SubResource("Frame_348"), SubResource("Frame_349"), SubResource("Frame_350"), SubResource("Frame_351"), SubResource("Frame_352"), SubResource("Frame_353"), SubResource("Frame_354"), SubResource("Frame_355")]}
+tracks/0/type = "animation"
+tracks/0/path = NodePath("SpineVisual/SpineAnimationTrack/SpineVisual Track 0")
+tracks/0/keys = {"times": PackedFloat32Array(0), "clips": PackedStringArray("run_looped")}
 tracks/1/type = "value"
-tracks/1/path = NodePath("Visual/Body:position")
-tracks/1/interp = 0
-tracks/1/keys = {"times": PackedFloat32Array(0.000000000, 0.033333333, 0.066666667, 0.100000000, 0.133333333, 0.166666667, 0.200000000, 0.233333333, 0.266666667, 0.300000000, 0.333333333, 0.366666667, 0.400000000, 0.433333333, 0.466666667, 0.500000000, 0.533333333, 0.566666667, 0.600000000, 0.633333333, 0.666666667, 0.700000000, 0.733333333, 0.766666667, 0.800000000, 0.833333333), "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1), "update": 1, "values": [Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65)]}
+tracks/1/path = NodePath("AttackHitbox:preview_action")
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [&"run"]}
 tracks/2/type = "value"
-tracks/2/path = NodePath("Visual/Effect1:visible")
-tracks/2/interp = 0
-tracks/2/keys = {"times": PackedFloat32Array(0.000000000), "transitions": PackedFloat32Array(1), "update": 1, "values": [false]}
+tracks/2/path = NodePath("AttackHitbox:preview_time")
+tracks/2/keys = {"times": PackedFloat32Array(0,0.866666667), "transitions": PackedFloat32Array(1,1), "update": 0, "values": [0.0,0.866666667]}
 tracks/3/type = "value"
-tracks/3/path = NodePath("Visual/Effect2:visible")
-tracks/3/interp = 0
-tracks/3/keys = {"times": PackedFloat32Array(0.000000000), "transitions": PackedFloat32Array(1), "update": 1, "values": [false]}
-tracks/4/type = "value"
-tracks/4/path = NodePath("Visual/ProtectGlow:visible")
-tracks/4/interp = 0
-tracks/4/keys = {"times": PackedFloat32Array(0.000000000), "transitions": PackedFloat32Array(1), "update": 1, "values": [false]}
-[sub_resource type="Animation" id="Anim_jump"]
-length = 1.000000000
+tracks/3/path = NodePath("Visual/ProtectGlow:visible")
+tracks/3/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [false]}
+[sub_resource type="Animation" id="Native_jump"]
+length = 1.0
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:animation_name")
+tracks/0/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": ["jump"]}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:loop")
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [false]}
+[sub_resource type="Animation" id="Native_jump_looped"]
+length = 1.0
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:animation_name")
+tracks/0/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": ["jump"]}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:loop")
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [false]}
+[sub_resource type="Animation" id="Master_jump"]
+length = 1.0
 loop_mode = 0
-tracks/0/type = "value"
-tracks/0/path = NodePath("Visual/Body:texture")
-tracks/0/interp = 0
-tracks/0/keys = {"times": PackedFloat32Array(0.000000000, 0.033333333, 0.066666667, 0.100000000, 0.133333333, 0.166666667, 0.200000000, 0.233333333, 0.266666667, 0.300000000, 0.333333333, 0.366666667, 0.400000000, 0.433333333, 0.466666667, 0.500000000, 0.533333333, 0.566666667, 0.600000000, 0.633333333, 0.666666667, 0.700000000, 0.733333333, 0.766666667, 0.800000000, 0.833333333, 0.866666667, 0.900000000, 0.933333333, 0.966666667), "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1), "update": 1, "values": [SubResource("Frame_73"), SubResource("Frame_74"), SubResource("Frame_75"), SubResource("Frame_76"), SubResource("Frame_77"), SubResource("Frame_78"), SubResource("Frame_79"), SubResource("Frame_80"), SubResource("Frame_81"), SubResource("Frame_82"), SubResource("Frame_83"), SubResource("Frame_84"), SubResource("Frame_85"), SubResource("Frame_86"), SubResource("Frame_87"), SubResource("Frame_88"), SubResource("Frame_89"), SubResource("Frame_90"), SubResource("Frame_91"), SubResource("Frame_92"), SubResource("Frame_93"), SubResource("Frame_94"), SubResource("Frame_95"), SubResource("Frame_96"), SubResource("Frame_97"), SubResource("Frame_98"), SubResource("Frame_99"), SubResource("Frame_100"), SubResource("Frame_101"), SubResource("Frame_102")]}
+tracks/0/type = "animation"
+tracks/0/path = NodePath("SpineVisual/SpineAnimationTrack/SpineVisual Track 0")
+tracks/0/keys = {"times": PackedFloat32Array(0), "clips": PackedStringArray("jump")}
 tracks/1/type = "value"
-tracks/1/path = NodePath("Visual/Body:position")
-tracks/1/interp = 0
-tracks/1/keys = {"times": PackedFloat32Array(0.000000000, 0.033333333, 0.066666667, 0.100000000, 0.133333333, 0.166666667, 0.200000000, 0.233333333, 0.266666667, 0.300000000, 0.333333333, 0.366666667, 0.400000000, 0.433333333, 0.466666667, 0.500000000, 0.533333333, 0.566666667, 0.600000000, 0.633333333, 0.666666667, 0.700000000, 0.733333333, 0.766666667, 0.800000000, 0.833333333, 0.866666667, 0.900000000, 0.933333333, 0.966666667), "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1), "update": 1, "values": [Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65)]}
+tracks/1/path = NodePath("AttackHitbox:preview_action")
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [&"jump"]}
 tracks/2/type = "value"
-tracks/2/path = NodePath("Visual/Effect1:visible")
-tracks/2/interp = 0
-tracks/2/keys = {"times": PackedFloat32Array(0.000000000), "transitions": PackedFloat32Array(1), "update": 1, "values": [false]}
+tracks/2/path = NodePath("AttackHitbox:preview_time")
+tracks/2/keys = {"times": PackedFloat32Array(0,1.0), "transitions": PackedFloat32Array(1,1), "update": 0, "values": [0.0,1.0]}
 tracks/3/type = "value"
-tracks/3/path = NodePath("Visual/Effect2:visible")
-tracks/3/interp = 0
-tracks/3/keys = {"times": PackedFloat32Array(0.000000000), "transitions": PackedFloat32Array(1), "update": 1, "values": [false]}
-tracks/4/type = "value"
-tracks/4/path = NodePath("Visual/ProtectGlow:visible")
-tracks/4/interp = 0
-tracks/4/keys = {"times": PackedFloat32Array(0.000000000), "transitions": PackedFloat32Array(1), "update": 1, "values": [false]}
-[sub_resource type="Animation" id="Anim_jump_2"]
-length = 1.000000000
+tracks/3/path = NodePath("Visual/ProtectGlow:visible")
+tracks/3/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [false]}
+[sub_resource type="Animation" id="Native_jump_2"]
+length = 1.0
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:animation_name")
+tracks/0/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": ["jump_2"]}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:loop")
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [false]}
+[sub_resource type="Animation" id="Native_jump_2_looped"]
+length = 1.0
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:animation_name")
+tracks/0/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": ["jump_2"]}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:loop")
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [false]}
+[sub_resource type="Animation" id="Master_jump_2"]
+length = 1.0
 loop_mode = 0
-tracks/0/type = "value"
-tracks/0/path = NodePath("Visual/Body:texture")
-tracks/0/interp = 0
-tracks/0/keys = {"times": PackedFloat32Array(0.000000000, 0.033333333, 0.066666667, 0.100000000, 0.133333333, 0.166666667, 0.200000000, 0.233333333, 0.266666667, 0.300000000, 0.333333333, 0.366666667, 0.400000000, 0.433333333, 0.466666667, 0.500000000, 0.533333333, 0.566666667, 0.600000000, 0.633333333, 0.666666667, 0.700000000, 0.733333333, 0.766666667, 0.800000000, 0.833333333, 0.866666667, 0.900000000, 0.933333333, 0.966666667), "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1), "update": 1, "values": [SubResource("Frame_73"), SubResource("Frame_74"), SubResource("Frame_75"), SubResource("Frame_76"), SubResource("Frame_77"), SubResource("Frame_78"), SubResource("Frame_79"), SubResource("Frame_80"), SubResource("Frame_81"), SubResource("Frame_82"), SubResource("Frame_83"), SubResource("Frame_84"), SubResource("Frame_85"), SubResource("Frame_86"), SubResource("Frame_87"), SubResource("Frame_88"), SubResource("Frame_89"), SubResource("Frame_90"), SubResource("Frame_91"), SubResource("Frame_92"), SubResource("Frame_93"), SubResource("Frame_94"), SubResource("Frame_95"), SubResource("Frame_96"), SubResource("Frame_97"), SubResource("Frame_98"), SubResource("Frame_99"), SubResource("Frame_100"), SubResource("Frame_101"), SubResource("Frame_102")]}
+tracks/0/type = "animation"
+tracks/0/path = NodePath("SpineVisual/SpineAnimationTrack/SpineVisual Track 0")
+tracks/0/keys = {"times": PackedFloat32Array(0), "clips": PackedStringArray("jump_2")}
 tracks/1/type = "value"
-tracks/1/path = NodePath("Visual/Body:position")
-tracks/1/interp = 0
-tracks/1/keys = {"times": PackedFloat32Array(0.000000000, 0.033333333, 0.066666667, 0.100000000, 0.133333333, 0.166666667, 0.200000000, 0.233333333, 0.266666667, 0.300000000, 0.333333333, 0.366666667, 0.400000000, 0.433333333, 0.466666667, 0.500000000, 0.533333333, 0.566666667, 0.600000000, 0.633333333, 0.666666667, 0.700000000, 0.733333333, 0.766666667, 0.800000000, 0.833333333, 0.866666667, 0.900000000, 0.933333333, 0.966666667), "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1), "update": 1, "values": [Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65)]}
+tracks/1/path = NodePath("AttackHitbox:preview_action")
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [&"jump_2"]}
 tracks/2/type = "value"
-tracks/2/path = NodePath("Visual/Effect1:visible")
-tracks/2/interp = 0
-tracks/2/keys = {"times": PackedFloat32Array(0.000000000), "transitions": PackedFloat32Array(1), "update": 1, "values": [false]}
+tracks/2/path = NodePath("AttackHitbox:preview_time")
+tracks/2/keys = {"times": PackedFloat32Array(0,1.0), "transitions": PackedFloat32Array(1,1), "update": 0, "values": [0.0,1.0]}
 tracks/3/type = "value"
-tracks/3/path = NodePath("Visual/Effect2:visible")
-tracks/3/interp = 0
-tracks/3/keys = {"times": PackedFloat32Array(0.000000000), "transitions": PackedFloat32Array(1), "update": 1, "values": [false]}
-tracks/4/type = "value"
-tracks/4/path = NodePath("Visual/ProtectGlow:visible")
-tracks/4/interp = 0
-tracks/4/keys = {"times": PackedFloat32Array(0.000000000), "transitions": PackedFloat32Array(1), "update": 1, "values": [false]}
-[sub_resource type="Animation" id="Anim_fall"]
-length = 1.000000000
+tracks/3/path = NodePath("Visual/ProtectGlow:visible")
+tracks/3/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [false]}
+[sub_resource type="Animation" id="Native_fall"]
+length = 1.0
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:animation_name")
+tracks/0/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": ["fall"]}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:loop")
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [false]}
+[sub_resource type="Animation" id="Native_fall_looped"]
+length = 1.0
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:animation_name")
+tracks/0/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": ["fall"]}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:loop")
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [false]}
+[sub_resource type="Animation" id="Master_fall"]
+length = 1.0
 loop_mode = 0
-tracks/0/type = "value"
-tracks/0/path = NodePath("Visual/Body:texture")
-tracks/0/interp = 0
-tracks/0/keys = {"times": PackedFloat32Array(0.000000000, 0.033333333, 0.066666667, 0.100000000, 0.133333333, 0.166666667, 0.200000000, 0.233333333, 0.266666667, 0.300000000, 0.333333333, 0.366666667, 0.400000000, 0.433333333, 0.466666667, 0.500000000, 0.533333333, 0.566666667, 0.600000000, 0.633333333, 0.666666667, 0.700000000, 0.733333333, 0.766666667, 0.800000000, 0.833333333, 0.866666667, 0.900000000, 0.933333333, 0.966666667), "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1), "update": 1, "values": [SubResource("Frame_73"), SubResource("Frame_74"), SubResource("Frame_75"), SubResource("Frame_76"), SubResource("Frame_77"), SubResource("Frame_78"), SubResource("Frame_79"), SubResource("Frame_80"), SubResource("Frame_81"), SubResource("Frame_82"), SubResource("Frame_83"), SubResource("Frame_84"), SubResource("Frame_85"), SubResource("Frame_86"), SubResource("Frame_87"), SubResource("Frame_88"), SubResource("Frame_89"), SubResource("Frame_90"), SubResource("Frame_91"), SubResource("Frame_92"), SubResource("Frame_93"), SubResource("Frame_94"), SubResource("Frame_95"), SubResource("Frame_96"), SubResource("Frame_97"), SubResource("Frame_98"), SubResource("Frame_99"), SubResource("Frame_100"), SubResource("Frame_101"), SubResource("Frame_102")]}
+tracks/0/type = "animation"
+tracks/0/path = NodePath("SpineVisual/SpineAnimationTrack/SpineVisual Track 0")
+tracks/0/keys = {"times": PackedFloat32Array(0), "clips": PackedStringArray("fall")}
 tracks/1/type = "value"
-tracks/1/path = NodePath("Visual/Body:position")
-tracks/1/interp = 0
-tracks/1/keys = {"times": PackedFloat32Array(0.000000000, 0.033333333, 0.066666667, 0.100000000, 0.133333333, 0.166666667, 0.200000000, 0.233333333, 0.266666667, 0.300000000, 0.333333333, 0.366666667, 0.400000000, 0.433333333, 0.466666667, 0.500000000, 0.533333333, 0.566666667, 0.600000000, 0.633333333, 0.666666667, 0.700000000, 0.733333333, 0.766666667, 0.800000000, 0.833333333, 0.866666667, 0.900000000, 0.933333333, 0.966666667), "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1), "update": 1, "values": [Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65)]}
+tracks/1/path = NodePath("AttackHitbox:preview_action")
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [&"fall"]}
 tracks/2/type = "value"
-tracks/2/path = NodePath("Visual/Effect1:visible")
-tracks/2/interp = 0
-tracks/2/keys = {"times": PackedFloat32Array(0.000000000), "transitions": PackedFloat32Array(1), "update": 1, "values": [false]}
+tracks/2/path = NodePath("AttackHitbox:preview_time")
+tracks/2/keys = {"times": PackedFloat32Array(0,1.0), "transitions": PackedFloat32Array(1,1), "update": 0, "values": [0.0,1.0]}
 tracks/3/type = "value"
-tracks/3/path = NodePath("Visual/Effect2:visible")
-tracks/3/interp = 0
-tracks/3/keys = {"times": PackedFloat32Array(0.000000000), "transitions": PackedFloat32Array(1), "update": 1, "values": [false]}
-tracks/4/type = "value"
-tracks/4/path = NodePath("Visual/ProtectGlow:visible")
-tracks/4/interp = 0
-tracks/4/keys = {"times": PackedFloat32Array(0.000000000), "transitions": PackedFloat32Array(1), "update": 1, "values": [false]}
-[sub_resource type="Animation" id="Anim_land"]
-length = 1.000000000
+tracks/3/path = NodePath("Visual/ProtectGlow:visible")
+tracks/3/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [false]}
+[sub_resource type="Animation" id="Native_land"]
+length = 1.0
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:animation_name")
+tracks/0/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": ["land"]}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:loop")
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [false]}
+[sub_resource type="Animation" id="Native_land_looped"]
+length = 1.0
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:animation_name")
+tracks/0/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": ["land"]}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:loop")
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [false]}
+[sub_resource type="Animation" id="Master_land"]
+length = 1.0
 loop_mode = 0
-tracks/0/type = "value"
-tracks/0/path = NodePath("Visual/Body:texture")
-tracks/0/interp = 0
-tracks/0/keys = {"times": PackedFloat32Array(0.000000000, 0.033333333, 0.066666667, 0.100000000, 0.133333333, 0.166666667, 0.200000000, 0.233333333, 0.266666667, 0.300000000, 0.333333333, 0.366666667, 0.400000000, 0.433333333, 0.466666667, 0.500000000, 0.533333333, 0.566666667, 0.600000000, 0.633333333, 0.666666667, 0.700000000, 0.733333333, 0.766666667, 0.800000000, 0.833333333, 0.866666667, 0.900000000, 0.933333333, 0.966666667), "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1), "update": 1, "values": [SubResource("Frame_73"), SubResource("Frame_74"), SubResource("Frame_75"), SubResource("Frame_76"), SubResource("Frame_77"), SubResource("Frame_78"), SubResource("Frame_79"), SubResource("Frame_80"), SubResource("Frame_81"), SubResource("Frame_82"), SubResource("Frame_83"), SubResource("Frame_84"), SubResource("Frame_85"), SubResource("Frame_86"), SubResource("Frame_87"), SubResource("Frame_88"), SubResource("Frame_89"), SubResource("Frame_90"), SubResource("Frame_91"), SubResource("Frame_92"), SubResource("Frame_93"), SubResource("Frame_94"), SubResource("Frame_95"), SubResource("Frame_96"), SubResource("Frame_97"), SubResource("Frame_98"), SubResource("Frame_99"), SubResource("Frame_100"), SubResource("Frame_101"), SubResource("Frame_102")]}
+tracks/0/type = "animation"
+tracks/0/path = NodePath("SpineVisual/SpineAnimationTrack/SpineVisual Track 0")
+tracks/0/keys = {"times": PackedFloat32Array(0), "clips": PackedStringArray("land")}
 tracks/1/type = "value"
-tracks/1/path = NodePath("Visual/Body:position")
-tracks/1/interp = 0
-tracks/1/keys = {"times": PackedFloat32Array(0.000000000, 0.033333333, 0.066666667, 0.100000000, 0.133333333, 0.166666667, 0.200000000, 0.233333333, 0.266666667, 0.300000000, 0.333333333, 0.366666667, 0.400000000, 0.433333333, 0.466666667, 0.500000000, 0.533333333, 0.566666667, 0.600000000, 0.633333333, 0.666666667, 0.700000000, 0.733333333, 0.766666667, 0.800000000, 0.833333333, 0.866666667, 0.900000000, 0.933333333, 0.966666667), "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1), "update": 1, "values": [Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65)]}
+tracks/1/path = NodePath("AttackHitbox:preview_action")
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [&"land"]}
 tracks/2/type = "value"
-tracks/2/path = NodePath("Visual/Effect1:visible")
-tracks/2/interp = 0
-tracks/2/keys = {"times": PackedFloat32Array(0.000000000), "transitions": PackedFloat32Array(1), "update": 1, "values": [false]}
+tracks/2/path = NodePath("AttackHitbox:preview_time")
+tracks/2/keys = {"times": PackedFloat32Array(0,1.0), "transitions": PackedFloat32Array(1,1), "update": 0, "values": [0.0,1.0]}
 tracks/3/type = "value"
-tracks/3/path = NodePath("Visual/Effect2:visible")
-tracks/3/interp = 0
-tracks/3/keys = {"times": PackedFloat32Array(0.000000000), "transitions": PackedFloat32Array(1), "update": 1, "values": [false]}
-tracks/4/type = "value"
-tracks/4/path = NodePath("Visual/ProtectGlow:visible")
-tracks/4/interp = 0
-tracks/4/keys = {"times": PackedFloat32Array(0.000000000), "transitions": PackedFloat32Array(1), "update": 1, "values": [false]}
-[sub_resource type="Animation" id="Anim_hurt"]
+tracks/3/path = NodePath("Visual/ProtectGlow:visible")
+tracks/3/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [false]}
+[sub_resource type="Animation" id="Native_hurt"]
+length = 1.133333333
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:animation_name")
+tracks/0/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": ["hurt"]}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:loop")
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [false]}
+[sub_resource type="Animation" id="Native_hurt_looped"]
+length = 1.133333333
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:animation_name")
+tracks/0/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": ["hurt"]}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:loop")
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [false]}
+[sub_resource type="Animation" id="Master_hurt"]
 length = 1.133333333
 loop_mode = 0
-tracks/0/type = "value"
-tracks/0/path = NodePath("Visual/Body:texture")
-tracks/0/interp = 0
-tracks/0/keys = {"times": PackedFloat32Array(0.000000000, 0.033333333, 0.066666667, 0.100000000, 0.133333333, 0.166666667, 0.200000000, 0.233333333, 0.266666667, 0.300000000, 0.333333333, 0.366666667, 0.400000000, 0.433333333, 0.466666667, 0.500000000, 0.533333333, 0.566666667, 0.600000000, 0.633333333, 0.666666667, 0.700000000, 0.733333333, 0.766666667, 0.800000000, 0.833333333, 0.866666667, 0.900000000, 0.933333333, 0.966666667, 1.000000000, 1.033333333, 1.066666667, 1.100000000), "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1), "update": 1, "values": [SubResource("Frame_39"), SubResource("Frame_40"), SubResource("Frame_41"), SubResource("Frame_42"), SubResource("Frame_43"), SubResource("Frame_44"), SubResource("Frame_45"), SubResource("Frame_46"), SubResource("Frame_47"), SubResource("Frame_48"), SubResource("Frame_49"), SubResource("Frame_50"), SubResource("Frame_51"), SubResource("Frame_52"), SubResource("Frame_53"), SubResource("Frame_54"), SubResource("Frame_55"), SubResource("Frame_56"), SubResource("Frame_57"), SubResource("Frame_58"), SubResource("Frame_59"), SubResource("Frame_60"), SubResource("Frame_61"), SubResource("Frame_62"), SubResource("Frame_63"), SubResource("Frame_64"), SubResource("Frame_65"), SubResource("Frame_66"), SubResource("Frame_67"), SubResource("Frame_68"), SubResource("Frame_69"), SubResource("Frame_70"), SubResource("Frame_71"), SubResource("Frame_72")]}
+tracks/0/type = "animation"
+tracks/0/path = NodePath("SpineVisual/SpineAnimationTrack/SpineVisual Track 0")
+tracks/0/keys = {"times": PackedFloat32Array(0), "clips": PackedStringArray("hurt")}
 tracks/1/type = "value"
-tracks/1/path = NodePath("Visual/Body:position")
-tracks/1/interp = 0
-tracks/1/keys = {"times": PackedFloat32Array(0.000000000, 0.033333333, 0.066666667, 0.100000000, 0.133333333, 0.166666667, 0.200000000, 0.233333333, 0.266666667, 0.300000000, 0.333333333, 0.366666667, 0.400000000, 0.433333333, 0.466666667, 0.500000000, 0.533333333, 0.566666667, 0.600000000, 0.633333333, 0.666666667, 0.700000000, 0.733333333, 0.766666667, 0.800000000, 0.833333333, 0.866666667, 0.900000000, 0.933333333, 0.966666667, 1.000000000, 1.033333333, 1.066666667, 1.100000000), "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1), "update": 1, "values": [Vector2(-187.2, -161.9), Vector2(-187.2, -161.9), Vector2(-187.2, -161.9), Vector2(-187.2, -161.9), Vector2(-187.2, -161.9), Vector2(-103.9, -161.9), Vector2(-103.9, -161.9), Vector2(-103.9, -161.9), Vector2(-103.9, -161.9), Vector2(-103.9, -161.9), Vector2(-103.9, -161.9), Vector2(-103.9, -161.9), Vector2(-103.9, -161.9), Vector2(-103.9, -161.9), Vector2(-103.9, -161.9), Vector2(-103.9, -161.9), Vector2(-103.9, -161.9), Vector2(-103.9, -161.9), Vector2(-103.9, -161.9), Vector2(-103.9, -161.9), Vector2(-103.9, -161.9), Vector2(-103.9, -161.9), Vector2(-103.9, -161.9), Vector2(-103.9, -161.9), Vector2(-103.9, -161.9), Vector2(-103.9, -161.9), Vector2(-103.9, -161.9), Vector2(-103.9, -161.9), Vector2(-103.9, -161.9), Vector2(-103.9, -161.9), Vector2(-103.9, -161.9), Vector2(-103.9, -161.9), Vector2(-103.9, -161.9), Vector2(-103.9, -161.9)]}
+tracks/1/path = NodePath("AttackHitbox:preview_action")
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [&"hurt"]}
 tracks/2/type = "value"
-tracks/2/path = NodePath("Visual/Effect1:visible")
-tracks/2/interp = 0
-tracks/2/keys = {"times": PackedFloat32Array(0.000000000), "transitions": PackedFloat32Array(1), "update": 1, "values": [false]}
+tracks/2/path = NodePath("AttackHitbox:preview_time")
+tracks/2/keys = {"times": PackedFloat32Array(0,1.133333333), "transitions": PackedFloat32Array(1,1), "update": 0, "values": [0.0,1.133333333]}
 tracks/3/type = "value"
-tracks/3/path = NodePath("Visual/Effect2:visible")
-tracks/3/interp = 0
-tracks/3/keys = {"times": PackedFloat32Array(0.000000000), "transitions": PackedFloat32Array(1), "update": 1, "values": [false]}
-tracks/4/type = "value"
-tracks/4/path = NodePath("Visual/ProtectGlow:visible")
-tracks/4/interp = 0
-tracks/4/keys = {"times": PackedFloat32Array(0.000000000), "transitions": PackedFloat32Array(1), "update": 1, "values": [false]}
-[sub_resource type="Animation" id="Anim_death"]
-length = 1.300000000
+tracks/3/path = NodePath("Visual/ProtectGlow:visible")
+tracks/3/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [false]}
+[sub_resource type="Animation" id="Native_death"]
+length = 1.3
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:animation_name")
+tracks/0/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": ["death"]}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:loop")
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [false]}
+[sub_resource type="Animation" id="Native_death_looped"]
+length = 1.3
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:animation_name")
+tracks/0/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": ["death"]}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:loop")
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [false]}
+[sub_resource type="Animation" id="Master_death"]
+length = 1.3
 loop_mode = 0
-tracks/0/type = "value"
-tracks/0/path = NodePath("Visual/Body:texture")
-tracks/0/interp = 0
-tracks/0/keys = {"times": PackedFloat32Array(0.000000000, 0.033333333, 0.066666667, 0.100000000, 0.133333333, 0.166666667, 0.200000000, 0.233333333, 0.266666667, 0.300000000, 0.333333333, 0.366666667, 0.400000000, 0.433333333, 0.466666667, 0.500000000, 0.533333333, 0.566666667, 0.600000000, 0.633333333, 0.666666667, 0.700000000, 0.733333333, 0.766666667, 0.800000000, 0.833333333, 0.866666667, 0.900000000, 0.933333333, 0.966666667, 1.000000000, 1.033333333, 1.066666667, 1.100000000, 1.133333333, 1.166666667, 1.200000000, 1.233333333, 1.266666667), "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1), "update": 1, "values": [SubResource("Frame_0"), SubResource("Frame_1"), SubResource("Frame_2"), SubResource("Frame_3"), SubResource("Frame_4"), SubResource("Frame_5"), SubResource("Frame_6"), SubResource("Frame_7"), SubResource("Frame_8"), SubResource("Frame_9"), SubResource("Frame_10"), SubResource("Frame_11"), SubResource("Frame_12"), SubResource("Frame_13"), SubResource("Frame_14"), SubResource("Frame_15"), SubResource("Frame_16"), SubResource("Frame_17"), SubResource("Frame_18"), SubResource("Frame_19"), SubResource("Frame_20"), SubResource("Frame_21"), SubResource("Frame_22"), SubResource("Frame_23"), SubResource("Frame_24"), SubResource("Frame_25"), SubResource("Frame_26"), SubResource("Frame_27"), SubResource("Frame_28"), SubResource("Frame_29"), SubResource("Frame_30"), SubResource("Frame_31"), SubResource("Frame_32"), SubResource("Frame_33"), SubResource("Frame_34"), SubResource("Frame_35"), SubResource("Frame_36"), SubResource("Frame_37"), SubResource("Frame_38")]}
+tracks/0/type = "animation"
+tracks/0/path = NodePath("SpineVisual/SpineAnimationTrack/SpineVisual Track 0")
+tracks/0/keys = {"times": PackedFloat32Array(0), "clips": PackedStringArray("death")}
 tracks/1/type = "value"
-tracks/1/path = NodePath("Visual/Body:position")
-tracks/1/interp = 0
-tracks/1/keys = {"times": PackedFloat32Array(0.000000000, 0.033333333, 0.066666667, 0.100000000, 0.133333333, 0.166666667, 0.200000000, 0.233333333, 0.266666667, 0.300000000, 0.333333333, 0.366666667, 0.400000000, 0.433333333, 0.466666667, 0.500000000, 0.533333333, 0.566666667, 0.600000000, 0.633333333, 0.666666667, 0.700000000, 0.733333333, 0.766666667, 0.800000000, 0.833333333, 0.866666667, 0.900000000, 0.933333333, 0.966666667, 1.000000000, 1.033333333, 1.066666667, 1.100000000, 1.133333333, 1.166666667, 1.200000000, 1.233333333, 1.266666667), "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1), "update": 1, "values": [Vector2(-187.2, -161.9), Vector2(-187.2, -161.9), Vector2(-187.2, -161.9), Vector2(-187.2, -161.9), Vector2(-187.2, -161.9), Vector2(-187.2, -161.9), Vector2(-187.2, -161.9), Vector2(-187.2, -161.9), Vector2(-187.2, -161.9), Vector2(-187.2, -161.9), Vector2(-187.2, -161.9), Vector2(-187.2, -161.9), Vector2(-187.2, -161.9), Vector2(-187.2, -161.9), Vector2(-187.2, -161.9), Vector2(-187.2, -161.9), Vector2(-187.2, -161.9), Vector2(-187.2, -161.9), Vector2(-187.2, -161.9), Vector2(-187.2, -161.9), Vector2(-187.2, -161.9), Vector2(-187.2, -161.9), Vector2(-187.2, -161.9), Vector2(-187.2, -161.9), Vector2(-187.2, -161.9), Vector2(-187.2, -161.9), Vector2(-187.2, -161.9), Vector2(-187.2, -161.9), Vector2(-187.2, -161.9), Vector2(-187.2, -161.9), Vector2(-187.2, -161.9), Vector2(-187.2, -161.9), Vector2(-187.2, -161.9), Vector2(-187.2, -161.9), Vector2(-187.2, -161.9), Vector2(-187.2, -161.9), Vector2(-187.2, -161.9), Vector2(-187.2, -161.9), Vector2(-187.2, -161.9)]}
+tracks/1/path = NodePath("AttackHitbox:preview_action")
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [&"death"]}
 tracks/2/type = "value"
-tracks/2/path = NodePath("Visual/Effect1:visible")
-tracks/2/interp = 0
-tracks/2/keys = {"times": PackedFloat32Array(0.000000000), "transitions": PackedFloat32Array(1), "update": 1, "values": [false]}
+tracks/2/path = NodePath("AttackHitbox:preview_time")
+tracks/2/keys = {"times": PackedFloat32Array(0,1.3), "transitions": PackedFloat32Array(1,1), "update": 0, "values": [0.0,1.3]}
 tracks/3/type = "value"
-tracks/3/path = NodePath("Visual/Effect2:visible")
-tracks/3/interp = 0
-tracks/3/keys = {"times": PackedFloat32Array(0.000000000), "transitions": PackedFloat32Array(1), "update": 1, "values": [false]}
-tracks/4/type = "value"
-tracks/4/path = NodePath("Visual/ProtectGlow:visible")
-tracks/4/interp = 0
-tracks/4/keys = {"times": PackedFloat32Array(0.000000000), "transitions": PackedFloat32Array(1), "update": 1, "values": [false]}
-[sub_resource type="Animation" id="Anim_attack_1"]
+tracks/3/path = NodePath("Visual/ProtectGlow:visible")
+tracks/3/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [false]}
+[sub_resource type="Animation" id="Native_attack_1"]
+length = 1.266666667
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:animation_name")
+tracks/0/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": ["attack_1"]}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:loop")
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [false]}
+[sub_resource type="Animation" id="Native_attack_1_looped"]
+length = 1.266666667
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:animation_name")
+tracks/0/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": ["attack_1"]}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:loop")
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [false]}
+[sub_resource type="Animation" id="Master_attack_1"]
 length = 1.266666667
 loop_mode = 0
-tracks/0/type = "value"
-tracks/0/path = NodePath("Visual/Body:texture")
-tracks/0/interp = 0
-tracks/0/keys = {"times": PackedFloat32Array(0.000000000, 0.033333333, 0.066666667, 0.100000000, 0.133333333, 0.166666667, 0.200000000, 0.233333333, 0.266666667, 0.300000000, 0.333333333, 0.366666667, 0.400000000, 0.433333333, 0.466666667, 0.500000000, 0.533333333, 0.566666667, 0.600000000, 0.633333333, 0.666666667, 0.700000000, 0.733333333, 0.766666667, 0.800000000, 0.833333333, 0.866666667, 0.900000000, 0.933333333, 0.966666667, 1.000000000, 1.033333333, 1.066666667, 1.100000000, 1.133333333, 1.166666667, 1.200000000, 1.233333333), "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1), "update": 1, "values": [SubResource("Frame_103"), SubResource("Frame_104"), SubResource("Frame_105"), SubResource("Frame_106"), SubResource("Frame_107"), SubResource("Frame_108"), SubResource("Frame_109"), SubResource("Frame_110"), SubResource("Frame_111"), SubResource("Frame_112"), SubResource("Frame_113"), SubResource("Frame_114"), SubResource("Frame_115"), SubResource("Frame_116"), SubResource("Frame_117"), SubResource("Frame_118"), SubResource("Frame_119"), SubResource("Frame_120"), SubResource("Frame_121"), SubResource("Frame_122"), SubResource("Frame_123"), SubResource("Frame_124"), SubResource("Frame_125"), SubResource("Frame_126"), SubResource("Frame_127"), SubResource("Frame_128"), SubResource("Frame_129"), SubResource("Frame_130"), SubResource("Frame_131"), SubResource("Frame_132"), SubResource("Frame_133"), SubResource("Frame_134"), SubResource("Frame_135"), SubResource("Frame_136"), SubResource("Frame_137"), SubResource("Frame_138"), SubResource("Frame_139"), SubResource("Frame_140")]}
+tracks/0/type = "animation"
+tracks/0/path = NodePath("SpineVisual/SpineAnimationTrack/SpineVisual Track 0")
+tracks/0/keys = {"times": PackedFloat32Array(0), "clips": PackedStringArray("attack_1")}
 tracks/1/type = "value"
-tracks/1/path = NodePath("Visual/Body:position")
-tracks/1/interp = 0
-tracks/1/keys = {"times": PackedFloat32Array(0.000000000, 0.033333333, 0.066666667, 0.100000000, 0.133333333, 0.166666667, 0.200000000, 0.233333333, 0.266666667, 0.300000000, 0.333333333, 0.366666667, 0.400000000, 0.433333333, 0.466666667, 0.500000000, 0.533333333, 0.566666667, 0.600000000, 0.633333333, 0.666666667, 0.700000000, 0.733333333, 0.766666667, 0.800000000, 0.833333333, 0.866666667, 0.900000000, 0.933333333, 0.966666667, 1.000000000, 1.033333333, 1.066666667, 1.100000000, 1.133333333, 1.166666667, 1.200000000, 1.233333333), "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1), "update": 1, "values": [Vector2(-170.05, -209.05), Vector2(-170.05, -209.05), Vector2(-170.05, -209.05), Vector2(-170.05, -209.05), Vector2(-170.05, -209.05), Vector2(-170.05, -209.05), Vector2(-170.05, -209.05), Vector2(-170.05, -209.05), Vector2(-170.05, -209.05), Vector2(-170.05, -209.05), Vector2(-170.05, -209.05), Vector2(-170.05, -209.05), Vector2(-170.05, -209.05), Vector2(-170.05, -209.05), Vector2(-170.05, -209.05), Vector2(-170.05, -209.05), Vector2(-170.05, -209.05), Vector2(-170.05, -209.05), Vector2(-170.05, -209.05), Vector2(-170.05, -209.05), Vector2(-170.05, -209.05), Vector2(-170.05, -209.05), Vector2(-170.05, -209.05), Vector2(-170.05, -209.05), Vector2(-170.05, -209.05), Vector2(-170.05, -209.05), Vector2(-170.05, -209.05), Vector2(-170.05, -209.05), Vector2(-170.05, -209.05), Vector2(-170.05, -209.05), Vector2(-170.05, -209.05), Vector2(-170.05, -209.05), Vector2(-170.05, -209.05), Vector2(-170.05, -209.05), Vector2(-170.05, -209.05), Vector2(-170.05, -209.05), Vector2(-170.05, -209.05), Vector2(-170.05, -209.05)]}
+tracks/1/path = NodePath("AttackHitbox:preview_action")
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [&"attack_1"]}
 tracks/2/type = "value"
-tracks/2/path = NodePath("Visual/Effect1:visible")
-tracks/2/interp = 0
-tracks/2/keys = {"times": PackedFloat32Array(0.000000000), "transitions": PackedFloat32Array(1), "update": 1, "values": [true]}
+tracks/2/path = NodePath("AttackHitbox:preview_time")
+tracks/2/keys = {"times": PackedFloat32Array(0,1.266666667), "transitions": PackedFloat32Array(1,1), "update": 0, "values": [0.0,1.266666667]}
 tracks/3/type = "value"
-tracks/3/path = NodePath("Visual/Effect1:texture")
-tracks/3/interp = 0
-tracks/3/keys = {"times": PackedFloat32Array(0.000000000, 0.033333333, 0.066666667, 0.100000000, 0.133333333, 0.166666667, 0.200000000, 0.233333333, 0.266666667, 0.300000000, 0.333333333, 0.366666667, 0.400000000, 0.433333333, 0.466666667, 0.500000000, 0.533333333, 0.566666667, 0.600000000, 0.633333333, 0.666666667, 0.700000000, 0.733333333, 0.766666667, 0.800000000, 0.833333333, 0.866666667, 0.900000000, 0.933333333, 0.966666667, 1.000000000, 1.033333333, 1.066666667, 1.100000000, 1.133333333, 1.166666667, 1.200000000, 1.233333333), "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1), "update": 1, "values": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null]}
-tracks/4/type = "value"
-tracks/4/path = NodePath("Visual/Effect1:position")
-tracks/4/interp = 0
-tracks/4/keys = {"times": PackedFloat32Array(0.000000000, 0.033333333, 0.066666667, 0.100000000, 0.133333333, 0.166666667, 0.200000000, 0.233333333, 0.266666667, 0.300000000, 0.333333333, 0.366666667, 0.400000000, 0.433333333, 0.466666667, 0.500000000, 0.533333333, 0.566666667, 0.600000000, 0.633333333, 0.666666667, 0.700000000, 0.733333333, 0.766666667, 0.800000000, 0.833333333, 0.866666667, 0.900000000, 0.933333333, 0.966666667, 1.000000000, 1.033333333, 1.066666667, 1.100000000, 1.133333333, 1.166666667, 1.200000000, 1.233333333), "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1), "update": 1, "values": [Vector2(-0.0, -0.0), Vector2(-0.0, -0.0), Vector2(-0.0, -0.0), Vector2(-0.0, -0.0), Vector2(-0.0, -0.0), Vector2(-0.0, -0.0), Vector2(-0.0, -0.0), Vector2(-0.0, -0.0), Vector2(-0.0, -0.0), Vector2(-0.0, -0.0), Vector2(-0.0, -0.0), Vector2(-0.0, -0.0), Vector2(-0.0, -0.0), Vector2(-0.0, -0.0), Vector2(-0.0, -0.0), Vector2(-0.0, -0.0), Vector2(-0.0, -0.0), Vector2(-0.0, -0.0), Vector2(-0.0, -0.0), Vector2(-0.0, -0.0), Vector2(-0.0, -0.0), Vector2(-0.0, -0.0), Vector2(-0.0, -0.0), Vector2(-0.0, -0.0), Vector2(-0.0, -0.0), Vector2(-0.0, -0.0), Vector2(-0.0, -0.0), Vector2(-0.0, -0.0), Vector2(-0.0, -0.0), Vector2(-0.0, -0.0), Vector2(-0.0, -0.0), Vector2(-0.0, -0.0), Vector2(-0.0, -0.0), Vector2(-0.0, -0.0), Vector2(-0.0, -0.0), Vector2(-0.0, -0.0), Vector2(-0.0, -0.0), Vector2(-0.0, -0.0)]}
-tracks/5/type = "value"
-tracks/5/path = NodePath("Visual/Effect2:visible")
-tracks/5/interp = 0
-tracks/5/keys = {"times": PackedFloat32Array(0.000000000), "transitions": PackedFloat32Array(1), "update": 1, "values": [false]}
-tracks/6/type = "value"
-tracks/6/path = NodePath("Visual/ProtectGlow:visible")
-tracks/6/interp = 0
-tracks/6/keys = {"times": PackedFloat32Array(0.000000000), "transitions": PackedFloat32Array(1), "update": 1, "values": [false]}
-[sub_resource type="Animation" id="Anim_attack_2"]
+tracks/3/path = NodePath("Visual/ProtectGlow:visible")
+tracks/3/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [false]}
+[sub_resource type="Animation" id="Native_attack_2"]
+length = 1.466666667
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:animation_name")
+tracks/0/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": ["attack_2"]}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:loop")
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [false]}
+[sub_resource type="Animation" id="Native_attack_2_looped"]
+length = 1.466666667
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:animation_name")
+tracks/0/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": ["attack_2"]}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:loop")
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [false]}
+[sub_resource type="Animation" id="Master_attack_2"]
 length = 1.466666667
 loop_mode = 0
-tracks/0/type = "value"
-tracks/0/path = NodePath("Visual/Body:texture")
-tracks/0/interp = 0
-tracks/0/keys = {"times": PackedFloat32Array(0.000000000, 0.033333333, 0.066666667, 0.100000000, 0.133333333, 0.166666667, 0.200000000, 0.233333333, 0.266666667, 0.300000000, 0.333333333, 0.366666667, 0.400000000, 0.433333333, 0.466666667, 0.500000000, 0.533333333, 0.566666667, 0.600000000, 0.633333333, 0.666666667, 0.700000000, 0.733333333, 0.766666667, 0.800000000, 0.833333333, 0.866666667, 0.900000000, 0.933333333, 0.966666667, 1.000000000, 1.033333333, 1.066666667, 1.100000000, 1.133333333, 1.166666667, 1.200000000, 1.233333333, 1.266666667, 1.300000000, 1.333333333, 1.366666667, 1.400000000, 1.433333333), "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1), "update": 1, "values": [SubResource("Frame_179"), SubResource("Frame_180"), SubResource("Frame_181"), SubResource("Frame_182"), SubResource("Frame_183"), SubResource("Frame_184"), SubResource("Frame_185"), SubResource("Frame_186"), SubResource("Frame_187"), SubResource("Frame_188"), SubResource("Frame_189"), SubResource("Frame_190"), SubResource("Frame_191"), SubResource("Frame_192"), SubResource("Frame_193"), SubResource("Frame_194"), SubResource("Frame_195"), SubResource("Frame_196"), SubResource("Frame_197"), SubResource("Frame_198"), SubResource("Frame_199"), SubResource("Frame_200"), SubResource("Frame_201"), SubResource("Frame_202"), SubResource("Frame_203"), SubResource("Frame_204"), SubResource("Frame_205"), SubResource("Frame_206"), SubResource("Frame_207"), SubResource("Frame_208"), SubResource("Frame_209"), SubResource("Frame_210"), SubResource("Frame_211"), SubResource("Frame_212"), SubResource("Frame_213"), SubResource("Frame_214"), SubResource("Frame_215"), SubResource("Frame_216"), SubResource("Frame_217"), SubResource("Frame_218"), SubResource("Frame_219"), SubResource("Frame_220"), SubResource("Frame_221"), SubResource("Frame_222")]}
+tracks/0/type = "animation"
+tracks/0/path = NodePath("SpineVisual/SpineAnimationTrack/SpineVisual Track 0")
+tracks/0/keys = {"times": PackedFloat32Array(0), "clips": PackedStringArray("attack_2")}
 tracks/1/type = "value"
-tracks/1/path = NodePath("Visual/Body:position")
-tracks/1/interp = 0
-tracks/1/keys = {"times": PackedFloat32Array(0.000000000, 0.033333333, 0.066666667, 0.100000000, 0.133333333, 0.166666667, 0.200000000, 0.233333333, 0.266666667, 0.300000000, 0.333333333, 0.366666667, 0.400000000, 0.433333333, 0.466666667, 0.500000000, 0.533333333, 0.566666667, 0.600000000, 0.633333333, 0.666666667, 0.700000000, 0.733333333, 0.766666667, 0.800000000, 0.833333333, 0.866666667, 0.900000000, 0.933333333, 0.966666667, 1.000000000, 1.033333333, 1.066666667, 1.100000000, 1.133333333, 1.166666667, 1.200000000, 1.233333333, 1.266666667, 1.300000000, 1.333333333, 1.366666667, 1.400000000, 1.433333333), "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1), "update": 1, "values": [Vector2(-116.05, -224.15), Vector2(-116.05, -224.15), Vector2(-116.05, -224.15), Vector2(-116.05, -224.15), Vector2(-116.05, -224.15), Vector2(-116.05, -224.15), Vector2(-116.05, -224.15), Vector2(-116.05, -224.15), Vector2(-116.05, -224.15), Vector2(-116.05, -224.15), Vector2(-116.05, -224.15), Vector2(-116.05, -224.15), Vector2(-116.05, -224.15), Vector2(-116.05, -224.15), Vector2(-116.05, -224.15), Vector2(-116.05, -224.15), Vector2(-116.05, -224.15), Vector2(-116.05, -224.15), Vector2(-116.05, -224.15), Vector2(-116.05, -224.15), Vector2(-116.05, -224.15), Vector2(-116.05, -224.15), Vector2(-116.05, -224.15), Vector2(-116.05, -224.15), Vector2(-116.05, -224.15), Vector2(-116.05, -224.15), Vector2(-116.05, -224.15), Vector2(-116.05, -224.15), Vector2(-116.05, -224.15), Vector2(-116.05, -224.15), Vector2(-116.05, -224.15), Vector2(-116.05, -224.15), Vector2(-116.05, -224.15), Vector2(-116.05, -224.15), Vector2(-116.05, -224.15), Vector2(-116.05, -224.15), Vector2(-116.05, -224.15), Vector2(-116.05, -224.15), Vector2(-116.05, -224.15), Vector2(-116.05, -224.15), Vector2(-116.05, -224.15), Vector2(-116.05, -224.15), Vector2(-116.05, -224.15), Vector2(-116.05, -224.15)]}
+tracks/1/path = NodePath("AttackHitbox:preview_action")
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [&"attack_2"]}
 tracks/2/type = "value"
-tracks/2/path = NodePath("Visual/Effect1:visible")
-tracks/2/interp = 0
-tracks/2/keys = {"times": PackedFloat32Array(0.000000000), "transitions": PackedFloat32Array(1), "update": 1, "values": [false]}
+tracks/2/path = NodePath("AttackHitbox:preview_time")
+tracks/2/keys = {"times": PackedFloat32Array(0,1.466666667), "transitions": PackedFloat32Array(1,1), "update": 0, "values": [0.0,1.466666667]}
 tracks/3/type = "value"
-tracks/3/path = NodePath("Visual/Effect2:visible")
-tracks/3/interp = 0
-tracks/3/keys = {"times": PackedFloat32Array(0.000000000), "transitions": PackedFloat32Array(1), "update": 1, "values": [true]}
-tracks/4/type = "value"
-tracks/4/path = NodePath("Visual/Effect2:texture")
-tracks/4/interp = 0
-tracks/4/keys = {"times": PackedFloat32Array(0.000000000, 0.033333333, 0.066666667, 0.100000000, 0.133333333, 0.166666667, 0.200000000, 0.233333333, 0.266666667, 0.300000000, 0.333333333, 0.366666667, 0.400000000, 0.433333333, 0.466666667, 0.500000000, 0.533333333, 0.566666667, 0.600000000, 0.633333333, 0.666666667, 0.700000000, 0.733333333, 0.766666667, 0.800000000, 0.833333333, 0.866666667, 0.900000000, 0.933333333, 0.966666667, 1.000000000, 1.033333333, 1.066666667, 1.100000000, 1.133333333, 1.166666667, 1.200000000, 1.233333333, 1.266666667, 1.300000000, 1.333333333, 1.366666667, 1.400000000, 1.433333333), "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1), "update": 1, "values": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null]}
-tracks/5/type = "value"
-tracks/5/path = NodePath("Visual/Effect2:position")
-tracks/5/interp = 0
-tracks/5/keys = {"times": PackedFloat32Array(0.000000000, 0.033333333, 0.066666667, 0.100000000, 0.133333333, 0.166666667, 0.200000000, 0.233333333, 0.266666667, 0.300000000, 0.333333333, 0.366666667, 0.400000000, 0.433333333, 0.466666667, 0.500000000, 0.533333333, 0.566666667, 0.600000000, 0.633333333, 0.666666667, 0.700000000, 0.733333333, 0.766666667, 0.800000000, 0.833333333, 0.866666667, 0.900000000, 0.933333333, 0.966666667, 1.000000000, 1.033333333, 1.066666667, 1.100000000, 1.133333333, 1.166666667, 1.200000000, 1.233333333, 1.266666667, 1.300000000, 1.333333333, 1.366666667, 1.400000000, 1.433333333), "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1), "update": 1, "values": [Vector2(-0.0, -0.0), Vector2(-0.0, -0.0), Vector2(-0.0, -0.0), Vector2(-0.0, -0.0), Vector2(-0.0, -0.0), Vector2(-0.0, -0.0), Vector2(-0.0, -0.0), Vector2(-0.0, -0.0), Vector2(-0.0, -0.0), Vector2(-0.0, -0.0), Vector2(-0.0, -0.0), Vector2(-0.0, -0.0), Vector2(-0.0, -0.0), Vector2(-0.0, -0.0), Vector2(-0.0, -0.0), Vector2(-0.0, -0.0), Vector2(-0.0, -0.0), Vector2(-0.0, -0.0), Vector2(-0.0, -0.0), Vector2(-0.0, -0.0), Vector2(-0.0, -0.0), Vector2(-0.0, -0.0), Vector2(-0.0, -0.0), Vector2(-0.0, -0.0), Vector2(-0.0, -0.0), Vector2(-0.0, -0.0), Vector2(-0.0, -0.0), Vector2(-0.0, -0.0), Vector2(-0.0, -0.0), Vector2(-0.0, -0.0), Vector2(-0.0, -0.0), Vector2(-0.0, -0.0), Vector2(-0.0, -0.0), Vector2(-0.0, -0.0), Vector2(-0.0, -0.0), Vector2(-0.0, -0.0), Vector2(-0.0, -0.0), Vector2(-0.0, -0.0), Vector2(-0.0, -0.0), Vector2(-0.0, -0.0), Vector2(-0.0, -0.0), Vector2(-0.0, -0.0), Vector2(-0.0, -0.0), Vector2(-0.0, -0.0)]}
-tracks/6/type = "value"
-tracks/6/path = NodePath("Visual/ProtectGlow:visible")
-tracks/6/interp = 0
-tracks/6/keys = {"times": PackedFloat32Array(0.000000000), "transitions": PackedFloat32Array(1), "update": 1, "values": [false]}
-[sub_resource type="Animation" id="Anim_attack_3"]
-length = 1.000000000
+tracks/3/path = NodePath("Visual/ProtectGlow:visible")
+tracks/3/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [false]}
+[sub_resource type="Animation" id="Native_attack_3"]
+length = 1.0
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:animation_name")
+tracks/0/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": ["attack_3"]}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:loop")
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [false]}
+[sub_resource type="Animation" id="Native_attack_3_looped"]
+length = 1.0
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:animation_name")
+tracks/0/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": ["attack_3"]}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:loop")
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [false]}
+[sub_resource type="Animation" id="Master_attack_3"]
+length = 1.0
 loop_mode = 0
-tracks/0/type = "value"
-tracks/0/path = NodePath("Visual/Body:texture")
-tracks/0/interp = 0
-tracks/0/keys = {"times": PackedFloat32Array(0.000000000, 0.033333333, 0.066666667, 0.100000000, 0.133333333, 0.166666667, 0.200000000, 0.233333333, 0.266666667, 0.300000000, 0.333333333, 0.366666667, 0.400000000, 0.433333333, 0.466666667, 0.500000000, 0.533333333, 0.566666667, 0.600000000, 0.633333333, 0.666666667, 0.700000000, 0.733333333, 0.766666667, 0.800000000, 0.833333333, 0.866666667, 0.900000000, 0.933333333, 0.966666667), "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1), "update": 1, "values": [SubResource("Frame_273"), SubResource("Frame_274"), SubResource("Frame_275"), SubResource("Frame_276"), SubResource("Frame_277"), SubResource("Frame_278"), SubResource("Frame_279"), SubResource("Frame_280"), SubResource("Frame_281"), SubResource("Frame_282"), SubResource("Frame_283"), SubResource("Frame_284"), SubResource("Frame_285"), SubResource("Frame_286"), SubResource("Frame_287"), SubResource("Frame_288"), SubResource("Frame_289"), SubResource("Frame_290"), SubResource("Frame_291"), SubResource("Frame_292"), SubResource("Frame_293"), SubResource("Frame_294"), SubResource("Frame_295"), SubResource("Frame_296"), SubResource("Frame_297"), SubResource("Frame_298"), SubResource("Frame_299"), SubResource("Frame_300"), SubResource("Frame_301"), SubResource("Frame_302")]}
+tracks/0/type = "animation"
+tracks/0/path = NodePath("SpineVisual/SpineAnimationTrack/SpineVisual Track 0")
+tracks/0/keys = {"times": PackedFloat32Array(0), "clips": PackedStringArray("attack_3")}
 tracks/1/type = "value"
-tracks/1/path = NodePath("Visual/Body:position")
-tracks/1/interp = 0
-tracks/1/keys = {"times": PackedFloat32Array(0.000000000, 0.033333333, 0.066666667, 0.100000000, 0.133333333, 0.166666667, 0.200000000, 0.233333333, 0.266666667, 0.300000000, 0.333333333, 0.366666667, 0.400000000, 0.433333333, 0.466666667, 0.500000000, 0.533333333, 0.566666667, 0.600000000, 0.633333333, 0.666666667, 0.700000000, 0.733333333, 0.766666667, 0.800000000, 0.833333333, 0.866666667, 0.900000000, 0.933333333, 0.966666667), "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1), "update": 1, "values": [Vector2(-93.8, -160.85), Vector2(-93.8, -160.85), Vector2(-93.8, -160.85), Vector2(-93.8, -160.85), Vector2(-93.8, -160.85), Vector2(-93.8, -160.85), Vector2(-93.8, -160.85), Vector2(-93.8, -160.85), Vector2(-93.8, -160.85), Vector2(-93.8, -160.85), Vector2(-93.8, -160.85), Vector2(-93.8, -160.85), Vector2(-93.8, -160.85), Vector2(-93.8, -160.85), Vector2(-93.8, -160.85), Vector2(-93.8, -160.85), Vector2(-93.8, -160.85), Vector2(-93.8, -160.85), Vector2(-93.8, -160.85), Vector2(-93.8, -160.85), Vector2(-93.8, -160.85), Vector2(-93.8, -160.85), Vector2(-93.8, -160.85), Vector2(-93.8, -160.85), Vector2(-93.8, -160.85), Vector2(-93.8, -160.85), Vector2(-93.8, -160.85), Vector2(-93.8, -160.85), Vector2(-93.8, -160.85), Vector2(-93.8, -160.85)]}
+tracks/1/path = NodePath("AttackHitbox:preview_action")
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [&"attack_3"]}
 tracks/2/type = "value"
-tracks/2/path = NodePath("Visual/Effect1:visible")
-tracks/2/interp = 0
-tracks/2/keys = {"times": PackedFloat32Array(0.000000000), "transitions": PackedFloat32Array(1), "update": 1, "values": [false]}
+tracks/2/path = NodePath("AttackHitbox:preview_time")
+tracks/2/keys = {"times": PackedFloat32Array(0,1.0), "transitions": PackedFloat32Array(1,1), "update": 0, "values": [0.0,1.0]}
 tracks/3/type = "value"
-tracks/3/path = NodePath("Visual/Effect2:visible")
-tracks/3/interp = 0
-tracks/3/keys = {"times": PackedFloat32Array(0.000000000), "transitions": PackedFloat32Array(1), "update": 1, "values": [false]}
-tracks/4/type = "value"
-tracks/4/path = NodePath("Visual/ProtectGlow:visible")
-tracks/4/interp = 0
-tracks/4/keys = {"times": PackedFloat32Array(0.000000000), "transitions": PackedFloat32Array(1), "update": 1, "values": [false]}
-[sub_resource type="Animation" id="Anim_protect"]
-length = 1.000000000
-loop_mode = 1
+tracks/3/path = NodePath("Visual/ProtectGlow:visible")
+tracks/3/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [false]}
+[sub_resource type="Animation" id="Native_protect"]
+length = 1.0
 tracks/0/type = "value"
-tracks/0/path = NodePath("Visual/Body:texture")
-tracks/0/interp = 0
-tracks/0/keys = {"times": PackedFloat32Array(0.000000000, 0.033333333, 0.066666667, 0.100000000, 0.133333333, 0.166666667, 0.200000000, 0.233333333, 0.266666667, 0.300000000, 0.333333333, 0.366666667, 0.400000000, 0.433333333, 0.466666667, 0.500000000, 0.533333333, 0.566666667, 0.600000000, 0.633333333, 0.666666667, 0.700000000, 0.733333333, 0.766666667, 0.800000000, 0.833333333, 0.866666667, 0.900000000, 0.933333333, 0.966666667), "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1), "update": 1, "values": [SubResource("Frame_73"), SubResource("Frame_74"), SubResource("Frame_75"), SubResource("Frame_76"), SubResource("Frame_77"), SubResource("Frame_78"), SubResource("Frame_79"), SubResource("Frame_80"), SubResource("Frame_81"), SubResource("Frame_82"), SubResource("Frame_83"), SubResource("Frame_84"), SubResource("Frame_85"), SubResource("Frame_86"), SubResource("Frame_87"), SubResource("Frame_88"), SubResource("Frame_89"), SubResource("Frame_90"), SubResource("Frame_91"), SubResource("Frame_92"), SubResource("Frame_93"), SubResource("Frame_94"), SubResource("Frame_95"), SubResource("Frame_96"), SubResource("Frame_97"), SubResource("Frame_98"), SubResource("Frame_99"), SubResource("Frame_100"), SubResource("Frame_101"), SubResource("Frame_102")]}
+tracks/0/path = NodePath(".:animation_name")
+tracks/0/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": ["protect"]}
 tracks/1/type = "value"
-tracks/1/path = NodePath("Visual/Body:position")
-tracks/1/interp = 0
-tracks/1/keys = {"times": PackedFloat32Array(0.000000000, 0.033333333, 0.066666667, 0.100000000, 0.133333333, 0.166666667, 0.200000000, 0.233333333, 0.266666667, 0.300000000, 0.333333333, 0.366666667, 0.400000000, 0.433333333, 0.466666667, 0.500000000, 0.533333333, 0.566666667, 0.600000000, 0.633333333, 0.666666667, 0.700000000, 0.733333333, 0.766666667, 0.800000000, 0.833333333, 0.866666667, 0.900000000, 0.933333333, 0.966666667), "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1), "update": 1, "values": [Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65), Vector2(-94.15, -165.65)]}
+tracks/1/path = NodePath(".:loop")
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [false]}
+[sub_resource type="Animation" id="Native_protect_looped"]
+length = 1.0
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:animation_name")
+tracks/0/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": ["protect"]}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:loop")
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [false]}
+[sub_resource type="Animation" id="Master_protect"]
+length = 1.0
+loop_mode = 0
+tracks/0/type = "animation"
+tracks/0/path = NodePath("SpineVisual/SpineAnimationTrack/SpineVisual Track 0")
+tracks/0/keys = {"times": PackedFloat32Array(0), "clips": PackedStringArray("protect")}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AttackHitbox:preview_action")
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [&"protect"]}
 tracks/2/type = "value"
-tracks/2/path = NodePath("Visual/Effect1:visible")
-tracks/2/interp = 0
-tracks/2/keys = {"times": PackedFloat32Array(0.000000000), "transitions": PackedFloat32Array(1), "update": 1, "values": [false]}
+tracks/2/path = NodePath("AttackHitbox:preview_time")
+tracks/2/keys = {"times": PackedFloat32Array(0,1.0), "transitions": PackedFloat32Array(1,1), "update": 0, "values": [0.0,1.0]}
 tracks/3/type = "value"
-tracks/3/path = NodePath("Visual/Effect2:visible")
-tracks/3/interp = 0
-tracks/3/keys = {"times": PackedFloat32Array(0.000000000), "transitions": PackedFloat32Array(1), "update": 1, "values": [false]}
-tracks/4/type = "value"
-tracks/4/path = NodePath("Visual/ProtectGlow:visible")
-tracks/4/interp = 0
-tracks/4/keys = {"times": PackedFloat32Array(0.000000000), "transitions": PackedFloat32Array(1), "update": 1, "values": [true]}
-[sub_resource type="AnimationLibrary" id="Library"]
-_data = {&"idle": SubResource("Anim_idle"), &"move": SubResource("Anim_move"), &"run": SubResource("Anim_run"), &"jump": SubResource("Anim_jump"), &"jump_2": SubResource("Anim_jump_2"), &"fall": SubResource("Anim_fall"), &"land": SubResource("Anim_land"), &"hurt": SubResource("Anim_hurt"), &"death": SubResource("Anim_death"), &"attack_1": SubResource("Anim_attack_1"), &"attack_2": SubResource("Anim_attack_2"), &"attack_3": SubResource("Anim_attack_3"), &"protect": SubResource("Anim_protect")}
+tracks/3/path = NodePath("Visual/ProtectGlow:visible")
+tracks/3/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [false]}
+[sub_resource type="AnimationLibrary" id="NativeLibrary"]
+_data = {&"idle": SubResource("Native_idle"), &"idle_looped": SubResource("Native_idle_looped"), &"move": SubResource("Native_move"), &"move_looped": SubResource("Native_move_looped"), &"run": SubResource("Native_run"), &"run_looped": SubResource("Native_run_looped"), &"jump": SubResource("Native_jump"), &"jump_looped": SubResource("Native_jump_looped"), &"jump_2": SubResource("Native_jump_2"), &"jump_2_looped": SubResource("Native_jump_2_looped"), &"fall": SubResource("Native_fall"), &"fall_looped": SubResource("Native_fall_looped"), &"land": SubResource("Native_land"), &"land_looped": SubResource("Native_land_looped"), &"hurt": SubResource("Native_hurt"), &"hurt_looped": SubResource("Native_hurt_looped"), &"death": SubResource("Native_death"), &"death_looped": SubResource("Native_death_looped"), &"attack_1": SubResource("Native_attack_1"), &"attack_1_looped": SubResource("Native_attack_1_looped"), &"attack_2": SubResource("Native_attack_2"), &"attack_2_looped": SubResource("Native_attack_2_looped"), &"attack_3": SubResource("Native_attack_3"), &"attack_3_looped": SubResource("Native_attack_3_looped"), &"protect": SubResource("Native_protect"), &"protect_looped": SubResource("Native_protect_looped")}
+[sub_resource type="AnimationLibrary" id="MasterLibrary"]
+_data = {&"idle": SubResource("Master_idle"), &"move": SubResource("Master_move"), &"run": SubResource("Master_run"), &"jump": SubResource("Master_jump"), &"jump_2": SubResource("Master_jump_2"), &"fall": SubResource("Master_fall"), &"land": SubResource("Master_land"), &"hurt": SubResource("Master_hurt"), &"death": SubResource("Master_death"), &"attack_1": SubResource("Master_attack_1"), &"attack_2": SubResource("Master_attack_2"), &"attack_3": SubResource("Master_attack_3"), &"protect": SubResource("Master_protect")}
 [sub_resource type="RectangleShape2D" id="HitShape"]
 resource_local_to_scene = true
 size = Vector2(1,1)
 [node name="AnimationAdapter" type="Node2D"]
 script = ExtResource("adapter")
 profile = ExtResource("profile")
+[node name="SpineVisual" type="SpineSprite" parent="."]
+scale = Vector2(2,2)
+skeleton_data_res = ExtResource("spine")
+preview_skin = "基础"
+preview_animation = "idle"
+preview_frame = false
+[node name="SpineAnimationTrack" type="SpineAnimationTrack" parent="SpineVisual"]
+mix_duration = 0.0
+[node name="SpineVisual Track 0" type="AnimationPlayer" parent="SpineVisual/SpineAnimationTrack"]
+libraries/ = SubResource("NativeLibrary")
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries/ = SubResource("MasterLibrary")
 [node name="Visual" type="Node2D" parent="."]
 scale = Vector2(2,2)
-[node name="Body" type="Sprite2D" parent="Visual"]
-centered = false
-texture = SubResource("Frame_73")
-position = Vector2(-94.15, -165.65)
-[node name="Effect1" type="Sprite2D" parent="Visual"]
-visible = false
-centered = false
-[node name="Effect2" type="Sprite2D" parent="Visual"]
-visible = false
-centered = false
 [node name="ProtectGlow" type="Polygon2D" parent="Visual"]
 visible = false
 z_index = -1
 polygon = PackedVector2Array(-100,-95, -70,-175, 0,-205, 70,-175, 100,-95, 70,-20, 0,10, -70,-20)
 color = Color(1,0.88,0.45,0.35)
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries/ = SubResource("Library")
 [node name="AttackHitbox" type="Area2D" parent="."]
 visible = false
 collision_layer = 0

@@ -15,6 +15,8 @@ class_name BattleFrameTimelineFeature
 @export var action_rules: Dictionary = {"move": false, "jump": false, "turn": false}
 ## 行为树技能保持原有提交方式；分段技能由此时间轴提交 GAS 消耗与冷却。
 @export var commit_resources: bool = false
+## 操作意图释放或控制权丢失时取消本次施放；不在HELD阶段重复起手。
+@export var cancel_on_input_release: bool = false
 ## 技能使用位置与原版可打断动作；普通攻击保持现有默认规则。
 @export var can_use_in_air: bool = false
 @export var can_use_on_ground: bool = true

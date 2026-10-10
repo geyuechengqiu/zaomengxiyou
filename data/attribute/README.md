@@ -92,9 +92,9 @@ GAS 现有 SimpleDamageLogic 只执行攻击减防御和上下文倍率；上述
 完整计算链、统一接口、原版生命规则及插件联合类图见 [属性链说明](../../addons/battle_foundation/attributes/README.md)。原28个通用定义保持原集合，等级和经验作为另2个定义组合使用。生命、魔法、攻击、防御最终取整，成长中间值保留小数。Role / EXP 的 SHA256 和导入口径见 [成长来源映射](progression/source_mapping.json)。重新导入：`node tools/import_attribute_progression.mjs <Speculum-4399-master路径>`；不覆盖动画编辑内容。
 
 ```powershell
-& '<Godot 可执行文件路径>' --headless --path . res://examples/verify_base_attributes.tscn
+& '<Godot 可执行文件路径>' --headless --path . res://tests/suites/verify_base_attributes.tscn
 ```
 
-[验证脚本](../../examples/verify_base_attributes.gd) 检查 28 个定义、5 个属性集、2 个 Vital 模板的加载、唯一 ID、原版 ID 与文件名、评分与负值、上限/恢复、来源修改器、多实体隔离及默认伤害策略读取 atk / phyDef，失败返回非零退出码。
+[验证脚本](../../tests/suites/verify_base_attributes.gd) 检查 28 个定义、5 个属性集、2 个 Vital 模板的加载、唯一 ID、原版 ID 与文件名、评分与负值、上限/恢复、来源修改器、多实体隔离及默认伤害策略读取 atk / phyDef，失败返回非零退出码。
 
 孙悟空属性集另加入原Common的 `xpMax=10000`，当前无双值保存在独立 `rage` Vital（入场0），与角色经验 `exp` 分开。预置WushuangController与GAS状态实现获取/消耗/原版增益，详见 [普通无双规则](../effects/wushuang/README.md)。

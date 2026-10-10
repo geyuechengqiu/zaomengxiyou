@@ -1,4 +1,4 @@
-extends "res://examples/original_damage_demo.gd"
+extends "res://tests/fixtures/original_damage_demo.gd"
 #region 真实跳字压力测试配置
 const STYLES := ["normal", "critical", "true", "true_critical", "player", "dodge", "normal_double", "critical_double", "special", "kill", "heal"]
 var report_name: String = "current"

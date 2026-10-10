@@ -24,6 +24,8 @@
 [ext_resource type="PackedScene" uid="uid://djhbcr3yyxe42" path="res://data/animation/sunwukong_visual.tscn" id="visual"]
 [ext_resource type="Script" uid="uid://bftymfsrppn7b" path="res://addons/battle_foundation/runtime/battle_wushuang_controller.gd" id="wushuang_controller"]
 
+[ext_resource type="JSON" path="res://data/inventory/presentation_rules.json" id="inventory_presentation_rules"]
+[ext_resource type="JSON" path="res://data/inventory/growth_rules.json" id="growth_rules"]
 [sub_resource type="CapsuleShape2D" id="body"]
 radius = 22.0
 height = 180.0
@@ -68,8 +70,8 @@ base_values = Dictionary[StringName, float]({
 &"guardian": 0.0,
 &"hit": 0.0,
 &"hpMax": 275.0,
-&"jumpSpeed1": -178.0,
-&"jumpSpeed2": -178.0,
+&"jumpSpeed1": -300.0,
+&"jumpSpeed2": -300.0,
 &"lightResist": 0.0,
 &"lucky": 0.0,
 &"mpMax": 100.0,
@@ -120,8 +122,10 @@ script = ExtResource("component_ProtectionSystem")
 
 [node name="Inventory" type="Node" parent="." unique_id=1025194930]
 script = ExtResource("component_Inventory")
+growth_rules = ExtResource("growth_rules")
 initial_items = Array[ExtResource("15_a0weu")]([ExtResource("bag_armor"), ExtResource("bag_helmet"), ExtResource("bag_weapon")])
 original_rules = ExtResource("original_bag_rules")
+presentation_rules = ExtResource("inventory_presentation_rules")
 
 [node name="PlayerOperations" type="Node" parent="." unique_id=1198386844]
 script = ExtResource("player_operations")

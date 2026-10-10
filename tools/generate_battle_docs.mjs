@@ -26,7 +26,7 @@ attributePipeline += box(30,415,440,235,'GAS 属性组件与实例', ['GameplayA
 attributePipeline += box(530,415,440,235,'BattleAttributeComponent', ['继承 GameplayVitalAttributeComponent','基础 → growth.level → equipment.<slot>','临时 status.<instance> → GAS final','等级、经验、换装、Buff 共用入口'], '../runtime/battle_attribute_component.gd','#fef3c7');
 attributePipeline += box(1030,415,440,235,'GAS Status / Effect', ['GE_AttributeModifier：克隆模板','Status：叠层、时钟、到期与移除','同来源撤销，叠层不残留旧修改器','临时值不修改共享配置'], '../../gameplay_abiltiy_system/scripts/status/gameplay_status_instance.gd');
 attributePipeline += box(30,790,440,220,'HealthVital / ManaVital', ['当前 hp / mp 与 hpMax / mpMax 分开','升级补基础+成长+装备上限','换装 / Buff 保留当前值并截断','可选保留比例 / 回满 / 补差额'], '../../gameplay_abiltiy_system/scripts/attributes/vitals/gameplay_vital.gd');
-attributePipeline += box(530,790,440,220,'完整快照、面板与战斗', ['snapshot_changed：Vital同步后通知','Core：battle.attributes.changed','面板 / 下一次攻击读取相同 get_value','get_breakdown：解释属性来源'], '../../../examples/wukong_platform_demo.gd','#e2e8f0');
+attributePipeline += box(530,790,440,220,'完整快照、面板与战斗', ['snapshot_changed：Vital同步后通知','Core：battle.attributes.changed','面板 / 下一次攻击读取相同 get_value','get_breakdown：解释属性来源'], '../../../tests/fixtures/wukong_platform_demo.gd','#e2e8f0');
 attributePipeline += box(1030,790,440,220,'Simple Inventory · C_Inventory', ['equip_changed(slot, item)','bind_inventory：连接 / 初次同步','换装备：同槽来源原子替换','卸装：删除该槽全部加成'], '../../simple_inventory/src/core/C_Inventory.gd');
 attributePipeline += arrow('M250 320V360H630V415','独占 GAS 实例',282,350);
 attributePipeline += arrow('M750 320V415','等级 / 经验',766,388);
@@ -261,7 +261,7 @@ nativeHitboxes.rectangles.forEach((entry,i)=>{
 ranges += box(935,140,535,205,'原版碰撞数据链', ['attackV427.swf：abs / ABConfigs','getAbRects(shootAssetLink)','SkillControl.reBuilBodyBox → sensor','AI atkRange 不参与伤害矩形'], '../../../data/battle2d/attack_hitboxes_source.json','#dcfce7');
 ranges += box(935,405,535,205,'第四段第二击', ['ABRect 与第一击相同','显示 scaleX=-1 不反转碰撞框','局部偏移 (-17,-4)，再按朝向镜像','跟随角色位置，保留技能位移'], '../../../data/battle2d/attack4.tres','#fef3c7');
 ranges += box(30,685,690,175,'技能数据驱动统一框', ['每击：hit_rect → 正缩放 → 偏移 → 素材比例','更新同一个 CollisionShape2D → 镜像 → 世界变换','修改技能判定数据，预览与伤害范围一起更新'], '../movement/battle_hitbox_2d.gd');
-ranges += box(780,685,690,175,'命中边界与当前运行方式', ['每段、每击、左右方向都验证前后边界与框外','独立受击区域 → 攻击实例去重 → GAS / Vital','五连击默认瞬时查询；单段验收支持持续窗口'], '../../../examples/verify_stage_four.gd','#e2e8f0');
+ranges += box(780,685,690,175,'命中边界与当前运行方式', ['每段、每击、左右方向都验证前后边界与框外','独立受击区域 → 攻击实例去重 → GAS / Vital','五连击默认瞬时查询；单段验收支持持续窗口'], '../../../tests/suites/verify_stage_four.gd','#e2e8f0');
 fs.writeFileSync(path.join(docs,'attack-ranges.svg'),svg(1500,900,'孙悟空 · 五段原版 ABRect 与命中坐标',ranges));
 // #endregion
 // #region AnimationPlayer 与编辑器攻击框联合类图

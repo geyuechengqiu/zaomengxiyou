@@ -99,9 +99,15 @@ func _get_direction(actor: BattleEntity2D, attacker: Node, context: Dictionary) 
 #region 保护动作不等于免伤：清理技能/预约，使用真实 Core 叶子锁定
 func start_protection() -> bool:
 	var actor := _owner.get_ref() as BattleEntity2D
-	if actor == null or not actor.is_alive() or TagManager.has_tag(actor, &"state.stunned") or not actor.protection.profile.protection_action_enabled:
+	if actor == null or not actor.is_alive() or not actor.protection.profile.protection_action_enabled:
 		return false
 	var definition := actor.protection.profile
+	if definition.cleanse_debuffs:
+		for status in actor.statuses.get_active_statuses():
+			if status.status_data.tags.has(&"status.debuff"):
+				actor.statuses.remove_instance(status, &"protection_cleanse")
+	if TagManager.has_tag(actor, &"state.stunned"):
+		return false
 	if not definition.protect_ability_id.is_empty() and (not actor.abilities.has_ability(definition.protect_ability_id) or not actor.abilities.can_activate_ability(definition.protect_ability_id, {})):
 		return false
 	actor.cancel_skill(&"protection")
@@ -109,6 +115,10 @@ func start_protection() -> bool:
 	if not definition.protect_ability_id.is_empty() and not actor.abilities.try_activate_ability(definition.protect_ability_id, {"protection": true}):
 		return false
 	actor.action_state.enter(BattleActionState2D.State.PROTECT, {"protect_seconds": definition.protect_seconds, "interrupt_priority": 1000 if definition.blocks_reaction else 0})
+	if definition.protection_status != null:
+		actor.statuses.apply_status(definition.protection_status, actor)
+	for status in definition.protection_statuses:
+		if status != null: actor.statuses.apply_status(status, actor)
 	actor.refresh_action_animation(true)
 	return actor.action_state.current == BattleActionState2D.State.PROTECT
 #endregion

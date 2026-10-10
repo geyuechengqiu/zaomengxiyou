@@ -1,6 +1,6 @@
 extends Resource
 class_name BattleProtectionProfile
-## 每个 Boss 独立的 protectPoint 配置；绝不把当前条/命中次数写入 Resource。
+## 每种怪物独立的 protectPoint 定义；当前条/命中次数保存在实体实例中。
 
 #region 满值与原版数据来源
 @export var enabled: bool = true
@@ -25,6 +25,11 @@ class_name BattleProtectionProfile
 @export var blocks_displacement: bool = true
 @export var blocks_status: bool = false
 @export var counts_while_active: bool = false
+## 原通用保护技1900010：净化减益，并施加独立的无敌和减益免疫Buff。
+@export var protection_status: GameplayStatusData
+@export var protection_statuses: Array[GameplayStatusData] = []
+@export var cleanse_debuffs: bool = false
+@export var invulnerable_alpha: bool = false
 #endregion
 #region 公共接口
 

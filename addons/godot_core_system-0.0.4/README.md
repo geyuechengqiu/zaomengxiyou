@@ -17,7 +17,7 @@ A highly modular and extensible core system framework designed for Godot 4.4+
 
 [Getting Started](#-getting-started) •
 [Documentation](docs/) •
-[Examples](examples/) •
+[Examples](../../tests/fixtures/plugin_showcase.tscn) •
 [Contributing](docs/CONTRIBUTING.md) •
 [Support and Help](#-support--help)
 
@@ -104,7 +104,7 @@ Detailed documentation for each utility:
 
 ## 🌟 Example Projects
 
-Visit our [example projects](examples/) to understand the framework's practical applications and best practices.
+Visit our [example projects](../../tests/fixtures/plugin_showcase.tscn) to understand the framework's practical applications and best practices.
 
 ### Complete Game Examples
 
@@ -145,3 +145,5 @@ If you encounter any issues or have suggestions:
     <strong>Built by Liweimin0512 with ❤️</strong><br>
     <sub>Making game development easier</sub>
 </div>
+
+本项目未使用的插件自带演示已移出导入目录，正式集成与回归入口见项目 tests 目录；插件 source 保留。

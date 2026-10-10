@@ -8,7 +8,7 @@ const STYLES := {
 	&"true": ["real_bleedNumber", ""], &"true_critical": ["real_baojiNumber", "real_baoji"],
 	&"player": ["playerBleedNumber", ""], &"dodge": ["sb", ""],
 	&"normal_double": ["bleedNumber2", ""], &"critical_double": ["baojiNumber2", "baoji2"],
-	&"special": ["baoDuBleedNumber", ""], &"kill": ["miaosa", ""], &"heal": ["bleedNumberAdd", ""]
+	&"special": ["baoDuBleedNumber", ""], &"kill": ["miaosa", ""], &"heal": ["bleedNumberAdd", ""], &"mana": ["mpNumberAdd", ""]
 }
 @export var number: int = 80:
 	set(value):
@@ -17,7 +17,7 @@ const STYLES := {
 			return
 		number = next
 		queue_redraw()
-@export_enum("normal", "critical", "true", "true_critical", "player", "dodge", "normal_double", "critical_double", "special", "kill", "heal") var style: String = "normal":
+@export_enum("normal", "critical", "true", "true_critical", "player", "dodge", "normal_double", "critical_double", "special", "kill", "heal", "mana") var style: String = "normal":
 	set(value):
 		if style == value:
 			return

@@ -1,0 +1,14 @@
+[remap]
+
+importer="spine.json"
+type="SpineSkeletonFileResource"
+uid="uid://defemwgcqcxk"
+path="res://.godot/imported/monster.spine-json-b7f06ad3b197b39edbcb76cc27975b74.spjson"
+
+[deps]
+
+source_file="res://assets/monsters/yushoushi/monster.spine-json"
+dest_files=["res://.godot/imported/monster.spine-json-b7f06ad3b197b39edbcb76cc27975b74.spjson"]
+
+[params]
+

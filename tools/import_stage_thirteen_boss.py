@@ -63,7 +63,7 @@ def animations(actions,resources):
     for i,file in [(1,'skill'),(2,'skill2'),(3,'skill3')]:text+=f'[ext_resource type="Resource" path="res://{BASE}/{file}.tres" id="skill{i}"]\n'
     text+='\n'.join(resources)
     for action,native in clips.items():
-        frames=actions[native];text+=f'[sub_resource type="Animation" id="Anim_{action}"]\nlength = {len(frames)/30:.9f}\nloop_mode = {1 if action in ["idle","move","run","protect"] else 0}\n'
+        frames=actions[native];text+=f'[sub_resource type="Animation" id="Anim_{action}"]\nlength = {len(frames)/30:.9f}\nloop_mode = {1 if action in ["idle","move","run"] else 0}\n'
         text+=sequence_tracks(0,'Visual/Body',frames)
         index=2
         for slot,fx in [(1,'skill1_1'),(2,'skill2_2')]:
@@ -109,7 +109,7 @@ def import_definitions(original,config,actions):
         write(BASE+('/skill.tres' if number==1 else '/skill'+str(number)+'.tres'),text)
     def object_config(name,part,skill,kind,animation,continuation=''):
         text='[gd_resource type="Resource" script_class="BattleBossObjectDefinition" format=3]\n[ext_resource type="Script" path="res://addons/battle_foundation/boss/battle_boss_object_definition.gd" id="script"]\n[resource]\nscript = ExtResource("script")\n'
-        vals={'object_id': '&"'+('pipa_notes' if name=='note' else 'jade_wall')+'"','kind':g(kind),'animation':'&"'+animation+'"','continuation_animation':'&"'+continuation+'"','formation_seconds':str(len(actions[animation])/30 if continuation else 0),'lifetime':str(len(actions[animation])/30+5 if continuation else part['shootTime']),'speed':str(part['shootSpeed']),'spawn_offset':f'Vector2({part["x"]},{part["y"]})','angles':'Array[float](['+(', '.join(str((i-2)*20) for i in range(5)) if name=='note' else '0.0')+'])','linked_to_action':g(part.get('linkParentState',False)),'through_targets':g(part['shootThrough']),'maximum_hits':str(part.get('atkMax',skill['atkMax'])),'hit_interval':str(part.get('atkInterval',0.1)),'damage_context':g({'protection_skill_id':str(skill['id']),'hit_stun':part.get('stiff',skill.get('stiff',0)),'reaction_gravity':1980,'reset_vertical_velocity':True,'knockback_speed':80 if name=='note' else 0,'launch_speed':360 if name=='note' else 0,'knockback_duration':0.5 if name=='note' else 0.3,'reaction_type':'launch' if name=='note' else 'hurt'})}
+        vals={'object_id': '&"'+('pipa_notes' if name=='note' else 'jade_wall')+'"','kind':g(kind),'animation':'&"'+animation+'"','continuation_animation':'&"'+continuation+'"','formation_seconds':str(len(actions[animation])/30 if continuation else 0),'lifetime':str(len(actions[animation])/30+5 if continuation else part['shootTime']),'speed':str(part['shootSpeed']),'spawn_offset':f'Vector2({part["x"]},{part["y"]})','angles':'Array[float](['+(', '.join(str((i-2)*20) for i in range(5)) if name=='note' else '0.0')+'])','linked_to_action':g(part.get('linkParentState',False)),'through_targets':g(part['shootThrough']),'maximum_hits':str(part.get('atkMax',skill['atkMax'])),'hit_interval':str(part.get('atkInterval',skill['atkInterval'])),'damage_context':g({'protection_skill_id':str(skill['id']),'hit_stun':part.get('stiff',skill.get('stiff',0)),'reaction_gravity':1980,'reset_vertical_velocity':True,'knockback_speed':80 if name=='note' else 0,'launch_speed':360 if name=='note' else 0,'knockback_duration':0.5 if name=='note' else 0.3,'reaction_type':'launch' if name=='note' else 'hurt'})}
         for key,value in vals.items():text+=key+' = '+value+'\n'
         for key,clip in [('hit_rects',animation),('continuation_rects',continuation)]:
             if clip:text+=key+' = Dictionary[int, Rect2]({'+', '.join(str(r['frame'])+': '+rect(r) for r in ab[clip])+'})\n'
@@ -175,5 +175,11 @@ def main():
     sources=[source_hash(original,p) for p in ['games/zmhj-g5/cache/assets/man/11106/1_V226.swf','games/zmhj-g5/cache/assets/ui/mission_20260406_1.swf','games/zmhj-g5/cache/assets/music/bg/boss_01.swf','games/zmhj-g5/cache/assets/music/hs.swf','games/zmhj-g5/cache/assets/icon/skill/dialog/2001110.png','games/zmhj-g5/cache/assets/icon/skill/dialog/2001120.png','out/zmhj-equip-skill-diag/viewers/component/SkillComing.as','out/zmhj-equip-skill-diag/viewers/component/BossBleed.as','out/zmhj-equip-skill-diag/com/wdcgame/engine/entitys/AIHpProtectControl.as']]
     dump(BASE+'/original_boss.json',{'sources':sources,'monster':config['Monster']['10601'],'resource':config['Resource']['11106'],'skills':{k:config['Skill'][k] for k in ['2001100','2001110','2001120','1900010']},'ai':clean(config['MAi']['10009']),'behavior':[{y.tag:y.text for y in x} for x in behavior if x.findtext('id') in needed],'animations':{k:len(v) for k,v in actions.items()},'bounds':ab,'sounds':sound_evidence,'scope':{'hp_phases':False,'monster_summoning':False,'ordinary_boss':True}})
     print('Imported original 3 Boss skills, 5 notes, delayed physical wall, authored animations, announcement icons, Boss UI and audio')
+    from convert_monsters_to_spine import convert
+    convert('jushi_lingjun')
+    if (PROJECT/'data/protection/first_level_source.json').exists():
+        from refine_combat_hud import author
+        author()
+
 if __name__=='__main__': main()
 #endregion

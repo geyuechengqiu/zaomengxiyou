@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="BattleInventoryEquipment" format=3 uid="uid://hj0mcqt6mv78"]
 
 [ext_resource type="Script" uid="uid://umn6e5ncnv34" path="res://addons/battle_foundation/definitions/battle_equipment_definition.gd" id="equip"]
-[ext_resource type="Texture2D" uid="uid://lho1jprdn8b5" path="res://assets/ui/original/item_110101003.png" id="icon"]
+[ext_resource type="Texture2D" uid="uid://c8ur7ok6xedo4" path="res://assets/ui/original/loot_110101003_ui.png" id="icon"]
 [ext_resource type="Script" uid="uid://bxnwsngemp233" path="res://addons/battle_foundation/definitions/battle_inventory_equipment.gd" id="item"]
 [ext_resource type="Script" uid="uid://bj8wgemc4twgi" path="res://addons/gameplay_abiltiy_system/scripts/attributes/gameplay_attribute_modifier.gd" id="modifier"]
 

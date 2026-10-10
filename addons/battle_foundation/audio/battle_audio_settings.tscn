@@ -1,0 +1,66 @@
+[gd_scene format=3]
+[ext_resource type="Script" path="res://addons/battle_foundation/audio/battle_audio_settings.gd" id="script"]
+[node name="AudioSettings" type="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 4
+script = ExtResource("script")
+[node name="Master" type="HBoxContainer" parent="."]
+layout_mode = 2
+[node name="Name" type="Label" parent="Master"]
+layout_mode = 2
+custom_minimum_size = Vector2(100, 30)
+text = "总音量"
+[node name="Volume" type="HSlider" parent="Master"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 100.0
+step = 1.0
+value = 100.0
+[node name="Value" type="Label" parent="Master"]
+layout_mode = 2
+custom_minimum_size = Vector2(55, 30)
+text = "100%"
+horizontal_alignment = 2
+[node name="Mute" type="CheckButton" parent="Master"]
+layout_mode = 2
+text = "静音"
+[node name="Music" type="HBoxContainer" parent="."]
+layout_mode = 2
+[node name="Name" type="Label" parent="Music"]
+layout_mode = 2
+custom_minimum_size = Vector2(100, 30)
+text = "背景音乐"
+[node name="Volume" type="HSlider" parent="Music"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 100.0
+step = 1.0
+value = 100.0
+[node name="Value" type="Label" parent="Music"]
+layout_mode = 2
+custom_minimum_size = Vector2(55, 30)
+text = "100%"
+horizontal_alignment = 2
+[node name="Mute" type="CheckButton" parent="Music"]
+layout_mode = 2
+text = "静音"
+[node name="Effects" type="HBoxContainer" parent="."]
+layout_mode = 2
+[node name="Name" type="Label" parent="Effects"]
+layout_mode = 2
+custom_minimum_size = Vector2(100, 30)
+text = "音效"
+[node name="Volume" type="HSlider" parent="Effects"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 100.0
+step = 1.0
+value = 100.0
+[node name="Value" type="Label" parent="Effects"]
+layout_mode = 2
+custom_minimum_size = Vector2(55, 30)
+text = "100%"
+horizontal_alignment = 2
+[node name="Mute" type="CheckButton" parent="Effects"]
+layout_mode = 2
+text = "静音"

@@ -4,7 +4,7 @@
 
 原Monster/10601名称已修正为“玉石琵琶精”，显示同步原版；原有定义ID`巨石灵君`及`jushi_lingjun`文件路径作为兼容索引保留。[居中血条、原抗性图标与出场说明](../../../addons/battle_foundation/boss/original-presentation.md)。
 
-主线F5运行 [碧玉径](../../../examples/level_progression_demo.tscn)。末区击破复苏容器后，按原死亡技能第25帧延迟生成Boss；击败Boss并完成区域后，在地面出口按W/↑确认通关。
+主线F5运行 [碧玉径](../../../game/levels/biyujing.tscn)。末区击破复苏容器后，按原死亡技能第25帧延迟生成Boss；击败Boss并完成区域后，在地面出口按W/↑确认通关。
 
 [系统实现、时序与验收](../../../addons/battle_foundation/boss/README.md) · [独立SVG类图](../../../addons/battle_foundation/docs/boss.svg) · [原版证据](original_boss.json)
 
@@ -26,6 +26,8 @@
 | 公共 BattlePresentation/BossFeedback | Boss栏、技能播报、Core音量总线、背景音乐/声音、镜头震动；场景不挂在悟空下 |
 
 世界距离已换算2倍；素材帧号保持30FPS。音符速度650原像素/秒由对象运行层换算为1300世界像素/秒，`spawn_offset`同样只在对象层换算一次；Boss规则里的attack_range和召唤事件spawn_offset直接使用世界单位。石墙总寿命5.4秒包含12/30秒成形及5秒实体阶段。
+
+石墙使用原 `atkMax=0`、`atkInterval=0`，整个生命周期只播放动画并阻挡移动，不造成接触伤害、硬直或保护值增长。`wall.tres.maximum_hits=0` 表示禁用命中；其他对象设置正数时，按每对象、每目标限制命中次数。
 
 普通玉石琵琶精原版没有阶段和召唤配置；`boss.tres`保持Phases为空。若设计自己的Boss，可在Inspector添加BattleBossPhase资源：设置唯一phase_id、0到1之间的health_ratio、entry_ability_id和required_conditions；按阈值从高到低排列，阶段技能必须已登记在怪物definition的ability_ids中。
 

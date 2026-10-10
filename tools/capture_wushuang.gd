@@ -11,7 +11,7 @@ func capture() -> void:
 	root.size = Vector2i(940, 590)
 	DirAccess.make_dir_recursive_absolute("res://.cleanup-backup")
 	# SceneTree命令行脚本使用无类型局部变量，避免自动加载注册前解析业务类型。
-	var scene = load("res://examples/wukong_skills_demo.tscn").instantiate()
+	var scene = load("res://tests/fixtures/wukong_skills_demo.tscn").instantiate()
 	scene.enable_player_controls = false
 	root.add_child(scene)
 	current_scene = scene

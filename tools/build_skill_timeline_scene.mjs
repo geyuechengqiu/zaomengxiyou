@@ -125,9 +125,9 @@ manifest.definitions.monsters['木桩'] = 'res://data/battle2d/skill_timeline/du
 manifest.definitions.statuses.attribute_test_buff = 'res://data/battle2d/statuses/attribute_test_buff.tres';
 write('manifest.json', JSON.stringify(manifest, null, 2));
 // 生成独立场景；GAS、控制器与运行组件继承自角色场景。
-let scene = fs.readFileSync(path.join(root, 'examples/single_attack_demo.tscn'), 'utf8')
+let scene = fs.readFileSync(path.join(root, 'tests/fixtures/single_attack_demo.tscn'), 'utf8')
   .replace(/ uid="uid:\/\/[^\"]+"/g, '')
-  .replace('res://examples/single_attack_demo.gd', 'res://examples/skill_timeline_demo.gd')
+  .replace('res://tests/fixtures/single_attack_demo.gd', 'res://tests/fixtures/skill_timeline_demo.gd')
   .replace('res://data/battle2d/single_attack/sunwukong_2d.tscn', 'res://data/battle2d/skill_timeline/sunwukong_2d.tscn')
   .replace('SingleAttackDemo', 'SkillTimelineDemo')
   .replace('res://data/battle2d/single_attack/manifest.json', 'res://data/battle2d/skill_timeline/manifest.json')
@@ -137,6 +137,6 @@ let scene = fs.readFileSync(path.join(root, 'examples/single_attack_demo.tscn'),
   .replace(/text = "A \/ D 移动[^\"]*"/, 'text = "A / D 移动 · K 跳跃 · J 三段攻击 · 再按 J 后摇派生 · Esc 菜单\n三段：0.5× / 1×+3 / 1.5×+5 · 不同击退，末段浮空 · 消耗10魔法"')
   .replace('[node name="PlayerOperations" parent="BattleSession/Actors/SunWukong"]', '[node name="PlayerOperations" parent="BattleSession/Actors/SunWukong"]\nability_slots = {&"skill_1": &"sunwukong_timeline_attack"}');
 scene += '\n[node name="Cancel" type="Button" parent="HUD/Panel/Column/Buttons"]\nlayout_mode = 2\nfocus_mode = 0\ntext = "取消技能"\n';
-fs.writeFileSync(path.join(root, 'examples/skill_timeline_demo.tscn'), scene);
+fs.writeFileSync(path.join(root, 'tests/fixtures/skill_timeline_demo.tscn'), scene);
 console.log('Generated authored stage 7 resources and scene.');
 // #endregion

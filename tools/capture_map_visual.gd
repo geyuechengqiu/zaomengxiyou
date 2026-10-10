@@ -9,7 +9,7 @@ func capture() -> void:
 		quit(1)
 		return
 	root.size = Vector2i(940,590)
-	var scene := load("res://examples/level_progression_demo.tscn").instantiate() as Node2D
+	var scene := load("res://game/levels/biyujing.tscn").instantiate() as Node2D
 	scene.enable_player_controls = false
 	root.add_child(scene)
 	current_scene = scene

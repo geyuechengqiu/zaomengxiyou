@@ -1,8 +1,20 @@
 [gd_resource type="Resource" script_class="BattleProtectionProfile" format=3]
 [ext_resource type="Script" path="res://addons/battle_foundation/definitions/battle_protection_profile.gd" id="script"]
+[ext_resource type="Resource" path="res://data/buffs/invulnerable.tres" id="status"]
+[ext_resource type="Resource" path="res://data/buffs/debuff_immunity.tres" id="immune"]
 [resource]
 script = ExtResource("script")
+enabled = true
 original_boss_key = "Monster/10601"
-protect_seconds = 0.8
+maximum_override = 25000
+inherit_original_display = false
+show_protect = true
+protection_action_enabled = true
+protect_seconds = 1.000000000
+protection_status = ExtResource("status")
+protection_statuses = Array[Resource]([ExtResource("immune")])
+cleanse_debuffs = true
 blocks_damage = true
 blocks_status = true
+invulnerable_alpha = true
+metadata/original_protect_skill_id = 1900010

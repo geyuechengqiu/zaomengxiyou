@@ -152,7 +152,7 @@ display_scale = 2.0
 #endregion
 
 #region Original definitions and shared GAS/Core scene components
-def export_monster(name, cfg, skill, atlas):
+def export_monster(name, cfg, skill, atlas, gravity=1980.0):
     base = f'data/monsters/{name}'
     shared_attributes = (PROJECT/'data/battle2d/dummy/attributes.tres').read_text(encoding='utf-8')
     values = {'hp':cfg['hpMax'],'mp':0,'atk':cfg['atk'],'def':cfg['phyDef'],'walk':cfg['walkSpeed']*2,'run':cfg['walkSpeed']*2,'rehp':cfg['reHP']}
@@ -164,7 +164,10 @@ def export_monster(name, cfg, skill, atlas):
 [resource]
 script = ExtResource("script")
 attack_skill_id = &"{name}_skill1"
-maximum_jumps = 1
+gravity = {gravity}
+jump_velocity = -620.0
+second_jump_velocity = -620.0
+maximum_jumps = {0 if name == 'revival_vessel' else 1}
 hurt_lock_frames = 9
 ''')
     ranged = name == 'yushoushi'
@@ -340,7 +343,7 @@ scene_category = "monsters"
 '''
     write('data/levels/biyujing/actors.tscn',actors)
     scene = '''[gd_scene format=3]
-[ext_resource type="Script" path="res://examples/first_level_demo.gd" id="script"]
+[ext_resource type="Script" path="res://tests/fixtures/first_level_demo.gd" id="script"]
 [ext_resource type="Script" path="res://addons/battle_foundation/runtime/battle_session.gd" id="session"]
 [ext_resource type="PackedScene" path="res://data/levels/biyujing/actors.tscn" id="actors"]
 [ext_resource type="Resource" path="res://data/damage/original_strategy.tres" id="damage"]
@@ -416,7 +419,7 @@ theme_override_font_sizes/font_size = 17
 text = "A/D移动 · K跳跃 · J五连击（跑/跳攻击）· Esc暂停/改键\n16剑舞+16驭兽使，向右前进；地形为可编辑验收地图。"
 [node name="OperationMenu" parent="HUD" instance=ExtResource("menu")]
 '''
-    write('examples/first_level_demo.tscn',scene)
+    write('tests/fixtures/first_level_demo.tscn',scene)
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
@@ -436,7 +439,10 @@ def main():
         atlas = export_atlas(source,name,_Amf3Reader,_read_one)
         original['monsters'][name]=cfg; original['skills'][name]=skill
         original['ai'][name]=no_parents(data['MAi'][str(cfg['aiId'])]); original['assets'][name]=dict(atlas, source=source.relative_to(args.original_root).as_posix())
-        export_monster(name,cfg,skill,atlas)
+        # Nape integrates 0.1 seconds at 30 source frames/sec; world scale is 2.
+        # AI obstacle jump speed is platform tuning, not a Monster table field.
+        gravity = float(data['Common']['1']['gravity']) * (30 * 0.1)**2 * 2
+        export_monster(name,cfg,skill,atlas,gravity)
     behavior = ET.fromstring(data['Behavior'])
     original['behaviors'] = [{c.tag:c.text for c in record} for record in behavior if record.findtext('id') in ['1041','2041','111005','207001002','234','201','205']]
     dump('data/monsters/original_first_level.json',original)
@@ -452,6 +458,13 @@ def main():
     dump('data/damage/skill_mapping.json',mapping)
     export_level()
     print('Original fighters exported:', {k:v['animations'] for k,v in original['assets'].items()})
+
+    from convert_monsters_to_spine import convert
+    for monster_name in ('jianwu', 'yushoushi', 'revival_vessel'):
+        convert(monster_name)
+    if (PROJECT/'data/protection/first_level_source.json').exists():
+        from refine_combat_hud import author
+        author()
 
 if __name__ == '__main__':
     main()

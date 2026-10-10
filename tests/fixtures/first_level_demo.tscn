@@ -1,0 +1,138 @@
+[gd_scene format=3]
+[ext_resource type="Script" path="res://tests/fixtures/first_level_demo.gd" id="script"]
+[ext_resource type="Script" path="res://addons/battle_foundation/runtime/battle_session.gd" id="session"]
+[ext_resource type="PackedScene" path="res://data/levels/biyujing/actors.tscn" id="actors"]
+[ext_resource type="Resource" path="res://data/damage/original_strategy.tres" id="damage"]
+[ext_resource type="PackedScene" path="res://addons/battle_foundation/presentation/battle_presentation_2d.tscn" id="presentation"]
+[ext_resource type="PackedScene" path="res://addons/battle_foundation/presentation/combat_feedback_2d.tscn" id="feedback"]
+[ext_resource type="PackedScene" path="res://addons/battle_foundation/input/battle_operation_menu.tscn" id="menu"]
+[node name="FirstLevelDemo" type="Node2D"]
+process_mode = 3
+script = ExtResource("script")
+[node name="Background" type="CanvasLayer" parent="."]
+layer = -5
+[node name="Sky" type="ColorRect" parent="Background"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+color = Color(0.1, 0.2, 0.22, 1)
+[node name="Mountains" type="Polygon2D" parent="."]
+z_index = -1
+color = Color(0.17, 0.32, 0.3, 1)
+polygon = PackedVector2Array(0,650, 350,180, 800,650, 1300,90, 1700,650, 2300,160, 2800,650, 3200,110, 3800,650, 4300,130, 4900,650, 5500,160, 6100,650, 6700,140, 7200,650, 7700,110, 8500,650, 9000,100, 9600,650, 10400,150, 11000,650)
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(940, 480)
+zoom = Vector2(0.5, 0.5)
+[node name="BattleSession" type="Node3D" parent="."]
+script = ExtResource("session")
+scene_manifest_path = "res://data/levels/biyujing/manifest.json"
+scene_seed = 11001
+damage_strategy = ExtResource("damage")
+[node name="BattlePresentation" parent="BattleSession" instance=ExtResource("presentation")]
+[node name="SunWukongFeedback" parent="BattleSession/BattlePresentation/EntityViews" instance=ExtResource("feedback")]
+actor_path = NodePath("../../../Actors/SunWukong")
+[node name="Sword01Feedback" parent="BattleSession/BattlePresentation/EntityViews" instance=ExtResource("feedback")]
+actor_path = NodePath("../../../Actors/Sword01")
+[node name="Beast01Feedback" parent="BattleSession/BattlePresentation/EntityViews" instance=ExtResource("feedback")]
+actor_path = NodePath("../../../Actors/Beast01")
+[node name="Sword02Feedback" parent="BattleSession/BattlePresentation/EntityViews" instance=ExtResource("feedback")]
+actor_path = NodePath("../../../Actors/Sword02")
+[node name="Beast02Feedback" parent="BattleSession/BattlePresentation/EntityViews" instance=ExtResource("feedback")]
+actor_path = NodePath("../../../Actors/Beast02")
+[node name="Sword03Feedback" parent="BattleSession/BattlePresentation/EntityViews" instance=ExtResource("feedback")]
+actor_path = NodePath("../../../Actors/Sword03")
+[node name="Beast03Feedback" parent="BattleSession/BattlePresentation/EntityViews" instance=ExtResource("feedback")]
+actor_path = NodePath("../../../Actors/Beast03")
+[node name="Sword04Feedback" parent="BattleSession/BattlePresentation/EntityViews" instance=ExtResource("feedback")]
+actor_path = NodePath("../../../Actors/Sword04")
+[node name="Beast04Feedback" parent="BattleSession/BattlePresentation/EntityViews" instance=ExtResource("feedback")]
+actor_path = NodePath("../../../Actors/Beast04")
+[node name="Sword05Feedback" parent="BattleSession/BattlePresentation/EntityViews" instance=ExtResource("feedback")]
+actor_path = NodePath("../../../Actors/Sword05")
+[node name="Beast05Feedback" parent="BattleSession/BattlePresentation/EntityViews" instance=ExtResource("feedback")]
+actor_path = NodePath("../../../Actors/Beast05")
+[node name="Sword06Feedback" parent="BattleSession/BattlePresentation/EntityViews" instance=ExtResource("feedback")]
+actor_path = NodePath("../../../Actors/Sword06")
+[node name="Beast06Feedback" parent="BattleSession/BattlePresentation/EntityViews" instance=ExtResource("feedback")]
+actor_path = NodePath("../../../Actors/Beast06")
+[node name="Sword07Feedback" parent="BattleSession/BattlePresentation/EntityViews" instance=ExtResource("feedback")]
+actor_path = NodePath("../../../Actors/Sword07")
+[node name="Beast07Feedback" parent="BattleSession/BattlePresentation/EntityViews" instance=ExtResource("feedback")]
+actor_path = NodePath("../../../Actors/Beast07")
+[node name="Sword08Feedback" parent="BattleSession/BattlePresentation/EntityViews" instance=ExtResource("feedback")]
+actor_path = NodePath("../../../Actors/Sword08")
+[node name="Beast08Feedback" parent="BattleSession/BattlePresentation/EntityViews" instance=ExtResource("feedback")]
+actor_path = NodePath("../../../Actors/Beast08")
+[node name="Sword09Feedback" parent="BattleSession/BattlePresentation/EntityViews" instance=ExtResource("feedback")]
+actor_path = NodePath("../../../Actors/Sword09")
+[node name="Beast09Feedback" parent="BattleSession/BattlePresentation/EntityViews" instance=ExtResource("feedback")]
+actor_path = NodePath("../../../Actors/Beast09")
+[node name="Sword10Feedback" parent="BattleSession/BattlePresentation/EntityViews" instance=ExtResource("feedback")]
+actor_path = NodePath("../../../Actors/Sword10")
+[node name="Beast10Feedback" parent="BattleSession/BattlePresentation/EntityViews" instance=ExtResource("feedback")]
+actor_path = NodePath("../../../Actors/Beast10")
+[node name="Sword11Feedback" parent="BattleSession/BattlePresentation/EntityViews" instance=ExtResource("feedback")]
+actor_path = NodePath("../../../Actors/Sword11")
+[node name="Beast11Feedback" parent="BattleSession/BattlePresentation/EntityViews" instance=ExtResource("feedback")]
+actor_path = NodePath("../../../Actors/Beast11")
+[node name="Sword12Feedback" parent="BattleSession/BattlePresentation/EntityViews" instance=ExtResource("feedback")]
+actor_path = NodePath("../../../Actors/Sword12")
+[node name="Beast12Feedback" parent="BattleSession/BattlePresentation/EntityViews" instance=ExtResource("feedback")]
+actor_path = NodePath("../../../Actors/Beast12")
+[node name="Sword13Feedback" parent="BattleSession/BattlePresentation/EntityViews" instance=ExtResource("feedback")]
+actor_path = NodePath("../../../Actors/Sword13")
+[node name="Beast13Feedback" parent="BattleSession/BattlePresentation/EntityViews" instance=ExtResource("feedback")]
+actor_path = NodePath("../../../Actors/Beast13")
+[node name="Sword14Feedback" parent="BattleSession/BattlePresentation/EntityViews" instance=ExtResource("feedback")]
+actor_path = NodePath("../../../Actors/Sword14")
+[node name="Beast14Feedback" parent="BattleSession/BattlePresentation/EntityViews" instance=ExtResource("feedback")]
+actor_path = NodePath("../../../Actors/Beast14")
+[node name="Sword15Feedback" parent="BattleSession/BattlePresentation/EntityViews" instance=ExtResource("feedback")]
+actor_path = NodePath("../../../Actors/Sword15")
+[node name="Beast15Feedback" parent="BattleSession/BattlePresentation/EntityViews" instance=ExtResource("feedback")]
+actor_path = NodePath("../../../Actors/Beast15")
+[node name="Sword16Feedback" parent="BattleSession/BattlePresentation/EntityViews" instance=ExtResource("feedback")]
+actor_path = NodePath("../../../Actors/Sword16")
+[node name="Beast16Feedback" parent="BattleSession/BattlePresentation/EntityViews" instance=ExtResource("feedback")]
+actor_path = NodePath("../../../Actors/Beast16")
+[node name="Actors" parent="BattleSession" instance=ExtResource("actors")]
+[node name="HUD" type="CanvasLayer" parent="."]
+layer = 20
+[node name="Panel" type="PanelContainer" parent="HUD"]
+offset_left = 14.0
+offset_top = 12.0
+offset_right = 926.0
+offset_bottom = 112.0
+[node name="Column" type="VBoxContainer" parent="HUD/Panel"]
+layout_mode = 2
+[node name="Title" type="Label" parent="HUD/Panel/Column"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "阶段11 · 碧玉径小怪：剑舞 / 驭兽使"
+[node name="Info" type="Label" parent="HUD/Panel/Column"]
+layout_mode = 2
+text = "小怪按原版属性战斗；AI提交意图，由Core动作状态机执行。"
+[node name="Buttons" type="HBoxContainer" parent="HUD/Panel/Column"]
+layout_mode = 2
+[node name="Restart" type="Button" parent="HUD/Panel/Column/Buttons"]
+layout_mode = 2
+focus_mode = 0
+text = "重开关卡"
+[node name="Stun" type="Button" parent="HUD/Panel/Column/Buttons"]
+layout_mode = 2
+focus_mode = 0
+text = "眩晕附近小怪"
+[node name="Slow" type="Button" parent="HUD/Panel/Column/Buttons"]
+layout_mode = 2
+focus_mode = 0
+text = "减速附近小怪"
+[node name="Help" type="Label" parent="HUD"]
+offset_left = 14.0
+offset_top = 540.0
+offset_right = 926.0
+offset_bottom = 578.0
+theme_override_font_sizes/font_size = 17
+text = "A/D移动 · K跳跃 · J五连击（跑/跳攻击）· 空格无双表现 · Esc暂停/改键
+16剑舞+16驭兽使，向右前进；地形为可编辑验收地图。"
+[node name="OperationMenu" parent="HUD" instance=ExtResource("menu")]

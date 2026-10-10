@@ -2,7 +2,7 @@
 
 > 阶段8已为实际场景接入原版伤害策略；本文数值表是显式选择 SimpleDamageLogic 的阶段7验收夹具结果。实际场景按原版浮动、截断、概率与抗性结算；显示统一整数。详见 [原版伤害说明](original-damage.md)。
 
-打开 [skill_timeline_demo.tscn](../../../examples/skill_timeline_demo.tscn)，用现有带 Spine 模块的 Godot 按 **F6**。场景沿用原版 940×590，角色、地形、木桩、GAS 组件、操作控制器、HUD 和技能对象均预置；启动和施放不创建节点。F5 现打开阶段8原版伤害场景。
+打开 [skill_timeline_demo.tscn](../../../tests/fixtures/skill_timeline_demo.tscn)，用现有带 Spine 模块的 Godot 按 **F6**。场景沿用原版 940×590，角色、地形、木桩、GAS 组件、操作控制器、HUD 和技能对象均预置；启动和施放不创建节点。F5 现打开阶段8原版伤害场景。
 
 A/D 移动，K 跳跃，J 三段攻击，Y 技能槽 1，Esc 菜单与改键。第 28—38 素材帧再次按 J 派生单段普攻，可从第 20 帧提前缓存。按钮可取消技能、翻转、移动木桩以打空、增加攻击、暂停或重载场景。两个木桩各有 500 生命、防御 5；三段倍率、反应、消耗和冷却是**阶段 7 测试配置**，不代表原版某个技能。
 
@@ -129,10 +129,10 @@ BattleTimelineObject2D 激活已有 Node2D、设置生成位置/速度，手动�
 ## 验收与扩展入口
 
 ```powershell
-& '<带 Spine 模块的 Godot 路径>' --headless --path . res://examples/verify_skill_timeline.tscn
+& '<带 Spine 模块的 Godot 路径>' --headless --path . res://tests/suites/verify_skill_timeline.tscn
 ```
 
-[verify_skill_timeline.gd](../../../examples/verify_skill_timeline.gd) **117 项检查通过**：三段不同倍率与反应、源帧顺序、低帧率跨全技能、持续间隔/最大次数、晚进入/多目标独立计时、真实技能槽意图与菜单、派生窗口/缓存/控制权释放、同步取消、直接GAS取消/遗忘、死亡清理、完成重入、旧编号回收、资源不足、消耗冷却、暂停/慢动作/停顿、资源图隔离、Buff/保护上下文、霸体与浮空许可、内部小数与整数反馈、高速位移碰撞和动画时钟，并检查启动前后预置节点树一致。阶段4原五连击222项、阶段6单段闭环64项、操作145项、属性链65项与插件/阶段1/Core事件回归通过；D3D12实际场景与SVG已检查。
+[verify_skill_timeline.gd](../../../tests/suites/verify_skill_timeline.gd) **117 项检查通过**：三段不同倍率与反应、源帧顺序、低帧率跨全技能、持续间隔/最大次数、晚进入/多目标独立计时、真实技能槽意图与菜单、派生窗口/缓存/控制权释放、同步取消、直接GAS取消/遗忘、死亡清理、完成重入、旧编号回收、资源不足、消耗冷却、暂停/慢动作/停顿、资源图隔离、Buff/保护上下文、霸体与浮空许可、内部小数与整数反馈、高速位移碰撞和动画时钟，并检查启动前后预置节点树一致。阶段4原五连击222项、阶段6单段闭环64项、操作145项、属性链65项与插件/阶段1/Core事件回归通过；D3D12实际场景与SVG已检查。
 
 [真实编辑器预览验收](../../../tools/verify_editor_skill_timeline.gd) **11项通过**，覆盖三段切换、同一形状复用、Inspector矩形实时刷新与数据恢复：
 

@@ -17,6 +17,7 @@ signal operation_observed(intent: CoreOperationIntent)
 var controller: CoreOperationController
 var actor: BattleEntity2D
 var _phases: Array[CoreOperationIntent] = []
+var _run_attack_rearm: bool = false
 #endregion
 #region 装配与控制权
 func _ready() -> void:
@@ -48,6 +49,7 @@ func set_control_blocked(reason: StringName, blocked: bool) -> void:
 
 func _on_control_changed(available: bool, _reasons: Array) -> void:
 	if not available:
+		actor.release_skill_operation()
 		actor.action_state.clear_operation_state()
 		actor.skill_aim_axis = 0.0
 		_phases.clear()
@@ -103,10 +105,32 @@ func _handle_cancelled_intent(_intent: CoreOperationIntent) -> void:
 	pass
 #endregion
 #region 意图观察与 Core 发布
+func _is_hold_skill_operation(operation: StringName) -> bool:
+	var ability := actor.abilities.get_ability_instance(ability_slots.get(operation, &""))
+	var timeline := ability.get_feature("BattleFrameTimelineFeature") as BattleFrameTimelineFeature if ability != null else null
+	return timeline != null and timeline.cancel_on_input_release
+
+func finish_run_attack() -> void:
+	_run_attack_rearm = true
+	controller.clear_double_tap_axis(&"move")
+	# 丢弃已收集的旧移动快照；保留攻击/跳跃/技能等独立操作。
+	_phases = _phases.filter(func(intent: CoreOperationIntent): return intent.action not in [&"move_left", &"move_right", &"run"])
+
 func _on_intent(intent: CoreOperationIntent) -> void:
 	var snapshot := intent.copy_intent()
+	if snapshot.phase == CoreOperationIntent.Phase.RELEASED:
+		# 同步关闭攻击，即使战斗处于暂停/受击停顿，也不能松开后补发命中。
+		actor.release_skill_operation(snapshot.action)
+		if _is_hold_skill_operation(snapshot.action):
+			# 前摇/冷却期间未受理的按下不能在松开后延迟施放。
+			controller.clear_buffered_intents(snapshot.action)
 	snapshot.payload["move_axis"] = controller.get_axis(&"move")
 	snapshot.payload["running"] = controller.is_pressed(&"run") or controller.get_double_tap_direction(&"move") != 0
+	if _run_attack_rearm and snapshot.action in [&"move_left", &"move_right", &"run"]:
+		if snapshot.phase == CoreOperationIntent.Phase.PRESSED and not snapshot.payload.get("cancelled", false): _run_attack_rearm = false
+		else:
+			snapshot.payload["move_axis"] = 0.0
+			snapshot.payload["running"] = false
 	operation_observed.emit(snapshot.copy_intent())
 	actor.publish_battle_event(&"battle.operation_intent", {"intent": snapshot.action, "phase": snapshot.get_phase_name(), "strength": snapshot.strength, "held_seconds": snapshot.held_seconds, "input_time": snapshot.input_time, "input_sequence": snapshot.sequence, "controller_id": controller.controller_id, "operation_payload": snapshot.payload})
 	if snapshot.payload.get("cancelled", false):

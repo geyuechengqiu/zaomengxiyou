@@ -1,5 +1,6 @@
 [gd_scene format=3]
 [ext_resource type="Script" path="res://addons/battle_foundation/input/battle_operation_menu.gd" id="script"]
+[ext_resource type="PackedScene" path="res://addons/battle_foundation/audio/battle_audio_settings.tscn" id="audio_settings"]
 [sub_resource type="StyleBoxFlat" id="panel"]
 bg_color = Color(0.09, 0.16, 0.23, 1)
 content_margin_left = 20.0
@@ -8,6 +9,7 @@ content_margin_top = 16.0
 content_margin_bottom = 16.0
 [node name="OperationMenu" type="Control"]
 process_mode = 3
+z_index = 100
 visible = false
 layout_mode = 3
 anchors_preset = 15
@@ -41,7 +43,7 @@ layout_mode = 2
 theme_override_constants/separation = 8
 [node name="Title" type="Label" parent="Margin/Panel/Column"]
 layout_mode = 2
-text = "操作设置 · 按键重映射"
+text = "设置 · 声音与按键"
 theme_override_font_sizes/font_size = 24
 [node name="Status" type="Label" parent="Margin/Panel/Column"]
 layout_mode = 2
@@ -49,6 +51,8 @@ custom_minimum_size = Vector2(0, 40)
 autowrap_mode = 3
 theme_override_font_sizes/font_size = 16
 theme_override_colors/font_color = Color(1, 0.83, 0.55, 1)
+[node name="AudioSettings" parent="Margin/Panel/Column" instance=ExtResource("audio_settings")]
+layout_mode = 2
 [node name="Scroll" type="ScrollContainer" parent="Margin/Panel/Column"]
 layout_mode = 2
 size_flags_vertical = 3

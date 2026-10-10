@@ -4,7 +4,7 @@
 
 ## 运行与操作
 
-F5 运行 [hit_reaction_demo.tscn](../../../examples/hit_reaction_demo.tscn)。A/D 移动、K 二段跳、连按 J 五连击，Esc 暂停/修改操作键。底部按钮可切换目标模式、转身、靠近或远离木桩、重置及暂停。代码中 `session.set_time_scale()` 可调整慢动作，演示使用普通伤害样例。
+F5 运行 [hit_reaction_demo.tscn](../../../tests/fixtures/hit_reaction_demo.tscn)。A/D 移动、K 二段跳、连按 J 五连击，Esc 暂停/修改操作键。底部按钮可切换目标模式、转身、靠近或远离木桩、重置及暂停。代码中 `session.set_time_scale()` 可调整慢动作，演示使用普通伤害样例。
 
 左木桩引用东皇太一 `Monster/10001`，基础保护满值 25000；右木桩引用商羊 `Monster/11103`，基础满值 35000。左上两个输入框可分别修改满值，修改时清空该目标的保护运行数据。运行修改不写回 `.tres`，永久配置请在 Inspector 编辑资源。
 
@@ -147,7 +147,7 @@ Core 新事件：battle.hit.reaction、battle.protection.changed/triggered/ended
 
 ```powershell
 # 一项阶段9验收
-& '<带 Spine 的 Godot 路径>' --headless --path . res://examples/verify_hit_reaction.tscn
+& '<带 Spine 的 Godot 路径>' --headless --path . res://tests/suites/verify_hit_reaction.tscn
 # 阶段9 + 已有战斗、动画、Core/GAS/输入回归，正常退出并检查 PASS/错误日志
 & .\tools\verify_stage_nine.ps1 -Godot '<带 Spine 的 Godot 路径>'
 ```

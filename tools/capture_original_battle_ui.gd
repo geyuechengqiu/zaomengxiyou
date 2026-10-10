@@ -19,7 +19,7 @@ func shot(name: String) -> void:
 func capture() -> void:
 	if DisplayServer.get_name() == "headless": quit(1); return
 	root.size = Vector2i(940,590)
-	scene = load("res://examples/level_progression_demo.tscn").instantiate()
+	scene = load("res://game/levels/biyujing.tscn").instantiate()
 	scene.enable_player_controls = false
 	root.add_child(scene)
 	current_scene = scene
@@ -66,14 +66,14 @@ func capture() -> void:
 	await shot("inventory")
 	var weapon = scene.player.inventory.get_bag_items("equipment")[2]
 	scene.player.inventory.equip_item(weapon)
-	scene.original_hud.inventory_view._show_item_tip(weapon)
+	scene.original_hud.inventory_view._show_item_tip(weapon, scene.original_hud.inventory_view.get_node("Equipment/Part1"), true)
 	await shot("equipped-tooltip")
 	var bag_view = scene.original_hud.inventory_view
 	bag_view.get_node("Tooltip").hide()
-	bag_view.get_node("Resistances").show()
+	bag_view._show_resistances()
 	await shot("resistances")
 	bag_view.get_node("Resistances").hide()
-	bag_view._open_context(scene.player.inventory.get_bag_items("equipment")[0], false)
+	bag_view._open_context(scene.player.inventory.get_bag_items("equipment")[0], false, bag_view.get_node("Grid").get_child(0))
 	bag_view._sell_selected()
 	await shot("sell-confirmation")
 	bag_view.get_node("Confirm").hide()

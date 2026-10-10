@@ -1,6 +1,6 @@
 # GodotGear
 
-本项目增加 `OriginalInventory extends C_Inventory`，用于复刻上古天地篇四类独立容量、25格分页、品质排序、锁定出售、原消耗扩容和原子换装。角色场景直接预置该节点；定义入库深复制，数量和装备状态不污染共享资源。`equip_changed` 接现有 GAS 属性入口与角色皮肤，视图只调用插件操作。基础 C_Inventory 的无效索引、非持有装备和空引用处理也已修正，旧接口保留。[物品配置](../../data/inventory/README.md)、[原版 UI、规则与范围](../../data/ui/README.md)。OriginalInventory 的恢复道具/角色条件桥接使用 Battle Foundation；通用 C_Inventory 不依赖该桥接。
+本项目增加 `OriginalInventory extends C_Inventory`，用于复刻上古天地篇四类独立容量、25格分页、品质排序、锁定出售、原消耗扩容和原子换装。角色场景直接预置该节点；物品定义与带UID的实例状态分开，数量、强化和词条不污染共享资源。`equipment_changed` 统一通知现有GAS属性入口，`appearance_changed` 通知角色皮肤；旧 `equip_changed` 保留兼容。阶段14已加入原成本强化/洗练、套装门槛、地面拾取、灵魂和经验奖励。[物品配置](../../data/inventory/README.md)、[成长与掉落配置](../../data/loot/README.md)、[原版 UI、规则与范围](../../data/ui/README.md)。OriginalInventory 的恢复道具/角色条件桥接使用 Battle Foundation；通用 C_Inventory 不依赖该桥接。
 
 一个轻量级、灵活的 Godot 4.x 背包系统插件
 
@@ -46,6 +46,12 @@ inventory.remove_item(0)  # 移除槽位0的物品
 ```
 
 ## 文档
+
+### 造梦西游原版背包适配
+
+`OriginalInventory` 在通用组件之上管理四类背包、独占物品实例、装备交换与事务验证。面板通过 `get_context_actions` 读取菜单规则，通过 `get_comparison_item` 查找同部位装备。`OriginalItemPresenter` 整理原品质、类型、强化名称、GAS装备数值、孔位与售价，并提供原版抗性解释公式。数据与界面节点分开，面板不直接修改物品或最终属性。
+
+业务角色在预置 `Inventory` 填写 `Display Name`、`Player Number`、`Presentation Rules`。`operation_completed` 与 `operation_rejected` 接公共提示；`wardrobe_requested` 接独立衣柜模块；`set_show_fashion` 通过 `appearance_changed` 同步外观，保留装备属性。配置和源码依据见 [背包面板细节](../../data/inventory/panel-details.md)。
 
 详细文档和示例请访问我们的 [Wiki](https://github.com/Liweimin0512/GodotGear/wiki) *（即将推出）*
 

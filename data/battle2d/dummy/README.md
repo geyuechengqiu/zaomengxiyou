@@ -35,10 +35,10 @@ SVG 的脚底参考线为 Y=180，场景实体根节点为脚底原点。原图 
 
 HURT 的退出由动作状态规则决定，默认硬直使用 `BattleActionProfile2D.hurt_lock_frames / source_fps`，并可被技能事件的 `hit_stun` 覆盖；修改视觉动作时长不会自动修改硬直。动画完成只发送通知。生命耗尽进入 DEAD 并立即播放 `death`，不会因 `hurt` 结束恢复待机。
 
-运行 [原版伤害样例](../../../examples/original_damage_demo.tscn) 可检查悟空五连击下的木桩受伤。单段和技能时间轴样例同样复用此场景。自动验证入口为 [verify_wooden_dummy.tscn](../../../examples/verify_wooden_dummy.tscn)，覆盖重复受伤、朝向、时钟、碰撞独立、同类实例隔离、五连击和死亡优先级。
+运行 [原版伤害样例](../../../tests/fixtures/original_damage_demo.tscn) 可检查悟空五连击下的木桩受伤。单段和技能时间轴样例同样复用此场景。自动验证入口为 [verify_wooden_dummy.tscn](../../../tests/suites/verify_wooden_dummy.tscn)，覆盖重复受伤、朝向、时钟、碰撞独立、同类实例隔离、五连击和死亡优先级。
 
 ## 阶段 9：击飞、倒地与保护动画
 
 新增预置 AnimationLibrary [reaction_animations.tres](reaction_animations.tres)，在木桩 AnimationPlayer 的 `reaction` 库中可直接拖动预览：`launched`、`air_hurt`、`hit_land`、`knockdown`、`getup`、`protect`。动作分别表现浮空倾斜、下落受伤、接地压缩、倒下、起身及青色保护脉冲，继续只修改 Body/HurtFace，底座和物理形状不受动画轨道影响。
 
-AnimationPlayerAdapter 对外仍使用不含库名的语义动作；Core 状态决定动作和退出时间。落地0.1秒、倒地0.65秒、起身0.35秒可在角色 reaction_profile 调整，动画长短不自动改变这些规则。运行 [阶段9演示](../../../examples/hit_reaction_demo.tscn)，详细配置见 [受击与保护说明](../../../addons/battle_foundation/combat/hit-reaction-protection.md)。
+AnimationPlayerAdapter 对外仍使用不含库名的语义动作；Core 状态决定动作和退出时间。落地0.1秒、倒地0.65秒、起身0.35秒可在角色 reaction_profile 调整，动画长短不自动改变这些规则。运行 [阶段9演示](../../../tests/fixtures/hit_reaction_demo.tscn)，详细配置见 [受击与保护说明](../../../addons/battle_foundation/combat/hit-reaction-protection.md)。

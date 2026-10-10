@@ -190,13 +190,17 @@ func apply_skill_aim(timeline: BattleFrameTimelineFeature, degrees: float) -> vo
 	if not timeline.aim_head_bone.is_empty():
 		var bone := _sprite.get_skeleton().find_bone(String(timeline.aim_head_bone))
 		if bone != null:
-			var pose := bone.get_pose()
-			_aim_head = bone
-			_aim_head_base_rotation = pose.get_rotation()
 			# DragonBones的node旋转是相对动画的绝对偏移；Spine转为Y向上角度。
-			# 每次先撤销上次偏移，不让无旋转关键帧的头骨累积瞄准角。
-			pose.set_rotation(_aim_head_base_rotation - degrees)
-			_sprite.get_skeleton().update_world_transform(SpineConstant.Physics_Update)
+			# 原生动画应用后、顶点缓存生成前修改骨骼，画面才能同步瞄准。
+			# 单独 update_world_transform 只更新骨骼，不会刷新 Spine 的绘制网格。
+			var aim_pose := func(_updated_sprite: SpineSprite) -> void:
+				var pose := bone.get_pose()
+				_aim_head = bone
+				_aim_head_base_rotation = pose.get_rotation()
+				pose.set_rotation(_aim_head_base_rotation - degrees)
+			_sprite.before_world_transforms_change.connect(aim_pose)
+			_sprite.update_skeleton(0.0)
+			_sprite.before_world_transforms_change.disconnect(aim_pose)
 
 func _restore_aim_head() -> void:
 	if _aim_head != null:

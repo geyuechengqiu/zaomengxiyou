@@ -159,11 +159,11 @@ auto_save 属性目前未在 set/reset 路径触发保存，调用者必须显�
 
 ## 音频、总线与播放器池
 
-[AudioManager](../source/audio_system/audio_manager.gd) 将 MUSIC、SOUND_EFFECT、VOICE、AMBIENT 映射到 Music、SFX、Voice、Ambient 总线；ready 时补建缺失总线，从 ConfigManager 的 audio 段读取主音量与分类音量。播放器按类型放在数组中，每次复用未播放的 AudioStreamPlayer，没有空闲者就创建并挂到 audio_node_root；音频资源按路径缓存。
+[AudioManager](../source/audio_system/audio_manager.gd) 将 MUSIC、SOUND_EFFECT、VOICE、AMBIENT 映射到 Music、SFX、Voice、Ambient 总线；ready 时补建缺失总线，从 ConfigManager 的 audio 段读取主音量、分类音量及各自静音状态。工厂播放器池上限分别为2/32/16/8；优先复用空闲节点，满池替换忙碌节点，音频资源按路径缓存。`bind_scene_player()`允许战斗场景预置播放器复用同一套分类音量，节点及播放生命周期仍由本场战斗管理。
 
-play_music 切换当前音乐，旧播放器 Tween 淡出并停止，新播放器按需要淡入；loop=true 连接 finished 后重新 play。导入资源本身已设置循环时，loop=false 不能关闭资源循环。play_sound/play_voice 选分类播放器、设置 stream/bus/volume_db 并播放，返回播放器便于调用者控制。stop_all 停止池内全部播放器，不移除缓存和节点。
+play_music 切换当前音乐，旧播放器 Tween 淡出并停止，新播放器按需要淡入；每个播放器保存独立补间，复用时取消旧补间，防止旧淡出停止新曲目。loop=true 连接 finished 后重新 play；loop=false遇到导入流循环时复制本次流并关闭循环，不修改缓存。play_sound/play_voice只给播放器施加本次声音的局部增益，分类音量由总线统一施加一次，避免重复衰减。stop_all取消音乐补间并停止工厂池，不停止其他关卡持有的场景播放器。
 
-set_volume/set_master_volume 只改模块内数值和 AudioServer 总线，不自动更新 ConfigFile，持久化需要调用者写配置再 save_config。分类音量同时用于总线和播放器幅度，因而播放时可能产生两次分类衰减；改变总线后旧播放器的自身衰减仍保留。AMBIENT 有总线/音量/池配置，但当前没有独立 play_ambient 公共方法；播放器是普通 AudioStreamPlayer，不提供 2D/3D 空间定位。切歌过程中重复请求也没有专门的 Tween 取消/串行机制。
+set_volume/set_master_volume、set_muted/set_master_muted即时更新AudioServer及ConfigManager内存配置，并发出settings_changed；save_preferences显式落盘，避免拖动滑条时每一步写磁盘。静音独立于滑条数值，取消静音恢复原音量。AMBIENT 有总线/音量/池配置，但当前没有独立play_ambient公共方法；播放器是普通AudioStreamPlayer，不提供2D/3D空间定位。战斗音频、原资源目录与设置面板见[接入说明](../../battle_foundation/audio/README.md)。
 
 ## 时间与计时器
 
@@ -209,7 +209,7 @@ AsyncIOStrategy 直接 await 全局 io_completed，一旦先完成其他任务�
 
 示例是接口展示，部分会触及上述未完成路径。它们的全部脚本列于 [源码索引](source-index.md)，没有把运行成功与“存在示例文件”混为一谈。
 
-已移除三个确认失效的历史示例入口：scene_demo 引用不存在的 `CoreSystem.SceneManager`；scene_push_stack_issue44 使用旧 preload 路径；issue40_reset_to_default 场景引用缺失脚本。前两者专用子场景一并删除。当前示例与插件资源通过 [插件验收](../../../examples/verify_plugins.gd) 的递归加载与编译检查；检查失败会传播到入口并返回失败码。
+已移除三个确认失效的历史示例入口：scene_demo 引用不存在的 `CoreSystem.SceneManager`；scene_push_stack_issue44 使用旧 preload 路径；issue40_reset_to_default 场景引用缺失脚本。前两者专用子场景一并删除。当前示例与插件资源通过 [插件验收](../../../tests/suites/verify_plugins.gd) 的递归加载与编译检查；检查失败会传播到入口并返回失败码。
 
 | 示例目录 | 展示内容 |
 | --- | --- |
@@ -257,7 +257,7 @@ AsyncIOStrategy 直接 await 全局 io_completed，一旦先完成其他任务�
 node tools/add_script_regions.mjs --check
 node tools/generate_core_docs.mjs
 node addons/gameplay_abiltiy_system/docs/generate_diagrams.mjs
-& '<Godot 可执行文件路径>' --headless --path . res://examples/verify_plugins.tscn
+& '<Godot 可执行文件路径>' --headless --path . res://tests/suites/verify_plugins.tscn
 ```
 
 不带 `--check` 的分区工具会补充未分区的脚本并验证注释外源码一致性，修改前副本放在 `.cleanup-backup/script-regions-*.json`。文档生成重建本插件 4 张 SVG 和全部脚本索引。验证场景检查原有插件效果；它不穷举新增核心插件的存档、场景、输入等全部接口。

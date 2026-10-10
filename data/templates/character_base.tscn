@@ -1,0 +1,22 @@
+[gd_scene format=3]
+[ext_resource type="PackedScene" path="res://data/templates/combatant_base.tscn" id="base"]
+[ext_resource type="PackedScene" path="res://data/animation/sunwukong_visual.tscn" id="visual"]
+[ext_resource type="Resource" path="res://data/battle2d/sunwukong_actions.tres" id="actions"]
+[ext_resource type="Script" path="res://addons/battle_foundation/input/battle_player_operations.gd" id="operations"]
+[ext_resource type="Resource" path="res://data/controls/player_operations.tres" id="profile"]
+[ext_resource type="Script" path="res://addons/godot_core_system-0.0.4/source/operation_system/operation_controller.gd" id="controller"]
+[ext_resource type="Script" path="res://addons/battle_foundation/runtime/battle_wushuang_controller.gd" id="wushuang"]
+[node name="CharacterTemplate" instance=ExtResource("base")]
+scene_category = "characters"
+action_profile = ExtResource("actions")
+[node name="AnimationAdapter" parent="." instance=ExtResource("visual")]
+[node name="PlayerOperations" type="Node" parent="."]
+script = ExtResource("operations")
+operation_profile = ExtResource("profile")
+ability_slots = Dictionary[StringName, StringName]({&"skill_1": &"sunwukong_skill1", &"skill_2": &"sunwukong_skill2", &"skill_3": &"sunwukong_skill3", &"skill_4": &"sunwukong_skill4", &"skill_5": &"sunwukong_skill8", &"wushuang": &"sunwukong_wushuang"})
+[node name="OperationController" type="Node" parent="PlayerOperations"]
+script = ExtResource("controller")
+profile = ExtResource("profile")
+externally_driven = true
+[node name="WushuangController" type="Node" parent="."]
+script = ExtResource("wushuang")

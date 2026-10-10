@@ -1,6 +1,6 @@
 # 悟空普通无双：红光与残影
 
-打开 [五技能演示](../../../examples/wukong_skills_demo.tscn) 按 F6，或按 F5 运行第一关；通过战斗命中获取无双值，满10000后按空格释放，Esc菜单可改键。持续15秒，期间按上限/15×战斗delta消耗且不再获取；重复按下不刷新。释放时保留正在进行的攻击与技能；地面受击硬直按原 `onStiffComplete` 解除，眩晕由控制状态裁决。
+打开 [五技能演示](../../../tests/fixtures/wukong_skills_demo.tscn) 按 F6，或按 F5 运行第一关；通过战斗命中获取无双值，满10000后按空格释放，Esc菜单可改键。持续15秒，期间按上限/15×战斗delta消耗且不再获取；重复按下不刷新。释放时保留正在进行的攻击与技能；地面受击硬直按原 `onStiffComplete` 解除，眩晕由控制状态裁决。
 
 ## 战斗获取、增益与UI
 
@@ -71,10 +71,10 @@ Flash 的 GlowFilter 由 Godot shader 的5×5 Gaussian采样近似，颜色、�
 
 ## 验证
 
-[自动验收](../../../examples/verify_wushuang.gd) 覆盖真实输入和改键、攻击中激活、姿态/换装/朝向冻结、固定池、实例隔离、低帧率、暂停/慢动作/停顿、30源帧辉光边界、到期/死亡/离场清理。
+[自动验收](../../../tests/suites/verify_wushuang.gd) 覆盖真实输入和改键、攻击中激活、姿态/换装/朝向冻结、固定池、实例隔离、低帧率、暂停/慢动作/停顿、30源帧辉光边界、到期/死亡/离场清理。
 
 ```powershell
-& '<带 Spine 模块的 Godot.exe>' --headless --path . res://examples/verify_wushuang.tscn
+& '<带 Spine 模块的 Godot.exe>' --headless --path . res://tests/suites/verify_wushuang.tscn
 & '<带 Spine 模块的 Godot.exe>' --path . --script res://tools/capture_wushuang.gd
 ```
 

@@ -1,0 +1,26 @@
+{
+  "sources": [
+    {
+      "path": "games/zmhj-g5/cache/assets/module/backpack_20260817_1.swf",
+      "sha256": "0ca3eeb641de59477d38a807d9770eaf6e6712692a848c03da578898d397b084"
+    },
+    {
+      "path": "games/zmhj-g5/cache/assets/module/material_20260831_1.swf",
+      "sha256": "9b5ff7fe25225a1eb48b038b01b204e81aa129f5803b23b6be9057b5a9333955"
+    }
+  ],
+  "glow_frames": 30,
+  "fps": 30,
+  "portrait_position": [
+    270,
+    280
+  ],
+  "portrait_outer_scale": 0.5,
+  "glow_registration": [
+    165,
+    158.35
+  ],
+  "uid_open_seconds": 0.5,
+  "uid_close_seconds": 0.2,
+  "scope": "Backpack presentation; wardrobe module remains a separate plugin signal."
+}

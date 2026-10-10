@@ -1,5 +1,7 @@
 # 原版保护数据
 
+当前关卡四种怪物的独立阈值、原保护技Buff、透明度与动作/Buff时间分离见 [战斗HUD与怪物保护](../ui/combat-hud.md)。各怪物的protection.tres是永久编辑入口，原始配置证据保存在first_level_source.json。
+
 [original_protection.json](original_protection.json) 由本地客户端导出的 Boss 与技能表转换，不用统一常数替代 Boss 配置。含 1308 条 Boss、6411 条完整 Skill 记录、项目五连击能力 ID → 原技能 ID 映射及三个来源文件的 SHA256。
 
 来源为 [机制说明](D:/UserData/Downloads/game/Speculum-4399-master/exports/zmhj_protection/机制说明.md)、同目录 Boss保护条满值.json、全部技能保护值.json。原版代码入口为 BattleModelManager.calProtectPoint、ManEntity.CheckProtect、BossBleed 进度显示和 DamageControl 伤害流程。原导出目录只读，不在本项目中修改。

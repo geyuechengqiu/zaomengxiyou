@@ -1,6 +1,6 @@
 # 孙悟空跑攻、跳攻与第四段转身
 
-打开 [原版伤害场景](../../examples/original_damage_demo.tscn) 或 [平台场景](../../examples/wukong_platform_demo.tscn)，按 F6 运行。A/D 移动，Shift 或同方向双击进入奔跑，K 跳跃，J 攻击：奔跑时发动跑攻，起跳或空中时发动跳攻，其他可攻击的地面状态开始原有五连击。所有入口消费 Core 操作意图，改键无需修改角色代码。
+打开 [原版伤害场景](../../tests/fixtures/original_damage_demo.tscn) 或 [平台场景](../../tests/fixtures/wukong_platform_demo.tscn)，按 F6 运行。A/D 移动，Shift 或同方向双击进入奔跑，K 跳跃，J 攻击：奔跑时发动跑攻，起跳或空中时发动跳攻，其他可攻击的地面状态开始原有五连击。所有入口消费 Core 操作意图，改键无需修改角色代码。
 
 ## 原素材与技能时间
 
@@ -53,7 +53,7 @@ Core 现在包含 17 个动作叶子，新增 RUN_ATTACK / JUMP_ATTACK；[Battle
 离线 [导入工具](../../tools/import_wukong_context_attacks.py) 读取 Speculum 原始数据，追加资源索引和语义动画；已有技能资源及已存在的语义动画保留编辑结果。运行游戏无需 Speculum 或 Python。
 
 ```powershell
-& '<Spine-Godot.exe>' --headless --path . res://examples/verify_wukong_context_attacks.tscn
+& '<Spine-Godot.exe>' --headless --path . res://tests/suites/verify_wukong_context_attacks.tscn
 & '<Spine-Godot.exe>' --headless --editor --single-window --path . --script res://tools/verify_editor_wukong_attack_effects.gd
 ```
 

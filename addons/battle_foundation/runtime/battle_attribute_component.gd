@@ -212,14 +212,32 @@ func set_equipment(slot: StringName, definition: BattleEquipmentDefinition) -> v
 func bind_inventory(inventory: C_Inventory) -> void:
 	begin_update()
 	if is_instance_valid(_inventory):
-		_inventory.equip_changed.disconnect(_on_inventory_equipped)
+		if _inventory is OriginalInventory: _inventory.equipment_changed.disconnect(_on_inventory_changed)
+		else: _inventory.equip_changed.disconnect(_on_inventory_equipped)
 		for slot in _inventory.equip_slots:
 			replace_source(StringName("equipment." + slot), [])
+		replace_source(&"equipment.sets", [])
 	_inventory = inventory
 	if is_instance_valid(_inventory):
-		_inventory.equip_changed.connect(_on_inventory_equipped)
-		for slot in _inventory.equip_slots:
-			_on_inventory_equipped(slot, _inventory.equip_slots[slot][1])
+		if _inventory is OriginalInventory:
+			_inventory.equipment_changed.connect(_on_inventory_changed)
+			_on_inventory_changed({})
+		else:
+			_inventory.equip_changed.connect(_on_inventory_equipped)
+			for slot in _inventory.equip_slots:
+				_on_inventory_equipped(slot, _inventory.equip_slots[slot][1])
+	end_update()
+
+func _on_inventory_changed(_change: Dictionary) -> void:
+	var original := _inventory as OriginalInventory
+	if original == null: return
+	begin_update()
+	for slot in original.equip_slots:
+		replace_source(StringName("equipment." + slot), original.get_item_attribute_modifiers(original.equip_slots[slot][1]))
+	var set_modifiers: Array[GameplayAttributeModifier] = []
+	for values: Dictionary in original.get_active_set_bonuses().values():
+		for id in values: set_modifiers.append(GameplayAttributeModifier.new(StringName(id), float(values[id])))
+	replace_source(&"equipment.sets", set_modifiers)
 	end_update()
 
 func _on_inventory_equipped(slot: StringName, item: Equip) -> void:

@@ -13,7 +13,7 @@ class_name BattleBossObjectDefinition
 @export var linked_to_action: bool = true
 @export var through_targets: bool = false
 @export var hit_interval: float = 0.1
-## 原版atkMax=0不限次数；按每个对象、每个目标分别记录。
+## 原版DamageControl按count >= atkMax拦截；0禁用命中，正数为每对象/目标上限。
 @export var maximum_hits: int = 1
 @export var source_fps: float = 30.0
 @export var hit_rects: Dictionary[int, Rect2] = {}
@@ -30,5 +30,5 @@ func is_valid() -> bool:
 		for frame in rows:
 			var rect: Rect2 = rows[frame]
 			if frame < 0 or not rect.position.is_finite() or not rect.size.is_finite() or rect.size.x <= 0 or rect.size.y <= 0: return false
-	return lifetime > 0 and hit_interval >= 0.001 and not hit_rects.is_empty()
+	return lifetime > 0 and not hit_rects.is_empty()
 #endregion

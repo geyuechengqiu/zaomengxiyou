@@ -1,6 +1,6 @@
 # 连续地图与原版碧玉径视觉
 
-F5运行 [碧玉径](../../../examples/level_progression_demo.tscn)。整关只有一张 [map.tscn](../../../data/levels/biyujing/progression/map.tscn)，世界范围为`Rect2(0, 0, 10944, 1216)`，地面顶为1056；五个区域沿同一世界坐标连续相接。区域切换解锁刷怪、门和镜头边界，人物、地形与背景留在原场景中。镜头通过 [Phantom Camera原版跟随适配](../camera/README.md)连续过渡，不直接跳到角色或新区左缘。
+F5运行 [碧玉径](../../../game/levels/biyujing.tscn)。整关只有一张 [map.tscn](../../../data/levels/biyujing/progression/map.tscn)，世界范围为`Rect2(0, 0, 10944, 1216)`，地面顶为1056；五个区域沿同一世界坐标连续相接。区域切换解锁刷怪、门和镜头边界，人物、地形与背景留在原场景中。镜头通过 [Phantom Camera原版跟随适配](../camera/README.md)连续过渡，不直接跳到角色或新区左缘。
 
 地图继承 [基础地图模板](battle_map_template_2d.tscn)，美术继承 [视觉模板](battle_map_visual_template_2d.tscn)。美术、碰撞、出生点、门和动画播放器都预置在场景里，启动只绑定节点；刷怪继续实例化已经制作好的完整怪物场景。
 
@@ -67,6 +67,6 @@ python tools/import_biyujing_map_visual.py --original-root 'D:/UserData/Download
 
 视觉导入需要Python、Java及原仓库FFDec库，覆盖六种贴图、visual.tscn和来源记录；对map.tscn只接入模板/视觉、同步原出生标记、去掉旧地形纯色显示，对演示场景去掉旧背景。它不重建战斗、刷怪、角色或Boss技能。日常手工编辑不用重新导入。
 
-[verify_map_visual.gd](../../../examples/verify_map_visual.gd)检查预置节点、全部区域连续性、原始素材/云帧、地板拼接、层序、三种Zoom及镜头限界、原生重复偏移、遮挡、暂停/慢动作/停顿、实例隔离和离场清理。现有完整关卡与Boss验收继续验证刷怪及通关。
+[verify_map_visual.gd](../../../tests/suites/verify_map_visual.gd)检查预置节点、全部区域连续性、原始素材/云帧、地板拼接、层序、三种Zoom及镜头限界、原生重复偏移、遮挡、暂停/慢动作/停顿、实例隔离和离场清理。现有完整关卡与Boss验收继续验证刷怪及通关。
 
 2026-10-09使用带Spine模块的Godot 4.7.2验证：地图83项检查通过，默认27套回归全部通过，实际D3D12画面确认首区与Boss区美术正确显示。文档预览使用初始悟空属性；完整关卡战斗验收仍以初始等级1、生命275、攻击26的五连击打通34个目标，剩余生命92。

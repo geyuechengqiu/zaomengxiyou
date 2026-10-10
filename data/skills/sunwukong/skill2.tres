@@ -47,7 +47,7 @@ protection_skill_id = "1101020"
 [sub_resource type="Resource" id="Dash"]
 script = ExtResource("motion")
 end_frame = 15
-velocity = Vector2(800, 0)
+velocity = Vector2(1600, 0)
 
 [sub_resource type="Resource" id="Timeline"]
 script = ExtResource("timeline")

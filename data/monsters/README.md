@@ -2,9 +2,9 @@
 
 普通玉石琵琶精现已接入阶段13三技能、独立对象池与原版公共Boss表现；[Boss配置与扩展步骤](jushi_lingjun/README.md)、[插件实现](../../addons/battle_foundation/boss/README.md)。F5可完整经过普通怪物、容器和Boss后确认通关。
 
-F5入口已切换到 [阶段12区域关卡](../../examples/level_progression_demo.tscn)，按原版出生计划生成怪物并推进出口。下述32只预置小怪场景仍用于独立AI测试，F6运行。[区域/刷怪/通关配置](../levels/biyujing/progression/README.md)。
+F5入口已切换到 [阶段12区域关卡](../../game/levels/biyujing.tscn)，按原版出生计划生成怪物并推进出口。下述32只预置小怪场景仍用于独立AI测试，F6运行。[区域/刷怪/通关配置](../levels/biyujing/progression/README.md)。
 
-F6 运行 `examples/first_level_demo.tscn`；A/D 移动、K 跳跃、J 普攻/跑攻/跳攻，Esc 暂停和改键。场景中的按钮可以对附近小怪施加眩晕或减速，用于观察 AI 是否遵守动作权限。伤害跳字、原版血条与受击特效全部由 `BattleSession/BattlePresentation` 管理。
+F6 运行 `tests/fixtures/first_level_demo.tscn`；A/D 移动、K 跳跃、J 普攻/跑攻/跳攻，Esc 暂停和改键。场景中的按钮可以对附近小怪施加眩晕或减速，用于观察 AI 是否遵守动作权限。伤害跳字、原版血条与受击特效全部由 `BattleSession/BattlePresentation` 管理。
 
 ## 实际原版身份
 
@@ -42,6 +42,12 @@ F6 运行 `examples/first_level_demo.tscn`；A/D 移动、K 跳跃、J 普攻/�
 
 `Policy → Combat Style` 支持 melee、ranged、stationary；每只怪的目标、巡逻方向、退步计时、决策节拍都在 AIController，资源仅保存配置。`Flee Health Ratio=0` 关闭低生命逃离，设置0.25则在25%及以下尝试远离目标；`Maximum Retreat Distance` 限制退步距离。`Target Selector` 可选最近、最低当前生命、最高攻击，`Preferred Definition` 可优先指定角色定义；仍须满足敌对、存活、检测范围与活动边界。
 
+### 怪物跳跃高度
+
+剑舞、驭兽使与玉石琵琶精在各自 `actions.tres` 明确配置 `Gravity=1980`、`Jump Velocity=-620`、`Maximum Jumps=1`；复苏容器为固定对象，`Maximum Jumps=0`。原版 `Common.gravity=110`，Nape 每原素材帧积分0.1秒、素材30FPS，世界坐标放大2倍，所以 Godot 重力为 `110 × (30 × 0.1)² × 2 = 1980`。主动起跳现在与原版受击浮空使用相同的重力，避免示例默认1500造成跳高和滞空时间偏大。
+
+AI越障的起跳速度仍为平台移植调校值，普通怪物配置表没有独立 `jumpSpeed1` 字段，不将它标为原版数值。理论上升高度 `Jump Velocity² / (2 × Gravity)` 约97世界像素，镜头缩放0.5时约49屏幕像素；固定60Hz积分实测略低。速度负值绝对值越大跳得越高，重力越大越快落地。后续调整整类怪物请修改对应 `actions.tres`；单只实例需要不同高度时，将其 `Action Profile` 设为唯一再修改。悟空的运动参数单独配置。
+
 ## 添加新怪物
 
 1. 复制其中一类目录，改 `definition.tres` 中的语义身份、场景路径、基础属性和技能ID；将新身份和技能加入正在使用的 manifest。
@@ -54,7 +60,19 @@ F6 运行 `examples/first_level_demo.tscn`；A/D 移动、K 跳跃、J 普攻/�
 
 ## 原素材与重新导出
 
-`assets/monsters/jianwu`、`yushoushi` 保存原 PNG 图集、图集 XML 及 AB XML。它们来自原版 AMF/deflate 序列帧资源，直接使用既有 AnimationPlayerAdapter2D，未强行转换为骨骼动画。
+四种现有关卡怪物已使用 `SpineAnimationAdapter`：剑舞、驭兽使、复苏容器及玉石琵琶精。原 PNG 图集、图集 XML 与 AB XML 保留为离线来源；游戏运行直接加载 `monster.atlas`、`monster.spine-json` 和 `spinedata.tres`，不解析XML。
+
+原版是整帧图片，没有肢体骨骼数据；转换使用 Spine 4.3 附件时间轴，Body/Effect1/Effect2 独立槽位保存原层序、裁边偏移与每帧注册点，动作切换显式清除旧特效。每个实例独立 SpineSprite 姿态，图集和骨架定义只读共享。原版30FPS时长保持不变，不用插值变形替代像素轮廓。
+
+`visual.tscn` 内预置 SpineSprite、SpineAnimationTrack、原生播放器、语义 AnimationPlayer 与单一 AttackHitbox。编辑器选择语义动作可以预览身体、特效和命中框；攻击规则仍来自 GAS Timeline 的 AB 判定。Boss石墙、弹道和出生特效是独立场景对象，继续使用原逐帧对象动画，不作为怪物人物骨架。
+
+新增人物优先从 [角色/怪物模板](../templates/README.md) 继承。测试用木桩是SVG夹具，不是关卡怪物。
+
+```powershell
+python tools/convert_monsters_to_spine.py
+```
+
+该工具默认保留已经转换的可编辑场景；`--force` 从 `source_visual.txt` 重新生成，会覆盖手工编辑。转换证据和动作时长位于每种怪物素材目录的 `spine_conversion.json`。普通怪物与Boss导入器现在会自动执行转换。
 
 ```powershell
 python tools/export_stage_eleven_monsters.py --original-root D:/UserData/Downloads/game/Speculum-4399-master
@@ -63,3 +81,5 @@ python tools/export_stage_eleven_monsters.py --original-root D:/UserData/Downloa
 此工具会重建导入的 visual、怪物/技能配置和验收关卡布局。手工调整这些生成文件前可复制成新角色目录；不要在有未保存自定义修改时重新生成。原 `TextureAtlas.fromTexture(_fill=false)` 使用 width−frameX/height−frameY 填充，SpriteRender 再应用 pivot；导入保留该注册点和透明边，不按错误的 frameWidth 裁剪兽使的技能帧。
 
 实现和验收命令见 [AI插件说明](../../addons/battle_foundation/ai/README.md)。
+
+![现有四种怪物的Spine原生攻击渲染](../../addons/battle_foundation/docs/monster-spine-attack.png)

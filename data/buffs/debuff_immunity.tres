@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="GameplayStatusData" format=3]
+[ext_resource type="Script" path="res://addons/gameplay_abiltiy_system/scripts/status/gameplay_status_data.gd" id="status"]
+[ext_resource type="Script" path="res://addons/battle_foundation/gas/battle_original_status_policy.gd" id="policy"]
+[sub_resource type="Resource" id="policy"]
+script = ExtResource("policy")
+replace_rule = 1
+[resource]
+script = ExtResource("status")
+status_id = &"debuff_immunity"
+status_display_name = "免疫减益"
+duration = 2.0
+stacking_policy = SubResource("policy")
+max_stacks = 1
+stacking_group = &"original.27/"
+tags = Array[StringName]([&"status.buff", &"state.debuff_immune"])
+metadata/original_buff_id = 27000201
+metadata/original_type = 27

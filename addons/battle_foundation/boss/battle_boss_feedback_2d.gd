@@ -81,12 +81,12 @@ func bind_boss(actor: BattleEntity2D) -> void:
 	_death_remaining = 1
 	bar.visible = true
 	_refresh_header(actor)
-	if sound_enabled: music.play()
+	if sound_enabled and _session.audio == null: music.play()
 	_refresh_bar(actor, true)
 
 func _repeat_music() -> void:
 	var actor := _boss.get_ref() as BattleEntity2D if _boss != null else null
-	if sound_enabled and is_instance_valid(actor) and actor.is_alive(): music.play()
+	if sound_enabled and _session.audio == null and is_instance_valid(actor) and actor.is_alive(): music.play()
 
 func _refresh_bar(actor: BattleEntity2D, immediate: bool = false) -> void:
 	_refresh_header(actor)
@@ -221,14 +221,14 @@ func _on_event(id: String, payload: Array) -> void:
 		warning_remaining = 0
 	elif id == "battle.boss.objects_spawned" and data.object_id == &"jade_wall": _start_shake()
 	elif id == "battle.protection.triggered": _start_shake()
-	elif id == "battle.attack.hit" and sound_enabled and data.get("actual_hp_loss",0) > 0 and _last_sound_tick != _session.clock.physics_tick:
+	elif id == "battle.attack.hit" and sound_enabled and _session.audio == null and data.get("actual_hp_loss",0) > 0 and _last_sound_tick != _session.clock.physics_tick:
 		_last_sound_tick = _session.clock.physics_tick
 		hit_audio.play()
 	elif id in ["battle.level.victory","battle.level.failed"]:
 		banner.visible = false
 		warning.visible = false
 		music.stop()
-		if sound_enabled:
+		if sound_enabled and _session.audio == null:
 			result_audio.stream = victory_sound if id == "battle.level.victory" else defeat_sound
 			result_audio.play()
 	elif id == "battle.entity.killed" or id == "battle.entity_despawned":

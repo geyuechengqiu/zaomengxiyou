@@ -2,7 +2,7 @@
 
 角色消费操作名称，按键只存在于 Core 输入适配与用户配置中。孙悟空平台场景已使用本通道驱动移动、奔跑、二段跳和 `sunwukong_attack1` 至 `sunwukong_attack5`；角色由 `孙悟空` 定义生成。
 
-打开 [平台场景](../../../examples/wukong_platform_demo.tscn)，用带 Spine 模块的 Godot 按 F6。Esc 打开设置菜单，可以修改所有操作按键、查看冲突并恢复默认；设置保存到 Core ConfigManager 的 `user://config.cfg`。菜单内的按键不会同时发动攻击。
+打开 [平台场景](../../../tests/fixtures/wukong_platform_demo.tscn)，用带 Spine 模块的 Godot 按 F6。Esc 打开设置菜单，可以修改所有操作按键、查看冲突并恢复默认；设置保存到 Core ConfigManager 的 `user://config.cfg`。菜单内的按键不会同时发动攻击。
 
 ![操作控制器联合类图](../docs/player-operations.svg)
 
@@ -119,7 +119,7 @@ Core 事件 `battle.operation_intent` 用于记录阶段，`battle.operation_res
 [来源索引](../../../data/controls/source_mapping.json) 记录本地原版脚本和 SHA-256：ManFrameControl 负责普通玩家公共读取和角色动作入口；UserVO 提供主键位；KeyboradInput / KeyVO / InputInstance 提供边沿和双击。新实现把公共操作、可重映射输入与角色专属许可拆开。上下飞行、下跳、技能禁用 Buff 等规则可在业务层追加，不能通过修改按键判断来实现。
 
 ```powershell
-& '<带 Spine 模块的 Godot 路径>' --headless --path . res://examples/verify_player_operations.tscn
+& '<带 Spine 模块的 Godot 路径>' --headless --path . res://tests/suites/verify_player_operations.tscn
 ```
 
-[自动验收](../../../examples/verify_player_operations.gd) 使用真实 Godot 输入分发、Control 消费、GAS 和平台碰撞。覆盖全部操作边沿、短按/长按/连按、缓存序列/容量/过期/快照、同方向双击与别名聚合、摇杆变向/设备过滤/虚拟来源、改键冲突/持久化/重载、菜单捕获不攻击、失焦/暂停/控制权、实际普攻恢复缓存/落地跳跃缓存/技能槽以及角色扩展钩子。验收临时使用独立用户配置，结束恢复原配置；成功打印 PASS，失败返回 1。
+[自动验收](../../../tests/suites/verify_player_operations.gd) 使用真实 Godot 输入分发、Control 消费、GAS 和平台碰撞。覆盖全部操作边沿、短按/长按/连按、缓存序列/容量/过期/快照、同方向双击与别名聚合、摇杆变向/设备过滤/虚拟来源、改键冲突/持久化/重载、菜单捕获不攻击、失焦/暂停/控制权、实际普攻恢复缓存/落地跳跃缓存/技能槽以及角色扩展钩子。验收临时使用独立用户配置，结束恢复原配置；成功打印 PASS，失败返回 1。

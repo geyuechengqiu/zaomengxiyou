@@ -4,7 +4,7 @@
 
 打开 [sunwukong_visual.tscn](../../../data/animation/sunwukong_visual.tscn)，选择主 AnimationPlayer 即可预览十四个动作。所有技能复用一个 BattleHitbox2D + CollisionShape2D，编辑器按动作和时间读取技能事件，运行时按技能 ID 和命中序号读取实体 GAS 定义。调整范围时修改技能数据的 hit_rect、缩放与偏移。[编辑步骤、节点结构、新角色接入和验证说明](../../../data/animation/README.md)。
 
-运行 [横版平台场景](../../../examples/wukong_platform_demo.tscn)：在编辑器打开场景后按 F6。测试场景有孙悟空、左右两个不同外观的同配置靶子、地面、两个高度的平台和墙体。当前项目 F5 主场景保持插件演示。
+运行 [横版平台场景](../../../tests/fixtures/wukong_platform_demo.tscn)：在编辑器打开场景后按 F6。测试场景有孙悟空、左右两个不同外观的同配置靶子、地面、两个高度的平台和墙体。当前项目 F5 主场景保持插件演示。
 
 需要 **带 Spine 模块的 Godot**。本机使用 `godot-4.3-4.7.2-stable.exe`，引擎实际版本为 Godot 4.7.2，自带 Spine 4.3 运行时。角色骨架版本为 4.3.23。普通未编译 Spine 模块的 Godot 没有 SpineSprite 等类，不能运行这组场景。无需另加 GDExtension 或下载重复骨架；这些类型由现有引擎提供。[Spine Godot 官方文档](https://esotericsoftware.com/spine-godot)
 
@@ -135,10 +135,10 @@ if visual.is_socket_active(&"weapon"):
 ![平台原生渲染](../docs/wukong-platform.png)
 
 ```powershell
-& '<带 Spine 模块的 Godot 路径>' --headless --path . res://examples/verify_wukong_animation.tscn
+& '<带 Spine 模块的 Godot 路径>' --headless --path . res://tests/suites/verify_wukong_animation.tscn
 ```
 
-[验收脚本](../../../examples/verify_wukong_animation.gd) 使用真实 Spine 和真实 2D 物理世界，失败返回 1。覆盖八个动作映射/原版时长、全部 206 个皮肤的时间/位置/层序/挂点不变、组合装备与实例隔离、无效输入、单次完成/循环通知、手动时钟不被渲染重复推进、左右命中、4/30 秒时序、伤害/死亡规则与动画分离、暂停/慢动作/停顿、跳到高台和墙体碰撞。另已查看 GPU 实际渲染的六种基础动作、左右朝向和不同外观，检查脚底、注册点、层序和装备位置。
+[验收脚本](../../../tests/suites/verify_wukong_animation.gd) 使用真实 Spine 和真实 2D 物理世界，失败返回 1。覆盖八个动作映射/原版时长、全部 206 个皮肤的时间/位置/层序/挂点不变、组合装备与实例隔离、无效输入、单次完成/循环通知、手动时钟不被渲染重复推进、左右命中、4/30 秒时序、伤害/死亡规则与动画分离、暂停/慢动作/停顿、跳到高台和墙体碰撞。另已查看 GPU 实际渲染的六种基础动作、左右朝向和不同外观，检查脚底、注册点、层序和装备位置。
 
 ## 配置资源与实例边界
 
@@ -147,3 +147,7 @@ if visual.is_socket_active(&"weapon"):
 `BattleCatalog` 深拷贝属性、Vital、技能等配置资源图；BattleEntityDefinition.scene 设置 NEVER_DUPLICATE，共享只读 PackedScene，再通过 instantiate 创建独立节点。角色场景中的动画配置和动作规则按只读定义使用；AnimationProfile.skeleton_data 同样 NEVER_DUPLICATE，避免深拷贝原生 Spine 数据。
 
 每个角色的 CharacterBody2D、BattleActionState2D、GAS 三组件、技能实例黑板、Vital 当前值、SpineSprite 骨架姿态、TrackEntry 和组合皮肤分别创建。共享资源只存动作和附件定义；运行中不修改 profile、skeleton_data 或原皮肤。角色 A 改生命、播放时间、朝向或外观，不影响角色 B。
+
+## 统一怪物 Spine 后端
+
+全部正式关卡怪物现使用 SpineAnimationAdapter。离线转换把原逐帧图片及特效分为 Body/Effect1/Effect2 附件槽，保留原图集注册点和帧时间；预置语义 AnimationPlayer 保持编辑器可视化，GAS决定攻击判定与动作规则。换向镜像身体与特效；切换待机清除旧附件。参见 [怪物资源说明](../../../data/monsters/README.md) 与 [新增角色模板](../../../data/templates/README.md)。AnimationPlayerAdapter2D仍用于SVG测试木桩与非人物逐帧对象。

@@ -46,7 +46,8 @@ def import_boss_assets(original, config):
         source = original/'games/zmhj-g5/cache/assets/man'/config['Resource'][str(cfg['resourceId'])]['normal']
         atlas = exporter.export_atlas(source, slug, _Amf3Reader, _read_one)
         atlas['attack_bounds'] = {k:v for k,v in atlas['attack_bounds'].items() if k.startswith('skill1')}
-        exporter.export_monster(slug, dict(cfg, name=display), skill, atlas)
+        gravity = float(config['Common']['1']['gravity']) * (30 * 0.1)**2 * 2
+        exporter.export_monster(slug, dict(cfg, name=display), skill, atlas, gravity)
         if mid == '10601':
             definition = PROJECT/f'data/monsters/{slug}/definition.tres'
             text = re.sub(r'^display_name = .*$', 'display_name = '+json.dumps(cfg['name'],ensure_ascii=False),definition.read_text(encoding='utf8'),flags=re.M)

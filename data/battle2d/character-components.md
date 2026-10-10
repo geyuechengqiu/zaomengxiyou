@@ -56,7 +56,7 @@ GAS 组件保留为角色根的直接子节点，符合已有 GAS 宿主接口�
 
 原版伤害及受击样例的组件中预置 `atk = 100`，平台与基础角色为 26；伤害样例启动和切换样例时恢复组件配置，不再把攻击强行写成 100。暴击测试模式仍临时使用验收评分，返回普通模式后恢复组件评分。
 
-[verify_scene_attributes.tscn](../../examples/verify_scene_attributes.tscn) 覆盖 Inspector 字段、保存/重新加载、初始等级成长、Vital 填满、实例与资源隔离、面板与实际扣血一致，以及伤害样例切换保留组件配置。
+[verify_scene_attributes.tscn](../../tests/suites/verify_scene_attributes.tscn) 覆盖 Inspector 字段、保存/重新加载、初始等级成长、Vital 填满、实例与资源隔离、面板与实际扣血一致，以及伤害样例切换保留组件配置。
 
 | 编辑位置 | 作用 |
 | --- | --- |
@@ -90,8 +90,8 @@ ActionState、MotionController、ComboState、HitReactionController、Protection
 
 ## 验收
 
-[verify_character_components.tscn](../../examples/verify_character_components.tscn) 通过 95 项检查，覆盖入树前完整组件、继承场景、绑定前后节点身份不变、组件不重复生成、玩家/目标控制权、同类角色数据隔离、缺失节点校验与离树/未入树释放。现有五连击、跑攻跳攻、碰撞、改键、属性、伤害、受击与保护验证继续通过。
+[verify_character_components.tscn](../../tests/suites/verify_character_components.tscn) 通过 95 项检查，覆盖入树前完整组件、继承场景、绑定前后节点身份不变、组件不重复生成、玩家/目标控制权、同类角色数据隔离、缺失节点校验与离树/未入树释放。现有五连击、跑攻跳攻、碰撞、改键、属性、伤害、受击与保护验证继续通过。
 
 ```powershell
-& '<Spine-Godot.exe>' --headless --path . res://examples/verify_character_components.tscn
+& '<Spine-Godot.exe>' --headless --path . res://tests/suites/verify_character_components.tscn
 ```

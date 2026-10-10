@@ -1,0 +1,106 @@
+[gd_scene format=3]
+[ext_resource type="Script" path="res://addons/battle_foundation/audio/battle_audio.gd" id="script"]
+[ext_resource type="JSON" path="res://data/audio/original_audio.json" id="catalog"]
+[node name="Audio" type="Node"]
+script = ExtResource("script")
+catalog = ExtResource("catalog")
+[node name="Music" type="AudioStreamPlayer" parent="."]
+process_mode = 3
+bus = &"Music"
+[node name="Effects" type="Node" parent="."]
+[node name="Voice0" type="AudioStreamPlayer" parent="Effects"]
+process_mode = 3
+bus = &"SFX"
+[node name="Voice1" type="AudioStreamPlayer" parent="Effects"]
+process_mode = 3
+bus = &"SFX"
+[node name="Voice2" type="AudioStreamPlayer" parent="Effects"]
+process_mode = 3
+bus = &"SFX"
+[node name="Voice3" type="AudioStreamPlayer" parent="Effects"]
+process_mode = 3
+bus = &"SFX"
+[node name="Voice4" type="AudioStreamPlayer" parent="Effects"]
+process_mode = 3
+bus = &"SFX"
+[node name="Voice5" type="AudioStreamPlayer" parent="Effects"]
+process_mode = 3
+bus = &"SFX"
+[node name="Voice6" type="AudioStreamPlayer" parent="Effects"]
+process_mode = 3
+bus = &"SFX"
+[node name="Voice7" type="AudioStreamPlayer" parent="Effects"]
+process_mode = 3
+bus = &"SFX"
+[node name="Voice8" type="AudioStreamPlayer" parent="Effects"]
+process_mode = 3
+bus = &"SFX"
+[node name="Voice9" type="AudioStreamPlayer" parent="Effects"]
+process_mode = 3
+bus = &"SFX"
+[node name="Voice10" type="AudioStreamPlayer" parent="Effects"]
+process_mode = 3
+bus = &"SFX"
+[node name="Voice11" type="AudioStreamPlayer" parent="Effects"]
+process_mode = 3
+bus = &"SFX"
+[node name="Voice12" type="AudioStreamPlayer" parent="Effects"]
+process_mode = 3
+bus = &"SFX"
+[node name="Voice13" type="AudioStreamPlayer" parent="Effects"]
+process_mode = 3
+bus = &"SFX"
+[node name="Voice14" type="AudioStreamPlayer" parent="Effects"]
+process_mode = 3
+bus = &"SFX"
+[node name="Voice15" type="AudioStreamPlayer" parent="Effects"]
+process_mode = 3
+bus = &"SFX"
+[node name="Voice16" type="AudioStreamPlayer" parent="Effects"]
+process_mode = 3
+bus = &"SFX"
+[node name="Voice17" type="AudioStreamPlayer" parent="Effects"]
+process_mode = 3
+bus = &"SFX"
+[node name="Voice18" type="AudioStreamPlayer" parent="Effects"]
+process_mode = 3
+bus = &"SFX"
+[node name="Voice19" type="AudioStreamPlayer" parent="Effects"]
+process_mode = 3
+bus = &"SFX"
+[node name="Voice20" type="AudioStreamPlayer" parent="Effects"]
+process_mode = 3
+bus = &"SFX"
+[node name="Voice21" type="AudioStreamPlayer" parent="Effects"]
+process_mode = 3
+bus = &"SFX"
+[node name="Voice22" type="AudioStreamPlayer" parent="Effects"]
+process_mode = 3
+bus = &"SFX"
+[node name="Voice23" type="AudioStreamPlayer" parent="Effects"]
+process_mode = 3
+bus = &"SFX"
+[node name="Voice24" type="AudioStreamPlayer" parent="Effects"]
+process_mode = 3
+bus = &"SFX"
+[node name="Voice25" type="AudioStreamPlayer" parent="Effects"]
+process_mode = 3
+bus = &"SFX"
+[node name="Voice26" type="AudioStreamPlayer" parent="Effects"]
+process_mode = 3
+bus = &"SFX"
+[node name="Voice27" type="AudioStreamPlayer" parent="Effects"]
+process_mode = 3
+bus = &"SFX"
+[node name="Voice28" type="AudioStreamPlayer" parent="Effects"]
+process_mode = 3
+bus = &"SFX"
+[node name="Voice29" type="AudioStreamPlayer" parent="Effects"]
+process_mode = 3
+bus = &"SFX"
+[node name="Voice30" type="AudioStreamPlayer" parent="Effects"]
+process_mode = 3
+bus = &"SFX"
+[node name="Voice31" type="AudioStreamPlayer" parent="Effects"]
+process_mode = 3
+bus = &"SFX"

@@ -1,4 +1,0 @@
-[gd_scene format=3]
-[ext_resource type="Script" path="res://examples/verify_level_progression.gd" id="script"]
-[node name="VerifyLevelProgression" type="Node"]
-script = ExtResource("script")

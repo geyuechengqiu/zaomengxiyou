@@ -2,7 +2,7 @@
 
 [原版居中血条、姓名/抗性图标、怪物出场与提前移镜](original-presentation.md)：F5已接入，使用原SWF贴图、字体及注册点；调试生命/保护数字默认隐藏。
 
-F5运行 [碧玉径](../../../examples/level_progression_demo.tscn)：孙悟空、五区域普通怪物、复苏容器、玉石琵琶精及最终出口构成完整战斗流程。角色控制和技能按键沿用现有配置。Boss不是独立伤害系统，仍使用Core操作意图和状态机、GAS技能实例/属性/Vital/Buff、原版伤害策略及BattleClock。
+F5运行 [碧玉径](../../../game/levels/biyujing.tscn)：孙悟空、五区域普通怪物、复苏容器、玉石琵琶精及最终出口构成完整战斗流程。角色控制和技能按键沿用现有配置。Boss不是独立伤害系统，仍使用Core操作意图和状态机、GAS技能实例/属性/Vital/Buff、原版伤害策略及BattleClock。
 
 [类图与时序](../docs/boss.svg) · [巨石灵君配置入口](../../../data/monsters/jushi_lingjun/README.md) · [原始配置与来源哈希](../../../data/monsters/jushi_lingjun/original_boss.json)
 
@@ -31,13 +31,15 @@ F5运行 [碧玉径](../../../examples/level_progression_demo.tscn)：孙悟空�
 | --- | --- | --- | --- |
 | 震颤之音 | 2001100 | 动作38帧；特效AB第15至32帧有效 | 一次近身伤害；按原targetMove与stiff击退/浮空 |
 | 琵琶之伤 | 2001110 | 动作44帧；第24帧发射音符；贴身特效AB第19至27帧 | 5枚音符、20度间隔、原速度650/秒；每弹每目标一次；原默认倍率0.2 |
-| 玉石之墙 | 2001120 | 动作30帧；第19帧生成；成形12帧后切15帧循环 | 成形后实体阻挡并持续5秒；按逐帧AB与0.1秒间隔结算；原默认倍率1.5 |
+| 玉石之墙 | 2001120 | 动作30帧；第19帧生成；成形12帧后切15帧循环 | 成形后实体阻挡并持续5秒；原 `atkMax=0` 禁用接触命中，不造成伤害或硬直 |
 
 攻击窗口使用左闭右开区间，因此技能1写`start_frame=15,end_frame=33`。素材保持30FPS语义，世界坐标换算2倍，镜像同时改变图像、偏移、攻击区域及飞行方向。石墙不随正常动作结束消失；音符的`linkParentState=true`使它随动作结束清理。取消技能会回收该次释放产生的全部对象，包括独立石墙。
 
 决策适配原MAi的优先关系：琵琶技能优先、5秒共享组；技能1/3随机选择、共用10秒组；出手后1–2秒退步。寻路、活动范围、索敌和移动限制复用通用AI；这不是逐节点复制原Flash行为树。Inspector中的距离范围是当前2D接近策略参数。
 
 原普通玉石琵琶精**没有血量阶段或召唤怪配置**，主线的`Phases`为空，三个原版技能不额外召唤。阶段与召唤作为其他Boss的通用能力，独立验收配置实际运行这些入口。
+
+石墙的零命中上限参照原 `DamageControl.onHurt()`：计数达到 `skill.atkMax` 就立即返回；`SkillParam` 从技能定义继承该值，成形与后续实体阶段都未覆盖它。因此 `maximum_hits=0` 表示禁用命中，不能当作无限次数。对象仍更新动画、AB与实体碰撞，但跳过伤害、Buff、硬直和保护值结算，也不发布 `battle.attack.hit`。原 `atkInterval=0` 同样保留；对象定义允许零间隔，正数命中上限仍按每对象、每目标计数。
 
 ## 播报、动作和真实攻击
 
@@ -88,12 +90,12 @@ Boss BGM来自`boss_01.swf`；命中、胜负声音来自原`hs.swf`。Resource/
 
 ## 验收与重新导出
 
-[verify_boss.gd](../../../examples/verify_boss.gd)检查真实原AB、普通/扇形/持续伤害、镜像、石墙阻挡、低帧率、前置播报、暂停/控制、机关条件、阶段只触发一次、GAS帧事件召唤、计数/取消/回收、保护/血条/Core音量总线及实例隔离。最后从实际初始悟空出发，仅用Core移动和普攻意图打通五区域：34个目标、Boss实际扣血1199、剩余生命55。
+[verify_boss.gd](../../../tests/suites/verify_boss.gd)检查真实原AB、普通/扇形/持续伤害、镜像、石墙阻挡、低帧率、前置播报、暂停/控制、机关条件、阶段只触发一次、GAS帧事件召唤、计数/取消/回收、保护/血条/Core音量总线及实例隔离。最后从实际初始悟空出发，仅用Core移动和普攻意图打通五区域：34个目标、Boss实际扣血1199、剩余生命55。
 
 2026-10-09验证：Boss72项检查、完整29套回归全部通过；D3D12/NVIDIA实际渲染确认原版横幅、人物技能/音符/实体墙/保护与跳字显示。镜头仅在反馈期间修改偏移，避免未触发震动时无穷大计时进入正弦运算，导致世界和跳字坐标异常。文档本地链接、源文件/音频哈希、SVG语法与实际浏览器渲染也已检查。
 
 ```powershell
-& '<带Spine模块的Godot.exe>' --headless --path . res://examples/verify_boss.tscn
+& '<带Spine模块的Godot.exe>' --headless --path . res://tests/suites/verify_boss.tscn
 & './tools/verify_stage_eight.ps1' -Godot '<带Spine模块的Godot.exe>'
 # GPU检查不要使用--headless；PNG写入忽略目录.cleanup-backup。
 & '<带Spine模块的Godot.exe>' --path . --script res://tools/capture_boss.gd

@@ -20,6 +20,8 @@ enum ITEM_TYPE {
 # Item的属性
 @export var name = "道具名称"
 @export var icon: Texture = null
+## 原版Resource.icon1地面图标与icon2背包图标分别保存。
+@export var pickup_icon: Texture2D
 @export var description = "道具描述"
 ## 道具类型
 @export var category : ITEM_TYPE = ITEM_TYPE.NONE # 如 "consumable", "equipment", "material" 等
@@ -36,6 +38,23 @@ enum ITEM_TYPE {
 @export var original_data: Dictionary = {}
 var runtime_id: int = 0
 var locked: bool = false
+## 资源文件是定义；create_instance生成的物品才拥有独立运行状态。
+var definition: Item
+var runtime: InventoryItemState
+
+func create_instance() -> Item:
+	var source: Item = definition if definition != null else self
+	var copy := source.duplicate_deep(Resource.DEEP_DUPLICATE_ALL) as Item
+	copy.definition = source
+	copy.quantity = quantity
+	copy.locked = locked
+	copy.runtime = InventoryItemState.from_dictionary(runtime.to_dictionary()) if runtime != null else InventoryItemState.new()
+	copy.runtime.unique_id = Crypto.new().generate_random_bytes(16).hex_encode()
+	copy.runtime.owner_inventory_id = 0
+	return copy
+
+func get_save_data() -> Dictionary:
+	return {"item_id": String(item_id), "quantity": quantity, "locked": locked, "state": runtime.to_dictionary() if runtime != null else {}}
 #endregion
 #region 信号
 
@@ -61,5 +80,10 @@ func merge(other_item: Item) -> bool:
 
 ## 能否合并
 func can_merge_with(other_item: Item) -> bool:
-	return other_item != null and max_stack > 1 and category == other_item.category and item_id == other_item.item_id and name == other_item.name and attributes == other_item.attributes and locked == other_item.locked
+	return other_item != null and max_stack > 1 and category == other_item.category and item_id == other_item.item_id and name == other_item.name and attributes == other_item.attributes and original_data == other_item.original_data and locked == other_item.locked and _growth_key() == other_item._growth_key()
+
+func _growth_key() -> Dictionary:
+	var key := runtime.to_dictionary() if runtime != null else InventoryItemState.new().to_dictionary()
+	key.erase("unique_id")
+	return key
 #endregion

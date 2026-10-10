@@ -29,12 +29,17 @@ func register_actor(actor: BattleEntity2D) -> void:
 	if actor.ai_controller is BattleBossController2D:
 		view.health_bar_enabled = false
 		view.show_protection_bar = false
+	elif actor.protection.profile != null and actor.protection.profile.has_meta(&"original_protect_skill_id") and not actor.protection.profile.use_as_armor:
+		# 原showProtect用于BossBleed；普通怪物头顶不额外画调试保护条。
+		view.show_protection_bar = false
 	view.bind_actor(actor, self)
+	if _session.audio != null: _session.audio.register_actor(actor)
 
 func get_feedback(actor: BattleEntity2D) -> BattleCombatFeedback2D:
 	return _views.get(actor.entity_id) as BattleCombatFeedback2D
 
 func remove_actor(id: StringName) -> void:
+	if _session.audio != null: _session.audio.remove_actor(id)
 	var view := _views.get(id) as BattleCombatFeedback2D
 	_views.erase(id)
 	if is_instance_valid(view):
@@ -47,6 +52,7 @@ func clear_presentations() -> void:
 	for id in _views.keys():
 		remove_actor(id)
 	number_rows.clear_numbers()
+	if _session.audio != null: _session.audio.clear_audio()
 	var boss := get_node_or_null(^"BossFeedback") as BattleBossFeedback2D
 	if boss != null: boss.clear_feedback()
 	var stage := get_node_or_null(^"StageFeedback") as BattleStageFeedback
@@ -61,6 +67,7 @@ func advance_ui(delta: float) -> void:
 	if stage != null: stage.advance_ui(delta)
 
 func advance_presentation(delta: float) -> void:
+	if _session.audio != null: _session.audio.advance_audio()
 	for view: BattleCombatFeedback2D in _views.values():
 		view.advance_feedback(delta)
 	# 每场战斗每个 tick 仅推进一次，数量与目标数无关。
@@ -71,12 +78,17 @@ func advance_presentation(delta: float) -> void:
 		boss.synchronize_pause(_session.is_simulation_blocked())
 
 func _on_event(id: String, payload: Array) -> void:
-	if id not in ["battle.attack.hit", "battle.damage.settled"] or payload.size() != 1 or not payload[0] is Dictionary:
+	if id not in ["battle.attack.hit", "battle.damage.settled", "battle.loot.picked_up"] or payload.size() != 1 or not payload[0] is Dictionary:
 		return
 	var data: Dictionary = payload[0]
 	if id == "battle.damage.settled" and bool(data.get("defer_attack_feedback", false)):
 		return
 	if data.get("battle_id") != _session.battle_id:
+		return
+	if id == "battle.loot.picked_up":
+		var recipient := _views.get(data.get("source_entity_id")) as BattleCombatFeedback2D
+		if is_instance_valid(recipient) and data.get("is_supply", false):
+			recipient.show_supply_recovery(data.get("restored_vital", &""), int(data.get("restored_amount", 0)))
 		return
 	var view := _views.get(data.get("target_entity_id")) as BattleCombatFeedback2D
 	if is_instance_valid(view):

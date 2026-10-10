@@ -1,5 +1,5 @@
 [gd_scene format=3]
-[ext_resource type="FontFile" path="res://addons/simple_inventory/assets/fonts/SourceHanSansSC-Regular-2.otf" id="R1"]
+[ext_resource type="FontFile" path="res://assets/ui/original/ui_font.ttf" id="R1"]
 [ext_resource type="Script" path="res://addons/battle_foundation/ui/original_inventory_view.gd" id="R2"]
 [ext_resource type="Texture2D" path="res://assets/ui/original/slot_0.png" id="R3"]
 [ext_resource type="Texture2D" path="res://assets/ui/original/slot_1.png" id="R4"]
@@ -9,6 +9,9 @@
 [ext_resource type="Texture2D" path="res://assets/ui/original/slot_5.png" id="R8"]
 [ext_resource type="Texture2D" path="res://assets/ui/original/slot_6.png" id="R9"]
 [ext_resource type="Texture2D" path="res://assets/ui/original/slot_7.png" id="R10"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/slot_8.png" id="slot8"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/slot_9.png" id="slot9"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/slot_10.png" id="slot10"]
 [ext_resource type="Texture2D" path="res://assets/ui/original/tab_0_0.png" id="R11"]
 [ext_resource type="Texture2D" path="res://assets/ui/original/tab_0_1.png" id="R12"]
 [ext_resource type="Texture2D" path="res://assets/ui/original/tab_0_2.png" id="R13"]
@@ -94,12 +97,82 @@
 [ext_resource type="Texture2D" path="res://assets/ui/original/tips_background.png" id="R93"]
 [ext_resource type="Texture2D" path="res://assets/ui/original/warn_background.png" id="R94"]
 [ext_resource type="Texture2D" path="res://assets/ui/original/tips_background.png" id="R95"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/bag_close_0.png" id="bag_close_0"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/bag_close_1.png" id="bag_close_1"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/bag_close_2.png" id="bag_close_2"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/bag_wardrobe_0.png" id="bag_wardrobe_0"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/bag_wardrobe_1.png" id="bag_wardrobe_1"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/bag_wardrobe_2.png" id="bag_wardrobe_2"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/bag_previous_0.png" id="bag_previous_0"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/bag_previous_1.png" id="bag_previous_1"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/bag_previous_2.png" id="bag_previous_2"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/bag_next_0.png" id="bag_next_0"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/bag_next_1.png" id="bag_next_1"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/bag_next_2.png" id="bag_next_2"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/body_panel_clean.png" id="body_clean"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/bag_page_0.png" id="page_skin_0"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/bag_page_1.png" id="page_skin_1"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/bag_page_2.png" id="page_skin_2"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/exp_fill.png" id="experience_fill"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/bag_experience_background.png" id="exp_bg"]
+[ext_resource type="Script" path="res://addons/battle_foundation/ui/original_fight_power_display.gd" id="fight_display"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/fight_digit_0.png" id="fight_digit_0"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/fight_digit_1.png" id="fight_digit_1"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/fight_digit_2.png" id="fight_digit_2"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/fight_digit_3.png" id="fight_digit_3"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/fight_digit_4.png" id="fight_digit_4"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/fight_digit_5.png" id="fight_digit_5"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/fight_digit_6.png" id="fight_digit_6"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/fight_digit_7.png" id="fight_digit_7"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/fight_digit_8.png" id="fight_digit_8"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/fight_digit_9.png" id="fight_digit_9"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/body_panel_static.png" id="detail_body"]
+[ext_resource type="PackedScene" path="res://data/ui/inventory_portrait_glow.tscn" id="detail_glow"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/bag_uid_icon.png" id="detail_uid_icon"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/bag_uid_background.png" id="detail_uid_bg"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/bag_uid_copy_0.png" id="detail_copy0"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/bag_uid_copy_1.png" id="detail_copy1"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/bag_uid_copy_2.png" id="detail_copy2"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/bag_fashion_0.png" id="detail_fashion0"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/bag_fashion_1.png" id="detail_fashion1"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/bag_fashion_2.png" id="detail_fashion2"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/bag_fashion_3.png" id="detail_fashion3"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/bag_fashion_4.png" id="detail_fashion4"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/bag_fashion_5.png" id="detail_fashion5"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/bag_menu_text_1.png" id="detail_menu1"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/bag_menu_text_2.png" id="detail_menu2"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/bag_menu_text_3.png" id="detail_menu3"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/bag_menu_text_4.png" id="detail_menu4"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/bag_menu_text_5.png" id="detail_menu5"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/bag_menu_text_6.png" id="detail_menu6"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/bag_menu_text_7.png" id="detail_menu7"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/bag_menu_text_8.png" id="detail_menu8"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/bag_menu_text_9.png" id="detail_menu9"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/bag_menu_text_10.png" id="detail_menu10"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/bag_menu_text_11.png" id="detail_menu11"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/bag_menu_text_12.png" id="detail_menu12"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/bag_menu_text_13.png" id="detail_menu13"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/bag_menu_text_14.png" id="detail_menu14"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/bag_menu_text_15.png" id="detail_menu15"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/bag_menu_text_16.png" id="detail_menu16"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/bag_menu_text_17.png" id="detail_menu17"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/bag_menu_text_18.png" id="detail_menu18"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/bag_menu_text_19.png" id="detail_menu19"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/bag_menu_text_20.png" id="detail_menu20"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/bag_menu_text_21.png" id="detail_menu21"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/bag_menu_text_22.png" id="detail_menu22"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/bag_menu_text_23.png" id="detail_menu23"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/bag_menu_text_24.png" id="detail_menu24"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/bag_menu_text_25.png" id="detail_menu25"]
+[ext_resource type="PackedScene" path="res://data/ui/inventory_item_tooltip.tscn" id="detail_tooltip"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/tips_background.png" id="detail_tips"]
 [sub_resource type="StyleBoxTexture" id="Button0"]
 texture = ExtResource("R27")
 texture_margin_left = 7.0
 texture_margin_right = 7.0
 texture_margin_top = 7.0
 texture_margin_bottom = 7.0
+[sub_resource type="StyleBoxEmpty" id="NicknameInput"]
 [sub_resource type="StyleBoxTexture" id="Button1"]
 texture = ExtResource("R28")
 texture_margin_left = 7.0
@@ -118,7 +191,10 @@ offset_right = 940.0
 offset_bottom = 590.0
 mouse_filter = 0
 script = ExtResource("R2")
-slot_textures = Array[Texture2D]([ExtResource("R3"), ExtResource("R4"), ExtResource("R5"), ExtResource("R6"), ExtResource("R7"), ExtResource("R8"), ExtResource("R9"), ExtResource("R10")])
+page_textures = Array[Texture2D]([ExtResource("page_skin_0"), ExtResource("page_skin_1"), ExtResource("page_skin_2")])
+menu_textures = Array[Texture2D]([ExtResource("detail_menu1"), ExtResource("detail_menu2"), ExtResource("detail_menu3"), ExtResource("detail_menu4"), ExtResource("detail_menu5"), ExtResource("detail_menu6"), ExtResource("detail_menu7"), ExtResource("detail_menu8"), ExtResource("detail_menu9"), ExtResource("detail_menu10"), ExtResource("detail_menu11"), ExtResource("detail_menu12"), ExtResource("detail_menu13"), ExtResource("detail_menu14"), ExtResource("detail_menu15"), ExtResource("detail_menu16"), ExtResource("detail_menu17"), ExtResource("detail_menu18"), ExtResource("detail_menu19"), ExtResource("detail_menu20"), ExtResource("detail_menu21"), ExtResource("detail_menu22"), ExtResource("detail_menu23"), ExtResource("detail_menu24"), ExtResource("detail_menu25")])
+fashion_textures = Array[Texture2D]([ExtResource("detail_fashion0"), ExtResource("detail_fashion1"), ExtResource("detail_fashion2"), ExtResource("detail_fashion3"), ExtResource("detail_fashion4"), ExtResource("detail_fashion5")])
+slot_textures = Array[Texture2D]([ExtResource("R3"), ExtResource("R4"), ExtResource("R5"), ExtResource("R6"), ExtResource("R7"), ExtResource("R8"), ExtResource("R9"), ExtResource("R10"), ExtResource("slot8"), ExtResource("slot9"), ExtResource("slot10")])
 tab_textures = Array[Texture2D]([ExtResource("R11"), ExtResource("R12"), ExtResource("R13"), ExtResource("R14"), ExtResource("R15"), ExtResource("R16"), ExtResource("R17"), ExtResource("R18"), ExtResource("R19"), ExtResource("R20"), ExtResource("R21"), ExtResource("R22")])
 [node name="Window" type="TextureRect" parent="."]
 offset_left = 0
@@ -130,13 +206,13 @@ expand_mode = 1
 texture = ExtResource("R23")
 
 [node name="BodyPanel" type="TextureRect" parent="."]
-offset_left = -72.05
+offset_left = 128.95
 offset_top = 77.6
-offset_right = 479.95
-offset_bottom = 528.6
+offset_right = 478.95
+offset_bottom = 527.6
 mouse_filter = 2
 expand_mode = 1
-texture = ExtResource("R24")
+texture = ExtResource("detail_body")
 
 [node name="BagPanel" type="TextureRect" parent="."]
 offset_left = 475.6
@@ -147,21 +223,30 @@ mouse_filter = 2
 expand_mode = 1
 texture = ExtResource("R25")
 
+
+
+
+[node name="PortraitGlow" parent="." instance=ExtResource("detail_glow")]
+position = Vector2(165,158.35)
 [node name="RolePortrait" parent="." instance=ExtResource("R26")]
-position = Vector2(270,280)
-scale = Vector2(0.7,0.7)
-[node name="Name" type="Label" parent="."]
+position = Vector2(270, 280)
+scale = Vector2(0.5, 0.5)
+[node name="Name" type="LineEdit" parent="."]
 offset_left = 189
 offset_top = 84
 offset_right = 322
 offset_bottom = 109
-mouse_filter = 2
+mouse_filter = 0
 theme_override_fonts/font = ExtResource("R1")
 theme_override_font_sizes/font_size = 18
 theme_override_colors/font_color = Color(0.42,0.16,0.02,1)
+theme_override_colors/caret_color = Color(0.42,0.16,0.02,1)
+theme_override_styles/normal = SubResource("NicknameInput")
+theme_override_styles/focus = SubResource("NicknameInput")
+max_length = 15
+expand_to_text_length = false
 text = "孙悟空"
-horizontal_alignment = 0
-vertical_alignment = 1
+alignment = 0
 [node name="Level" type="Label" parent="."]
 offset_left = 129
 offset_top = 299
@@ -171,13 +256,31 @@ mouse_filter = 2
 theme_override_fonts/font = ExtResource("R1")
 theme_override_font_sizes/font_size = 20
 theme_override_colors/font_color = Color(1,1,0.2,1)
-text = "1"
+text = "Lv.1"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 z_index = 1
 theme_override_colors/font_outline_color = Color(0.37,0.12,0.02,1)
 theme_override_constants/outline_size = 2
+
+[node name="ExperienceBackground" type="TextureRect" parent="."]
+offset_left = 187.1
+offset_top = 303.85
+offset_right = 467.1
+offset_bottom = 323.85
+mouse_filter = 2
+texture = ExtResource("exp_bg")
+[node name="ExperienceFill" type="TextureProgressBar" parent="."]
+offset_left = 194.45
+offset_top = 306.2
+offset_right = 460.45
+offset_bottom = 322.2
+mouse_filter = 2
+max_value = 1.0
+step = 0.0
+texture_progress = ExtResource("experience_fill")
+nine_patch_stretch = true
 [node name="Experience" type="Label" parent="."]
 offset_left = 247
 offset_top = 304
@@ -190,176 +293,187 @@ theme_override_colors/font_color = Color(0.42,0.16,0.02,1)
 text = "0/110"
 horizontal_alignment = 1
 vertical_alignment = 1
-[node name="Wardrobe" type="Button" parent="."]
-offset_left = 407
-offset_top = 122
-offset_right = 480
-offset_bottom = 146
+[node name="Wardrobe" type="TextureButton" parent="."]
+offset_left = 415.75
+offset_top = 113
+offset_right = 458.75
+offset_bottom = 159
 focus_mode = 0
-theme_override_fonts/font = ExtResource("R1")
-theme_override_font_sizes/font_size = 14
-theme_override_styles/normal = SubResource("Button0")
-theme_override_styles/hover = SubResource("Button1")
-theme_override_styles/pressed = SubResource("Button2")
-text = "衣橱"
+texture_normal = ExtResource("bag_wardrobe_0")
+texture_hover = ExtResource("bag_wardrobe_1")
+texture_pressed = ExtResource("bag_wardrobe_2")
+ignore_texture_size = true
+stretch_mode = 0
+
 [node name="ResistanceButton" type="Button" parent="."]
-offset_left = 416
-offset_top = 501
-offset_right = 460
-offset_bottom = 523
+theme_override_colors/font_color = Color(0.372549,0.117647,0.019608,1)
+theme_override_colors/font_hover_color = Color(0.372549,0.117647,0.019608,1)
+theme_override_colors/font_pressed_color = Color(0.372549,0.117647,0.019608,1)
+offset_left = 415.75
+offset_top = 501.8
+offset_right = 459.75
+offset_bottom = 523.8
+flat = true
 focus_mode = 0
-theme_override_fonts/font = ExtResource("R1")
-theme_override_font_sizes/font_size = 14
-theme_override_styles/normal = SubResource("Button0")
-theme_override_styles/hover = SubResource("Button1")
-theme_override_styles/pressed = SubResource("Button2")
-text = "抗性"
+
 [node name="Attributes" type="Control" parent="."]
 
 [node name="Value0" type="Label" parent="Attributes"]
-offset_left = 188.0
-offset_top = 335
-offset_right = 294.0
-offset_bottom = 357
+offset_left = 178
+offset_top = 334
+offset_right = 289
+offset_bottom = 354
 mouse_filter = 2
 theme_override_fonts/font = ExtResource("R1")
 theme_override_font_sizes/font_size = 14
 theme_override_colors/font_color = Color(0.42,0.16,0.02,1)
 text = ""
-horizontal_alignment = 2
+horizontal_alignment = 1
 vertical_alignment = 1
+
 [node name="Value1" type="Label" parent="Attributes"]
-offset_left = 356.8
-offset_top = 335
-offset_right = 462.8
-offset_bottom = 357
+offset_left = 347
+offset_top = 334
+offset_right = 458
+offset_bottom = 354
 mouse_filter = 2
 theme_override_fonts/font = ExtResource("R1")
 theme_override_font_sizes/font_size = 14
 theme_override_colors/font_color = Color(0.42,0.16,0.02,1)
 text = ""
-horizontal_alignment = 2
+horizontal_alignment = 1
 vertical_alignment = 1
+
 [node name="Value2" type="Label" parent="Attributes"]
-offset_left = 188.0
-offset_top = 362
-offset_right = 294.0
-offset_bottom = 384
+offset_left = 178
+offset_top = 361
+offset_right = 289
+offset_bottom = 381
 mouse_filter = 2
 theme_override_fonts/font = ExtResource("R1")
 theme_override_font_sizes/font_size = 14
 theme_override_colors/font_color = Color(0.42,0.16,0.02,1)
 text = ""
-horizontal_alignment = 2
+horizontal_alignment = 1
 vertical_alignment = 1
+
 [node name="Value3" type="Label" parent="Attributes"]
-offset_left = 356.8
-offset_top = 362
-offset_right = 462.8
-offset_bottom = 384
+offset_left = 347
+offset_top = 361
+offset_right = 458
+offset_bottom = 381
 mouse_filter = 2
 theme_override_fonts/font = ExtResource("R1")
 theme_override_font_sizes/font_size = 14
 theme_override_colors/font_color = Color(0.42,0.16,0.02,1)
 text = ""
-horizontal_alignment = 2
+horizontal_alignment = 1
 vertical_alignment = 1
+
 [node name="Value4" type="Label" parent="Attributes"]
-offset_left = 188.0
-offset_top = 389
-offset_right = 294.0
-offset_bottom = 411
+offset_left = 178
+offset_top = 388
+offset_right = 289
+offset_bottom = 408
 mouse_filter = 2
 theme_override_fonts/font = ExtResource("R1")
 theme_override_font_sizes/font_size = 14
 theme_override_colors/font_color = Color(0.42,0.16,0.02,1)
 text = ""
-horizontal_alignment = 2
+horizontal_alignment = 1
 vertical_alignment = 1
+
 [node name="Value5" type="Label" parent="Attributes"]
-offset_left = 356.8
-offset_top = 389
-offset_right = 462.8
-offset_bottom = 411
+offset_left = 347
+offset_top = 388
+offset_right = 458
+offset_bottom = 408
 mouse_filter = 2
 theme_override_fonts/font = ExtResource("R1")
 theme_override_font_sizes/font_size = 14
 theme_override_colors/font_color = Color(0.42,0.16,0.02,1)
 text = ""
-horizontal_alignment = 2
+horizontal_alignment = 1
 vertical_alignment = 1
+
 [node name="Value6" type="Label" parent="Attributes"]
-offset_left = 188.0
-offset_top = 416
-offset_right = 294.0
-offset_bottom = 438
+offset_left = 178
+offset_top = 415
+offset_right = 289
+offset_bottom = 435
 mouse_filter = 2
 theme_override_fonts/font = ExtResource("R1")
 theme_override_font_sizes/font_size = 14
 theme_override_colors/font_color = Color(0.42,0.16,0.02,1)
 text = ""
-horizontal_alignment = 2
+horizontal_alignment = 1
 vertical_alignment = 1
+
 [node name="Value7" type="Label" parent="Attributes"]
-offset_left = 356.8
-offset_top = 416
-offset_right = 462.8
-offset_bottom = 438
+offset_left = 347
+offset_top = 415
+offset_right = 458
+offset_bottom = 435
 mouse_filter = 2
 theme_override_fonts/font = ExtResource("R1")
 theme_override_font_sizes/font_size = 14
 theme_override_colors/font_color = Color(0.42,0.16,0.02,1)
 text = ""
-horizontal_alignment = 2
+horizontal_alignment = 1
 vertical_alignment = 1
+
 [node name="Value8" type="Label" parent="Attributes"]
-offset_left = 188.0
-offset_top = 443
-offset_right = 294.0
-offset_bottom = 465
+offset_left = 178
+offset_top = 442
+offset_right = 289
+offset_bottom = 462
 mouse_filter = 2
 theme_override_fonts/font = ExtResource("R1")
 theme_override_font_sizes/font_size = 14
 theme_override_colors/font_color = Color(0.42,0.16,0.02,1)
 text = ""
-horizontal_alignment = 2
+horizontal_alignment = 1
 vertical_alignment = 1
+
 [node name="Value9" type="Label" parent="Attributes"]
-offset_left = 356.8
-offset_top = 443
-offset_right = 462.8
-offset_bottom = 465
+offset_left = 347
+offset_top = 442
+offset_right = 458
+offset_bottom = 462
 mouse_filter = 2
 theme_override_fonts/font = ExtResource("R1")
 theme_override_font_sizes/font_size = 14
 theme_override_colors/font_color = Color(0.42,0.16,0.02,1)
 text = ""
-horizontal_alignment = 2
+horizontal_alignment = 1
 vertical_alignment = 1
+
 [node name="Value10" type="Label" parent="Attributes"]
-offset_left = 188.0
-offset_top = 470
-offset_right = 294.0
-offset_bottom = 492
+offset_left = 178
+offset_top = 469
+offset_right = 289
+offset_bottom = 489
 mouse_filter = 2
 theme_override_fonts/font = ExtResource("R1")
 theme_override_font_sizes/font_size = 14
 theme_override_colors/font_color = Color(0.42,0.16,0.02,1)
 text = ""
-horizontal_alignment = 2
+horizontal_alignment = 1
 vertical_alignment = 1
+
 [node name="Value11" type="Label" parent="Attributes"]
-offset_left = 356.8
-offset_top = 470
-offset_right = 462.8
-offset_bottom = 492
+offset_left = 347
+offset_top = 469
+offset_right = 458
+offset_bottom = 489
 mouse_filter = 2
 theme_override_fonts/font = ExtResource("R1")
 theme_override_font_sizes/font_size = 14
 theme_override_colors/font_color = Color(0.42,0.16,0.02,1)
 text = ""
-horizontal_alignment = 2
+horizontal_alignment = 1
 vertical_alignment = 1
+
 [node name="Equipment" type="Control" parent="."]
 
 [node name="Part0" type="Control" parent="Equipment"]
@@ -406,17 +520,18 @@ expand_mode = 1
 texture = ExtResource("R31")
 visible = false
 [node name="Part" type="Label" parent="Equipment/Part0"]
-offset_left = 0
-offset_top = 61
-offset_right = 60
-offset_bottom = 80
+offset_left = 12
+offset_top = 19
+offset_right = 48
+offset_bottom = 41
 mouse_filter = 2
 theme_override_fonts/font = ExtResource("R1")
-theme_override_font_sizes/font_size = 12
-theme_override_colors/font_color = Color(0.42,0.16,0.02,1)
+theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(0.894,0.808,0.753,1)
 text = "翅膀"
 horizontal_alignment = 1
 vertical_alignment = 1
+
 [node name="Part1" type="Control" parent="Equipment"]
 offset_left = 345
 offset_top = 165
@@ -461,17 +576,18 @@ expand_mode = 1
 texture = ExtResource("R33")
 visible = false
 [node name="Part" type="Label" parent="Equipment/Part1"]
-offset_left = 0
-offset_top = 61
-offset_right = 60
-offset_bottom = 80
+offset_left = 12
+offset_top = 19
+offset_right = 48
+offset_bottom = 41
 mouse_filter = 2
 theme_override_fonts/font = ExtResource("R1")
-theme_override_font_sizes/font_size = 12
-theme_override_colors/font_color = Color(0.42,0.16,0.02,1)
+theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(0.894,0.808,0.753,1)
 text = "武器"
 horizontal_alignment = 1
 vertical_alignment = 1
+
 [node name="Part2" type="Control" parent="Equipment"]
 offset_left = 409
 offset_top = 165
@@ -516,17 +632,18 @@ expand_mode = 1
 texture = ExtResource("R35")
 visible = false
 [node name="Part" type="Label" parent="Equipment/Part2"]
-offset_left = 0
-offset_top = 61
-offset_right = 60
-offset_bottom = 80
+offset_left = 12
+offset_top = 19
+offset_right = 48
+offset_bottom = 41
 mouse_filter = 2
 theme_override_fonts/font = ExtResource("R1")
-theme_override_font_sizes/font_size = 12
-theme_override_colors/font_color = Color(0.42,0.16,0.02,1)
+theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(0.894,0.808,0.753,1)
 text = "头盔"
 horizontal_alignment = 1
 vertical_alignment = 1
+
 [node name="Part3" type="Control" parent="Equipment"]
 offset_left = 129
 offset_top = 236
@@ -571,17 +688,18 @@ expand_mode = 1
 texture = ExtResource("R37")
 visible = false
 [node name="Part" type="Label" parent="Equipment/Part3"]
-offset_left = 0
-offset_top = 61
-offset_right = 60
-offset_bottom = 80
+offset_left = 12
+offset_top = 19
+offset_right = 48
+offset_bottom = 41
 mouse_filter = 2
 theme_override_fonts/font = ExtResource("R1")
-theme_override_font_sizes/font_size = 12
-theme_override_colors/font_color = Color(0.42,0.16,0.02,1)
+theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(0.894,0.808,0.753,1)
 text = "法宝"
 horizontal_alignment = 1
 vertical_alignment = 1
+
 [node name="Part4" type="Control" parent="Equipment"]
 offset_left = 345
 offset_top = 236
@@ -626,17 +744,18 @@ expand_mode = 1
 texture = ExtResource("R39")
 visible = false
 [node name="Part" type="Label" parent="Equipment/Part4"]
-offset_left = 0
-offset_top = 61
-offset_right = 60
-offset_bottom = 80
+offset_left = 12
+offset_top = 19
+offset_right = 48
+offset_bottom = 41
 mouse_filter = 2
 theme_override_fonts/font = ExtResource("R1")
-theme_override_font_sizes/font_size = 12
-theme_override_colors/font_color = Color(0.42,0.16,0.02,1)
+theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(0.894,0.808,0.753,1)
 text = "防具"
 horizontal_alignment = 1
 vertical_alignment = 1
+
 [node name="Part5" type="Control" parent="Equipment"]
 offset_left = 409
 offset_top = 236
@@ -681,17 +800,18 @@ expand_mode = 1
 texture = ExtResource("R41")
 visible = false
 [node name="Part" type="Label" parent="Equipment/Part5"]
-offset_left = 0
-offset_top = 61
-offset_right = 60
-offset_bottom = 80
+offset_left = 12
+offset_top = 19
+offset_right = 48
+offset_bottom = 41
 mouse_filter = 2
 theme_override_fonts/font = ExtResource("R1")
-theme_override_font_sizes/font_size = 12
-theme_override_colors/font_color = Color(0.42,0.16,0.02,1)
+theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(0.894,0.808,0.753,1)
 text = "饰品"
 horizontal_alignment = 1
 vertical_alignment = 1
+
 [node name="Tabs" type="Control" parent="."]
 
 [node name="Tab0" type="TextureButton" parent="Tabs"]
@@ -1807,18 +1927,16 @@ mouse_filter = 2
 expand_mode = 1
 texture = ExtResource("R91")
 visible = false
-[node name="Previous" type="Button" parent="."]
-offset_left = 638
-offset_top = 444
-offset_right = 666
-offset_bottom = 470
+[node name="Previous" type="TextureButton" parent="."]
+offset_left = 500
+offset_top = 443
+offset_right = 524
+offset_bottom = 473
 focus_mode = 0
-theme_override_fonts/font = ExtResource("R1")
-theme_override_font_sizes/font_size = 14
-theme_override_styles/normal = SubResource("Button0")
-theme_override_styles/hover = SubResource("Button1")
-theme_override_styles/pressed = SubResource("Button2")
-text = "‹"
+texture_normal = ExtResource("bag_previous_0")
+texture_hover = ExtResource("bag_previous_1")
+texture_pressed = ExtResource("bag_previous_2")
+
 [node name="Page" type="Label" parent="."]
 offset_left = 668
 offset_top = 444
@@ -1831,19 +1949,22 @@ theme_override_colors/font_color = Color(0.42,0.16,0.02,1)
 text = "1 / 2"
 horizontal_alignment = 1
 vertical_alignment = 1
-[node name="Next" type="Button" parent="."]
-offset_left = 770
-offset_top = 444
-offset_right = 798
-offset_bottom = 470
+visible = false
+
+[node name="Next" type="TextureButton" parent="."]
+offset_left = 808
+offset_top = 443
+offset_right = 832
+offset_bottom = 473
 focus_mode = 0
-theme_override_fonts/font = ExtResource("R1")
-theme_override_font_sizes/font_size = 14
-theme_override_styles/normal = SubResource("Button0")
-theme_override_styles/hover = SubResource("Button1")
-theme_override_styles/pressed = SubResource("Button2")
-text = "›"
+texture_normal = ExtResource("bag_next_0")
+texture_hover = ExtResource("bag_next_1")
+texture_pressed = ExtResource("bag_next_2")
+
 [node name="Sort" type="Button" parent="."]
+theme_override_colors/font_color = Color(0.372549,0.117647,0.019608,1)
+theme_override_colors/font_hover_color = Color(0.372549,0.117647,0.019608,1)
+theme_override_colors/font_pressed_color = Color(0.372549,0.117647,0.019608,1)
 offset_left = 700
 offset_top = 478
 offset_right = 798
@@ -1867,6 +1988,8 @@ theme_override_colors/font_color = Color(0.42,0.16,0.02,1)
 text = "0 / 25"
 horizontal_alignment = 0
 vertical_alignment = 1
+visible = false
+
 [node name="Spirit" type="Label" parent="."]
 offset_left = 539
 offset_top = 486
@@ -1879,72 +2002,94 @@ theme_override_colors/font_color = Color(0.37,0.12,0.02,1)
 text = "0"
 horizontal_alignment = 0
 vertical_alignment = 1
-[node name="Close" type="Button" parent="."]
+[node name="Close" type="TextureButton" parent="."]
 offset_left = 799.2
 offset_top = 28.5
 offset_right = 832.2
 offset_bottom = 66.5
 focus_mode = 0
-theme_override_fonts/font = ExtResource("R1")
-theme_override_font_sizes/font_size = 14
-theme_override_styles/normal = SubResource("Button0")
-theme_override_styles/hover = SubResource("Button1")
-theme_override_styles/pressed = SubResource("Button2")
-text = "×"
+texture_normal = ExtResource("bag_close_0")
+texture_hover = ExtResource("bag_close_1")
+texture_pressed = ExtResource("bag_close_2")
+
 [node name="Context" type="Control" parent="."]
 visible = false
-offset_right = 128.0
-offset_bottom = 150.0
-mouse_filter = 0
+offset_right = 130.0
+offset_bottom = 174.0
+mouse_filter = 0z_index = 30
+z_index = 30
+
 [node name="Background" type="NinePatchRect" parent="Context"]
 offset_left = 0
 offset_top = 0
-offset_right = 128
-offset_bottom = 150
+offset_right = 0.0
+offset_bottom = 0.0
 mouse_filter = 2
 texture = ExtResource("R92")
 patch_margin_left = 38
 patch_margin_top = 29
 patch_margin_right = 39
 patch_margin_bottom = 30
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 
 [node name="Use" type="Button" parent="Context"]
-offset_left = 4
-offset_top = 4
-offset_right = 124
-offset_bottom = 36
+theme_override_colors/font_color = Color(0.372549,0.117647,0.019608,1)
+theme_override_colors/font_hover_color = Color(0.372549,0.117647,0.019608,1)
+theme_override_colors/font_pressed_color = Color(0.372549,0.117647,0.019608,1)
+offset_left = 15
+offset_top = 24
+offset_right = 115
+offset_bottom = 60
 focus_mode = 0
 theme_override_fonts/font = ExtResource("R1")
 theme_override_font_sizes/font_size = 14
 theme_override_styles/normal = SubResource("Button0")
 theme_override_styles/hover = SubResource("Button1")
 theme_override_styles/pressed = SubResource("Button2")
-text = "装备"
+text = ""
+theme_override_styles/disabled = SubResource("Button0")
+
 [node name="Sell" type="Button" parent="Context"]
-offset_left = 4
-offset_top = 40
-offset_right = 124
-offset_bottom = 72
+theme_override_colors/font_color = Color(0.372549,0.117647,0.019608,1)
+theme_override_colors/font_hover_color = Color(0.372549,0.117647,0.019608,1)
+theme_override_colors/font_pressed_color = Color(0.372549,0.117647,0.019608,1)
+offset_left = 15
+offset_top = 71
+offset_right = 115
+offset_bottom = 107
 focus_mode = 0
 theme_override_fonts/font = ExtResource("R1")
 theme_override_font_sizes/font_size = 14
 theme_override_styles/normal = SubResource("Button0")
 theme_override_styles/hover = SubResource("Button1")
 theme_override_styles/pressed = SubResource("Button2")
-text = "出售"
+text = ""
+theme_override_styles/disabled = SubResource("Button0")
+
 [node name="Lock" type="Button" parent="Context"]
-offset_left = 4
-offset_top = 76
-offset_right = 124
-offset_bottom = 108
+theme_override_colors/font_color = Color(0.372549,0.117647,0.019608,1)
+theme_override_colors/font_hover_color = Color(0.372549,0.117647,0.019608,1)
+theme_override_colors/font_pressed_color = Color(0.372549,0.117647,0.019608,1)
+offset_left = 15
+offset_top = 118
+offset_right = 115
+offset_bottom = 154
 focus_mode = 0
 theme_override_fonts/font = ExtResource("R1")
 theme_override_font_sizes/font_size = 14
 theme_override_styles/normal = SubResource("Button0")
 theme_override_styles/hover = SubResource("Button1")
 theme_override_styles/pressed = SubResource("Button2")
-text = "锁定"
+text = ""
+theme_override_styles/disabled = SubResource("Button0")
+
 [node name="Close" type="Button" parent="Context"]
+theme_override_colors/font_color = Color(0.372549,0.117647,0.019608,1)
+theme_override_colors/font_hover_color = Color(0.372549,0.117647,0.019608,1)
+theme_override_colors/font_pressed_color = Color(0.372549,0.117647,0.019608,1)
 offset_left = 4
 offset_top = 112
 offset_right = 124
@@ -1956,35 +2101,10 @@ theme_override_styles/normal = SubResource("Button0")
 theme_override_styles/hover = SubResource("Button1")
 theme_override_styles/pressed = SubResource("Button2")
 text = "关闭"
-[node name="Tooltip" type="Control" parent="."]
-visible = false
-offset_right = 290.0
-offset_bottom = 220.0
-mouse_filter = 2
-[node name="Background" type="NinePatchRect" parent="Tooltip"]
-offset_left = 0
-offset_top = 0
-offset_right = 290
-offset_bottom = 220
-mouse_filter = 2
-texture = ExtResource("R93")
-patch_margin_left = 25
-patch_margin_top = 20
-patch_margin_right = 25
-patch_margin_bottom = 20
 
-[node name="Text" type="Label" parent="Tooltip"]
-offset_left = 12
-offset_top = 12
-offset_right = 276
-offset_bottom = 206
-mouse_filter = 2
-theme_override_fonts/font = ExtResource("R1")
-theme_override_font_sizes/font_size = 15
-theme_override_colors/font_color = Color(0.372549,0.117647,0.019608,1)
-text = ""
-horizontal_alignment = 0
-vertical_alignment = 1
+
+visible = false
+
 [node name="Confirm" type="Control" parent="."]
 visible = false
 offset_left = 320.0
@@ -2012,11 +2132,13 @@ offset_bottom = 100
 mouse_filter = 2
 theme_override_fonts/font = ExtResource("R1")
 theme_override_font_sizes/font_size = 18
-theme_override_colors/font_color = Color(0.372549,0.117647,0.019608,1)
 text = "确认出售？"
 horizontal_alignment = 1
 vertical_alignment = 1
 [node name="Less" type="Button" parent="Confirm"]
+theme_override_colors/font_color = Color(0.372549,0.117647,0.019608,1)
+theme_override_colors/font_hover_color = Color(0.372549,0.117647,0.019608,1)
+theme_override_colors/font_pressed_color = Color(0.372549,0.117647,0.019608,1)
 offset_left = 70
 offset_top = 97
 offset_right = 98
@@ -2036,11 +2158,13 @@ offset_bottom = 121
 mouse_filter = 2
 theme_override_fonts/font = ExtResource("R1")
 theme_override_font_sizes/font_size = 16
-theme_override_colors/font_color = Color(0.372549,0.117647,0.019608,1)
 text = "1"
 horizontal_alignment = 1
 vertical_alignment = 1
 [node name="More" type="Button" parent="Confirm"]
+theme_override_colors/font_color = Color(0.372549,0.117647,0.019608,1)
+theme_override_colors/font_hover_color = Color(0.372549,0.117647,0.019608,1)
+theme_override_colors/font_pressed_color = Color(0.372549,0.117647,0.019608,1)
 offset_left = 204
 offset_top = 97
 offset_right = 232
@@ -2053,6 +2177,9 @@ theme_override_styles/hover = SubResource("Button1")
 theme_override_styles/pressed = SubResource("Button2")
 text = "+"
 [node name="Yes" type="Button" parent="Confirm"]
+theme_override_colors/font_color = Color(0.372549,0.117647,0.019608,1)
+theme_override_colors/font_hover_color = Color(0.372549,0.117647,0.019608,1)
+theme_override_colors/font_pressed_color = Color(0.372549,0.117647,0.019608,1)
 offset_left = 42
 offset_top = 133
 offset_right = 130
@@ -2065,6 +2192,9 @@ theme_override_styles/hover = SubResource("Button1")
 theme_override_styles/pressed = SubResource("Button2")
 text = "确定"
 [node name="No" type="Button" parent="Confirm"]
+theme_override_colors/font_color = Color(0.372549,0.117647,0.019608,1)
+theme_override_colors/font_hover_color = Color(0.372549,0.117647,0.019608,1)
+theme_override_colors/font_pressed_color = Color(0.372549,0.117647,0.019608,1)
 offset_left = 170
 offset_top = 133
 offset_right = 258
@@ -2076,144 +2206,317 @@ theme_override_styles/normal = SubResource("Button0")
 theme_override_styles/hover = SubResource("Button1")
 theme_override_styles/pressed = SubResource("Button2")
 text = "取消"
-[node name="Resistances" type="Control" parent="."]
+
+
+
+
+
+
+
+
+
+
+
+
+
+[node name="RoleName" type="Label" parent="."]
+offset_left = 374.75
+offset_top = 82.6
+offset_right = 438.75
+offset_bottom = 106.6
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("R1")
+theme_override_font_sizes/font_size = 16
+theme_override_colors/font_color = Color(1,0.86,0.63,1)
+theme_override_colors/font_outline_color = Color(0.37,0.12,0.02,1)
+theme_override_constants/outline_size = 2
+horizontal_alignment = 1
+text = "孙悟空"
+[node name="PageButtons" type="Control" parent="."]
+mouse_filter = 2
+[node name="Page0" type="TextureButton" parent="PageButtons"]
 visible = false
-offset_left = 310.0
-offset_top = 160.0
-offset_right = 630.0
-offset_bottom = 435.0
-mouse_filter = 0
-[node name="Background" type="NinePatchRect" parent="Resistances"]
+focus_mode = 0
+texture_normal = ExtResource("page_skin_0")
+texture_hover = ExtResource("page_skin_1")
+texture_pressed = ExtResource("page_skin_2")
+[node name="Text" type="Label" parent="PageButtons/Page0"]
+offset_top = 4.0
+offset_right = 31.0
+offset_bottom = 24.0
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("R1")
+theme_override_font_sizes/font_size = 16
+theme_override_colors/font_color = Color(0.372549,0.117647,0.019608,1)
+horizontal_alignment = 1
+text = "1"
+[node name="Page1" type="TextureButton" parent="PageButtons"]
+visible = false
+focus_mode = 0
+texture_normal = ExtResource("page_skin_0")
+texture_hover = ExtResource("page_skin_1")
+texture_pressed = ExtResource("page_skin_2")
+[node name="Text" type="Label" parent="PageButtons/Page1"]
+offset_top = 4.0
+offset_right = 31.0
+offset_bottom = 24.0
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("R1")
+theme_override_font_sizes/font_size = 16
+theme_override_colors/font_color = Color(0.372549,0.117647,0.019608,1)
+horizontal_alignment = 1
+text = "2"
+[node name="Page2" type="TextureButton" parent="PageButtons"]
+visible = false
+focus_mode = 0
+texture_normal = ExtResource("page_skin_0")
+texture_hover = ExtResource("page_skin_1")
+texture_pressed = ExtResource("page_skin_2")
+[node name="Text" type="Label" parent="PageButtons/Page2"]
+offset_top = 4.0
+offset_right = 31.0
+offset_bottom = 24.0
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("R1")
+theme_override_font_sizes/font_size = 16
+theme_override_colors/font_color = Color(0.372549,0.117647,0.019608,1)
+horizontal_alignment = 1
+text = "3"
+[node name="Page3" type="TextureButton" parent="PageButtons"]
+visible = false
+focus_mode = 0
+texture_normal = ExtResource("page_skin_0")
+texture_hover = ExtResource("page_skin_1")
+texture_pressed = ExtResource("page_skin_2")
+[node name="Text" type="Label" parent="PageButtons/Page3"]
+offset_top = 4.0
+offset_right = 31.0
+offset_bottom = 24.0
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("R1")
+theme_override_font_sizes/font_size = 16
+theme_override_colors/font_color = Color(0.372549,0.117647,0.019608,1)
+horizontal_alignment = 1
+text = "4"
+[node name="Page4" type="TextureButton" parent="PageButtons"]
+visible = false
+focus_mode = 0
+texture_normal = ExtResource("page_skin_0")
+texture_hover = ExtResource("page_skin_1")
+texture_pressed = ExtResource("page_skin_2")
+[node name="Text" type="Label" parent="PageButtons/Page4"]
+offset_top = 4.0
+offset_right = 31.0
+offset_bottom = 24.0
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("R1")
+theme_override_font_sizes/font_size = 16
+theme_override_colors/font_color = Color(0.372549,0.117647,0.019608,1)
+horizontal_alignment = 1
+text = "5"
+[node name="Page5" type="TextureButton" parent="PageButtons"]
+visible = false
+focus_mode = 0
+texture_normal = ExtResource("page_skin_0")
+texture_hover = ExtResource("page_skin_1")
+texture_pressed = ExtResource("page_skin_2")
+[node name="Text" type="Label" parent="PageButtons/Page5"]
+offset_top = 4.0
+offset_right = 31.0
+offset_bottom = 24.0
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("R1")
+theme_override_font_sizes/font_size = 16
+theme_override_colors/font_color = Color(0.372549,0.117647,0.019608,1)
+horizontal_alignment = 1
+text = "6"
+[node name="Page6" type="TextureButton" parent="PageButtons"]
+visible = false
+focus_mode = 0
+texture_normal = ExtResource("page_skin_0")
+texture_hover = ExtResource("page_skin_1")
+texture_pressed = ExtResource("page_skin_2")
+[node name="Text" type="Label" parent="PageButtons/Page6"]
+offset_top = 4.0
+offset_right = 31.0
+offset_bottom = 24.0
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("R1")
+theme_override_font_sizes/font_size = 16
+theme_override_colors/font_color = Color(0.372549,0.117647,0.019608,1)
+horizontal_alignment = 1
+text = "7"
+[node name="Page7" type="TextureButton" parent="PageButtons"]
+visible = false
+focus_mode = 0
+texture_normal = ExtResource("page_skin_0")
+texture_hover = ExtResource("page_skin_1")
+texture_pressed = ExtResource("page_skin_2")
+[node name="Text" type="Label" parent="PageButtons/Page7"]
+offset_top = 4.0
+offset_right = 31.0
+offset_bottom = 24.0
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("R1")
+theme_override_font_sizes/font_size = 16
+theme_override_colors/font_color = Color(0.372549,0.117647,0.019608,1)
+horizontal_alignment = 1
+text = "8"
+
+[node name="FightPower" type="Control" parent="."]
+offset_left = 251.0
+offset_top = 499.0
+offset_right = 415.0
+offset_bottom = 527.0
+mouse_filter = 2
+script = ExtResource("fight_display")
+digits = Array[Texture2D]([ExtResource("fight_digit_0"), ExtResource("fight_digit_1"), ExtResource("fight_digit_2"), ExtResource("fight_digit_3"), ExtResource("fight_digit_4"), ExtResource("fight_digit_5"), ExtResource("fight_digit_6"), ExtResource("fight_digit_7"), ExtResource("fight_digit_8"), ExtResource("fight_digit_9")])
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[node name="PlayerNumber" type="Control" parent="."]
+offset_left = 131.6
+offset_top = 121.05
+offset_right = 342.7
+offset_bottom = 153.05
+z_index = 5
+mouse_filter = 1
+clip_contents = true
+[node name="Drawer" type="Control" parent="PlayerNumber"]
+offset_left = -6.9
+offset_top = 0
+offset_right = 161.1
+offset_bottom = 30
+visible = false
+mouse_filter = 1
+[node name="Background" type="TextureRect" parent="PlayerNumber/Drawer"]
 offset_left = 0
 offset_top = 0
-offset_right = 320
-offset_bottom = 275
+offset_right = 168
+offset_bottom = 30
 mouse_filter = 2
-texture = ExtResource("R95")
-patch_margin_left = 25
-patch_margin_top = 20
-patch_margin_right = 25
-patch_margin_bottom = 20
-
-[node name="Title" type="Label" parent="Resistances"]
-offset_left = 18
-offset_top = 12
-offset_right = 268
-offset_bottom = 40
-mouse_filter = 2
-theme_override_fonts/font = ExtResource("R1")
-theme_override_font_sizes/font_size = 18
-theme_override_colors/font_color = Color(0.372549,0.117647,0.019608,1)
-text = "五行与元素抗性"
-horizontal_alignment = 0
-vertical_alignment = 1
-[node name="Values" type="Control" parent="Resistances"]
-
-[node name="Value0" type="Label" parent="Resistances/Values"]
-offset_left = 24
-offset_top = 54
-offset_right = 152
-offset_bottom = 86
+texture = ExtResource("detail_uid_bg")
+expand_mode = 1
+[node name="Value" type="Label" parent="PlayerNumber/Drawer"]
+offset_left = 12
+offset_top = 4
+offset_right = 122
+offset_bottom = 27
 mouse_filter = 2
 theme_override_fonts/font = ExtResource("R1")
 theme_override_font_sizes/font_size = 16
 theme_override_colors/font_color = Color(0.372549,0.117647,0.019608,1)
 text = ""
-horizontal_alignment = 0
-vertical_alignment = 1
-[node name="Value1" type="Label" parent="Resistances/Values"]
-offset_left = 168
-offset_top = 54
-offset_right = 296
-offset_bottom = 86
-mouse_filter = 2
-theme_override_fonts/font = ExtResource("R1")
-theme_override_font_sizes/font_size = 16
-theme_override_colors/font_color = Color(0.372549,0.117647,0.019608,1)
-text = ""
-horizontal_alignment = 0
-vertical_alignment = 1
-[node name="Value2" type="Label" parent="Resistances/Values"]
-offset_left = 24
-offset_top = 94
-offset_right = 152
-offset_bottom = 126
-mouse_filter = 2
-theme_override_fonts/font = ExtResource("R1")
-theme_override_font_sizes/font_size = 16
-theme_override_colors/font_color = Color(0.372549,0.117647,0.019608,1)
-text = ""
-horizontal_alignment = 0
-vertical_alignment = 1
-[node name="Value3" type="Label" parent="Resistances/Values"]
-offset_left = 168
-offset_top = 94
-offset_right = 296
-offset_bottom = 126
-mouse_filter = 2
-theme_override_fonts/font = ExtResource("R1")
-theme_override_font_sizes/font_size = 16
-theme_override_colors/font_color = Color(0.372549,0.117647,0.019608,1)
-text = ""
-horizontal_alignment = 0
-vertical_alignment = 1
-[node name="Value4" type="Label" parent="Resistances/Values"]
-offset_left = 24
-offset_top = 134
-offset_right = 152
-offset_bottom = 166
-mouse_filter = 2
-theme_override_fonts/font = ExtResource("R1")
-theme_override_font_sizes/font_size = 16
-theme_override_colors/font_color = Color(0.372549,0.117647,0.019608,1)
-text = ""
-horizontal_alignment = 0
-vertical_alignment = 1
-[node name="Value5" type="Label" parent="Resistances/Values"]
-offset_left = 168
-offset_top = 134
-offset_right = 296
-offset_bottom = 166
-mouse_filter = 2
-theme_override_fonts/font = ExtResource("R1")
-theme_override_font_sizes/font_size = 16
-theme_override_colors/font_color = Color(0.372549,0.117647,0.019608,1)
-text = ""
-horizontal_alignment = 0
-vertical_alignment = 1
-[node name="Value6" type="Label" parent="Resistances/Values"]
-offset_left = 24
-offset_top = 174
-offset_right = 152
-offset_bottom = 206
-mouse_filter = 2
-theme_override_fonts/font = ExtResource("R1")
-theme_override_font_sizes/font_size = 16
-theme_override_colors/font_color = Color(0.372549,0.117647,0.019608,1)
-text = ""
-horizontal_alignment = 0
-vertical_alignment = 1
-[node name="Value7" type="Label" parent="Resistances/Values"]
-offset_left = 168
-offset_top = 174
-offset_right = 296
-offset_bottom = 206
-mouse_filter = 2
-theme_override_fonts/font = ExtResource("R1")
-theme_override_font_sizes/font_size = 16
-theme_override_colors/font_color = Color(0.372549,0.117647,0.019608,1)
-text = ""
-horizontal_alignment = 0
-vertical_alignment = 1
-[node name="Close" type="Button" parent="Resistances"]
-offset_left = 110
-offset_top = 228
-offset_right = 210
-offset_bottom = 260
+[node name="Copy" type="TextureButton" parent="PlayerNumber/Drawer"]
+offset_left = 120.35
+offset_top = 2.9
+offset_right = 164.35
+offset_bottom = 28.9
 focus_mode = 0
+texture_normal = ExtResource("detail_copy0")
+texture_hover = ExtResource("detail_copy1")
+texture_pressed = ExtResource("detail_copy2")
+[node name="Icon" type="TextureRect" parent="PlayerNumber"]
+offset_left = 0
+offset_top = 1
+offset_right = 55
+offset_bottom = 32
+mouse_filter = 0
+texture = ExtResource("detail_uid_icon")
+expand_mode = 1
+[node name="FashionToggle" type="TextureButton" parent="."]
+offset_left = 407.35
+offset_top = 122.6
+offset_right = 479.85
+offset_bottom = 146.6
+visible = false
+focus_mode = 0
+texture_normal = ExtResource("detail_fashion0")
+texture_hover = ExtResource("detail_fashion2")
+texture_pressed = ExtResource("detail_fashion1")
+[node name="Caption" type="TextureRect" parent="Context/Use"]
+offset_left = 0
+offset_top = 0
+offset_right = 100
+offset_bottom = 36
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
+[node name="Caption" type="TextureRect" parent="Context/Sell"]
+offset_left = 0
+offset_top = 0
+offset_right = 100
+offset_bottom = 36
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
+[node name="Caption" type="TextureRect" parent="Context/Lock"]
+offset_left = 0
+offset_top = 0
+offset_right = 100
+offset_bottom = 36
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
+[node name="Tooltip" parent="." instance=ExtResource("detail_tooltip")]
+visible = false
+z_index = 25
+[node name="ComparisonTooltip" parent="." instance=ExtResource("detail_tooltip")]
+visible = false
+z_index = 25
+[node name="Resistances" type="Control" parent="."]
+offset_left = 0
+offset_top = 0
+offset_right = 420
+offset_bottom = 90
+visible = false
+z_index = 26
+mouse_filter = 2
+[node name="Background" type="NinePatchRect" parent="Resistances"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+texture = ExtResource("detail_tips")
+patch_margin_left = 45
+patch_margin_right = 29
+patch_margin_top = 30
+patch_margin_bottom = 29
+[node name="Text" type="Label" parent="Resistances"]
+offset_left = 12
+offset_top = 12
+offset_right = 408
+offset_bottom = 212
+mouse_filter = 2
 theme_override_fonts/font = ExtResource("R1")
-theme_override_font_sizes/font_size = 14
-theme_override_styles/normal = SubResource("Button0")
-theme_override_styles/hover = SubResource("Button1")
-theme_override_styles/pressed = SubResource("Button2")
-text = "关闭"
+theme_override_font_sizes/font_size = 16
+theme_override_colors/font_color = Color(0.372549,0.117647,0.019608,1)
+text = ""

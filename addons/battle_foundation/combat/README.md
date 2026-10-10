@@ -6,7 +6,7 @@
 
 阶段 7 在此闭环上扩展 [技能时间轴、连招与多段攻击](skill-timeline.md)。新场景使用独立资源，阶段 6 的窗口和场景保持兼容；BattleAttackInstance 的目标记录现包含 count / next_hit_time，hit_count 统计实际次数。分段反应、派生缓存、消耗与冷却、对象和事件取消协议见新文档。
 
-打开 [single_attack_demo.tscn](../../../examples/single_attack_demo.tscn)，使用项目现有带 Spine 模块的 Godot 按 F6。A/D 移动，K 跳跃，J 只施放第一段普攻；长按不自动重复，也不预约连击。Esc 打开菜单与改键。按钮可翻转角色、移动木桩以打空、切换攻击 26/200、重置整个场景及暂停。两侧木桩初始生命 70、防御 5，是明确使用测试数值的敌方实体。
+打开 [single_attack_demo.tscn](../../../tests/fixtures/single_attack_demo.tscn)，使用项目现有带 Spine 模块的 Godot 按 F6。A/D 移动，K 跳跃，J 只施放第一段普攻；长按不自动重复，也不预约连击。Esc 打开菜单与改键。按钮可翻转角色、移动木桩以打空、切换攻击 26/200、重置整个场景及暂停。两侧木桩初始生命 70、防御 5，是明确使用测试数值的敌方实体。
 
 项目视口已改为原版 **940×590**，保持宽高比缩放。依据原版 `games/zmhj-g5/game.json` 的 contentWidth/contentHeight，以及反编译 `Game.as` 的 `drawRect(0,0,940,590)`；基础引擎 GameData 的 640×480 默认值不作为该游戏的有效尺寸。世界沿用现有 2 倍战斗坐标，预置 Camera2D 的 zoom=0.5，让原素材以 1 倍像素显示，命中几何和碰撞单位保持一致。
 
@@ -132,10 +132,10 @@ SingleAttackDemo
 ## 验收
 
 ```powershell
-& '<带 Spine 模块的 Godot 路径>' --headless --path . res://examples/verify_single_attack.tscn
+& '<带 Spine 模块的 Godot 路径>' --headless --path . res://tests/suites/verify_single_attack.tscn
 ```
 
-[验收脚本](../../../examples/verify_single_attack.gd) 驱动真实按键入口、GAS 帧事件、2D 物理更新和实际 HealthVital，已通过 **64 项检查**。覆盖原 46 项战斗闭环，另验证 940×590、启动节点树一致、预置 GAS/输入/菜单、摄像机素材比例、原版特效时长/透明结尾/注册点、单次播放、暂停、挂点镜像、连续受击重播及技能关闭闪光。失败返回非零退出码。
+[验收脚本](../../../tests/suites/verify_single_attack.gd) 驱动真实按键入口、GAS 帧事件、2D 物理更新和实际 HealthVital，已通过 **64 项检查**。覆盖原 46 项战斗闭环，另验证 940×590、启动节点树一致、预置 GAS/输入/菜单、摄像机素材比例、原版特效时长/透明结尾/注册点、单次播放、暂停、挂点镜像、连续受击重播及技能关闭闪光。失败返回非零退出码。
 
 `--headless --path . --script res://tools/verify_single_attack_scene.gd` 另通过 8 项完整场景重载、死亡复位、注册注销与菜单控制检查。
 

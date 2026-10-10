@@ -1,7 +1,7 @@
 {
   "source": "games/zmhj-g5/cache/assets/ui/mission2_20250707_1.swf",
   "source_sha256": "6168f618107d92257687fb0157e053a82fe7f7c6a910e20421c3b245424aa050",
-  "glyph_count": 115,
+  "glyph_count": 125,
   "groups": {
     "bleedNumber": {
       "label": "普通伤害",
@@ -57,6 +57,10 @@
     },
     "bleedNumberAdd": {
       "label": "回血数字-附赠",
+      "count": 10
+    },
+    "mpNumberAdd": {
+      "label": "魔法恢复",
       "count": 10
     }
   },
@@ -4125,6 +4129,206 @@
       },
       "file": "bleedNumberAdd/bleedNumberAdd0009.png",
       "sha256": "954e5590101b8aa3497b0ce3e0b5463338b164d0d2d622319a309c1133cf0944"
+    },
+    {
+      "group": "mpNumberAdd",
+      "name": "mpNumberAdd0000",
+      "file": "mpNumberAdd/mpNumberAdd0000.png",
+      "atlas_fields": {
+        "name": "mpNumberAdd0000",
+        "x": "368",
+        "y": "997",
+        "width": "26",
+        "height": "30",
+        "pivotX": "13",
+        "pivotY": "15"
+      },
+      "source_atlas": "mission2",
+      "restored_size": [
+        26,
+        30
+      ],
+      "sha256": "ce8a1d74a22af16075e47c2b5aa44cc5b6611b976f9f26df7ae1dfaab0818ae3"
+    },
+    {
+      "group": "mpNumberAdd",
+      "name": "mpNumberAdd0001",
+      "file": "mpNumberAdd/mpNumberAdd0001.png",
+      "atlas_fields": {
+        "name": "mpNumberAdd0001",
+        "x": "394",
+        "y": "997",
+        "width": "26",
+        "height": "30",
+        "pivotX": "13",
+        "pivotY": "15"
+      },
+      "source_atlas": "mission2",
+      "restored_size": [
+        26,
+        30
+      ],
+      "sha256": "8ca951cfd5f14f84777f812361ed9e5a7d4ad6d28a0060eafcb8c04b1c051c6c"
+    },
+    {
+      "group": "mpNumberAdd",
+      "name": "mpNumberAdd0002",
+      "file": "mpNumberAdd/mpNumberAdd0002.png",
+      "atlas_fields": {
+        "name": "mpNumberAdd0002",
+        "x": "420",
+        "y": "997",
+        "width": "26",
+        "height": "30",
+        "pivotX": "13",
+        "pivotY": "15"
+      },
+      "source_atlas": "mission2",
+      "restored_size": [
+        26,
+        30
+      ],
+      "sha256": "86e0fa4e5254c5e6578a9b1b184cee063e980675c96bc378df5f0b1c16d9297f"
+    },
+    {
+      "group": "mpNumberAdd",
+      "name": "mpNumberAdd0003",
+      "file": "mpNumberAdd/mpNumberAdd0003.png",
+      "atlas_fields": {
+        "name": "mpNumberAdd0003",
+        "x": "446",
+        "y": "997",
+        "width": "26",
+        "height": "30",
+        "pivotX": "13",
+        "pivotY": "15"
+      },
+      "source_atlas": "mission2",
+      "restored_size": [
+        26,
+        30
+      ],
+      "sha256": "10e573b21ba88d7820fd95429956eefd10c59f328051802bf7eeb9070d36863b"
+    },
+    {
+      "group": "mpNumberAdd",
+      "name": "mpNumberAdd0004",
+      "file": "mpNumberAdd/mpNumberAdd0004.png",
+      "atlas_fields": {
+        "name": "mpNumberAdd0004",
+        "x": "472",
+        "y": "997",
+        "width": "26",
+        "height": "30",
+        "pivotX": "13",
+        "pivotY": "15"
+      },
+      "source_atlas": "mission2",
+      "restored_size": [
+        26,
+        30
+      ],
+      "sha256": "e41d21e8828ab46791738821b6ce2529a39875a257aa352031b5c4185745e8d4"
+    },
+    {
+      "group": "mpNumberAdd",
+      "name": "mpNumberAdd0005",
+      "file": "mpNumberAdd/mpNumberAdd0005.png",
+      "atlas_fields": {
+        "name": "mpNumberAdd0005",
+        "x": "498",
+        "y": "997",
+        "width": "26",
+        "height": "30",
+        "pivotX": "13",
+        "pivotY": "15"
+      },
+      "source_atlas": "mission2",
+      "restored_size": [
+        26,
+        30
+      ],
+      "sha256": "e0573a8dcf90312645052f88d9d80bea129abbde7db14f610528150a49660d59"
+    },
+    {
+      "group": "mpNumberAdd",
+      "name": "mpNumberAdd0006",
+      "file": "mpNumberAdd/mpNumberAdd0006.png",
+      "atlas_fields": {
+        "name": "mpNumberAdd0006",
+        "x": "524",
+        "y": "997",
+        "width": "26",
+        "height": "30",
+        "pivotX": "13",
+        "pivotY": "15"
+      },
+      "source_atlas": "mission2",
+      "restored_size": [
+        26,
+        30
+      ],
+      "sha256": "13f321038e6ac2ab6f9dd8d7e01ff25f8a0e19d659c1c743be9d5ff21a3b7442"
+    },
+    {
+      "group": "mpNumberAdd",
+      "name": "mpNumberAdd0007",
+      "file": "mpNumberAdd/mpNumberAdd0007.png",
+      "atlas_fields": {
+        "name": "mpNumberAdd0007",
+        "x": "550",
+        "y": "997",
+        "width": "26",
+        "height": "30",
+        "pivotX": "13",
+        "pivotY": "15"
+      },
+      "source_atlas": "mission2",
+      "restored_size": [
+        26,
+        30
+      ],
+      "sha256": "4baee04f7289ba97a42132dcaf944d3a355bddff71a40422221fb6964759ff97"
+    },
+    {
+      "group": "mpNumberAdd",
+      "name": "mpNumberAdd0008",
+      "file": "mpNumberAdd/mpNumberAdd0008.png",
+      "atlas_fields": {
+        "name": "mpNumberAdd0008",
+        "x": "576",
+        "y": "997",
+        "width": "26",
+        "height": "30",
+        "pivotX": "13",
+        "pivotY": "15"
+      },
+      "source_atlas": "mission2",
+      "restored_size": [
+        26,
+        30
+      ],
+      "sha256": "8842113da2e5d5c46dc95de75f1aad8e05199e402d93f5e79d40f7dcad3be896"
+    },
+    {
+      "group": "mpNumberAdd",
+      "name": "mpNumberAdd0009",
+      "file": "mpNumberAdd/mpNumberAdd0009.png",
+      "atlas_fields": {
+        "name": "mpNumberAdd0009",
+        "x": "602",
+        "y": "997",
+        "width": "26",
+        "height": "30",
+        "pivotX": "13",
+        "pivotY": "15"
+      },
+      "source_atlas": "mission2",
+      "restored_size": [
+        26,
+        30
+      ],
+      "sha256": "d8b8c0c42d385c039da79cf0da886ea65e75d407156a1be68a1a1da4857623b4"
     }
   ],
   "evidence": [

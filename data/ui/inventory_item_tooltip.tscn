@@ -1,0 +1,121 @@
+[gd_scene format=3]
+[ext_resource type="Script" path="res://addons/battle_foundation/ui/original_inventory_tooltip.gd" id="script"]
+[ext_resource type="FontFile" path="res://assets/ui/original/ui_font.ttf" id="R1"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/tips_background.png" id="bg"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/tips_quality.png" id="quality"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/tips_type.png" id="type"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/tips_level.png" id="level"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/zbz_icon.png" id="equipped"]
+[node name="ItemTooltip" type="Control"]
+offset_right = 260
+offset_bottom = 300
+mouse_filter = 2
+script = ExtResource("script")
+[node name="Background" type="NinePatchRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+texture = ExtResource("bg")
+patch_margin_left = 45
+patch_margin_right = 29
+patch_margin_top = 30
+patch_margin_bottom = 29
+[node name="Name" type="Label" parent="."]
+offset_left = 20
+offset_top = 15
+offset_right = 235
+offset_bottom = 39
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("R1")
+theme_override_font_sizes/font_size = 18
+theme_override_colors/font_color = Color(1,1,1,1)
+text = ""
+theme_override_colors/font_outline_color = Color(0,0,0,1)
+theme_override_constants/outline_size = 2
+[node name="QualityRow" type="TextureRect" parent="."]
+offset_left = 13
+offset_top = 40
+offset_right = 247
+offset_bottom = 63
+mouse_filter = 2
+texture = ExtResource("quality")
+expand_mode = 1
+[node name="Quality" type="Label" parent="."]
+offset_left = 70
+offset_top = 40
+offset_right = 244
+offset_bottom = 63
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("R1")
+theme_override_font_sizes/font_size = 16
+theme_override_colors/font_color = Color(1,1,1,1)
+text = ""
+[node name="TypeRow" type="TextureRect" parent="."]
+offset_left = 13
+offset_top = 65
+offset_right = 247
+offset_bottom = 88
+mouse_filter = 2
+texture = ExtResource("type")
+expand_mode = 1
+[node name="Type" type="Label" parent="."]
+offset_left = 70
+offset_top = 65
+offset_right = 244
+offset_bottom = 88
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("R1")
+theme_override_font_sizes/font_size = 16
+theme_override_colors/font_color = Color(1,1,1,1)
+text = ""
+[node name="LevelRow" type="TextureRect" parent="."]
+offset_left = 13
+offset_top = 90
+offset_right = 247
+offset_bottom = 113
+mouse_filter = 2
+texture = ExtResource("level")
+expand_mode = 1
+[node name="Level" type="Label" parent="."]
+offset_left = 70
+offset_top = 90
+offset_right = 244
+offset_bottom = 113
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("R1")
+theme_override_font_sizes/font_size = 16
+theme_override_colors/font_color = Color(1,1,1,1)
+text = ""
+[node name="Body" type="RichTextLabel" parent="."]
+offset_left = 20
+offset_top = 113
+offset_right = 240
+offset_bottom = 243
+mouse_filter = 2
+bbcode_enabled = true
+scroll_active = false
+theme_override_fonts/normal_font = ExtResource("R1")
+theme_override_font_sizes/normal_font_size = 16
+theme_override_constants/line_separation = 3
+theme_override_colors/default_color = Color(0.372549,0.117647,0.019608,1)
+[node name="Price" type="Label" parent="."]
+offset_left = 20
+offset_top = 260
+offset_right = 240
+offset_bottom = 285
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("R1")
+theme_override_font_sizes/font_size = 16
+theme_override_colors/font_color = Color(0.372549,0.117647,0.019608,1)
+text = ""
+[node name="Equipped" type="TextureRect" parent="."]
+offset_left = 235
+offset_top = 10
+offset_right = 252
+offset_bottom = 52
+mouse_filter = 2
+texture = ExtResource("equipped")
+expand_mode = 1
+stretch_mode = 5

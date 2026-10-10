@@ -2,6 +2,9 @@ extends Control
 class_name BattleOriginalHUD
 #region 共享关卡UI只读角色/GAS；菜单获得控制权并释放缓存
 signal inventory_changed(open: bool)
+signal module_changed(open: bool)
+signal settings_requested
+signal module_requested(module: StringName)
 @export var disabled_icon_material: ShaderMaterial
 var actor: BattleEntity2D
 var session: BattleSession
@@ -18,7 +21,9 @@ var _visible_statuses: Array[GameplayStatusInstance] = []
 @onready var inventory_view: OriginalInventoryView = $Inventory
 
 func _ready() -> void:
-	$BagButton.pressed.connect(func(): set_inventory_open(not inventory_view.visible))
+	for button in $BattleTools.get_children():
+		button.pressed.connect(open_module.bind(StringName(button.get_meta(&"module"))))
+	$ModulePanel/Close.pressed.connect(func(): set_module_open(false))
 	inventory_view.close_requested.connect(func(): set_inventory_open(false))
 	CoreSystem.event_bus.event_pushed.connect(_on_event)
 	CoreSystem.operation_manager.bindings.mapping_changed.connect(_on_mapping_changed)
@@ -28,6 +33,7 @@ func bind_actor(owner_actor: BattleEntity2D) -> void:
 	session = actor.session
 	inventory_view.bind_actor(actor)
 	(inventory_view.inventory as OriginalInventory).operation_rejected.connect(show_notification)
+	(inventory_view.inventory as OriginalInventory).operation_completed.connect(show_notification)
 	actor.attributes.snapshot_changed.connect(_refresh_attributes)
 	actor.statuses.status_applied.connect(_refresh_status_icons)
 	actor.statuses.status_removed.connect(_refresh_status_icons)
@@ -124,13 +130,70 @@ func _on_mapping_changed(_action: StringName) -> void:
 
 func set_inventory_open(open: bool) -> void:
 	if actor == null or open == inventory_view.visible: return
+	if open: set_module_open(false)
 	actor.operations.set_control_blocked(&"inventory", open)
 	$SkillTooltip.hide()
 	inventory_view.visible = open
 	inventory_changed.emit(open)
 
+#region 原版六个战斗入口；尚未移植的模块显示真实运行数据
+func open_module(module: StringName) -> void:
+	if actor == null: return
+	module_requested.emit(module)
+	if module == &"backpack":
+		set_inventory_open(not inventory_view.visible)
+		return
+	set_inventory_open(false)
+	set_module_open(false)
+	if module == &"systemSet":
+		settings_requested.emit()
+		return
+	if module == &"petHorse":
+		show_notification("你还没有灵宠")
+		return
+	var lines: Array[String] = []
+	match module:
+		&"skill":
+			$ModulePanel/Title.text = "技能"
+			for index in range(_abilities.size()):
+				var ability := _abilities[index]
+				if ability == null: continue
+				var remaining := _cooldowns[index].get_cooldown_remaining(ability) if _cooldowns[index] != null else 0.0
+				lines.append("%s　按键：%s　冷却：%d秒" % [ability.get_definition().ability_name, get_intent_key(StringName("skill_%d" % (index + 1))), ceili(remaining)])
+		&"heartMedical":
+			$ModulePanel/Title.text = "心法"
+			lines.append("尚未接入心法养成。当前生效的战斗效果：")
+			for status in actor.statuses.get_active_statuses():
+				if not status.removed: lines.append(status.status_data.status_display_name)
+			if lines.size() == 1: lines.append("无")
+		&"magicWeapon":
+			$ModulePanel/Title.text = "法宝"
+			var item := inventory_view.inventory.equip_slots["amulet"][1] as Item
+			lines.append("尚未装备法宝" if item == null else item.name)
+			lines.append("可在背包中查看和装备法宝。")
+		_: return
+	$ModulePanel/Text.text = "\n\n".join(lines)
+	set_module_open(true)
+
+func set_module_open(open: bool) -> void:
+	if actor == null or open == $ModulePanel.visible: return
+	actor.operations.set_control_blocked(&"battle_module", open)
+	$SkillTooltip.hide()
+	$ModulePanel.visible = open
+	module_changed.emit(open)
+
+func is_module_open() -> bool:
+	return $ModulePanel.visible
+
+func refresh_level_time() -> void:
+	if session == null: return
+	var seconds := maxi(0, floori(session.level_instance.elapsed if session.level_instance != null else session.clock.elapsed))
+	$LevelTimer/Time.text = "%02d:%02d" % [seconds / 60, seconds % 60]
+#endregion
+
 func _process(delta: float) -> void:
 	if actor == null or not is_instance_valid(actor): return
+	refresh_level_time()
 	for index in range(_abilities.size()):
 		var slot := $Skills/Slots.get_child(index) as Control
 		var ability := _abilities[index]
@@ -220,7 +283,12 @@ func show_notification(message: String) -> void:
 func _on_event(id: String, payload: Array) -> void:
 	if actor == null or payload.size() != 1 or not payload[0] is Dictionary or payload[0].get("battle_id") != session.battle_id: return
 	var data: Dictionary = payload[0]
-	if id == "battle.operation_intent" and data.source_entity_id == actor.entity_id and data.phase == "pressed":
+	if id == "battle.loot.picked_up" and data.source_entity_id == actor.entity_id:
+		if not data.get("is_supply", false):
+			$PickupEffects.play_pickup(data.screen_position, data.pickup_texture, data.screen_size)
+	elif id == "battle.loot.cleared":
+		$PickupEffects.clear_effects()
+	elif id == "battle.operation_intent" and data.source_entity_id == actor.entity_id and data.phase == "pressed":
 		var intent := StringName(data.intent)
 		if not String(intent).begins_with("skill_"): return
 		var ability := actor.abilities.get_ability_instance(actor.operations.ability_slots.get(intent, &""))

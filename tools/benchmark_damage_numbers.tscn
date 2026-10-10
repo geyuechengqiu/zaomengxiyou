@@ -1,7 +1,7 @@
 [gd_scene format=3]
 
 [ext_resource type="Resource" path="res://data/battle2d/sunwukong_actions.tres" id="actions"]
-[ext_resource type="PackedScene" path="res://examples/single_attack_demo.tscn" id="scene"]
+[ext_resource type="PackedScene" path="res://tests/fixtures/single_attack_demo.tscn" id="scene"]
 [ext_resource type="Script" path="res://tools/benchmark_damage_numbers.gd" id="script"]
 
 [node name="OriginalDamageDemo" unique_id=758983325 instance=ExtResource("scene")]

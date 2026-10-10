@@ -34,7 +34,7 @@ menu.push(...node('Buttons','HBoxContainer','Margin/Panel/Column',['layout_mode 
 write('addons/battle_foundation/input/battle_operation_menu.tscn',menu);
 // #endregion
 // #region 940×590、静态世界、角色与全部运行组件
-const scene = ['[gd_scene format=3]',ext('Script','examples/single_attack_demo.gd','script'),
+const scene = ['[gd_scene format=3]',ext('Script','tests/fixtures/single_attack_demo.gd','script'),
   ext('Script','addons/battle_foundation/runtime/battle_session.gd','session'),
   ext('PackedScene','data/battle2d/single_attack/sunwukong_2d.tscn','wukong'),
   ext('PackedScene','data/battle2d/dummy/wooden_dummy.tscn','dummy'),
@@ -94,6 +94,6 @@ scene.push(...node('Help','Label','HUD',['offset_left = 24.0','offset_top = 506.
   ...instance('OperationMenu','MenuLayer','menu'));
 scene.push('[editable path="BattleSession/BattlePresentation"]');
 for (const name of ['SunWukong','LeftDummy','RightDummy']) scene.push(`[editable path="BattleSession/Actors/${name}"]`);
-write('examples/single_attack_demo.tscn',scene);
+write('tests/fixtures/single_attack_demo.tscn',scene);
 console.log('Built scene-authored combat arena and menu for the original 940×590 viewport.');
 // #endregion

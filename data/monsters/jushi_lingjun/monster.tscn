@@ -34,6 +34,7 @@ size = Vector2(356.0, 274.0)
 [node name="Monster" type="CharacterBody2D" unique_id=196081415]
 collision_layer = 2
 script = ExtResource("entity")
+hide_after_death = true
 action_profile = ExtResource("actions")
 protection_profile = ExtResource("protect_profile")
 

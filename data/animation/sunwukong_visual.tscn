@@ -4726,7 +4726,7 @@ tracks/17/keys = {
 
 [sub_resource type="Animation" id="SkillMaster_skill3"]
 resource_name = "skill3"
-length = 1.2333333333333334
+length = 2.466666666666667
 tracks/0/type = "animation"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -4756,10 +4756,10 @@ tracks/2/path = NodePath("AttackHitbox:preview_time")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 1.2333333),
+"times": PackedFloat32Array(0, 2.4666667),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [0.0, 1.2333333333333334]
+"values": [0.0, 2.466666666666667]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -4812,7 +4812,7 @@ tracks/7/path = NodePath("AttackEffects/SkillPrimary:visible")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
-"times": PackedFloat32Array(0, 0.16666667, 1.1666666),
+"times": PackedFloat32Array(0, 0.16666667, 2.4),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [false, true, false]
@@ -4825,7 +4825,7 @@ tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
 "clips": PackedStringArray("RESET", "skill3_looped", "RESET"),
-"times": PackedFloat32Array(0, 0.16666667, 1.1666666)
+"times": PackedFloat32Array(0, 0.16666667, 2.4)
 }
 tracks/9/type = "value"
 tracks/9/imported = false
@@ -4837,7 +4837,7 @@ tracks/9/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [Vector2(57, -43)]
+"values": [Vector2(57, -47.2384)]
 }
 tracks/10/type = "value"
 tracks/10/imported = false
@@ -4870,7 +4870,7 @@ tracks/12/path = NodePath("AttackEffects/SkillSecondary:visible")
 tracks/12/interp = 1
 tracks/12/loop_wrap = true
 tracks/12/keys = {
-"times": PackedFloat32Array(0, 0.16666667, 1.1666666),
+"times": PackedFloat32Array(0, 0.16666667, 2.4),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [false, true, false]
@@ -4883,7 +4883,7 @@ tracks/13/interp = 1
 tracks/13/loop_wrap = true
 tracks/13/keys = {
 "clips": PackedStringArray("RESET", "skill3_1_looped", "RESET"),
-"times": PackedFloat32Array(0, 0.16666667, 1.1666666)
+"times": PackedFloat32Array(0, 0.16666667, 2.4)
 }
 tracks/14/type = "value"
 tracks/14/imported = false
@@ -4895,7 +4895,7 @@ tracks/14/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [Vector2(0, 3)]
+"values": [Vector2(0, -1.2384)]
 }
 tracks/15/type = "value"
 tracks/15/imported = false
@@ -4928,7 +4928,7 @@ tracks/17/path = NodePath("AttackEffects/BeamEnd:visible")
 tracks/17/interp = 1
 tracks/17/loop_wrap = true
 tracks/17/keys = {
-"times": PackedFloat32Array(0, 0.16666667, 1.1666666),
+"times": PackedFloat32Array(0, 0.16666667, 2.4),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [false, true, false]
@@ -4941,7 +4941,7 @@ tracks/18/interp = 1
 tracks/18/loop_wrap = true
 tracks/18/keys = {
 "clips": PackedStringArray("RESET", "skill3_2_looped", "RESET"),
-"times": PackedFloat32Array(0, 0.16666667, 1.1666666)
+"times": PackedFloat32Array(0, 0.16666667, 2.4)
 }
 tracks/19/type = "value"
 tracks/19/imported = false
@@ -4953,7 +4953,7 @@ tracks/19/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [Vector2(1257, -43)]
+"values": [Vector2(1257, -47.2384)]
 }
 tracks/20/type = "value"
 tracks/20/imported = false
@@ -4998,10 +4998,10 @@ tracks/23/path = NodePath("AttackEffects:preview_time")
 tracks/23/interp = 1
 tracks/23/loop_wrap = true
 tracks/23/keys = {
-"times": PackedFloat32Array(0, 1.2333333),
+"times": PackedFloat32Array(0, 2.4666667),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [0.0, 1.2333333333333334]
+"values": [0.0, 2.466666666666667]
 }
 
 [sub_resource type="Animation" id="SkillMaster_skill4"]

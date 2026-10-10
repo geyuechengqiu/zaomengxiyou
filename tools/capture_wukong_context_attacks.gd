@@ -1,4 +1,4 @@
-extends "res://examples/original_damage_demo.gd"
+extends "res://tests/fixtures/original_damage_demo.gd"
 #region 真实预置场景中的GPU画面验收
 func _ready() -> void:
 	super._ready()

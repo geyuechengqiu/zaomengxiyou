@@ -8,109 +8,88 @@
 
 | 脚本 / 类型 | 基类 | 配置与字段 | 公开方法 | 内部方法与回调 | 信号 |
 | --- | --- | --- | --- | --- | --- |
-| [audio_demo.gd](../examples/audio_demo/audio_demo.gd) | `Node2D` | `audio_manager`<br>`AUDIO_PATHS` | — | `_ready()`<br>`_start_demo()`<br>`_input()` | — |
 
 ## examples/config_demo
 
 | 脚本 / 类型 | 基类 | 配置与字段 | 公开方法 | 内部方法与回调 | 信号 |
 | --- | --- | --- | --- | --- | --- |
-| [config_demo.gd](../examples/config_demo/config_demo.gd) | `Node2D` | `status_label`<br>`config_tree`<br>`auto_save_label`<br>`demo_defaults`<br>`_config_manager`<br>`_logger` | — | `_ready()`<br>`_apply_demo_defaults()`<br>`_update_ui()`<br>`_on_modify_button_pressed()`<br>`_on_save_button_pressed()`<br>`_on_reset_button_pressed()`<br>`_on_config_loaded()`<br>`_on_config_saved()`<br>`_on_config_reset()`<br>`_log()` | — |
 
 ## examples/event_bus_demo
 
 | 脚本 / 类型 | 基类 | 配置与字段 | 公开方法 | 内部方法与回调 | 信号 |
 | --- | --- | --- | --- | --- | --- |
-| [event_bus_demo.gd](../examples/event_bus_demo/event_bus_demo.gd) | `Node2D` | `event_bus` | — | `_ready()`<br>`_start_demo()`<br>`_on_player_move()`<br>`_on_player_move_high_priority()`<br>`_on_player_move_low_priority()`<br>`_on_player_attack_once()`<br>`_on_player_move_right()`<br>`_run_issue48_test()` | — |
 | ↳ 内部类型 | `Issue48Listener : RefCounted`<br>`Issue48OtherListener : RefCounted` | 源码内含成员与方法 | — | — | — |
 
 ## examples/input_demo/basic
 
 | 脚本 / 类型 | 基类 | 配置与字段 | 公开方法 | 内部方法与回调 | 信号 |
 | --- | --- | --- | --- | --- | --- |
-| [basic_demo.gd](../examples/input_demo/basic/basic_demo.gd) | `Node` | `input_manager`<br>`status_label`<br>`input_log` | — | `_ready()`<br>`_setup_input()`<br>`_process()`<br>`_on_action_triggered()`<br>`_on_clear_log_pressed()`<br>`_on_reset_config_pressed()`<br>`_on_sensitivity_value_changed()`<br>`_on_deadzone_value_changed()` | — |
 
 ## examples/input_demo/edge_debounce_issue50
 
 | 脚本 / 类型 | 基类 | 配置与字段 | 公开方法 | 内部方法与回调 | 信号 |
 | --- | --- | --- | --- | --- | --- |
-| [issue50_edge_debounce_demo.gd](../examples/input_demo/edge_debounce_issue50/issue50_edge_debounce_demo.gd) | `Control` | `_log` | — | `_ready()`<br>`_append_log()`<br>`_run_same_frame_suite()`<br>`_run_spaced_edges_async()`<br>`_on_spaced_edges_pressed()`<br>`_on_same_frame_pressed()`<br>`_on_clear_pressed()` | — |
 
 ## examples/input_demo/event_processor
 
 | 脚本 / 类型 | 基类 | 配置与字段 | 公开方法 | 内部方法与回调 | 信号 |
 | --- | --- | --- | --- | --- | --- |
-| [processor_demo.gd](../examples/input_demo/event_processor/processor_demo.gd) | `CanvasLayer` | `input_manager`<br>`status_label`<br>`event_log`<br>`priority_display`<br>`filter_settings` | — | `_ready()`<br>`_input()`<br>`_get_event_priority()`<br>`_should_filter_event()`<br>`_process_event()`<br>`_handle_system_event()`<br>`_handle_ui_event()`<br>`_handle_gameplay_event()`<br>`_handle_debug_event()`<br>`_log_event()`<br>`_log_message()`<br>`_update_priority_display()`<br>`_on_clear_log_pressed()`<br>`_on_system_events_toggled()`<br>`_on_ui_events_toggled()`<br>`_on_gameplay_events_toggled()`<br>`_on_debug_events_toggled()` | — |
 
 ## examples/input_demo/input_buffer
 
 | 脚本 / 类型 | 基类 | 配置与字段 | 公开方法 | 内部方法与回调 | 信号 |
 | --- | --- | --- | --- | --- | --- |
-| [buffer_demo.gd](../examples/input_demo/input_buffer/buffer_demo.gd) | `CanvasLayer` | `input_manager`<br>`status_label`<br>`buffer_display`<br>`input_log`<br>`buffer_window_label`<br>`buffer_window`<br>`active_buffers` | — | `_ready()`<br>`_process()`<br>`_check_inputs()`<br>`_add_skill_buffer()`<br>`_on_skill_ready()`<br>`_execute_skill()`<br>`_create_skill_effect()`<br>`_update_buffer_display()`<br>`_update_status_display()`<br>`_log_input()`<br>`_on_clear_log_pressed()`<br>`_on_buffer_window_value_changed()`<br>`_on_reset_pressed()` | — |
 
 ## examples/input_demo/input_recorder
 
 | 脚本 / 类型 | 基类 | 配置与字段 | 公开方法 | 内部方法与回调 | 信号 |
 | --- | --- | --- | --- | --- | --- |
-| [recorder_demo.gd](../examples/input_demo/input_recorder/recorder_demo.gd) | `CanvasLayer` | `input_manager`<br>`status_label`<br>`playback_display`<br>`character`<br>`ghost`<br>`record_indicator`<br>`initial_position`<br>`current_movement`<br>`is_moving`<br>`is_jumping`<br>`is_recording`<br>`is_playing`<br>`has_recorded_data` | — | `_ready()`<br>`_exit_tree()`<br>`_update_button_states()`<br>`_get_movement_input()`<br>`_move_character()`<br>`_update_character_color()`<br>`_update_character_label()`<br>`_process()`<br>`_handle_recording()`<br>`_handle_playback()`<br>`_reset_state()`<br>`_handle_error()`<br>`_on_error_dialog_confirmed()`<br>`_validate_state()`<br>`_on_start_record_pressed()`<br>`_on_stop_record_pressed()`<br>`_on_start_playback_pressed()`<br>`_on_stop_playback_pressed()`<br>`_on_save_recording_pressed()`<br>`_on_load_recording_pressed()`<br>`_on_reset_positions_pressed()`<br>`_unhandled_input()`<br>`_update_status_display()` | — |
 
 ## examples/input_demo/input_state
 
 | 脚本 / 类型 | 基类 | 配置与字段 | 公开方法 | 内部方法与回调 | 信号 |
 | --- | --- | --- | --- | --- | --- |
-| [combo_demo.gd](../examples/input_demo/input_state/combo_demo.gd) | `CanvasLayer` | `input_manager`<br>`status_label`<br>`combo_display`<br>`hold_indicator`<br>`input_log`<br>`combo_count`<br>`last_hit_time`<br>`current_hold_time` | — | `_ready()`<br>`_process()`<br>`_update_combo_system()`<br>`_update_hold_system()`<br>`_handle_punch()`<br>`_handle_kick()`<br>`_handle_special_move()`<br>`_reset_combo()`<br>`_update_combo_display()`<br>`_update_status_display()`<br>`_log_input()`<br>`_on_clear_log_pressed()`<br>`_on_reset_combo_pressed()` | — |
 
 ## examples/input_demo
 
 | 脚本 / 类型 | 基类 | 配置与字段 | 公开方法 | 内部方法与回调 | 信号 |
 | --- | --- | --- | --- | --- | --- |
-| [settings_ui.gd](../examples/input_demo/settings_ui.gd) | `Control` | `jump_button`<br>`attack_button`<br>`sensitivity_slider`<br>`deadzone_slider`<br>`reset_button` | `update_button_text()`<br>`update_sensitivity()`<br>`update_deadzone()` | `_ready()` | `remap_requested`<br>`sensitivity_changed`<br>`deadzone_changed`<br>`reset_requested` |
 
 ## examples/input_demo/virtual_axis
 
 | 脚本 / 类型 | 基类 | 配置与字段 | 公开方法 | 内部方法与回调 | 信号 |
 | --- | --- | --- | --- | --- | --- |
-| [axis_visualizer.gd](../examples/input_demo/virtual_axis/axis_visualizer.gd) | `Control` | `current_axis`<br>`axis_color`<br>`deadzone_color`<br>`background_color` | `update_axis()`<br>`set_deadzone()`<br>`set_sensitivity()` | `_ready()`<br>`_draw()` | — |
-| [movement_demo.gd](../examples/input_demo/virtual_axis/movement_demo.gd) | `CanvasLayer` | `input_manager`<br>`character`<br>`axis_visualizer`<br>`status_label` | — | `_ready()`<br>`_setup_virtual_axis()`<br>`_physics_process()`<br>`_update_character_movement()`<br>`_update_axis_visualizer()`<br>`_update_status_display()`<br>`_on_sensitivity_value_changed()`<br>`_on_deadzone_value_changed()`<br>`_on_reset_pressed()` | — |
 
 ## examples/random_picker_demo
 
 | 脚本 / 类型 | 基类 | 配置与字段 | 公开方法 | 内部方法与回调 | 信号 |
 | --- | --- | --- | --- | --- | --- |
-| [test_random_picker.gd](../examples/random_picker_demo/test_random_picker.gd) | `Node` | `_random_pool`<br>`default_items`<br>`picked_count` | — | `_ready()`<br>`_test_edge_cases()`<br>`_test_basic_functionality()`<br>`_test_dynamic_changes()`<br>`_test_stress_performance()`<br>`_create_test_pool()` | — |
 
 ## examples/save_demo
 
 | 脚本 / 类型 | 基类 | 配置与字段 | 公开方法 | 内部方法与回调 | 信号 |
 | --- | --- | --- | --- | --- | --- |
-| [player.gd](../examples/save_demo/player.gd) | `Node` | `player_name`<br>`player_level`<br>`player_exp`<br>`player_position` | `save()`<br>`load_data()` | `_ready()` | — |
-| [save_demo.gd](../examples/save_demo/save_demo.gd) | `Node2D` | `player`<br>`status_label`<br>`save_list`<br>`line_edit_name`<br>`line_edit_level`<br>`line_edit_exp`<br>`label`<br>`_test_issue51_button`<br>`_save_manager`<br>`_logger` | `save_game()`<br>`load_game()`<br>`delete()` | `_ready()`<br>`_update_save_list()`<br>`_update_player_display()`<br>`_on_name_text_changed()`<br>`_on_level_text_changed()`<br>`_on_exp_text_changed()`<br>`_on_create_button_pressed()`<br>`_on_load_button_pressed()`<br>`_on_delete_button_pressed()`<br>`_on_save_created()`<br>`_on_save_loaded()`<br>`_on_save_deleted()`<br>`_on_auto_save_created()`<br>`_on_auto_save_succeeded()`<br>`_on_test_issue51_pressed()` | — |
 
 ## examples/state_machine
 
 | 脚本 / 类型 | 基类 | 配置与字段 | 公开方法 | 内部方法与回调 | 信号 |
 | --- | --- | --- | --- | --- | --- |
-| [example.gd](../examples/state_machine/example.gd) | `Node` | `state_machine_manager`<br>`state_label` | `update_state_display()` | `_ready()`<br>`_unhandled_input()`<br>`_process()` | — |
-| [ExampleGameStateMachine](../examples/state_machine/example_game_state_machine.gd) | `BaseStateMachine` | — | — | `_ready()` | — |
 | ↳ 内部类型 | `MenuState : BaseState`<br>`GameplayState : BaseStateMachine`<br>`PauseState : BaseState` | 源码内含成员与方法 | — | — | — |
 
 ## examples/tag_demo
 
 | 脚本 / 类型 | 基类 | 配置与字段 | 公开方法 | 内部方法与回调 | 信号 |
 | --- | --- | --- | --- | --- | --- |
-| [tag_character.gd](../examples/tag_demo/tag_character.gd) | `Node2D` | `tag_container` | `add_tag()`<br>`remove_tag()`<br>`has_tag()`<br>`get_tags()` | — | — |
-| [tag_demo.gd](../examples/tag_demo/tag_demo.gd) | `Node2D` | `tag_manager`<br>`status_label`<br>`player`<br>`enemy` | — | `_ready()`<br>`_on_player_move_button_pressed()`<br>`_on_player_attack_button_pressed()`<br>`_on_buff_button_pressed()`<br>`_on_query_button_pressed()`<br>`_update_status()`<br>`_update_buff_display()` | — |
 
 ## examples/time_demo
 
 | 脚本 / 类型 | 基类 | 配置与字段 | 公开方法 | 内部方法与回调 | 信号 |
 | --- | --- | --- | --- | --- | --- |
-| [time_demo.gd](../examples/time_demo/time_demo.gd) | `Node2D` | `time_manager`<br>`game_time_label`<br>`timer_label`<br>`status_label` | — | `_ready()`<br>`_process()`<br>`_on_speed_button_pressed()`<br>`_on_pause_button_pressed()`<br>`_on_reset_button_pressed()`<br>`_on_time_scale_changed()`<br>`_on_timer_completed()`<br>`_on_time_state_changed()` | — |
 
 ## examples/trigger_demo
 
 | 脚本 / 类型 | 基类 | 配置与字段 | 公开方法 | 内部方法与回调 | 信号 |
 | --- | --- | --- | --- | --- | --- |
-| [trigger_demo.gd](../examples/trigger_demo/trigger_demo.gd) | `Node2D` | `trigger_manager`<br>`player`<br>`status_label` | — | `_ready()`<br>`_on_area_2d_body_entered()`<br>`_on_area_2d_body_exited()`<br>`_on_button_pressed()`<br>`_on_enter_area()`<br>`_on_button_clicked()`<br>`_on_periodic_trigger()`<br>`_physics_process()` | — |
 
 ## 插件入口
 

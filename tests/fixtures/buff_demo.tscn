@@ -1,0 +1,89 @@
+[gd_scene format=3]
+[ext_resource type="PackedScene" path="res://tests/fixtures/original_damage_demo.tscn" id="base"]
+[ext_resource type="Script" path="res://tests/fixtures/buff_demo.gd" id="script"]
+[node name="BuffDemo" instance=ExtResource("base")]
+script = ExtResource("script")
+[node name="BattleSession" parent="." index="2"]
+scene_manifest_path = "res://data/battle2d/buffs/manifest.json"
+[node name="Title" parent="HUD/Panel/Column" index="0"]
+text = "阶段10 · 原版Buff、被动与战斗触发"
+[node name="Help" parent="HUD" index="1"]
+text = "A/D移动 · K跳跃 · J五连击 · Esc暂停/改键\n选目标施加Buff；死亡或离场清理；次生伤害也由公共表现显示。"
+[node name="BuffPanel" type="PanelContainer" parent="HUD"]
+offset_left = 14.0
+offset_top = 90.0
+offset_right = 282.0
+offset_bottom = 346.0
+[node name="Column" type="VBoxContainer" parent="HUD/BuffPanel"]
+layout_mode = 2
+[node name="Target" type="OptionButton" parent="HUD/BuffPanel/Column"]
+layout_mode = 2
+selected = 2
+item_count = 3
+popup/item_0/text = "目标：悟空"
+popup/item_0/id = 0
+popup/item_1/text = "目标：左木桩"
+popup/item_1/id = 1
+popup/item_2/text = "目标：右木桩"
+popup/item_2/id = 2
+[node name="Buttons" type="GridContainer" parent="HUD/BuffPanel/Column"]
+layout_mode = 2
+columns = 3
+[node name="AttackUp" type="Button" parent="HUD/BuffPanel/Column/Buttons"]
+layout_mode = 2
+focus_mode = 0
+text = "攻击+20%"
+[node name="Slow" type="Button" parent="HUD/BuffPanel/Column/Buttons"]
+layout_mode = 2
+focus_mode = 0
+text = "减速50%"
+[node name="Stun" type="Button" parent="HUD/BuffPanel/Column/Buttons"]
+layout_mode = 2
+focus_mode = 0
+text = "眩晕"
+[node name="Poison" type="Button" parent="HUD/BuffPanel/Column/Buttons"]
+layout_mode = 2
+focus_mode = 0
+text = "持续伤害"
+[node name="Shield" type="Button" parent="HUD/BuffPanel/Column/Buttons"]
+layout_mode = 2
+focus_mode = 0
+text = "护盾258"
+[node name="Invulnerable" type="Button" parent="HUD/BuffPanel/Column/Buttons"]
+layout_mode = 2
+focus_mode = 0
+text = "无敌"
+[node name="Armor" type="Button" parent="HUD/BuffPanel/Column/Buttons"]
+layout_mode = 2
+focus_mode = 0
+text = "霸体"
+[node name="Reflection" type="Button" parent="HUD/BuffPanel/Column/Buttons"]
+layout_mode = 2
+focus_mode = 0
+text = "反伤35%"
+[node name="LifeSteal" type="Button" parent="HUD/BuffPanel/Column/Buttons"]
+layout_mode = 2
+focus_mode = 0
+text = "原版吸血"
+[node name="Clear" type="Button" parent="HUD/BuffPanel/Column/Buttons"]
+layout_mode = 2
+focus_mode = 0
+text = "清除Buff"
+[node name="Passives" type="Button" parent="HUD/BuffPanel/Column/Buttons"]
+layout_mode = 2
+focus_mode = 0
+text = "被动组合"
+[node name="StatusScroll" type="ScrollContainer" parent="HUD/BuffPanel/Column"]
+custom_minimum_size = Vector2(0, 96)
+layout_mode = 2
+horizontal_scroll_mode = 0
+[node name="Status" type="Label" parent="HUD/BuffPanel/Column/StatusScroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+autowrap_mode = 3
+theme_override_font_sizes/font_size = 14
+text = "无Buff"
+[editable path="BattleSession/Actors/SunWukong"]
+[editable path="BattleSession/Actors/LeftDummy"]
+[editable path="BattleSession/Actors/RightDummy"]
+[editable path="BattleSession/BattlePresentation"]

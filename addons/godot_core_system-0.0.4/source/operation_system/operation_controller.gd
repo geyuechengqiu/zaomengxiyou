@@ -160,6 +160,14 @@ func get_double_tap_direction(axis: StringName) -> int:
 	var action := StringName(mapping.get("positive" if direction > 0 else "negative", ""))
 	return direction if direction != 0 and _double_held.has(action) and is_pressed(action) else 0
 
+## 仅清除指定轴的奔跑识别，保留其他操作缓存与按键状态。
+func clear_double_tap_axis(axis: StringName) -> void:
+	if profile == null or not profile.axes.has(axis): return
+	for key in ["positive", "negative"]:
+		var action := StringName(profile.axes[axis].get(key, ""))
+		_double_held.erase(action)
+		_last_tap.erase(action)
+
 
 func submit_intent(intent: StringName, strength: float = 1.0, origin: StringName = &"virtual", payload: Dictionary = {}) -> void:
 	# 自定义意图不要求 InputMap 中存在同名动作；同一 origin 的新值替换旧值。

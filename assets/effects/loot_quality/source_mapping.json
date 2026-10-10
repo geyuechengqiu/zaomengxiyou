@@ -1,0 +1,2699 @@
+{
+  "source": "games/zmhj-g5/cache/assets/ui/mission2_20250707_1.swf",
+  "source_sha256": "6168f618107d92257687fb0157e053a82fe7f7c6a910e20421c3b245424aa050",
+  "frames": [
+    {
+      "index": 0,
+      "file": "qualitybg0000.png",
+      "pivot": [
+        47.0,
+        47.0
+      ],
+      "canvas": [
+        94,
+        94
+      ],
+      "region": [
+        130,
+        1349,
+        94,
+        94
+      ],
+      "trim": [
+        0,
+        0
+      ],
+      "atlas": "mission2",
+      "sha256": "6dc1eadd88c5120c668daa4b3bf07ab87de0e21e209ace1b3bd190fa02dcb4bb"
+    },
+    {
+      "index": 1,
+      "file": "qualitybg0001.png",
+      "pivot": [
+        47.0,
+        47.0
+      ],
+      "canvas": [
+        94,
+        94
+      ],
+      "region": [
+        224,
+        1349,
+        94,
+        94
+      ],
+      "trim": [
+        0,
+        0
+      ],
+      "atlas": "mission2",
+      "sha256": "46197bd733c0657757a9620706dc701ac35574251897ed9544038777a900f14a"
+    },
+    {
+      "index": 2,
+      "file": "qualitybg0002.png",
+      "pivot": [
+        47.0,
+        47.0
+      ],
+      "canvas": [
+        94,
+        94
+      ],
+      "region": [
+        318,
+        1349,
+        94,
+        94
+      ],
+      "trim": [
+        0,
+        0
+      ],
+      "atlas": "mission2",
+      "sha256": "93770dedc64d2dbc072d795734a25ed9102e90e8062924e0b529b2e8b2dbe802"
+    },
+    {
+      "index": 3,
+      "file": "qualitybg0003.png",
+      "pivot": [
+        47.0,
+        47.0
+      ],
+      "canvas": [
+        94,
+        94
+      ],
+      "region": [
+        412,
+        1349,
+        94,
+        94
+      ],
+      "trim": [
+        0,
+        0
+      ],
+      "atlas": "mission2",
+      "sha256": "2d90cc4555c8d1e0f76c70e61605457a54d92c2efdcaf20218cebdb30b5a4548"
+    },
+    {
+      "index": 4,
+      "file": "qualitybg0004.png",
+      "pivot": [
+        47.0,
+        47.0
+      ],
+      "canvas": [
+        94,
+        94
+      ],
+      "region": [
+        506,
+        1349,
+        94,
+        94
+      ],
+      "trim": [
+        0,
+        0
+      ],
+      "atlas": "mission2",
+      "sha256": "e08d58c2e5c37fb04c072ad94290e299f96bf3846eb50fc6ab014e1f85666eba"
+    },
+    {
+      "index": 5,
+      "file": "qualitybg0005.png",
+      "pivot": [
+        47.0,
+        47.0
+      ],
+      "canvas": [
+        94,
+        94
+      ],
+      "region": [
+        600,
+        1349,
+        94,
+        94
+      ],
+      "trim": [
+        0,
+        0
+      ],
+      "atlas": "mission2",
+      "sha256": "bd811623c09f03bde35de7582687bdaae4b80cfb75f327a623a24ee5af3e7171"
+    },
+    {
+      "index": 6,
+      "file": "qualitybg0006.png",
+      "pivot": [
+        47.0,
+        47.0
+      ],
+      "canvas": [
+        94,
+        94
+      ],
+      "region": [
+        694,
+        1349,
+        94,
+        94
+      ],
+      "trim": [
+        0,
+        0
+      ],
+      "atlas": "mission2",
+      "sha256": "beef951e81a9bf15546c96eb469bebf47121711239d9de10fab9ef96e3176acd"
+    },
+    {
+      "index": 7,
+      "file": "qualitybg0007.png",
+      "pivot": [
+        47.0,
+        47.0
+      ],
+      "canvas": [
+        94,
+        94
+      ],
+      "region": [
+        788,
+        1349,
+        94,
+        94
+      ],
+      "trim": [
+        0,
+        0
+      ],
+      "atlas": "mission2",
+      "sha256": "ec9d5b3196c681e853dc8d1a2a0e6f5f770879d62b3c3cc947da63b0e90bd2c6"
+    },
+    {
+      "index": 8,
+      "file": "qualitybg0008.png",
+      "pivot": [
+        47.0,
+        47.0
+      ],
+      "canvas": [
+        94,
+        94
+      ],
+      "region": [
+        788,
+        1349,
+        94,
+        94
+      ],
+      "trim": [
+        0,
+        0
+      ],
+      "atlas": "mission2",
+      "sha256": "ec9d5b3196c681e853dc8d1a2a0e6f5f770879d62b3c3cc947da63b0e90bd2c6"
+    },
+    {
+      "index": 9,
+      "file": "qualitybg0009.png",
+      "pivot": [
+        47.0,
+        47.0
+      ],
+      "canvas": [
+        94,
+        94
+      ],
+      "region": [
+        788,
+        1349,
+        94,
+        94
+      ],
+      "trim": [
+        0,
+        0
+      ],
+      "atlas": "mission2",
+      "sha256": "ec9d5b3196c681e853dc8d1a2a0e6f5f770879d62b3c3cc947da63b0e90bd2c6"
+    },
+    {
+      "index": 10,
+      "file": "qualitybg0010.png",
+      "pivot": [
+        47.0,
+        47.0
+      ],
+      "canvas": [
+        94,
+        94
+      ],
+      "region": [
+        788,
+        1349,
+        94,
+        94
+      ],
+      "trim": [
+        0,
+        0
+      ],
+      "atlas": "mission2",
+      "sha256": "ec9d5b3196c681e853dc8d1a2a0e6f5f770879d62b3c3cc947da63b0e90bd2c6"
+    },
+    {
+      "index": 11,
+      "file": "qualitybg0011.png",
+      "pivot": [
+        47.0,
+        47.0
+      ],
+      "canvas": [
+        94,
+        94
+      ],
+      "region": [
+        788,
+        1349,
+        94,
+        94
+      ],
+      "trim": [
+        0,
+        0
+      ],
+      "atlas": "mission2",
+      "sha256": "ec9d5b3196c681e853dc8d1a2a0e6f5f770879d62b3c3cc947da63b0e90bd2c6"
+    },
+    {
+      "index": 12,
+      "file": "qualitybg0012.png",
+      "pivot": [
+        47.0,
+        47.0
+      ],
+      "canvas": [
+        94,
+        94
+      ],
+      "region": [
+        788,
+        1349,
+        94,
+        94
+      ],
+      "trim": [
+        0,
+        0
+      ],
+      "atlas": "mission2",
+      "sha256": "ec9d5b3196c681e853dc8d1a2a0e6f5f770879d62b3c3cc947da63b0e90bd2c6"
+    },
+    {
+      "index": 13,
+      "file": "qualitybg0013.png",
+      "pivot": [
+        47.0,
+        47.0
+      ],
+      "canvas": [
+        94,
+        94
+      ],
+      "region": [
+        882,
+        1349,
+        94,
+        94
+      ],
+      "trim": [
+        0,
+        0
+      ],
+      "atlas": "mission2",
+      "sha256": "9a1c4910d539331ab49969c012b12eb6d6e6cf88f2acc1477d8b80e361604641"
+    },
+    {
+      "index": 14,
+      "file": "qualitybg0014.png",
+      "pivot": [
+        47.0,
+        47.0
+      ],
+      "canvas": [
+        94,
+        94
+      ],
+      "region": [
+        882,
+        1349,
+        94,
+        94
+      ],
+      "trim": [
+        0,
+        0
+      ],
+      "atlas": "mission2",
+      "sha256": "9a1c4910d539331ab49969c012b12eb6d6e6cf88f2acc1477d8b80e361604641"
+    },
+    {
+      "index": 15,
+      "file": "qualitybg0015.png",
+      "pivot": [
+        47.0,
+        47.0
+      ],
+      "canvas": [
+        94,
+        94
+      ],
+      "region": [
+        882,
+        1349,
+        94,
+        94
+      ],
+      "trim": [
+        0,
+        0
+      ],
+      "atlas": "mission2",
+      "sha256": "9a1c4910d539331ab49969c012b12eb6d6e6cf88f2acc1477d8b80e361604641"
+    },
+    {
+      "index": 16,
+      "file": "qualitybg0016.png",
+      "pivot": [
+        47.0,
+        47.0
+      ],
+      "canvas": [
+        94,
+        94
+      ],
+      "region": [
+        882,
+        1349,
+        94,
+        94
+      ],
+      "trim": [
+        0,
+        0
+      ],
+      "atlas": "mission2",
+      "sha256": "9a1c4910d539331ab49969c012b12eb6d6e6cf88f2acc1477d8b80e361604641"
+    },
+    {
+      "index": 17,
+      "file": "qualitybg0017.png",
+      "pivot": [
+        47.0,
+        47.0
+      ],
+      "canvas": [
+        94,
+        94
+      ],
+      "region": [
+        882,
+        1349,
+        94,
+        94
+      ],
+      "trim": [
+        0,
+        0
+      ],
+      "atlas": "mission2",
+      "sha256": "9a1c4910d539331ab49969c012b12eb6d6e6cf88f2acc1477d8b80e361604641"
+    },
+    {
+      "index": 18,
+      "file": "qualitybg0018.png",
+      "pivot": [
+        47.0,
+        47.0
+      ],
+      "canvas": [
+        94,
+        94
+      ],
+      "region": [
+        882,
+        1349,
+        94,
+        94
+      ],
+      "trim": [
+        0,
+        0
+      ],
+      "atlas": "mission2",
+      "sha256": "9a1c4910d539331ab49969c012b12eb6d6e6cf88f2acc1477d8b80e361604641"
+    },
+    {
+      "index": 19,
+      "file": "qualitybg0019.png",
+      "pivot": [
+        47.0,
+        47.0
+      ],
+      "canvas": [
+        94,
+        94
+      ],
+      "region": [
+        882,
+        1349,
+        94,
+        94
+      ],
+      "trim": [
+        0,
+        0
+      ],
+      "atlas": "mission2",
+      "sha256": "9a1c4910d539331ab49969c012b12eb6d6e6cf88f2acc1477d8b80e361604641"
+    },
+    {
+      "index": 20,
+      "file": "qualitybg0020.png",
+      "pivot": [
+        47.0,
+        47.0
+      ],
+      "canvas": [
+        94,
+        94
+      ],
+      "region": [
+        882,
+        1349,
+        94,
+        94
+      ],
+      "trim": [
+        0,
+        0
+      ],
+      "atlas": "mission2",
+      "sha256": "9a1c4910d539331ab49969c012b12eb6d6e6cf88f2acc1477d8b80e361604641"
+    },
+    {
+      "index": 21,
+      "file": "qualitybg0021.png",
+      "pivot": [
+        47.0,
+        47.0
+      ],
+      "canvas": [
+        94,
+        94
+      ],
+      "region": [
+        882,
+        1349,
+        94,
+        94
+      ],
+      "trim": [
+        0,
+        0
+      ],
+      "atlas": "mission2",
+      "sha256": "9a1c4910d539331ab49969c012b12eb6d6e6cf88f2acc1477d8b80e361604641"
+    },
+    {
+      "index": 22,
+      "file": "qualitybg0022.png",
+      "pivot": [
+        47.0,
+        47.0
+      ],
+      "canvas": [
+        94,
+        94
+      ],
+      "region": [
+        882,
+        1349,
+        94,
+        94
+      ],
+      "trim": [
+        0,
+        0
+      ],
+      "atlas": "mission2",
+      "sha256": "9a1c4910d539331ab49969c012b12eb6d6e6cf88f2acc1477d8b80e361604641"
+    },
+    {
+      "index": 23,
+      "file": "qualitybg0023.png",
+      "pivot": [
+        47.0,
+        47.0
+      ],
+      "canvas": [
+        94,
+        94
+      ],
+      "region": [
+        882,
+        1349,
+        94,
+        94
+      ],
+      "trim": [
+        0,
+        0
+      ],
+      "atlas": "mission2",
+      "sha256": "9a1c4910d539331ab49969c012b12eb6d6e6cf88f2acc1477d8b80e361604641"
+    },
+    {
+      "index": 24,
+      "file": "qualitybg0024.png",
+      "pivot": [
+        47.0,
+        47.0
+      ],
+      "canvas": [
+        94,
+        94
+      ],
+      "region": [
+        882,
+        1349,
+        94,
+        94
+      ],
+      "trim": [
+        0,
+        0
+      ],
+      "atlas": "mission2",
+      "sha256": "9a1c4910d539331ab49969c012b12eb6d6e6cf88f2acc1477d8b80e361604641"
+    },
+    {
+      "index": 25,
+      "file": "qualitybg0025.png",
+      "pivot": [
+        47.0,
+        47.0
+      ],
+      "canvas": [
+        94,
+        94
+      ],
+      "region": [
+        882,
+        1349,
+        94,
+        94
+      ],
+      "trim": [
+        0,
+        0
+      ],
+      "atlas": "mission2",
+      "sha256": "9a1c4910d539331ab49969c012b12eb6d6e6cf88f2acc1477d8b80e361604641"
+    },
+    {
+      "index": 26,
+      "file": "qualitybg0026.png",
+      "pivot": [
+        47.0,
+        47.0
+      ],
+      "canvas": [
+        94,
+        94
+      ],
+      "region": [
+        882,
+        1349,
+        94,
+        94
+      ],
+      "trim": [
+        0,
+        0
+      ],
+      "atlas": "mission2",
+      "sha256": "9a1c4910d539331ab49969c012b12eb6d6e6cf88f2acc1477d8b80e361604641"
+    },
+    {
+      "index": 27,
+      "file": "qualitybg0027.png",
+      "pivot": [
+        47.0,
+        47.0
+      ],
+      "canvas": [
+        94,
+        94
+      ],
+      "region": [
+        882,
+        1349,
+        94,
+        94
+      ],
+      "trim": [
+        0,
+        0
+      ],
+      "atlas": "mission2",
+      "sha256": "9a1c4910d539331ab49969c012b12eb6d6e6cf88f2acc1477d8b80e361604641"
+    },
+    {
+      "index": 28,
+      "file": "qualitybg0028.png",
+      "pivot": [
+        47.0,
+        47.0
+      ],
+      "canvas": [
+        94,
+        94
+      ],
+      "region": [
+        882,
+        1349,
+        94,
+        94
+      ],
+      "trim": [
+        0,
+        0
+      ],
+      "atlas": "mission2",
+      "sha256": "9a1c4910d539331ab49969c012b12eb6d6e6cf88f2acc1477d8b80e361604641"
+    },
+    {
+      "index": 29,
+      "file": "qualitybg0029.png",
+      "pivot": [
+        47.0,
+        47.0
+      ],
+      "canvas": [
+        94,
+        94
+      ],
+      "region": [
+        882,
+        1349,
+        94,
+        94
+      ],
+      "trim": [
+        0,
+        0
+      ],
+      "atlas": "mission2",
+      "sha256": "9a1c4910d539331ab49969c012b12eb6d6e6cf88f2acc1477d8b80e361604641"
+    },
+    {
+      "index": 30,
+      "file": "qualitybg0030.png",
+      "pivot": [
+        47.0,
+        47.0
+      ],
+      "canvas": [
+        94,
+        94
+      ],
+      "region": [
+        882,
+        1349,
+        94,
+        94
+      ],
+      "trim": [
+        0,
+        0
+      ],
+      "atlas": "mission2",
+      "sha256": "9a1c4910d539331ab49969c012b12eb6d6e6cf88f2acc1477d8b80e361604641"
+    },
+    {
+      "index": 31,
+      "file": "qualitybg0031.png",
+      "pivot": [
+        47.0,
+        47.0
+      ],
+      "canvas": [
+        94,
+        94
+      ],
+      "region": [
+        882,
+        1349,
+        94,
+        94
+      ],
+      "trim": [
+        0,
+        0
+      ],
+      "atlas": "mission2",
+      "sha256": "9a1c4910d539331ab49969c012b12eb6d6e6cf88f2acc1477d8b80e361604641"
+    },
+    {
+      "index": 32,
+      "file": "qualitybg0032.png",
+      "pivot": [
+        47.0,
+        47.0
+      ],
+      "canvas": [
+        94,
+        94
+      ],
+      "region": [
+        882,
+        1349,
+        94,
+        94
+      ],
+      "trim": [
+        0,
+        0
+      ],
+      "atlas": "mission2",
+      "sha256": "9a1c4910d539331ab49969c012b12eb6d6e6cf88f2acc1477d8b80e361604641"
+    },
+    {
+      "index": 33,
+      "file": "qualitybg0033.png",
+      "pivot": [
+        47.0,
+        47.0
+      ],
+      "canvas": [
+        94,
+        94
+      ],
+      "region": [
+        882,
+        1349,
+        94,
+        94
+      ],
+      "trim": [
+        0,
+        0
+      ],
+      "atlas": "mission2",
+      "sha256": "9a1c4910d539331ab49969c012b12eb6d6e6cf88f2acc1477d8b80e361604641"
+    },
+    {
+      "index": 34,
+      "file": "qualitybg0034.png",
+      "pivot": [
+        47.0,
+        47.0
+      ],
+      "canvas": [
+        94,
+        94
+      ],
+      "region": [
+        882,
+        1349,
+        94,
+        94
+      ],
+      "trim": [
+        0,
+        0
+      ],
+      "atlas": "mission2",
+      "sha256": "9a1c4910d539331ab49969c012b12eb6d6e6cf88f2acc1477d8b80e361604641"
+    },
+    {
+      "index": 35,
+      "file": "qualitybg0035.png",
+      "pivot": [
+        47.0,
+        47.0
+      ],
+      "canvas": [
+        94,
+        94
+      ],
+      "region": [
+        882,
+        1349,
+        94,
+        94
+      ],
+      "trim": [
+        0,
+        0
+      ],
+      "atlas": "mission2",
+      "sha256": "9a1c4910d539331ab49969c012b12eb6d6e6cf88f2acc1477d8b80e361604641"
+    },
+    {
+      "index": 36,
+      "file": "qualitybg0036.png",
+      "pivot": [
+        47.0,
+        47.0
+      ],
+      "canvas": [
+        94,
+        94
+      ],
+      "region": [
+        882,
+        1349,
+        94,
+        94
+      ],
+      "trim": [
+        0,
+        0
+      ],
+      "atlas": "mission2",
+      "sha256": "9a1c4910d539331ab49969c012b12eb6d6e6cf88f2acc1477d8b80e361604641"
+    },
+    {
+      "index": 37,
+      "file": "qualitybg0037.png",
+      "pivot": [
+        47.0,
+        47.0
+      ],
+      "canvas": [
+        94,
+        94
+      ],
+      "region": [
+        882,
+        1349,
+        94,
+        94
+      ],
+      "trim": [
+        0,
+        0
+      ],
+      "atlas": "mission2",
+      "sha256": "9a1c4910d539331ab49969c012b12eb6d6e6cf88f2acc1477d8b80e361604641"
+    },
+    {
+      "index": 38,
+      "file": "qualitybg0038.png",
+      "pivot": [
+        47.0,
+        47.0
+      ],
+      "canvas": [
+        94,
+        94
+      ],
+      "region": [
+        882,
+        1349,
+        94,
+        94
+      ],
+      "trim": [
+        0,
+        0
+      ],
+      "atlas": "mission2",
+      "sha256": "9a1c4910d539331ab49969c012b12eb6d6e6cf88f2acc1477d8b80e361604641"
+    },
+    {
+      "index": 39,
+      "file": "qualitybg0039.png",
+      "pivot": [
+        47.0,
+        47.0
+      ],
+      "canvas": [
+        94,
+        94
+      ],
+      "region": [
+        882,
+        1349,
+        94,
+        94
+      ],
+      "trim": [
+        0,
+        0
+      ],
+      "atlas": "mission2",
+      "sha256": "9a1c4910d539331ab49969c012b12eb6d6e6cf88f2acc1477d8b80e361604641"
+    },
+    {
+      "index": 40,
+      "file": "qualitybg0040.png",
+      "pivot": [
+        47.0,
+        47.0
+      ],
+      "canvas": [
+        94,
+        94
+      ],
+      "region": [
+        882,
+        1349,
+        94,
+        94
+      ],
+      "trim": [
+        0,
+        0
+      ],
+      "atlas": "mission2",
+      "sha256": "9a1c4910d539331ab49969c012b12eb6d6e6cf88f2acc1477d8b80e361604641"
+    },
+    {
+      "index": 41,
+      "file": "qualitybg0041.png",
+      "pivot": [
+        47.0,
+        47.0
+      ],
+      "canvas": [
+        94,
+        94
+      ],
+      "region": [
+        882,
+        1349,
+        94,
+        94
+      ],
+      "trim": [
+        0,
+        0
+      ],
+      "atlas": "mission2",
+      "sha256": "9a1c4910d539331ab49969c012b12eb6d6e6cf88f2acc1477d8b80e361604641"
+    },
+    {
+      "index": 42,
+      "file": "qualitybg0042.png",
+      "pivot": [
+        47.0,
+        47.0
+      ],
+      "canvas": [
+        94,
+        94
+      ],
+      "region": [
+        882,
+        1349,
+        94,
+        94
+      ],
+      "trim": [
+        0,
+        0
+      ],
+      "atlas": "mission2",
+      "sha256": "9a1c4910d539331ab49969c012b12eb6d6e6cf88f2acc1477d8b80e361604641"
+    },
+    {
+      "index": 43,
+      "file": "qualitybg0043.png",
+      "pivot": [
+        47.0,
+        47.0
+      ],
+      "canvas": [
+        94,
+        94
+      ],
+      "region": [
+        882,
+        1349,
+        94,
+        94
+      ],
+      "trim": [
+        0,
+        0
+      ],
+      "atlas": "mission2",
+      "sha256": "9a1c4910d539331ab49969c012b12eb6d6e6cf88f2acc1477d8b80e361604641"
+    },
+    {
+      "index": 44,
+      "file": "qualitybg0044.png",
+      "pivot": [
+        47.0,
+        47.0
+      ],
+      "canvas": [
+        94,
+        94
+      ],
+      "region": [
+        882,
+        1349,
+        94,
+        94
+      ],
+      "trim": [
+        0,
+        0
+      ],
+      "atlas": "mission2",
+      "sha256": "9a1c4910d539331ab49969c012b12eb6d6e6cf88f2acc1477d8b80e361604641"
+    },
+    {
+      "index": 45,
+      "file": "qualitybg0045.png",
+      "pivot": [
+        47.0,
+        47.0
+      ],
+      "canvas": [
+        94,
+        94
+      ],
+      "region": [
+        882,
+        1349,
+        94,
+        94
+      ],
+      "trim": [
+        0,
+        0
+      ],
+      "atlas": "mission2",
+      "sha256": "9a1c4910d539331ab49969c012b12eb6d6e6cf88f2acc1477d8b80e361604641"
+    },
+    {
+      "index": 46,
+      "file": "qualitybg0046.png",
+      "pivot": [
+        47.0,
+        47.0
+      ],
+      "canvas": [
+        94,
+        94
+      ],
+      "region": [
+        882,
+        1349,
+        94,
+        94
+      ],
+      "trim": [
+        0,
+        0
+      ],
+      "atlas": "mission2",
+      "sha256": "9a1c4910d539331ab49969c012b12eb6d6e6cf88f2acc1477d8b80e361604641"
+    },
+    {
+      "index": 47,
+      "file": "qualitybg0047.png",
+      "pivot": [
+        47.0,
+        47.0
+      ],
+      "canvas": [
+        94,
+        94
+      ],
+      "region": [
+        882,
+        1349,
+        94,
+        94
+      ],
+      "trim": [
+        0,
+        0
+      ],
+      "atlas": "mission2",
+      "sha256": "9a1c4910d539331ab49969c012b12eb6d6e6cf88f2acc1477d8b80e361604641"
+    },
+    {
+      "index": 48,
+      "file": "qualitybg0048.png",
+      "pivot": [
+        47.0,
+        47.0
+      ],
+      "canvas": [
+        94,
+        94
+      ],
+      "region": [
+        882,
+        1349,
+        94,
+        94
+      ],
+      "trim": [
+        0,
+        0
+      ],
+      "atlas": "mission2",
+      "sha256": "9a1c4910d539331ab49969c012b12eb6d6e6cf88f2acc1477d8b80e361604641"
+    },
+    {
+      "index": 49,
+      "file": "qualitybg0049.png",
+      "pivot": [
+        47.0,
+        47.0
+      ],
+      "canvas": [
+        94,
+        94
+      ],
+      "region": [
+        882,
+        1349,
+        94,
+        94
+      ],
+      "trim": [
+        0,
+        0
+      ],
+      "atlas": "mission2",
+      "sha256": "9a1c4910d539331ab49969c012b12eb6d6e6cf88f2acc1477d8b80e361604641"
+    },
+    {
+      "index": 50,
+      "file": "qualitybg0050.png",
+      "pivot": [
+        47.0,
+        47.0
+      ],
+      "canvas": [
+        94,
+        94
+      ],
+      "region": [
+        882,
+        1349,
+        94,
+        94
+      ],
+      "trim": [
+        0,
+        0
+      ],
+      "atlas": "mission2",
+      "sha256": "9a1c4910d539331ab49969c012b12eb6d6e6cf88f2acc1477d8b80e361604641"
+    },
+    {
+      "index": 51,
+      "file": "qualitybg0051.png",
+      "pivot": [
+        47.0,
+        47.0
+      ],
+      "canvas": [
+        94,
+        94
+      ],
+      "region": [
+        882,
+        1349,
+        94,
+        94
+      ],
+      "trim": [
+        0,
+        0
+      ],
+      "atlas": "mission2",
+      "sha256": "9a1c4910d539331ab49969c012b12eb6d6e6cf88f2acc1477d8b80e361604641"
+    },
+    {
+      "index": 52,
+      "file": "qualitybg0052.png",
+      "pivot": [
+        47.0,
+        47.0
+      ],
+      "canvas": [
+        94,
+        94
+      ],
+      "region": [
+        882,
+        1349,
+        94,
+        94
+      ],
+      "trim": [
+        0,
+        0
+      ],
+      "atlas": "mission2",
+      "sha256": "9a1c4910d539331ab49969c012b12eb6d6e6cf88f2acc1477d8b80e361604641"
+    },
+    {
+      "index": 53,
+      "file": "qualitybg0053.png",
+      "pivot": [
+        47.0,
+        47.0
+      ],
+      "canvas": [
+        94,
+        94
+      ],
+      "region": [
+        976,
+        1349,
+        0,
+        0
+      ],
+      "trim": [
+        -47,
+        -47
+      ],
+      "atlas": "mission2",
+      "sha256": "fa4de10e86e803624aad40b123ec9375cc95c4a258f1cb322716fccf1cd961b7"
+    },
+    {
+      "index": 54,
+      "file": "qualitybg0054.png",
+      "pivot": [
+        47.0,
+        47.0
+      ],
+      "canvas": [
+        94,
+        94
+      ],
+      "region": [
+        976,
+        1349,
+        0,
+        0
+      ],
+      "trim": [
+        -47,
+        -47
+      ],
+      "atlas": "mission2",
+      "sha256": "fa4de10e86e803624aad40b123ec9375cc95c4a258f1cb322716fccf1cd961b7"
+    },
+    {
+      "index": 55,
+      "file": "qualitybg0055.png",
+      "pivot": [
+        47.0,
+        47.0
+      ],
+      "canvas": [
+        94,
+        94
+      ],
+      "region": [
+        976,
+        1349,
+        0,
+        0
+      ],
+      "trim": [
+        -47,
+        -47
+      ],
+      "atlas": "mission2",
+      "sha256": "fa4de10e86e803624aad40b123ec9375cc95c4a258f1cb322716fccf1cd961b7"
+    },
+    {
+      "index": 56,
+      "file": "qualitybg0056.png",
+      "pivot": [
+        47.0,
+        47.0
+      ],
+      "canvas": [
+        94,
+        94
+      ],
+      "region": [
+        976,
+        1349,
+        0,
+        0
+      ],
+      "trim": [
+        -47,
+        -47
+      ],
+      "atlas": "mission2",
+      "sha256": "fa4de10e86e803624aad40b123ec9375cc95c4a258f1cb322716fccf1cd961b7"
+    },
+    {
+      "index": 57,
+      "file": "qualitybg0057.png",
+      "pivot": [
+        47.0,
+        47.0
+      ],
+      "canvas": [
+        94,
+        94
+      ],
+      "region": [
+        976,
+        1349,
+        0,
+        0
+      ],
+      "trim": [
+        -47,
+        -47
+      ],
+      "atlas": "mission2",
+      "sha256": "fa4de10e86e803624aad40b123ec9375cc95c4a258f1cb322716fccf1cd961b7"
+    },
+    {
+      "index": 58,
+      "file": "qualitybg0058.png",
+      "pivot": [
+        47.0,
+        47.0
+      ],
+      "canvas": [
+        94,
+        94
+      ],
+      "region": [
+        976,
+        1349,
+        0,
+        0
+      ],
+      "trim": [
+        -47,
+        -47
+      ],
+      "atlas": "mission2",
+      "sha256": "fa4de10e86e803624aad40b123ec9375cc95c4a258f1cb322716fccf1cd961b7"
+    },
+    {
+      "index": 59,
+      "file": "qualitybg0059.png",
+      "pivot": [
+        47.0,
+        47.0
+      ],
+      "canvas": [
+        94,
+        94
+      ],
+      "region": [
+        976,
+        1349,
+        0,
+        0
+      ],
+      "trim": [
+        -47,
+        -47
+      ],
+      "atlas": "mission2",
+      "sha256": "fa4de10e86e803624aad40b123ec9375cc95c4a258f1cb322716fccf1cd961b7"
+    },
+    {
+      "index": 60,
+      "file": "qualitybg0060.png",
+      "pivot": [
+        47.0,
+        47.0
+      ],
+      "canvas": [
+        94,
+        94
+      ],
+      "region": [
+        976,
+        1349,
+        0,
+        0
+      ],
+      "trim": [
+        -47,
+        -47
+      ],
+      "atlas": "mission2",
+      "sha256": "fa4de10e86e803624aad40b123ec9375cc95c4a258f1cb322716fccf1cd961b7"
+    },
+    {
+      "index": 61,
+      "file": "qualitybg0061.png",
+      "pivot": [
+        47.0,
+        47.0
+      ],
+      "canvas": [
+        94,
+        94
+      ],
+      "region": [
+        976,
+        1349,
+        0,
+        0
+      ],
+      "trim": [
+        -47,
+        -47
+      ],
+      "atlas": "mission2",
+      "sha256": "fa4de10e86e803624aad40b123ec9375cc95c4a258f1cb322716fccf1cd961b7"
+    },
+    {
+      "index": 62,
+      "file": "qualitybg0062.png",
+      "pivot": [
+        47.0,
+        47.0
+      ],
+      "canvas": [
+        94,
+        94
+      ],
+      "region": [
+        976,
+        1349,
+        0,
+        0
+      ],
+      "trim": [
+        -47,
+        -47
+      ],
+      "atlas": "mission2",
+      "sha256": "fa4de10e86e803624aad40b123ec9375cc95c4a258f1cb322716fccf1cd961b7"
+    },
+    {
+      "index": 63,
+      "file": "qualitybg0063.png",
+      "pivot": [
+        47.0,
+        47.0
+      ],
+      "canvas": [
+        94,
+        94
+      ],
+      "region": [
+        976,
+        1349,
+        0,
+        0
+      ],
+      "trim": [
+        -47,
+        -47
+      ],
+      "atlas": "mission2",
+      "sha256": "fa4de10e86e803624aad40b123ec9375cc95c4a258f1cb322716fccf1cd961b7"
+    },
+    {
+      "index": 64,
+      "file": "qualitybg0064.png",
+      "pivot": [
+        47.0,
+        47.0
+      ],
+      "canvas": [
+        94,
+        94
+      ],
+      "region": [
+        976,
+        1349,
+        0,
+        0
+      ],
+      "trim": [
+        -47,
+        -47
+      ],
+      "atlas": "mission2",
+      "sha256": "fa4de10e86e803624aad40b123ec9375cc95c4a258f1cb322716fccf1cd961b7"
+    },
+    {
+      "index": 65,
+      "file": "qualitybg0065.png",
+      "pivot": [
+        47.0,
+        47.0
+      ],
+      "canvas": [
+        94,
+        94
+      ],
+      "region": [
+        976,
+        1349,
+        0,
+        0
+      ],
+      "trim": [
+        -47,
+        -47
+      ],
+      "atlas": "mission2",
+      "sha256": "fa4de10e86e803624aad40b123ec9375cc95c4a258f1cb322716fccf1cd961b7"
+    },
+    {
+      "index": 66,
+      "file": "qualitybg0066.png",
+      "pivot": [
+        47.0,
+        47.0
+      ],
+      "canvas": [
+        94,
+        94
+      ],
+      "region": [
+        976,
+        1349,
+        0,
+        0
+      ],
+      "trim": [
+        -47,
+        -47
+      ],
+      "atlas": "mission2",
+      "sha256": "fa4de10e86e803624aad40b123ec9375cc95c4a258f1cb322716fccf1cd961b7"
+    },
+    {
+      "index": 67,
+      "file": "qualitybg0067.png",
+      "pivot": [
+        47.0,
+        47.0
+      ],
+      "canvas": [
+        94,
+        94
+      ],
+      "region": [
+        976,
+        1349,
+        0,
+        0
+      ],
+      "trim": [
+        -47,
+        -47
+      ],
+      "atlas": "mission2",
+      "sha256": "fa4de10e86e803624aad40b123ec9375cc95c4a258f1cb322716fccf1cd961b7"
+    },
+    {
+      "index": 68,
+      "file": "qualitybg0068.png",
+      "pivot": [
+        47.0,
+        47.0
+      ],
+      "canvas": [
+        94,
+        94
+      ],
+      "region": [
+        976,
+        1349,
+        0,
+        0
+      ],
+      "trim": [
+        -47,
+        -47
+      ],
+      "atlas": "mission2",
+      "sha256": "fa4de10e86e803624aad40b123ec9375cc95c4a258f1cb322716fccf1cd961b7"
+    },
+    {
+      "index": 69,
+      "file": "qualitybg0069.png",
+      "pivot": [
+        47.0,
+        47.0
+      ],
+      "canvas": [
+        94,
+        94
+      ],
+      "region": [
+        976,
+        1349,
+        0,
+        0
+      ],
+      "trim": [
+        -47,
+        -47
+      ],
+      "atlas": "mission2",
+      "sha256": "fa4de10e86e803624aad40b123ec9375cc95c4a258f1cb322716fccf1cd961b7"
+    },
+    {
+      "index": 70,
+      "file": "qualitybg0070.png",
+      "pivot": [
+        47.0,
+        47.0
+      ],
+      "canvas": [
+        94,
+        94
+      ],
+      "region": [
+        976,
+        1349,
+        0,
+        0
+      ],
+      "trim": [
+        -47,
+        -47
+      ],
+      "atlas": "mission2",
+      "sha256": "fa4de10e86e803624aad40b123ec9375cc95c4a258f1cb322716fccf1cd961b7"
+    },
+    {
+      "index": 71,
+      "file": "qualitybg0071.png",
+      "pivot": [
+        47.0,
+        47.0
+      ],
+      "canvas": [
+        94,
+        94
+      ],
+      "region": [
+        976,
+        1349,
+        0,
+        0
+      ],
+      "trim": [
+        -47,
+        -47
+      ],
+      "atlas": "mission2",
+      "sha256": "fa4de10e86e803624aad40b123ec9375cc95c4a258f1cb322716fccf1cd961b7"
+    },
+    {
+      "index": 72,
+      "file": "qualitybg0072.png",
+      "pivot": [
+        47.0,
+        47.0
+      ],
+      "canvas": [
+        94,
+        94
+      ],
+      "region": [
+        976,
+        1349,
+        0,
+        0
+      ],
+      "trim": [
+        -47,
+        -47
+      ],
+      "atlas": "mission2",
+      "sha256": "fa4de10e86e803624aad40b123ec9375cc95c4a258f1cb322716fccf1cd961b7"
+    },
+    {
+      "index": 73,
+      "file": "qualitybg0073.png",
+      "pivot": [
+        47.0,
+        47.0
+      ],
+      "canvas": [
+        94,
+        94
+      ],
+      "region": [
+        976,
+        1349,
+        0,
+        0
+      ],
+      "trim": [
+        -47,
+        -47
+      ],
+      "atlas": "mission2",
+      "sha256": "fa4de10e86e803624aad40b123ec9375cc95c4a258f1cb322716fccf1cd961b7"
+    },
+    {
+      "index": 74,
+      "file": "qualitybg0074.png",
+      "pivot": [
+        47.0,
+        47.0
+      ],
+      "canvas": [
+        94,
+        94
+      ],
+      "region": [
+        976,
+        1349,
+        0,
+        0
+      ],
+      "trim": [
+        -47,
+        -47
+      ],
+      "atlas": "mission2",
+      "sha256": "fa4de10e86e803624aad40b123ec9375cc95c4a258f1cb322716fccf1cd961b7"
+    },
+    {
+      "index": 75,
+      "file": "qualitybg0075.png",
+      "pivot": [
+        47.0,
+        47.0
+      ],
+      "canvas": [
+        94,
+        94
+      ],
+      "region": [
+        976,
+        1349,
+        0,
+        0
+      ],
+      "trim": [
+        -47,
+        -47
+      ],
+      "atlas": "mission2",
+      "sha256": "fa4de10e86e803624aad40b123ec9375cc95c4a258f1cb322716fccf1cd961b7"
+    },
+    {
+      "index": 76,
+      "file": "qualitybg0076.png",
+      "pivot": [
+        47.0,
+        47.0
+      ],
+      "canvas": [
+        94,
+        94
+      ],
+      "region": [
+        976,
+        1349,
+        0,
+        0
+      ],
+      "trim": [
+        -47,
+        -47
+      ],
+      "atlas": "mission2",
+      "sha256": "fa4de10e86e803624aad40b123ec9375cc95c4a258f1cb322716fccf1cd961b7"
+    },
+    {
+      "index": 77,
+      "file": "qualitybg0077.png",
+      "pivot": [
+        47.0,
+        47.0
+      ],
+      "canvas": [
+        94,
+        94
+      ],
+      "region": [
+        976,
+        1349,
+        0,
+        0
+      ],
+      "trim": [
+        -47,
+        -47
+      ],
+      "atlas": "mission2",
+      "sha256": "fa4de10e86e803624aad40b123ec9375cc95c4a258f1cb322716fccf1cd961b7"
+    },
+    {
+      "index": 78,
+      "file": "qualitybg0078.png",
+      "pivot": [
+        47.0,
+        47.0
+      ],
+      "canvas": [
+        94,
+        94
+      ],
+      "region": [
+        976,
+        1349,
+        0,
+        0
+      ],
+      "trim": [
+        -47,
+        -47
+      ],
+      "atlas": "mission2",
+      "sha256": "fa4de10e86e803624aad40b123ec9375cc95c4a258f1cb322716fccf1cd961b7"
+    },
+    {
+      "index": 79,
+      "file": "qualitybg0079.png",
+      "pivot": [
+        47.0,
+        47.0
+      ],
+      "canvas": [
+        94,
+        94
+      ],
+      "region": [
+        976,
+        1349,
+        0,
+        0
+      ],
+      "trim": [
+        -47,
+        -47
+      ],
+      "atlas": "mission2",
+      "sha256": "fa4de10e86e803624aad40b123ec9375cc95c4a258f1cb322716fccf1cd961b7"
+    },
+    {
+      "index": 80,
+      "file": "qualitybg0080.png",
+      "pivot": [
+        47.0,
+        47.0
+      ],
+      "canvas": [
+        94,
+        94
+      ],
+      "region": [
+        976,
+        1349,
+        0,
+        0
+      ],
+      "trim": [
+        -47,
+        -47
+      ],
+      "atlas": "mission2",
+      "sha256": "fa4de10e86e803624aad40b123ec9375cc95c4a258f1cb322716fccf1cd961b7"
+    },
+    {
+      "index": 81,
+      "file": "qualitybg0081.png",
+      "pivot": [
+        47.0,
+        47.0
+      ],
+      "canvas": [
+        94,
+        94
+      ],
+      "region": [
+        976,
+        1349,
+        0,
+        0
+      ],
+      "trim": [
+        -47,
+        -47
+      ],
+      "atlas": "mission2",
+      "sha256": "fa4de10e86e803624aad40b123ec9375cc95c4a258f1cb322716fccf1cd961b7"
+    },
+    {
+      "index": 82,
+      "file": "qualitybg0082.png",
+      "pivot": [
+        47.0,
+        47.0
+      ],
+      "canvas": [
+        94,
+        94
+      ],
+      "region": [
+        976,
+        1349,
+        0,
+        0
+      ],
+      "trim": [
+        -47,
+        -47
+      ],
+      "atlas": "mission2",
+      "sha256": "fa4de10e86e803624aad40b123ec9375cc95c4a258f1cb322716fccf1cd961b7"
+    },
+    {
+      "index": 83,
+      "file": "qualitybg0083.png",
+      "pivot": [
+        47.0,
+        47.0
+      ],
+      "canvas": [
+        94,
+        94
+      ],
+      "region": [
+        976,
+        1349,
+        0,
+        0
+      ],
+      "trim": [
+        -47,
+        -47
+      ],
+      "atlas": "mission2",
+      "sha256": "fa4de10e86e803624aad40b123ec9375cc95c4a258f1cb322716fccf1cd961b7"
+    },
+    {
+      "index": 84,
+      "file": "qualitybg0084.png",
+      "pivot": [
+        47.0,
+        47.0
+      ],
+      "canvas": [
+        94,
+        94
+      ],
+      "region": [
+        976,
+        1349,
+        0,
+        0
+      ],
+      "trim": [
+        -47,
+        -47
+      ],
+      "atlas": "mission2",
+      "sha256": "fa4de10e86e803624aad40b123ec9375cc95c4a258f1cb322716fccf1cd961b7"
+    },
+    {
+      "index": 85,
+      "file": "qualitybg0085.png",
+      "pivot": [
+        47.0,
+        47.0
+      ],
+      "canvas": [
+        94,
+        94
+      ],
+      "region": [
+        976,
+        1349,
+        0,
+        0
+      ],
+      "trim": [
+        -47,
+        -47
+      ],
+      "atlas": "mission2",
+      "sha256": "fa4de10e86e803624aad40b123ec9375cc95c4a258f1cb322716fccf1cd961b7"
+    },
+    {
+      "index": 86,
+      "file": "qualitybg0086.png",
+      "pivot": [
+        47.0,
+        47.0
+      ],
+      "canvas": [
+        94,
+        94
+      ],
+      "region": [
+        976,
+        1349,
+        0,
+        0
+      ],
+      "trim": [
+        -47,
+        -47
+      ],
+      "atlas": "mission2",
+      "sha256": "fa4de10e86e803624aad40b123ec9375cc95c4a258f1cb322716fccf1cd961b7"
+    },
+    {
+      "index": 87,
+      "file": "qualitybg0087.png",
+      "pivot": [
+        47.0,
+        47.0
+      ],
+      "canvas": [
+        94,
+        94
+      ],
+      "region": [
+        976,
+        1349,
+        0,
+        0
+      ],
+      "trim": [
+        -47,
+        -47
+      ],
+      "atlas": "mission2",
+      "sha256": "fa4de10e86e803624aad40b123ec9375cc95c4a258f1cb322716fccf1cd961b7"
+    },
+    {
+      "index": 88,
+      "file": "qualitybg0088.png",
+      "pivot": [
+        47.0,
+        47.0
+      ],
+      "canvas": [
+        94,
+        94
+      ],
+      "region": [
+        976,
+        1349,
+        0,
+        0
+      ],
+      "trim": [
+        -47,
+        -47
+      ],
+      "atlas": "mission2",
+      "sha256": "fa4de10e86e803624aad40b123ec9375cc95c4a258f1cb322716fccf1cd961b7"
+    },
+    {
+      "index": 89,
+      "file": "qualitybg0089.png",
+      "pivot": [
+        47.0,
+        47.0
+      ],
+      "canvas": [
+        94,
+        94
+      ],
+      "region": [
+        976,
+        1349,
+        0,
+        0
+      ],
+      "trim": [
+        -47,
+        -47
+      ],
+      "atlas": "mission2",
+      "sha256": "fa4de10e86e803624aad40b123ec9375cc95c4a258f1cb322716fccf1cd961b7"
+    },
+    {
+      "index": 90,
+      "file": "qualitybg0090.png",
+      "pivot": [
+        47.0,
+        47.0
+      ],
+      "canvas": [
+        94,
+        94
+      ],
+      "region": [
+        976,
+        1349,
+        0,
+        0
+      ],
+      "trim": [
+        -47,
+        -47
+      ],
+      "atlas": "mission2",
+      "sha256": "fa4de10e86e803624aad40b123ec9375cc95c4a258f1cb322716fccf1cd961b7"
+    },
+    {
+      "index": 91,
+      "file": "qualitybg0091.png",
+      "pivot": [
+        47.0,
+        47.0
+      ],
+      "canvas": [
+        94,
+        94
+      ],
+      "region": [
+        976,
+        1349,
+        0,
+        0
+      ],
+      "trim": [
+        -47,
+        -47
+      ],
+      "atlas": "mission2",
+      "sha256": "fa4de10e86e803624aad40b123ec9375cc95c4a258f1cb322716fccf1cd961b7"
+    },
+    {
+      "index": 92,
+      "file": "qualitybg0092.png",
+      "pivot": [
+        47.0,
+        47.0
+      ],
+      "canvas": [
+        94,
+        94
+      ],
+      "region": [
+        976,
+        1349,
+        0,
+        0
+      ],
+      "trim": [
+        -47,
+        -47
+      ],
+      "atlas": "mission2",
+      "sha256": "fa4de10e86e803624aad40b123ec9375cc95c4a258f1cb322716fccf1cd961b7"
+    },
+    {
+      "index": 93,
+      "file": "qualitybg0093.png",
+      "pivot": [
+        47.0,
+        47.0
+      ],
+      "canvas": [
+        94,
+        94
+      ],
+      "region": [
+        976,
+        1349,
+        0,
+        0
+      ],
+      "trim": [
+        -47,
+        -47
+      ],
+      "atlas": "mission2",
+      "sha256": "fa4de10e86e803624aad40b123ec9375cc95c4a258f1cb322716fccf1cd961b7"
+    },
+    {
+      "index": 94,
+      "file": "qualitybg0094.png",
+      "pivot": [
+        47.0,
+        47.0
+      ],
+      "canvas": [
+        94,
+        94
+      ],
+      "region": [
+        976,
+        1349,
+        0,
+        0
+      ],
+      "trim": [
+        -47,
+        -47
+      ],
+      "atlas": "mission2",
+      "sha256": "fa4de10e86e803624aad40b123ec9375cc95c4a258f1cb322716fccf1cd961b7"
+    },
+    {
+      "index": 95,
+      "file": "qualitybg0095.png",
+      "pivot": [
+        47.0,
+        47.0
+      ],
+      "canvas": [
+        94,
+        94
+      ],
+      "region": [
+        976,
+        1349,
+        0,
+        0
+      ],
+      "trim": [
+        -47,
+        -47
+      ],
+      "atlas": "mission2",
+      "sha256": "fa4de10e86e803624aad40b123ec9375cc95c4a258f1cb322716fccf1cd961b7"
+    },
+    {
+      "index": 96,
+      "file": "qualitybg0096.png",
+      "pivot": [
+        47.0,
+        47.0
+      ],
+      "canvas": [
+        94,
+        94
+      ],
+      "region": [
+        976,
+        1349,
+        0,
+        0
+      ],
+      "trim": [
+        -47,
+        -47
+      ],
+      "atlas": "mission2",
+      "sha256": "fa4de10e86e803624aad40b123ec9375cc95c4a258f1cb322716fccf1cd961b7"
+    },
+    {
+      "index": 97,
+      "file": "qualitybg0097.png",
+      "pivot": [
+        47.0,
+        47.0
+      ],
+      "canvas": [
+        94,
+        94
+      ],
+      "region": [
+        976,
+        1349,
+        0,
+        0
+      ],
+      "trim": [
+        -47,
+        -47
+      ],
+      "atlas": "mission2",
+      "sha256": "fa4de10e86e803624aad40b123ec9375cc95c4a258f1cb322716fccf1cd961b7"
+    },
+    {
+      "index": 98,
+      "file": "qualitybg0098.png",
+      "pivot": [
+        47.0,
+        47.0
+      ],
+      "canvas": [
+        94,
+        94
+      ],
+      "region": [
+        976,
+        1349,
+        0,
+        0
+      ],
+      "trim": [
+        -47,
+        -47
+      ],
+      "atlas": "mission2",
+      "sha256": "fa4de10e86e803624aad40b123ec9375cc95c4a258f1cb322716fccf1cd961b7"
+    },
+    {
+      "index": 99,
+      "file": "qualitybg0099.png",
+      "pivot": [
+        47.0,
+        47.0
+      ],
+      "canvas": [
+        94,
+        94
+      ],
+      "region": [
+        976,
+        1349,
+        0,
+        0
+      ],
+      "trim": [
+        -47,
+        -47
+      ],
+      "atlas": "mission2",
+      "sha256": "fa4de10e86e803624aad40b123ec9375cc95c4a258f1cb322716fccf1cd961b7"
+    },
+    {
+      "index": 100,
+      "file": "qualitybg0100.png",
+      "pivot": [
+        47.0,
+        47.0
+      ],
+      "canvas": [
+        94,
+        94
+      ],
+      "region": [
+        976,
+        1349,
+        0,
+        0
+      ],
+      "trim": [
+        -47,
+        -47
+      ],
+      "atlas": "mission2",
+      "sha256": "fa4de10e86e803624aad40b123ec9375cc95c4a258f1cb322716fccf1cd961b7"
+    },
+    {
+      "index": 101,
+      "file": "qualitybg0101.png",
+      "pivot": [
+        47.0,
+        47.0
+      ],
+      "canvas": [
+        94,
+        94
+      ],
+      "region": [
+        976,
+        1349,
+        0,
+        0
+      ],
+      "trim": [
+        -47,
+        -47
+      ],
+      "atlas": "mission2",
+      "sha256": "fa4de10e86e803624aad40b123ec9375cc95c4a258f1cb322716fccf1cd961b7"
+    },
+    {
+      "index": 102,
+      "file": "qualitybg0102.png",
+      "pivot": [
+        47.0,
+        47.0
+      ],
+      "canvas": [
+        94,
+        94
+      ],
+      "region": [
+        976,
+        1349,
+        0,
+        0
+      ],
+      "trim": [
+        -47,
+        -47
+      ],
+      "atlas": "mission2",
+      "sha256": "fa4de10e86e803624aad40b123ec9375cc95c4a258f1cb322716fccf1cd961b7"
+    },
+    {
+      "index": 103,
+      "file": "qualitybg0103.png",
+      "pivot": [
+        47.0,
+        47.0
+      ],
+      "canvas": [
+        94,
+        94
+      ],
+      "region": [
+        976,
+        1349,
+        0,
+        0
+      ],
+      "trim": [
+        -47,
+        -47
+      ],
+      "atlas": "mission2",
+      "sha256": "fa4de10e86e803624aad40b123ec9375cc95c4a258f1cb322716fccf1cd961b7"
+    },
+    {
+      "index": 104,
+      "file": "qualitybg0104.png",
+      "pivot": [
+        47.0,
+        47.0
+      ],
+      "canvas": [
+        94,
+        94
+      ],
+      "region": [
+        976,
+        1349,
+        0,
+        0
+      ],
+      "trim": [
+        -47,
+        -47
+      ],
+      "atlas": "mission2",
+      "sha256": "fa4de10e86e803624aad40b123ec9375cc95c4a258f1cb322716fccf1cd961b7"
+    },
+    {
+      "index": 105,
+      "file": "qualitybg0105.png",
+      "pivot": [
+        47.0,
+        47.0
+      ],
+      "canvas": [
+        94,
+        94
+      ],
+      "region": [
+        976,
+        1349,
+        0,
+        0
+      ],
+      "trim": [
+        -47,
+        -47
+      ],
+      "atlas": "mission2",
+      "sha256": "fa4de10e86e803624aad40b123ec9375cc95c4a258f1cb322716fccf1cd961b7"
+    },
+    {
+      "index": 106,
+      "file": "qualitybg0106.png",
+      "pivot": [
+        47.0,
+        47.0
+      ],
+      "canvas": [
+        94,
+        94
+      ],
+      "region": [
+        976,
+        1349,
+        0,
+        0
+      ],
+      "trim": [
+        -47,
+        -47
+      ],
+      "atlas": "mission2",
+      "sha256": "fa4de10e86e803624aad40b123ec9375cc95c4a258f1cb322716fccf1cd961b7"
+    },
+    {
+      "index": 107,
+      "file": "qualitybg0107.png",
+      "pivot": [
+        47.0,
+        47.0
+      ],
+      "canvas": [
+        94,
+        94
+      ],
+      "region": [
+        976,
+        1349,
+        0,
+        0
+      ],
+      "trim": [
+        -47,
+        -47
+      ],
+      "atlas": "mission2",
+      "sha256": "fa4de10e86e803624aad40b123ec9375cc95c4a258f1cb322716fccf1cd961b7"
+    },
+    {
+      "index": 108,
+      "file": "qualitybg0108.png",
+      "pivot": [
+        47.0,
+        47.0
+      ],
+      "canvas": [
+        94,
+        94
+      ],
+      "region": [
+        976,
+        1349,
+        0,
+        0
+      ],
+      "trim": [
+        -47,
+        -47
+      ],
+      "atlas": "mission2",
+      "sha256": "fa4de10e86e803624aad40b123ec9375cc95c4a258f1cb322716fccf1cd961b7"
+    },
+    {
+      "index": 109,
+      "file": "qualitybg0109.png",
+      "pivot": [
+        47.0,
+        47.0
+      ],
+      "canvas": [
+        94,
+        94
+      ],
+      "region": [
+        976,
+        1349,
+        0,
+        0
+      ],
+      "trim": [
+        -47,
+        -47
+      ],
+      "atlas": "mission2",
+      "sha256": "fa4de10e86e803624aad40b123ec9375cc95c4a258f1cb322716fccf1cd961b7"
+    },
+    {
+      "index": 110,
+      "file": "qualitybg0110.png",
+      "pivot": [
+        47.0,
+        47.0
+      ],
+      "canvas": [
+        94,
+        94
+      ],
+      "region": [
+        976,
+        1349,
+        0,
+        0
+      ],
+      "trim": [
+        -47,
+        -47
+      ],
+      "atlas": "mission2",
+      "sha256": "fa4de10e86e803624aad40b123ec9375cc95c4a258f1cb322716fccf1cd961b7"
+    },
+    {
+      "index": 111,
+      "file": "qualitybg0111.png",
+      "pivot": [
+        47.0,
+        47.0
+      ],
+      "canvas": [
+        94,
+        94
+      ],
+      "region": [
+        976,
+        1349,
+        0,
+        0
+      ],
+      "trim": [
+        -47,
+        -47
+      ],
+      "atlas": "mission2",
+      "sha256": "fa4de10e86e803624aad40b123ec9375cc95c4a258f1cb322716fccf1cd961b7"
+    }
+  ],
+  "logic": [
+    "DropDownEntity.Awake: qualitybg[quality] behind icon1",
+    "FlyItemEntity.FlyTo: distance/200, Cubic.easeOut, collinear midpoint",
+    "UIBattleLayer.getBagPos: btn_bb.localToGlobal(27,29)"
+  ]
+}

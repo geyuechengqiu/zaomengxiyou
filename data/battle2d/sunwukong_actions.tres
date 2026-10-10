@@ -7,6 +7,7 @@
 script = ExtResource("script")
 run_attack_skill_id = &"sunwukong_run_attack"
 jump_attack_skill_id = &"sunwukong_jump_attack"
-jump_velocity = -720.0
-second_jump_velocity = -720.0
+gravity = 2000.0
+jump_velocity = -1000.0
+second_jump_velocity = -1000.0
 combo = ExtResource("combo")

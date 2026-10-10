@@ -102,7 +102,8 @@ func _update_geometry() -> void:
 		collision.disabled = false
 
 func _sample_targets(actor: BattleEntity2D, before: Vector2, after: Vector2) -> void:
-	if _geometry.size == Vector2.ZERO: return
+	# 原atkMax=0的石墙仅负责表现/阻挡，不进入伤害、硬直、保护值或Buff结算。
+	if definition.maximum_hits == 0 or _geometry.size == Vector2.ZERO: return
 	var transformed := Transform2D(rotation, Vector2.ZERO)*_geometry
 	for target in actor.session.get_entities():
 		if not active or not actor.is_alive(): return
@@ -115,7 +116,7 @@ func _sample_targets(actor: BattleEntity2D, before: Vector2, after: Vector2) -> 
 		var expanded := Rect2(bounds.position-half, bounds.size+half*2)
 		if not _crosses(expanded, before+transformed.get_center(), after+transformed.get_center()): continue
 		var record: Dictionary = hits.get(target.entity_id, {"count": 0, "due": 0.0})
-		if (definition.maximum_hits > 0 and record.count >= definition.maximum_hits) or age+0.0000001 < float(record.due): continue
+		if record.count >= definition.maximum_hits or age+0.0000001 < float(record.due): continue
 		record.count += 1
 		record.due = age+definition.hit_interval
 		hits[target.entity_id] = record

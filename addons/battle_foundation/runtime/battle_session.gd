@@ -25,6 +25,10 @@ var level_instance: BattleLevelInstance2D:
 	get: return get_node_or_null(^"LevelInstance") as BattleLevelInstance2D
 var camera_rig: BattleCameraRig2D:
 	get: return get_node_or_null(^"CameraRig") as BattleCameraRig2D
+var loot: BattleLootManager2D:
+	get: return get_node_or_null(^"Loot") as BattleLootManager2D
+var audio: BattleAudio:
+	get: return get_node_or_null(^"BattlePresentation/Audio") as BattleAudio
 ## 可在 .tscn 中预置会话；留空保留原工厂配置方式。
 @export_file("*.json") var scene_manifest_path: String = ""
 @export var scene_seed: int = 0
@@ -235,6 +239,7 @@ func register_scene_level(id: StringName, level_root: Node) -> bool:
 	return true
 
 func clear_battle() -> void:
+	if loot != null: loot.clear_loot()
 	if level_instance != null: level_instance.stop()
 	if camera_rig != null: camera_rig.stop()
 	for id in _entities.keys():
@@ -265,6 +270,7 @@ func advance_physics(unscaled_delta: float) -> void:
 				entity.advance_simulation(delta)
 	if is_instance_valid(_level_root) and _level_root is BattleMap2D:
 		_level_root.advance_visuals(delta)
+	if loot != null: loot.advance_loot(delta)
 	if presentation != null:
 		presentation.advance_presentation(delta)
 		presentation.advance_ui(unscaled_delta if not clock.paused and not (is_inside_tree() and get_tree().paused) else 0.0)

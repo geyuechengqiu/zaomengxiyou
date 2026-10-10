@@ -16,12 +16,12 @@ var reaction_gravity: float = -1.0
 #endregion
 #region 跳跃入口
 func can_jump(maximum_jumps: int) -> bool:
-	return maximum_jumps > 0 and (grounded or maxi(jumps_used, 1) < maximum_jumps)
+	return maximum_jumps > 0 and (grounded or jumps_used < maximum_jumps)
 
 func jump(profile: BattleActionProfile2D) -> bool:
 	if not can_jump(profile.maximum_jumps):
 		return false
-	jumps_used = 1 if grounded else maxi(jumps_used, 1) + 1
+	jumps_used = 1 if grounded else jumps_used + 1
 	jump_count = jumps_used
 	jump_serial += 1
 	grounded = false
@@ -60,8 +60,7 @@ func sweep_skill_displacement(displacement: Vector2, profile: BattleActionProfil
 		just_landed = true
 		landing_serial += 1
 		jumps_used = 0
-	elif not grounded and was_grounded:
-		jumps_used = maxi(jumps_used, 1)
+	# 走下平台或水平技能离开边缘不消耗跳跃，只在真正起跳时记次数。
 
 func apply_impulse(horizontal: float, duration: float, launch: float, gravity: float = -1.0, reset_vertical: bool = false) -> void:
 	impulse_speed = horizontal
@@ -121,7 +120,4 @@ func advance(delta: float, horizontal_speed: float, profile: BattleActionProfile
 			jumps_used = 0
 		if grounded:
 			reaction_gravity = -1.0
-		elif was_grounded:
-			# 走下边缘消耗地面起跳额度，只保留一次空中跳跃。
-			jumps_used = maxi(jumps_used, 1)
 #endregion

@@ -4,9 +4,9 @@
     162
   ],
   "padding": 2,
-  "unique_images": 95,
-  "aliases": 115,
-  "sha256": "fec747b7c5e36036cc36c72f313dca29e490fe640ce4ff41b8519c8af484786b",
+  "unique_images": 105,
+  "aliases": 125,
+  "sha256": "1ad41c8be5c546893de4b55c4a713515121604334d9c699a2c3261a3e6f96863",
   "regions": [
     {
       "file": "bleedNumber/bleedNumber0000.png",
@@ -1038,6 +1038,96 @@
       "file": "bleedNumberAdd/bleedNumberAdd0009.png",
       "region": [
         92,
+        130,
+        26,
+        30
+      ]
+    },
+    {
+      "file": "mpNumberAdd/mpNumberAdd0000.png",
+      "region": [
+        122,
+        130,
+        26,
+        30
+      ]
+    },
+    {
+      "file": "mpNumberAdd/mpNumberAdd0001.png",
+      "region": [
+        152,
+        130,
+        26,
+        30
+      ]
+    },
+    {
+      "file": "mpNumberAdd/mpNumberAdd0002.png",
+      "region": [
+        182,
+        130,
+        26,
+        30
+      ]
+    },
+    {
+      "file": "mpNumberAdd/mpNumberAdd0003.png",
+      "region": [
+        212,
+        130,
+        26,
+        30
+      ]
+    },
+    {
+      "file": "mpNumberAdd/mpNumberAdd0004.png",
+      "region": [
+        242,
+        130,
+        26,
+        30
+      ]
+    },
+    {
+      "file": "mpNumberAdd/mpNumberAdd0005.png",
+      "region": [
+        272,
+        130,
+        26,
+        30
+      ]
+    },
+    {
+      "file": "mpNumberAdd/mpNumberAdd0006.png",
+      "region": [
+        302,
+        130,
+        26,
+        30
+      ]
+    },
+    {
+      "file": "mpNumberAdd/mpNumberAdd0007.png",
+      "region": [
+        332,
+        130,
+        26,
+        30
+      ]
+    },
+    {
+      "file": "mpNumberAdd/mpNumberAdd0008.png",
+      "region": [
+        362,
+        130,
+        26,
+        30
+      ]
+    },
+    {
+      "file": "mpNumberAdd/mpNumberAdd0009.png",
+      "region": [
+        392,
         130,
         26,
         30

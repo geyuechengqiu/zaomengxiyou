@@ -3,5 +3,8 @@
 [resource]
 script = ExtResource("script")
 attack_skill_id = &"yushoushi_skill1"
+gravity = 1980.0
+jump_velocity = -620.0
+second_jump_velocity = -620.0
 maximum_jumps = 1
 hurt_lock_frames = 9

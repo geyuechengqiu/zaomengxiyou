@@ -1,5 +1,5 @@
 [gd_scene format=3]
-[ext_resource type="PackedScene" path="res://examples/original_damage_demo.tscn" id="scene"]
+[ext_resource type="PackedScene" path="res://tests/fixtures/original_damage_demo.tscn" id="scene"]
 [ext_resource type="Script" path="res://tools/capture_wukong_context_attacks.gd" id="script"]
 [node name="CaptureWukongContextAttacks" instance=ExtResource("scene")]
 script = ExtResource("script")

@@ -16,4 +16,4 @@
 
 添加业务定义时创建同类 `.tres`，在 manifest 对应类别登记 ID 和路径。实体中引用的技能和状态、关卡中引用的实体必须已经登记。外部业务通过 Catalog.instantiate_definition 或 Session.spawn_entity 等接口取得实例，不修改 `load()` 返回的共享资源。
 
-在 Godot 中运行 [交互演示](../../examples/stage_one_demo.tscn) 或 [自动验收](../../examples/verify_stage_one.tscn)。完整时钟规则、事件字段、素材帧约定和脚本索引见插件 README。
+在 Godot 中运行 [交互演示](../../tests/suites/verify_stage_one.tscn) 或 [自动验收](../../tests/suites/verify_stage_one.tscn)。完整时钟规则、事件字段、素材帧约定和脚本索引见插件 README。

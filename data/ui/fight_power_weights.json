@@ -1,0 +1,17 @@
+{
+  "source": "PowerAttribute[1]; FightPowerManager.getFightPowerByItemVo",
+  "weights": {
+    "hpMax": 1,
+    "mpMax": 2,
+    "atk": 12,
+    "phyDef": 40,
+    "hit": 4,
+    "dodge": 6,
+    "critical": 6,
+    "toughness": 4,
+    "lucky": 6,
+    "guardian": 4,
+    "reHP": 180,
+    "reMP": 360
+  }
+}

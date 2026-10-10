@@ -1,6 +1,6 @@
 # 阶段四：运动、动作状态与孙悟空五段普攻
 
-运行 [横版验收场景](../../../examples/wukong_platform_demo.tscn)，使用项目现有带 Spine 模块的 Godot 按 F6。A/D 或方向键行走，Shift 或同方向双击奔跑，K 地面跳 / 空中二段跳，J 地面连按预约五段普攻，奔跑/空中按 J 发动跑攻/跳攻。Esc 菜单与改键，F1 普通受击，F2 死亡，F4 重生。地面、高台、黄色单向平台、墙和低天花板用于测试。面板显示动作状态、支撑、跳跃预算、连击段号与预约情况。
+运行 [横版验收场景](../../../tests/fixtures/wukong_platform_demo.tscn)，使用项目现有带 Spine 模块的 Godot 按 F6。A/D 或方向键行走，Shift 或同方向双击奔跑，K 地面跳 / 空中二段跳，J 地面连按预约五段普攻，奔跑/空中按 J 发动跑攻/跳攻。Esc 菜单与改键，F1 普通受击，F2 死亡，F4 重生。地面、高台、黄色单向平台、墙和低天花板用于测试。面板显示动作状态、支撑、跳跃预算、连击段号与预约情况。
 
 复用现有 Battle Foundation、Core 操作/事件与 GAS 属性/Vital/技能系统。本阶段扩展 Battle Foundation，不另建重复的输入、技能或时钟插件。
 
@@ -53,7 +53,7 @@ actor.try_jump()
 
 实体清理/离树时注销机器，Core 调用 stop/dispose；战斗机器随后断开叶子的 `state_machine` / `agent` 所属引用并清空状态集合，避免 RefCounted 循环引用。ActionState 现为角色场景预置 Node，退出或释放时自动注销并清理；节点结构见 [角色组件说明](../../../data/battle2d/character-components.md)。独立测试手动创建未入树节点时，结束后调用 `free()`；`get_state_name()` 查询战斗状态，Node 的 `get_name()` 查询节点名。
 
-[verify_wukong_state_machine.tscn](../../../examples/verify_wukong_state_machine.tscn) 已通过 46 项检查：真实 Core 状态对象、注册/agent 隔离、生命周期顺序、转换消息、单一时钟、连击重入、死亡守卫、拒绝通知及重复重生/直接释放的注销与引用清理；原有阶段四验收继续覆盖运动和完整五段连击。
+[verify_wukong_state_machine.tscn](../../../tests/suites/verify_wukong_state_machine.tscn) 已通过 46 项检查：真实 Core 状态对象、注册/agent 隔离、生命周期顺序、转换消息、单一时钟、连击重入、死亡守卫、拒绝通知及重复重生/直接释放的注销与引用清理；原有阶段四验收继续覆盖运动和完整五段连击。
 
 ## 运动与时间规则
 
@@ -61,7 +61,7 @@ BattleSession 在固定物理更新中先识别未缩放输入，再计算战斗
 
 本控制器自己维护 `motion.grounded`，不读取由 `move_and_slide()` 更新的 `is_on_floor()`。地面法线夹角上限默认 45°；墙体不能恢复跳跃，顶头清除向上速度。已有支撑、未上升时才允许最多 3 像素的地面吸附，跨过边缘立即进入空中。StaticBody2D 单向平台由 CollisionShape2D 的 `one_way_collision` 配置。
 
-默认重力 1500 px/s²、跳跃速度 -620 px/s、最大落速 900 px/s；二段跳重置向上速度。地面起跳消耗第一跳；起跳态短暂拒绝再次起跳，避免同 tick 重复消费。空中最多补一跳；走下边缘也消耗地面额度。仅实际着地重置预算，并经过 LAND 状态，再回待机/行走/奔跑。原版两次跳跃额度已保留，像素运动参数为本测试地图校准值，没有将原版 `jump=-178` 直接当作 Godot 速度。
+重力、第一次与第二次起跳速度、最大落速和跳跃次数在 `data/battle2d/sunwukong_actions.tres` 配置；二段跳重置向上速度。地面起跳消耗第一跳；起跳态短暂拒绝再次起跳，避免同 tick 重复消费。按当前项目规则，走下平台或水平技能离开边缘不消耗跳跃额度，仍可在空中连续执行第一跳、第二跳；已经在地面起跳后则只剩一次空中跳跃。仅实际着地重置预算，并经过 LAND 状态，再回待机/行走/奔跑。像素运动参数为本地图配置，没有将原版 `jump=-178` 直接当作 Godot 速度。
 
 ## 明确的条件与优先关系
 
@@ -136,7 +136,7 @@ actor.receive_damage(10, attacker, &"heavy", 90)
 
 添加角色时建立其独立动作规则与连击 Resource，指定各段 GAS ID/动作名；实例状态由宿主新建。修改 `state_rules` / 每段规则即可调整移动、转向与跳取消，无需将按键写入角色代码。
 
-[verify_stage_four.tscn](../../../examples/verify_stage_four.tscn) 已通过 222 项真实 Godot PhysicsServer、GAS 和 Spine 检查：稳定支撑、行走/奔跑、二段跳预算、平台边缘、单向平台、顶头、大 delta 不穿墙、五段六事件、第四段位移/镜像、每段每击的原版几何与左右边界命中/框外不命中、阵营过滤、优先级/霸体、跳取消、暂停/慢动作/死亡，以及五次短按、长按和菜单清预约。[输入验收](../../../examples/verify_player_operations.tscn) 通过 145 项，新增松方向返回待机动画、相反方向释放、双击释放、CHANGED 强度、攻击中松键与菜单同步释放。通过打印 PASS，失败退出码为 1。原有 [动画](../../../examples/verify_wukong_animation.tscn)、[阶段一](../../../examples/verify_stage_one.tscn)、[属性](../../../examples/verify_base_attributes.tscn) 和 [Core 事件](../../../examples/verify_core_events.tscn) 验收继续运行。
+[verify_stage_four.tscn](../../../tests/suites/verify_stage_four.tscn) 已通过 222 项真实 Godot PhysicsServer、GAS 和 Spine 检查：稳定支撑、行走/奔跑、二段跳预算、平台边缘、单向平台、顶头、大 delta 不穿墙、五段六事件、第四段位移/镜像、每段每击的原版几何与左右边界命中/框外不命中、阵营过滤、优先级/霸体、跳取消、暂停/慢动作/死亡，以及五次短按、长按和菜单清预约。[输入验收](../../../tests/suites/verify_player_operations.tscn) 通过 145 项，新增松方向返回待机动画、相反方向释放、双击释放、CHANGED 强度、攻击中松键与菜单同步释放。通过打印 PASS，失败退出码为 1。原有 [动画](../../../tests/suites/verify_wukong_animation.tscn)、[阶段一](../../../tests/suites/verify_stage_one.tscn)、[属性](../../../tests/suites/verify_base_attributes.tscn) 和 [Core 事件](../../../tests/suites/verify_core_events.tscn) 验收继续运行。
 
 ```powershell
 # 在 Godot 项目根目录重建资源；仅生成时需要原版项目，游戏运行无需它。

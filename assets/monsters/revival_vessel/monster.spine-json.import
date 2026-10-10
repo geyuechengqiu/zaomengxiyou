@@ -1,0 +1,14 @@
+[remap]
+
+importer="spine.json"
+type="SpineSkeletonFileResource"
+uid="uid://b4bccwqly1iey"
+path="res://.godot/imported/monster.spine-json-6c7fd3236f7eaadd20c94bba7c6e23d6.spjson"
+
+[deps]
+
+source_file="res://assets/monsters/revival_vessel/monster.spine-json"
+dest_files=["res://.godot/imported/monster.spine-json-6c7fd3236f7eaadd20c94bba7c6e23d6.spjson"]
+
+[params]
+

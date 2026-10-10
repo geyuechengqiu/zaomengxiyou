@@ -114,7 +114,7 @@ func can_use_ability(_id: StringName, _context: Dictionary = {}) -> bool:
 	return not _cleaned and is_alive() and not TagManager.has_tag(self, &"state.stunned")
 
 func can_receive_status(data: GameplayStatusData) -> bool:
-	return not _cleaned and is_alive() and not (data.tags.has(&"status.debuff") and TagManager.has_tag(self, &"state.invulnerable"))
+	return not _cleaned and is_alive() and not (data.tags.has(&"status.debuff") and (TagManager.has_tag(self, &"state.invulnerable") or TagManager.has_tag(self, &"state.debuff_immune")))
 
 func receive_damage_info(info: DamageInfo, _kind: StringName = &"normal", _priority: int = 60, context: Dictionary = {}) -> float:
 	if session.is_simulation_blocked() or not is_alive():
