@@ -1,5 +1,11 @@
 {
-  "source": "PowerAttribute[1]; FightPowerManager.getFightPowerByItemVo",
+  "source": "PowerAttribute[1]; FightPowerManager.getFightPowerByItemVo; BodyView.updateFight; Tips[684]",
+  "archive": "D:\\UserData\\Downloads\\game\\Speculum-4399-master\\games\\zmhj-g5\\cache\\assets\\data\\cg1_20260921_1.swf",
+  "archive_sha256": "754e4db204d396151fedd0a510aa80f3283a616b29c4a3483ed1f4deb1c0c8c3",
+  "logic": {
+    "com/ywxgame/models/manager/FightPowerManager.as": "be66c941a2ae6998af278162e9b009f90371df70a4af896ca4a1a788d21aad69",
+    "modules/backpack/view/BodyView.as": "e4f3de203979660855dc064c2bfccf0391313c049950b0e48cd7c02c00428e16"
+  },
   "weights": {
     "hpMax": 1,
     "mpMax": 2,
@@ -13,5 +19,32 @@
     "guardian": 4,
     "reHP": 180,
     "reMP": 360
-  }
+  },
+  "roles": {
+    "孙悟空": {
+      "source_role_id": 2001,
+      "powerCorrection": 190,
+      "base_attributes": {
+        "hpMax": 275,
+        "mpMax": 100,
+        "atk": 26,
+        "phyDef": 5,
+        "hit": 0,
+        "dodge": 0,
+        "critical": 0,
+        "toughness": 0,
+        "lucky": 0,
+        "guardian": 0,
+        "reHP": 0,
+        "reMP": 0
+      },
+      "growth_per_level": {
+        "hpMax": 55,
+        "mpMax": 20,
+        "atk": 5.25,
+        "phyDef": 1.05
+      }
+    }
+  },
+  "original_tip": "总战斗力：num\n角色战力：num\n修正战力：num（当前版本）\n修正战力用于平衡各职业战力差异，会随版本变化"
 }

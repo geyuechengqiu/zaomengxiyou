@@ -1,0 +1,116 @@
+{
+  "source": "D:\\UserData\\Downloads\\game\\Speculum-4399-master\\games\\zmhj-g5\\cache\\assets\\ui\\mission2_20250707_1.swf",
+  "sha256": "6168f618107d92257687fb0157e053a82fe7f7c6a910e20421c3b245424aa050",
+  "logic": [
+    "viewers/component/HitCombox.as",
+    "viewers/container/layers/BattleTopLayer.as"
+  ],
+  "position": [
+    640,
+    150
+  ],
+  "digit_spacing": 48,
+  "label_x": 192,
+  "timeout_seconds": 1.5,
+  "glyphs": [
+    {
+      "name": "hitCombo0000",
+      "x": "436",
+      "y": "70",
+      "width": "90",
+      "height": "73",
+      "pivotX": "0",
+      "pivotY": "0"
+    },
+    {
+      "name": "hitComboNum0000",
+      "x": "526",
+      "y": "70",
+      "width": "56",
+      "height": "62",
+      "pivotX": "0",
+      "pivotY": "0"
+    },
+    {
+      "name": "hitComboNum0001",
+      "x": "582",
+      "y": "70",
+      "width": "56",
+      "height": "62",
+      "pivotX": "0",
+      "pivotY": "0"
+    },
+    {
+      "name": "hitComboNum0002",
+      "x": "638",
+      "y": "70",
+      "width": "56",
+      "height": "62",
+      "pivotX": "0",
+      "pivotY": "0"
+    },
+    {
+      "name": "hitComboNum0003",
+      "x": "694",
+      "y": "70",
+      "width": "56",
+      "height": "62",
+      "pivotX": "0",
+      "pivotY": "0"
+    },
+    {
+      "name": "hitComboNum0004",
+      "x": "750",
+      "y": "70",
+      "width": "56",
+      "height": "62",
+      "pivotX": "0",
+      "pivotY": "0"
+    },
+    {
+      "name": "hitComboNum0005",
+      "x": "806",
+      "y": "70",
+      "width": "56",
+      "height": "62",
+      "pivotX": "0",
+      "pivotY": "0"
+    },
+    {
+      "name": "hitComboNum0006",
+      "x": "862",
+      "y": "70",
+      "width": "56",
+      "height": "62",
+      "pivotX": "0",
+      "pivotY": "0"
+    },
+    {
+      "name": "hitComboNum0007",
+      "x": "918",
+      "y": "70",
+      "width": "56",
+      "height": "62",
+      "pivotX": "0",
+      "pivotY": "0"
+    },
+    {
+      "name": "hitComboNum0008",
+      "x": "0",
+      "y": "143",
+      "width": "56",
+      "height": "62",
+      "pivotX": "0",
+      "pivotY": "0"
+    },
+    {
+      "name": "hitComboNum0009",
+      "x": "56",
+      "y": "143",
+      "width": "56",
+      "height": "62",
+      "pivotX": "0",
+      "pivotY": "0"
+    }
+  ]
+}

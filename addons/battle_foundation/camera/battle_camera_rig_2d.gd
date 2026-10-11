@@ -57,6 +57,15 @@ func set_combat_locked(locked: bool) -> void:
 func _view_size() -> Vector2:
 	return _camera.get_viewport_rect().size / _pcam.zoom
 
+## 战斗活动范围取可见画面与当前区域的交集，而非整块ScreenRange。
+## 过区时使用正在插值的中心，新画面尚未到达的右侧暂不开放。
+func get_combat_horizontal_bounds() -> Vector2:
+	var half_width := _view_size().x / 2.0
+	var left := maxf(region_bounds.position.x, center.x - half_width)
+	var right := minf(region_bounds.end.x, center.x + half_width)
+	# 测试传送或低帧率跨区可能早于镜头抵达新区，不能产生反向区间。
+	return Vector2(left, maxf(left, right))
+
 func _clamp_target(position: Vector2, left: float) -> Vector2:
 	var half := _view_size()/2.0
 	# 区域窄于视口时居中，避免clampf的上下界倒置。

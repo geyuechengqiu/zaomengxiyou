@@ -90,5 +90,5 @@ script = ExtResource("component_Inventory")
 
 [node name="AIController" type="Node" parent="."]
 script = ExtResource("ai")
-enabled = false
+enabled = true
 profile = ExtResource("ai_profile")

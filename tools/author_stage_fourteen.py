@@ -22,7 +22,7 @@ spirit_texture = ExtResource("soul_texture")
 
 '''+text[pos:]
 path.write_text(text, 'utf8')
-for relative in ['data/battle2d/sunwukong_2d.tscn', 'data/templates/combatant_base.tscn']:
+for relative in ['data/characters/sunwukong/character.tscn', 'data/templates/combatant_base.tscn']:
     path = ROOT/relative; text = path.read_text('utf8')
     if 'id="growth_rules"' not in text:
         pos = text.index('[sub_resource')

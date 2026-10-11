@@ -1,12 +1,14 @@
 # 阶段 6：单段普攻与最小战斗闭环
 
+现已接入 [原版战斗连击与显示](hit-combo.md)：独立于五段普攻派生，按命中结算累计，1.5秒超时结束，使用原版数字/连击贴图和共享会话/HUD节点。
+
 阶段 10 新增 [Buff、被动与战斗触发](buffs-triggers.md)，复用并重构 GAS Status/Effect/PassiveStatusFeature，接入 Core STUN、标签引用计数、统一周期时钟、原版吸血/反伤与死亡/离场清理。测试场景为项目当前 F5 入口，节点与控件预置，全部定义位于业务 data/buffs。
 
 阶段 8 使用 GAS 策略 + Attribute/Vital/Status/Effect + Core 事件完成原版通用伤害链；等级评分沿用原版EXP，界面统一整数。原版盾后补1、真实伤害与吸血顺序、角色回调和结果字段见 [详细说明](original-damage.md)。
 
 阶段 7 在此闭环上扩展 [技能时间轴、连招与多段攻击](skill-timeline.md)。新场景使用独立资源，阶段 6 的窗口和场景保持兼容；BattleAttackInstance 的目标记录现包含 count / next_hit_time，hit_count 统计实际次数。分段反应、派生缓存、消耗与冷却、对象和事件取消协议见新文档。
 
-打开 [single_attack_demo.tscn](../../../tests/fixtures/single_attack_demo.tscn)，使用项目现有带 Spine 模块的 Godot 按 F6。A/D 移动，K 跳跃，J 只施放第一段普攻；长按不自动重复，也不预约连击。Esc 打开菜单与改键。按钮可翻转角色、移动木桩以打空、切换攻击 26/200、重置整个场景及暂停。两侧木桩初始生命 70、防御 5，是明确使用测试数值的敌方实体。
+打开 [single_attack_demo.tscn](../../../game/levels/biyujing.tscn)，使用项目现有带 Spine 模块的 Godot 按 F6。A/D 移动，K 跳跃，J 只施放第一段普攻；长按不自动重复，也不预约连击。Esc 打开菜单与改键。按钮可翻转角色、移动木桩以打空、切换攻击 26/200、重置整个场景及暂停。两侧木桩初始生命 70、防御 5，是明确使用测试数值的敌方实体。
 
 项目视口已改为原版 **940×590**，保持宽高比缩放。依据原版 `games/zmhj-g5/game.json` 的 contentWidth/contentHeight，以及反编译 `Game.as` 的 `drawRect(0,0,940,590)`；基础引擎 GameData 的 640×480 默认值不作为该游戏的有效尺寸。世界沿用现有 2 倍战斗坐标，预置 Camera2D 的 zoom=0.5，让原素材以 1 倍像素显示，命中几何和碰撞单位保持一致。
 
@@ -76,7 +78,7 @@ SingleAttackDemo
 
 ## 时间、窗口与去重
 
-独立 [单段技能资源](../../../data/battle2d/single_attack/attack1.tres) 保留原第一段的动作、范围、第 4 帧命中和 10 帧时长，使用 30 FPS。该验收资源额外设置 **`hit_window_frames = 2`**，这是阶段 6 的临时持续窗口，不代表已还原原版 sensor 的完整生命周期。
+独立 [单段技能资源](../../../data/characters/sunwukong/skills/normal_attacks/attack1.tres) 保留原第一段的动作、范围、第 4 帧命中和 10 帧时长，使用 30 FPS。该验收资源额外设置 **`hit_window_frames = 2`**，这是阶段 6 的临时持续窗口，不代表已还原原版 sensor 的完整生命周期。
 
 | 时段 | 行为 |
 | --- | --- |
@@ -105,11 +107,11 @@ SingleAttackDemo
 └─ ProtectionSystem                  独立保护值与保护时间
 ```
 
-木桩物理体为 44×180 胶囊，受击框为 90×170 矩形；悟空受击框先使用 44×180，保留已有范围边界。受击形状使用 `resource_local_to_scene`，编辑单个运行实例不会污染另一实例或模板。打开 [木桩场景](../../../data/battle2d/dummy/wooden_dummy.tscn) 或 [角色场景](../../../data/battle2d/sunwukong_2d.tscn)，选择 `Hurtbox/CollisionShape2D`，调整尺寸与局部位置；编辑器显示蓝色范围。`vulnerable=false` 可关闭几何受击资格。
+木桩物理体为 44×180 胶囊，受击框为 90×170 矩形；悟空受击框先使用 44×180，保留已有范围边界。受击形状使用 `resource_local_to_scene`，编辑单个运行实例不会污染另一实例或模板。打开 [木桩场景](../../../data/battle2d/dummy/wooden_dummy.tscn) 或 [角色场景](../../../data/characters/sunwukong/character.tscn)，选择 `Hurtbox/CollisionShape2D`，调整尺寸与局部位置；编辑器显示蓝色范围。`vulnerable=false` 可关闭几何受击资格。
 
 攻击/受击 Area2D 的物理监测关闭、层和掩码为 0；形状供 `Geometry2D.intersect_polygons` 查询，不参与阻挡、推挤或物理 overlap 回调。只有 CharacterBody2D 的碰撞体负责移动碰撞。改变物理体的位置不会移动受击区域，改变受击框不会改变角色支撑。
 
-攻击框继续以技能的 `hit_rect`、`hit_scale_x/y`、`hit_offset` 为唯一数据来源，事件参数不能覆盖真实技能几何。先正缩放、偏移和素材单位转换，再绕角色脚底镜像；左向局部 X 为 `-右向矩形.end.x`，宽高不变。保留原第一段 ABRect(-114,-104.95,267,99.95) 及 2 倍场景比例，仍允许其原有后侧覆盖。编辑攻击范围参见 [动画与统一攻击框说明](../../../data/animation/README.md)。
+攻击框继续以技能的 `hit_rect`、`hit_scale_x/y`、`hit_offset` 为唯一数据来源，事件参数不能覆盖真实技能几何。先正缩放、偏移和素材单位转换，再绕角色脚底镜像；左向局部 X 为 `-右向矩形.end.x`，宽高不变。保留原第一段 ABRect(-114,-104.95,267,99.95) 及 2 倍场景比例，仍允许其原有后侧覆盖。编辑攻击范围参见 [动画与统一攻击框说明](../../../data/characters/sunwukong/animation/README.md)。
 
 ## 临时伤害与反馈约定
 
@@ -135,7 +137,7 @@ SingleAttackDemo
 & '<带 Spine 模块的 Godot 路径>' --headless --path . res://tests/suites/verify_single_attack.tscn
 ```
 
-[验收脚本](../../../tests/suites/verify_single_attack.gd) 驱动真实按键入口、GAS 帧事件、2D 物理更新和实际 HealthVital，已通过 **64 项检查**。覆盖原 46 项战斗闭环，另验证 940×590、启动节点树一致、预置 GAS/输入/菜单、摄像机素材比例、原版特效时长/透明结尾/注册点、单次播放、暂停、挂点镜像、连续受击重播及技能关闭闪光。失败返回非零退出码。
+[验收脚本](../../../tests/README.md) 驱动真实按键入口、GAS 帧事件、2D 物理更新和实际 HealthVital，已通过 **64 项检查**。覆盖原 46 项战斗闭环，另验证 940×590、启动节点树一致、预置 GAS/输入/菜单、摄像机素材比例、原版特效时长/透明结尾/注册点、单次播放、暂停、挂点镜像、连续受击重播及技能关闭闪光。失败返回非零退出码。
 
 `--headless --path . --script res://tools/verify_single_attack_scene.gd` 另通过 8 项完整场景重载、死亡复位、注册注销与菜单控制检查。
 

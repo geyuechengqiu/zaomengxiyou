@@ -246,7 +246,7 @@ states += text(32,1100,'死亡守卫涵盖：语义入口、Core 管理器、叶
 fs.writeFileSync(path.join(docs,'action-state-machine.svg'),svg(1500,1140,'孙悟空 · Core 状态机接入、继承与生命周期类图',states));
 // #endregion
 // #region 原版攻击范围与坐标转换
-const nativeHitboxes=JSON.parse(fs.readFileSync(path.join(root,'data/battle2d/attack_hitboxes_source.json'),'utf8'));
+const nativeHitboxes=JSON.parse(fs.readFileSync(path.join(root,'data/characters/sunwukong/skills/attack_hitboxes_source.json'),'utf8'));
 let ranges=text(32,80,'原单位横向投影，脚底 X=0；纵向数据列于每行下方。游戏场景按 2 倍转换。');
 ranges += '<path d="M450 112V625" stroke="#059669" stroke-width="2" stroke-dasharray="6 5"/>';
 ranges += text(459,125,'脚底原点',16,'#059669');
@@ -258,7 +258,7 @@ nativeHitboxes.rectangles.forEach((entry,i)=>{
   ranges += text(450+(rx+rw)*1.2-12,y-8,String(Number((rx+rw).toFixed(2))),16);
   ranges += text(195,y+67,`ABRect(${rx}, ${ry}, ${rw}, ${rh})`,17);
 });
-ranges += box(935,140,535,205,'原版碰撞数据链', ['attackV427.swf：abs / ABConfigs','getAbRects(shootAssetLink)','SkillControl.reBuilBodyBox → sensor','AI atkRange 不参与伤害矩形'], '../../../data/battle2d/attack_hitboxes_source.json','#dcfce7');
+ranges += box(935,140,535,205,'原版碰撞数据链', ['attackV427.swf：abs / ABConfigs','getAbRects(shootAssetLink)','SkillControl.reBuilBodyBox → sensor','AI atkRange 不参与伤害矩形'], '../../../data/characters/sunwukong/skills/attack_hitboxes_source.json','#dcfce7');
 ranges += box(935,405,535,205,'第四段第二击', ['ABRect 与第一击相同','显示 scaleX=-1 不反转碰撞框','局部偏移 (-17,-4)，再按朝向镜像','跟随角色位置，保留技能位移'], '../../../data/battle2d/attack4.tres','#fef3c7');
 ranges += box(30,685,690,175,'技能数据驱动统一框', ['每击：hit_rect → 正缩放 → 偏移 → 素材比例','更新同一个 CollisionShape2D → 镜像 → 世界变换','修改技能判定数据，预览与伤害范围一起更新'], '../movement/battle_hitbox_2d.gd');
 ranges += box(780,685,690,175,'命中边界与当前运行方式', ['每段、每击、左右方向都验证前后边界与框外','独立受击区域 → 攻击实例去重 → GAS / Vital','五连击默认瞬时查询；单段验收支持持续窗口'], '../../../tests/suites/verify_stage_four.gd','#e2e8f0');
@@ -266,15 +266,15 @@ fs.writeFileSync(path.join(docs,'attack-ranges.svg'),svg(1500,900,'孙悟空 · 
 // #endregion
 // #region AnimationPlayer 与编辑器攻击框联合类图
 let authoring = text(32,80,'所有技能复用一个场景判定框；编辑器与战斗均读取技能数据，许可继续由 Core/GAS 决定。');
-authoring += box(30,115,440,215,'sunwukong_visual.tscn', ['静态 SpineSprite / 原生轨道 / 两个播放器','一个 AttackHitbox + CollisionShape2D','十四个语义动作，素材时长保持','CharacterBody2D 实例化表现场景'], '../../../data/animation/sunwukong_visual.tscn','#dcfce7');
-authoring += box(530,115,440,215,'主 AnimationPlayer', ['idle / move / run / attack_1…5 / …','TYPE_ANIMATION → 原生子播放器','预览 action / time 属性轨道','编辑器拖动 ↔ Spine 原素材姿态'], '../../../data/animation/sunwukong_visual.tscn','#fef3c7');
+authoring += box(30,115,440,215,'sunwukong_visual.tscn', ['静态 SpineSprite / 原生轨道 / 两个播放器','一个 AttackHitbox + CollisionShape2D','十四个语义动作，素材时长保持','CharacterBody2D 实例化表现场景'], '../../../data/characters/sunwukong/animation/sunwukong_visual.tscn','#dcfce7');
+authoring += box(530,115,440,215,'主 AnimationPlayer', ['idle / move / run / attack_1…5 / …','TYPE_ANIMATION → 原生子播放器','预览 action / time 属性轨道','编辑器拖动 ↔ Spine 原素材姿态'], '../../../data/characters/sunwukong/animation/sunwukong_visual.tscn','#fef3c7');
 authoring += box(1030,115,440,215,'SpineAnimationTrack', ['SpineSprite 的直接子节点','预置子 AnimationPlayer，复用原生 clip','44 个素材动作及循环版本','保留槽位、附件、皮肤与层序'], '../animation/spine_animation_adapter.gd','#fef3c7');
 authoring += box(30,465,440,215,'BattleClock / Core 状态机', ['唯一 combat delta：暂停、慢动作、停顿','许可、死亡、打断与落地由状态决定','通过动作名称命令适配器','动画完成只通知'], '../runtime/battle_action_state_machine_2d.gd');
 authoring += box(530,465,440,215,'SpineAnimationAdapter', ['获取场景节点，不 new/add_child','play / advance / playback_position','主时间同步 Spine，手动模式','朝向与换装不重置播放器时间'], '../animation/spine_animation_adapter.gd');
 authoring += box(1030,465,440,215,'GAS 技能定义 / 帧事件', ['ability_id + hit_index → 命中 payload','hit_rect / hit_scale_x,y / hit_offset','source_frame / fps → 预览当前命中','修改技能数据，复用同一形状'], '../../../data/battle2d/attack4.tres','#fce7f3');
 authoring += box(30,815,440,215,'GAS → Core impact → Entity2D', ['素材帧决定判定时机与命中序号','读取实例技能 → 配置唯一形状','攻击实例 → 独立受击区域 / 去重','DamageCalculator → HealthVital'], '../runtime/battle_entity_2d.gd');
 authoring += box(530,815,440,215,'BattleHitbox2D : Area2D', ['唯一 CollisionShape2D / RectangleShape2D','技能矩形 → 正缩放 → 偏移 → 比例','右向局部框 → 镜像 → 世界多边形','无效数据清空，不沿用上一击范围'], '../movement/battle_hitbox_2d.gd','#fce7f3');
-authoring += box(1030,815,440,215,'实例隔离与新角色', ['矩形 Local To Scene：按实例复制','技能实例定义独立，预览引用只读','新角色只配一个框和技能数据','调整范围无需改公共角色代码'], '../../../data/animation/README.md','#dcfce7');
+authoring += box(1030,815,440,215,'实例隔离与新角色', ['矩形 Local To Scene：按实例复制','技能实例定义独立，预览引用只读','新角色只配一个框和技能数据','调整范围无需改公共角色代码'], '../../../data/characters/sunwukong/animation/README.md','#dcfce7');
 authoring += arrow('M470 220H530','预置',478,210);
 authoring += arrow('M970 220H1030','clip',982,210);
 authoring += arrow('M750 465V330','控制',766,405);
@@ -396,7 +396,7 @@ fs.writeFileSync(path.join(docs,'monster-ai.svg'),svg(1520,1110,'普通怪物与
 // #region 悟空原版四技能与火魔斩联合类图
 let basicSkills = text(32,82,'配置只读，施放实例独占技能等级、瞄准、时钟与命中记录；所有身体、特效及唯一攻击框预置在场景。');
 basicSkills += box(30,120,440,210,'Core Operation → ActionState', ['Y / U / I / O / L → 技能槽意图','当前状态检查地面 / 空中 / 控制','重复 O → 风暴重劈派生','W / S → 射线瞄准轴'], '../input/battle_player_operations.gd','#e2e8f0');
-basicSkills += box(530,120,440,210,'GameplayAbilityDefinition', ['原版 MP / CD 逐级表','FrameTimeline：30 FPS 原帧号','AttackSegment：AB / 次数 / 间隔','状态、位移、派生与空中许可'], '../../../data/skills/sunwukong/README.md','#dcfce7');
+basicSkills += box(530,120,440,210,'GameplayAbilityDefinition', ['原版 MP / CD 逐级表','FrameTimeline：30 FPS 原帧号','AttackSegment：AB / 次数 / 间隔','状态、位移、派生与空中许可'], '../../../data/characters/sunwukong/skills/README.md','#dcfce7');
 basicSkills += box(1030,120,440,210,'GAS AbilityInstance / Status', ['本次技能等级快照 → MP / CD','黑板保存剩余冷却和运行状态','原版霸体与 dmgRate 来源撤销','取消不退已支付MP和已提交CD'], '../gas/battle_skill_mana_cost.gd');
 basicSkills += box(30,440,440,235,'BattleAttackInstance', ['释放 / 攻击段 / 目标 → 命中记录','素材帧接触采样 + 精确再次命中','0.18秒不舍入至整数素材帧','取消清空窗口、待执行事件','多个同配置悟空完全隔离'], '../runtime/battle_attack_instance.gd');
 basicSkills += box(530,440,440,235,'BattleFrameTimelineFeature', ['跨帧按时间顺序补发','烈焰闪扫掠 / 墙体，速度800','火眼金睛60度/秒，-30～15度','风暴：旋转5次 → 重劈1次','火魔斩：连打5次 → 独立砸地'], '../gas/battle_frame_timeline_feature.gd','#fef3c7');

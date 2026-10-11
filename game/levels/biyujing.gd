@@ -25,6 +25,8 @@ func _ready() -> void:
 	Panku.module_manager.get_module("native_logger").set_overlay_display_mode(PankuModuleNativeLogger.ScreenOverlayDisplayMode.ShowIfShellVisible)
 
 func _process(_delta: float) -> void:
+	# 默认隐藏的调试面板无需每帧分配完整属性快照、格式化多条文字。
+	if not info.is_visible_in_tree(): return
 	if not is_instance_valid(player) or flow.regions.is_empty(): return
 	var region := flow.regions[flow.current_region_index]
 	var snapshot := player.attributes.get_snapshot()

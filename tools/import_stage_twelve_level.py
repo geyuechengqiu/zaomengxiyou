@@ -162,7 +162,7 @@ def build(original):
 
 def build_map(base,objects,screens,point_ids,births):
     scene='''[gd_scene format=3]
-[ext_resource type="PackedScene" path="res://data/battle2d/sunwukong_2d.tscn" id="player"]
+[ext_resource type="PackedScene" path="res://data/characters/sunwukong/character.tscn" id="player"]
 [ext_resource type="Script" path="res://addons/battle_foundation/level/battle_spawn_point_2d.gd" id="point"]
 [ext_resource type="Script" path="res://addons/battle_foundation/level/battle_region_gate_2d.gd" id="gate"]
 [ext_resource type="PackedScene" path="res://addons/battle_foundation/level/battle_map_template_2d.tscn" id="map_template"]

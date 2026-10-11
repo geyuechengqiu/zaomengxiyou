@@ -13,6 +13,49 @@ var jump_serial: int = 0
 var impulse_speed: float = 0.0
 var impulse_remaining: float = 0.0
 var reaction_gravity: float = -1.0
+## 当前战斗区域的水平限制只属于此运动实例，由关卡启停。
+var horizontal_bounds_active: bool = false
+var horizontal_bounds: Vector2
+@export var body_shape_path: NodePath = ^"../CollisionShape2D"
+#endregion
+#region 区域边界；在扫掠前裁剪位移，保持竖向运动和场景碰撞
+func set_horizontal_bounds(left: float, right: float) -> void:
+	var limits := Vector2(left, right)
+	var shape_node := get_node_or_null(body_shape_path) as CollisionShape2D
+	if shape_node != null and shape_node.shape != null and not shape_node.disabled:
+		var rect := shape_node.global_transform * shape_node.shape.get_rect()
+		limits.x -= rect.position.x - body.global_position.x
+		limits.y -= rect.end.x - body.global_position.x
+	if limits.x > limits.y: limits = Vector2.ONE * (left + right) * 0.5
+	horizontal_bounds = limits
+	horizontal_bounds_active = true
+	constrain_horizontal_position()
+
+func clear_horizontal_bounds() -> void:
+	horizontal_bounds_active = false
+
+func constrain_horizontal_position() -> void:
+	if not horizontal_bounds_active: return
+	var position := body.global_position
+	position.x = clampf(position.x, horizontal_bounds.x, horizontal_bounds.y)
+	if position.x != body.global_position.x: body.global_position = position
+	if (position.x <= horizontal_bounds.x and body.velocity.x < 0) or (position.x >= horizontal_bounds.y and body.velocity.x > 0): body.velocity.x = 0
+	if (position.x <= horizontal_bounds.x and impulse_speed < 0) or (position.x >= horizontal_bounds.y and impulse_speed > 0):
+		impulse_speed = 0
+		impulse_remaining = 0
+
+func _limit_displacement(displacement: Vector2) -> Vector2:
+	if not horizontal_bounds_active: return displacement
+	constrain_horizontal_position()
+	var limited_x := clampf(body.global_position.x + displacement.x, horizontal_bounds.x, horizontal_bounds.y) - body.global_position.x
+	if not is_equal_approx(limited_x, displacement.x):
+		on_wall = true
+		if body.velocity.x * displacement.x > 0: body.velocity.x = 0
+		if impulse_speed * displacement.x > 0:
+			impulse_speed = 0
+			impulse_remaining = 0
+	displacement.x = limited_x
+	return displacement
 #endregion
 #region 跳跃入口
 func can_jump(maximum_jumps: int) -> bool:
@@ -38,6 +81,7 @@ func sweep_skill_displacement(displacement: Vector2, profile: BattleActionProfil
 		grounded = false
 	var remaining := displacement
 	for iteration in range(6):
+		remaining = _limit_displacement(remaining)
 		var collision := body.move_and_collide(remaining)
 		if collision == null:
 			break
@@ -93,6 +137,7 @@ func advance(delta: float, horizontal_speed: float, profile: BattleActionProfile
 		body.velocity.y = minf(body.velocity.y + gravity * gravity_scale * step_delta, profile.maximum_fall_speed)
 		var remaining := body.velocity * step_delta
 		for iteration in range(6):
+			remaining = _limit_displacement(remaining)
 			var collision := body.move_and_collide(remaining)
 			if collision == null:
 				break

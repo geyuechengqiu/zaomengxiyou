@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://b5wh628v86n22"]
 
 [ext_resource type="Script" uid="uid://pyqcb7t16pv2" path="res://addons/battle_foundation/presentation/battle_damage_number_glyphs.gd" id="glyphs"]
-[ext_resource type="Resource" path="res://data/effects/damage_number_textures.tres" id="library_resource"]
+[ext_resource type="Resource" uid="uid://caeeleqbpx4o7" path="res://data/effects/damage_number_textures.tres" id="library_resource"]
 [ext_resource type="Script" uid="uid://bnxxqa8yu3mge" path="res://addons/battle_foundation/presentation/battle_damage_number_2d.gd" id="script"]
 
 [node name="DamageNumber" type="Node2D" unique_id=1605483682]

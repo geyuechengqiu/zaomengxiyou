@@ -20,11 +20,14 @@ func _validate_property(property: Dictionary) -> void:
 #region 属性链运行状态
 ## 最终值仍由 GAS GameplayAttributeInstance 计算；此组件只管理成长与来源。
 var progression: BattleAttributeProgression
+var fight_power_rules: BattleFightPowerRules
+var fight_power_correction: float = 0.0
 var _sources: Dictionary[StringName, Array] = {}
 var _inventory: C_Inventory
 var _refill_after_level: bool = false
 var _configured: bool = false
 var _pending_vital_snapshot: bool = false
+var _pending_power_snapshot: bool = false
 var _last_health_ratio: float = -1.0
 signal snapshot_changed(snapshot: Dictionary)
 #endregion
@@ -48,6 +51,8 @@ func get_initial_configuration_error(data: BattleEntityDefinition) -> String:
 
 func initialize_from_definition(data: BattleEntityDefinition) -> void:
 	assert(get_initial_configuration_error(data).is_empty(), get_initial_configuration_error(data))
+	fight_power_rules = data.fight_power_rules
+	fight_power_correction = data.fight_power_correction
 	var sets: Array[GameplayAttributeSet] = []
 	# 先修改实例副本，再创建Vital，初始生命/魔法以修改后的最大值填满。
 	for source in _get_definition_sets(data):
@@ -89,6 +94,7 @@ func configure_progression(data: BattleAttributeProgression, initial_level: int)
 
 func _on_recalculated(_changes: Dictionary) -> void:
 	_pending_vital_snapshot = false
+	_pending_power_snapshot = false
 	var snapshot := get_snapshot()
 	snapshot_changed.emit(snapshot.duplicate(true))
 	var owner := get_parent()
@@ -110,7 +116,7 @@ func _on_vital_changed(_id: StringName, _value: float, _maximum: float, _percent
 func end_update() -> void:
 	super.end_update()
 	# 只包含治疗/耗蓝的效果事务也要通知，不能依赖普通属性发生变化。
-	if _update_depth == 0 and _pending_vital_snapshot and not _notifying_attributes:
+	if _update_depth == 0 and (_pending_vital_snapshot or _pending_power_snapshot) and not _notifying_attributes:
 		_on_recalculated({})
 
 func get_snapshot() -> Dictionary:
@@ -121,7 +127,19 @@ func get_snapshot() -> Dictionary:
 	result[&"mp"] = get_vital_value(&"mana") if has_vital(&"mana") else 0.0
 	result[&"level"] = current_level
 	result[&"expNext"] = progression.get_required_experience(current_level) if progression != null else 0.0
+	result[&"fightPower"] = get_fight_power()
 	return result
+
+## 永久属性按原始精度参与战力；战斗临时Buff、当前HP/MP和经验不参与。
+func get_fight_power_breakdown() -> Dictionary:
+	if fight_power_rules == null: return {"total": 0}
+	var attributes := {}
+	for id: StringName in BattleFightPowerRules.ATTRIBUTES:
+		attributes[id] = get_layer_value(id, false, false)
+	return fight_power_rules.get_breakdown(attributes, fight_power_correction)
+
+func get_fight_power() -> int:
+	return int(get_fight_power_breakdown().total)
 #endregion
 #region 基础、成长、等级和经验
 func set_base_value(id: StringName, value: float) -> bool:
@@ -133,7 +151,14 @@ func set_base_value(id: StringName, value: float) -> bool:
 	if id == &"exp":
 		set_experience(value)
 		return has_attribute(id)
-	return super.set_base_value(id, value)
+	var instance := get_attribute(id)
+	var previous := instance.base_value if instance != null else NAN
+	begin_update()
+	var changed := super.set_base_value(id, value)
+	if changed and instance != null and previous != instance.base_value:
+		_mark_power_change(id)
+	end_update()
+	return changed
 
 func _set_current_level(value: int) -> void:
 	if not _configured:
@@ -251,7 +276,10 @@ func add_modifier(modifier: GameplayAttributeModifier) -> void:
 	if not _sources.has(modifier.source_id):
 		_sources[modifier.source_id] = []
 	_sources[modifier.source_id].append(modifier)
+	begin_update()
+	_mark_power_change(modifier.attribute_id, modifier.source_id)
 	super.add_modifier(modifier)
+	end_update()
 
 func remove_modifier(modifier: GameplayAttributeModifier) -> void:
 	if modifier == null or not _sources.get(modifier.source_id, []).has(modifier):
@@ -259,15 +287,26 @@ func remove_modifier(modifier: GameplayAttributeModifier) -> void:
 	_sources[modifier.source_id].erase(modifier)
 	if _sources[modifier.source_id].is_empty():
 		_sources.erase(modifier.source_id)
+	begin_update()
+	_mark_power_change(modifier.attribute_id, modifier.source_id)
 	super.remove_modifier(modifier)
+	end_update()
 
 func remove_modifiers_by_source(source: StringName) -> void:
 	begin_update()
+	for modifier: GameplayAttributeModifier in _sources.get(source, []):
+		_mark_power_change(modifier.attribute_id, source)
 	_sources.erase(source)
 	super.remove_modifiers_by_source(source)
 	end_update()
 
-func get_layer_value(id: StringName, include_temporary: bool = true) -> float:
+## 原始属性小数变化或被临时覆盖时，整数最终值可能不变，仍需通知战力。
+func _mark_power_change(id: StringName, source: StringName = &"") -> void:
+	if fight_power_rules == null or not BattleFightPowerRules.ATTRIBUTES.has(id): return
+	if source.is_empty() or String(source).begins_with("growth.") or String(source).begins_with("equipment."):
+		_pending_power_snapshot = true
+
+func get_layer_value(id: StringName, include_temporary: bool = true, round_result: bool = true) -> float:
 	var instance := get_attribute(id)
 	if instance == null:
 		return 0.0
@@ -291,7 +330,7 @@ func get_layer_value(id: StringName, include_temporary: bool = true) -> float:
 	value *= 1.0 + multiplier
 	if not is_nan(override_value):
 		value = override_value
-	if instance.attribute_def.round_final_value:
+	if round_result and instance.attribute_def.round_final_value:
 		value = floorf(value + 0.5)
 	return clampf(value, instance.attribute_def.min_value, instance.attribute_def.max_value)
 

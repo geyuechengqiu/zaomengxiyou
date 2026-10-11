@@ -1,0 +1,51 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://addons/battle_foundation/ui/battle_hit_combo_view.gd" id="script"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/hit_combo/hitComboNum0000.png" id="digit0"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/hit_combo/hitComboNum0001.png" id="digit1"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/hit_combo/hitComboNum0002.png" id="digit2"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/hit_combo/hitComboNum0003.png" id="digit3"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/hit_combo/hitComboNum0004.png" id="digit4"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/hit_combo/hitComboNum0005.png" id="digit5"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/hit_combo/hitComboNum0006.png" id="digit6"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/hit_combo/hitComboNum0007.png" id="digit7"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/hit_combo/hitComboNum0008.png" id="digit8"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/hit_combo/hitComboNum0009.png" id="digit9"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/hit_combo/hitCombo0000.png" id="label"]
+
+[node name="HitCombo" type="Node2D"]
+visible = false
+position = Vector2(640, 150)
+texture_filter = 2
+script = ExtResource("script")
+digit_textures = Array[Texture2D]([ExtResource("digit0"), ExtResource("digit1"), ExtResource("digit2"), ExtResource("digit3"), ExtResource("digit4"), ExtResource("digit5"), ExtResource("digit6"), ExtResource("digit7"), ExtResource("digit8"), ExtResource("digit9")])
+
+[node name="Digit0" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(144, 0)
+texture = ExtResource("digit0")
+centered = false
+
+[node name="Digit1" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(96, 0)
+texture = ExtResource("digit0")
+centered = false
+
+[node name="Digit2" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(48, 0)
+texture = ExtResource("digit0")
+centered = false
+
+[node name="Digit3" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(0, 0)
+texture = ExtResource("digit0")
+centered = false
+
+[node name="Label" type="Sprite2D" parent="."]
+position = Vector2(192, 0)
+texture = ExtResource("label")
+centered = false
+

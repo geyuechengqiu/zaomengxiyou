@@ -14,7 +14,7 @@ func _ready() -> void:
 	for run in range(RUNS):
 		samples.append(_bench(COUNT))
 		await get_tree().process_frame
-	var report := {"engine": Engine.get_version_info().string, "count": COUNT, "runs": RUNS, "updates": 54, "delta": 1.0 / 60.0, "method": "actual pooled damage_number PackedScene, shared atlas and static Tween curve; headless CPU only, no GPU drawing; use benchmark_damage_numbers.tscn for render/full-frame results", "samples": samples}
+	var report := {"engine": Engine.get_version_info().string, "count": COUNT, "runs": RUNS, "updates": 54, "delta": 1.0 / 60.0, "method": "actual pooled damage_number PackedScene, shared atlas and static Tween curve; headless CPU only, no GPU drawing", "samples": samples}
 	var file := FileAccess.open("res://.cleanup-backup/feedback-tween-benchmark.json", FileAccess.WRITE)
 	file.store_string(JSON.stringify(report, "  ") + "\n")
 	print("PASS feedback Tween benchmark: ", JSON.stringify(report))

@@ -32,8 +32,8 @@ def export(source: Path) -> None:
         return result
     write(out / 'original_levels.json', {str(row['等级ID']): normalize(row) for row in levels})
     write(out / 'original_skills.json', {str(row['技能ID']): normalize(row) for row in skills})
-    mapping = json.loads((ROOT / 'data/battle2d/combo_source_mapping.json').read_text(encoding='utf-8-sig'))
-    context_path = ROOT / 'data/battle2d/context_attack_source_mapping.json'
+    mapping = json.loads((ROOT / 'data/characters/sunwukong/skills/combo_source_mapping.json').read_text(encoding='utf-8-sig'))
+    context_path = ROOT / 'data/characters/sunwukong/skills/context_attack_source_mapping.json'
     context_steps = json.loads(context_path.read_text(encoding='utf-8-sig'))['steps'] if context_path.exists() else []
     write(out / 'skill_mapping.json', {row['id']: row['source_skill_id'] for row in mapping['steps'] + context_steps})
     write(out / 'provenance.json', {'level_count': len(levels), 'skill_count': len(skills),

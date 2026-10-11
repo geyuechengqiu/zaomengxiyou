@@ -1,4 +1,5 @@
 [gd_scene format=3]
+[ext_resource type="PackedScene" path="res://data/ui/hit_combo.tscn" id="hit_combo"]
 [ext_resource type="FontFile" path="res://assets/ui/boss/count.ttf" id="R1"]
 [ext_resource type="FontFile" path="res://addons/simple_inventory/assets/fonts/SourceHanSansSC-Regular-2.otf" id="R2"]
 [ext_resource type="Script" path="res://addons/battle_foundation/ui/battle_original_hud.gd" id="R3"]
@@ -110,6 +111,8 @@ grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("R3")
 disabled_icon_material = SubResource("DisabledIcon")
+[node name="HitCombo" parent="." instance=ExtResource("hit_combo")]
+
 [node name="Player" type="Control" parent="."]
 mouse_filter = 2
 [node name="Frame" type="TextureRect" parent="Player"]

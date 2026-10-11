@@ -70,6 +70,7 @@ var _spawn_collision_layer: int = 0
 var _spawn_collision_mask: int = 0
 var _spawning: bool = false
 var _spawn_animation_visible: bool = true
+var last_ready_profile: Dictionary = {}
 #endregion
 #region 初始化与清理
 func get_component_configuration_error(data: BattleEntityDefinition = null) -> String:
@@ -126,6 +127,7 @@ func initialize_battle(owner_session: BattleSession, id: StringName, data: Battl
 		apply_status_definition(status_id, self)
 
 func _ready() -> void:
+	var stamp := Time.get_ticks_usec() if session != null and session.profile_spawns else 0
 	_bind_scene_components()
 	motion.body = self
 	if wushuang != null: wushuang.bind(self)
@@ -157,7 +159,9 @@ func _ready() -> void:
 			inventory.equip_changed.connect(_on_equipment_appearance_changed)
 	CoreSystem.event_bus.event_pushed.connect(_on_core_event)
 	if session.presentation != null:
+		var before := Time.get_ticks_usec() if stamp > 0 else 0
 		session.presentation.register_actor(self)
+		if stamp > 0: last_ready_profile = {"entity_ready_ms":(before-stamp)/1000.0,"feedback_ms":(Time.get_ticks_usec()-before)/1000.0}
 
 func _on_equipment_appearance_changed(slot: StringName, item: Equip) -> void:
 	if inventory is OriginalInventory:
@@ -241,6 +245,10 @@ func advance_simulation(delta: float) -> void:
 			collision_layer = 0
 			collision_mask = 0
 			if feedback != null: feedback.hide()
+			var stage := session.presentation.get_node_or_null(^"StageFeedback") as BattleStageFeedback if session.presentation != null else null
+			# Boss斩败需要暂存材质节点，完成恢复后再销毁。
+			if not ai_controller is BattleBossController2D or stage == null or not stage.is_execution_playing():
+				session.retire_dead_entity(entity_id)
 		return
 	if spawn_remaining > 0:
 		if not is_alive(): _finish_spawn_appearance()

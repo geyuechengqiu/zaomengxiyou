@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" path="res://addons/battle_foundation/presentation/battle_presentation_2d.tscn" id="presentation"]
 [ext_resource type="Script" uid="uid://rs6v4ot0o3ig" path="res://game/levels/biyujing.gd" id="script"]
 [ext_resource type="Script" uid="uid://cp8lkcidkxi3c" path="res://addons/battle_foundation/runtime/battle_session.gd" id="session"]
+[ext_resource type="Script" path="res://addons/battle_foundation/combat/battle_hit_combo_tracker.gd" id="hit_combo"]
 
 [ext_resource type="Script" path="res://addons/battle_foundation/loot/battle_loot_manager_2d.gd" id="loot_service"]
 [ext_resource type="JSON" path="res://data/loot/original_first_level.json" id="loot_rules"]
@@ -149,6 +150,9 @@ script = ExtResource("session")
 scene_manifest_path = "res://data/levels/biyujing/progression/manifest.json"
 scene_seed = 12001
 damage_strategy = ExtResource("damage")
+
+[node name="HitComboTracker" type="Node" parent="BattleSession"]
+script = ExtResource("hit_combo")
 
 [node name="CameraRig" parent="BattleSession" unique_id=484255912 instance=ExtResource("camera_rig")]
 

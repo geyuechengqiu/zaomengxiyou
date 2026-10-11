@@ -6,6 +6,10 @@
 
 ## 新角色或怪物
 
+角色定义模板已引用原版战力规则。新角色的 `Fight Power Correction` 默认0，悟空也为0，匹配参考离线原版；仅明确需要职业平衡修正时再设置。规则和配置入口见 [原版战力](../../addons/battle_foundation/attributes/fight-power.md)。
+
+角色和怪物模板的 Spine 动画场景均带预置 `SuperArmorEffect`，自动读取统一霸体规则；新增角色需把 `Capture/Body` 设为对应 Spine 数据。描边设置和原版视觉优先级见 [霸体表现](../effects/super_armor/README.md)。
+
 1. 在Godot创建“新建继承场景”，选择character_base或monster_base，保存到新实体的data目录；不要修改模板影响其他派生场景。
 2. 保留组件节点。替换AnimationAdapter为你保存的Spine视觉场景，配置语义动作idle/move/run/jump/fall/land/hurt/death与攻击动作；骨架、两个AnimationPlayer、SpineAnimationTrack、单一AttackHitbox全部预置。动画完成只通知动作系统。
 3. 将模板 [character_definition.tres](character_definition.tres) 或 [monster_definition.tres](monster_definition.tres) 复制到新目录，修改唯一语义definition_id、display_name、faction_id和scene路径。复制/新建attribute_set、成长表和技能定义，避免编辑共享定义改变其他种类。通过GAS组件Base Values设置场景覆盖，或在定义属性集中设置同种实体默认属性；Initial Level Override为0时使用定义等级。

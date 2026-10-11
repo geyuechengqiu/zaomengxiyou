@@ -171,22 +171,24 @@ func verify_rewards_and_pickup() -> void:
 	var monster := session.spawn_entity_2d("monsters", &"剑舞", player.global_position + Vector2(150, 0))
 	monster.ai_controller.enabled = false
 	var events := reward_events
+	var monster_id := monster.entity_id
+	var monster_ref: WeakRef = weakref(monster)
 	monster.attributes.get_vital(&"health").set_current_value(0)
 	await tick(1.0 / 60.0)
 	check(bag.spirit == spirit + 8 and player.attributes.get_value(&"exp") == xp + 6 and reward_events == events + 1, "普通怪死亡按原Drop1立即结算8灵魂6经验，只执行一次")
 	check(loot.souls.size() == 1 and loot.spirit_texture.resource_path.ends_with("spirit_drop.png"), "每次灵魂奖励创建一次使用原素材的飞行表现")
+	monster.publish_battle_event(&"battle.entity_died")
+	await tick(0.1)
+	check(reward_events == events + 1, "重复死亡事件不能重复发奖")
 	var initial_position: Vector2 = loot.souls[0].position
 	session.set_paused(true)
 	await tick(1)
 	check(loot.souls[0].position == initial_position, "暂停不推进灵魂飞行或地面掉落")
 	session.set_paused(false)
 	for _frame in range(12): await tick(0.25)
-	check(not monster.visible and monster.collision_layer == 0 and not monster.is_alive(), "死亡动画后怪物隐藏并停用物理碰撞，不留尸体")
+	check(monster_ref.get_ref() == null and session.get_entity(monster_id) == null and not session.presentation._views.has(monster_id), "死亡动画后释放怪物及组件，移除活动反馈，不留隐藏尸体")
 	check(bag.spirit == spirit + 8 and player.attributes.get_value(&"exp") == xp + 6, "灵魂抵达玩家不会再次发奖")
 	check(loot.souls.is_empty(), "低帧率飞行能抵达并清理所有拖尾")
-	monster.publish_battle_event(&"battle.entity_died")
-	await tick(0.1)
-	check(reward_events == events + 1, "重复死亡事件不能重复发奖")
 	loot.drops.clear()
 	var count := bag.get_bag_items("equipment").size()
 	var pickup_notifications: Array[String] = []

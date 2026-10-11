@@ -9,7 +9,7 @@ import { fileURLToPath } from 'node:url';
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const sourceRoot = process.argv[2];
 if (!sourceRoot) throw new Error('Usage: node tools/add_wukong_attack_effects.mjs <Speculum-4399-master>');
-const scenePath = path.join(root, 'data/animation/sunwukong_visual.tscn');
+const scenePath = path.join(root, 'data/characters/sunwukong/animation/sunwukong_visual.tscn');
 let scene = fs.readFileSync(scenePath, 'utf8').replace(/\r\n/g, '\n');
 if (scene.includes('[node name="AttackEffects"')) {
   console.log('AttackEffects exists; preserve authored effect tracks and offsets.');
@@ -104,7 +104,7 @@ ${['RESET', 'attack1', 'attack2', 'attack3', 'attack4', 'attack5', 'runAttack', 
 
 `;
 const firstSub = scene.indexOf('[sub_resource');
-scene = scene.slice(0, firstSub) + `[ext_resource type="SpineSkeletonDataResource" path="res://assets/skelton/char/sunwukong/effects/skill_wukong_data.tres" id="attack_effect_data"]\n[ext_resource type="Script" path="res://addons/battle_foundation/animation/spine_animation_effects_2d.gd" id="attack_effect_preview"]\n\n` + scene.slice(firstSub);
+scene = scene.slice(0, firstSub) + `[ext_resource type="SpineSkeletonDataResource" path="res://assets/characters/sunwukong/animation/effects/skill_wukong_data.tres" id="attack_effect_data"]\n[ext_resource type="Script" path="res://addons/battle_foundation/animation/spine_animation_effects_2d.gd" id="attack_effect_preview"]\n\n` + scene.slice(firstSub);
 scene = scene.replace('[node name="AnimationAdapter"', resources + '[node name="AnimationAdapter"');
 scene += `
 [node name="AttackEffects" type="Node2D" parent="."]
@@ -133,11 +133,11 @@ libraries/ = SubResource("AttackEffectLibrary")
 `;
 }
 fs.writeFileSync(scenePath, scene);
-fs.writeFileSync(path.join(root, 'data/animation/sunwukong_attack_effects_source.json'), JSON.stringify({
+fs.writeFileSync(path.join(root, 'data/characters/sunwukong/animation/sunwukong_attack_effects_source.json'), JSON.stringify({
   source_fps: fps, config: configPath, skeleton: skeletonPath,
   skeleton_sha256: crypto.createHash('sha256').update(fs.readFileSync(path.join(sourceRoot, skeletonPath))).digest('hex'),
   source_controller: 'out/zmhj-equip-skill-diag/com/wdcgame/engine/entitys/controls/skill/SkillControl.as',
-  asset: 'res://assets/skelton/char/sunwukong/effects/skill_wukong_data.tres',
+  asset: 'res://assets/characters/sunwukong/animation/effects/skill_wukong_data.tres',
   display_scale: 2, actions: mapping
 }, null, 2) + '\n');
 console.log('Added eight original VFX events to seven authored attacks; other tracks and jump_2 preserved.');

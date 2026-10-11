@@ -24,6 +24,7 @@ const RESISTANCE_NAMES: Array[String] = ["光抗", "暗抗", "水抗", "火抗",
 @onready var protect_label: Label = $HUD/BossBar/ProtectionValue
 @onready var resistance_slots: Control = $HUD/BossBar/Resistances
 @onready var banner: Sprite2D = $HUD/Announcement
+@onready var entrance: BattleOriginalEffectClip2D = $HUD/BossComing
 @onready var warning: Polygon2D = $Warning
 @onready var music: AudioStreamPlayer = $Music
 @onready var hit_audio: AudioStreamPlayer = $HitAudio
@@ -73,6 +74,8 @@ func _exit_tree() -> void:
 #endregion
 #region 原版三条血量与0.6/0.3秒缓动
 func bind_boss(actor: BattleEntity2D) -> void:
+	var previous := _boss.get_ref() as BattleEntity2D if _boss != null else null
+	if previous != actor: entrance.play_effect()
 	_boss = weakref(actor)
 	_last_hp = -1
 	_last_max = -1
@@ -157,6 +160,7 @@ func advance_feedback(delta: float) -> void:
 			if _death_remaining <= 0: bar.visible = false
 	else: bar.visible = false
 	if delta <= 0: return
+	entrance.advance_effect(delta)
 	_hp_age = minf(0.6,_hp_age+delta)
 	_protect_age = minf(0.3,_protect_age+delta)
 	fill.value = lerpf(_hp_from,_hp_to,1-pow(1-_hp_age/0.6,2))
@@ -225,6 +229,7 @@ func _on_event(id: String, payload: Array) -> void:
 		_last_sound_tick = _session.clock.physics_tick
 		hit_audio.play()
 	elif id in ["battle.level.victory","battle.level.failed"]:
+		entrance.clear_effect()
 		banner.visible = false
 		warning.visible = false
 		music.stop()
@@ -234,6 +239,7 @@ func _on_event(id: String, payload: Array) -> void:
 	elif id == "battle.entity.killed" or id == "battle.entity_despawned":
 		var boss := _boss.get_ref() as BattleEntity2D if _boss != null else null
 		if boss != null and data.target_entity_id == boss.entity_id:
+			entrance.clear_effect()
 			banner.visible = false
 			warning.visible = false
 			music.stop()
@@ -245,6 +251,7 @@ func synchronize_pause(blocked: bool) -> void:
 
 func clear_feedback() -> void:
 	_boss = null
+	if is_instance_valid(entrance): entrance.clear_effect()
 	if is_instance_valid(bar): bar.visible = false
 	if is_instance_valid(banner): banner.visible = false
 	if is_instance_valid(warning): warning.visible = false

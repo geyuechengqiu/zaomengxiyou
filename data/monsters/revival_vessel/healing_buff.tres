@@ -1,0 +1,31 @@
+[gd_resource type="Resource" script_class="GameplayStatusData" format=3]
+[ext_resource type="Script" path="res://addons/gameplay_abiltiy_system/scripts/status/gameplay_status_data.gd" id="status"]
+[ext_resource type="Script" path="res://addons/gameplay_abiltiy_system/scripts/effects/gameplay_effect.gd" id="effect_type"]
+[ext_resource type="Script" path="res://addons/gameplay_abiltiy_system/scripts/status/features/status_feature.gd" id="feature_type"]
+[ext_resource type="Script" path="res://addons/battle_foundation/gas/battle_original_status_policy.gd" id="policy"]
+[ext_resource type="Script" path="res://addons/battle_foundation/gas/ge_original_periodic_vital.gd" id="effect"]
+[ext_resource type="Script" path="res://addons/gameplay_abiltiy_system/scripts/status/features/feature_periodic_effects.gd" id="periodic"]
+[sub_resource type="Resource" id="Effect"]
+script = ExtResource("effect")
+health_ratio = 0.05
+attack_ratio = 2.0
+fixed_delta = 10.0
+show_value_on_head = true
+[sub_resource type="Resource" id="Periodic"]
+script = ExtResource("periodic")
+feature_name = "pipa_healing_tick"
+period = 2.0
+periodic_effects = Array[ExtResource("effect_type")]([SubResource("Effect")])
+[sub_resource type="Resource" id="Policy"]
+script = ExtResource("policy")
+replace_rule = 2
+[resource]
+script = ExtResource("status")
+status_id = &"pipa_healing"
+status_display_name = "持续回血"
+duration = 10.0
+features = Array[ExtResource("feature_type")]([SubResource("Periodic")])
+stacking_policy = SubResource("Policy")
+stacking_group = &"original.50004/hp"
+tags = Array[StringName]([&"status.buff"])
+metadata/original_buff_id = 5000401

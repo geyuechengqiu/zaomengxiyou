@@ -64,7 +64,7 @@ export(BACKPACK,'bodyPanel',PROJECT/'.cleanup-backup/bag-body-clean',True)
 export(BACKPACK,'#66',PROJECT/'.cleanup-backup/bag-exp-background')
 copy('#66','bag_experience_background.png',PROJECT/'.cleanup-backup/bag-exp-background')
 for frame in range(10): copy('fight_number',f'fight_digit_{frame}.png',PROJECT/'.cleanup-backup/bag-controls',frame)
-dump('data/ui/fight_power_weights.json',{'source':'PowerAttribute[1]; FightPowerManager.getFightPowerByItemVo','weights':{k:config['PowerAttribute']['1'][k] for k in ['hpMax','mpMax','atk','phyDef','hit','dodge','critical','toughness','lucky','guardian','reHP','reMP']}})
+subprocess.run([sys.executable, str(PROJECT/'tools/export_original_fight_power.py'), str(ORIGINAL)], check=True)
 for symbol,name in [('roleInfo1','player_frame.png'),('roleSkill1','skill_frame.png'),('bagPanel','bag_panel.png')]: copy(symbol,name,PROJECT/'.cleanup-backup/battle-ui-background')
 for symbol,name in [('mainPanel','bag_window.png'),('bodyPanel','body_panel.png'),('warn_background','warn_background.png'),('tips_background','tips_background.png'),('menu_background','menu_background.png'),('#161','bar_background.png'),('#869','hp_fill.png'),('#875','mp_fill.png'),('#879','exp_fill.png'),('#703','rage_background.png'),('#707','rage_fill.png'),('lock','lock.png')]: copy(symbol,name)
 for index, id in enumerate([186,189,192,195]):
@@ -175,7 +175,7 @@ common=config['Common']['1']
 dump('data/inventory/original_rules.json',{'max_capacity':int(common['packMaxNum']),'sell_discount':float(common['sellDiscount']),'initial_capacities':{'equipment':common['equPackageNum'],'material':common['propPackageNum'],'consumable':common['consumePropPackageNum'],'fashion':common['fashionPackageNum']},'open_pack':{k:v for k,v in config['OpenPack'].items() if int(v['packType']) in [1,2,3,4]},'item_names':{'101018001':config['Prop']['101018001']['name']}})
 for row in skill_rows:
     action=row['ability_id'].replace('sunwukong_','')
-    path=PROJECT/f'data/skills/sunwukong/{action}.tres';text=path.read_text('utf8')
+    path=PROJECT/f'data/characters/sunwukong/skills/{action}.tres';text=path.read_text('utf8')
     if 'id="original_icon"' not in text:
         pos=text.index('[sub_resource');text=text[:pos]+f'[ext_resource type="Texture2D" path="{row["icon"]}" id="original_icon"]\n'+text[pos:]
         text=text.replace(f'ability_name = "{row["name"]}"',f'ability_name = "{row["name"]}"\nicon = ExtResource("original_icon")')

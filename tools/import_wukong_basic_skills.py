@@ -16,13 +16,13 @@ from import_wukong_context_attacks import _native, _value
 
 GAS = 'addons/gameplay_abiltiy_system/scripts'
 BF = 'addons/battle_foundation'
-FOLDER = 'data/skills/sunwukong'
+FOLDER = 'data/characters/sunwukong/skills'
 TABLE = json.loads((SOURCE/'exports/zmhj_role_stats/原始配置/Skill.json').read_text(encoding='utf-8-sig'))
 BUFFS = json.loads((SOURCE/'exports/zmhj_role_stats/原始配置/Buff.json').read_text(encoding='utf-8-sig'))
 COMMON = load_config_table(SOURCE/'games/zmhj-g5', 'Common')['1']
 PHYSICS = dict(source_fps=30, nape_step=0.1, gravity=float(COMMON['gravity']), display_scale=2)
 # 火眼固定注册点与人物使用同一个原始骨架原点；人物脚底校准不能只作用于身体。
-_origin = re.search(r'skeleton_offset = Vector2\(([^,]+),\s*([^)]+)\)', (PROJECT/'data/animation/sunwukong_profile.tres').read_text('utf8'))
+_origin = re.search(r'skeleton_offset = Vector2\(([^,]+),\s*([^)]+)\)', (PROJECT/'data/characters/sunwukong/animation/sunwukong_profile.tres').read_text('utf8'))
 BEAM_ORIGIN_OFFSET = [float(_origin[1]), float(_origin[2])] if _origin else [0.0, 0.0]
 # TargetMove.x enters normalToBodyVelocity; Y is written directly to Nape's body.
 BODY_TIME_SCALE = PHYSICS['source_fps'] * PHYSICS['nape_step']
@@ -145,7 +145,7 @@ for action,original_id in IDS.items():
 #endregion
 
 #region 追加保存的AnimationPlayer动作，不覆盖已有角色轨道
-visual_path = PROJECT/'data/animation/sunwukong_visual.tscn'
+visual_path = PROJECT/'data/characters/sunwukong/animation/sunwukong_visual.tscn'
 visual = visual_path.read_text(encoding='utf-8')
 primary_library = re.search(r'\[node name="AnimationPlayer"[^\n]*parent="AttackEffects/Primary/SpineAnimationTrack"[^\n]*\][\s\S]*?libraries/ = SubResource\("([^\"]+)"\)', visual)[1]
 
@@ -222,7 +222,7 @@ for match in list(re.finditer(r'\[sub_resource type="Animation"[^\n]*\]\n[\s\S]*
     if re.search(r'resource_name = "(skill2|skill3|skill3_1|skill3_2|skill4)_looped"',block) and 'loop_mode =' not in block:
         visual = visual[:match.start()]+block.replace('length =','loop_mode = 1\nlength =',1)+visual[match.end():]
 visual_path.write_text(visual,encoding='utf-8')
-profile_path = PROJECT/'data/animation/sunwukong_profile.tres'
+profile_path = PROJECT/'data/characters/sunwukong/animation/sunwukong_profile.tres'
 profile = profile_path.read_text(encoding='utf-8')
 if '&"skill8"' not in profile:
     profile = profile.replace('&"jump_attack": &"jumpAttack"}', '&"jump_attack": &"jumpAttack", '+', '.join(f'&"{a}": &"{a}"' for a in SPECS if a!='skill8_slam')+'}')
@@ -230,12 +230,12 @@ if '&"skill8"' not in profile:
 #endregion
 
 #region 统一角色、槽位、所有引用目录及可审计快照
-file = PROJECT/'data/battle2d/sunwukong.tres'
+file = PROJECT/'data/characters/sunwukong/definition.tres'
 text = file.read_text(encoding='utf-8')
 if '&"sunwukong_skill1"' not in text:
     text = re.sub(r'(ability_ids = [^\n]*)(\]\))',lambda m:m[1]+', '+', '.join('&"'+id+'"' for id in SKILLS)+m[2],text)
     file.write_text(text,encoding='utf-8')
-file = PROJECT/'data/battle2d/sunwukong_2d.tscn'
+file = PROJECT/'data/characters/sunwukong/character.tscn'
 text = file.read_text(encoding='utf-8')
 slot_text = 'ability_slots = Dictionary[StringName, StringName]({'+', '.join(f'&"skill_{slot}": &"sunwukong_skill{skill}"' for slot,skill in [(1,1),(2,2),(3,3),(4,4),(5,8)])+'})\n'
 if 'sunwukong_skill1' not in text: text=text.replace('controller_path = NodePath("OperationController")\n', 'controller_path = NodePath("OperationController")\n'+slot_text)
@@ -244,7 +244,7 @@ for file in (PROJECT/'data').rglob('manifest.json'):
     try: manifest=json.loads(file.read_text(encoding='utf-8-sig'))
     except ValueError: continue
     definitions=manifest.get('definitions',{})
-    if 'res://data/battle2d/sunwukong.tres' not in definitions.get('characters',{}).values(): continue
+    if 'res://data/characters/sunwukong/definition.tres' not in definitions.get('characters',{}).values(): continue
     definitions['skills'].update(SKILLS)
     definitions.setdefault('statuses',{}).update(STATUS_IDS)
     dump(file.relative_to(PROJECT),manifest)

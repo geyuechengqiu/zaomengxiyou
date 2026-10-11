@@ -22,7 +22,8 @@ def main():
         pack = {}
         for name, content in streams.items():
             safe_name = re.sub(r'[^\w.-]', '_', name)
-            target = folder / group / (safe_name + '.mp3')
+            pack_folder = ROOT/'assets/characters/sunwukong/audio' if group == 'se2001V456' else folder/group
+            target = pack_folder / (safe_name + '.mp3')
             target.parent.mkdir(parents=True, exist_ok=True)
             target.write_bytes(content)
             pack[name] = 'res://' + target.relative_to(ROOT).as_posix()

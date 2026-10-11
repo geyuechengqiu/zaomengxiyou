@@ -1,6 +1,6 @@
 # 玩家操作定义
 
-[player_operations.tres](player_operations.tres) 是 CoreOperationProfile 共享定义，保存语义意图到 InputMap 动作的映射、默认物理键、轴规则和输入时间窗口。当前按住状态、控制权、缓存与序列保存在每个 CoreOperationController；重映射写入用户配置，不修改本资源。
+[悟空操作定义](../characters/sunwukong/controls/input.tres) 是 CoreOperationProfile 定义，保存语义意图到 InputMap 动作的映射、默认物理键、轴规则和输入时间窗口。当前按住状态、控制权、缓存与序列保存在每个 CoreOperationController；重映射写入用户配置，不修改本资源。新角色可以配置自己的操作资源，复用相同控制器。
 
 角色只识别 `attack`、`jump`、`skill_1`、`magic_weapon`、`wushuang` 等名称。技能槽通过 BattlePlayerOperations.ability_slots 对应真实 GAS 技能 ID；孙悟空普攻由连击配置指定为 `sunwukong_attack1` 至 `sunwukong_attack5`。输入按下调用 `request_attack()` 发动或预约一段，HELD 不自动连击；菜单与失焦撤回预约。运动、二段跳与状态规则见 [阶段四 README](../../addons/battle_foundation/movement/README.md)。
 

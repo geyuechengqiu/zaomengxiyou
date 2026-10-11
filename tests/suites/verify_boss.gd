@@ -72,6 +72,9 @@ func _step(delta: float = 1.0/60) -> void:
 func _event(id: String, payload: Array) -> void:
 	if payload.size() != 1 or not payload[0] is Dictionary or not is_instance_valid(session) or payload[0].get("battle_id") != session.battle_id: return
 	var row: Dictionary = payload[0].duplicate()
+	var entity: Variant = row.get("entity")
+	if is_instance_valid(entity) and entity is BattleEntity2D:
+		row["entity_definition_id"] = entity.definition_id
 	row["event"] = id
 	rows.append(row)
 
@@ -436,7 +439,7 @@ func _verify_playable_level() -> void:
 			won = true
 			break
 	for row in _events("battle.attack.hit",player.entity_id):
-		if row.get("entity") is BattleEntity2D and is_instance_valid(row.entity) and row.entity.definition_id == &"巨石灵君": damage_to_boss += row.actual_hp_loss
+		if row.get("entity_definition_id") == &"巨石灵君": damage_to_boss += row.actual_hp_loss
 	_check(won and scene.flow.death_count == 34 and damage_to_boss >= 1167, "原悟空属性、真实Core普攻与GAS伤害完成32小怪/容器/Boss/出口：状态%d区域%d死亡%d生命%d Boss伤害%d" % [scene.flow.state,scene.flow.current_region_index+1,scene.flow.death_count,player.attributes.get_vital_value(&"health"),damage_to_boss])
 	if won: print("PASS playable first level: original level1 Wukong, hp275/atk26, actual combo only; 34 targets, Boss damage %d, remaining HP %d" % [damage_to_boss,player.attributes.get_vital_value(&"health")])
 #endregion

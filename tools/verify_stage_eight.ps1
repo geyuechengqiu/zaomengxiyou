@@ -1,6 +1,6 @@
 param(
     [Parameter(Mandatory=$true)][string]$Godot,
-    [string[]]$Suites = @('audio', 'loot_growth', 'combat_hud', 'monster_spine', 'original_battle_ui', 'original_boss_presentation', 'camera_follow', 'map_visual', 'boss', 'level_progression', 'wushuang', 'wukong_skills', 'monster_ai', 'buffs', 'hit_reaction', 'battle_presentation', 'scene_attributes', 'character_components', 'original_feedback', 'wooden_dummy', 'wukong_attack_effects', 'wukong_context_attacks', 'original_damage', 'damage_numbers', 'damage_number_pool', 'single_attack', 'skill_timeline', 'core_events', 'attribute_pipeline', 'stage_four', 'player_operations', 'wukong_state_machine', 'plugins', 'stage_one')
+    [string[]]$Suites = @('spawn_performance', 'pipa_support', 'base_attributes', 'fight_power', 'audio', 'loot_growth', 'combat_hud', 'hit_combo', 'wushuang_visual', 'super_armor_visual', 'double_jump', 'monster_spine', 'original_battle_ui', 'original_boss_presentation', 'camera_follow', 'map_visual', 'boss', 'level_progression', 'damage_number_pool')
 )
 #region 项目根目录与隔离日志
 $ErrorActionPreference = 'Stop'

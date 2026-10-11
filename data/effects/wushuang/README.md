@@ -1,6 +1,6 @@
 # 悟空普通无双：红光与残影
 
-打开 [五技能演示](../../../tests/fixtures/wukong_skills_demo.tscn) 按 F6，或按 F5 运行第一关；通过战斗命中获取无双值，满10000后按空格释放，Esc菜单可改键。持续15秒，期间按上限/15×战斗delta消耗且不再获取；重复按下不刷新。释放时保留正在进行的攻击与技能；地面受击硬直按原 `onStiffComplete` 解除，眩晕由控制状态裁决。
+打开 [五技能演示](../../../game/levels/biyujing.tscn) 按 F6，或按 F5 运行第一关；通过战斗命中获取无双值，满10000后按空格释放，Esc菜单可改键。持续15秒，期间按上限/15×战斗delta消耗且不再获取；重复按下不刷新。释放时保留正在进行的攻击与技能；地面受击硬直按原 `onStiffComplete` 解除，眩晕由控制状态裁决。
 
 ## 战斗获取、增益与UI
 
@@ -51,19 +51,21 @@ Flash 的 GlowFilter 由 Godot shader 的5×5 Gaussian采样近似，颜色、�
 
 `CoreOperationController → BattlePlayerOperations → Core动作机 → sunwukong_wushuang → BattleWushuangActivationFeature → BattleWushuangController → GAS rage Vital / normal_wushuang_visual → BattleWushuangEffect2D`。
 
-角色的 [AnimationAdapter](../../animation/sunwukong_visual.tscn) 已预置 [WushuangEffect场景](sunwukong_wushuang.tscn)：一个实时红光捕获视口，以及六组 `Sprite2D/Capture/Body` 残影槽。身体前面的静态节点顺序让红光与残影在人物后、地形前绘制，避免负层级被背景遮挡。复用时调整已有槽的绘制顺序，最新残影盖住旧残影，保留原版序号递增的层序语义。六个槽循环复用，默认最多五个存活残影；不在启动或采样时添加节点、创建 Tween，也不做生产环境的 CPU 图片回读。
+角色的 [AnimationAdapter](../../characters/sunwukong/animation/sunwukong_visual.tscn) 已预置 [WushuangEffect场景](sunwukong_wushuang.tscn)：一个实时红光捕获视口，以及六组 `Sprite2D/Capture/Body` 残影槽。身体前面的静态节点顺序让红光与残影在人物后、地形前绘制，避免负层级被背景遮挡。复用时调整已有槽的绘制顺序，最新残影盖住旧残影，保留原版序号递增的层序语义。六个槽循环复用，默认最多五个存活残影；不在启动或采样时添加节点、创建 Tween，也不做生产环境的 CPU 图片回读。
 
 [BattleSpinePoseMirror2D](../../../addons/battle_foundation/animation/spine_pose_mirror_2d.gd) 共用只读骨架与图集，独占姿态及复合皮肤。捕获已解算骨骼世界变换、槽位附件、颜色和 deform，保留原动画 drawOrder；换装不会释放仍被旧残影使用的独立皮肤。SubViewport 只在捕获时 `UPDATE_ONCE`；旧残影的纹理和骨骼不继续刷新。
 
 [BattleWushuangEffect2D](../../../addons/battle_foundation/presentation/battle_wushuang_effect_2d.gd) 在角色每次战斗更新完成后接收一次 combat delta。暂停、受击停顿冻结生成和消散；慢动作统一影响持续时间、脉动和透明度。自然结束立即撤销红光，已有残影继续消散；死亡和离场立即清空。低帧率补算未过期样本的年龄和世界位置，过期样本跳过；同一大 delta 内多个样本使用本次已解算姿态，不重建历史子帧姿态。
 
+残影与当前人物脚底位置相距不足 `Minimum Ghost Distance` 时暂不绘制，默认2个原素材像素（悟空世界坐标4像素）。采样周期、快照姿态和1秒消散仍保持不变；待机、原地攻击或转向时，旧快照不会叠成人物重影。人物移开后，尚未过期的快照显示为正常拖尾；返回旧快照位置时自动隐藏重叠快照。实时轮廓红光始终由当前姿态绘制，停止、转向、换装不影响无双增益和怒气消耗。
+
 实时红光用320×320捕获，提供模糊边缘余量；残影仍采用原版240×240，超出区域的附件可能裁切。运行成本有界，但视口与模糊着色仍有 GPU 成本，不能据此保证任意数量角色的性能。
 
 ## 调整与新增角色
 
-- 角色 `AnimationAdapter/WushuangEffect`：`Glow Color`、`Spawn Interval`、`Ghost Lifetime`、`Source FPS`、`Glow Base Width`、`Glow Maximum Step`。
+- 角色 `AnimationAdapter/WushuangEffect`：`Glow Color`、`Spawn Interval`、`Ghost Lifetime`、`Minimum Ghost Distance`、`Source FPS`、`Glow Base Width`、`Glow Maximum Step`。
 - [无双状态](../../buffs/normal_wushuang_visual.tres)：`Duration` 与三个原版GAS效果；控制器依据同一Duration计算消耗。
-- [无双技能](../../skills/sunwukong/wushuang.tres)：表现状态引用；角色 `ability_slots.wushuang` 绑定语义技能 ID。
+- [无双技能](../../characters/sunwukong/skills/wushuang.tres)：表现状态引用；角色 `ability_slots.wushuang` 绑定语义技能 ID。
 - 改采样间隔或寿命时，手动增减预置残影槽，至少 `ceil(寿命/间隔)+1`；运行时会检查槽数。
 - 新角色复制无双场景，替换七个 Body 的 Spine 数据资源，设置其 `xpColor` 和角色比例，保留脚底对齐、独立皮肤和静态节点结构。将状态、技能加入所用 manifest，再绑定角色无双槽。
 
@@ -71,11 +73,11 @@ Flash 的 GlowFilter 由 Godot shader 的5×5 Gaussian采样近似，颜色、�
 
 ## 验证
 
-[自动验收](../../../tests/suites/verify_wushuang.gd) 覆盖真实输入和改键、攻击中激活、姿态/换装/朝向冻结、固定池、实例隔离、低帧率、暂停/慢动作/停顿、30源帧辉光边界、到期/死亡/离场清理。
+[重影回归](../../../tests/suites/verify_wushuang_visual.gd) 使用真实角色和 GAS 无双入口，检查待机、原地转向、返回旧位置时不绘制重合快照；移动拖尾、采样/消散时间、固定池、低帧率、暂停/慢动作、到期/死亡清理。GPU脚本分别捕获待机、跑动、停止、转向和结束画面，便于检查身体、武器与红光的实际对齐。
 
 ```powershell
-& '<带 Spine 模块的 Godot.exe>' --headless --path . res://tests/suites/verify_wushuang.tscn
-& '<带 Spine 模块的 Godot.exe>' --path . --script res://tools/capture_wushuang.gd
+& '<带 Spine 模块的 Godot.exe>' --headless --path . res://tests/suites/verify_wushuang_visual.tscn
+& '<带 Spine 模块的 Godot.exe>' --path . --script res://tools/performance/capture_wushuang_overlap.gd
 ```
 
 第二条使用真实 GPU 渲染比较无双开/关后的画面，验证红光和残影确实出现在场景里，并保存双向奔跑及攻击图片到忽略目录 `.cleanup-backup`。CPU回读仅用于该验收工具。回归入口见 [verify_stage_eight.ps1](../../../tools/verify_stage_eight.ps1)。

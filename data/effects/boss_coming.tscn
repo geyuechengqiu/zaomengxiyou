@@ -1,0 +1,138 @@
+[gd_scene format=3]
+[ext_resource type="Script" path="res://addons/battle_foundation/presentation/battle_original_effect_clip_2d.gd" id="script"]
+[ext_resource type="Texture2D" path="res://assets/ui/boss/boss_coming.png" id="atlas"]
+[sub_resource type="AtlasTexture" id="Frame1"]
+atlas = ExtResource("atlas")
+region = Rect2(0, 0, 636, 319)
+filter_clip = true
+[sub_resource type="AtlasTexture" id="Frame2"]
+atlas = ExtResource("atlas")
+region = Rect2(638, 0, 586, 293)
+filter_clip = true
+[sub_resource type="AtlasTexture" id="Frame3"]
+atlas = ExtResource("atlas")
+region = Rect2(1226, 0, 534, 267)
+filter_clip = true
+[sub_resource type="AtlasTexture" id="Frame4"]
+atlas = ExtResource("atlas")
+region = Rect2(0, 321, 484, 243)
+filter_clip = true
+[sub_resource type="AtlasTexture" id="Frame5"]
+atlas = ExtResource("atlas")
+region = Rect2(486, 321, 433, 217)
+filter_clip = true
+[sub_resource type="AtlasTexture" id="Frame6"]
+atlas = ExtResource("atlas")
+region = Rect2(921, 321, 433, 217)
+filter_clip = true
+[sub_resource type="AtlasTexture" id="Frame7"]
+atlas = ExtResource("atlas")
+region = Rect2(1356, 321, 433, 217)
+filter_clip = true
+[sub_resource type="AtlasTexture" id="Frame8"]
+atlas = ExtResource("atlas")
+region = Rect2(0, 566, 433, 217)
+filter_clip = true
+[sub_resource type="AtlasTexture" id="Frame9"]
+atlas = ExtResource("atlas")
+region = Rect2(435, 566, 433, 217)
+filter_clip = true
+[sub_resource type="AtlasTexture" id="Frame10"]
+atlas = ExtResource("atlas")
+region = Rect2(870, 566, 433, 217)
+filter_clip = true
+[sub_resource type="AtlasTexture" id="Frame11"]
+atlas = ExtResource("atlas")
+region = Rect2(1305, 566, 433, 217)
+filter_clip = true
+[sub_resource type="AtlasTexture" id="Frame12"]
+atlas = ExtResource("atlas")
+region = Rect2(0, 785, 440, 221)
+filter_clip = true
+[sub_resource type="AtlasTexture" id="Frame13"]
+atlas = ExtResource("atlas")
+region = Rect2(442, 785, 448, 225)
+filter_clip = true
+[sub_resource type="AtlasTexture" id="Frame14"]
+atlas = ExtResource("atlas")
+region = Rect2(892, 785, 456, 229)
+filter_clip = true
+[sub_resource type="AtlasTexture" id="Frame15"]
+atlas = ExtResource("atlas")
+region = Rect2(1350, 785, 454, 231)
+filter_clip = true
+[sub_resource type="AtlasTexture" id="Frame16"]
+atlas = ExtResource("atlas")
+region = Rect2(0, 1018, 462, 233)
+filter_clip = true
+[sub_resource type="AtlasTexture" id="Frame17"]
+atlas = ExtResource("atlas")
+region = Rect2(464, 1018, 433, 217)
+filter_clip = true
+[sub_resource type="AtlasTexture" id="Frame18"]
+atlas = ExtResource("atlas")
+region = Rect2(899, 1018, 433, 217)
+filter_clip = true
+[sub_resource type="AtlasTexture" id="Frame19"]
+atlas = ExtResource("atlas")
+region = Rect2(1334, 1018, 433, 217)
+filter_clip = true
+[sub_resource type="AtlasTexture" id="Frame20"]
+atlas = ExtResource("atlas")
+region = Rect2(0, 1253, 433, 217)
+filter_clip = true
+[sub_resource type="AtlasTexture" id="Frame21"]
+atlas = ExtResource("atlas")
+region = Rect2(435, 1253, 433, 217)
+filter_clip = true
+[sub_resource type="AtlasTexture" id="Frame22"]
+atlas = ExtResource("atlas")
+region = Rect2(870, 1253, 433, 217)
+filter_clip = true
+[sub_resource type="AtlasTexture" id="Frame23"]
+atlas = ExtResource("atlas")
+region = Rect2(1305, 1253, 433, 217)
+filter_clip = true
+[sub_resource type="AtlasTexture" id="Frame24"]
+atlas = ExtResource("atlas")
+region = Rect2(0, 1472, 433, 217)
+filter_clip = true
+[sub_resource type="AtlasTexture" id="Frame25"]
+atlas = ExtResource("atlas")
+region = Rect2(435, 1472, 433, 217)
+filter_clip = true
+[sub_resource type="AtlasTexture" id="Frame26"]
+atlas = ExtResource("atlas")
+region = Rect2(870, 1472, 433, 217)
+filter_clip = true
+[sub_resource type="AtlasTexture" id="Frame27"]
+atlas = ExtResource("atlas")
+region = Rect2(1305, 1472, 426, 215)
+filter_clip = true
+[sub_resource type="AtlasTexture" id="Frame28"]
+atlas = ExtResource("atlas")
+region = Rect2(0, 1691, 423, 215)
+filter_clip = true
+[sub_resource type="AtlasTexture" id="Frame29"]
+atlas = ExtResource("atlas")
+region = Rect2(425, 1691, 422, 213)
+filter_clip = true
+[sub_resource type="Animation" id="Clip"]
+length = 1.1
+loop_mode = 0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/keys = {"times": PackedFloat32Array(0.0, 0.03333333333333333, 0.06666666666666667, 0.1, 0.13333333333333333, 0.16666666666666666, 0.2, 0.23333333333333334, 0.26666666666666666, 0.3, 0.3333333333333333, 0.36666666666666664, 0.4, 0.43333333333333335, 0.4666666666666667, 0.5, 0.5333333333333333, 0.5666666666666667, 0.6, 0.6333333333333333, 0.6666666666666666, 0.7, 0.7333333333333333, 0.7666666666666667, 0.8, 0.8333333333333334, 0.8666666666666667, 0.9, 0.9333333333333333, 0.9666666666666667, 1.0, 1.0333333333333334, 1.0666666666666667), "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1), "update": 1, "values": [null, SubResource("Frame1"), SubResource("Frame2"), SubResource("Frame3"), SubResource("Frame4"), SubResource("Frame5"), SubResource("Frame6"), SubResource("Frame7"), SubResource("Frame8"), SubResource("Frame9"), SubResource("Frame10"), SubResource("Frame11"), SubResource("Frame12"), SubResource("Frame13"), SubResource("Frame14"), SubResource("Frame15"), SubResource("Frame16"), SubResource("Frame17"), SubResource("Frame18"), SubResource("Frame19"), SubResource("Frame20"), SubResource("Frame21"), SubResource("Frame22"), SubResource("Frame23"), SubResource("Frame24"), SubResource("Frame25"), SubResource("Frame26"), SubResource("Frame27"), SubResource("Frame28"), SubResource("Frame29"), null, null, null]}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite2D:position")
+tracks/1/keys = {"times": PackedFloat32Array(0.0, 0.03333333333333333, 0.06666666666666667, 0.1, 0.13333333333333333, 0.16666666666666666, 0.2, 0.23333333333333334, 0.26666666666666666, 0.3, 0.3333333333333333, 0.36666666666666664, 0.4, 0.43333333333333335, 0.4666666666666667, 0.5, 0.5333333333333333, 0.5666666666666667, 0.6, 0.6333333333333333, 0.6666666666666666, 0.7, 0.7333333333333333, 0.7666666666666667, 0.8, 0.8333333333333334, 0.8666666666666667, 0.9, 0.9333333333333333, 0.9666666666666667, 1.0, 1.0333333333333334, 1.0666666666666667), "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1), "update": 1, "values": [Vector2(151.85, 136.1), Vector2(151.85, 136.1), Vector2(176.85, 149.1), Vector2(202.85, 162.1), Vector2(227.85, 174.1), Vector2(253.85, 187.1), Vector2(253.85, 187.1), Vector2(253.85, 187.1), Vector2(253.85, 187.1), Vector2(253.85, 187.1), Vector2(253.85, 187.1), Vector2(253.85, 187.1), Vector2(249.85, 185.1), Vector2(245.85, 183.1), Vector2(241.85, 181.1), Vector2(247.85, 180.1), Vector2(243.85, 179.1), Vector2(253.85, 187.1), Vector2(253.85, 187.1), Vector2(253.85, 187.1), Vector2(253.85, 187.1), Vector2(253.85, 187.1), Vector2(253.85, 187.1), Vector2(253.85, 187.1), Vector2(253.85, 187.1), Vector2(253.85, 187.1), Vector2(253.85, 187.1), Vector2(259.85, 188.1), Vector2(262.85, 188.1), Vector2(262.85, 189.1), Vector2(151.85, 136.1), Vector2(151.85, 136.1), Vector2(151.85, 136.1)]}
+[sub_resource type="AnimationLibrary" id="Library"]
+_data = {&"play": SubResource("Clip")}
+[node name="OriginalEffect" type="Node2D"]
+visible = false
+scale = Vector2(1, 1)
+script = ExtResource("script")
+[node name="Sprite2D" type="Sprite2D" parent="."]
+centered = false
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries/ = SubResource("Library")

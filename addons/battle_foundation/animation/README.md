@@ -2,9 +2,9 @@
 
 独立表现接口 [CharacterAnimationAdapter](character_animation_adapter.gd) 面向动作名称；[SpineAnimationAdapter](spine_animation_adapter.gd) 控制场景预置的主 AnimationPlayer，经原生 SpineAnimationTrack 子播放器驱动 SpineSprite，并封装组合皮肤与挂点。战斗层保存生命、技能实例和动作状态，表现层保存动作、朝向、皮肤与播放时间。两者使用同一场战斗的 delta，职责分别管理。
 
-打开 [sunwukong_visual.tscn](../../../data/animation/sunwukong_visual.tscn)，选择主 AnimationPlayer 即可预览十四个动作。所有技能复用一个 BattleHitbox2D + CollisionShape2D，编辑器按动作和时间读取技能事件，运行时按技能 ID 和命中序号读取实体 GAS 定义。调整范围时修改技能数据的 hit_rect、缩放与偏移。[编辑步骤、节点结构、新角色接入和验证说明](../../../data/animation/README.md)。
+打开 [sunwukong_visual.tscn](../../../data/characters/sunwukong/animation/sunwukong_visual.tscn)，选择主 AnimationPlayer 即可预览十四个动作。所有技能复用一个 BattleHitbox2D + CollisionShape2D，编辑器按动作和时间读取技能事件，运行时按技能 ID 和命中序号读取实体 GAS 定义。调整范围时修改技能数据的 hit_rect、缩放与偏移。[编辑步骤、节点结构、新角色接入和验证说明](../../../data/characters/sunwukong/animation/README.md)。
 
-运行 [横版平台场景](../../../tests/fixtures/wukong_platform_demo.tscn)：在编辑器打开场景后按 F6。测试场景有孙悟空、左右两个不同外观的同配置靶子、地面、两个高度的平台和墙体。当前项目 F5 主场景保持插件演示。
+运行 [碧玉径](../../../game/levels/biyujing.tscn)，按 F5 进入当前正式关卡。旧平台/木桩演示已清理；编辑器动画预览直接打开角色 visual，角色与怪物模板保存在 `data/templates/`。
 
 需要 **带 Spine 模块的 Godot**。本机使用 `godot-4.3-4.7.2-stable.exe`，引擎实际版本为 Godot 4.7.2，自带 Spine 4.3 运行时。角色骨架版本为 4.3.23。普通未编译 Spine 模块的 Godot 没有 SpineSprite 等类，不能运行这组场景。无需另加 GDExtension 或下载重复骨架；这些类型由现有引擎提供。[Spine Godot 官方文档](https://esotericsoftware.com/spine-godot)
 
@@ -12,9 +12,9 @@
 
 ## 原版动作与来源
 
-资源实际目录是 `assets/skelton/char/sunwukong`。修正 `sunwukong_spinedata.tres` 的 atlas/skel 引用到该目录；原始 `wukong.skel`、`wukong.atlas`、`wukong.png` 保持原文件内容。数据映射在 [sunwukong_profile.tres](../../../data/animation/sunwukong_profile.tres)，业务角色和技能在 [data/battle2d](../../../data/battle2d/README.md)。
+资源实际目录是 `assets/characters/sunwukong/animation`。原始 `wukong.skel`、`wukong.atlas`、`wukong.png` 保持原内容，资源引用随迁移更新。数据映射在 [sunwukong_profile.tres](../../../data/characters/sunwukong/animation/sunwukong_profile.tres)，角色、属性和技能集中在 [悟空目录](../../../data/characters/sunwukong/README.md)。
 
-本地原版依据来自 Speculum-4399-master 的孙悟空注册点修正版 Spine JSON、DragonBones 原动作帧数、Role/Skill 配置和客户端 CharEntity 的 `shootFrame × (1 / Fps)` 公式。文件路径及 SHA-256 保存于 [source_mapping.json](../../../data/battle2d/source_mapping.json)，运行时不依赖那个项目。
+本地原版依据来自 Speculum-4399-master 的孙悟空注册点修正版 Spine JSON、DragonBones 原动作帧数、Role/Skill 配置和客户端 CharEntity 的 `shootFrame × (1 / Fps)` 公式。文件路径及 SHA-256 保存于 [配置来源](../../../data/characters/sunwukong/attributes/configuration_source.json)，运行时不依赖那个项目。
 
 | 战斗动作名 | Spine 原动作 | 原版帧数 / 30 fps | 时长（秒） | 播放方式 |
 | --- | --- | --- | --- | --- |
@@ -30,10 +30,10 @@
 | attack_3 | attack3 | 12 | 0.400000 | 单次 |
 | attack_4 | attack4 | 18 | 0.600000 | 单次 |
 | attack_5 | attack5 | 20 | 0.666667 | 单次 |
-| jump_2 | jumpTwo | 8 | 0.266667 | 单次 |
+| jump_2 | jumpTwo | 8 | 0.266667 | 上升期间循环 |
 | land | idle | 35 | 1.166667 | 单次；战斗 LAND 窗口另定 |
 
-骨架保留全部44个原动作，主 AnimationPlayer 保存14个语义动作；原素材没有独立落地动画，land 使用 idle。初始时长取自 SpineAnimation，编辑器可编排多个原生 clip 并修改主时间轴长度；当前 jump_2 已编辑为 jumpTwo → jumpDown，长度0.3秒。初始化检查有效时长与原生绑定，保留组合动作；不再强制语义时长等于单个原素材。播放时间和进度读取主播放器，子 clip 使用各自关键帧的局部时间。表中为素材基准时长，不重新采样到60帧。单次完成保持终帧，是否待机由战斗状态决定。运动权限见 [阶段四](../movement/README.md)。
+骨架保留全部44个原动作，主 AnimationPlayer 使用语义动作；原素材没有独立落地动画，land 使用 idle。初始时长取自 SpineAnimation，编辑器可编排多个原生 clip 并修改主时间轴长度；jump_2 按原版8帧/30FPS循环播放 jumpTwo，下落时由动作状态切换 fall/jumpDown，不在二段跳动画里提前切换。初始化检查有效时长与原生绑定，保留组合动作；不再强制语义时长等于单个原素材。播放时间和进度读取主播放器，子 clip 使用各自关键帧的局部时间。表中为素材基准时长，不重新采样到60帧。单次完成保持终帧，是否待机由战斗状态决定。运动权限见 [阶段四](../movement/README.md)。
 
 ## 对外接口
 
@@ -130,7 +130,7 @@ if visual.is_socket_active(&"weapon"):
 
 角色已使用 [独立操作控制器](../input/README.md)，无按键轮询。改键只更新 InputMap 和用户配置；动画与角色代码仍消费动作/操作名称。输入缓存、长按、双击、控制权与技能槽扩展不进入 Spine 适配层。
 
-原版 Role.walkSpeed=210、runSpeed=300 已导入 GAS；jumpSpeed=-178 保存在属性中，平台运动实际读取动作配置的重力 1500、跳跃速度 -620。二段跳、五段连击和原版普攻特效已接入。其他技能特效与完整原版运动单位仍待迁移。换装只改变外观。资源路径、不同样例的覆盖配置和全部调参步骤见 [孙悟空配置说明](../../../data/animation/sunwukong-config.md)。
+原版 Role.walkSpeed=210、runSpeed=300 已导入 GAS；jumpSpeed=-178 保存在属性中，平台运动实际读取动作配置的重力 1500、跳跃速度 -620。二段跳、五段连击和原版普攻特效已接入。其他技能特效与完整原版运动单位仍待迁移。换装只改变外观。资源路径、不同样例的覆盖配置和全部调参步骤见 [孙悟空配置说明](../../../data/characters/sunwukong/animation/sunwukong-config.md)。
 
 ![平台原生渲染](../docs/wukong-platform.png)
 
@@ -138,7 +138,7 @@ if visual.is_socket_active(&"weapon"):
 & '<带 Spine 模块的 Godot 路径>' --headless --path . res://tests/suites/verify_wukong_animation.tscn
 ```
 
-[验收脚本](../../../tests/suites/verify_wukong_animation.gd) 使用真实 Spine 和真实 2D 物理世界，失败返回 1。覆盖八个动作映射/原版时长、全部 206 个皮肤的时间/位置/层序/挂点不变、组合装备与实例隔离、无效输入、单次完成/循环通知、手动时钟不被渲染重复推进、左右命中、4/30 秒时序、伤害/死亡规则与动画分离、暂停/慢动作/停顿、跳到高台和墙体碰撞。另已查看 GPU 实际渲染的六种基础动作、左右朝向和不同外观，检查脚底、注册点、层序和装备位置。
+[验收脚本](../../../tests/README.md) 使用真实 Spine 和真实 2D 物理世界，失败返回 1。覆盖八个动作映射/原版时长、全部 206 个皮肤的时间/位置/层序/挂点不变、组合装备与实例隔离、无效输入、单次完成/循环通知、手动时钟不被渲染重复推进、左右命中、4/30 秒时序、伤害/死亡规则与动画分离、暂停/慢动作/停顿、跳到高台和墙体碰撞。另已查看 GPU 实际渲染的六种基础动作、左右朝向和不同外观，检查脚底、注册点、层序和装备位置。
 
 ## 配置资源与实例边界
 

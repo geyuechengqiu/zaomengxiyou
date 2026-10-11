@@ -21,6 +21,18 @@ var _skills: Dictionary = {}
 var _aliases: Dictionary = {}
 var _dimmed: bool = false
 var _original_alpha: float = 1.0
+## 原保护表约2MB：只解析一次，技能/别名只读共享；累计值仍由各组件保存。
+static var _source_cache: Dictionary = {}
+static var source_parse_count: int = 0
+
+static func load_original_source(path: String) -> Dictionary:
+	if _source_cache.has(path): return _source_cache[path]
+	if not FileAccess.file_exists(path): return {}
+	var parsed: Variant = JSON.parse_string(FileAccess.get_file_as_string(path))
+	if not parsed is Dictionary or parsed.get("version") != 1: return {}
+	_source_cache[path] = parsed
+	source_parse_count += 1
+	return parsed
 #endregion
 #region 初始化、Boss 满值与技能配置查询
 func configure(actor: BattleEntity2D, definition: BattleProtectionProfile) -> bool:
@@ -31,12 +43,12 @@ func configure(actor: BattleEntity2D, definition: BattleProtectionProfile) -> bo
 	if not profile.is_valid():
 		last_error = "保护条配置无效"
 		return false
-	var parsed: Variant = JSON.parse_string(FileAccess.get_file_as_string(profile.original_data_path)) if FileAccess.file_exists(profile.original_data_path) else null
-	if not parsed is Dictionary or parsed.get("version") != 1:
+	var parsed := load_original_source(profile.original_data_path)
+	if parsed.is_empty():
 		last_error = "保护条原版数据缺失或版本错误：" + profile.original_data_path
 		return false
-	_skills = parsed.get("skills", {}).duplicate(true)
-	_aliases = parsed.get("ability_ids", {}).duplicate(true)
+	_skills = parsed.get("skills", {})
+	_aliases = parsed.get("ability_ids", {})
 	var boss: Dictionary = parsed.get("bosses", {}).get(profile.original_boss_key, {})
 	show_protect = profile.show_protect and (not profile.inherit_original_display or bool(boss.get("showProtect", true)))
 	maximum = profile.maximum_override if profile.maximum_override > 0 else int(boss.get("protectPoint", 0))

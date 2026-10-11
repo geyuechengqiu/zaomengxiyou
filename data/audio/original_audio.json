@@ -35,31 +35,31 @@
       "levlUp": "res://assets/audio/original/hs/levlUp.mp3"
     },
     "se2001V456": {
-      "runAttack": "res://assets/audio/original/se2001V456/runAttack.mp3",
-      "attack1": "res://assets/audio/original/se2001V456/attack1.mp3",
-      "attack2": "res://assets/audio/original/se2001V456/attack2.mp3",
-      "attack3": "res://assets/audio/original/se2001V456/attack3.mp3",
-      "attack4": "res://assets/audio/original/se2001V456/attack4.mp3",
-      "attack5": "res://assets/audio/original/se2001V456/attack5.mp3",
-      "jumpAttack": "res://assets/audio/original/se2001V456/jumpAttack.mp3",
-      "skillXp1": "res://assets/audio/original/se2001V456/skillXp1.mp3",
-      "skill4": "res://assets/audio/original/se2001V456/skill4.mp3",
-      "skill4_1": "res://assets/audio/original/se2001V456/skill4_1.mp3",
-      "skill5": "res://assets/audio/original/se2001V456/skill5.mp3",
-      "skill6": "res://assets/audio/original/se2001V456/skill6.mp3",
-      "skillXp2": "res://assets/audio/original/se2001V456/skillXp2.mp3",
-      "skill9": "res://assets/audio/original/se2001V456/skill9.mp3",
-      "skill8": "res://assets/audio/original/se2001V456/skill8.mp3",
-      "skill7_b": "res://assets/audio/original/se2001V456/skill7_b.mp3",
-      "skill3": "res://assets/audio/original/se2001V456/skill3.mp3",
-      "skill2": "res://assets/audio/original/se2001V456/skill2.mp3",
-      "skill12_3": "res://assets/audio/original/se2001V456/skill12_3.mp3",
-      "skill12_1": "res://assets/audio/original/se2001V456/skill12_1.mp3",
-      "skill12": "res://assets/audio/original/se2001V456/skill12.mp3",
-      "skill11": "res://assets/audio/original/se2001V456/skill11.mp3",
-      "skill10_1": "res://assets/audio/original/se2001V456/skill10_1.mp3",
-      "skill10": "res://assets/audio/original/se2001V456/skill10.mp3",
-      "skill1": "res://assets/audio/original/se2001V456/skill1.mp3"
+      "runAttack": "res://assets/characters/sunwukong/audio/runAttack.mp3",
+      "attack1": "res://assets/characters/sunwukong/audio/attack1.mp3",
+      "attack2": "res://assets/characters/sunwukong/audio/attack2.mp3",
+      "attack3": "res://assets/characters/sunwukong/audio/attack3.mp3",
+      "attack4": "res://assets/characters/sunwukong/audio/attack4.mp3",
+      "attack5": "res://assets/characters/sunwukong/audio/attack5.mp3",
+      "jumpAttack": "res://assets/characters/sunwukong/audio/jumpAttack.mp3",
+      "skillXp1": "res://assets/characters/sunwukong/audio/skillXp1.mp3",
+      "skill4": "res://assets/characters/sunwukong/audio/skill4.mp3",
+      "skill4_1": "res://assets/characters/sunwukong/audio/skill4_1.mp3",
+      "skill5": "res://assets/characters/sunwukong/audio/skill5.mp3",
+      "skill6": "res://assets/characters/sunwukong/audio/skill6.mp3",
+      "skillXp2": "res://assets/characters/sunwukong/audio/skillXp2.mp3",
+      "skill9": "res://assets/characters/sunwukong/audio/skill9.mp3",
+      "skill8": "res://assets/characters/sunwukong/audio/skill8.mp3",
+      "skill7_b": "res://assets/characters/sunwukong/audio/skill7_b.mp3",
+      "skill3": "res://assets/characters/sunwukong/audio/skill3.mp3",
+      "skill2": "res://assets/characters/sunwukong/audio/skill2.mp3",
+      "skill12_3": "res://assets/characters/sunwukong/audio/skill12_3.mp3",
+      "skill12_1": "res://assets/characters/sunwukong/audio/skill12_1.mp3",
+      "skill12": "res://assets/characters/sunwukong/audio/skill12.mp3",
+      "skill11": "res://assets/characters/sunwukong/audio/skill11.mp3",
+      "skill10_1": "res://assets/characters/sunwukong/audio/skill10_1.mp3",
+      "skill10": "res://assets/characters/sunwukong/audio/skill10.mp3",
+      "skill1": "res://assets/characters/sunwukong/audio/skill1.mp3"
     },
     "se2002V456": {
       "skillXp2": "res://assets/audio/original/se2002V456/skillXp2.mp3",
@@ -363,175 +363,175 @@
     {
       "source": "games/zmhj-g5/cache/assets/music/se2001V456.swf",
       "symbol": "runAttack",
-      "file": "assets/audio/original/se2001V456/runAttack.mp3",
+      "file": "assets/characters/sunwukong/audio/runAttack.mp3",
       "sha256": "efee5e3f8ad35442b54d5b973680fccf1f2b92776b1ad0f04b1d38d9840f229d",
       "source_sha256": "c7e80101b5b804cbe1a18d0032baf15dbadb4fba079bab300ee98dea25aabd1d"
     },
     {
       "source": "games/zmhj-g5/cache/assets/music/se2001V456.swf",
       "symbol": "attack1",
-      "file": "assets/audio/original/se2001V456/attack1.mp3",
+      "file": "assets/characters/sunwukong/audio/attack1.mp3",
       "sha256": "8992a06daef57ac617b866a93e074414aa066155c51a646549d701b7404eb1e4",
       "source_sha256": "c7e80101b5b804cbe1a18d0032baf15dbadb4fba079bab300ee98dea25aabd1d"
     },
     {
       "source": "games/zmhj-g5/cache/assets/music/se2001V456.swf",
       "symbol": "attack2",
-      "file": "assets/audio/original/se2001V456/attack2.mp3",
+      "file": "assets/characters/sunwukong/audio/attack2.mp3",
       "sha256": "3bd5e53706d8456c9fbeca1a0b9913afd2287986cbd36bcb7a7c7c6328bd8f71",
       "source_sha256": "c7e80101b5b804cbe1a18d0032baf15dbadb4fba079bab300ee98dea25aabd1d"
     },
     {
       "source": "games/zmhj-g5/cache/assets/music/se2001V456.swf",
       "symbol": "attack3",
-      "file": "assets/audio/original/se2001V456/attack3.mp3",
+      "file": "assets/characters/sunwukong/audio/attack3.mp3",
       "sha256": "ef893b387155982ce68e03e961a33d393ca6a3c415c295de3f420e22af708792",
       "source_sha256": "c7e80101b5b804cbe1a18d0032baf15dbadb4fba079bab300ee98dea25aabd1d"
     },
     {
       "source": "games/zmhj-g5/cache/assets/music/se2001V456.swf",
       "symbol": "attack4",
-      "file": "assets/audio/original/se2001V456/attack4.mp3",
+      "file": "assets/characters/sunwukong/audio/attack4.mp3",
       "sha256": "499e116a7d0278e4f8a5a6ab4f8e1e82c21fced4865199ff1fce600da59d7328",
       "source_sha256": "c7e80101b5b804cbe1a18d0032baf15dbadb4fba079bab300ee98dea25aabd1d"
     },
     {
       "source": "games/zmhj-g5/cache/assets/music/se2001V456.swf",
       "symbol": "attack5",
-      "file": "assets/audio/original/se2001V456/attack5.mp3",
+      "file": "assets/characters/sunwukong/audio/attack5.mp3",
       "sha256": "09f1e936b6ef5ccb5bf7844e9a6af684a56f253c6994dd8f1e3a2d659d1ab925",
       "source_sha256": "c7e80101b5b804cbe1a18d0032baf15dbadb4fba079bab300ee98dea25aabd1d"
     },
     {
       "source": "games/zmhj-g5/cache/assets/music/se2001V456.swf",
       "symbol": "jumpAttack",
-      "file": "assets/audio/original/se2001V456/jumpAttack.mp3",
+      "file": "assets/characters/sunwukong/audio/jumpAttack.mp3",
       "sha256": "4cc917e3b85e3cfdf267af823abc17ae1007c425640311a40083be9f66b02e49",
       "source_sha256": "c7e80101b5b804cbe1a18d0032baf15dbadb4fba079bab300ee98dea25aabd1d"
     },
     {
       "source": "games/zmhj-g5/cache/assets/music/se2001V456.swf",
       "symbol": "skillXp1",
-      "file": "assets/audio/original/se2001V456/skillXp1.mp3",
+      "file": "assets/characters/sunwukong/audio/skillXp1.mp3",
       "sha256": "587a47cf2772b745113d0cfc053dc84e5b266d8e2d3dbefa4d3a4ecfe664e908",
       "source_sha256": "c7e80101b5b804cbe1a18d0032baf15dbadb4fba079bab300ee98dea25aabd1d"
     },
     {
       "source": "games/zmhj-g5/cache/assets/music/se2001V456.swf",
       "symbol": "skill4",
-      "file": "assets/audio/original/se2001V456/skill4.mp3",
+      "file": "assets/characters/sunwukong/audio/skill4.mp3",
       "sha256": "f3456ccc11f904f95eec85ab241e46575a2e14592a0f776e7e9f8aa42a882784",
       "source_sha256": "c7e80101b5b804cbe1a18d0032baf15dbadb4fba079bab300ee98dea25aabd1d"
     },
     {
       "source": "games/zmhj-g5/cache/assets/music/se2001V456.swf",
       "symbol": "skill4_1",
-      "file": "assets/audio/original/se2001V456/skill4_1.mp3",
+      "file": "assets/characters/sunwukong/audio/skill4_1.mp3",
       "sha256": "5cb4fd7ca2bb8c4d4f24a0909413d6e88e8ed78846ee3d4b3842e3cca446bb94",
       "source_sha256": "c7e80101b5b804cbe1a18d0032baf15dbadb4fba079bab300ee98dea25aabd1d"
     },
     {
       "source": "games/zmhj-g5/cache/assets/music/se2001V456.swf",
       "symbol": "skill5",
-      "file": "assets/audio/original/se2001V456/skill5.mp3",
+      "file": "assets/characters/sunwukong/audio/skill5.mp3",
       "sha256": "fe829bb0832cefafa40e0b192b03879ab0affe76528a385f2d45613aecbe07ad",
       "source_sha256": "c7e80101b5b804cbe1a18d0032baf15dbadb4fba079bab300ee98dea25aabd1d"
     },
     {
       "source": "games/zmhj-g5/cache/assets/music/se2001V456.swf",
       "symbol": "skill6",
-      "file": "assets/audio/original/se2001V456/skill6.mp3",
+      "file": "assets/characters/sunwukong/audio/skill6.mp3",
       "sha256": "91e6a1da3f9862d6dd336f2eec07f1c1cdafd52161bc42be8b8822a9963cea82",
       "source_sha256": "c7e80101b5b804cbe1a18d0032baf15dbadb4fba079bab300ee98dea25aabd1d"
     },
     {
       "source": "games/zmhj-g5/cache/assets/music/se2001V456.swf",
       "symbol": "skillXp2",
-      "file": "assets/audio/original/se2001V456/skillXp2.mp3",
+      "file": "assets/characters/sunwukong/audio/skillXp2.mp3",
       "sha256": "ff5341c53eb2f66cac7b3f6eabbeba1d229268c2a5a37bf261794490ed6b087a",
       "source_sha256": "c7e80101b5b804cbe1a18d0032baf15dbadb4fba079bab300ee98dea25aabd1d"
     },
     {
       "source": "games/zmhj-g5/cache/assets/music/se2001V456.swf",
       "symbol": "skill9",
-      "file": "assets/audio/original/se2001V456/skill9.mp3",
+      "file": "assets/characters/sunwukong/audio/skill9.mp3",
       "sha256": "d801a0d2587d9d3193108ce028378d3d6ce67b942bed97dc068f55332f4fc8e6",
       "source_sha256": "c7e80101b5b804cbe1a18d0032baf15dbadb4fba079bab300ee98dea25aabd1d"
     },
     {
       "source": "games/zmhj-g5/cache/assets/music/se2001V456.swf",
       "symbol": "skill8",
-      "file": "assets/audio/original/se2001V456/skill8.mp3",
+      "file": "assets/characters/sunwukong/audio/skill8.mp3",
       "sha256": "fed705b344eea3b81843579c8b99fdc5c9b134597965c17487141669d0fd9728",
       "source_sha256": "c7e80101b5b804cbe1a18d0032baf15dbadb4fba079bab300ee98dea25aabd1d"
     },
     {
       "source": "games/zmhj-g5/cache/assets/music/se2001V456.swf",
       "symbol": "skill7_b",
-      "file": "assets/audio/original/se2001V456/skill7_b.mp3",
+      "file": "assets/characters/sunwukong/audio/skill7_b.mp3",
       "sha256": "d713c77e55fb6378de12c2b5652f91c758582eef121cfccd0412d561f8864203",
       "source_sha256": "c7e80101b5b804cbe1a18d0032baf15dbadb4fba079bab300ee98dea25aabd1d"
     },
     {
       "source": "games/zmhj-g5/cache/assets/music/se2001V456.swf",
       "symbol": "skill3",
-      "file": "assets/audio/original/se2001V456/skill3.mp3",
+      "file": "assets/characters/sunwukong/audio/skill3.mp3",
       "sha256": "1efc3c56f74ba0cb717e2bc09cc428ddbcfc77ab006d38a8ec42ec52330466f8",
       "source_sha256": "c7e80101b5b804cbe1a18d0032baf15dbadb4fba079bab300ee98dea25aabd1d"
     },
     {
       "source": "games/zmhj-g5/cache/assets/music/se2001V456.swf",
       "symbol": "skill2",
-      "file": "assets/audio/original/se2001V456/skill2.mp3",
+      "file": "assets/characters/sunwukong/audio/skill2.mp3",
       "sha256": "0f4df0b94edf92a495bcb238ce65b01a1b3d0f91ed3275254d9b64b8a2c315a6",
       "source_sha256": "c7e80101b5b804cbe1a18d0032baf15dbadb4fba079bab300ee98dea25aabd1d"
     },
     {
       "source": "games/zmhj-g5/cache/assets/music/se2001V456.swf",
       "symbol": "skill12_3",
-      "file": "assets/audio/original/se2001V456/skill12_3.mp3",
+      "file": "assets/characters/sunwukong/audio/skill12_3.mp3",
       "sha256": "0e1c375cea401c69725754be32f019f634bebf5d26d8ca33c14a51bf68fed414",
       "source_sha256": "c7e80101b5b804cbe1a18d0032baf15dbadb4fba079bab300ee98dea25aabd1d"
     },
     {
       "source": "games/zmhj-g5/cache/assets/music/se2001V456.swf",
       "symbol": "skill12_1",
-      "file": "assets/audio/original/se2001V456/skill12_1.mp3",
+      "file": "assets/characters/sunwukong/audio/skill12_1.mp3",
       "sha256": "743ece2049e31e7d44605f75eaa8902a4db3c19e37f61f0229e363b143eea0b8",
       "source_sha256": "c7e80101b5b804cbe1a18d0032baf15dbadb4fba079bab300ee98dea25aabd1d"
     },
     {
       "source": "games/zmhj-g5/cache/assets/music/se2001V456.swf",
       "symbol": "skill12",
-      "file": "assets/audio/original/se2001V456/skill12.mp3",
+      "file": "assets/characters/sunwukong/audio/skill12.mp3",
       "sha256": "0e1c375cea401c69725754be32f019f634bebf5d26d8ca33c14a51bf68fed414",
       "source_sha256": "c7e80101b5b804cbe1a18d0032baf15dbadb4fba079bab300ee98dea25aabd1d"
     },
     {
       "source": "games/zmhj-g5/cache/assets/music/se2001V456.swf",
       "symbol": "skill11",
-      "file": "assets/audio/original/se2001V456/skill11.mp3",
+      "file": "assets/characters/sunwukong/audio/skill11.mp3",
       "sha256": "df1d45edae5cfabf430f615b8570abdf64044496f206c2690aa3aee85cb716a6",
       "source_sha256": "c7e80101b5b804cbe1a18d0032baf15dbadb4fba079bab300ee98dea25aabd1d"
     },
     {
       "source": "games/zmhj-g5/cache/assets/music/se2001V456.swf",
       "symbol": "skill10_1",
-      "file": "assets/audio/original/se2001V456/skill10_1.mp3",
+      "file": "assets/characters/sunwukong/audio/skill10_1.mp3",
       "sha256": "2bdfddaf00268763e14db4c88d521bb816321c87c3590505c7568bb27dcb8cf9",
       "source_sha256": "c7e80101b5b804cbe1a18d0032baf15dbadb4fba079bab300ee98dea25aabd1d"
     },
     {
       "source": "games/zmhj-g5/cache/assets/music/se2001V456.swf",
       "symbol": "skill10",
-      "file": "assets/audio/original/se2001V456/skill10.mp3",
+      "file": "assets/characters/sunwukong/audio/skill10.mp3",
       "sha256": "a5e2b3f64bc602e6688add0a1ba70cc622f129302e3caabad3639ada807b8bde",
       "source_sha256": "c7e80101b5b804cbe1a18d0032baf15dbadb4fba079bab300ee98dea25aabd1d"
     },
     {
       "source": "games/zmhj-g5/cache/assets/music/se2001V456.swf",
       "symbol": "skill1",
-      "file": "assets/audio/original/se2001V456/skill1.mp3",
+      "file": "assets/characters/sunwukong/audio/skill1.mp3",
       "sha256": "ae809b31f0edbffeec3073adfd1ca68881bdbf748eb1f498f824908c504090b5",
       "source_sha256": "c7e80101b5b804cbe1a18d0032baf15dbadb4fba079bab300ee98dea25aabd1d"
     },

@@ -1,0 +1,14 @@
+[remap]
+
+importer="spine.skel"
+type="SpineSkeletonFileResource"
+uid="uid://cl1mejyujd3og"
+path="res://.godot/imported/wukong.skel-49a79fa28136f4bedf03fcc039df8939.spskel"
+
+[deps]
+
+source_file="res://assets/characters/sunwukong/animation/wukong.skel"
+dest_files=["res://.godot/imported/wukong.skel-49a79fa28136f4bedf03fcc039df8939.spskel"]
+
+[params]
+

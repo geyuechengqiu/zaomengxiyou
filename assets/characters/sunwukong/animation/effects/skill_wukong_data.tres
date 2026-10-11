@@ -1,0 +1,8 @@
+[gd_resource type="SpineSkeletonDataResource" format=3 uid="uid://djiqktd4ynkwo"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://05g0k4uh8c5q" path="res://assets/characters/sunwukong/animation/effects/skeletons.atlas" id="1_gstcv"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://cve6y5p5p3j4n" path="res://assets/characters/sunwukong/animation/effects/wukong_skills.skel" id="2_emjul"]
+
+[resource]
+atlas_res = ExtResource("1_gstcv")
+skeleton_file_res = ExtResource("2_emjul")

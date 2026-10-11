@@ -1,0 +1,19 @@
+{
+  "reference_project": "godot-spine-example",
+  "reference_files": [
+    {
+      "path": "D:/UserData/Documents/GodotDoc/godot-spine-example/test_sunwukong.tscn",
+      "sha256": "c7b58e439f10a7f211730c44657cb89e3f5057b56cddb6f8a69a58c3a2349b6d"
+    },
+    {
+      "path": "D:/UserData/Documents/GodotDoc/godot-spine-example/test_sunwukong.gd",
+      "sha256": "4bda075ecce8235ece76dc0325f67102003eb1f0c2bdff65c2313ec61fae83f2"
+    }
+  ],
+  "adopted_structure": "SpineSprite -> SpineAnimationTrack -> native AnimationPlayer; separate master AnimationPlayer with TYPE_ANIMATION tracks",
+  "runtime_scene": "res://data/characters/sunwukong/animation/sunwukong_visual.tscn",
+  "semantic_actions": 14,
+  "hitbox_source": "GAS GameplayAbilityDefinition / BattleFrameTimelineFeature.events[].payload",
+  "reference_required_at_runtime": false,
+  "shared_hitbox_count": 1
+}

@@ -20,7 +20,7 @@ func _verify() -> void:
 	await create_timer(1.0).timeout
 	while EditorInterface.get_resource_filesystem().is_scanning():
 		await process_frame
-	EditorInterface.open_scene_from_path("res://data/animation/sunwukong_visual.tscn")
+	EditorInterface.open_scene_from_path("res://data/characters/sunwukong/animation/sunwukong_visual.tscn")
 	for frame in range(5):
 		await process_frame
 	var visual := EditorInterface.get_edited_scene_root() as Node2D

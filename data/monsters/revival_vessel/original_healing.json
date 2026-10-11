@@ -1,0 +1,58 @@
+{
+  "fps": 30,
+  "buff_frames": 14,
+  "buff_loop_seconds": 0.4666666666666667,
+  "boss_frames": 33,
+  "boss_seconds": 1.1,
+  "boss_origin": [
+    151.85,
+    136.1
+  ],
+  "sources": [
+    {
+      "path": "games/zmhj-g5/cache/assets/buff/5004.swf",
+      "sha256": "1ff9c32ebec6155810807b612bc8be1be09ac1f5098e2db9d5a5738444f8af95"
+    },
+    {
+      "path": "games/zmhj-g5/cache/assets/ui/mission_20260406_1.swf",
+      "sha256": "60944248515768281bc82c2e20e267711bf2922967c54029133c36c3c35b9862"
+    }
+  ],
+  "buff": {
+    "describe": "场景琵琶-持续回血",
+    "resistType": 0,
+    "totalTime": 10,
+    "name": "持续回血",
+    "attributeV3": 10,
+    "pvpBuffHpProtectRatio": 1,
+    "stackReplace": 0,
+    "toward": 0,
+    "orderDisplay": 1,
+    "attributeV1": 0.05,
+    "targets": 0,
+    "replaceRule": 2,
+    "show1Effect": 0,
+    "sceneBuffId": -1,
+    "stackMax": 0,
+    "showValueOnHead": 1,
+    "effectTag": "0",
+    "isMulPVPreHp": 1,
+    "destroyBySend": 0,
+    "multiple": 1,
+    "resourceId": 5004,
+    "toWho": 11,
+    "group": 50004,
+    "attributeV2": 2,
+    "interval": 2,
+    "triggerNum": 1,
+    "recCd": 0,
+    "isImmediate": 0,
+    "type": 5,
+    "id": 5000401,
+    "isIntervalDelay": 1,
+    "attributeT": "hp",
+    "isDebuff": 0,
+    "triggerByHurtTargets": "0",
+    "summonCanAdd": 1
+  }
+}

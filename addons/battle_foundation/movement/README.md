@@ -1,6 +1,6 @@
 # 阶段四：运动、动作状态与孙悟空五段普攻
 
-运行 [横版验收场景](../../../tests/fixtures/wukong_platform_demo.tscn)，使用项目现有带 Spine 模块的 Godot 按 F6。A/D 或方向键行走，Shift 或同方向双击奔跑，K 地面跳 / 空中二段跳，J 地面连按预约五段普攻，奔跑/空中按 J 发动跑攻/跳攻。Esc 菜单与改键，F1 普通受击，F2 死亡，F4 重生。地面、高台、黄色单向平台、墙和低天花板用于测试。面板显示动作状态、支撑、跳跃预算、连击段号与预约情况。
+运行 [横版验收场景](../../../game/levels/biyujing.tscn)，使用项目现有带 Spine 模块的 Godot 按 F6。A/D 或方向键行走，Shift 或同方向双击奔跑，K 地面跳 / 空中二段跳，J 地面连按预约五段普攻，奔跑/空中按 J 发动跑攻/跳攻。Esc 菜单与改键，F1 普通受击，F2 死亡，F4 重生。地面、高台、黄色单向平台、墙和低天花板用于测试。面板显示动作状态、支撑、跳跃预算、连击段号与预约情况。
 
 复用现有 Battle Foundation、Core 操作/事件与 GAS 属性/Vital/技能系统。本阶段扩展 Battle Foundation，不另建重复的输入、技能或时钟插件。
 
@@ -51,9 +51,9 @@ actor.request_attack()
 actor.try_jump()
 ```
 
-实体清理/离树时注销机器，Core 调用 stop/dispose；战斗机器随后断开叶子的 `state_machine` / `agent` 所属引用并清空状态集合，避免 RefCounted 循环引用。ActionState 现为角色场景预置 Node，退出或释放时自动注销并清理；节点结构见 [角色组件说明](../../../data/battle2d/character-components.md)。独立测试手动创建未入树节点时，结束后调用 `free()`；`get_state_name()` 查询战斗状态，Node 的 `get_name()` 查询节点名。
+实体清理/离树时注销机器，Core 调用 stop/dispose；战斗机器随后断开叶子的 `state_machine` / `agent` 所属引用并清空状态集合，避免 RefCounted 循环引用。ActionState 现为角色场景预置 Node，退出或释放时自动注销并清理；节点结构见 [角色组件说明](../../../data/characters/sunwukong/components.md)。独立测试手动创建未入树节点时，结束后调用 `free()`；`get_state_name()` 查询战斗状态，Node 的 `get_name()` 查询节点名。
 
-[verify_wukong_state_machine.tscn](../../../tests/suites/verify_wukong_state_machine.tscn) 已通过 46 项检查：真实 Core 状态对象、注册/agent 隔离、生命周期顺序、转换消息、单一时钟、连击重入、死亡守卫、拒绝通知及重复重生/直接释放的注销与引用清理；原有阶段四验收继续覆盖运动和完整五段连击。
+[verify_wukong_state_machine.tscn](../../../tests/README.md) 已通过 46 项检查：真实 Core 状态对象、注册/agent 隔离、生命周期顺序、转换消息、单一时钟、连击重入、死亡守卫、拒绝通知及重复重生/直接释放的注销与引用清理；原有阶段四验收继续覆盖运动和完整五段连击。
 
 ## 运动与时间规则
 
@@ -61,7 +61,7 @@ BattleSession 在固定物理更新中先识别未缩放输入，再计算战斗
 
 本控制器自己维护 `motion.grounded`，不读取由 `move_and_slide()` 更新的 `is_on_floor()`。地面法线夹角上限默认 45°；墙体不能恢复跳跃，顶头清除向上速度。已有支撑、未上升时才允许最多 3 像素的地面吸附，跨过边缘立即进入空中。StaticBody2D 单向平台由 CollisionShape2D 的 `one_way_collision` 配置。
 
-重力、第一次与第二次起跳速度、最大落速和跳跃次数在 `data/battle2d/sunwukong_actions.tres` 配置；二段跳重置向上速度。地面起跳消耗第一跳；起跳态短暂拒绝再次起跳，避免同 tick 重复消费。按当前项目规则，走下平台或水平技能离开边缘不消耗跳跃额度，仍可在空中连续执行第一跳、第二跳；已经在地面起跳后则只剩一次空中跳跃。仅实际着地重置预算，并经过 LAND 状态，再回待机/行走/奔跑。像素运动参数为本地图配置，没有将原版 `jump=-178` 直接当作 Godot 速度。
+重力、第一次与第二次起跳速度、最大落速和跳跃次数在 `data/characters/sunwukong/actions.tres` 配置；二段跳重置向上速度。地面起跳消耗第一跳；起跳态短暂拒绝再次起跳，避免同 tick 重复消费。按当前项目规则，走下平台或水平技能离开边缘不消耗跳跃额度，仍可在空中连续执行第一跳、第二跳；已经在地面起跳后则只剩一次空中跳跃。仅实际着地重置预算，并经过 LAND 状态，再回待机/行走/奔跑。像素运动参数为本地图配置，没有将原版 `jump=-178` 直接当作 Godot 速度。
 
 ## 明确的条件与优先关系
 
@@ -85,7 +85,7 @@ BattleSession 在固定物理更新中先识别未缩放输入，再计算战斗
 
 ![五段连击联合运行图](../docs/combo-runtime.svg)
 
-来源为 Speculum 的 `Skill.json`、角色 DragonBones 30 FPS 动作时长和 `CharEntity.toAttack/toNextAttack`。完整路径、原始编号、SHA-256、命中帧、偏移与迁移边界记录于 [combo_source_mapping.json](../../../data/battle2d/combo_source_mapping.json)。运行时角色 ID 为 `孙悟空`，技能 ID 为 `sunwukong_attack1` 至 `sunwukong_attack5`。
+来源为 Speculum 的 `Skill.json`、角色 DragonBones 30 FPS 动作时长和 `CharEntity.toAttack/toNextAttack`。完整路径、原始编号、SHA-256、命中帧、偏移与迁移边界记录于 [combo_source_mapping.json](../../../data/characters/sunwukong/skills/combo_source_mapping.json)。运行时角色 ID 为 `孙悟空`，技能 ID 为 `sunwukong_attack1` 至 `sunwukong_attack5`。
 
 | 段 | 语义动作 | 原素材总帧数 / 秒 | 命中帧 | 单次伤害倍率 |
 | --- | --- | --- | --- | --- |
@@ -97,13 +97,13 @@ BattleSession 在固定物理更新中先识别未缩放输入，再计算战斗
 
 首次按下发动第一段；当前段期间再次按下，只预约下一段，重复按下不会预约多段或跳过当前动画。GAS 当前段结束才推进一次；没有预约立即回运动状态，第五段结束不自动循环。长按不自动连击。已受理的预约保留至当前段结束，未受理的输入仍遵守 Core 的 0.2 秒缓存；菜单、失焦、暂停与死亡会撤销预约。受击和允许的跳取消会同时取消当前 GAS 技能、未来命中和后续预约。
 
-第四段前 16 素材帧按起手方向施加技能位移，当前配置为 100 px/s（原导入为 300）；整段位移仍被墙挡住。第 [8,16) 帧内新按反方向允许一次转身，只改变身体、特效与攻击朝向，不改变本段位移方向；预约第五段沿新朝向释放。详细规则与编辑入口见 [跑攻、跳攻与第四段转身](../../../data/battle2d/wukong-context-attacks.md)。第 8 帧的第二击保留原配置 `scaleX=-1`、偏移 `(-17,-4)`：负缩放只作用于显示，碰撞框不因此反转；局部添加偏移后按角色朝向整体镜像。其他段固定角色位置。帧 0 在激活后首个战斗 tick 发出，所有事件仍以 30 FPS 计时；例如第 8 帧为 0.267 秒，在 60 Hz 中对应约第 16 次物理更新。
+第四段前 16 素材帧按起手方向施加技能位移，当前配置为 100 px/s（原导入为 300）；整段位移仍被墙挡住。第 [8,16) 帧内新按反方向允许一次转身，只改变身体、特效与攻击朝向，不改变本段位移方向；预约第五段沿新朝向释放。详细规则与编辑入口见 [跑攻、跳攻与第四段转身](../../../data/characters/sunwukong/skills/context-attacks.md)。第 8 帧的第二击保留原配置 `scaleX=-1`、偏移 `(-17,-4)`：负缩放只作用于显示，碰撞框不因此反转；局部添加偏移后按角色朝向整体镜像。其他段固定角色位置。帧 0 在激活后首个战斗 tick 发出，所有事件仍以 30 FPS 计时；例如第 8 帧为 0.267 秒，在 60 Hz 中对应约第 16 次物理更新。
 
 ### 原版实际碰撞范围
 
 ![五段原版 ABRect 与坐标转换](../docs/attack-ranges.svg)
 
-原版 `Skill.atkRange` 用于 AI 和选敌。伤害 sensor 由 `SkillControl.getAbs() → ManResourceVO.getAbRects(shootAssetLink) → reBuilBodyBox()` 使用素材 ABRect 创建。数据从 [原版素材快照](../../../data/battle2d/attack_hitboxes_source.json) 提取并保存在各 GAS 技能的命中事件 payload 中；[表现场景](../../../data/animation/sunwukong_visual.tscn) 只保留一个 BattleHitbox2D / CollisionShape2D，每击读取对应技能数据更新。
+原版 `Skill.atkRange` 用于 AI 和选敌。伤害 sensor 由 `SkillControl.getAbs() → ManResourceVO.getAbRects(shootAssetLink) → reBuilBodyBox()` 使用素材 ABRect 创建。数据从 [原版素材快照](../../../data/characters/sunwukong/skills/attack_hitboxes_source.json) 提取并保存在各 GAS 技能的命中事件 payload 中；[表现场景](../../../data/characters/sunwukong/animation/sunwukong_visual.tscn) 只保留一个 BattleHitbox2D / CollisionShape2D，每击读取对应技能数据更新。
 
 | 普攻 | ABRect 原单位：x、y、宽、高 | 右朝向横向覆盖 |
 | --- | --- | --- |
@@ -113,11 +113,11 @@ BattleSession 在固定物理更新中先识别未缩放输入，再计算战斗
 | 4 | -94.85、-105.95、188.65、159.95 | -94.85 → 93.8；第二击另加偏移 |
 | 5 | -69、-159.95、324、184.95 | -69 → 255 |
 
-每击读取技能事件 hit_rect，仅正 hit_scale_x/y 缩放位置和尺寸，添加 hit_offset，按素材单位比例转换后整体朝向镜像，再转为世界坐标。第四段第二击更新同一形状，偏移只计算一次；形状实例独立，缺少有效数据时返回空范围。范围与皮肤、武器挂点及动画包围盒无关，实际查询和调试绘制使用同一多边形。详见 [编辑技能判定并预览](../../../data/animation/README.md)。
+每击读取技能事件 hit_rect，仅正 hit_scale_x/y 缩放位置和尺寸，添加 hit_offset，按素材单位比例转换后整体朝向镜像，再转为世界坐标。第四段第二击更新同一形状，偏移只计算一次；形状实例独立，缺少有效数据时返回空范围。范围与皮肤、武器挂点及动画包围盒无关，实际查询和调试绘制使用同一多边形。详见 [编辑技能判定并预览](../../../data/characters/sunwukong/animation/README.md)。
 
 每次命中通过 Core `battle.attack.impact` 发出，宿主按阵营查询独立受击区域，BattleAttackInstance 按“当前施放 + hit_index + 目标 ID”去重，然后经 GAS DamageCalculator 与 HealthVital 扣血。第四段两次命中是不同 hit_index，可各伤害一次。`battle.combo.started` / `finished`、`battle.motion.jump` / `landed` 用于观察，均带场次/实体信息。普通攻击仍使用现有简单伤害公式 `max(1, atk-phyDef) × 倍率`；阶段 6 已补充可配置持续窗口与反馈，见 [单段战斗闭环](../combat/README.md)。原版暴击、保护值、击退、完整 sensor 生命周期和额外特效尚未移植。
 
-原素材没有独立落地动画，LAND 映射 `idle`；第二跳映射原生 `jumpTwo`。五段原生 Spine 动作、附件层序和装备挂点继续由独立动画适配层维护，换装不修改战斗段时长或角色位置。
+原素材没有独立落地动画，LAND 映射 `idle`；第二跳映射原生 `jumpTwo`，按原8帧/30FPS循环翻身，上升期间不提前播放 `jumpDown`，真正下落时由动作状态切换 `fall`。五段原生 Spine 动作、附件层序和装备挂点继续由独立动画适配层维护，换装不修改战斗段时长或角色位置。
 
 ## 扩展与验收
 
@@ -136,7 +136,7 @@ actor.receive_damage(10, attacker, &"heavy", 90)
 
 添加角色时建立其独立动作规则与连击 Resource，指定各段 GAS ID/动作名；实例状态由宿主新建。修改 `state_rules` / 每段规则即可调整移动、转向与跳取消，无需将按键写入角色代码。
 
-[verify_stage_four.tscn](../../../tests/suites/verify_stage_four.tscn) 已通过 222 项真实 Godot PhysicsServer、GAS 和 Spine 检查：稳定支撑、行走/奔跑、二段跳预算、平台边缘、单向平台、顶头、大 delta 不穿墙、五段六事件、第四段位移/镜像、每段每击的原版几何与左右边界命中/框外不命中、阵营过滤、优先级/霸体、跳取消、暂停/慢动作/死亡，以及五次短按、长按和菜单清预约。[输入验收](../../../tests/suites/verify_player_operations.tscn) 通过 145 项，新增松方向返回待机动画、相反方向释放、双击释放、CHANGED 强度、攻击中松键与菜单同步释放。通过打印 PASS，失败退出码为 1。原有 [动画](../../../tests/suites/verify_wukong_animation.tscn)、[阶段一](../../../tests/suites/verify_stage_one.tscn)、[属性](../../../tests/suites/verify_base_attributes.tscn) 和 [Core 事件](../../../tests/suites/verify_core_events.tscn) 验收继续运行。
+[verify_stage_four.tscn](../../../tests/README.md) 已通过 222 项真实 Godot PhysicsServer、GAS 和 Spine 检查：稳定支撑、行走/奔跑、二段跳预算、平台边缘、单向平台、顶头、大 delta 不穿墙、五段六事件、第四段位移/镜像、每段每击的原版几何与左右边界命中/框外不命中、阵营过滤、优先级/霸体、跳取消、暂停/慢动作/死亡，以及五次短按、长按和菜单清预约。[输入验收](../../../tests/README.md) 通过 145 项，新增松方向返回待机动画、相反方向释放、双击释放、CHANGED 强度、攻击中松键与菜单同步释放。通过打印 PASS，失败退出码为 1。原有 [动画](../../../tests/README.md)、[阶段一](../../../tests/README.md)、[属性](../../../tests/suites/verify_base_attributes.tscn) 和 [Core 事件](../../../tests/README.md) 验收继续运行。
 
 ```powershell
 # 在 Godot 项目根目录重建资源；仅生成时需要原版项目，游戏运行无需它。

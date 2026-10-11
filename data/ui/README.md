@@ -95,7 +95,7 @@ python tools/build_original_ui_scenes.py 'D:/UserData/Downloads/game/Speculum-43
 
 关闭按钮、衣柜、上一页/下一页和圆形页码保留原三态图片。页码随各分类实际容量变化，最多显示8页，一页时隐藏，超过8页才显示箭头。原版上古天地不同版本的下方仓库/按键设置按钮存在差异；当前本地按钮保留“整理”功能，未用仓库文字冒充整理入口。
 
-战斗力数字采用原 `fight_number` 的10个字形及 NumberCom 的-3像素间距。当前离线展示使用原 `FightPowerManager.getFightPowerByItemVo` / `PowerAttribute[1]` 十二项最终属性加权后四舍五入，权重在 [fight_power_weights.json](fight_power_weights.json)。原联网人物面板战力来自服务端，本项目没有该服务器；此数字是本地基础属性战力，不声称包含未移植的账户系统和服务端额外战力。
+战斗力数字采用原 `fight_number` 的10个字形及 NumberCom 的-3像素间距。战力由GAS属性组件统一提供，使用原 `PowerAttribute[1]` 十二项长期属性权重，参考离线原版不另加职业修正，一级裸装悟空为987。基础、成长、装备/词条/套装参与，临时Buff和当前生命/魔法不参与；成长的小数先加权，最后按原AS3 `Math.round` 取整。配置及来源校验在 [fight_power_weights.json](fight_power_weights.json)，规则和样例见 [原版战力](../../addons/battle_foundation/attributes/fight-power.md)。原联网面板通过 `getPower` 获取服务端结果；本地复现参考离线服务端的属性加权结果，不虚构尚未移植的账户成长战力。
 
 基础场景生成后自动运行 [refine_original_inventory_ui.py](../../tools/refine_original_inventory_ui.py)，该步骤可重复执行，使用已有导出资产。所有控件保存于场景，不在打开背包时创建。
 

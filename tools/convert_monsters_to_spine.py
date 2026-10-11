@@ -173,6 +173,8 @@ libraries/ = SubResource("MasterLibrary")
     text += nodes['AttackHitbox']+'\n'
     text += next(b for b in blocks(source,'node') if 'parent="AttackHitbox"' in b)+'\n'
     write(folder/'visual.tscn', text.rstrip()+'\n')
+    from author_super_armor_effects import attach
+    attach(folder/'visual.tscn')
 #endregion
 
 if __name__ == '__main__':

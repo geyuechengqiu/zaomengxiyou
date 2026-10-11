@@ -1,0 +1,16 @@
+[remap]
+
+importer="spine.atlas"
+type="SpineAtlasResource"
+uid="uid://b53hds236e5pl"
+path="res://.godot/imported/wukong.atlas-28adc37ac6e6a96de5ab7e46ff829099.spatlas"
+
+[deps]
+
+source_file="res://assets/characters/sunwukong/animation/wukong.atlas"
+dest_files=["res://.godot/imported/wukong.atlas-28adc37ac6e6a96de5ab7e46ff829099.spatlas"]
+
+[params]
+
+normal_map_prefix="n"
+specular_map_prefix="s"

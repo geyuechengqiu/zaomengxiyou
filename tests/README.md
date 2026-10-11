@@ -1,11 +1,22 @@
-# 验证目录
+# 当前功能验证
 
-`suites/` 保存自动验收脚本及入口场景；`fixtures/` 保存验收依赖的预置平台、木桩、技能和插件测试场景。正式游戏入口是 [game/levels/biyujing.tscn](../game/levels/biyujing.tscn)，project.godot已指向它。
-
-未引用的旧阶段1演示移除；仍被检查使用的场景从examples迁入fixtures，保留原UID并同步资源引用。未引用的Core/摄像机示例移出项目；GAS验证依赖的示例和使用中的配置保留。完整路径变更记录在 [docs/project_layout.json](../docs/project_layout.json)。
+`suites/` 保存当前功能的验收脚本和入口。旧演示及依赖它们的验证已清理，现有验证直接装配 [最新碧玉径](../game/levels/biyujing.tscn)、基础模板或独立功能组件，验证入口不作为游戏关卡发布。
 
 ```powershell
 ./tools/verify_stage_eight.ps1 -Godot 'D:/UserData/Downloads/godot/version/godot-4.3-4.7.2-stable.exe'
+./tools/verify_stage_eight.ps1 -Godot '<Godot.exe>' -Suites spawn_performance,level_progression
 ```
 
-全套包括Spine模板、背包、输入、属性、Buff、技能、AI、Boss、关卡、镜头、UI、音频、补给跳字和伤害展示。`audio`专项覆盖原资源、实际动作/命中/拾取、总线与静音保存、切歌、循环、暂停及多会话；可用-Suites选择必要检查。每套独立Godot进程和user目录，失败退出并输出日志；日志和GPU截图保存在忽略的.cleanup-backup，不作为正式素材。
+默认 19 套：怪物出生与生命周期性能、琵琶回血与 Boss 登场、共享属性、原版战力、音频与补给、掉落和装备成长、战斗 HUD、原版战斗连击、无双表现、霸体彩色描边、原版二段跳、Spine 与模板、原版 UI、Boss 表现、镜头、地图视觉、Boss 实战、关卡推进和伤害数字池。每套使用独立 Godot 进程和用户目录，脚本/运行错误会使验证失败。日志保存到忽略的 `.cleanup-backup/stage8-<suite>.log`。
+
+`fight_power` 检查原权重和职业修正、小数成长先加权后取整、统一快照、GM即时刷新、穿脱装备/词条/套装、临时Buff及生命/魔法排除、临时覆盖下的永久属性通知和同配置角色隔离。
+
+`hit_combo` 验证原版数字/文字、真实GAS命中、多目标、召唤归属、重复事件防重、角色隔离、1.5秒超时与刷新、暂停/慢动作/命中停顿、最高连击、死亡/离场，以及背包空格和清空物品后的悬停/点击路径。GPU显示检查使用 [capture_hit_combo](../tools/performance/capture_hit_combo.gd)。
+
+`spawn_performance` 检查预热、刷怪不解析大表、生命/保护值隔离、反馈池复用与重置、暂停和死亡节点释放。耗时另由 [出生微基准](../tools/performance/benchmark_monster_spawn.tscn) 测量，结果说明见 [性能文档](../docs/project-organization-performance.md)。
+
+`wushuang_visual` 检查待机/原地转向/返回旧位置不叠加人物重影、移动拖尾、原版采样及消散时间、暂停/慢动作/低帧率、固定节点池和结束/死亡清理。真实 GPU 画面对照使用 [capture_wushuang_overlap](../tools/performance/capture_wushuang_overlap.gd)，截图保存在 `.cleanup-backup/wushuang-after-*.png`。
+
+`super_armor_visual` 验证原红黄22帧描边、GAS/动作/保护霸体、换装和镜像、独立材质、暂停/慢动作、无双优先及死亡清理。GPU检查使用 [capture_super_armor](../tools/performance/capture_super_armor.gd)，同时直接验证真实初始背包987战力。
+
+`double_jump` 检查原8帧/30FPS循环二段跳、上升期间持续翻身、真正下落时切换动作、落地重置预算、暂停、不同更新率与大delta的原生姿态/时间一致性。真实 GPU 检查使用 [capture_double_jump](../tools/performance/capture_double_jump.gd)。

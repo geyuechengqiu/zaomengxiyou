@@ -2,7 +2,7 @@
 
 CoreSystem 的可选 operation_manager 模块将 Godot 输入变成角色操作名称。按下、持有、松开、强度变化、缓存、双击、改键和控制权均已实现；角色决定意图能否执行。模块不依赖 Spine、悟空或 GAS，业务接入使用 Battle Foundation。
 
-完整键表、角色扩展、原版来源、SVG 类图和验收见 [角色操作控制器文档](../../../battle_foundation/input/README.md)。当前入口是 [孙悟空平台](../../../../tests/fixtures/wukong_platform_demo.tscn)，按 Esc 打开设置。
+完整键表、角色扩展、原版来源、SVG 类图和验收见 [角色操作控制器文档](../../../battle_foundation/input/README.md)。当前入口是 [孙悟空平台](../../../../game/levels/biyujing.tscn)，按 Esc 打开设置。
 
 ## 组成
 

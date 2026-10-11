@@ -18,7 +18,7 @@ const motionSpeed = step4Number('root_motion_speed', 300);
 const motionFrames = step4Number('root_motion_frames', 16);
 const turnStart = step4Number('turn_window_start_frame', 8);
 const turnEnd = step4Number('turn_window_end_frame', 16);
-const hitboxes = readProject('data/battle2d/attack_hitboxes_source.json');
+const hitboxes = readProject('data/characters/sunwukong/skills/attack_hitboxes_source.json');
 if (crypto.createHash('sha256').update(fs.readFileSync(path.join(source,hitboxes.source_path))).digest('hex') !== hitboxes.sha256)
   throw new Error('Attack asset changed: regenerate attack_hitboxes_source.json with tools/extract_wukong_hitboxes.py');
 // #endregion

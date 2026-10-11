@@ -7,11 +7,25 @@ class_name BattlePresentation2D
 @onready var number_rows: BattleDamageNumberLayer2D = $DamageNumbers/Rows
 var _session: BattleSession
 var _views: Dictionary = {}
+@export_range(0,32,1) var prewarm_feedback_count: int = 4
+@export_range(0,64,1) var max_cached_feedback: int = 8
+var _idle_views: Array[BattleCombatFeedback2D] = []
+var feedback_created: int = 0
+var feedback_reused: int = 0
 
 func _ready() -> void:
 	_session = get_parent() as BattleSession
 	assert(_session != null, "BattlePresentation 必须放在 BattleSession 下")
 	CoreSystem.event_bus.event_pushed.connect(_on_event)
+	if feedback_scene != null:
+		for index in range(mini(prewarm_feedback_count,max_cached_feedback)):
+			_idle_views.append(_create_feedback())
+
+func _create_feedback() -> BattleCombatFeedback2D:
+	var view := feedback_scene.instantiate() as BattleCombatFeedback2D
+	entity_views.add_child(view)
+	feedback_created += 1
+	return view
 
 func register_actor(actor: BattleEntity2D) -> void:
 	if actor.session != _session or _views.has(actor.entity_id):
@@ -23,8 +37,10 @@ func register_actor(actor: BattleEntity2D) -> void:
 			break
 	if view == null:
 		# 动态出生目标的反馈是表现实例；公共管理器与数字池由场景预置。
-		view = feedback_scene.instantiate() as BattleCombatFeedback2D
-		entity_views.add_child(view)
+		if not _idle_views.is_empty():
+			view = _idle_views.pop_back()
+			feedback_reused += 1
+		else: view = _create_feedback()
 	_views[actor.entity_id] = view
 	if actor.ai_controller is BattleBossController2D:
 		view.health_bar_enabled = false
@@ -45,7 +61,8 @@ func remove_actor(id: StringName) -> void:
 	if is_instance_valid(view):
 		view.unbind_actor()
 		if view.actor_path.is_empty():
-			view.queue_free()
+			if _idle_views.size() < max_cached_feedback: _idle_views.append(view)
+			else: view.queue_free()
 	# 已发出的数字属于本场战斗，目标离场后仍播放至自然结束。
 
 func clear_presentations() -> void:
@@ -98,4 +115,5 @@ func _exit_tree() -> void:
 	if CoreSystem.event_bus.event_pushed.is_connected(_on_event):
 		CoreSystem.event_bus.event_pushed.disconnect(_on_event)
 	_views.clear()
+	_idle_views.clear()
 #endregion

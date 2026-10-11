@@ -36,13 +36,13 @@ def main(source: Path):
         records.append({'id': id, 'action': action, 'source_skill_id': source_id, 'source_action': native, 'duration_frames': frames[native], 'hit_start_frame': trigger, 'hit_end_frame': end, 'damage_multiplier': skill['skillDefault'], 'hit_rect': rect, 'original_definition': skill})
         _append_visual(project, action, native, frames[native], trigger, end)
     mapping = {'source_fps': 30, 'steps': records, 'turn_window': {'action': 'attack_4', 'frames': [8, 16], 'policy': 'project-defined half-open window; one reverse pressed edge per cast, motion keeps startup direction'}, 'sources': [{'path': path, 'sha256': hashlib.sha256((source / path).read_bytes()).hexdigest()} for path in [config_path, swf_path, skeleton_path]]}
-    write_json(project / 'data/battle2d/context_attack_source_mapping.json', mapping)
-    profile = project / 'data/animation/sunwukong_profile.tres'
+    write_json(project / 'data/characters/sunwukong/skills/context_attack_source_mapping.json', mapping)
+    profile = project / 'data/characters/sunwukong/animation/sunwukong_profile.tres'
     text = profile.read_text(encoding='utf-8')
     if '&"run_attack"' not in text:
         text = text.replace('&"attack_5": &"attack5"}', '&"attack_5": &"attack5", &"run_attack": &"runAttack", &"jump_attack": &"jumpAttack"}')
         profile.write_text(text, encoding='utf-8')
-    actor = project / 'data/battle2d/sunwukong.tres'
+    actor = project / 'data/characters/sunwukong/definition.tres'
     text = actor.read_text(encoding='utf-8')
     if '&"sunwukong_run_attack"' not in text:
         text = text.replace('&"sunwukong_attack5"]', '&"sunwukong_attack5", &"sunwukong_run_attack", &"sunwukong_jump_attack"]')
@@ -89,7 +89,7 @@ def _native(index, target, times, clips):
 
 
 def _append_visual(project, action, native, frames, trigger, end):
-    file = project / 'data/animation/sunwukong_visual.tscn'
+    file = project / 'data/characters/sunwukong/animation/sunwukong_visual.tscn'
     text = file.read_text(encoding='utf-8')
     if f'resource_name = "{action}"' in text:
         return

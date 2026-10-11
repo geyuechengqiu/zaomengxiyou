@@ -17,7 +17,7 @@ A highly modular and extensible core system framework designed for Godot 4.4+
 
 [Getting Started](#-getting-started) •
 [Documentation](docs/) •
-[Examples](../../tests/fixtures/plugin_showcase.tscn) •
+[Examples](../../game/levels/biyujing.tscn) •
 [Contributing](docs/CONTRIBUTING.md) •
 [Support and Help](#-support--help)
 
@@ -104,7 +104,7 @@ Detailed documentation for each utility:
 
 ## 🌟 Example Projects
 
-Visit our [example projects](../../tests/fixtures/plugin_showcase.tscn) to understand the framework's practical applications and best practices.
+Visit our [example projects](../../game/levels/biyujing.tscn) to understand the framework's practical applications and best practices.
 
 ### Complete Game Examples
 

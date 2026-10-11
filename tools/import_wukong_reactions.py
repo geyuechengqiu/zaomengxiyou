@@ -16,7 +16,7 @@ def main():
     relative = 'exports/zmhj_role_stats/原始配置/Skill.json'
     source = args.original_root / relative
     skills = json.loads(source.read_text(encoding='utf-8-sig'))
-    output = PROJECT / 'data/battle2d/original_reactions'
+    output = PROJECT / 'data/characters/sunwukong/skills/normal_attacks'
     output.mkdir(exist_ok=True)
     records = []
     for index, name in enumerate(['attack1', 'attack2', 'attack3', 'attack4', 'attack5', 'run_attack', 'jump_attack'], 1):

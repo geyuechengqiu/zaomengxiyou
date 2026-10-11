@@ -196,9 +196,9 @@ heal.apply(target, target, {})
 # 生命值 10 → 35；这是直接效果，没有技能冷却。
 ```
 
-项目的 [plugin_showcase.gd](../../tests/fixtures/plugin_showcase.gd) 把治疗配置成 `GameplayAbilityDefinition`，组合 `CooldownFeature` 与 `BTSequence(AbilityNodeCommitCooldown, AbilityNodeApplyEffect)`，用技能按钮触发；这条路径会施加 25 点治疗并进入 3 秒冷却。
+项目的 [plugin_showcase.gd](../../game/levels/biyujing.gd) 把治疗配置成 `GameplayAbilityDefinition`，组合 `CooldownFeature` 与 `BTSequence(AbilityNodeCommitCooldown, AbilityNodeApplyEffect)`，用技能按钮触发；这条路径会施加 25 点治疗并进入 3 秒冷却。
 
-当前 [burn_status.tres](examples/burn_status.tres) 只配置叠加、持续时间和标签，**没有周期伤害或粒子 Cue**。名称“燃烧演示”本身不会造成伤害；要做持续伤害，需添加 `FeaturePeriodicEffects` 并配置其 `periodic_effects`。
+项目的持续伤害使用 [poison.tres](../../data/buffs/poison.tres) 和周期 Effect，状态堆叠、标签与计时由同一 GAS 组件管理。旧燃烧演示已清理。
 
 ## 阅读源码时需要注意的实现边界
 
@@ -461,7 +461,7 @@ func _exit_tree() -> void:
     CoreSystem.event_bus.unsubscribe("damage_applied", _on_damage_applied)
 ```
 
-事件迁移验证见 [回归场景](../../tests/suites/verify_core_events.tscn)，覆盖全部 GAS 资源和 10 类事件，以及共享伤害对象、完全减伤、死亡、自定义事件、离树/销毁退订和再入树。无需保留旧事件脚本或注册旧单例。
+事件迁移验证见 [回归场景](../../tests/README.md)，覆盖全部 GAS 资源和 10 类事件，以及共享伤害对象、完全减伤、死亡、自定义事件、离树/销毁退订和再入树。无需保留旧事件脚本或注册旧单例。
 
 另外两个服务分别是 `DamageCalculator` 和 `GameplayCueManager`，详见 Vital 与 Cue 两节；可选 DebugDraw 是外部独立插件的调试辅助，不在这四个 GAS 自动加载服务中。
 
@@ -500,7 +500,7 @@ UI 对应 `.tscn` 负责控件层级和唯一节点名 `%Button`、`%Icon` 等�
 
 状态面板订阅了 status_stacked，但组件当前不发该信号，所以叠加后图标层数可能需主动刷新。各调试面板的 toggle_action 需宿主配置 InputMap；发现对象依赖 Entities 分组，不能默认扫描所有 Node。反复 setup 更换对象还需要处理旧信号连接；它们是插件演示/调试工具，不是自动接管所有宿主生命周期的 UI 管理器。
 
-插件有四个独立示例：test_attribute 演示基础数值、成长和修改器；test_vital_system 演示生命/法力和恢复；test_effect_basic 演示直接伤害/治疗；test_status_component 演示状态堆叠/标签/计时。数据由 [example_data.gd](examples/example_data.gd) 和 [burn_status.tres](examples/burn_status.tres) 提供。根目录综合演示同时连接技能按钮、控制台、背包和 DebugDraw。这些场景与资产全部列在 [源码与资源索引](docs/source-index.md)。
+旧独立示例场景及脚本已清理。属性、Vital、Effect、状态和技能继续用于正式碧玉径；当前验证直接装配正式关卡与基础模板，见 [验证目录](../../tests/README.md)。
 
 ## 系统如何联合运行
 

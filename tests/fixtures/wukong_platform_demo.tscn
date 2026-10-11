@@ -1,6 +1,0 @@
-[gd_scene format=3 uid="uid://2y7c5526h3c3"]
-
-[ext_resource type="Script" uid="uid://mdpmhhr2jdxs" path="res://tests/fixtures/wukong_platform_demo.gd" id="script"]
-
-[node name="WukongPlatformDemo" type="Node2D" unique_id=799864290]
-script = ExtResource("script")

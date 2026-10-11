@@ -8,6 +8,9 @@ class_name BattleEntityDefinition
 @export var scene: PackedScene
 @export var attribute_set: GameplayAttributeSet
 @export var progression: BattleAttributeProgression
+@export var fight_power_rules: BattleFightPowerRules
+## 原Role.powerCorrection，用于平衡职业战力；不作为伤害/属性加成。
+@export var fight_power_correction: float = 0.0
 @export_range(1, 10000) var initial_level: int = 1
 @export var vitals: Array[GameplayVital] = []
 @export var ability_ids: Array[StringName] = []

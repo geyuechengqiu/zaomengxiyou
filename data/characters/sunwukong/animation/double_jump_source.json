@@ -1,0 +1,20 @@
+{
+  "character_id": "孙悟空",
+  "action": "jump_2",
+  "native_animation": "jumpTwo",
+  "source_fps": 30,
+  "duration_frames": 8,
+  "play_times": 0,
+  "loop": true,
+  "transition": "继续上升时循环jumpTwo；竖向速度为正时切换jumpDown；落地由动作状态机处理",
+  "sources": [
+    {
+      "path": "D:\\UserData\\Downloads\\game\\Speculum-4399-master\\exports\\character_2001_wukong_placeholders\\dragonbones56\\1_V427\\1_V427_ske.json",
+      "sha256": "9e98c3c102bcbf3e17b84f20cdb8db147fb85e1ed3ea888f7f548116884a5ffe"
+    },
+    {
+      "path": "D:\\UserData\\Downloads\\game\\Speculum-4399-master\\exports\\zmhj_character_state_control\\sources\\com\\wdcgame\\engine\\entitys\\CharEntity.as",
+      "sha256": "6f85e91714f99dd9b629c640d62e1d9db46bb09bb5647451b01a4c1c5208ecb1"
+    }
+  ]
+}

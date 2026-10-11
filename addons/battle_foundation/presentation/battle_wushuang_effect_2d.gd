@@ -6,6 +6,8 @@ class_name BattleWushuangEffect2D
 @export var glow_color: Color = Color("ff3000")
 @export_range(0.01, 2.0) var spawn_interval: float = 0.2
 @export_range(0.01, 3.0) var ghost_lifetime: float = 1.0
+## 原素材像素距离；同位置的旧姿态不绘制，避免待机或原地转向重影。
+@export_range(0.0, 60.0, 0.1) var minimum_ghost_distance: float = 2.0
 @export var source_fps: float = 30.0
 @export var glow_base_width: float = 10.0
 @export var glow_maximum_step: int = 30
@@ -104,6 +106,7 @@ func advance_effect(delta: float) -> void:
 		clear_effect()
 		return
 	if delta <= 0.0: return
+	var now: Transform2D = get_parent().global_transform
 	for index in range(_ages.size()):
 		if _ages[index] < 0.0: continue
 		_ages[index] += delta
@@ -112,6 +115,7 @@ func advance_effect(delta: float) -> void:
 			_ghosts[index].visible = false
 		else:
 			_ghosts[index].modulate.a = 1.0 - _ages[index] / ghost_lifetime
+			_ghosts[index].visible = _should_show_ghost(_ghosts[index].global_position, now.origin)
 	if not active: return
 	elapsed += delta
 	_frame_time += delta
@@ -124,7 +128,6 @@ func advance_effect(delta: float) -> void:
 	live_mirror.capture(_source, Vector2(160, 240), _unit_scale, _skin_names)
 	live_viewport.render_target_update_mode = SubViewport.UPDATE_ONCE
 	_spawn_time += delta
-	var now := get_parent().global_transform as Transform2D
 	while _spawn_time + 0.0000001 >= spawn_interval:
 		_spawn_time = maxf(0.0, _spawn_time - spawn_interval)
 		# 大delta中过期的采样不渲染；保留仍存活采样的年龄和插值世界位置。
@@ -135,6 +138,10 @@ func advance_effect(delta: float) -> void:
 func _set_glow_width() -> void:
 	halo.material.set_shader_parameter("blur_width", glow_base_width + _glow_step)
 
+func _should_show_ghost(position: Vector2, body_position: Vector2) -> bool:
+	var distance := minimum_ghost_distance * _unit_scale
+	return position.distance_squared_to(body_position) >= distance * distance
+
 func _spawn_ghost(age: float, world_pose: Transform2D) -> void:
 	var index := _cursor
 	_cursor = (_cursor + 1) % _ghosts.size()
@@ -144,7 +151,7 @@ func _spawn_ghost(age: float, world_pose: Transform2D) -> void:
 	ghost.global_transform = world_pose.scaled_local(Vector2.ONE * _unit_scale)
 	ghost.material.set_shader_parameter("blur_width", glow_base_width + _glow_step)
 	ghost.modulate = Color(1, 1, 1, 1.0 - age / ghost_lifetime)
-	ghost.visible = true
+	ghost.visible = _should_show_ghost(world_pose.origin, get_parent().global_position)
 	# 原版zSort随生成序号递增；复用池时更新绘制顺序，最新残影盖住旧残影。
 	$GhostPool.move_child(ghost, $GhostPool.get_child_count() - 1)
 	_ages[index] = age

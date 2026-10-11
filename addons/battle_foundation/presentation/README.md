@@ -24,7 +24,7 @@ BattleSession
    └─ LeftDummy / RightDummy           各自独立的战斗组件
 ```
 
-打开 [单段攻击场景](../../../tests/fixtures/single_attack_demo.tscn)、[时间轴场景](../../../tests/fixtures/skill_timeline_demo.tscn) 或其原版伤害/受击派生场景，在 **BattleSession → BattlePresentation** 调整公共表现。基础关卡已经预置三个目标视图，启动时只绑定目标，不新增表现组件。动态出生目标使用管理器配置的 `feedback_scene` 实例化目标视图，数字按命中从共用池取出。
+打开 [单段攻击场景](../../../game/levels/biyujing.tscn)、[时间轴场景](../../../game/levels/biyujing.tscn) 或其原版伤害/受击派生场景，在 **BattleSession → BattlePresentation** 调整公共表现。基础关卡已经预置三个目标视图，启动时只绑定目标，不新增表现组件。动态出生目标使用管理器配置的 `feedback_scene` 实例化目标视图，数字按命中从共用池取出。
 
 | 编辑位置 | 配置 |
 | --- | --- |
@@ -56,4 +56,4 @@ BattleSession
 
 ## 验收
 
-[verify_battle_presentation.tscn](../../../tests/suites/verify_battle_presentation.tscn) 覆盖启动节点数不变、角色树无公共反馈、多个目标共享池、每 tick 一次、移动与屏幕坐标、暂停/停顿/慢动作、跨会话隔离、目标释放后数字完成、跨目标复用与场景清理。原版跳字、数字池、血条、原版伤害、受击及攻击样例继续使用既有验收验证原行为。
+[verify_battle_presentation.tscn](../../../tests/README.md) 覆盖启动节点数不变、角色树无公共反馈、多个目标共享池、每 tick 一次、移动与屏幕坐标、暂停/停顿/慢动作、跨会话隔离、目标释放后数字完成、跨目标复用与场景清理。原版跳字、数字池、血条、原版伤害、受击及攻击样例继续使用既有验收验证原行为。

@@ -209,7 +209,7 @@ AsyncIOStrategy 直接 await 全局 io_completed，一旦先完成其他任务�
 
 示例是接口展示，部分会触及上述未完成路径。它们的全部脚本列于 [源码索引](source-index.md)，没有把运行成功与“存在示例文件”混为一谈。
 
-已移除三个确认失效的历史示例入口：scene_demo 引用不存在的 `CoreSystem.SceneManager`；scene_push_stack_issue44 使用旧 preload 路径；issue40_reset_to_default 场景引用缺失脚本。前两者专用子场景一并删除。当前示例与插件资源通过 [插件验收](../../../tests/suites/verify_plugins.gd) 的递归加载与编译检查；检查失败会传播到入口并返回失败码。
+已移除三个确认失效的历史示例入口：scene_demo 引用不存在的 `CoreSystem.SceneManager`；scene_push_stack_issue44 使用旧 preload 路径；issue40_reset_to_default 场景引用缺失脚本。前两者专用子场景一并删除。当前示例与插件资源通过 [插件验收](../../../tests/README.md) 的递归加载与编译检查；检查失败会传播到入口并返回失败码。
 
 | 示例目录 | 展示内容 |
 | --- | --- |

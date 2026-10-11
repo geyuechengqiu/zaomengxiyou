@@ -22,10 +22,12 @@ var _effect_players: Array[AnimationPlayer] = []
 var _effect_tail: Dictionary = {}
 var _aim_head: SpineBone
 var _aim_head_base_rotation: float = 0.0
+var _armor_effect: BattleSuperArmorEffect2D
 #endregion
 #region 生命周期
 func _ready() -> void:
 	initialize_adapter()
+	_armor_effect = get_node_or_null(^"SuperArmorEffect") as BattleSuperArmorEffect2D
 
 func initialize_adapter() -> bool:
 	if _initialized:
@@ -170,10 +172,12 @@ func get_animation_player() -> AnimationPlayer:
 func advance_status_visuals(delta: float) -> void:
 	var effect := get_node_or_null(^"WushuangEffect") as BattleWushuangEffect2D
 	if effect != null: effect.advance_effect(delta)
+	if _armor_effect != null: _armor_effect.advance_effect(delta)
 
 func clear_status_visuals() -> void:
 	var effect := get_node_or_null(^"WushuangEffect") as BattleWushuangEffect2D
 	if effect != null: effect.clear_effect()
+	if _armor_effect != null: _armor_effect.clear_effect()
 
 func apply_skill_aim(timeline: BattleFrameTimelineFeature, degrees: float) -> void:
 	_restore_aim_head()

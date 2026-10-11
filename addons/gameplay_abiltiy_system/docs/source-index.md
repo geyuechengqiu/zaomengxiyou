@@ -8,11 +8,6 @@
 
 | 文件 / 类型 | 基类 | 导出配置 | 公开方法 | 信号 |
 | --- | --- | --- | --- | --- |
-| [example_data.gd](../examples/example_data.gd) | `RefCounted` | — | `attribute_sets()`<br>`vitals()`<br>`register_tags()` | — |
-| [test_attribute.gd](../examples/test_attribute.gd) | `Node3D` | — | — | — |
-| [test_effect_basic.gd](../examples/test_effect_basic.gd) | `Node3D` | `damage_effect_res`<br>`heal_effect_res` | — | — |
-| [test_status_component.gd](../examples/test_status_component.gd) | `Node` | — | — | — |
-| [test_vital_system.gd](../examples/test_vital_system.gd) | `Node3D` | — | — | — |
 
 ## .
 
@@ -306,11 +301,6 @@
 | [assets/circular_progress.tres](../assets/circular_progress.tres) | Godot Resource；示例配置、主题或材质 |
 | [assets/effect_icon.svg](../assets/effect_icon.svg) | 矢量图标素材 |
 | [assets/theme.tres](../assets/theme.tres) | Godot Resource；示例配置、主题或材质 |
-| [examples/burn_status.tres](../examples/burn_status.tres) | Godot Resource；示例配置、主题或材质 |
-| [examples/test_attribute.tscn](../examples/test_attribute.tscn) | Godot 场景；示例或 UI 控件层级 |
-| [examples/test_effect_basic.tscn](../examples/test_effect_basic.tscn) | Godot 场景；示例或 UI 控件层级 |
-| [examples/test_status_component.tscn](../examples/test_status_component.tscn) | Godot 场景；示例或 UI 控件层级 |
-| [examples/test_vital_system.tscn](../examples/test_vital_system.tscn) | Godot 场景；示例或 UI 控件层级 |
 | [plugin.cfg](../plugin.cfg) | 编辑器插件配置 |
 | [shaders/circular_progress.gdshader](../shaders/circular_progress.gdshader) | Godot Shader；冷却遮罩或残影视觉 |
 | [shaders/ghost_trail.gdshader](../shaders/ghost_trail.gdshader) | Godot Shader；冷却遮罩或残影视觉 |
@@ -325,3 +315,5 @@
 ## 文档生成
 
 [generate_diagrams.mjs](generate_diagrams.mjs) 为统一入口，[system_diagrams.mjs](system_diagrams.mjs) 保存模块图布局。运行一次统一入口即重建 19 个 SVG 与此索引；历史 drawio/png 不参与当前实现说明。
+
+旧独立演示已从项目清理；当前功能直接在碧玉径和模板上验证，见 [当前验证目录](../../../tests/README.md)。

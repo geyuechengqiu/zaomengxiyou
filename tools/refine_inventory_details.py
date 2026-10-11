@@ -130,7 +130,7 @@ def author():
     tip+=label('Price','.',20,260,220,25,'',16)
     tip+=node('Equipped','TextureRect','.',rect(235,10,17,42)+'mouse_filter = 2\ntexture = ExtResource("equipped")\nexpand_mode = 1\nstretch_mode = 5')
     (ROOT/'data/ui/inventory_item_tooltip.tscn').write_text(tip,'utf8')
-    actor_path=ROOT/'data/battle2d/sunwukong_2d.tscn';actor=actor_path.read_text('utf8')
+    actor_path=ROOT/'data/characters/sunwukong/character.tscn';actor=actor_path.read_text('utf8')
     if 'id="inventory_presentation_rules"' not in actor:
         index=actor.index('[sub_resource');actor=actor[:index]+'[ext_resource type="JSON" path="res://data/inventory/presentation_rules.json" id="inventory_presentation_rules"]\n'+actor[index:]
     node_match=re.search(r'\[node name="Inventory"[^\n]*\]\n.*?(?=\n\[|\Z)',actor,re.S)

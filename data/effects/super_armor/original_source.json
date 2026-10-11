@@ -1,0 +1,28 @@
+{
+  "logic": {
+    "prefabs/scripts/ManEntity.as": "e3dcfcc236578a9cf6953db22c6f7bae6297fa98ccf0a603e8054f6f38bb4bad",
+    "com/wdcgame/filters/ColorFilterAnimation.as": "d10a6757f7ed46e21c3b4feb91b012a96d059f28390d88bd950ea63665e0b2c5",
+    "com/wdcgame/utils/ColorUtils.as": "4d0af5788f354ac6c3a9de955e04d4e9c1b61b086c04c5028df2828bfbf92fc8"
+  },
+  "colors": [
+    "ff0000",
+    "ffff00"
+  ],
+  "blur": [
+    5,
+    5
+  ],
+  "strength": 3,
+  "source_fps": 30,
+  "colors_per_direction": 11,
+  "cycle_frames": 22,
+  "priority": "wushuang > super_armor; death removes both",
+  "note": "ColorFilterAnimation ignores its 0.3 parameter and delta; changeColorto uses truncated integer steps and includes both endpoints.",
+  "show_bati_effect": {
+    "sunwukong": true,
+    "jianwu": true,
+    "jushi_lingjun": true,
+    "revival_vessel": true,
+    "yushoushi": true
+  }
+}

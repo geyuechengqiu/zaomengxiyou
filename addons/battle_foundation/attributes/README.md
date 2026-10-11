@@ -1,5 +1,7 @@
 # 属性计算链
 
+战力计算复用此属性链，采用原版十二项权重、原始成长精度和可选职业修正，排除临时战斗Buff。公式、一级悟空987及配置入口见 [原版战力](fight-power.md)。
+
 `BattleAttributeComponent` 继承现有 GAS `GameplayVitalAttributeComponent`，最终值仍由 `GameplayAttributeInstance` 计算。Core 发布战斗通知，Simple Inventory 管理背包与槽位，GAS Status / Effect 管理 Buff。2D 与 3D 实体通过同一 `BattleGASBinding` 装配。
 
 ![属性链与插件联合类图](../docs/attribute-pipeline.svg)
@@ -16,7 +18,7 @@
 
 沿用 GAS 公式：`(基础 + 成长ADD + 装备ADD + 临时ADD) × (1 + 所有MULTIPLY之和)`。0.2 表示20%；各层不分别乘算。OVERRIDE 沿用 GAS 覆盖规则，多项覆盖时第一项优先。`hpMax/mpMax/atk/phyDef` 在全部修改器计算后采用原玩家 Math.round 语义取整，再限制范围；成长中间值保留小数。
 
-`level/exp` 禁止装备和 Buff 修改器写入；等级通过统一入口同步，经验为本等级剩余经验。一次经验奖励可连续升级，每次扣除对应 `upgradeEXP`；满级停止循环，保留剩余经验。孙悟空一级生命275、魔法100、攻击26、防御5，每级增量分别55、20、5.25、1.05，见 [成长资源](../../../data/attribute/progression/sunwukong.tres)。220为 EXP 表覆盖范围，产品等级上限可单独配置，不推定原版 CommonConfig 的值。
+`level/exp` 禁止装备和 Buff 修改器写入；等级通过统一入口同步，经验为本等级剩余经验。一次经验奖励可连续升级，每次扣除对应 `upgradeEXP`；满级停止循环，保留剩余经验。孙悟空一级生命275、魔法100、攻击26、防御5，每级增量分别55、20、5.25、1.05，见 [成长资源](../../../data/characters/sunwukong/attributes/progression.tres)。220为 EXP 表覆盖范围，产品等级上限可单独配置，不推定原版 CommonConfig 的值。
 
 `get_breakdown(id)` 返回基础值、成长/装备/临时修改器来源、类型、数值与最终值。修改器模板先复制，按来源清理；不同实体不共享运行修改器和 Vital。
 
@@ -59,7 +61,7 @@ GAS begin_update/end_update 支持嵌套事务。成长、换装、多项效果�
 
 ## 平台验收与动画修复
 
-打开 [悟空平台场景](../../../tests/fixtures/wukong_platform_demo.tscn)，新增等级、经验、当前/最大生命魔法、攻击、防御面板，以及 GM 升降级、获得经验、穿脱验收武器、添加/移除8秒 Buff 和耗蓝按钮。1/2键仍只演示 Spine 外观换装；属性验收装备与 Buff 使用测试数值，不冒充原版装备。
+打开 [悟空平台场景](../../../game/levels/biyujing.tscn)，新增等级、经验、当前/最大生命魔法、攻击、防御面板，以及 GM 升降级、获得经验、穿脱验收武器、添加/移除8秒 Buff 和耗蓝按钮。1/2键仍只演示 Spine 外观换装；属性验收装备与 Buff 使用测试数值，不冒充原版装备。
 
 ![成长、装备与Buff生效后的实际场景](../docs/attribute-platform.png)
 
@@ -67,6 +69,6 @@ GAS begin_update/end_update 支持嵌套事务。成长、换装、多项效果�
 & '<Godot 可执行文件路径>' --headless --path . res://tests/suites/verify_attribute_pipeline.tscn
 ```
 
-[验收脚本](../../../tests/suites/verify_attribute_pipeline.gd) 检查连续升级/满级、最终取整、生命策略、背包同槽替换/卸装、Buff叠层/过期、模板及同类怪物隔离、通知、即时面板和实际普攻伤害。
+[验收脚本](../../../tests/README.md) 检查连续升级/满级、最终取整、生命策略、背包同槽替换/卸装、Buff叠层/过期、模板及同类怪物隔离、通知、即时面板和实际普攻伤害。
 
-人物不显示已修复：编辑后的 jump_2 主时间轴包含多个 Spine clip，适配器不再以单个原动画时长拒绝整个初始化。预置主 AnimationPlayer 决定动作和时刻，原生辅助播放器按当前关键帧的局部时间驱动骨架。保留已有编辑内容、暂停时间规则和换皮肤时长，实际 GPU 截图确认人物与攻击显示正常。
+人物不显示已修复：适配器允许编辑器编排多个 Spine clip，不再以单个原动画时长拒绝整个初始化。预置主 AnimationPlayer 决定动作和时刻，原生辅助播放器按当前关键帧的局部时间驱动骨架。当前二段跳另按原8帧/30FPS配置循环翻身，下落由动作状态切换。暂停时间规则和换皮肤时长保持一致，实际 GPU 截图确认人物与攻击显示正常。

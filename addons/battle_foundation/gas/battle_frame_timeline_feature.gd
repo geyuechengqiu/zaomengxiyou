@@ -22,6 +22,8 @@ class_name BattleFrameTimelineFeature
 @export var can_use_on_ground: bool = true
 @export var interrupt_actions: Array[StringName] = []
 @export var initial_status_ids: Array[StringName] = []
+## 原版myBuff/toWho=11：施放时的同阵营存活单位，不经过敌对攻击判定。
+@export var initial_status_to_allies: bool = false
 ## 可选原版特效尾帧；不延长战斗动作，不产生命中，新技能/受击/死亡立即取消。
 @export var effect_tail_frames: int = 0
 @export_group("Directional Beam")
@@ -120,7 +122,13 @@ func _update_segments(ability: GameplayAbilityInstance, delta: float) -> void:
 		if cooldown != null and not context.get("skip_cooldown", false):
 			cooldown.start_cooldown(ability)
 		for id in initial_status_ids:
-			owner.apply_status_definition(id, owner)
+			if initial_status_to_allies:
+				for target in owner.session.get_entities():
+					if not is_instance_valid(target) or not target is BattleEntity2D or target.is_queued_for_deletion() or target.faction_id != owner.faction_id or not target.is_alive() or target.is_spawning(): continue
+					target.apply_status_definition(id, owner)
+					if not _is_current(ability, owner, cast): return
+			else:
+				owner.apply_status_definition(id, owner)
 			if not _is_current(ability, owner, cast):
 				return
 		owner.publish_battle_event(&"battle.skill.committed", {"attack_id": cast.attack_id, "ability_id": cast.ability_id})

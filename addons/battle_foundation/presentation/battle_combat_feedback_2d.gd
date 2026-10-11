@@ -28,16 +28,25 @@ var _actor: BattleEntity2D:
 @onready var _protection_label: Label = $ProtectionLabel
 @onready var hit_effect: BattleHitEffect2D = $HitEffect
 @onready var appearance: BattleMonsterAppearance2D = $MonsterAppearance
+@onready var healing_buff: BattleOriginalEffectClip2D = $HealingBuff
 var remaining: float = 0.0
 var last_damage: float = 0.0
 var hit_count: int = 0
 var _setup_complete: bool = false
+var _default_health_enabled: bool = true
+var _default_protection_enabled: bool = true
 
 func _ready() -> void:
 	visible = false
+	_default_health_enabled = health_bar_enabled
+	_default_protection_enabled = show_protection_bar
 
 func bind_actor(actor: BattleEntity2D, presentation: BattlePresentation2D) -> void:
+	var enable_health := health_bar_enabled
+	var enable_protection := show_protection_bar
 	unbind_actor()
+	health_bar_enabled = enable_health
+	show_protection_bar = enable_protection
 	_actor_ref = weakref(actor)
 	_presentation = presentation
 	visible = true
@@ -61,6 +70,7 @@ func _on_damage_received(_info: DamageInfo) -> void:
 
 func unbind_actor() -> void:
 	if is_instance_valid(appearance): appearance.clear_effect()
+	if is_instance_valid(healing_buff): healing_buff.clear_effect()
 	var actor := _actor
 	if is_instance_valid(actor) and is_instance_valid(actor.attributes):
 		if actor.attributes.snapshot_changed.is_connected(_refresh_health):
@@ -78,6 +88,13 @@ func unbind_actor() -> void:
 		hit_effect.visible = false
 		hit_effect.play_count = 0
 	visible = false
+	health_bar_enabled = _default_health_enabled
+	show_protection_bar = _default_protection_enabled
+	if is_instance_valid(_health): _health.configure(false,false,false,0,1)
+	if is_instance_valid(_label): _label.visible = false
+	if is_instance_valid(_damage): _damage.visible = false
+	if is_instance_valid(_protection_bar): _protection_bar.visible = false
+	if is_instance_valid(_protection_label): _protection_label.visible = false
 
 func _exit_tree() -> void:
 	unbind_actor()
@@ -123,6 +140,10 @@ func advance_feedback(delta: float) -> void:
 	_health.advance_bar(delta, _actor.animation.get_facing())
 	_label.visible = show_health_values and _health.visible
 	hit_effect.advance_effect(delta)
+	var healing := _actor.is_alive() and not _actor.is_spawning() and _actor.statuses.has_status(&"pipa_healing")
+	if healing and not healing_buff.visible: healing_buff.play_effect()
+	elif not healing and healing_buff.visible: healing_buff.clear_effect()
+	healing_buff.advance_effect(delta)
 	if remaining <= 0.0:
 		return
 	remaining = maxf(0.0, remaining - delta)

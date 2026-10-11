@@ -17,6 +17,7 @@ func _ready() -> void:
 	await _fresh()
 	_verify_data()
 	await _verify_original_waves()
+	await _verify_locked_motion()
 	await _verify_low_fps()
 	await _verify_conditions()
 	await _verify_all_regions_and_boss()
@@ -154,10 +155,12 @@ func _verify_original_waves() -> void:
 	var gate := demo.get_node("BattleSession/Actors/Gates/Gate1") as BattleRegionGate2D
 	_check(flow.regions[0].entered and first.next_due > flow.elapsed and _living().is_empty() and gate.locked, "进入触发区后延迟未出生时仍锁门")
 	_check(session.camera_rig.combat_locked, "区域已经触发但怪物尚在延迟出生，横向镜头保持锁定")
+	_check(player.motion.horizontal_bounds_active, "延迟出生期间玩家左右边界同样锁定")
 	await _step(0.9)
 	_check(first.created == 0, "原版首只等待delay+interval")
 	await _step(0.1)
 	_check(first.created == 1 and not first.generation_complete(), "首只出现，计划仍未出生完毕")
+	_verify_first_visible_edges()
 	var locked_center: float = demo.camera.get_screen_center_position().x
 	for x in [1800,1000]:
 		_move_player(x)
@@ -175,6 +178,7 @@ func _verify_original_waves() -> void:
 	await _step(0.01)
 	_check(_living().is_empty() and flow.waves[&"biyujing_region_1_wave_1"].completed and not flow.regions[0].completed and gate.locked, "第一波全死、第二波尚未出现，出口保持锁定")
 	_check(session.camera_rig.combat_locked, "第一波全死但第二波未完成，左右镜头仍锁定")
+	_check(player.motion.horizontal_bounds_active, "两波之间零活怪时玩家也不能离开区域")
 	_check(flow.plans[&"screen1_birth2"].started and flow.plans[&"screen1_birth4"].started, "指定两个出生点全死触发第二波")
 	_move_player(2200)
 	player.move_axis = 1
@@ -189,6 +193,7 @@ func _verify_original_waves() -> void:
 	await _step(0.01)
 	_check(flow.regions[0].completed and flow.regions[0].exit_open and not gate.locked and gate.shape.disabled, "全部计划及目标完成才打开门与碰撞")
 	_check(not session.camera_rig.combat_locked, "全部计划与目标完成后才恢复镜头移动")
+	_check(not player.motion.horizontal_bounds_active, "原区域完成后解除玩家双向限制")
 	await _step(0.1)
 	_check(_events("battle.region.completed", "region_id", &"biyujing_region_1") == 1 and _events("battle.region.exit_opened", "region_id", &"biyujing_region_1") == 1, "区域完成及出口开启只通知一次")
 	var camera_before: Vector2 = demo.camera.get_screen_center_position()
@@ -228,6 +233,65 @@ func _verify_original_waves() -> void:
 	_check(is_equal_approx(session.camera_rig._target().x,3308), "新区有怪时回头不再拉走战斗镜头")
 #endregion
 #region 低帧率、暂停、慢动作、停顿和窄触发区
+func _verify_first_visible_edges() -> void:
+	var rig := session.camera_rig
+	var half_width: float = demo.camera.get_viewport_rect().size.x / demo.camera.zoom.x / 2.0
+	var visible := Vector2(demo.camera.get_screen_center_position().x-half_width,demo.camera.get_screen_center_position().x+half_width)
+	var limits := player.motion.horizontal_bounds
+	_check(limits.is_equal_approx(Vector2(visible.x+22,visible.y-22)) and limits.y < flow.regions[0].definition.bounds.end.x-22, "首区有活怪时限制在真实可见画面，不是更宽的区域右边界")
+	for direction in [-1,1]:
+		var edge: float = limits.x if direction < 0 else limits.y
+		_move_player(edge-direction*80,-1200)
+		player.motion.advance(0.5,direction*3000,player.action_profile)
+		_check(is_equal_approx(player.global_position.x,edge), "大步长跑动与空中移动不能走出画面边缘："+str(direction))
+		_move_player(edge-direction*80,-1200)
+		player.motion.apply_impulse(direction*3000,1,300)
+		player.motion.advance(0.5,0,player.action_profile)
+		_check(is_equal_approx(player.global_position.x,edge) and player.motion.impulse_remaining == 0, "首区有活怪时击退仍停在画面边缘："+str(direction))
+		_move_player(edge-direction*80,-1200)
+		player.motion.sweep_skill_displacement(Vector2(direction*10000,-20),player.action_profile)
+		_check(is_equal_approx(player.global_position.x,edge), "首区有活怪时技能冲刺不能越过画面边缘："+str(direction))
+		var shape := player.get_node("CollisionShape2D") as CollisionShape2D
+		var body_rect := shape.global_transform * shape.shape.get_rect()
+		_check(body_rect.position.x >= visible.x-0.001 and body_rect.end.x <= visible.y+0.001, "玩家物理碰撞体保持在真实锁定画面内："+str(direction))
+	_move_player(256)
+
+func _verify_locked_motion() -> void:
+	# 上一验收已通过真实出生/死亡进入第二区；这里覆盖运动的不同入口。
+	session.camera_rig.advance_camera(10)
+	flow._sync_camera_lock()
+	var bounds := flow.regions[1].definition.bounds
+	var limits := player.motion.horizontal_bounds
+	var visible := session.camera_rig.get_combat_horizontal_bounds()
+	_check(player.motion.horizontal_bounds_active and limits.is_equal_approx(Vector2(visible.x+22,visible.y-22)) and limits.y < bounds.end.x-22, "新区限制取锁定画面与区域的交集，并包含玩家碰撞体半径")
+	for direction in [-1,1]:
+		var edge: float = limits.x if direction < 0 else limits.y
+		_move_player(edge-direction*80,-1200)
+		player.move_axis = direction
+		player.running = true
+		await _step(0.5)
+		_check(player.global_position.x >= limits.x-0.001 and player.global_position.x <= limits.y+0.001, "高于出口墙时跑动也不能从区域侧面离开："+str(direction))
+		_check(player.global_position.y > -1200 and player.velocity.x == 0, "撞区域边界只停止横向速度，仍正常受重力下落")
+		_move_player(edge-direction*80,-1200)
+		player.motion.apply_impulse(direction*3000,1,300)
+		await _step(0.3)
+		_check(player.global_position.x >= limits.x-0.001 and player.global_position.x <= limits.y+0.001 and player.motion.impulse_remaining == 0, "击退击飞不会逃出区域或保留向外冲量："+str(direction))
+		_move_player(edge-direction*80,-1200)
+		player.motion.sweep_skill_displacement(Vector2(direction*10000,-20),player.action_profile)
+		_check(is_equal_approx(player.global_position.x,edge) and is_equal_approx(player.global_position.y,-1220), "单帧技能位移裁剪横向但保留竖向："+str(direction))
+		player.motion.sweep_skill_displacement(Vector2(-direction*100,0),player.action_profile)
+		_check(is_equal_approx(player.global_position.x,edge-direction*100), "贴边后立即可以反向移动："+str(direction))
+	await _clear_region()
+	_check(flow.regions[1].completed and not player.motion.horizontal_bounds_active, "新区所有出生计划及目标完成才解除双向限制")
+	_move_player(bounds.position.x+50,-1200)
+	player.motion.sweep_skill_displacement(Vector2(-200,0),player.action_profile)
+	_check(player.global_position.x < bounds.position.x, "清屏后确实可向左返回已通关区域")
+	_move_player(bounds.end.x-50,-1200)
+	player.motion.sweep_skill_displacement(Vector2(200,0),player.action_profile)
+	_check(player.global_position.x > bounds.end.x, "清屏后可越过右边界")
+	flow.stop()
+	_check(not player.motion.horizontal_bounds_active, "停止关卡不残留旧区域运动限制")
+
 func _verify_low_fps() -> void:
 	await _fresh()
 	_move_player(100)

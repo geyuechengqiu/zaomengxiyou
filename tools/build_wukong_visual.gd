@@ -1,6 +1,6 @@
 extends SceneTree
 #region 离线构建可保存的动画与命中框场景
-const OUTPUT := "res://data/animation/sunwukong_visual.tscn"
+const OUTPUT := "res://data/characters/sunwukong/animation/sunwukong_visual.tscn"
 const ADAPTER = preload("res://addons/battle_foundation/animation/spine_animation_adapter.gd")
 
 func _initialize() -> void:
@@ -12,7 +12,7 @@ func _initialize() -> void:
 	call_deferred("_build")
 
 func _build() -> void:
-	var profile := load("res://data/animation/sunwukong_profile.tres") as CharacterAnimationProfile
+	var profile := load("res://data/characters/sunwukong/animation/sunwukong_profile.tres") as CharacterAnimationProfile
 	var data := profile.skeleton_data as SpineSkeletonDataResource
 	var visual := Node2D.new()
 	visual.name = "AnimationAdapter"
@@ -41,6 +41,9 @@ func _build() -> void:
 	master.name = "AnimationPlayer"
 	master.add_animation_library(&"", _master_library(profile, data))
 	visual.add_child(master)
+	var armor := load("res://data/effects/super_armor/outline.tscn").instantiate()
+	armor.get_node("Capture/Body").skeleton_data_res = data
+	visual.add_child(armor)
 	_add_hitbox(visual, profile.display_scale)
 	_set_owners(visual, visual)
 	var packed := PackedScene.new()
@@ -105,8 +108,8 @@ func _add_hitbox(container: Node2D, scale: float) -> void:
 	hitbox.set("source_unit_scale", scale)
 	var preview: Array = hitbox.get("preview_abilities")
 	for index in range(1, 6):
-		preview.append(load("res://data/battle2d/attack%d.tres" % index))
-	for path in ["res://data/battle2d/run_attack.tres", "res://data/battle2d/jump_attack.tres"]:
+		preview.append(load("res://data/characters/sunwukong/skills/normal_attacks/attack%d.tres" % index))
+	for path in ["res://data/characters/sunwukong/skills/normal_attacks/run_attack.tres", "res://data/characters/sunwukong/skills/normal_attacks/jump_attack.tres"]:
 		if ResourceLoader.exists(path):
 			preview.append(load(path))
 	hitbox.collision_layer = 0

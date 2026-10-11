@@ -1,0 +1,4 @@
+[gd_scene format=3]
+[ext_resource type="Script" path="res://tests/suites/verify_super_armor_visual.gd" id="script"]
+[node name="VerifySuperArmorVisual" type="Node"]
+script = ExtResource("script")

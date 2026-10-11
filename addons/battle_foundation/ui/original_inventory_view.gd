@@ -27,7 +27,6 @@ const BAG_KEYS := ["equipment", "material", "consumable", "fashion"]
 const PARTS := ["wing", "weapon", "helmet", "amulet", "armor", "ornament"]
 const FASHION_PARTS := ["wing", "fashionWeapon", "fashionHelmet", "amulet", "fashionArmor", "fairy"]
 const ATTRIBUTES := [&"hpMax", &"mpMax", &"atk", &"phyDef", &"reHP", &"reMP", &"hit", &"dodge", &"critical", &"toughness", &"lucky", &"guardian"]
-const POWER_CONFIG = preload("res://data/ui/fight_power_weights.json")
 
 func _ready() -> void:
 	$Close.pressed.connect(func(): close_requested.emit())
@@ -158,11 +157,8 @@ func _render_slot(slot: Control, item: Item, locked_slot: bool) -> void:
 	slot.set_meta(&"locked_slot", locked_slot)
 
 func _on_attributes(snapshot: Dictionary) -> void:
-	# 当前离线属性采用原客户端 PowerAttribute[1] 权重，显示整数。
-	var power := 0.0
-	for id in POWER_CONFIG.data.weights:
-		power += float(snapshot.get(StringName(id), 0)) * float(POWER_CONFIG.data.weights[id])
-	$FightPower.number = roundi(power)
+	# 战力由属性组件统一计算；UI不使用临时战斗属性另算一遍。
+	$FightPower.number = int(snapshot.get(&"fightPower", 0))
 	$Level.text = "Lv.%d" % int(snapshot.level)
 	$Experience.text = "%d/%d" % [int(snapshot.get(&"exp",0)),int(snapshot.expNext)]
 	$ExperienceFill.value = clampf(float(snapshot.get(&"exp", 0)) / maxf(1.0, float(snapshot.expNext)), 0.0, 1.0)
@@ -200,7 +196,7 @@ func _slot_input(event: InputEvent, index: int) -> void:
 		if slot.get_meta(&"locked_slot", false):
 			_confirm_extension(index+page*25+1)
 			return
-		_open_context(slot.get_meta(&"item") as Item, false, slot)
+		_open_context(slot.get_meta(&"item") as Item if slot.has_meta(&"item") else null, false, slot)
 
 func _equipment_input(event: InputEvent, index: int) -> void:
 	if $Confirm.visible: return
@@ -279,7 +275,7 @@ func _lock_selected() -> void:
 func _slot_hover(index: int) -> void:
 	var slot := $Grid.get_child(index) as Control
 	if slot.get_meta(&"locked_slot", false): _show_tip("此背包格尚未解锁")
-	else: _show_item_tip(slot.get_meta(&"item") as Item, slot, false)
+	else: _show_item_tip(slot.get_meta(&"item") as Item if slot.has_meta(&"item") else null, slot, false)
 
 func _equipment_hover(index: int) -> void:
 	if inventory == null: return

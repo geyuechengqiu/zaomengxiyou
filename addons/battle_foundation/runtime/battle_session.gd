@@ -18,6 +18,10 @@ var _event_bus: Node
 var _level_root: Node
 var _advancing: bool = false
 var _pending_hit_stop: float = 0.0
+## 离线性能工具启用；默认关闭，不在普通游玩中采样。
+var profile_spawns: bool = false
+var last_spawn_profile: Dictionary = {}
+var _retired_entities: Array[StringName] = []
 ## 公共战斗表现必须由场景预置；不挂载于任何角色。
 var presentation: BattlePresentation2D:
 	get: return get_node_or_null(^"BattlePresentation") as BattlePresentation2D
@@ -29,6 +33,8 @@ var loot: BattleLootManager2D:
 	get: return get_node_or_null(^"Loot") as BattleLootManager2D
 var audio: BattleAudio:
 	get: return get_node_or_null(^"BattlePresentation/Audio") as BattleAudio
+var hit_combo: BattleHitComboTracker:
+	get: return get_node_or_null(^"HitComboTracker") as BattleHitComboTracker
 ## 可在 .tscn 中预置会话；留空保留原工厂配置方式。
 @export_file("*.json") var scene_manifest_path: String = ""
 @export var scene_seed: int = 0
@@ -107,7 +113,9 @@ func spawn_entity_2d(category: String, id: StringName, at: Vector2 = Vector2.ZER
 	if not _configured or not ["characters", "monsters"].has(category):
 		last_error = "战斗未配置或实体类别无效"
 		return null
+	var stamp := Time.get_ticks_usec() if profile_spawns else 0
 	var data := catalog.instantiate_definition(category, id) as BattleEntityDefinition
+	var copied := Time.get_ticks_usec() if profile_spawns else 0
 	if data == null:
 		last_error = catalog.last_error
 		return null
@@ -115,6 +123,7 @@ func spawn_entity_2d(category: String, id: StringName, at: Vector2 = Vector2.ZER
 		last_error = "2D 实体定义必须引用预置组件的角色场景：" + str(id)
 		return null
 	var node: Node = data.scene.instantiate()
+	var instantiated := Time.get_ticks_usec() if profile_spawns else 0
 	if not node is BattleEntity2D:
 		node.free()
 		last_error = "2D 实体场景根节点必须继承 BattleEntity2D"
@@ -128,13 +137,17 @@ func spawn_entity_2d(category: String, id: StringName, at: Vector2 = Vector2.ZER
 	entity.position = at
 	var runtime_id := StringName("%s/entity/%d" % [battle_id, _entity_serial])
 	entity.initialize_battle(self, runtime_id, data)
+	var initialized := Time.get_ticks_usec() if profile_spawns else 0
 	if not faction_override.is_empty():
 		entity.faction_id = faction_override
 	_entities[runtime_id] = entity
 	entity.tree_exiting.connect(_on_entity_exiting.bind(runtime_id), CONNECT_ONE_SHOT)
 	add_child(entity)
+	var entered := Time.get_ticks_usec() if profile_spawns else 0
 	if play_appearance and category == "monsters": entity.begin_spawn_appearance(int(data.get_meta(&"original_show_appear", 0)))
 	publish_event(&"battle.entity_spawned", null, entity, {"definition_id": id, "category": category})
+	if profile_spawns:
+		last_spawn_profile = {"copy_ms":(copied-stamp)/1000.0,"instantiate_ms":(instantiated-copied)/1000.0,"initialize_ms":(initialized-instantiated)/1000.0,"enter_tree_ms":(entered-initialized)/1000.0,"events_ms":(Time.get_ticks_usec()-entered)/1000.0}
 	return entity
 
 func get_entity(id: StringName) -> Variant:
@@ -163,6 +176,19 @@ func register_scene_entity_2d(entity: BattleEntity2D, category: String, id: Stri
 func get_entities() -> Array:
 	return _entities.values().duplicate()
 
+func warm_monster_resources() -> void:
+	# 读取预置场景中的保护配置；只预热只读数据，不提前注册/生成战斗实体。
+	for id: StringName in catalog.get_ids("monsters"):
+		var data := catalog.instantiate_definition("monsters",id) as BattleEntityDefinition
+		if data == null or data.scene == null: continue
+		var state := data.scene.get_state()
+		for node in range(state.get_node_count()):
+			for property in range(state.get_node_property_count(node)):
+				if state.get_node_property_name(node,property) != &"protection_profile": continue
+				var profile := state.get_node_property_value(node,property) as BattleProtectionProfile
+				if profile != null and profile.enabled:
+					BattleProtectionSystem.load_original_source(profile.original_data_path)
+
 func despawn_entity(id: StringName) -> void:
 	var entity: Variant = get_entity(id)
 	if entity == null:
@@ -173,6 +199,16 @@ func despawn_entity(id: StringName) -> void:
 		presentation.remove_actor(id)
 	_entities.erase(id)
 	entity.queue_free()
+
+func retire_dead_entity(id: StringName) -> void:
+	if not _retired_entities.has(id): _retired_entities.append(id)
+
+func _flush_retired_entities() -> void:
+	# 死亡、被动、掉落及出生依赖先结算，最后才移除，避免迭代中修改实体表。
+	for id in _retired_entities:
+		var entity := get_entity(id) as BattleEntity2D
+		if is_instance_valid(entity) and not entity.is_alive(): despawn_entity(id)
+	_retired_entities.clear()
 
 func create_equipment(id: StringName) -> BattleEquipmentState:
 	var data := catalog.instantiate_definition("equipment", id) as BattleEquipmentDefinition
@@ -239,6 +275,8 @@ func register_scene_level(id: StringName, level_root: Node) -> bool:
 	return true
 
 func clear_battle() -> void:
+	if hit_combo != null: hit_combo.clear_battle()
+	_retired_entities.clear()
 	if loot != null: loot.clear_loot()
 	if level_instance != null: level_instance.stop()
 	if camera_rig != null: camera_rig.stop()
@@ -271,6 +309,7 @@ func advance_physics(unscaled_delta: float) -> void:
 	if is_instance_valid(_level_root) and _level_root is BattleMap2D:
 		_level_root.advance_visuals(delta)
 	if loot != null: loot.advance_loot(delta)
+	if hit_combo != null: hit_combo.advance_combat()
 	if presentation != null:
 		presentation.advance_presentation(delta)
 		presentation.advance_ui(unscaled_delta if not clock.paused and not (is_inside_tree() and get_tree().paused) else 0.0)
@@ -278,6 +317,7 @@ func advance_physics(unscaled_delta: float) -> void:
 		level_instance.advance_level(delta)
 	if camera_rig != null:
 		camera_rig.advance_camera(delta)
+	_flush_retired_entities()
 	# 同一 tick 的所有目标先完成命中，停顿从下一个物理 tick 开始。
 	# 不能让第一个目标请求停顿后，后面的目标因为 blocked 而漏结算。
 	if _pending_hit_stop > 0.0:
@@ -352,6 +392,7 @@ func _on_core_event(event_id: String, payload: Array) -> void:
 			entity.cleanup_death_statuses()
 
 func _on_entity_exiting(id: StringName) -> void:
+	if hit_combo != null: hit_combo.remove_entity(id)
 	if presentation != null:
 		presentation.remove_actor(id)
 	_entities.erase(id)

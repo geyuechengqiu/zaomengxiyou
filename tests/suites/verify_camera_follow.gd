@@ -128,6 +128,7 @@ func _verify_combat_lock() -> void:
 	rig.advance_camera(1.0/30.0)
 	rig.set_combat_locked(true)
 	var locked := rig.center.x
+	check(rig.get_combat_horizontal_bounds().is_equal_approx(Vector2(260,2140)), "战斗活动范围取可见画面而非整块2368像素区域")
 	for x in [1000,2000,1000]:
 		player_at(x)
 		rig.advance_camera(1)
@@ -141,13 +142,16 @@ func _verify_combat_lock() -> void:
 	var before := rig.center.x
 	rig.set_combat_locked(true)
 	check(is_equal_approx(rig.center.x,before), "新区战斗锁定不瞬移")
+	check(rig.get_combat_horizontal_bounds().is_equal_approx(Vector2(2368,2368)), "过区镜头尚未抵达时不提前开放不可见的右侧")
 	player_at(2500)
 	rig.advance_camera(1.0/30.0)
 	check(is_equal_approx(rig.center.x,lerpf(before,3308,0.2)), "新区锁定只平滑过渡到固定战斗画面")
+	check(rig.get_combat_horizontal_bounds().is_equal_approx(Vector2(2368,rig.center.x+940)), "过区活动范围跟随当前插值画面的右边缘")
 	player_at(4400)
 	rig.set_combat_locked(true)
 	rig.advance_camera(10)
 	check(is_equal_approx(rig.center.x,3308) and not rig.going_next, "重复同步锁定不重新采样目标，平滑过区完成后保持锁定")
+	check(rig.get_combat_horizontal_bounds().is_equal_approx(Vector2(2368,4248)), "新区锁定后右侧限制在可见4248处，不开放到区域4544处")
 	player_at(1000)
 	rig.advance_camera(10)
 	check(is_equal_approx(rig.center.x,3308), "新区域尚未清理时回头不能拉走镜头")

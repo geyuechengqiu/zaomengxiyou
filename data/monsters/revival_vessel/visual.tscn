@@ -5,6 +5,7 @@
 [ext_resource type="Resource" path="res://data/monsters/revival_vessel/skill.tres" id="skill"]
 [ext_resource type="Script" path="res://addons/gameplay_abiltiy_system/scripts/abilities/gameplay_ability_definition.gd" id="definition"]
 [ext_resource type="SpineSkeletonDataResource" path="res://assets/monsters/revival_vessel/spinedata.tres" id="spine"]
+[ext_resource type="PackedScene" path="res://data/effects/super_armor/outline.tscn" id="armor_outline"]
 [sub_resource type="Animation" id="Native_idle"]
 length = 0.8
 tracks/0/type = "value"
@@ -295,6 +296,9 @@ size = Vector2(1, 1)
 [node name="AnimationAdapter" type="Node2D"]
 script = ExtResource("adapter")
 profile = ExtResource("profile")
+[node name="SuperArmorEffect" parent="." instance=ExtResource("armor_outline")]
+[node name="Body" parent="SuperArmorEffect/Capture" index="0"]
+skeleton_data_res = ExtResource("spine")
 [node name="SpineVisual" type="SpineSprite" parent="."]
 scale = Vector2(2,2)
 skeleton_data_res = ExtResource("spine")
@@ -318,3 +322,5 @@ preview_abilities = Array[ExtResource("definition")]([ExtResource("skill")])
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackHitbox"]
 shape = SubResource("HitShape")
 disabled = true
+
+[editable path="SuperArmorEffect"]

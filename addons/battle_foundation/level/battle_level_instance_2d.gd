@@ -52,6 +52,7 @@ func start(data: BattleLevelDefinition) -> bool:
 		for id in plan.monster_ids:
 			if not _session.catalog.has_definition("monsters", id): return _configuration_failure("计划怪物未登记：" + String(id))
 	definition = data
+	_session.warm_monster_resources()
 	elapsed = 0.0
 	_clock_origin = _session.clock.elapsed
 	death_count = 0
@@ -87,6 +88,7 @@ func _configuration_failure(message: String) -> bool:
 	return false
 
 func stop() -> void:
+	if is_instance_valid(_player) and is_instance_valid(_player.motion): _player.motion.clear_horizontal_bounds()
 	var map := _player.get_parent() as BattleMap2D if is_instance_valid(_player) else null
 	if map != null: map.set_final_exit_open(false)
 	state = State.STOPPED
@@ -125,13 +127,14 @@ func advance_level(delta: float) -> void:
 	elapsed += delta
 	var region := regions[current_region_index]
 	var now := _player.global_position
-	var forward_step := now.x > _previous_position.x + 0.0001
 	if not region.entered and _crosses(region.definition.entry_rect, _previous_position, now):
 		region.entered = true
 		region.entered_at = elapsed
 		_emit(&"battle.region.entered", {"region_id": region.definition.region_id})
-	_previous_position = now
 	_sync_camera_lock()
+	now = _player.global_position
+	var forward_step := now.x > _previous_position.x + 0.0001
+	_previous_position = now
 	# 所有定时事件使用绝对combat时间，低帧率补发并跨计划按到期时间排序。
 	while state == State.RUNNING:
 		_refresh_waves()
@@ -291,6 +294,7 @@ func request_exit(actor: BattleEntity2D, automatic: bool = false) -> bool:
 		if not _level_conditions_met(): return false
 		region.exited = true
 		state = State.WON
+		_sync_camera_lock()
 		_emit(&"battle.region.exited", {"region_id": region.definition.region_id})
 		if state != State.WON: return true
 		_emit(&"battle.level.victory", {"level_id": definition.definition_id, "death_count": death_count})
@@ -315,11 +319,20 @@ func _refresh_camera(initial: bool = false) -> void:
 		camera.limit_bottom = ceili(regions[current_region_index].definition.bounds.end.y)
 
 func _sync_camera_lock() -> void:
-	var rig := get_node_or_null(camera_rig_path) as BattleCameraRig2D
-	if rig == null or regions.is_empty(): return
+	if regions.is_empty() or not is_instance_valid(_player): return
 	var region := regions[current_region_index]
-	# 零活怪可能仍有延迟出生或完成条件，必须沿用区域完整通关判定。
-	rig.set_combat_locked(region.entered and not region.completed)
+	var locked := state == State.RUNNING and region.entered and not region.completed
+	var rig := get_node_or_null(camera_rig_path) as BattleCameraRig2D
+	if rig != null:
+		# 先同步战斗镜头，再用同一画面确定活动边界。
+		rig.set_combat_locked(locked)
+	# 与镜头共用完整通关判定；后续波次未出生时同样不能逃出战斗区域。
+	if locked:
+		var bounds := Vector2(region.definition.bounds.position.x, region.definition.bounds.end.x)
+		if rig != null: bounds = rig.get_combat_horizontal_bounds()
+		_player.motion.set_horizontal_bounds(bounds.x, bounds.y)
+	else:
+		_player.motion.clear_horizontal_bounds()
 
 func _crosses(rect: Rect2, from: Vector2, to: Vector2) -> bool:
 	if rect.has_point(from) or rect.has_point(to): return true
@@ -394,6 +407,7 @@ func _fail(message: String) -> void:
 	if state != State.RUNNING: return
 	last_error = message
 	state = State.FAILED
+	_sync_camera_lock()
 	_pending_exit = false
 	_emit(&"battle.level.failed", {"level_id": definition.definition_id, "reason": message})
 

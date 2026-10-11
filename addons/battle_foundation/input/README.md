@@ -2,7 +2,7 @@
 
 角色消费操作名称，按键只存在于 Core 输入适配与用户配置中。孙悟空平台场景已使用本通道驱动移动、奔跑、二段跳和 `sunwukong_attack1` 至 `sunwukong_attack5`；角色由 `孙悟空` 定义生成。
 
-打开 [平台场景](../../../tests/fixtures/wukong_platform_demo.tscn)，用带 Spine 模块的 Godot 按 F6。Esc 打开设置菜单，可以修改所有操作按键、查看冲突并恢复默认；设置保存到 Core ConfigManager 的 `user://config.cfg`。菜单内的按键不会同时发动攻击。
+打开 [平台场景](../../../game/levels/biyujing.tscn)，用带 Spine 模块的 Godot 按 F6。Esc 打开设置菜单，可以修改所有操作按键、查看冲突并恢复默认；设置保存到 Core ConfigManager 的 `user://config.cfg`。菜单内的按键不会同时发动攻击。
 
 ![操作控制器联合类图](../docs/player-operations.svg)
 
@@ -10,7 +10,7 @@
 
 | 层 | 实现 | 职责 |
 | --- | --- | --- |
-| 配置 | [CoreOperationProfile](../../godot_core_system-0.0.4/source/operation_system/operation_profile.gd)、[业务配置](../../../data/controls/player_operations.tres) | 意图→InputMap 动作、默认物理键、轴规则、缓存/长按/双击参数；共享只读，不写当前按住状态 |
+| 配置 | [CoreOperationProfile](../../godot_core_system-0.0.4/source/operation_system/operation_profile.gd)、[业务配置](../../../data/characters/sunwukong/controls/input.tres) | 意图→InputMap 动作、默认物理键、轴规则、缓存/长按/双击参数；共享只读，不写当前按住状态 |
 | 重映射 | [CoreOperationBindings](../../godot_core_system-0.0.4/source/operation_system/operation_bindings.gd) | 安装默认 InputMap、捕获新键、检查冲突/保留键、存储事件描述、恢复用户配置 |
 | 输入通道 | [CoreOperationController](../../godot_core_system-0.0.4/source/operation_system/operation_controller.gd) | 每个控制者的强度、来源、时间、阶段、双击、缓存和控制权阻断；不施放技能 |
 | 缓存 | [CoreOperationBuffer](../../godot_core_system-0.0.4/source/operation_system/operation_buffer.gd) | 缓存每一次按下，按 sequence 精确消费；容量和过期限制 |
@@ -79,7 +79,7 @@ BattleSession 每次固定物理更新先调用 `advance_input(unscaled_delta)`�
 
 ```gdscript
 var operations := BattlePlayerOperations.new()
-operations.operation_profile = preload("res://data/controls/player_operations.tres")
+operations.operation_profile = preload("res://data/characters/sunwukong/controls/input.tres")
 # 下列 ID 必须由角色真实学会；各角色替换配置，无需更改键位代码。
 operations.ability_slots = {&"skill_1": &"your_skill_id", &"magic_weapon": &"your_weapon_skill"}
 actor.operations = operations
@@ -122,4 +122,4 @@ Core 事件 `battle.operation_intent` 用于记录阶段，`battle.operation_res
 & '<带 Spine 模块的 Godot 路径>' --headless --path . res://tests/suites/verify_player_operations.tscn
 ```
 
-[自动验收](../../../tests/suites/verify_player_operations.gd) 使用真实 Godot 输入分发、Control 消费、GAS 和平台碰撞。覆盖全部操作边沿、短按/长按/连按、缓存序列/容量/过期/快照、同方向双击与别名聚合、摇杆变向/设备过滤/虚拟来源、改键冲突/持久化/重载、菜单捕获不攻击、失焦/暂停/控制权、实际普攻恢复缓存/落地跳跃缓存/技能槽以及角色扩展钩子。验收临时使用独立用户配置，结束恢复原配置；成功打印 PASS，失败返回 1。
+[自动验收](../../../tests/README.md) 使用真实 Godot 输入分发、Control 消费、GAS 和平台碰撞。覆盖全部操作边沿、短按/长按/连按、缓存序列/容量/过期/快照、同方向双击与别名聚合、摇杆变向/设备过滤/虚拟来源、改键冲突/持久化/重载、菜单捕获不攻击、失焦/暂停/控制权、实际普攻恢复缓存/落地跳跃缓存/技能槽以及角色扩展钩子。验收临时使用独立用户配置，结束恢复原配置；成功打印 PASS，失败返回 1。

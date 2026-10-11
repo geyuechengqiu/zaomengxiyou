@@ -16,33 +16,33 @@
 
 普通无双表现复用 Core 空格意图和 GAS 状态，新增无动作状态技能 `BattleStatusActivationFeature`、预置 `BattleWushuangEffect2D` 及原生姿态快照 `BattleSpinePoseMirror2D`。红光与残影独立于动作播放器，固定池消费战斗时钟，支持实例隔离与死亡/离场清理；预置 `BattleWushuangController` 协调 GAS rage Vital、释放实例怒气预算与增益；满10000释放，15秒消耗，原版伤害/移速/暴击及起手霸体同步撤销，满值HUD播放原15帧火焰和6帧空格提示，怒气条采用原1秒QuadOut缓动。[原版依据与配置](../../data/effects/wushuang/README.md)。
 
-新增 [悟空转职前四技能与火魔斩](../../data/skills/sunwukong/README.md)：原版 MP/CD 等级表、空中限制、原素材 AB、精确重复命中、射线转向、冲刺扫掠、风暴追加重劈、独立砸地与 3 帧视觉尾部。通过现有 Core/GAS/Spine 接入，没有第二套技能或判定系统。[五技能演示](../../tests/fixtures/wukong_skills_demo.tscn)、[联合类图](docs/wukong-basic-skills.svg)、[验收](../../tests/suites/verify_wukong_skills.tscn)。新增 BattleSkillManaCost / BattleSkillCooldownFeature 为本次技能等级快照读取原版消耗与冷却，不修改共享配置。
+新增 [悟空转职前四技能与火魔斩](../../data/characters/sunwukong/skills/README.md)：原版 MP/CD 等级表、空中限制、原素材 AB、精确重复命中、射线转向、冲刺扫掠、风暴追加重劈、独立砸地与 3 帧视觉尾部。通过现有 Core/GAS/Spine 接入，没有第二套技能或判定系统。[五技能演示](../../game/levels/biyujing.tscn)、[联合类图](docs/wukong-basic-skills.svg)、[验收](../../tests/README.md)。新增 BattleSkillManaCost / BattleSkillCooldownFeature 为本次技能等级快照读取原版消耗与冷却，不修改共享配置。
 
-阶段 11 新增 [普通怪物与AI](ai/README.md)：编辑器预置两类碧玉径小怪，复用Core操作意图/动作状态、GAS技能与独立冷却、属性/Vital、Buff、受击和死亡。AI配置通过Policy/TargetSelector扩展；原版图集由AnimationPlayer播放，兽形攻击支持同段逐帧AB判定。F6独立AI入口为 [first_level_demo.tscn](../../tests/fixtures/first_level_demo.tscn)；[怪物配置与新增步骤](../../data/monsters/README.md)。
+阶段 11 新增 [普通怪物与AI](ai/README.md)：编辑器预置两类碧玉径小怪，复用Core操作意图/动作状态、GAS技能与独立冷却、属性/Vital、Buff、受击和死亡。AI配置通过Policy/TargetSelector扩展；原版图集由AnimationPlayer播放，兽形攻击支持同段逐帧AB判定。F6独立AI入口为 [first_level_demo.tscn](../../game/levels/biyujing.tscn)；[怪物配置与新增步骤](../../data/monsters/README.md)。
 
 阶段 10 新增 [Buff、被动与战斗触发](combat/buffs-triggers.md)，复用并重构 GAS Status/Effect/PassiveStatusFeature，接入 Core STUN、标签引用计数、统一周期时钟、原版吸血/反伤与死亡/离场清理。打开 tests/fixtures/buff_demo.tscn 按F6验收，节点与控件预置，全部定义位于业务 data/buffs。
 
-角色的 GAS、动作、运动、连击、受击、保护与输入组件已预置到角色 PackedScene，运行时只绑定并初始化。节点树、生命周期及迁移入口见 [角色组件说明](../../data/battle2d/character-components.md)。
+角色的 GAS、动作、运动、连击、受击、保护与输入组件已预置到角色 PackedScene，运行时只绑定并初始化。节点树、生命周期及迁移入口见 [角色组件说明](../../data/characters/sunwukong/components.md)。
 
-阶段 9 新增 [受击、击退、浮空与独立保护条](combat/hit-reaction-protection.md)：HP 与动作分离，霸体受伤倍率、无敌效果策略可配置，真实 Core 叶子管理击飞/下落/落地/倒地/起身；保护满值读取各 Boss protectPoint 或显式覆盖，同目标同技能累计并在触发后重置。演示 [hit_reaction_demo.tscn](../../tests/fixtures/hit_reaction_demo.tscn)，自动验收 199 项及 13 套既有回归通过。
+阶段 9 新增 [受击、击退、浮空与独立保护条](combat/hit-reaction-protection.md)：HP 与动作分离，霸体受伤倍率、无敌效果策略可配置，真实 Core 叶子管理击飞/下落/落地/倒地/起身；保护满值读取各 Boss protectPoint 或显式覆盖，同目标同技能累计并在触发后重置。演示 [hit_reaction_demo.tscn](../../game/levels/biyujing.tscn)，自动验收 199 项及 13 套既有回归通过。
 
 阶段 8 使用 GAS 策略 + Attribute/Vital/Status/Effect + Core 事件完成原版通用伤害链；等级评分沿用原版EXP，界面统一整数。原版盾后补1、真实伤害与吸血顺序、角色回调和结果字段见 [详细说明](combat/original-damage.md)。
 
 原版伤害样例已恢复五连击，并接入125张原版数字贴图（含回血和回魔）、闪避/真实伤害随机偏移及共享对象池曲线驱动上飘淡出；普通与真实伤害分开生成实例。窗口放大后的重复拉伸已修复。预览、源码依据与验收见 [跳字说明](../../data/effects/README.md)。
 
-阶段 7 见 [技能时间轴、连招与多段攻击](combat/skill-timeline.md)：扩展现有 BattleFrameTimelineFeature，新增攻击段/派生/位移资源，每次施放独立保存命中次数与下次命中时间；接入 GAS Cost/Cooldown、Status/Effect、Core 状态反应和预置对象回收。[三段演示](../../tests/fixtures/skill_timeline_demo.tscn)、[验收](../../tests/suites/verify_skill_timeline.tscn)、[联合类图](docs/skill-timeline.svg)。
+阶段 7 见 [技能时间轴、连招与多段攻击](combat/skill-timeline.md)：扩展现有 BattleFrameTimelineFeature，新增攻击段/派生/位移资源，每次施放独立保存命中次数与下次命中时间；接入 GAS Cost/Cooldown、Status/Effect、Core 状态反应和预置对象回收。[三段演示](../../game/levels/biyujing.tscn)、[验收](../../tests/README.md)、[联合类图](docs/skill-timeline.svg)。
 
-阶段 6 见 [单段普攻与战斗闭环](combat/README.md)：复用 Core/GAS，将物理体、受击区域和单一攻击框分开，加入每次施放独立的攻击实例与窗口去重、木桩、生命条和实际扣血飘字。交互入口 [single_attack_demo.tscn](../../tests/fixtures/single_attack_demo.tscn)，自动验收 [verify_single_attack.tscn](../../tests/suites/verify_single_attack.tscn)，结构与时序见 [联合类图](docs/single-attack-runtime.svg)。
+阶段 6 见 [单段普攻与战斗闭环](combat/README.md)：复用 Core/GAS，将物理体、受击区域和单一攻击框分开，加入每次施放独立的攻击实例与窗口去重、木桩、生命条和实际扣血飘字。交互入口 [single_attack_demo.tscn](../../game/levels/biyujing.tscn)，自动验收 [verify_single_attack.tscn](../../tests/README.md)，结构与时序见 [联合类图](docs/single-attack-runtime.svg)。
 
 单段测试采用原版 940×590，已搭建全部节点；BattleSession 支持 scene_manifest_path，BattleEntity2D 支持 scene_definition_id / category / session_path，GAS 与操作系统复用预置组件和控制器。原版普通受击的 11 帧动画通过 [BattleHitEffect2D](presentation/battle_hit_effect_2d.gd) 和场景预置 AnimationPlayer 接入，时钟仍统一。配置与重置流程见战斗 README。
 
-属性阶段见 [属性计算链说明](attributes/README.md)：复用 GAS 最终属性/Vital/Status/Effect、Simple Inventory 装备槽和 Core 通知，统一基础、成长、装备、临时来源。面板与伤害读取相同最终值；提供 [联合类图](docs/attribute-pipeline.svg) 和 [场景验收](../../tests/suites/verify_attribute_pipeline.tscn)。
+属性阶段见 [属性计算链说明](attributes/README.md)：复用 GAS 最终属性/Vital/Status/Effect、Simple Inventory 装备槽和 Core 通知，统一基础、成长、装备、临时来源。面板与伤害读取相同最终值；提供 [联合类图](docs/attribute-pipeline.svg) 和 [场景验收](../../tests/README.md)。
 
 本插件在 CoreSystem 与 GAS 之上建立项目的战斗基础入口，依赖 Godot 4.7+。Core 继续负责资源缓存、用户配置与事件总线；GAS 继续负责属性、Vital、技能、冷却、状态和效果。新增代码负责定义索引、运行实体编号、阵营、会话随机流、固定物理战斗时钟及原素材帧事件。
 
-运行 [交互演示](../../tests/suites/verify_stage_one.tscn)：在 Godot 中打开场景，按 F6。A 与 B 使用同一角色定义；按钮可施放技能、添加减伤状态、暂停/恢复、切换慢动作、触发受击停顿及重新生成实例。界面同时显示生命、独立冷却、状态剩余时间和素材帧事件。
+运行 [交互演示](../../tests/README.md)：在 Godot 中打开场景，按 F6。A 与 B 使用同一角色定义；按钮可施放技能、添加减伤状态、暂停/恢复、切换慢动作、触发受击停顿及重新生成实例。界面同时显示生命、独立冷却、状态剩余时间和素材帧事件。
 
-运行 [验收场景](../../tests/suites/verify_stage_one.tscn)：
+运行 [验收场景](../../tests/README.md)：
 
 ```powershell
 & '<Godot 可执行文件路径>' --headless --path . res://tests/suites/verify_stage_one.tscn
@@ -53,19 +53,19 @@
 在项目根目录执行 `node tools/generate_battle_docs.mjs` 可重建战斗基础、动画、操作、运动/连击、Core 状态机、攻击范围、属性链及单段攻击的 SVG。
 
 
-新增 [独立动画适配层](animation/README.md)，封装现有原生 Spine 运行时，接入孙悟空基础动作、组合换装、骨骼挂点和播放进度；[横版平台场景](../../tests/fixtures/wukong_platform_demo.tscn) 复用统一战斗时钟、Core 事件和 GAS 运行实例。动画完成只通知，攻击许可、受击锁定及死亡由独立战斗状态管理。
+新增 [独立动画适配层](animation/README.md)，封装现有原生 Spine 运行时，接入孙悟空基础动作、组合换装、骨骼挂点和播放进度；[横版平台场景](../../game/levels/biyujing.tscn) 复用统一战斗时钟、Core 事件和 GAS 运行实例。动画完成只通知，攻击许可、受击锁定及死亡由独立战斗状态管理。
 
-动画节点预置于 [独立表现场景](../../data/animation/sunwukong_visual.tscn)，参考 godot-spine-example 的主/原生 AnimationPlayer 结构。编辑器可拖动十四个动作时间轴，所有技能统一更新一个 CollisionShape2D；预览与实际命中均读取技能事件的矩形、正缩放和偏移。[编辑技能判定与新角色扩展](../../data/animation/README.md)。
+动画节点预置于 [独立表现场景](../../data/characters/sunwukong/animation/sunwukong_visual.tscn)，参考 godot-spine-example 的主/原生 AnimationPlayer 结构。编辑器可拖动十四个动作时间轴，所有技能统一更新一个 CollisionShape2D；预览与实际命中均读取技能事件的矩形、正缩放和偏移。[编辑技能判定与新角色扩展](../../data/characters/sunwukong/animation/README.md)。
 
-新增 [可扩展角色操作控制器](input/README.md)，复用 CoreOperationController 并补齐阶段、长按、双击、可消费缓存与真实改键。BattlePlayerOperations 提供公共操作、槽位配置和角色钩子，BattleOperationMenu 管理模态输入与设置。输入时间与战斗时间分开，菜单/失焦/暂停/死亡等控制权互不覆盖。平台场景按 Esc 设置键位，验收入口为 [verify_player_operations.tscn](../../tests/suites/verify_player_operations.tscn)。
+新增 [可扩展角色操作控制器](input/README.md)，复用 CoreOperationController 并补齐阶段、长按、双击、可消费缓存与真实改键。BattlePlayerOperations 提供公共操作、槽位配置和角色钩子，BattleOperationMenu 管理模态输入与设置。输入时间与战斗时间分开，菜单/失焦/暂停/死亡等控制权互不覆盖。平台场景按 Esc 设置键位，验收入口为 [verify_player_operations.tscn](../../tests/README.md)。
 
 ![操作系统联合类图](docs/player-operations.svg)
 
-阶段四新增 [运动、状态与五段普攻](movement/README.md)：独立扫掠运动控制器管理重力、平台、墙/顶、二段跳与落地预算；Core 当前叶子消费操作意图并按状态表管理移动/跳跃/转向、攻击种类、霸体与打断门槛。五段 GAS 技能按原素材时间线运行，当前段只预约一段，第四段位移经碰撞，第二击保留显示缩放与偏移。判定使用原素材五组 ABRect，不使用 AI 选敌范围。自动验收 [verify_stage_four.tscn](../../tests/suites/verify_stage_four.tscn) 通过 222 项检查。
+阶段四新增 [运动、状态与五段普攻](movement/README.md)：独立扫掠运动控制器管理重力、平台、墙/顶、二段跳与落地预算；Core 当前叶子消费操作意图并按状态表管理移动/跳跃/转向、攻击种类、霸体与打断门槛。五段 GAS 技能按原素材时间线运行，当前段只预约一段，第四段位移经碰撞，第二击保留显示缩放与偏移。判定使用原素材五组 ABRect，不使用 AI 选敌范围。自动验收 [verify_stage_four.tscn](../../tests/README.md) 通过 222 项检查。
 
 ![运动与状态联合类图](docs/motion-state.svg)
 
-动作状态使用 Core `BaseStateMachine` / `BaseState` 实现；每实体登记真实机器和十八个独立叶子（原九种 + 阶段9六种 + 跑攻/跳攻 + Buff眩晕），保持单一 combat delta。`BattleActionState2D` 是语义兼容入口，查询 Core 当前叶子，不再维护另一份状态。继承、生命周期、死亡守卫和注销说明见 [动作状态机接入](movement/README.md#动作状态接入-core-插件状态机)；验收入口 [verify_wukong_state_machine.tscn](../../tests/suites/verify_wukong_state_machine.tscn)。
+动作状态使用 Core `BaseStateMachine` / `BaseState` 实现；每实体登记真实机器和十八个独立叶子（原九种 + 阶段9六种 + 跑攻/跳攻 + Buff眩晕），保持单一 combat delta。`BattleActionState2D` 是语义兼容入口，查询 Core 当前叶子，不再维护另一份状态。继承、生命周期、死亡守卫和注销说明见 [动作状态机接入](movement/README.md#动作状态接入-core-插件状态机)；验收入口 [verify_wukong_state_machine.tscn](../../tests/README.md)。
 
 ## 为什么需要补充插件
 
@@ -103,7 +103,7 @@ Godot 加载资源时会复用缓存中的同一对象，场景内置 Resource �
 
 ## 配置读取和资源索引
 
-业务入口是 [manifest.json](../../data/battle/manifest.json)，`version=1`，`definitions` 下每个类别使用 ID → `res://` 资源路径字典。定义文件位于 [data/battle](../../data/battle/README.md)。项目设置 `battle_foundation/manifest_path` 指向默认索引；插件不硬编码业务资源路径。
+业务入口是 [manifest.json](../../data/levels/biyujing/progression/README.md)，`version=1`，`definitions` 下每个类别使用 ID → `res://` 资源路径字典。定义文件位于 [data/battle](../../data/levels/biyujing/progression/README.md)。项目设置 `battle_foundation/manifest_path` 指向默认索引；插件不硬编码业务资源路径。
 
 `BattleCatalog.load_manifest()` 检查 JSON 格式、版本、类别、路径存在性、资源类型、索引 ID 与资源 ID、属性/Vital 依赖、实体技能/状态引用、关卡出生引用和素材帧顺序。全部通过才替换当前索引；失败可读取 `last_error`，上一份有效索引保留。新增资源后必须登记索引，不依赖导出包中运行时扫描目录。
 
@@ -134,7 +134,7 @@ func _exit_tree() -> void:
         session.clear_battle()
 ```
 
-`start_level(&"sample_arena")` 会实例化关卡场景并按出生表生成角色和怪物。实体场景根节点必须继承 `BattleEntity`；[示例实体场景](../../data/battle/scenes/sample_entity.tscn) 带 CapsuleShape3D，使用固定物理更新中的 `move_and_collide(velocity * combat_delta)` 进行位移和碰撞。当前示例提供水平位移入口，重力、跳跃和完整移动控制器属于后续角色业务。
+`start_level(&"sample_arena")` 会实例化关卡场景并按出生表生成角色和怪物。实体场景根节点必须继承 `BattleEntity`；[示例实体场景](../../data/levels/biyujing/progression/README.md) 带 CapsuleShape3D，使用固定物理更新中的 `move_and_collide(velocity * combat_delta)` 进行位移和碰撞。当前示例提供水平位移入口，重力、跳跃和完整移动控制器属于后续角色业务。
 
 组件由 BattleEntity 创建，不能再在同一实体场景里重复放置这三个 GAS 组件。宿主需要扩展时继承 BattleEntity，通过现有 getter 查询属性、技能和状态组件。
 
@@ -250,6 +250,6 @@ GAS `BTWait` 已改为累计传入 delta，消除真实毫秒时钟绕过战斗�
 | [SpineAnimationAdapter](animation/spine_animation_adapter.gd) | 原生 Spine 手动播放、组合皮肤、镜像、挂点和调试查询 |
 | [plugin.gd](plugin.gd) | 编辑器启用/禁用注册 Autoload |
 
-[verify_stage_one.gd](../../tests/suites/verify_stage_one.gd) 验证：六类定义加载、无效索引不破坏旧索引、深层子资源隔离、双角色生命/冷却/禁用/Buff 计时与层数隔离、同步减伤目标过滤、场次事件、随机流与快照、暂停/恢复、SceneTree 暂停、慢动作、停顿及部分 tick、素材帧补发、BTWait 模拟时间、实际固定物理调度/墙体碰撞、关卡出生和销毁 ID 不复用。
+[verify_stage_one.gd](../../tests/README.md) 验证：六类定义加载、无效索引不破坏旧索引、深层子资源隔离、双角色生命/冷却/禁用/Buff 计时与层数隔离、同步减伤目标过滤、场次事件、随机流与快照、暂停/恢复、SceneTree 暂停、慢动作、停顿及部分 tick、素材帧补发、BTWait 模拟时间、实际固定物理调度/墙体碰撞、关卡出生和销毁 ID 不复用。
 
 本阶段的业务资源全部是接口验收样例，不代表原版角色、怪物、技能、装备或关卡的实际初始数值。原版属性共享定义继续保留，后续实体表导入可替换这些样例资源，无需改变插件接口。

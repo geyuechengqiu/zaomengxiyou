@@ -2,7 +2,7 @@
 [ext_resource type="Script" path="res://addons/battle_foundation/presentation/battle_wushuang_effect_2d.gd" id="script"]
 [ext_resource type="Script" path="res://addons/battle_foundation/animation/spine_pose_mirror_2d.gd" id="mirror"]
 [ext_resource type="Shader" path="res://addons/battle_foundation/presentation/wushuang_glow.gdshader" id="shader"]
-[ext_resource type="SpineSkeletonDataResource" path="res://assets/skelton/char/sunwukong/sunwukong_spinedata.tres" id="body"]
+[ext_resource type="SpineSkeletonDataResource" path="res://assets/characters/sunwukong/animation/sunwukong_spinedata.tres" id="body"]
 [sub_resource type="ShaderMaterial" id="halo"]
 shader = ExtResource("shader")
 [sub_resource type="ShaderMaterial" id="ghost"]

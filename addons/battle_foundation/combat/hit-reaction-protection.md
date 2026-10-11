@@ -4,7 +4,7 @@
 
 ## 运行与操作
 
-F5 运行 [hit_reaction_demo.tscn](../../../tests/fixtures/hit_reaction_demo.tscn)。A/D 移动、K 二段跳、连按 J 五连击，Esc 暂停/修改操作键。底部按钮可切换目标模式、转身、靠近或远离木桩、重置及暂停。代码中 `session.set_time_scale()` 可调整慢动作，演示使用普通伤害样例。
+F5 运行 [hit_reaction_demo.tscn](../../../game/levels/biyujing.tscn)。A/D 移动、K 二段跳、连按 J 五连击，Esc 暂停/修改操作键。底部按钮可切换目标模式、转身、靠近或远离木桩、重置及暂停。代码中 `session.set_time_scale()` 可调整慢动作，演示使用普通伤害样例。
 
 左木桩引用东皇太一 `Monster/10001`，基础保护满值 25000；右木桩引用商羊 `Monster/11103`，基础满值 35000。左上两个输入框可分别修改满值，修改时清空该目标的保护运行数据。运行修改不写回 `.tres`，永久配置请在 Inspector 编辑资源。
 
@@ -49,7 +49,7 @@ F5 运行 [hit_reaction_demo.tscn](../../../tests/fixtures/hit_reaction_demo.tsc
 
 ## 攻击段、方向与碰撞
 
-多段技能编辑 [BattleAttackSegment](../definitions/battle_attack_segment.gd)；旧 FrameEvent 也接受相同 payload。示例五连击使用独立 [hit_reaction/attack1～5](../../../data/battle2d/hit_reaction/README.md)，不覆盖旧阶段的技能资源。
+多段技能编辑 [BattleAttackSegment](../definitions/battle_attack_segment.gd)；旧 FrameEvent 也接受相同 payload。示例五连击使用独立 [hit_reaction/attack1～5](../../../data/characters/sunwukong/skills/normal_attacks/README.md)，不覆盖旧阶段的技能资源。
 
 | 参数 | 用途 |
 | --- | --- |
@@ -69,7 +69,7 @@ F5 运行 [hit_reaction_demo.tscn](../../../tests/fixtures/hit_reaction_demo.tsc
 
 速度单位是 Godot 世界像素/秒，距离是世界像素；这些演示运动值不是原 Flash 的单位换算结论。方向由命中上下文中的攻击朝向或相对位置确定，后续转身不会反向修改已经施加的冲量。
 
-悟空基础技能已按原版 TargetMove 单独换算：横向经过 normalToBodyVelocity，竖向直接进入 Nape 物理体。30 FPS、0.1 物理步长、110 重力和当前素材比例 2 对应横向 ×2、竖向 ×6、受击重力 1980；完整依据与每段数值见 [悟空技能说明](../../../data/skills/sunwukong/README.md)。原版火魔斩以相对目标方向配合负速度吸附，霸体仍可阻止位移。
+悟空基础技能已按原版 TargetMove 单独换算：横向经过 normalToBodyVelocity，竖向直接进入 Nape 物理体。30 FPS、0.1 物理步长、110 重力和当前素材比例 2 对应横向 ×2、竖向 ×6、受击重力 1980；完整依据与每段数值见 [悟空技能说明](../../../data/characters/sunwukong/skills/README.md)。原版火魔斩以相对目标方向配合负速度吸附，霸体仍可阻止位移。
 
 击退使用已有 `BattleMotionController2D.apply_impulse()`，每步通过 `move_and_collide` 扫掠并沿碰撞面滑动，不直接修改 X 坐标。定距击退最后一个 tick 只走剩余时间对应距离。重力与击退共同推进；墙体阻止穿越，地面和单向平台提供支撑，平台边缘可正常掉落。场景边界必须有真实碰撞体，不能只依靠摄影机范围；本演示左右墙为高碰撞体，覆盖浮空路径。连续新命中的冲量替换旧冲量，不叠加为无限速度。
 

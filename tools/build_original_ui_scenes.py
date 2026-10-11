@@ -52,7 +52,7 @@ s.node('Inventory','Control','',f'visible = false\noffset_right = 940.0\noffset_
 s.rect('Window','.',0,0,940,590,'bag_window.png')
 s.rect('BodyPanel','.',-72.05,77.6,552,451,'body_panel.png')
 s.rect('BagPanel','.',475.6,109.6,334,412,'bag_panel.png')
-portrait=s.resource('res://data/animation/sunwukong_visual.tscn','PackedScene')
+portrait=s.resource('res://data/characters/sunwukong/animation/sunwukong_visual.tscn','PackedScene')
 s.nodes.append(f'[node name="RolePortrait" parent="." instance={portrait}]\nposition = Vector2(270,280)\nscale = Vector2(0.7,0.7)\n')
 s.label('Name','.',189,84,133,25,'孙悟空',size=18,color='Color(0.42,0.16,0.02,1)')
 s.label('Level','.',129,299,57,28,'1',size=20,color='Color(1,1,0.2,1)',align=1)
@@ -208,7 +208,7 @@ text=text.replace('[node name="Panel" type="PanelContainer" parent="HUD"]\n','[n
 text=text.replace('[node name="Help" type="Label" parent="HUD"]\n','[node name="Help" type="Label" parent="HUD"]\nvisible = false\n')
 text=re.sub(r'(visible = false\n)+','visible = false\n',text)
 path.write_text(text,'utf8')
-path=PROJECT/'data/battle2d/sunwukong_2d.tscn';text=path.read_text('utf8')
+path=PROJECT/'data/characters/sunwukong/character.tscn';text=path.read_text('utf8')
 text=re.sub(r'\[ext_resource type="Script"(?: uid="[^"]+")? path="res://addons/simple_inventory/src/core/C_Inventory.gd" id="component_Inventory"\]', '[ext_resource type="Script" path="res://addons/simple_inventory/src/core/original_inventory.gd" id="component_Inventory"]',text)
 if 'id="bag_weapon"' not in text:
     refs=''.join(f'[ext_resource type="Resource" path="res://data/inventory/{id}.tres" id="bag_{part}"]\n' for id,part in [('110101001','armor'),('110101002','helmet'),('110101003','weapon')])

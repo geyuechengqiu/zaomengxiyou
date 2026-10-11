@@ -1,0 +1,14 @@
+[remap]
+
+importer="spine.skel"
+type="SpineSkeletonFileResource"
+uid="uid://cve6y5p5p3j4n"
+path="res://.godot/imported/wukong_skills.skel-eaf7c615fab11e760ad9b97e55a2f858.spskel"
+
+[deps]
+
+source_file="res://assets/characters/sunwukong/animation/effects/wukong_skills.skel"
+dest_files=["res://.godot/imported/wukong_skills.skel-eaf7c615fab11e760ad9b97e55a2f858.spskel"]
+
+[params]
+

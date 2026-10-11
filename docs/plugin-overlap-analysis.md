@@ -35,7 +35,7 @@ GAS 用资源登记标签定义，用 Node 元数据保存引用计数，以 Gro
 
 ## 事件：已统一使用 Core，保留 GAS 战斗同步链路
 
-源码：[HealthVital](../addons/gameplay_abiltiy_system/scripts/attributes/vitals/health_vital.gd)、[GameplayStatusComponent](../addons/gameplay_abiltiy_system/scripts/components/gameplay_status_component.gd)、[CoreEventBus](../addons/godot_core_system-0.0.4/source/event_system/event_bus.gd)、[事件回归验证](../tests/suites/verify_core_events.gd)。
+源码：[HealthVital](../addons/gameplay_abiltiy_system/scripts/attributes/vitals/health_vital.gd)、[GameplayStatusComponent](../addons/gameplay_abiltiy_system/scripts/components/gameplay_status_component.gd)、[CoreEventBus](../addons/godot_core_system-0.0.4/source/event_system/event_bus.gd)、[事件回归验证](../tests/README.md)。
 
 原 GAS 总线只有统一的同步 Dictionary 广播，功能简单。迁移后旧脚本、UID、自动加载及插件注册全部移除；技能、状态、生命值和技能栏全部 10 处发布直接调用 `CoreSystem.event_bus.push_event(name, [context], true)`。Core 的按名订阅回调获得一个 Dictionary，无需转发或同时维护两条总线。
 

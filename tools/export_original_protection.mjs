@@ -21,7 +21,7 @@ for (const row of read('全部技能保护值.json')) {
   }
   skills[String(row['技能ID'])] = result;
 }
-const mapping = JSON.parse(fs.readFileSync(path.join(projectRoot, 'data/battle2d/combo_source_mapping.json'), 'utf8'));
+const mapping = JSON.parse(fs.readFileSync(path.join(projectRoot, 'data/characters/sunwukong/skills/combo_source_mapping.json'), 'utf8'));
 const ability_ids = Object.fromEntries(mapping.steps.map(row => [row.id, String(row.source_skill_id)]));
 const provenance = ['Boss保护条满值.json', '全部技能保护值.json', '机制说明.md'].map(name => ({path: `exports/zmhj_protection/${name}`, sha256: crypto.createHash('sha256').update(fs.readFileSync(path.join(source,name))).digest('hex')}));
 const out = path.join(projectRoot, 'data/protection');

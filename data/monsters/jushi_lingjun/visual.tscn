@@ -7,6 +7,7 @@
 [ext_resource type="Resource" path="res://data/monsters/jushi_lingjun/skill2.tres" id="skill2"]
 [ext_resource type="Resource" path="res://data/monsters/jushi_lingjun/skill3.tres" id="skill3"]
 [ext_resource type="SpineSkeletonDataResource" path="res://assets/monsters/jushi_lingjun/spinedata.tres" id="spine"]
+[ext_resource type="PackedScene" path="res://data/effects/super_armor/outline.tscn" id="armor_outline"]
 [sub_resource type="Animation" id="Native_idle"]
 length = 1.0
 tracks/0/type = "value"
@@ -420,6 +421,12 @@ size = Vector2(1,1)
 [node name="AnimationAdapter" type="Node2D"]
 script = ExtResource("adapter")
 profile = ExtResource("profile")
+[node name="SuperArmorEffect" parent="." instance=ExtResource("armor_outline")]
+capture_origin = Vector2(256, 384)
+[node name="Capture" parent="SuperArmorEffect" index="1"]
+size = Vector2i(512, 512)
+[node name="Body" parent="SuperArmorEffect/Capture" index="0"]
+skeleton_data_res = ExtResource("spine")
 [node name="SpineVisual" type="SpineSprite" parent="."]
 scale = Vector2(2,2)
 skeleton_data_res = ExtResource("spine")
@@ -450,3 +457,5 @@ preview_abilities = Array[ExtResource("definition")]([ExtResource("skill1"),ExtR
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackHitbox"]
 shape = SubResource("HitShape")
 disabled = true
+
+[editable path="SuperArmorEffect"]

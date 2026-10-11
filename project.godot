@@ -29,7 +29,7 @@ PhantomCameraManager="*res://addons/phantom_camera/scripts/managers/phantom_came
 
 [battle_foundation]
 
-manifest_path="res://data/battle/manifest.json"
+manifest_path="res://data/levels/biyujing/progression/manifest.json"
 
 [display]
 

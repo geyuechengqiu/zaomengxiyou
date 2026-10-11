@@ -31,6 +31,7 @@ func _ready() -> void:
 func bind_actor(owner_actor: BattleEntity2D) -> void:
 	actor = owner_actor
 	session = actor.session
+	$HitCombo.bind_tracker(session.hit_combo, actor.entity_id)
 	inventory_view.bind_actor(actor)
 	(inventory_view.inventory as OriginalInventory).operation_rejected.connect(show_notification)
 	(inventory_view.inventory as OriginalInventory).operation_completed.connect(show_notification)

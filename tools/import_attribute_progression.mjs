@@ -28,7 +28,7 @@ script = ExtResource("script")
 attributes = Dictionary[ExtResource("attr"), float]({ExtResource("level"): 1.0, ExtResource("exp"): 0.0})
 `);
 const growth = Object.fromEntries(['hpMax', 'mpMax', 'atk', 'phyDef'].map(id => [id, role[id + 'Add']]));
-write('data/attribute/progression/sunwukong.tres', `[gd_resource type="Resource" script_class="BattleAttributeProgression" format=3]
+write('data/characters/sunwukong/attributes/progression.tres', `[gd_resource type="Resource" script_class="BattleAttributeProgression" format=3]
 [ext_resource type="Script" path="res://addons/battle_foundation/definitions/battle_attribute_progression.gd" id="script"]
 [ext_resource type="Resource" path="res://data/attribute/sets/progression_attributes.tres" id="attributes"]
 [resource]
@@ -38,6 +38,6 @@ growth_per_level = Dictionary[StringName, float]({${Object.entries(growth).map((
 experience_per_level = Array[float]([${levels.map(level => experience[level].upgradeEXP).join(', ')}])
 maximum_level = ${levels.length}
 `);
-write('data/attribute/progression/source_mapping.json', JSON.stringify({runtime_character_id: '孙悟空', source_role_id: 2001, growth, experience_semantics: '本级经验，升级逐级扣除 upgradeEXP', maximum_level: levels.length, maximum_level_note: '导入 EXP 表覆盖范围；产品等级上限可单独配置，不推定 CommonConfig.levelMax', files: ['Role.json', 'EXP.json'].map(file => ({file, sha256: crypto.createHash('sha256').update(fs.readFileSync(path.join(sourceDir, file))).digest('hex')})), implementation: 'exports/zmhj_damage_formulas/sources/models/vo/UserVO.as:451-513', policies: {level_up: 'fill_base_growth_equipment_excluding_temporary', equipment: 'keep_current_clamp', temporary: 'keep_current_clamp', level_down: 'keep_current_clamp'}}, null, 2) + '\n');
+write('data/characters/sunwukong/attributes/source_mapping.json', JSON.stringify({runtime_character_id: '孙悟空', source_role_id: 2001, growth, experience_semantics: '本级经验，升级逐级扣除 upgradeEXP', maximum_level: levels.length, maximum_level_note: '导入 EXP 表覆盖范围；产品等级上限可单独配置，不推定 CommonConfig.levelMax', files: ['Role.json', 'EXP.json'].map(file => ({file, sha256: crypto.createHash('sha256').update(fs.readFileSync(path.join(sourceDir, file))).digest('hex')})), implementation: 'exports/zmhj_damage_formulas/sources/models/vo/UserVO.as:451-513', policies: {level_up: 'fill_base_growth_equipment_excluding_temporary', equipment: 'keep_current_clamp', temporary: 'keep_current_clamp', level_down: 'keep_current_clamp'}}, null, 2) + '\n');
 console.log(`Imported 孙悟空 growth ${JSON.stringify(growth)} and ${levels.length} EXP rows`);
 // #endregion

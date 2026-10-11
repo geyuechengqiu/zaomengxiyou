@@ -26,7 +26,7 @@ snapshot = {
     'rectangles': rects,
     'coordinate_policy': 'source foot origin; positive scale changes geometry; negative display scale does not mirror ABRect; parent direction mirrors rect and offset',
 }
-target = Path(__file__).resolve().parents[1] / 'data/battle2d/attack_hitboxes_source.json'
+target = Path(__file__).resolve().parents[1] / 'data/characters/sunwukong/skills/attack_hitboxes_source.json'
 target.write_text(json.dumps(snapshot, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
 print(f'Extracted {len(rects)} original ABRects -> {target}')
 #endregion

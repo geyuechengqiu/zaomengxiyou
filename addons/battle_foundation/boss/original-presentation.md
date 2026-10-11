@@ -31,7 +31,7 @@ F5运行碧玉径。第一关Monster/10601的原名称是**玉石琵琶精**，R
 
 `Monster1.start()`检查`showAppear`；大于0时，播放mission的`appearN`，以出生世界坐标为原点，特效结束才调用`super.start()`初始化怪物。当前导入的`appear1`为25帧、30FPS、25/30秒，不循环，注册点`(-92.05,-140)`，每帧199×198像素。世界坐标和素材显示×2，镜头0.5，画面上的尺寸与原素材一致。
 
-剑舞、驭兽使、复苏容器的原值为1；玉石琵琶精为0，不额外播放烟雾。原值保存在实体定义的`metadata/original_show_appear`。关卡出生计划和Boss召唤明确开启出场流程：
+剑舞、驭兽使、复苏容器的原值为1；玉石琵琶精为0，不额外播放烟雾。Boss 仍会按原 `BattleTopLayer.showBoss` 播放独立的屏幕 `bossComing`：33 帧、30 FPS、1.1 秒，保留 940×590 下的注册坐标。公共 `BossFeedback/HUD/BossComing` 预置 [boss_coming.tscn](../../../data/effects/boss_coming.tscn)，随 BattleClock 推进，同实例重复绑定不重播，死亡、离场和清关清理。原值保存在实体定义的`metadata/original_show_appear`。关卡出生计划和Boss召唤明确开启出场流程：
 
 ```gdscript
 session.spawn_entity_2d("monsters", &"剑舞", at, &"", true)

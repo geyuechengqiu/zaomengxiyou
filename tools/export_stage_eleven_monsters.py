@@ -240,8 +240,8 @@ metadata/original_ai_attack_wait = 5.0
 '''
     write(base+'/skill.tres',skill_text)
     # Reuse the existing serialized component set, replacing presentation/input only.
-    scene = (PROJECT/'data/battle2d/sunwukong_2d.tscn').read_text(encoding='utf-8')
-    scene = scene.replace('res://data/animation/sunwukong_visual.tscn',f'res://{base}/visual.tscn').replace('res://data/battle2d/sunwukong_actions.tres',f'res://{base}/actions.tres').replace('[node name="SunWukong"','[node name="Monster"')
+    scene = (PROJECT/'data/characters/sunwukong/character.tscn').read_text(encoding='utf-8')
+    scene = scene.replace('res://data/characters/sunwukong/animation/sunwukong_visual.tscn',f'res://{base}/visual.tscn').replace('res://data/characters/sunwukong/actions.tres',f'res://{base}/actions.tres').replace('[node name="SunWukong"','[node name="Monster"')
     scene = re.sub(r'\[node name="PlayerOperations"[\s\S]*$', '', scene)
     # Definition holds attributes; empty component overrides remain directly editable.
     scene = re.sub(r'base_values = Dictionary\[StringName, float\]\(\{[\s\S]*?\}\)\ninitial_level_override = 1', 'initial_level_override = 0', scene)
@@ -265,161 +265,6 @@ profile = ExtResource("ai_profile")
 #endregion
 
 #region Export entry and source evidence
-def export_level():
-    manifest = json.loads((PROJECT/'data/battle2d/buffs/manifest.json').read_text(encoding='utf-8'))
-    for action in ['attack1', 'attack2', 'attack3', 'attack4', 'attack5', 'run_attack', 'jump_attack']:
-        manifest['definitions']['skills']['sunwukong_'+action] = f'res://data/battle2d/original_reactions/{action}.tres'
-    manifest['definitions']['monsters'] = {'剑舞':'res://data/monsters/jianwu/definition.tres', '驭兽使':'res://data/monsters/yushoushi/definition.tres'}
-    manifest['definitions']['skills'].update({n+'_skill1':f'res://data/monsters/{n}/skill.tres' for n in ['jianwu','yushoushi']})
-    manifest['definitions']['levels'] = {'碧玉径':'res://data/levels/biyujing/definition.tres'}
-    dump('data/levels/biyujing/manifest.json',manifest)
-    write('data/levels/biyujing/definition.tres','''[gd_resource type="Resource" script_class="BattleLevelDefinition" format=3]
-[ext_resource type="Script" path="res://addons/battle_foundation/definitions/battle_level_definition.gd" id="script"]
-[ext_resource type="PackedScene" path="res://data/levels/biyujing/actors.tscn" id="scene"]
-[resource]
-script = ExtResource("script")
-definition_id = &"碧玉径"
-display_name = "碧玉径 · 第一关普通小怪"
-scene = ExtResource("scene")
-metadata/original_dungeon_id = 1
-metadata/original_map = "No_1-1_V283"
-metadata/original_width = 5472
-metadata/original_height = 600
-metadata/ordinary_monster_counts = {"剑舞": 16, "驭兽使": 16}
-''')
-    actors = '''[gd_scene format=3]
-[ext_resource type="PackedScene" path="res://data/battle2d/sunwukong_2d.tscn" id="player"]
-[ext_resource type="PackedScene" path="res://data/monsters/jianwu/monster.tscn" id="jianwu"]
-[ext_resource type="PackedScene" path="res://data/monsters/yushoushi/monster.tscn" id="yushoushi"]
-[sub_resource type="RectangleShape2D" id="ground"]
-size = Vector2(10944, 400)
-[sub_resource type="RectangleShape2D" id="wall"]
-size = Vector2(40, 700)
-[sub_resource type="RectangleShape2D" id="obstacle"]
-size = Vector2(90, 55)
-[node name="Actors" type="Node2D"]
-[node name="Terrain" type="Node2D" parent="."]
-[node name="Ground" type="StaticBody2D" parent="Terrain"]
-position = Vector2(5472, 850)
-collision_mask = 2
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Terrain/Ground"]
-shape = SubResource("ground")
-[node name="Surface" type="Polygon2D" parent="Terrain/Ground"]
-polygon = PackedVector2Array(-5472,-200, 5472,-200, 5472,200, -5472,200)
-color = Color(0.15, 0.3, 0.22, 1)
-[node name="Grass" type="Polygon2D" parent="Terrain/Ground"]
-polygon = PackedVector2Array(-5472,-200, 5472,-200, 5472,-188, -5472,-188)
-color = Color(0.45, 0.72, 0.41, 1)
-'''
-    for i,x in enumerate([0,10944]):
-        actors += f'''[node name="Wall{i}" type="StaticBody2D" parent="Terrain"]
-position = Vector2({x}, 300)
-collision_mask = 2
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Terrain/Wall{i}"]
-shape = SubResource("wall")
-'''
-    for i,x in enumerate([3000,6000,8500]):
-        actors += f'''[node name="Obstacle{i}" type="StaticBody2D" parent="Terrain"]
-position = Vector2({x}, 622.5)
-collision_mask = 2
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Terrain/Obstacle{i}"]
-shape = SubResource("obstacle")
-[node name="Rock" type="Polygon2D" parent="Terrain/Obstacle{i}"]
-polygon = PackedVector2Array(-45,27.5, -45,-27.5, 45,-27.5, 45,27.5)
-color = Color(0.35, 0.4, 0.3, 1)
-'''
-    actors += '''[node name="SunWukong" parent="." instance=ExtResource("player")]
-position = Vector2(650, 650)
-scene_definition_id = &"孙悟空"
-'''
-    names = ['SunWukong']
-    for index in range(16):
-        for name,ident,offset in [('Sword','剑舞',0),('Beast','驭兽使',260)]:
-            node = f'{name}{index+1:02d}'; names.append(node)
-            actors += f'''[node name="{node}" parent="." instance=ExtResource("{'jianwu' if name=='Sword' else 'yushoushi'}")]
-position = Vector2({1050+index*600+offset}, 650)
-scene_definition_id = &"{ident}"
-scene_category = "monsters"
-'''
-    write('data/levels/biyujing/actors.tscn',actors)
-    scene = '''[gd_scene format=3]
-[ext_resource type="Script" path="res://tests/fixtures/first_level_demo.gd" id="script"]
-[ext_resource type="Script" path="res://addons/battle_foundation/runtime/battle_session.gd" id="session"]
-[ext_resource type="PackedScene" path="res://data/levels/biyujing/actors.tscn" id="actors"]
-[ext_resource type="Resource" path="res://data/damage/original_strategy.tres" id="damage"]
-[ext_resource type="PackedScene" path="res://addons/battle_foundation/presentation/battle_presentation_2d.tscn" id="presentation"]
-[ext_resource type="PackedScene" path="res://addons/battle_foundation/presentation/combat_feedback_2d.tscn" id="feedback"]
-[ext_resource type="PackedScene" path="res://addons/battle_foundation/input/battle_operation_menu.tscn" id="menu"]
-[node name="FirstLevelDemo" type="Node2D"]
-process_mode = 3
-script = ExtResource("script")
-[node name="Background" type="CanvasLayer" parent="."]
-layer = -5
-[node name="Sky" type="ColorRect" parent="Background"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-mouse_filter = 2
-color = Color(0.1, 0.2, 0.22, 1)
-[node name="Mountains" type="Polygon2D" parent="."]
-z_index = -1
-color = Color(0.17, 0.32, 0.3, 1)
-polygon = PackedVector2Array(0,650, 350,180, 800,650, 1300,90, 1700,650, 2300,160, 2800,650, 3200,110, 3800,650, 4300,130, 4900,650, 5500,160, 6100,650, 6700,140, 7200,650, 7700,110, 8500,650, 9000,100, 9600,650, 10400,150, 11000,650)
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(940, 480)
-zoom = Vector2(0.5, 0.5)
-[node name="BattleSession" type="Node3D" parent="."]
-script = ExtResource("session")
-scene_manifest_path = "res://data/levels/biyujing/manifest.json"
-scene_seed = 11001
-damage_strategy = ExtResource("damage")
-[node name="BattlePresentation" parent="BattleSession" instance=ExtResource("presentation")]
-'''
-    for name in names:
-        scene += f'''[node name="{name}Feedback" parent="BattleSession/BattlePresentation/EntityViews" instance=ExtResource("feedback")]
-actor_path = NodePath("../../../Actors/{name}")
-'''
-    scene += '''[node name="Actors" parent="BattleSession" instance=ExtResource("actors")]
-[node name="HUD" type="CanvasLayer" parent="."]
-layer = 20
-[node name="Panel" type="PanelContainer" parent="HUD"]
-offset_left = 14.0
-offset_top = 12.0
-offset_right = 926.0
-offset_bottom = 112.0
-[node name="Column" type="VBoxContainer" parent="HUD/Panel"]
-layout_mode = 2
-[node name="Title" type="Label" parent="HUD/Panel/Column"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 22
-text = "阶段11 · 碧玉径小怪：剑舞 / 驭兽使"
-[node name="Info" type="Label" parent="HUD/Panel/Column"]
-layout_mode = 2
-text = "小怪按原版属性战斗；AI提交意图，由Core动作状态机执行。"
-[node name="Buttons" type="HBoxContainer" parent="HUD/Panel/Column"]
-layout_mode = 2
-[node name="Restart" type="Button" parent="HUD/Panel/Column/Buttons"]
-layout_mode = 2
-focus_mode = 0
-text = "重开关卡"
-[node name="Stun" type="Button" parent="HUD/Panel/Column/Buttons"]
-layout_mode = 2
-focus_mode = 0
-text = "眩晕附近小怪"
-[node name="Slow" type="Button" parent="HUD/Panel/Column/Buttons"]
-layout_mode = 2
-focus_mode = 0
-text = "减速附近小怪"
-[node name="Help" type="Label" parent="HUD"]
-offset_left = 14.0
-offset_top = 540.0
-offset_right = 926.0
-offset_bottom = 578.0
-theme_override_font_sizes/font_size = 17
-text = "A/D移动 · K跳跃 · J五连击（跑/跳攻击）· Esc暂停/改键\n16剑舞+16驭兽使，向右前进；地形为可编辑验收地图。"
-[node name="OperationMenu" parent="HUD" instance=ExtResource("menu")]
-'''
-    write('tests/fixtures/first_level_demo.tscn',scene)
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
@@ -456,7 +301,7 @@ def main():
         mapping[name+'_skill1'] = skill['id']
     dump('data/damage/original_skills.json',table)
     dump('data/damage/skill_mapping.json',mapping)
-    export_level()
+    # Latest region map is authored by import_stage_twelve_level; no legacy demo is generated.
     print('Original fighters exported:', {k:v['animations'] for k,v in original['assets'].items()})
 
     from convert_monsters_to_spine import convert

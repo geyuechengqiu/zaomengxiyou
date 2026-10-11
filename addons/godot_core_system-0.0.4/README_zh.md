@@ -17,7 +17,7 @@
 
 [快速开始](#-快速开始) •
 [文档](docs/) •
-[示例](../../tests/fixtures/plugin_showcase.tscn) •
+[示例](../../game/levels/biyujing.tscn) •
 [贡献](docs/CONTRIBUTING.md) •
 [支持与帮助](#-支持与帮助)
 
@@ -107,7 +107,7 @@ func _ready():
 
 ## 🌟 示例项目
 
-访问我们的[示例项目](../../tests/fixtures/plugin_showcase.tscn)，了解框架的实际应用场景和使用方式。
+访问我们的[示例项目](../../game/levels/biyujing.tscn)，了解框架的实际应用场景和使用方式。
 
 ### 完整游戏示例
 
