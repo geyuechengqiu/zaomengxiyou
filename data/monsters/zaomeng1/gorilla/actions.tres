@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="BattleActionProfile2D" format=3]
+[ext_resource type="Script" path="res://addons/battle_foundation/definitions/battle_action_profile_2d.gd" id="script"]
+[resource]
+script = ExtResource("script")
+attack_skill_id = &"zaomeng1_gorilla_hit1"
+gravity = 2700.0
+jump_velocity = -1200.0
+second_jump_velocity = -1200.0
+maximum_jumps = 1
+hurt_lock_frames = 15

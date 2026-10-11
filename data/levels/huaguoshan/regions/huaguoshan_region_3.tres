@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="BattleRegionDefinition" format=3]
+[ext_resource type="Script" path="res://addons/battle_foundation/level/BattleRegionDefinition.cs" id="script"]
+[resource]
+script = ExtResource("script")
+region_id = &"huaguoshan_region_3"
+display_name = "花果山 · 区域3"
+bounds = Rect2(3760,0,1880,1216)
+entry_rect = Rect2(3880,0,160,1216)
+exit_rect = Rect2(5544,0,96,1216)
+wave_ids = Array[StringName]([&"huaguoshan_region_3_wave"])
+automatic_exit = true
+camera_transition_margin = 840.0
+metadata/original_stop_x = 2970.15

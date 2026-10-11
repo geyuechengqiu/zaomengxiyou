@@ -20,7 +20,7 @@ script = ExtResource("equip")
 definition_id = &"110101001"
 display_name = "封煞甲"
 slot_id = &"armor"
-attribute_modifiers = Array[ExtResource("modifier")]([SubResource("Mod0"), SubResource("Mod1")])
+attribute_modifiers = Array[Resource]([SubResource("Mod0"), SubResource("Mod1")])
 
 [resource]
 script = ExtResource("item")

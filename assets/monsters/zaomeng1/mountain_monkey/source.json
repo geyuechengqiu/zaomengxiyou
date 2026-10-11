@@ -1,0 +1,168 @@
+{
+  "source": "Monster_v1.swf",
+  "symbol": "export.monster.Monster2",
+  "original_labels": {
+    "walk": [
+      {
+        "instance": "body",
+        "character_id": 57,
+        "classes": [],
+        "x": -8.0,
+        "y": 0.0,
+        "scale_x": 1.0,
+        "scale_y": 1.0
+      },
+      {
+        "instance": "colipse",
+        "character_id": 22,
+        "classes": [],
+        "x": 0.55,
+        "y": -0.45,
+        "scale_x": 0.41999817,
+        "scale_y": 0.91111755
+      }
+    ],
+    "hurt": [
+      {
+        "instance": "body",
+        "character_id": 60,
+        "classes": [
+          "Monster_fla.受伤_64"
+        ],
+        "x": -7.0,
+        "y": 0.0,
+        "scale_x": 1.0,
+        "scale_y": 1.0
+      },
+      {
+        "instance": "colipse",
+        "character_id": 22,
+        "classes": [],
+        "x": 0.55,
+        "y": -0.45,
+        "scale_x": 0.41999817,
+        "scale_y": 0.91111755
+      }
+    ],
+    "hit1": [
+      {
+        "instance": "body",
+        "character_id": 67,
+        "classes": [
+          "Monster_fla.元件9_65"
+        ],
+        "x": -7.0,
+        "y": 0.0,
+        "scale_x": 1.0,
+        "scale_y": 1.0
+      },
+      {
+        "instance": "colipse",
+        "character_id": 22,
+        "classes": [],
+        "x": 0.55,
+        "y": -0.45,
+        "scale_x": 0.41999817,
+        "scale_y": 0.91111755
+      }
+    ],
+    "dead": [
+      {
+        "instance": "body",
+        "character_id": 73,
+        "classes": [
+          "Monster_fla.元件11_67"
+        ],
+        "x": 0.0,
+        "y": 30.0,
+        "scale_x": 1.0,
+        "scale_y": 1.0
+      },
+      {
+        "instance": "colipse",
+        "character_id": 22,
+        "classes": [],
+        "x": 0.55,
+        "y": -0.45,
+        "scale_x": 0.41999817,
+        "scale_y": 0.91111755
+      }
+    ],
+    "wait": [
+      {
+        "instance": "body",
+        "character_id": 80,
+        "classes": [],
+        "x": -6.0,
+        "y": 0.0,
+        "scale_x": 1.0,
+        "scale_y": 1.0
+      },
+      {
+        "instance": "colipse",
+        "character_id": 22,
+        "classes": [],
+        "x": 0.55,
+        "y": -0.45,
+        "scale_x": 0.41999817,
+        "scale_y": 0.91111755
+      }
+    ],
+    "afterHurt": [
+      {
+        "instance": "body",
+        "character_id": 83,
+        "classes": [
+          "Monster_fla.受伤之后_69"
+        ],
+        "x": -7.65,
+        "y": -0.65,
+        "scale_x": 1.0,
+        "scale_y": 1.0
+      },
+      {
+        "instance": "colipse",
+        "character_id": 22,
+        "classes": [],
+        "x": 0.55,
+        "y": -0.45,
+        "scale_x": 0.41999817,
+        "scale_y": 0.91111755
+      }
+    ]
+  },
+  "semantic_actions": {
+    "idle": "wait",
+    "move": "walk",
+    "run": "walk",
+    "jump": "walk",
+    "jump_2": "walk",
+    "fall": "walk",
+    "land": "wait",
+    "hurt": "hurt",
+    "recover": "afterHurt",
+    "protect": "afterHurt",
+    "death": "dead",
+    "attack_1": "hit1"
+  },
+  "foot_origin": 41.25,
+  "actions": {
+    "idle": 0.5,
+    "move": 0.5333333333333333,
+    "run": 0.5333333333333333,
+    "jump": 0.5333333333333333,
+    "jump_2": 0.5333333333333333,
+    "fall": 0.5333333333333333,
+    "land": 0.5,
+    "hurt": 0.43333333333333335,
+    "recover": 0.3333333333333333,
+    "protect": 0.3333333333333333,
+    "death": 0.7333333333333333,
+    "attack_1": 0.4
+  },
+  "attribute_source": "data/monsters/yushoushi/attributes.tres",
+  "source_fps": 24,
+  "loaded_display_fps": 30,
+  "source_facing": -1,
+  "logical_facing": 1
+}

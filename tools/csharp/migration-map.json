@@ -29,5 +29,6 @@
   "addons/battle_foundation/runtime/battle_equipment_state.gd": "addons/battle_foundation/runtime/BattleEquipmentState.cs",
   "addons/battle_foundation/runtime/battle_combo_state.gd": "addons/battle_foundation/runtime/BattleComboState.cs",
   "addons/battle_foundation/combat/battle_damage_rules.gd": "addons/battle_foundation/combat/BattleDamageRules.cs",
-  "addons/battle_foundation/presentation/battle_damage_number_library.gd": "addons/battle_foundation/presentation/BattleDamageNumberLibrary.cs"
+  "addons/battle_foundation/presentation/battle_damage_number_library.gd": "addons/battle_foundation/presentation/BattleDamageNumberLibrary.cs",
+  "addons/battle_foundation/runtime/battle_motion_controller_2d.gd": "addons/battle_foundation/runtime/BattleMotionController2D.cs"
 }

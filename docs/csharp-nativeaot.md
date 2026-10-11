@@ -6,9 +6,17 @@
 
 - 引擎：带 Spine 4.3 的 Godot 4.7.2 C#，`D:/UserData/Downloads/godot/version/4.7.2 C#/godot-4.3-4.7.2-stable-mono.exe`。
 - 配套模板：同目录的 `spine-godot-templates-4.3-4.7.2-stable-mono.tpz`，已确认版本为 `4.7.2.stable.mono`。构建脚本只提取本项目需要的 Windows x64 模板，不修改全局模板。
-- .NET 8 SDK，首次迁移使用项目缓存中的便携版 8.0.425；换电脑可安装 .NET 8 SDK。
+- .NET 8 SDK 8.0.425 已安装到 `C:/Program Files/dotnet/sdk/8.0.425`；首次迁移使用的项目便携版仍保留。换电脑也需安装 .NET 8 SDK，只有运行时无法构建。
 - Windows NativeAOT 需要 Visual Studio 的 C++ 桌面开发工具与 Windows SDK。本机已有 Build Tools。
 - `bootstrap.ps1` 从指定引擎复制对应 NuGet 包，避免使用缺少 Spine API 的标准 GodotSharp 包。包、SDK、构建输出均不提交。
+
+### 编辑器启动与 MSBuild
+
+本机最初只有系统运行时，导致直接打开 Godot 出现 `.NET Sdk not found` 和 `Microsoft.Build` 缺失；现在已通过微软官方签名安装器安装系统 .NET 8 SDK 8.0.425，无需专用启动入口即可构建。安装前已打开的编辑器没有成功注册 MSBuild，需要退出后重新打开，再使用 F5/F6。
+
+`open_editor.cmd` 或 `./tools/csharp/open_editor.ps1` 仍可作为便携 SDK 的启动入口：先构建，再为编辑器进程设置 PATH 和 DOTNET_ROOT，保留原有编辑器设置与存档。仅运行一次构建脚本不会改变其他编辑器进程的环境。
+
+Godot 在初始化时从 PATH 查找 .NET CLI。`NuGet.Config` 固定项目缓存，使编辑器和命令行使用同一套 Spine 绑定。其他机器先运行一次 `bootstrap.ps1` 准备配套 NuGet 包；也可用 `open_editor.ps1 -Godot '<配套引擎>' -Dotnet '<.NET 8 SDK/dotnet.exe>'` 启动。仅有运行时时，脚本会明确报错。
 
 ```powershell
 # 编辑器调试程序集
@@ -34,9 +42,10 @@
 
 ## 当前迁移进度
 
-已迁移 **31 个脚本**，并切换实际资源/场景引用：
+已迁移 **32 个脚本**，并切换实际资源/场景引用：
 
 - 运行数据：时钟、随机流、阵营、装备状态、普攻连招状态。
+- 角色运动：`BattleMotionController2D` 统一管理跳跃、击退、碰撞与边界；坡面只修正位移，不将横向击退投影为持续的向上速度。
 - 战斗规则：原版战力、连击统计、伤害规则及护盾/回调容器。
 - 资源定义：动画配置、Boss 阶段/技能/行为配置、实体、成长、装备、普攻、攻击步骤、事件、反应、保护、派生、位移、出生点，以及区域/波次/出生计划。
 - 区域、波次与出生计划的运行实例，伤害数字素材库，碧玉径入口。
@@ -54,6 +63,8 @@ C# 不能直接继承 GDScript 基类。继承第三方 GAS、状态机和背包
 已实际编译和运行 Windows x64 NativeAOT 游戏。验证不使用放大悟空属性、关闭怪物 AI 或替换伤害公式：初始等级1、生命275、攻击26，真实五连击击败34个目标并完成五区域及 Boss 通关。
 
 导出包完成19组回归、1651项检查，涵盖战力、掉落成长、技能/Buff、Spine、UI、音频、镜头、地图、出生依赖、保护及500条跳字突发。C# Debug 构建与脚本图也已验证。正式包额外检查主关卡启动与干净退出。
+
+花果山与运动控制器迁移后，Windows x64 NativeAOT 验证包已完成21组回归。新增套件覆盖造1 hit1 的真实命中/打空/镜像/扣血、AI施放、60/15FPS坡地击退、原击飞正常落地，以及花果山全部33个目标出生时位于镜头内。碧玉径仍以初始悟空和真实五连击通关；验收输入按原普攻矩形的实际可达范围尝试攻击，避免旧的230像素经验阈值漏掉可命中目标。
 
 已修复实际导出才能暴露的问题：
 

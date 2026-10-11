@@ -28,7 +28,16 @@ $taskLog = Join-Path $taskCacheRoot $(if ($Validation) { 'nativeaot-export-valid
 $taskApp = Join-Path $taskOutputRoot 'zaomengxiyou.exe'
 $taskPreset = if ($Validation) { 'Windows NativeAOT Validation' } else { 'Windows NativeAOT' }
 $taskArguments = @('--headless', '--path', ('"' + $taskProjectRoot + '"'), '--export-release', ('"' + $taskPreset + '"'), ('"' + $taskApp + '"'), '--log-file', ('"' + $taskLog + '"'))
-$taskProcess = Start-Process -FilePath $Godot -ArgumentList $taskArguments -WindowStyle Hidden -Wait -PassThru
+$taskProcess = Start-Process -FilePath $Godot -ArgumentList $taskArguments -WindowStyle Hidden -PassThru
+# Start-Process -Wait also waits for compiler server descendants, which can remain
+# alive after Godot successfully exits. Wait for the actual exporter process only.
+$taskDeadline = [DateTime]::UtcNow.AddMinutes(10)
+while (-not $taskProcess.WaitForExit(1000)) {
+    if ([DateTime]::UtcNow -gt $taskDeadline) {
+        Stop-Process -Id $taskProcess.Id -Force
+        throw "Godot export timed out; see $taskLog"
+    }
+}
 if ($taskProcess.ExitCode -ne 0) { throw "Godot export failed (exit $($taskProcess.ExitCode)); see $taskLog" }
 if ((Get-Content -LiteralPath $taskLog -Raw) -match '(?m)^ERROR:|SCRIPT ERROR:') {
     throw "Godot reported export errors despite its exit code; see $taskLog"

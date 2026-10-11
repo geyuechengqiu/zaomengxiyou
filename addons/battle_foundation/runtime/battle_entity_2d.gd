@@ -775,7 +775,7 @@ func advance_timeline_motion(cast: BattleAttackInstance, until: float) -> void:
 	var displacement := cast.get_motion_between(cast.elapsed, until)
 	var previous_elapsed := cast.elapsed
 	var animation_delta := maxf(0.0, until - cast.elapsed)
-	var landing_serial := motion.landing_serial
+	var landing_serial: int = motion.landing_serial
 	motion.sweep_skill_displacement(displacement, action_profile)
 	action_state.grounded = motion.grounded
 	if action_state.current == BattleActionState2D.State.RUN_ATTACK and not motion.grounded:

@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="BattleAIProfile2D" format=3]
+[ext_resource type="Script" path="res://addons/battle_foundation/ai/battle_ai_profile_2d.gd" id="profile"]
+[ext_resource type="Script" path="res://addons/battle_foundation/ai/ZaomengOneAIPolicy.cs" id="policy"]
+[ext_resource type="Script" path="res://addons/battle_foundation/ai/battle_ai_target_selector_2d.gd" id="selector"]
+[sub_resource type="Resource" id="Policy"]
+script = ExtResource("policy")
+passive_until_hit = true
+[sub_resource type="Resource" id="Selector"]
+script = ExtResource("selector")
+[resource]
+script = ExtResource("profile")
+policy = SubResource("Policy")
+target_selector = SubResource("Selector")
+attack_skill_id = &"zaomeng1_little_monkey_hit1"
+detection_range = 600.0
+vertical_range = 160
+leash_radius = 1800.0
+attack_range = 160
+attack_vertical_range = 320
+patrol_radius = 300.0
+retreat_chance = 0.0
+jump_obstacles = false

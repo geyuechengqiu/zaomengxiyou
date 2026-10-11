@@ -65,7 +65,7 @@ func advance_simulation(delta: float) -> void:
 		target = profile.target_selector.select_target(actor, profile, home)
 		if had_target and target == null and absf(actor.global_position.x - home.x) > profile.home_tolerance:
 			returning = true
-	var decision := profile.policy.decide(self)
+	var decision: Dictionary = profile.policy.call("decide", self)
 	set_state(StringName(decision.get("state", &"IDLE")))
 	var axis := clampf(float(decision.get("axis", 0.0)), -1.0, 1.0)
 	# 边界处仅允许朝出生点移动，逃离也不能把怪物带出活动范围。

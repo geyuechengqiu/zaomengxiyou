@@ -1,0 +1,216 @@
+[gd_scene format=3]
+[ext_resource type="PackedScene" path="res://addons/battle_foundation/level/battle_map_template_2d.tscn" id="template"]
+[ext_resource type="PackedScene" path="res://data/levels/huaguoshan/visual.tscn" id="visual"]
+[ext_resource type="PackedScene" path="res://data/characters/sunwukong/character.tscn" id="player"]
+[ext_resource type="Script" path="res://addons/battle_foundation/level/battle_spawn_point_2d.gd" id="point"]
+[ext_resource type="Script" path="res://addons/battle_foundation/level/battle_region_gate_2d.gd" id="gate"]
+[ext_resource type="PackedScene" path="res://data/ui/gateway.tscn" id="gateway"]
+[ext_resource type="Script" path="res://addons/battle_foundation/level/BattleFinalExit2D.cs" id="exit_anchor"]
+[ext_resource type="Script" path="res://addons/battle_foundation/level/BattleLevelPreview2D.cs" id="preview"]
+[ext_resource type="FontFile" path="res://assets/ui/original/ui_font.ttf" id="preview_font"]
+[ext_resource type="Resource" path="res://data/levels/huaguoshan/regions/huaguoshan_region_1.tres" id="preview_huaguoshan_region_1"]
+[ext_resource type="Resource" path="res://data/levels/huaguoshan/regions/huaguoshan_region_2.tres" id="preview_huaguoshan_region_2"]
+[ext_resource type="Resource" path="res://data/levels/huaguoshan/regions/huaguoshan_region_3.tres" id="preview_huaguoshan_region_3"]
+[ext_resource type="Resource" path="res://data/levels/huaguoshan/regions/huaguoshan_region_4.tres" id="preview_huaguoshan_region_4"]
+[ext_resource type="Resource" path="res://data/levels/huaguoshan/regions/huaguoshan_region_5.tres" id="preview_huaguoshan_region_5"]
+[ext_resource type="Resource" path="res://data/levels/huaguoshan/plans/huaguoshan_birth_1.tres" id="preview_huaguoshan_birth_1"]
+[ext_resource type="Resource" path="res://data/levels/huaguoshan/plans/huaguoshan_birth_10.tres" id="preview_huaguoshan_birth_10"]
+[ext_resource type="Resource" path="res://data/levels/huaguoshan/plans/huaguoshan_birth_12.tres" id="preview_huaguoshan_birth_12"]
+[ext_resource type="Resource" path="res://data/levels/huaguoshan/plans/huaguoshan_birth_13.tres" id="preview_huaguoshan_birth_13"]
+[ext_resource type="Resource" path="res://data/levels/huaguoshan/plans/huaguoshan_birth_14.tres" id="preview_huaguoshan_birth_14"]
+[ext_resource type="Resource" path="res://data/levels/huaguoshan/plans/huaguoshan_birth_15.tres" id="preview_huaguoshan_birth_15"]
+[ext_resource type="Resource" path="res://data/levels/huaguoshan/plans/huaguoshan_birth_17.tres" id="preview_huaguoshan_birth_17"]
+[ext_resource type="Resource" path="res://data/levels/huaguoshan/plans/huaguoshan_birth_18.tres" id="preview_huaguoshan_birth_18"]
+[ext_resource type="Resource" path="res://data/levels/huaguoshan/plans/huaguoshan_birth_2.tres" id="preview_huaguoshan_birth_2"]
+[ext_resource type="Resource" path="res://data/levels/huaguoshan/plans/huaguoshan_birth_3.tres" id="preview_huaguoshan_birth_3"]
+[ext_resource type="Resource" path="res://data/levels/huaguoshan/plans/huaguoshan_birth_5.tres" id="preview_huaguoshan_birth_5"]
+[ext_resource type="Resource" path="res://data/levels/huaguoshan/plans/huaguoshan_birth_7.tres" id="preview_huaguoshan_birth_7"]
+[ext_resource type="Resource" path="res://data/levels/huaguoshan/plans/huaguoshan_birth_8.tres" id="preview_huaguoshan_birth_8"]
+[ext_resource type="Resource" path="res://data/levels/huaguoshan/plans/huaguoshan_birth_9.tres" id="preview_huaguoshan_birth_9"]
+[sub_resource type="RectangleShape2D" id="GateShape"]
+size = Vector2(20,1280)
+[sub_resource type="RectangleShape2D" id="WallShape"]
+size = Vector2(128,1280)
+[sub_resource type="RectangleShape2D" id="PlatformShape"]
+size = Vector2(484.05762,40)
+[node name="Actors" instance=ExtResource("template")]
+bounds = Rect2(0,0,9660,1216)
+ground_y = 1037.1
+[node name="HuaguoshanVisual" parent="Visuals" instance=ExtResource("visual")]
+[node name="Ground" type="StaticBody2D" parent="Terrain"]
+collision_mask = 2
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Terrain/Ground"]
+polygon = PackedVector2Array(-16.70,1031.30,1971.30,1031.30,2119.30,885.30,2235.30,879.30,2539.30,879.30,2711.30,1031.30,2943.30,1031.30,3083.30,893.30,3199.30,887.30,3503.30,887.30,3667.30,1031.30,8839.30,1031.30,8987.30,889.30,9399.30,887.30,9583.30,1051.30,9660.00,1051.30,9660.00,1280.00,-16.70,1280.00)
+[node name="Wall0" type="StaticBody2D" parent="Terrain"]
+position = Vector2(-64,640)
+collision_mask = 2
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Terrain/Wall0"]
+shape = SubResource("WallShape")
+[node name="Wall1" type="StaticBody2D" parent="Terrain"]
+position = Vector2(9724,640)
+collision_mask = 2
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Terrain/Wall1"]
+shape = SubResource("WallShape")
+[node name="Platform0" type="StaticBody2D" parent="Terrain"]
+position = Vector2(4129.0,738.5)
+collision_mask = 2
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Terrain/Platform0"]
+shape = SubResource("PlatformShape")
+one_way_collision = true
+[node name="Platform1" type="StaticBody2D" parent="Terrain"]
+position = Vector2(5267.1,737.6)
+collision_mask = 2
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Terrain/Platform1"]
+shape = SubResource("PlatformShape")
+one_way_collision = true
+[node name="Platform2" type="StaticBody2D" parent="Terrain"]
+position = Vector2(4683.4,425.6)
+collision_mask = 2
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Terrain/Platform2"]
+shape = SubResource("PlatformShape")
+one_way_collision = true
+[node name="SunWukong" parent="." instance=ExtResource("player")]
+position = Vector2(256,984)
+scene_definition_id = &"孙悟空"
+[node name="huaguoshan_birth_1" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(1260.0,754.6)
+script = ExtResource("point")
+spawn_point_id = &"huaguoshan_birth_1"
+metadata/original_position = Vector2(2512.8,754.6)
+[node name="huaguoshan_birth_2" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(2060.0,718.8)
+script = ExtResource("point")
+spawn_point_id = &"huaguoshan_birth_2"
+metadata/original_position = Vector2(1612.7,718.8)
+[node name="huaguoshan_birth_3" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(3580.0,857.3)
+script = ExtResource("point")
+spawn_point_id = &"huaguoshan_birth_3"
+metadata/original_position = Vector2(3726.0,857.3)
+[node name="huaguoshan_birth_5" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(3580.0,754.5)
+script = ExtResource("point")
+spawn_point_id = &"huaguoshan_birth_5"
+metadata/original_position = Vector2(3726.0,754.5)
+[node name="huaguoshan_birth_7" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(6494.4,766.6)
+script = ExtResource("point")
+spawn_point_id = &"huaguoshan_birth_7"
+metadata/original_position = Vector2(6970.4,766.6)
+[node name="huaguoshan_birth_8" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(6665.6,766.6)
+script = ExtResource("point")
+spawn_point_id = &"huaguoshan_birth_8"
+metadata/original_position = Vector2(7141.6,766.6)
+[node name="huaguoshan_birth_9" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(6564.3,766.6)
+script = ExtResource("point")
+spawn_point_id = &"huaguoshan_birth_9"
+metadata/original_position = Vector2(7040.3,766.6)
+[node name="huaguoshan_birth_10" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(3940.0,738.7)
+script = ExtResource("point")
+spawn_point_id = &"huaguoshan_birth_10"
+metadata/original_position = Vector2(3410.7,738.7)
+[node name="huaguoshan_birth_12" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(4520.2564,568.9)
+script = ExtResource("point")
+spawn_point_id = &"huaguoshan_birth_12"
+metadata/original_position = Vector2(4119.3,568.9)
+[node name="huaguoshan_birth_13" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(8672.4131,752.8)
+script = ExtResource("point")
+spawn_point_id = &"huaguoshan_birth_13"
+metadata/original_position = Vector2(8591.3,752.8)
+[node name="huaguoshan_birth_14" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(4995.369,233.5)
+script = ExtResource("point")
+spawn_point_id = &"huaguoshan_birth_14"
+metadata/original_position = Vector2(4699.5,233.5)
+[node name="huaguoshan_birth_15" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(5460.0,583.1)
+script = ExtResource("point")
+spawn_point_id = &"huaguoshan_birth_15"
+metadata/original_position = Vector2(5266.9,583.1)
+[node name="huaguoshan_birth_17" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(7700.0,764.4)
+script = ExtResource("point")
+spawn_point_id = &"huaguoshan_birth_17"
+metadata/original_position = Vector2(7545.7,764.4)
+[node name="huaguoshan_birth_18" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(9220.0,708.8)
+script = ExtResource("point")
+spawn_point_id = &"huaguoshan_birth_18"
+metadata/original_position = Vector2(9180.1,708.8)
+[node name="Gate1" type="StaticBody2D" parent="Gates"]
+position = Vector2(1880,608)
+script = ExtResource("gate")
+region_id = &"huaguoshan_region_1"
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Gates/Gate1"]
+shape = SubResource("GateShape")
+[node name="Barrier" type="Polygon2D" parent="Gates/Gate1"]
+visible = false
+polygon = PackedVector2Array(-10,-640,10,-640,10,640,-10,640)
+color = Color(1,0.5,0.1,0)
+[node name="Label" type="Label" parent="Gates/Gate1"]
+visible = false
+[node name="Gate2" type="StaticBody2D" parent="Gates"]
+position = Vector2(3760,608)
+script = ExtResource("gate")
+region_id = &"huaguoshan_region_2"
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Gates/Gate2"]
+shape = SubResource("GateShape")
+[node name="Barrier" type="Polygon2D" parent="Gates/Gate2"]
+visible = false
+polygon = PackedVector2Array(-10,-640,10,-640,10,640,-10,640)
+color = Color(1,0.5,0.1,0)
+[node name="Label" type="Label" parent="Gates/Gate2"]
+visible = false
+[node name="Gate3" type="StaticBody2D" parent="Gates"]
+position = Vector2(5640,608)
+script = ExtResource("gate")
+region_id = &"huaguoshan_region_3"
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Gates/Gate3"]
+shape = SubResource("GateShape")
+[node name="Barrier" type="Polygon2D" parent="Gates/Gate3"]
+visible = false
+polygon = PackedVector2Array(-10,-640,10,-640,10,640,-10,640)
+color = Color(1,0.5,0.1,0)
+[node name="Label" type="Label" parent="Gates/Gate3"]
+visible = false
+[node name="Gate4" type="StaticBody2D" parent="Gates"]
+position = Vector2(7520,608)
+script = ExtResource("gate")
+region_id = &"huaguoshan_region_4"
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Gates/Gate4"]
+shape = SubResource("GateShape")
+[node name="Barrier" type="Polygon2D" parent="Gates/Gate4"]
+visible = false
+polygon = PackedVector2Array(-10,-640,10,-640,10,640,-10,640)
+color = Color(1,0.5,0.1,0)
+[node name="Label" type="Label" parent="Gates/Gate4"]
+visible = false
+[node name="Gate5" type="StaticBody2D" parent="Gates"]
+position = Vector2(9660,608)
+script = ExtResource("gate")
+region_id = &"huaguoshan_region_5"
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Gates/Gate5"]
+shape = SubResource("GateShape")
+[node name="Barrier" type="Polygon2D" parent="Gates/Gate5"]
+visible = false
+polygon = PackedVector2Array(-10,-640,10,-640,10,640,-10,640)
+color = Color(1,0.5,0.1,0)
+[node name="Label" type="Label" parent="Gates/Gate5"]
+visible = false
+[node name="FinalExit" type="Marker2D" parent="."]
+position = Vector2(9491.3,975.3)
+script = ExtResource("exit_anchor")
+[node name="Gateway" parent="FinalExit" instance=ExtResource("gateway")]
+[node name="PlayerBirth" parent="." index="5"]
+position = Vector2(256,984)
+
+[node name="EditorPreview" type="Node2D" parent="."]
+script = ExtResource("preview")
+regions = Array[Resource]([ExtResource("preview_huaguoshan_region_1"),ExtResource("preview_huaguoshan_region_2"),ExtResource("preview_huaguoshan_region_3"),ExtResource("preview_huaguoshan_region_4"),ExtResource("preview_huaguoshan_region_5")])
+plans = Array[Resource]([ExtResource("preview_huaguoshan_birth_1"),ExtResource("preview_huaguoshan_birth_10"),ExtResource("preview_huaguoshan_birth_12"),ExtResource("preview_huaguoshan_birth_13"),ExtResource("preview_huaguoshan_birth_14"),ExtResource("preview_huaguoshan_birth_15"),ExtResource("preview_huaguoshan_birth_17"),ExtResource("preview_huaguoshan_birth_18"),ExtResource("preview_huaguoshan_birth_2"),ExtResource("preview_huaguoshan_birth_3"),ExtResource("preview_huaguoshan_birth_5"),ExtResource("preview_huaguoshan_birth_7"),ExtResource("preview_huaguoshan_birth_8"),ExtResource("preview_huaguoshan_birth_9")])
+label_font = ExtResource("preview_font")

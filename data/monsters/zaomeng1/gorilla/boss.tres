@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="BattleBossProfile" format=3]
+[ext_resource type="Script" path="res://addons/battle_foundation/boss/BattleBossProfile.cs" id="profile"]
+[ext_resource type="Script" path="res://addons/battle_foundation/boss/BattleBossSkillRule.cs" id="rule"]
+[ext_resource type="Script" path="res://addons/battle_foundation/ai/ZaomengOneAIPolicy.cs" id="policy"]
+[sub_resource type="Resource" id="Policy"]
+script = ExtResource("policy")
+[sub_resource type="Resource" id="Hit1"]
+script = ExtResource("rule")
+ability_id = &"zaomeng1_gorilla_hit1"
+attack_range = 300.0
+vertical_range = 600.0
+group_cooldown = 0.0
+[resource]
+script = ExtResource("profile")
+display_name = "大猩猩"
+attack_decision_policy = SubResource("Policy")
+skills = Array[ExtResource("rule")]([SubResource("Hit1")])

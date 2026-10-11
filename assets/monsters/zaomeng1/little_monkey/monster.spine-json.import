@@ -1,0 +1,13 @@
+[remap]
+
+importer="spine.json"
+type="SpineSkeletonFileResource"
+uid="uid://5y1i3afs0md0"
+path="res://.godot/imported/monster.spine-json-34a8fef148c48bc406ac9c3c0f39bc4f.spjson"
+
+[deps]
+
+source_file="res://assets/monsters/zaomeng1/little_monkey/monster.spine-json"
+dest_files=["res://.godot/imported/monster.spine-json-34a8fef148c48bc406ac9c3c0f39bc4f.spjson"]
+
+[params]

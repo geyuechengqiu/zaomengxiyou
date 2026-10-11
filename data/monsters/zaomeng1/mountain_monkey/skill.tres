@@ -1,0 +1,38 @@
+[gd_resource type="Resource" script_class="GameplayAbilityDefinition" format=3]
+[ext_resource type="Script" path="res://addons/gameplay_abiltiy_system/scripts/abilities/gameplay_ability_definition.gd" id="definition"]
+[ext_resource type="Script" path="res://addons/gameplay_abiltiy_system/scripts/abilities/features/gameplay_ability_feature.gd" id="feature"]
+[ext_resource type="Script" path="res://addons/battle_foundation/gas/battle_frame_timeline_feature.gd" id="timeline"]
+[ext_resource type="Script" path="res://addons/battle_foundation/definitions/battle_attack_segment.gd" id="segment"]
+[sub_resource type="Resource" id="Hit"]
+script = ExtResource("segment")
+segment_id = &"hit1"
+start_frame = 2
+end_frame = 9
+action = &"attack_1"
+hit_rect = Rect2(-15.986661, -94.736188, 96.873322, 96.872375)
+hit_rect_frames = Dictionary[int, Rect2]({2: Rect2(-15.986661, -94.736188, 96.873322, 96.872375), 3: Rect2(-15.986661, -94.736188, 96.873322, 96.872375), 4: Rect2(-28.600000, -44.100183, 98.000000, 39.000366), 5: Rect2(-28.600000, -44.100183, 98.000000, 39.000366), 6: Rect2(-28.600000, -44.100183, 98.000000, 39.000366), 7: Rect2(-28.600000, -44.100183, 98.000000, 39.000366), 8: Rect2(-28.600000, -44.100183, 98.000000, 39.000366)})
+damage_multiplier = 1.0
+maximum_hits = 1
+knockback_speed = 360.0
+knockback_duration = 0.5
+launch_speed = 300.0
+reset_vertical_velocity = true
+reaction_gravity = 2700.0
+hit_stun = 0.5
+reaction_type = "launch"
+protection_parameters = {"protectPoint": 3334, "protectPointB": 3334, "isProtectPointAdd": 1}
+[sub_resource type="Resource" id="Timeline"]
+script = ExtResource("timeline")
+source_fps = 30.0
+duration_frames = 12
+animation_action = &"attack_1"
+commit_resources = true
+attack_segments = Array[ExtResource("segment")]([SubResource("Hit")])
+[resource]
+script = ExtResource("definition")
+ability_id = &"zaomeng1_mountain_monkey_hit1"
+ability_name = "山猴 · hit1"
+features = Array[ExtResource("feature")]([SubResource("Timeline")])
+metadata/zaomeng1_base_power = 12
+metadata/zaomeng1_attack_back_speed = Vector2(6, -5)
+metadata/zaomeng1_hit_max_count = 1

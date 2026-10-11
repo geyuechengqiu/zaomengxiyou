@@ -1,0 +1,47 @@
+[gd_scene format=3]
+[ext_resource type="PackedScene" path="res://addons/battle_foundation/level/battle_map_visual_template_2d.tscn" id="template"]
+[ext_resource type="Texture2D" path="res://assets/maps/huaguoshan/far.png" id="far"]
+[ext_resource type="Texture2D" path="res://assets/maps/huaguoshan/forest.png" id="forest"]
+[ext_resource type="Texture2D" path="res://assets/maps/huaguoshan/platform.png" id="platform"]
+[ext_resource type="Texture2D" path="res://assets/maps/huaguoshan/ground.png" id="ground"]
+[ext_resource type="Shader" path="res://assets/maps/huaguoshan/ground_continuation.gdshader" id="stone_shader"]
+[sub_resource type="ShaderMaterial" id="StoneMaterial"]
+shader = ExtResource("stone_shader")
+[node name="HuaguoshanVisual" instance=ExtResource("template")]
+[node name="FarBackground" parent="." index="0"]
+scroll_scale = Vector2(0.1295, 1)
+[node name="Mountains" type="Sprite2D" parent="FarBackground"]
+scale = Vector2(2, 2)
+centered = false
+texture = ExtResource("far")
+[node name="MiddleBackground" parent="." index="1"]
+scroll_scale = Vector2(1, 1)
+[node name="Forest" type="Sprite2D" parent="MiddleBackground"]
+position = Vector2(-60, 140)
+scale = Vector2(2, 2)
+centered = false
+texture = ExtResource("forest")
+[node name="GroundContinuation" type="Polygon2D" parent="GroundArtwork"]
+material = SubResource("StoneMaterial")
+texture = ExtResource("ground")
+polygon = PackedVector2Array(-16.70,1035.30,1971.30,1035.30,2119.30,889.30,2235.30,883.30,2539.30,883.30,2711.30,1035.30,2943.30,1035.30,3083.30,897.30,3199.30,891.30,3503.30,891.30,3667.30,1035.30,8839.30,1035.30,8987.30,893.30,9399.30,891.30,9583.30,1055.30,9660.00,1055.30,9660.00,1280.00,-16.70,1280.00)
+[node name="Ground" type="Sprite2D" parent="GroundArtwork"]
+position = Vector2(-16.7, 863.3)
+scale = Vector2(2, 2)
+centered = false
+texture = ExtResource("ground")
+[node name="Platform0" type="Sprite2D" parent="GroundArtwork"]
+position = Vector2(3862.9999999999995, 696.6)
+scale = Vector2(2,2)
+centered = false
+texture = ExtResource("platform")
+[node name="Platform1" type="Sprite2D" parent="GroundArtwork"]
+position = Vector2(5007.0, 699.6)
+scale = Vector2(2,2)
+centered = false
+texture = ExtResource("platform")
+[node name="Platform2" type="Sprite2D" parent="GroundArtwork"]
+position = Vector2(4420.9, 385.0)
+scale = Vector2(2,2)
+centered = false
+texture = ExtResource("platform")

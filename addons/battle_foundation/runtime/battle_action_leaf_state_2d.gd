@@ -36,7 +36,7 @@ func handle_operation(intent: CoreOperationIntent, slots: Dictionary) -> Operati
 			return OperationResult.ACCEPTED if actor.request_attack() else OperationResult.RETRY
 		&"jump":
 			if intent.payload.get("held_intents", []).has(&"move_down"):
-				return OperationResult.NOT_HANDLED
+				return OperationResult.ACCEPTED if actor.motion.try_drop_through(actor.action_profile) else OperationResult.UNAVAILABLE
 			return OperationResult.ACCEPTED if actor.try_jump() else OperationResult.RETRY
 	if slots.has(intent.action):
 		var id: StringName = slots[intent.action]

@@ -1,6 +1,6 @@
 param(
     [Parameter(Mandatory=$true)][string]$Godot,
-    [string[]]$Suites = @('spawn_performance', 'pipa_support', 'base_attributes', 'fight_power', 'audio', 'loot_growth', 'combat_hud', 'hit_combo', 'wushuang_visual', 'super_armor_visual', 'double_jump', 'monster_spine', 'original_battle_ui', 'original_boss_presentation', 'camera_follow', 'map_visual', 'boss', 'level_progression', 'damage_number_pool')
+    [string[]]$Suites = @('spawn_performance', 'pipa_support', 'base_attributes', 'fight_power', 'audio', 'loot_growth', 'combat_hud', 'hit_combo', 'wushuang_visual', 'super_armor_visual', 'double_jump', 'monster_spine', 'original_battle_ui', 'original_boss_presentation', 'camera_follow', 'map_visual', 'boss', 'level_progression', 'damage_number_pool', 'huaguoshan', 'huaguoshan_combat')
 )
 #region 项目根目录与隔离日志
 $ErrorActionPreference = 'Stop'

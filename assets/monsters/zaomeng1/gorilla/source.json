@@ -1,0 +1,168 @@
+{
+  "source": "Monster_v1.swf",
+  "symbol": "export.monster.Monster3",
+  "original_labels": {
+    "walk": [
+      {
+        "instance": "body",
+        "character_id": 118,
+        "classes": [],
+        "x": 0.0,
+        "y": 0.0,
+        "scale_x": 1.0,
+        "scale_y": 1.0
+      },
+      {
+        "instance": "colipse",
+        "character_id": 22,
+        "classes": [],
+        "x": 0.5,
+        "y": -0.05,
+        "scale_x": 1.0999603,
+        "scale_y": 1.2221985
+      }
+    ],
+    "hit1": [
+      {
+        "instance": "body",
+        "character_id": 123,
+        "classes": [
+          "Monster_fla.元件4_50"
+        ],
+        "x": 6.0,
+        "y": 3.55,
+        "scale_x": 1.0,
+        "scale_y": 1.0
+      },
+      {
+        "instance": "colipse",
+        "character_id": 22,
+        "classes": [],
+        "x": 0.5,
+        "y": -0.05,
+        "scale_x": 1.0999603,
+        "scale_y": 1.2221985
+      }
+    ],
+    "hurt": [
+      {
+        "instance": "body",
+        "character_id": 125,
+        "classes": [
+          "Monster_fla.受伤_51"
+        ],
+        "x": 6.0,
+        "y": 3.55,
+        "scale_x": 1.0,
+        "scale_y": 1.0
+      },
+      {
+        "instance": "colipse",
+        "character_id": 22,
+        "classes": [],
+        "x": 0.5,
+        "y": -0.05,
+        "scale_x": 1.0999603,
+        "scale_y": 1.2221985
+      }
+    ],
+    "dead": [
+      {
+        "instance": "body",
+        "character_id": 129,
+        "classes": [
+          "Monster_fla.元件6_52"
+        ],
+        "x": 6.0,
+        "y": 3.55,
+        "scale_x": 1.0,
+        "scale_y": 1.0
+      },
+      {
+        "instance": "colipse",
+        "character_id": 22,
+        "classes": [],
+        "x": 0.5,
+        "y": -0.05,
+        "scale_x": 1.0999603,
+        "scale_y": 1.2221985
+      }
+    ],
+    "afterHurt": [
+      {
+        "instance": "body",
+        "character_id": 132,
+        "classes": [
+          "Monster_fla.受伤后_53"
+        ],
+        "x": 5.35,
+        "y": 3.35,
+        "scale_x": 1.0,
+        "scale_y": 1.0
+      },
+      {
+        "instance": "colipse",
+        "character_id": 22,
+        "classes": [],
+        "x": 0.5,
+        "y": -0.05,
+        "scale_x": 1.0999603,
+        "scale_y": 1.2221985
+      }
+    ],
+    "wait": [
+      {
+        "instance": "body",
+        "character_id": 138,
+        "classes": [],
+        "x": 12.35,
+        "y": 0.05,
+        "scale_x": 1.0,
+        "scale_y": 1.0
+      },
+      {
+        "instance": "colipse",
+        "character_id": 22,
+        "classes": [],
+        "x": 0.5,
+        "y": -0.05,
+        "scale_x": 1.0999603,
+        "scale_y": 1.2221985
+      }
+    ]
+  },
+  "semantic_actions": {
+    "idle": "wait",
+    "move": "walk",
+    "run": "walk",
+    "jump": "walk",
+    "jump_2": "walk",
+    "fall": "walk",
+    "land": "wait",
+    "hurt": "hurt",
+    "recover": "afterHurt",
+    "protect": "afterHurt",
+    "death": "dead",
+    "attack_1": "hit1"
+  },
+  "foot_origin": 59.3,
+  "actions": {
+    "idle": 0.5,
+    "move": 0.6666666666666666,
+    "run": 0.6666666666666666,
+    "jump": 0.6666666666666666,
+    "jump_2": 0.6666666666666666,
+    "fall": 0.6666666666666666,
+    "land": 0.5,
+    "hurt": 0.43333333333333335,
+    "recover": 0.23333333333333334,
+    "protect": 0.23333333333333334,
+    "death": 0.6666666666666666,
+    "attack_1": 0.5666666666666667
+  },
+  "attribute_source": "data/monsters/jushi_lingjun/attributes.tres",
+  "source_fps": 24,
+  "loaded_display_fps": 30,
+  "source_facing": -1,
+  "logical_facing": 1
+}

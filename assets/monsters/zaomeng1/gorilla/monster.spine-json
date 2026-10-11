@@ -1,0 +1,1774 @@
+{
+  "skeleton": {
+    "spine": "4.3.00",
+    "fps": 30,
+    "images": "./"
+  },
+  "bones": [
+    {
+      "name": "root"
+    },
+    {
+      "name": "Body",
+      "parent": "root",
+      "scaleX": -1
+    }
+  ],
+  "slots": [
+    {
+      "name": "Body",
+      "bone": "Body"
+    }
+  ],
+  "skins": [
+    {
+      "name": "基础",
+      "attachments": {
+        "Body": {
+          "walk_0": {
+            "type": "region",
+            "path": "region_0",
+            "x": 6.350000000000001,
+            "y": 55.69999999999999,
+            "width": 126,
+            "height": 113
+          },
+          "walk_1": {
+            "type": "region",
+            "path": "region_0",
+            "x": 6.350000000000001,
+            "y": 55.69999999999999,
+            "width": 126,
+            "height": 113
+          },
+          "walk_2": {
+            "type": "region",
+            "path": "region_0",
+            "x": 6.350000000000001,
+            "y": 55.69999999999999,
+            "width": 126,
+            "height": 113
+          },
+          "walk_3": {
+            "type": "region",
+            "path": "region_0",
+            "x": 6.350000000000001,
+            "y": 55.69999999999999,
+            "width": 126,
+            "height": 113
+          },
+          "walk_4": {
+            "type": "region",
+            "path": "region_0",
+            "x": 6.350000000000001,
+            "y": 55.69999999999999,
+            "width": 126,
+            "height": 113
+          },
+          "walk_5": {
+            "type": "region",
+            "path": "region_1",
+            "x": -0.6499999999999986,
+            "y": 58.19999999999999,
+            "width": 110,
+            "height": 116
+          },
+          "walk_6": {
+            "type": "region",
+            "path": "region_1",
+            "x": -0.6499999999999986,
+            "y": 58.19999999999999,
+            "width": 110,
+            "height": 116
+          },
+          "walk_7": {
+            "type": "region",
+            "path": "region_1",
+            "x": -0.6499999999999986,
+            "y": 58.19999999999999,
+            "width": 110,
+            "height": 116
+          },
+          "walk_8": {
+            "type": "region",
+            "path": "region_1",
+            "x": -0.6499999999999986,
+            "y": 58.19999999999999,
+            "width": 110,
+            "height": 116
+          },
+          "walk_9": {
+            "type": "region",
+            "path": "region_2",
+            "x": 8.350000000000001,
+            "y": 54.69999999999999,
+            "width": 130,
+            "height": 115
+          },
+          "walk_10": {
+            "type": "region",
+            "path": "region_2",
+            "x": 8.350000000000001,
+            "y": 54.69999999999999,
+            "width": 130,
+            "height": 115
+          },
+          "walk_11": {
+            "type": "region",
+            "path": "region_2",
+            "x": 8.350000000000001,
+            "y": 54.69999999999999,
+            "width": 130,
+            "height": 115
+          },
+          "walk_12": {
+            "type": "region",
+            "path": "region_2",
+            "x": 8.350000000000001,
+            "y": 54.69999999999999,
+            "width": 130,
+            "height": 115
+          },
+          "walk_13": {
+            "type": "region",
+            "path": "region_2",
+            "x": 8.350000000000001,
+            "y": 54.69999999999999,
+            "width": 130,
+            "height": 115
+          },
+          "walk_14": {
+            "type": "region",
+            "path": "region_3",
+            "x": -0.6499999999999986,
+            "y": 56.69999999999999,
+            "width": 110,
+            "height": 119
+          },
+          "walk_15": {
+            "type": "region",
+            "path": "region_3",
+            "x": -0.6499999999999986,
+            "y": 56.69999999999999,
+            "width": 110,
+            "height": 119
+          },
+          "walk_16": {
+            "type": "region",
+            "path": "region_3",
+            "x": -0.6499999999999986,
+            "y": 56.69999999999999,
+            "width": 110,
+            "height": 119
+          },
+          "walk_17": {
+            "type": "region",
+            "path": "region_3",
+            "x": -0.6499999999999986,
+            "y": 56.69999999999999,
+            "width": 110,
+            "height": 119
+          },
+          "walk_18": {
+            "type": "region",
+            "path": "region_3",
+            "x": -0.6499999999999986,
+            "y": 56.69999999999999,
+            "width": 110,
+            "height": 119
+          },
+          "walk_19": {
+            "type": "region",
+            "path": "region_3",
+            "x": -0.6499999999999986,
+            "y": 56.69999999999999,
+            "width": 110,
+            "height": 119
+          },
+          "hit1_0": {
+            "type": "region",
+            "path": "region_4",
+            "x": 22.599999999999994,
+            "y": 78.35,
+            "width": 122,
+            "height": 155
+          },
+          "hit1_1": {
+            "type": "region",
+            "path": "region_4",
+            "x": 22.599999999999994,
+            "y": 78.35,
+            "width": 122,
+            "height": 155
+          },
+          "hit1_2": {
+            "type": "region",
+            "path": "region_5",
+            "x": 26.599999999999994,
+            "y": 78.35,
+            "width": 124,
+            "height": 155
+          },
+          "hit1_3": {
+            "type": "region",
+            "path": "region_5",
+            "x": 26.599999999999994,
+            "y": 78.35,
+            "width": 124,
+            "height": 155
+          },
+          "hit1_4": {
+            "type": "region",
+            "path": "region_6",
+            "x": -1.4000000000000057,
+            "y": 69.35,
+            "width": 132,
+            "height": 139
+          },
+          "hit1_5": {
+            "type": "region",
+            "path": "region_6",
+            "x": -1.4000000000000057,
+            "y": 69.35,
+            "width": 132,
+            "height": 139
+          },
+          "hit1_6": {
+            "type": "region",
+            "path": "region_7",
+            "x": -26.400000000000006,
+            "y": 57.849999999999994,
+            "width": 172,
+            "height": 120
+          },
+          "hit1_7": {
+            "type": "region",
+            "path": "region_7",
+            "x": -26.400000000000006,
+            "y": 57.849999999999994,
+            "width": 172,
+            "height": 120
+          },
+          "hit1_8": {
+            "type": "region",
+            "path": "region_7",
+            "x": -26.400000000000006,
+            "y": 57.849999999999994,
+            "width": 172,
+            "height": 120
+          },
+          "hit1_9": {
+            "type": "region",
+            "path": "region_7",
+            "x": -26.400000000000006,
+            "y": 57.849999999999994,
+            "width": 172,
+            "height": 120
+          },
+          "hit1_10": {
+            "type": "region",
+            "path": "region_7",
+            "x": -26.400000000000006,
+            "y": 57.849999999999994,
+            "width": 172,
+            "height": 120
+          },
+          "hit1_11": {
+            "type": "region",
+            "path": "region_7",
+            "x": -26.400000000000006,
+            "y": 57.849999999999994,
+            "width": 172,
+            "height": 120
+          },
+          "hit1_12": {
+            "type": "region",
+            "path": "region_7",
+            "x": -26.400000000000006,
+            "y": 57.849999999999994,
+            "width": 172,
+            "height": 120
+          },
+          "hit1_13": {
+            "type": "region",
+            "path": "region_7",
+            "x": -26.400000000000006,
+            "y": 57.849999999999994,
+            "width": 172,
+            "height": 120
+          },
+          "hit1_14": {
+            "type": "region",
+            "path": "region_7",
+            "x": -26.400000000000006,
+            "y": 57.849999999999994,
+            "width": 172,
+            "height": 120
+          },
+          "hit1_15": {
+            "type": "region",
+            "path": "region_7",
+            "x": -26.400000000000006,
+            "y": 57.849999999999994,
+            "width": 172,
+            "height": 120
+          },
+          "hit1_16": {
+            "type": "region",
+            "path": "region_7",
+            "x": -26.400000000000006,
+            "y": 57.849999999999994,
+            "width": 172,
+            "height": 120
+          },
+          "hurt_0": {
+            "type": "region",
+            "path": "region_8",
+            "x": 18.6,
+            "y": 70.44999999999999,
+            "width": 114,
+            "height": 137
+          },
+          "hurt_1": {
+            "type": "region",
+            "path": "region_8",
+            "x": 18.6,
+            "y": 70.44999999999999,
+            "width": 114,
+            "height": 137
+          },
+          "hurt_2": {
+            "type": "region",
+            "path": "region_8",
+            "x": 18.6,
+            "y": 70.44999999999999,
+            "width": 114,
+            "height": 137
+          },
+          "hurt_3": {
+            "type": "region",
+            "path": "region_8",
+            "x": 18.6,
+            "y": 70.44999999999999,
+            "width": 114,
+            "height": 137
+          },
+          "hurt_4": {
+            "type": "region",
+            "path": "region_8",
+            "x": 18.6,
+            "y": 70.44999999999999,
+            "width": 114,
+            "height": 137
+          },
+          "hurt_5": {
+            "type": "region",
+            "path": "region_8",
+            "x": 18.6,
+            "y": 70.44999999999999,
+            "width": 114,
+            "height": 137
+          },
+          "hurt_6": {
+            "type": "region",
+            "path": "region_8",
+            "x": 18.6,
+            "y": 70.44999999999999,
+            "width": 114,
+            "height": 137
+          },
+          "hurt_7": {
+            "type": "region",
+            "path": "region_8",
+            "x": 18.6,
+            "y": 70.44999999999999,
+            "width": 114,
+            "height": 137
+          },
+          "hurt_8": {
+            "type": "region",
+            "path": "region_8",
+            "x": 18.6,
+            "y": 70.44999999999999,
+            "width": 114,
+            "height": 137
+          },
+          "hurt_9": {
+            "type": "region",
+            "path": "region_8",
+            "x": 18.6,
+            "y": 70.44999999999999,
+            "width": 114,
+            "height": 137
+          },
+          "hurt_10": {
+            "type": "region",
+            "path": "region_8",
+            "x": 18.6,
+            "y": 70.44999999999999,
+            "width": 114,
+            "height": 137
+          },
+          "hurt_11": {
+            "type": "region",
+            "path": "region_8",
+            "x": 18.6,
+            "y": 70.44999999999999,
+            "width": 114,
+            "height": 137
+          },
+          "hurt_12": {
+            "type": "region",
+            "path": "region_8",
+            "x": 18.6,
+            "y": 70.44999999999999,
+            "width": 114,
+            "height": 137
+          },
+          "dead_0": {
+            "type": "region",
+            "path": "region_9",
+            "x": 5.25,
+            "y": 55.5,
+            "width": 126,
+            "height": 112
+          },
+          "dead_1": {
+            "type": "region",
+            "path": "region_9",
+            "x": 5.25,
+            "y": 55.5,
+            "width": 126,
+            "height": 112
+          },
+          "dead_2": {
+            "type": "region",
+            "path": "region_10",
+            "x": 0.25,
+            "y": 43.0,
+            "width": 136,
+            "height": 103
+          },
+          "dead_3": {
+            "type": "region",
+            "path": "region_10",
+            "x": 0.25,
+            "y": 43.0,
+            "width": 136,
+            "height": 103
+          },
+          "dead_4": {
+            "type": "region",
+            "path": "region_11",
+            "x": -7.25,
+            "y": 35.5,
+            "width": 145,
+            "height": 80
+          },
+          "dead_5": {
+            "type": "region",
+            "path": "region_11",
+            "x": -7.25,
+            "y": 35.5,
+            "width": 145,
+            "height": 80
+          },
+          "dead_6": {
+            "type": "region",
+            "path": "region_12",
+            "x": -8.75,
+            "y": 22.0,
+            "width": 154,
+            "height": 61
+          },
+          "dead_7": {
+            "type": "region",
+            "path": "region_12",
+            "x": -8.75,
+            "y": 22.0,
+            "width": 154,
+            "height": 61
+          },
+          "dead_8": {
+            "type": "region",
+            "path": "region_12",
+            "x": -8.75,
+            "y": 22.0,
+            "width": 154,
+            "height": 61
+          },
+          "dead_9": {
+            "type": "region",
+            "path": "region_12",
+            "x": -8.75,
+            "y": 22.0,
+            "width": 154,
+            "height": 61
+          },
+          "dead_10": {
+            "type": "region",
+            "path": "region_12",
+            "x": -8.75,
+            "y": 22.0,
+            "width": 154,
+            "height": 61
+          },
+          "dead_11": {
+            "type": "region",
+            "path": "region_12",
+            "x": -8.75,
+            "y": 22.0,
+            "width": 154,
+            "height": 61
+          },
+          "dead_12": {
+            "type": "region",
+            "path": "region_12",
+            "x": -8.75,
+            "y": 22.0,
+            "width": 154,
+            "height": 61
+          },
+          "dead_13": {
+            "type": "region",
+            "path": "region_12",
+            "x": -8.75,
+            "y": 22.0,
+            "width": 154,
+            "height": 61
+          },
+          "dead_14": {
+            "type": "region",
+            "path": "region_12",
+            "x": -8.75,
+            "y": 22.0,
+            "width": 154,
+            "height": 61
+          },
+          "dead_15": {
+            "type": "region",
+            "path": "region_12",
+            "x": -8.75,
+            "y": 22.0,
+            "width": 154,
+            "height": 61
+          },
+          "dead_16": {
+            "type": "region",
+            "path": "region_12",
+            "x": -8.75,
+            "y": 22.0,
+            "width": 154,
+            "height": 61
+          },
+          "dead_17": {
+            "type": "region",
+            "path": "region_12",
+            "x": -8.75,
+            "y": 22.0,
+            "width": 154,
+            "height": 61
+          },
+          "dead_18": {
+            "type": "region",
+            "path": "region_12",
+            "x": -8.75,
+            "y": 22.0,
+            "width": 154,
+            "height": 61
+          },
+          "dead_19": {
+            "type": "region",
+            "path": "region_12",
+            "x": -8.75,
+            "y": 22.0,
+            "width": 154,
+            "height": 61
+          },
+          "afterHurt_0": {
+            "type": "region",
+            "path": "region_13",
+            "x": 10.700000000000003,
+            "y": 72.15,
+            "width": 138,
+            "height": 131
+          },
+          "afterHurt_1": {
+            "type": "region",
+            "path": "region_13",
+            "x": 10.700000000000003,
+            "y": 72.15,
+            "width": 138,
+            "height": 131
+          },
+          "afterHurt_2": {
+            "type": "region",
+            "path": "region_13",
+            "x": 10.700000000000003,
+            "y": 72.15,
+            "width": 138,
+            "height": 131
+          },
+          "afterHurt_3": {
+            "type": "region",
+            "path": "region_13",
+            "x": 10.700000000000003,
+            "y": 72.15,
+            "width": 138,
+            "height": 131
+          },
+          "afterHurt_4": {
+            "type": "region",
+            "path": "region_13",
+            "x": 10.700000000000003,
+            "y": 72.15,
+            "width": 138,
+            "height": 131
+          },
+          "afterHurt_5": {
+            "type": "region",
+            "path": "region_13",
+            "x": 10.700000000000003,
+            "y": 72.15,
+            "width": 138,
+            "height": 131
+          },
+          "afterHurt_6": {
+            "type": "region",
+            "path": "region_13",
+            "x": 10.700000000000003,
+            "y": 72.15,
+            "width": 138,
+            "height": 131
+          },
+          "wait_0": {
+            "type": "region",
+            "path": "region_14",
+            "x": 2.6499999999999986,
+            "y": 57.5,
+            "width": 107,
+            "height": 115
+          },
+          "wait_1": {
+            "type": "region",
+            "path": "region_14",
+            "x": 2.6499999999999986,
+            "y": 57.5,
+            "width": 107,
+            "height": 115
+          },
+          "wait_2": {
+            "type": "region",
+            "path": "region_15",
+            "x": 2.1499999999999986,
+            "y": 57.5,
+            "width": 108,
+            "height": 115
+          },
+          "wait_3": {
+            "type": "region",
+            "path": "region_15",
+            "x": 2.1499999999999986,
+            "y": 57.5,
+            "width": 108,
+            "height": 115
+          },
+          "wait_4": {
+            "type": "region",
+            "path": "region_16",
+            "x": 2.1499999999999986,
+            "y": 56.5,
+            "width": 108,
+            "height": 113
+          },
+          "wait_5": {
+            "type": "region",
+            "path": "region_16",
+            "x": 2.1499999999999986,
+            "y": 56.5,
+            "width": 108,
+            "height": 113
+          },
+          "wait_6": {
+            "type": "region",
+            "path": "region_17",
+            "x": 2.1499999999999986,
+            "y": 55.5,
+            "width": 108,
+            "height": 111
+          },
+          "wait_7": {
+            "type": "region",
+            "path": "region_17",
+            "x": 2.1499999999999986,
+            "y": 55.5,
+            "width": 108,
+            "height": 111
+          },
+          "wait_8": {
+            "type": "region",
+            "path": "region_17",
+            "x": 2.1499999999999986,
+            "y": 55.5,
+            "width": 108,
+            "height": 111
+          },
+          "wait_9": {
+            "type": "region",
+            "path": "region_17",
+            "x": 2.1499999999999986,
+            "y": 55.5,
+            "width": 108,
+            "height": 111
+          },
+          "wait_10": {
+            "type": "region",
+            "path": "region_16",
+            "x": 2.1499999999999986,
+            "y": 56.5,
+            "width": 108,
+            "height": 113
+          },
+          "wait_11": {
+            "type": "region",
+            "path": "region_16",
+            "x": 2.1499999999999986,
+            "y": 56.5,
+            "width": 108,
+            "height": 113
+          },
+          "wait_12": {
+            "type": "region",
+            "path": "region_18",
+            "x": 2.1499999999999986,
+            "y": 57.5,
+            "width": 108,
+            "height": 115
+          },
+          "wait_13": {
+            "type": "region",
+            "path": "region_18",
+            "x": 2.1499999999999986,
+            "y": 57.5,
+            "width": 108,
+            "height": 115
+          },
+          "wait_14": {
+            "type": "region",
+            "path": "region_18",
+            "x": 2.1499999999999986,
+            "y": 57.5,
+            "width": 108,
+            "height": 115
+          }
+        }
+      }
+    }
+  ],
+  "animations": {
+    "idle": {
+      "slots": {
+        "Body": {
+          "attachment": [
+            {
+              "time": 0.0,
+              "name": "wait_0"
+            },
+            {
+              "time": 0.033333333,
+              "name": "wait_1"
+            },
+            {
+              "time": 0.066666667,
+              "name": "wait_2"
+            },
+            {
+              "time": 0.1,
+              "name": "wait_3"
+            },
+            {
+              "time": 0.133333333,
+              "name": "wait_4"
+            },
+            {
+              "time": 0.166666667,
+              "name": "wait_5"
+            },
+            {
+              "time": 0.2,
+              "name": "wait_6"
+            },
+            {
+              "time": 0.233333333,
+              "name": "wait_7"
+            },
+            {
+              "time": 0.266666667,
+              "name": "wait_8"
+            },
+            {
+              "time": 0.3,
+              "name": "wait_9"
+            },
+            {
+              "time": 0.333333333,
+              "name": "wait_10"
+            },
+            {
+              "time": 0.366666667,
+              "name": "wait_11"
+            },
+            {
+              "time": 0.4,
+              "name": "wait_12"
+            },
+            {
+              "time": 0.433333333,
+              "name": "wait_13"
+            },
+            {
+              "time": 0.466666667,
+              "name": "wait_14"
+            }
+          ]
+        }
+      },
+      "bones": {
+        "root": {
+          "translate": [
+            {
+              "time": 0.5,
+              "x": 0,
+              "y": 0
+            }
+          ]
+        }
+      }
+    },
+    "move": {
+      "slots": {
+        "Body": {
+          "attachment": [
+            {
+              "time": 0.0,
+              "name": "walk_0"
+            },
+            {
+              "time": 0.033333333,
+              "name": "walk_1"
+            },
+            {
+              "time": 0.066666667,
+              "name": "walk_2"
+            },
+            {
+              "time": 0.1,
+              "name": "walk_3"
+            },
+            {
+              "time": 0.133333333,
+              "name": "walk_4"
+            },
+            {
+              "time": 0.166666667,
+              "name": "walk_5"
+            },
+            {
+              "time": 0.2,
+              "name": "walk_6"
+            },
+            {
+              "time": 0.233333333,
+              "name": "walk_7"
+            },
+            {
+              "time": 0.266666667,
+              "name": "walk_8"
+            },
+            {
+              "time": 0.3,
+              "name": "walk_9"
+            },
+            {
+              "time": 0.333333333,
+              "name": "walk_10"
+            },
+            {
+              "time": 0.366666667,
+              "name": "walk_11"
+            },
+            {
+              "time": 0.4,
+              "name": "walk_12"
+            },
+            {
+              "time": 0.433333333,
+              "name": "walk_13"
+            },
+            {
+              "time": 0.466666667,
+              "name": "walk_14"
+            },
+            {
+              "time": 0.5,
+              "name": "walk_15"
+            },
+            {
+              "time": 0.533333333,
+              "name": "walk_16"
+            },
+            {
+              "time": 0.566666667,
+              "name": "walk_17"
+            },
+            {
+              "time": 0.6,
+              "name": "walk_18"
+            },
+            {
+              "time": 0.633333333,
+              "name": "walk_19"
+            }
+          ]
+        }
+      },
+      "bones": {
+        "root": {
+          "translate": [
+            {
+              "time": 0.6666666666666666,
+              "x": 0,
+              "y": 0
+            }
+          ]
+        }
+      }
+    },
+    "run": {
+      "slots": {
+        "Body": {
+          "attachment": [
+            {
+              "time": 0.0,
+              "name": "walk_0"
+            },
+            {
+              "time": 0.033333333,
+              "name": "walk_1"
+            },
+            {
+              "time": 0.066666667,
+              "name": "walk_2"
+            },
+            {
+              "time": 0.1,
+              "name": "walk_3"
+            },
+            {
+              "time": 0.133333333,
+              "name": "walk_4"
+            },
+            {
+              "time": 0.166666667,
+              "name": "walk_5"
+            },
+            {
+              "time": 0.2,
+              "name": "walk_6"
+            },
+            {
+              "time": 0.233333333,
+              "name": "walk_7"
+            },
+            {
+              "time": 0.266666667,
+              "name": "walk_8"
+            },
+            {
+              "time": 0.3,
+              "name": "walk_9"
+            },
+            {
+              "time": 0.333333333,
+              "name": "walk_10"
+            },
+            {
+              "time": 0.366666667,
+              "name": "walk_11"
+            },
+            {
+              "time": 0.4,
+              "name": "walk_12"
+            },
+            {
+              "time": 0.433333333,
+              "name": "walk_13"
+            },
+            {
+              "time": 0.466666667,
+              "name": "walk_14"
+            },
+            {
+              "time": 0.5,
+              "name": "walk_15"
+            },
+            {
+              "time": 0.533333333,
+              "name": "walk_16"
+            },
+            {
+              "time": 0.566666667,
+              "name": "walk_17"
+            },
+            {
+              "time": 0.6,
+              "name": "walk_18"
+            },
+            {
+              "time": 0.633333333,
+              "name": "walk_19"
+            }
+          ]
+        }
+      },
+      "bones": {
+        "root": {
+          "translate": [
+            {
+              "time": 0.6666666666666666,
+              "x": 0,
+              "y": 0
+            }
+          ]
+        }
+      }
+    },
+    "jump": {
+      "slots": {
+        "Body": {
+          "attachment": [
+            {
+              "time": 0.0,
+              "name": "walk_0"
+            },
+            {
+              "time": 0.033333333,
+              "name": "walk_1"
+            },
+            {
+              "time": 0.066666667,
+              "name": "walk_2"
+            },
+            {
+              "time": 0.1,
+              "name": "walk_3"
+            },
+            {
+              "time": 0.133333333,
+              "name": "walk_4"
+            },
+            {
+              "time": 0.166666667,
+              "name": "walk_5"
+            },
+            {
+              "time": 0.2,
+              "name": "walk_6"
+            },
+            {
+              "time": 0.233333333,
+              "name": "walk_7"
+            },
+            {
+              "time": 0.266666667,
+              "name": "walk_8"
+            },
+            {
+              "time": 0.3,
+              "name": "walk_9"
+            },
+            {
+              "time": 0.333333333,
+              "name": "walk_10"
+            },
+            {
+              "time": 0.366666667,
+              "name": "walk_11"
+            },
+            {
+              "time": 0.4,
+              "name": "walk_12"
+            },
+            {
+              "time": 0.433333333,
+              "name": "walk_13"
+            },
+            {
+              "time": 0.466666667,
+              "name": "walk_14"
+            },
+            {
+              "time": 0.5,
+              "name": "walk_15"
+            },
+            {
+              "time": 0.533333333,
+              "name": "walk_16"
+            },
+            {
+              "time": 0.566666667,
+              "name": "walk_17"
+            },
+            {
+              "time": 0.6,
+              "name": "walk_18"
+            },
+            {
+              "time": 0.633333333,
+              "name": "walk_19"
+            }
+          ]
+        }
+      },
+      "bones": {
+        "root": {
+          "translate": [
+            {
+              "time": 0.6666666666666666,
+              "x": 0,
+              "y": 0
+            }
+          ]
+        }
+      }
+    },
+    "jump_2": {
+      "slots": {
+        "Body": {
+          "attachment": [
+            {
+              "time": 0.0,
+              "name": "walk_0"
+            },
+            {
+              "time": 0.033333333,
+              "name": "walk_1"
+            },
+            {
+              "time": 0.066666667,
+              "name": "walk_2"
+            },
+            {
+              "time": 0.1,
+              "name": "walk_3"
+            },
+            {
+              "time": 0.133333333,
+              "name": "walk_4"
+            },
+            {
+              "time": 0.166666667,
+              "name": "walk_5"
+            },
+            {
+              "time": 0.2,
+              "name": "walk_6"
+            },
+            {
+              "time": 0.233333333,
+              "name": "walk_7"
+            },
+            {
+              "time": 0.266666667,
+              "name": "walk_8"
+            },
+            {
+              "time": 0.3,
+              "name": "walk_9"
+            },
+            {
+              "time": 0.333333333,
+              "name": "walk_10"
+            },
+            {
+              "time": 0.366666667,
+              "name": "walk_11"
+            },
+            {
+              "time": 0.4,
+              "name": "walk_12"
+            },
+            {
+              "time": 0.433333333,
+              "name": "walk_13"
+            },
+            {
+              "time": 0.466666667,
+              "name": "walk_14"
+            },
+            {
+              "time": 0.5,
+              "name": "walk_15"
+            },
+            {
+              "time": 0.533333333,
+              "name": "walk_16"
+            },
+            {
+              "time": 0.566666667,
+              "name": "walk_17"
+            },
+            {
+              "time": 0.6,
+              "name": "walk_18"
+            },
+            {
+              "time": 0.633333333,
+              "name": "walk_19"
+            }
+          ]
+        }
+      },
+      "bones": {
+        "root": {
+          "translate": [
+            {
+              "time": 0.6666666666666666,
+              "x": 0,
+              "y": 0
+            }
+          ]
+        }
+      }
+    },
+    "fall": {
+      "slots": {
+        "Body": {
+          "attachment": [
+            {
+              "time": 0.0,
+              "name": "walk_0"
+            },
+            {
+              "time": 0.033333333,
+              "name": "walk_1"
+            },
+            {
+              "time": 0.066666667,
+              "name": "walk_2"
+            },
+            {
+              "time": 0.1,
+              "name": "walk_3"
+            },
+            {
+              "time": 0.133333333,
+              "name": "walk_4"
+            },
+            {
+              "time": 0.166666667,
+              "name": "walk_5"
+            },
+            {
+              "time": 0.2,
+              "name": "walk_6"
+            },
+            {
+              "time": 0.233333333,
+              "name": "walk_7"
+            },
+            {
+              "time": 0.266666667,
+              "name": "walk_8"
+            },
+            {
+              "time": 0.3,
+              "name": "walk_9"
+            },
+            {
+              "time": 0.333333333,
+              "name": "walk_10"
+            },
+            {
+              "time": 0.366666667,
+              "name": "walk_11"
+            },
+            {
+              "time": 0.4,
+              "name": "walk_12"
+            },
+            {
+              "time": 0.433333333,
+              "name": "walk_13"
+            },
+            {
+              "time": 0.466666667,
+              "name": "walk_14"
+            },
+            {
+              "time": 0.5,
+              "name": "walk_15"
+            },
+            {
+              "time": 0.533333333,
+              "name": "walk_16"
+            },
+            {
+              "time": 0.566666667,
+              "name": "walk_17"
+            },
+            {
+              "time": 0.6,
+              "name": "walk_18"
+            },
+            {
+              "time": 0.633333333,
+              "name": "walk_19"
+            }
+          ]
+        }
+      },
+      "bones": {
+        "root": {
+          "translate": [
+            {
+              "time": 0.6666666666666666,
+              "x": 0,
+              "y": 0
+            }
+          ]
+        }
+      }
+    },
+    "land": {
+      "slots": {
+        "Body": {
+          "attachment": [
+            {
+              "time": 0.0,
+              "name": "wait_0"
+            },
+            {
+              "time": 0.033333333,
+              "name": "wait_1"
+            },
+            {
+              "time": 0.066666667,
+              "name": "wait_2"
+            },
+            {
+              "time": 0.1,
+              "name": "wait_3"
+            },
+            {
+              "time": 0.133333333,
+              "name": "wait_4"
+            },
+            {
+              "time": 0.166666667,
+              "name": "wait_5"
+            },
+            {
+              "time": 0.2,
+              "name": "wait_6"
+            },
+            {
+              "time": 0.233333333,
+              "name": "wait_7"
+            },
+            {
+              "time": 0.266666667,
+              "name": "wait_8"
+            },
+            {
+              "time": 0.3,
+              "name": "wait_9"
+            },
+            {
+              "time": 0.333333333,
+              "name": "wait_10"
+            },
+            {
+              "time": 0.366666667,
+              "name": "wait_11"
+            },
+            {
+              "time": 0.4,
+              "name": "wait_12"
+            },
+            {
+              "time": 0.433333333,
+              "name": "wait_13"
+            },
+            {
+              "time": 0.466666667,
+              "name": "wait_14"
+            }
+          ]
+        }
+      },
+      "bones": {
+        "root": {
+          "translate": [
+            {
+              "time": 0.5,
+              "x": 0,
+              "y": 0
+            }
+          ]
+        }
+      }
+    },
+    "hurt": {
+      "slots": {
+        "Body": {
+          "attachment": [
+            {
+              "time": 0.0,
+              "name": "hurt_0"
+            },
+            {
+              "time": 0.033333333,
+              "name": "hurt_1"
+            },
+            {
+              "time": 0.066666667,
+              "name": "hurt_2"
+            },
+            {
+              "time": 0.1,
+              "name": "hurt_3"
+            },
+            {
+              "time": 0.133333333,
+              "name": "hurt_4"
+            },
+            {
+              "time": 0.166666667,
+              "name": "hurt_5"
+            },
+            {
+              "time": 0.2,
+              "name": "hurt_6"
+            },
+            {
+              "time": 0.233333333,
+              "name": "hurt_7"
+            },
+            {
+              "time": 0.266666667,
+              "name": "hurt_8"
+            },
+            {
+              "time": 0.3,
+              "name": "hurt_9"
+            },
+            {
+              "time": 0.333333333,
+              "name": "hurt_10"
+            },
+            {
+              "time": 0.366666667,
+              "name": "hurt_11"
+            },
+            {
+              "time": 0.4,
+              "name": "hurt_12"
+            }
+          ]
+        }
+      },
+      "bones": {
+        "root": {
+          "translate": [
+            {
+              "time": 0.43333333333333335,
+              "x": 0,
+              "y": 0
+            }
+          ]
+        }
+      }
+    },
+    "recover": {
+      "slots": {
+        "Body": {
+          "attachment": [
+            {
+              "time": 0.0,
+              "name": "afterHurt_0"
+            },
+            {
+              "time": 0.033333333,
+              "name": "afterHurt_1"
+            },
+            {
+              "time": 0.066666667,
+              "name": "afterHurt_2"
+            },
+            {
+              "time": 0.1,
+              "name": "afterHurt_3"
+            },
+            {
+              "time": 0.133333333,
+              "name": "afterHurt_4"
+            },
+            {
+              "time": 0.166666667,
+              "name": "afterHurt_5"
+            },
+            {
+              "time": 0.2,
+              "name": "afterHurt_6"
+            }
+          ]
+        }
+      },
+      "bones": {
+        "root": {
+          "translate": [
+            {
+              "time": 0.23333333333333334,
+              "x": 0,
+              "y": 0
+            }
+          ]
+        }
+      }
+    },
+    "protect": {
+      "slots": {
+        "Body": {
+          "attachment": [
+            {
+              "time": 0.0,
+              "name": "afterHurt_0"
+            },
+            {
+              "time": 0.033333333,
+              "name": "afterHurt_1"
+            },
+            {
+              "time": 0.066666667,
+              "name": "afterHurt_2"
+            },
+            {
+              "time": 0.1,
+              "name": "afterHurt_3"
+            },
+            {
+              "time": 0.133333333,
+              "name": "afterHurt_4"
+            },
+            {
+              "time": 0.166666667,
+              "name": "afterHurt_5"
+            },
+            {
+              "time": 0.2,
+              "name": "afterHurt_6"
+            }
+          ]
+        }
+      },
+      "bones": {
+        "root": {
+          "translate": [
+            {
+              "time": 0.23333333333333334,
+              "x": 0,
+              "y": 0
+            }
+          ]
+        }
+      }
+    },
+    "death": {
+      "slots": {
+        "Body": {
+          "attachment": [
+            {
+              "time": 0.0,
+              "name": "dead_0"
+            },
+            {
+              "time": 0.033333333,
+              "name": "dead_1"
+            },
+            {
+              "time": 0.066666667,
+              "name": "dead_2"
+            },
+            {
+              "time": 0.1,
+              "name": "dead_3"
+            },
+            {
+              "time": 0.133333333,
+              "name": "dead_4"
+            },
+            {
+              "time": 0.166666667,
+              "name": "dead_5"
+            },
+            {
+              "time": 0.2,
+              "name": "dead_6"
+            },
+            {
+              "time": 0.233333333,
+              "name": "dead_7"
+            },
+            {
+              "time": 0.266666667,
+              "name": "dead_8"
+            },
+            {
+              "time": 0.3,
+              "name": "dead_9"
+            },
+            {
+              "time": 0.333333333,
+              "name": "dead_10"
+            },
+            {
+              "time": 0.366666667,
+              "name": "dead_11"
+            },
+            {
+              "time": 0.4,
+              "name": "dead_12"
+            },
+            {
+              "time": 0.433333333,
+              "name": "dead_13"
+            },
+            {
+              "time": 0.466666667,
+              "name": "dead_14"
+            },
+            {
+              "time": 0.5,
+              "name": "dead_15"
+            },
+            {
+              "time": 0.533333333,
+              "name": "dead_16"
+            },
+            {
+              "time": 0.566666667,
+              "name": "dead_17"
+            },
+            {
+              "time": 0.6,
+              "name": "dead_18"
+            },
+            {
+              "time": 0.633333333,
+              "name": "dead_19"
+            }
+          ]
+        }
+      },
+      "bones": {
+        "root": {
+          "translate": [
+            {
+              "time": 0.6666666666666666,
+              "x": 0,
+              "y": 0
+            }
+          ]
+        }
+      }
+    },
+    "attack_1": {
+      "slots": {
+        "Body": {
+          "attachment": [
+            {
+              "time": 0.0,
+              "name": "hit1_0"
+            },
+            {
+              "time": 0.033333333,
+              "name": "hit1_1"
+            },
+            {
+              "time": 0.066666667,
+              "name": "hit1_2"
+            },
+            {
+              "time": 0.1,
+              "name": "hit1_3"
+            },
+            {
+              "time": 0.133333333,
+              "name": "hit1_4"
+            },
+            {
+              "time": 0.166666667,
+              "name": "hit1_5"
+            },
+            {
+              "time": 0.2,
+              "name": "hit1_6"
+            },
+            {
+              "time": 0.233333333,
+              "name": "hit1_7"
+            },
+            {
+              "time": 0.266666667,
+              "name": "hit1_8"
+            },
+            {
+              "time": 0.3,
+              "name": "hit1_9"
+            },
+            {
+              "time": 0.333333333,
+              "name": "hit1_10"
+            },
+            {
+              "time": 0.366666667,
+              "name": "hit1_11"
+            },
+            {
+              "time": 0.4,
+              "name": "hit1_12"
+            },
+            {
+              "time": 0.433333333,
+              "name": "hit1_13"
+            },
+            {
+              "time": 0.466666667,
+              "name": "hit1_14"
+            },
+            {
+              "time": 0.5,
+              "name": "hit1_15"
+            },
+            {
+              "time": 0.533333333,
+              "name": "hit1_16"
+            }
+          ]
+        }
+      },
+      "bones": {
+        "root": {
+          "translate": [
+            {
+              "time": 0.5666666666666667,
+              "x": 0,
+              "y": 0
+            }
+          ]
+        }
+      }
+    }
+  }
+}

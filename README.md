@@ -2,9 +2,13 @@
 
 此分支正在迁移为 **C# + NativeAOT**：项目逻辑和自维护插件使用 C#，第三方插件保留；编辑器使用 Debug，正式导出使用原生预编译。构建命令、迁移进度和导出模板要求见 [C# / NativeAOT](docs/csharp-nativeaot.md)。
 
+本机已安装系统 .NET 8 SDK 8.0.425，可直接用配套 Godot 打开项目并使用 F5/F6。安装前已打开的编辑器需退出并重新打开。也可使用 [open_editor.cmd](open_editor.cmd)，它会先构建并启用项目便携 SDK。
+
 已接入匹配的 Spine/.NET Windows 模板并运行 NativeAOT 关卡包。执行 `./tools/csharp/export_native.ps1` 生成正式包。当前31个脚本已迁移，完整C#迁移仍在进行；原生编译与原生运行验证均已完成。
 
 正式入口为 [碧玉径](game/levels/biyujing.tscn)，按 F5 运行。需要带 **Spine 4.3 模块**的 Godot；本机引擎为 Godot 4.7.2。逻辑视口为原版 940×590，战斗世界使用 2 倍素材坐标。
+
+新增 [造梦西游1第一关花果山](game/levels/huaguoshan.tscn)，打开场景按 F6。原山景、森林、坡地和平台构成连续地图，五区域14个计划共33个敌人；三个怪物外观使用原图转 Spine，属性沿用碧玉径，技能时序、逐帧攻击框及击退采用造1，普攻统一1倍。单人活怪上限6，复用战斗 UI、背包、掉落、镜头和通关。详见 [花果山配置与来源](data/levels/huaguoshan/README.md)。
 
 当前关卡包含孙悟空、五个连续区域、32 个普通怪物、复苏容器和玉石琵琶精 Boss。地图、角色组件、出生点、出口、镜头和战斗 UI 均预置，怪物按原版波次与出生依赖生成。技能、属性、Buff、掉落、装备成长和表现通过现有插件协同。
 

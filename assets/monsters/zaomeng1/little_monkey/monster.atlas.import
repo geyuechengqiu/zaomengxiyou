@@ -1,0 +1,16 @@
+[remap]
+
+importer="spine.atlas"
+type="SpineAtlasResource"
+uid="uid://bbb22dqjbtc5b"
+path="res://.godot/imported/monster.atlas-c4ed80e3a7c0e3d88396fed45573bb68.spatlas"
+
+[deps]
+
+source_file="res://assets/monsters/zaomeng1/little_monkey/monster.atlas"
+dest_files=["res://.godot/imported/monster.atlas-c4ed80e3a7c0e3d88396fed45573bb68.spatlas"]
+
+[params]
+
+normal_map_prefix="n"
+specular_map_prefix="s"

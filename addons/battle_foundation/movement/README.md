@@ -14,7 +14,7 @@
 
 | 脚本 | 责任与运行状态 |
 | --- | --- |
-| [BattleMotionController2D](../runtime/battle_motion_controller_2d.gd) | 每实体独立的速度、地面/墙/顶接触、跳跃预算、落地与起跳序号；使用 CharacterBody2D 做扫掠碰撞 |
+| [BattleMotionController2D](../runtime/BattleMotionController2D.cs) | 每实体独立的速度、地面/墙/顶接触、跳跃预算、落地与起跳序号；使用 CharacterBody2D 做扫掠碰撞 |
 | [BattleActionState2D](../runtime/battle_action_state_2d.gd) | 兼容语义入口；状态、时间与权限委托 Core 当前叶子；绑定及注销 |
 | [BattleActionStateMachine2D](../runtime/battle_action_state_machine_2d.gd) | 继承 Core BaseStateMachine，持有十七种动作状态（含阶段9六种受击/保护状态与跑攻/跳攻）及更新上下文、死亡守卫 |
 | [BattleActionLeafState2D](../runtime/battle_action_leaf_state_2d.gd) | 继承 Core BaseState；进入/退出、计时、状态转换和权限判定 |

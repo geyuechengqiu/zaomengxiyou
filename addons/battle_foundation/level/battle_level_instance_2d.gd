@@ -140,7 +140,10 @@ func advance_level(delta: float) -> void:
 		_refresh_waves()
 		_start_plans()
 		var earliest: BattleSpawnPlanInstance
+		var budget := get_node_or_null(^"SpawnBudget")
+		if budget != null and not budget.call("allow_spawn"): break
 		for candidate: BattleSpawnPlanInstance in plans.values():
+			if not candidate.started or candidate.generation_complete(): continue
 			if candidate.next_due <= elapsed + 0.0000001 and (earliest == null or candidate.next_due < earliest.next_due): earliest = candidate
 		if earliest == null: break
 		_spawn_next(earliest)
@@ -219,6 +222,8 @@ func _refresh_waves() -> void:
 func _spawn_next(instance: BattleSpawnPlanInstance) -> void:
 	var cfg: BattleSpawnPlanDefinition = instance.definition
 	var due: float = instance.next_due
+	var budget := get_node_or_null(^"SpawnBudget")
+	if budget != null: due = budget.call("get_due_time", instance, elapsed)
 	var point: BattleSpawnPoint2D = _points[cfg.spawn_point_id]
 	var actor := _session.spawn_entity_2d("monsters", cfg.monster_ids[instance.created], point.sample_position(_session.random), &"", true)
 	if state != State.RUNNING: return
@@ -284,6 +289,9 @@ func request_exit(actor: BattleEntity2D, automatic: bool = false) -> bool:
 	if state != State.RUNNING or actor != _player or _session.is_simulation_blocked() or not actor.is_alive(): return false
 	var region := regions[current_region_index]
 	var exit_rect: Rect2 = region.definition.exit_rect
+	if current_region_index == regions.size()-1:
+		var anchor := _player.get_parent().get_node_or_null(^"FinalExit") as BattleFinalExit2D
+		if anchor != null: exit_rect = anchor.get_exit_rect()
 	if automatic and region.definition.automatic_exit and current_region_index < regions.size()-1: exit_rect = region.definition.get_automatic_exit_rect()
 	if region.exited or not region.exit_open or not exit_rect.has_point(actor.global_position): return false
 	if current_region_index == regions.size() - 1:

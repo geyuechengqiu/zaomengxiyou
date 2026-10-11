@@ -124,6 +124,7 @@ func _choose_skill(offset: Vector2) -> BattleBossSkillRule:
 			candidates.clear()
 		if rule.priority == priority: candidates.append(rule)
 	if candidates.is_empty(): return null
+	if boss_profile.attack_decision_policy != null and not boss_profile.attack_decision_policy.call("allow_attack", self): return null
 	var total := 0.0
 	for rule in candidates: total += rule.weight
 	var roll := actor.session.random.random_float(&"boss_ai")*total

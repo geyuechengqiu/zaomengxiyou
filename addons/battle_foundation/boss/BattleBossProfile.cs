@@ -11,9 +11,11 @@ public partial class BattleBossProfile : Resource
     [Export] public int maximum_summons { get; set; } = 8;
     [Export] public StringName completion_condition { get; set; } = "";
     [Export] public double intro_seconds { get; set; } = 0.0;
+    [Export] public Resource? attack_decision_policy { get; set; }
 
     public bool is_valid()
     {
+        if (attack_decision_policy != null && !attack_decision_policy.HasMethod("allow_attack")) return false;
         if (skills.Count == 0 || health_bar_count < 1 || maximum_summons < 0 || !double.IsFinite(intro_seconds) || intro_seconds < 0) return false;
         var seen = new System.Collections.Generic.HashSet<StringName>();
         foreach (var rule in skills)

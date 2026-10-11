@@ -1,0 +1,16 @@
+[remap]
+
+importer="spine.atlas"
+type="SpineAtlasResource"
+uid="uid://dpb3fxs7lutcl"
+path="res://.godot/imported/monster.atlas-841d7b1cd907525e8ccbabaf42817e43.spatlas"
+
+[deps]
+
+source_file="res://assets/monsters/zaomeng1/mountain_monkey/monster.atlas"
+dest_files=["res://.godot/imported/monster.atlas-841d7b1cd907525e8ccbabaf42817e43.spatlas"]
+
+[params]
+
+normal_map_prefix="n"
+specular_map_prefix="s"

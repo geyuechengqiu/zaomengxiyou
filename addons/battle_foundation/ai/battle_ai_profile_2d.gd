@@ -1,7 +1,7 @@
 extends Resource
 class_name BattleAIProfile2D
 #region 共享决策配置，不保存目标与计时器
-@export var policy: BattleAIPolicy2D
+@export var policy: Resource
 @export var target_selector: BattleAITargetSelector2D
 @export var attack_skill_id: StringName
 @export_range(0.02, 1.0) var decision_interval: float = 0.1
@@ -23,6 +23,7 @@ class_name BattleAIProfile2D
 @export var original_ai_id: int = 0
 
 func is_valid() -> bool:
+	if policy == null or not policy.has_method("decide"): return false
 	for value in [decision_interval, detection_range, vertical_range, leash_radius, home_tolerance, attack_range, attack_vertical_range, minimum_attack_distance, patrol_radius, patrol_wait, flee_health_ratio, retreat_chance, retreat_minimum, retreat_maximum, maximum_retreat_distance]:
 		if not is_finite(value) or value < 0.0:
 			return false

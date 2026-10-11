@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="BattleWaveDefinition" format=3]
+[ext_resource type="Script" path="res://addons/battle_foundation/level/BattleWaveDefinition.cs" id="script"]
+[resource]
+script = ExtResource("script")
+wave_id = &"huaguoshan_region_4_wave"
+region_id = &"huaguoshan_region_4"
+plan_ids = Array[StringName]([&"huaguoshan_birth_7",&"huaguoshan_birth_8",&"huaguoshan_birth_9"])

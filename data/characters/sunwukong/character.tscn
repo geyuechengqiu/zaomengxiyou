@@ -13,7 +13,7 @@
 [ext_resource type="Script" uid="uid://cea1apq6pvlmp" path="res://addons/battle_foundation/runtime/battle_attribute_component.gd" id="component_GameplayVitalAttributeComponent"]
 [ext_resource type="Script" uid="uid://bicr1hcycakxb" path="res://addons/battle_foundation/combat/battle_hit_reaction_controller_2d.gd" id="component_HitReactionController"]
 [ext_resource type="Script" uid="uid://dan0jfrselm17" path="res://addons/simple_inventory/src/core/original_inventory.gd" id="component_Inventory"]
-[ext_resource type="Script" uid="uid://pusqtp2e6bgt" path="res://addons/battle_foundation/runtime/battle_motion_controller_2d.gd" id="component_MotionController"]
+[ext_resource type="Script" uid="uid://pusqtp2e6bgt" path="res://addons/battle_foundation/runtime/BattleMotionController2D.cs" id="component_MotionController"]
 [ext_resource type="Script" uid="uid://bcwcoxsr2ywmt" path="res://addons/battle_foundation/combat/battle_protection_system.gd" id="component_ProtectionSystem"]
 [ext_resource type="Script" uid="uid://bxdee48rg8khy" path="res://addons/battle_foundation/runtime/battle_entity_2d.gd" id="entity"]
 [ext_resource type="Script" uid="uid://bub8f66j00mfc" path="res://addons/battle_foundation/movement/battle_hurtbox_2d.gd" id="hurtbox"]

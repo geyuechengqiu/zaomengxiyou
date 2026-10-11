@@ -238,7 +238,7 @@ GAS `BTWait` 已改为累计传入 delta，消除真实毫秒时钟绕过战斗�
 | [BattleActionStateMachine2D](runtime/battle_action_state_machine_2d.gd) | Core BaseStateMachine 子类、九状态、更新上下文及死亡终态守卫 |
 | [BattleActionLeafState2D](runtime/battle_action_leaf_state_2d.gd) | Core BaseState 子类、进入/退出、状态计时与转换条件、权限 |
 | [BattleActionProfile2D](definitions/battle_action_profile_2d.gd) | 战斗规则时间、原攻击区域及平台样例运动配置 |
-| [BattleMotionController2D](runtime/battle_motion_controller_2d.gd) | 速度、扫掠碰撞、地面/墙/顶、跳跃预算 |
+| [BattleMotionController2D](runtime/BattleMotionController2D.cs) | 速度、扫掠碰撞、地面/墙/顶、跳跃预算 |
 | [BattleComboDefinition](definitions/battle_combo_definition.gd) / [BattleAttackStep2D](definitions/battle_attack_step_2d.gd) | 只读分段技能、时长、权限与位移配置 |
 | [BattleComboState](runtime/battle_combo_state.gd) | 独立连击段号、下一段预约与施放序号 |
 | [BattleAttackInstance](runtime/battle_attack_instance.gd) | 攻击编号、攻击者/阵营、持续窗口与每击目标去重 |

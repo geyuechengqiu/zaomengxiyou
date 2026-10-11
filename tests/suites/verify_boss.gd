@@ -427,7 +427,8 @@ func _verify_playable_level() -> void:
 		move.phase = CoreOperationIntent.Phase.CHANGED
 		move.payload = {"move_axis":axis,"running":true}
 		player.action_state.handle_operation(move)
-		if target != null and not region.exit_open and distance < 230 and not protecting:
+		# 普攻1的原矩形右端153×2，另加目标受击宽度；镜头边界处也要尝试真实可命中的普攻。
+		if target != null and not region.exit_open and distance < 340 and not protecting:
 			if player.action_state.get_permission(&"turn",player.action_profile): player.animation.set_facing(1 if target.global_position.x > player.global_position.x else -1)
 			if frame%6 == 0:
 				var attack := CoreOperationIntent.new()

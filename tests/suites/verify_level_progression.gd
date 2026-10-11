@@ -237,16 +237,16 @@ func _verify_first_visible_edges() -> void:
 	var rig := session.camera_rig
 	var half_width: float = demo.camera.get_viewport_rect().size.x / demo.camera.zoom.x / 2.0
 	var visible := Vector2(demo.camera.get_screen_center_position().x-half_width,demo.camera.get_screen_center_position().x+half_width)
-	var limits := player.motion.horizontal_bounds
+	var limits: Vector2 = player.motion.horizontal_bounds
 	_check(limits.is_equal_approx(Vector2(visible.x+22,visible.y-22)) and limits.y < flow.regions[0].definition.bounds.end.x-22, "首区有活怪时限制在真实可见画面，不是更宽的区域右边界")
 	for direction in [-1,1]:
 		var edge: float = limits.x if direction < 0 else limits.y
 		_move_player(edge-direction*80,-1200)
-		player.motion.advance(0.5,direction*3000,player.action_profile)
+		player.motion.advance(0.5,direction*3000,player.action_profile,1.0)
 		_check(is_equal_approx(player.global_position.x,edge), "大步长跑动与空中移动不能走出画面边缘："+str(direction))
 		_move_player(edge-direction*80,-1200)
-		player.motion.apply_impulse(direction*3000,1,300)
-		player.motion.advance(0.5,0,player.action_profile)
+		player.motion.apply_impulse(direction*3000,1,300,-1.0,false)
+		player.motion.advance(0.5,0,player.action_profile,1.0)
 		_check(is_equal_approx(player.global_position.x,edge) and player.motion.impulse_remaining == 0, "首区有活怪时击退仍停在画面边缘："+str(direction))
 		_move_player(edge-direction*80,-1200)
 		player.motion.sweep_skill_displacement(Vector2(direction*10000,-20),player.action_profile)
@@ -261,7 +261,7 @@ func _verify_locked_motion() -> void:
 	session.camera_rig.advance_camera(10)
 	flow._sync_camera_lock()
 	var bounds: Rect2 = flow.regions[1].definition.bounds
-	var limits := player.motion.horizontal_bounds
+	var limits: Vector2 = player.motion.horizontal_bounds
 	var visible := session.camera_rig.get_combat_horizontal_bounds()
 	_check(player.motion.horizontal_bounds_active and limits.is_equal_approx(Vector2(visible.x+22,visible.y-22)) and limits.y < bounds.end.x-22, "新区限制取锁定画面与区域的交集，并包含玩家碰撞体半径")
 	for direction in [-1,1]:
@@ -273,7 +273,7 @@ func _verify_locked_motion() -> void:
 		_check(player.global_position.x >= limits.x-0.001 and player.global_position.x <= limits.y+0.001, "高于出口墙时跑动也不能从区域侧面离开："+str(direction))
 		_check(player.global_position.y > -1200 and player.velocity.x == 0, "撞区域边界只停止横向速度，仍正常受重力下落")
 		_move_player(edge-direction*80,-1200)
-		player.motion.apply_impulse(direction*3000,1,300)
+		player.motion.apply_impulse(direction*3000,1,300,-1.0,false)
 		await _step(0.3)
 		_check(player.global_position.x >= limits.x-0.001 and player.global_position.x <= limits.y+0.001 and player.motion.impulse_remaining == 0, "击退击飞不会逃出区域或保留向外冲量："+str(direction))
 		_move_player(edge-direction*80,-1200)
