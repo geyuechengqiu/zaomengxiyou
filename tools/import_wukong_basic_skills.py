@@ -8,6 +8,7 @@ import re
 import sys
 
 PROJECT = Path(__file__).resolve().parents[1]
+SCRIPT_MIGRATIONS = json.loads((PROJECT/'tools/csharp/migration-map.json').read_text(encoding='utf-8'))
 SOURCE = Path(sys.argv[1]) if len(sys.argv) > 1 else Path('D:/UserData/Downloads/game/Speculum-4399-master')
 sys.dont_write_bytecode = True
 sys.path.insert(0, str(SOURCE))
@@ -54,7 +55,7 @@ def write(path, text):
     target.write_text(text,encoding='utf-8')
 
 def dump(path, data): write(path, json.dumps(data,ensure_ascii=False,indent=2)+'\n')
-def ext(path, name): return f'[ext_resource type="Script" path="res://{path}" id="{name}"]\n'
+def ext(path, name): return f'[ext_resource type="Script" path="res://{SCRIPT_MIGRATIONS.get(path, path)}" id="{name}"]\n'
 def arr(values): return 'Array[float](['+', '.join(str(float(v)) for v in values)+'])'
 def series(value): return str(value).split(';') if isinstance(value,str) else [value]
 def sn(values): return 'Array[StringName](['+', '.join('&'+json.dumps(v,ensure_ascii=False) for v in values)+'])'
@@ -70,11 +71,13 @@ for number in [6000101,6000201,6000301,6000501,19000101]:
     STATUS_IDS[name] = f'res://{FOLDER}/{name}.tres'
     text = '[gd_resource type="Resource" script_class="GameplayStatusData" format=3]\n'
     text += ext(f'{GAS}/status/gameplay_status_data.gd','status')+ext(f'{BF}/gas/battle_original_status_policy.gd','policy')
+    text += '[ext_resource type="Resource" path="res://data/buffs/natural_duration.tres" id="natural_duration"]\n'
     if number == 19000101:
         text += ext(f'{BF}/gas/ge_battle_damage_rules.gd','effect')+ext(f'{GAS}/effects/gameplay_effect.gd','effect_type')
         text += '[sub_resource type="Resource" id="Reduction"]\nscript = ExtResource("effect")\nrules = {&"dmgRate": 50.0}\n'
     text += '[sub_resource type="Resource" id="Policy"]\nscript = ExtResource("policy")\nreplace_rule = 3\n'
     text += f'[resource]\nscript = ExtResource("status")\nstatus_id = &"{name}"\nstatus_display_name = "{row["describe"]}"\nduration = {row["totalTime"]}\nstacking_policy = SubResource("Policy")\n'
+    text += 'duration_policy = ExtResource("natural_duration")\n'
     text += f'tags = {sn(["status.buff"] + (["state.super_armor"] if row["type"] == 6 else []))}\n'
     if number == 19000101: text += 'apply_effects = Array[ExtResource("effect_type")]([SubResource("Reduction")])\n'
     text += f'metadata/original_buff_id = {number}\n'

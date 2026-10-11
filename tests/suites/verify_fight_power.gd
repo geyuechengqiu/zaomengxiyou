@@ -22,11 +22,12 @@ func _ready() -> void:
 	check(source.weights == expected_weights, "十二项权重与原PowerAttribute[1]一致")
 	check(source.roles["孙悟空"].powerCorrection == 190 and source.original_tip.contains("修正战力"), "原Role2001修正190及Tips684组成说明")
 	check(source.archive_sha256.length() == 64 and source.logic.size() == 2, "原版配置和公式保留SHA256溯源")
-	check(rules.calculate(original) == 987 and rules.calculate(original,190) == 1177, "一级原版987；显式启用190修正才为1177")
-	check(rules.calculate({&"critical":10,&"toughness":10,&"lucky":10,&"guardian":10,&"hit":10,&"dodge":10}) == 300, "评分直接乘权重，不转换为暴击/闪避/幸运概率")
-	check(rules.calculate({&"hpMax":0.49}) == 0 and rules.calculate({&"hpMax":0.5}) == 1 and rules.calculate({&"hpMax":-0.5}) == 0, "AS3 Math.round使用floor(sum+0.5)，非逐属性取整")
-	check(rules.calculate({&"hpMax":0.25,&"mpMax":0.125}) == 1, "多个小数项先相加再取整")
-	check(rules.calculate({&"hp":10000,&"mp":10000,&"exp":10000,&"level":81,&"fireResist":10000,&"critical_rate":1}) == 0, "当前生命/魔法/经验/等级/抗性/概率不作为直接战力项")
+	# C#默认参数不会加入Godot跨语言方法元数据，显式传入修正值。
+	check(rules.calculate(original,0) == 987 and rules.calculate(original,190) == 1177, "一级原版987；显式启用190修正才为1177")
+	check(rules.calculate({&"critical":10,&"toughness":10,&"lucky":10,&"guardian":10,&"hit":10,&"dodge":10},0) == 300, "评分直接乘权重，不转换为暴击/闪避/幸运概率")
+	check(rules.calculate({&"hpMax":0.49},0) == 0 and rules.calculate({&"hpMax":0.5},0) == 1 and rules.calculate({&"hpMax":-0.5},0) == 0, "AS3 Math.round使用floor(sum+0.5)，非逐属性取整")
+	check(rules.calculate({&"hpMax":0.25,&"mpMax":0.125},0) == 1, "多个小数项先相加再取整")
+	check(rules.calculate({&"hp":10000,&"mp":10000,&"exp":10000,&"level":81,&"fireResist":10000,&"critical_rate":1},0) == 0, "当前生命/魔法/经验/等级/抗性/概率不作为直接战力项")
 	scene = load("res://game/levels/biyujing.tscn").instantiate()
 	scene.enable_player_controls = false
 	add_child(scene)

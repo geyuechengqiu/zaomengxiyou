@@ -45,7 +45,7 @@ def build(project: Path) -> None:
         assert atlas.crop((x, y, x+w, y+h)).tobytes() == Image.open(folder / record["file"]).convert("RGBA").tobytes()
     atlas.save(folder / "atlas.png")
     resource = ['[gd_resource type="Resource" script_class="BattleDamageNumberLibrary" format=3]',
-                '[ext_resource type="Script" path="res://addons/battle_foundation/presentation/battle_damage_number_library.gd" id="script"]',
+                '[ext_resource type="Script" path="res://addons/battle_foundation/presentation/BattleDamageNumberLibrary.cs" id="script"]',
                 '[ext_resource type="Texture2D" path="res://assets/effects/damage_numbers/atlas.png" id="atlas"]']
     groups = {}
     for index, (record, placement) in enumerate(zip(source["textures"], placements)):

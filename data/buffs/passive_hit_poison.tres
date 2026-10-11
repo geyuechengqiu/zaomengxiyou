@@ -1,4 +1,5 @@
 [gd_resource type="Resource" script_class="GameplayStatusData" format=3]
+[ext_resource type="Resource" path="res://data/buffs/natural_duration.tres" id="natural_duration"]
 [ext_resource type="Script" path="res://addons/gameplay_abiltiy_system/scripts/status/gameplay_status_data.gd" id="status"]
 [ext_resource type="Script" path="res://addons/gameplay_abiltiy_system/scripts/effects/gameplay_effect.gd" id="effect_type"]
 [ext_resource type="Script" path="res://addons/gameplay_abiltiy_system/scripts/status/features/status_feature.gd" id="feature_type"]
@@ -18,6 +19,7 @@ effects = Array[ExtResource("effect_type")]([SubResource("effect")])
 cooldown = 1.0
 [resource]
 script = ExtResource("status")
+duration_policy = ExtResource("natural_duration")
 status_id = &"passive_hit_poison"
 status_display_name = "组合被动验收：passive_hit_poison"
 duration = -1.0

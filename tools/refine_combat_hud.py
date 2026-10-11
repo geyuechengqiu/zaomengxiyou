@@ -33,7 +33,7 @@ def author():
     for name,row in evidence['monsters'].items():
         generic=int(row.get('protectSkill',0))==1900010
         maximum=int(row.get('protectPoint',0))
-        text='[gd_resource type="Resource" script_class="BattleProtectionProfile" format=3]\n[ext_resource type="Script" path="res://addons/battle_foundation/definitions/battle_protection_profile.gd" id="script"]\n'
+        text='[gd_resource type="Resource" script_class="BattleProtectionProfile" format=3]\n[ext_resource type="Script" path="res://addons/battle_foundation/definitions/BattleProtectionProfile.cs" id="script"]\n'
         if generic:text+='[ext_resource type="Resource" path="res://data/buffs/invulnerable.tres" id="status"]\n[ext_resource type="Resource" path="res://data/buffs/debuff_immunity.tres" id="immune"]\n'
         text+='[resource]\nscript = ExtResource("script")\n'+f'enabled = {str(maximum>0).lower()}\noriginal_boss_key = "Monster/{row["id"]}"\nmaximum_override = {maximum if maximum>0 else -1}\ninherit_original_display = false\nshow_protect = {str(bool(row.get("showProtect",0))).lower()}\nprotection_action_enabled = {str(generic).lower()}\n'
         if generic:

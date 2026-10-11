@@ -7,8 +7,8 @@
 [ext_resource type="Script" path="res://addons/battle_foundation/gas/battle_skill_cooldown_feature.gd" id="cooldown"]
 [ext_resource type="Script" path="res://addons/battle_foundation/gas/battle_frame_timeline_feature.gd" id="timeline"]
 [ext_resource type="Script" path="res://addons/battle_foundation/definitions/battle_attack_segment.gd" id="segment"]
-[ext_resource type="Script" path="res://addons/battle_foundation/definitions/battle_skill_branch.gd" id="branch"]
-[ext_resource type="Script" path="res://addons/battle_foundation/definitions/battle_skill_motion.gd" id="motion"]
+[ext_resource type="Script" path="res://addons/battle_foundation/definitions/BattleSkillBranch.cs" id="branch"]
+[ext_resource type="Script" path="res://addons/battle_foundation/definitions/BattleSkillMotion.cs" id="motion"]
 [sub_resource type="Resource" id="Mana"]
 script = ExtResource("mana")
 skill_id = &"sunwukong_skill8_slam"

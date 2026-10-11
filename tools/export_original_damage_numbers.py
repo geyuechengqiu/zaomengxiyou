@@ -33,7 +33,7 @@ output.mkdir(parents=True, exist_ok=True)
 groups = {}
 records = []
 resource = ['[gd_resource type="Resource" script_class="BattleDamageNumberLibrary" format=3]',
-            '[ext_resource type="Script" path="res://addons/battle_foundation/presentation/battle_damage_number_library.gd" id="script"]']
+            '[ext_resource type="Script" path="res://addons/battle_foundation/presentation/BattleDamageNumberLibrary.cs" id="script"]']
 for index, row in enumerate(manifest["textures"]):
     relative = Path(row["group"]) / (row["name"] + ".png")
     original = source_export / row["files"]["restored"]

@@ -21,7 +21,9 @@ try {
         $process = Start-Process -FilePath $Godot -ArgumentList $arguments -WindowStyle Hidden -Wait -PassThru
         $output = Get-Content -Raw -LiteralPath $taskLog
         if ($process.ExitCode -ne 0 -or $output -match 'SCRIPT ERROR:|(?m)^ERROR:' -or $output -notmatch '(?m)^PASS') {
-            Write-Output $output
+            $taskLines = $output -split "`n"
+            $taskLines | Select-Object -First 100 | Write-Output
+            if ($taskLines.Count -gt 100) { $taskLines | Select-Object -Last 25 | Write-Output }
             throw "Godot suite failed: $suite (exit $($process.ExitCode))"
         }
         $output -split "`n" | Where-Object { $_ -match '^PASS' } | Write-Output

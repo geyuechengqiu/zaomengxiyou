@@ -159,7 +159,7 @@ for id in equip_ids:
     for key in ['hpMax','mpMax','atk','phyDef','reHP','reMP','hit','dodge','critical','toughness','lucky','guardian']:
         value=float(str(data.get(key,'0')).split(';')[0])
         if value: modifiers.append((key,value))
-    text='[gd_resource type="Resource" format=3]\n[ext_resource type="Script" path="res://addons/battle_foundation/definitions/battle_inventory_equipment.gd" id="item"]\n[ext_resource type="Script" path="res://addons/battle_foundation/definitions/battle_equipment_definition.gd" id="equip"]\n[ext_resource type="Script" path="res://addons/gameplay_abiltiy_system/scripts/attributes/gameplay_attribute_modifier.gd" id="modifier"]\n'+f'[ext_resource type="Texture2D" path="{icon}" id="icon"]\n'
+    text='[gd_resource type="Resource" format=3]\n[ext_resource type="Script" path="res://addons/battle_foundation/definitions/battle_inventory_equipment.gd" id="item"]\n[ext_resource type="Script" path="res://addons/battle_foundation/definitions/BattleEquipmentDefinition.cs" id="equip"]\n[ext_resource type="Script" path="res://addons/gameplay_abiltiy_system/scripts/attributes/gameplay_attribute_modifier.gd" id="modifier"]\n'+f'[ext_resource type="Texture2D" path="{icon}" id="icon"]\n'
     for i,(key,value) in enumerate(modifiers):text+=f'[sub_resource type="Resource" id="Mod{i}"]\nscript = ExtResource("modifier")\nattribute_id = &"{key}"\nvalue = {value}\n'
     slot={'armor':'armor','helmet':'helmet','weapon':'weapon'}[data['part']]
     text+='[sub_resource type="Resource" id="Equipment"]\nscript = ExtResource("equip")\n'+f'definition_id = &"{id}"\ndisplay_name = {json.dumps(data["name"],ensure_ascii=False)}\nslot_id = &"{slot}"\n'

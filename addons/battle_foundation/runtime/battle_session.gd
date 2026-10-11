@@ -71,7 +71,7 @@ func configure(id: StringName, manifest_path: String, seed_value: int) -> bool:
 		return false
 	battle_id = id
 	random.initialize(seed_value)
-	factions.set_relation(&"player", &"enemy", BattleFactions.Relation.HOSTILE)
+	factions.set_relation(&"player", &"enemy", -1, true)
 	_configured = true
 	return true
 

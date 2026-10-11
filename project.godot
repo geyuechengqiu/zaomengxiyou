@@ -12,12 +12,13 @@ config_version=5
 
 config/name="zaomengxiyou"
 run/main_scene="res://game/levels/biyujing.tscn"
-config/features=PackedStringArray("4.7", "Forward Plus")
+config/features=PackedStringArray("4.7", "C#", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
 
 CoreSystem="*res://addons/godot_core_system-0.0.4/source/core_system.gd"
+CoreLifetime="*res://addons/battle_foundation/integration/CoreLifetime.cs"
 GameplayAbilitySystem="*uid://u2lf4qtnkmft"
 DamageCalculator="*uid://b2jxgcjagrkdx"
 TagManager="*uid://crdi6238nttlg"
@@ -36,6 +37,10 @@ manifest_path="res://data/levels/biyujing/progression/manifest.json"
 window/size/viewport_width=940
 window/size/viewport_height=590
 window/stretch/mode="canvas_items"
+
+[dotnet]
+
+project/assembly_name="zaomengxiyou"
 
 [editor_plugins]
 

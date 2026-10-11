@@ -2,7 +2,7 @@
 
 [ext_resource type="Resource" path="res://data/monsters/revival_vessel/actions.tres" id="actions"]
 [ext_resource type="Script" path="res://addons/battle_foundation/runtime/battle_action_state_2d.gd" id="component_ActionState"]
-[ext_resource type="Script" path="res://addons/battle_foundation/runtime/battle_combo_state.gd" id="component_ComboState"]
+[ext_resource type="Script" path="res://addons/battle_foundation/runtime/BattleComboState.cs" id="component_ComboState"]
 [ext_resource type="Script" path="res://addons/battle_foundation/combat/battle_damage_rules_component.gd" id="component_DamageRules"]
 [ext_resource type="Script" path="res://addons/gameplay_abiltiy_system/scripts/components/gameplay_ability_component.gd" id="component_GameplayAbilityComponent"]
 [ext_resource type="Script" path="res://addons/gameplay_abiltiy_system/scripts/components/gameplay_status_component.gd" id="component_GameplayStatusComponent"]

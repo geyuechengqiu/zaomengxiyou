@@ -137,7 +137,7 @@ disabled = true
 '''
     write(f'data/monsters/{name}/visual.tscn',text)
     write(f'data/monsters/{name}/animation.tres', '''[gd_resource type="Resource" script_class="CharacterAnimationProfile" format=3]
-[ext_resource type="Script" path="res://addons/battle_foundation/animation/character_animation_profile.gd" id="script"]
+[ext_resource type="Script" path="res://addons/battle_foundation/animation/CharacterAnimationProfile.cs" id="script"]
 [resource]
 script = ExtResource("script")
 source_fps = 30.0

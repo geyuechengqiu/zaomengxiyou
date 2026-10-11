@@ -9,3 +9,10 @@
 # Python offline import tools
 __pycache__/
 *.pyc
+
+# C# build and IDE output
+bin/
+obj/
+.vs/
+*.csproj.user
+*.sln.docstates

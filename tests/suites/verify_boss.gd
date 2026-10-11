@@ -257,7 +257,7 @@ func _verify_wall_no_contact_damage() -> void:
 
 func _verify_lead_control() -> void:
 	await _fresh()
-	var rule := controller.boss_profile.skills[1]
+	var rule: BattleBossSkillRule = controller.boss_profile.skills[1]
 	rule.announcement_lead_seconds = 0.6
 	rule.warning_rect = Rect2(0,-100,400,100)
 	controller.enabled = true
@@ -386,6 +386,8 @@ func _verify_protection_and_cleanup() -> void:
 	_check(not boss.protection.active and boss.action_state.current != BattleActionState2D.State.PROTECT, "保护结束恢复动作规则")
 	_check(TagManager.has_tag(boss, &"state.invulnerable"), "动作一秒结束但原无敌Buff持续两秒")
 	await _step(1)
+	_check(not TagManager.has_tag(boss, &"state.invulnerable") and not TagManager.has_tag(boss, &"state.debuff_immune"), "原两秒保护Buff到期清除无敌与减益免疫，包括原生导出")
+	_check(not session.apply_secondary_damage(boss, player, 1, &"test").is_immune, "保护到期后重新通过统一伤害入口受伤")
 	boss.protection.register_hit({"original_skill_id":1101010,"protection_parameters":{"protectPoint":1000}},1,1167)
 	await _step(0.3)
 	_check(feedback.protect.value > 0 and feedback.protect_label.text.contains("25000"), "即使HP未变，公共保护条仍跟随保护分数更新")
@@ -414,7 +416,7 @@ func _verify_playable_level() -> void:
 				target = actor
 				distance = gap
 		var region: BattleRegionInstance = scene.flow.regions[scene.flow.current_region_index]
-		var goal := region.definition.exit_rect.get_center().x if region.exit_open else (target.global_position.x if target != null else region.definition.entry_rect.get_center().x)
+		var goal: float = region.definition.exit_rect.get_center().x if region.exit_open else (target.global_position.x if target != null else region.definition.entry_rect.get_center().x)
 		var axis := signf(goal-player.global_position.x) if absf(goal-player.global_position.x) > (110 if target != null and not region.exit_open else 10) else 0.0
 		var protecting := target != null and target.ai_controller is BattleBossController2D and TagManager.has_tag(target, &"state.invulnerable")
 		# 按真实保护规则走位等待无敌结束，不对无敌Boss持续贴身空打。
@@ -440,6 +442,15 @@ func _verify_playable_level() -> void:
 			break
 	for row in _events("battle.attack.hit",player.entity_id):
 		if row.get("entity_definition_id") == &"巨石灵君": damage_to_boss += row.actual_hp_loss
+	if not won:
+		print("Playable failure player: ", player.global_position, " state=", player.action_state.current, " velocity=", player.velocity, " combo=", player.combo.index)
+		print("Playable failure region: ", scene.flow.regions[4].definition.bounds, " camera=", session.camera_rig.center, " view=", session.camera_rig._view_size(), " limits=", player.motion.horizontal_bounds)
+		for remaining in session.get_entities():
+			if remaining != player and remaining.is_alive():
+				print("Playable failure target: ", remaining.definition_id, " position=", remaining.global_position, " state=", remaining.action_state.current, " hp=", remaining.attributes.get_vital_value(&"health"), " protection=", remaining.protection.active, " immunity=", TagManager.has_tag(remaining, &"state.invulnerable"))
+				print("Playable failure ground: ", remaining.motion.grounded, " wall=", remaining.motion.on_wall, " ai=", remaining.ai_controller.state, " clock=", session.clock.elapsed, " delta=", session.clock.last_delta, " scale=", session.clock.time_scale)
+				if remaining.attack_instance != null: print("Playable failure cast: ", remaining.attack_instance.ability_id, " elapsed=", remaining.attack_instance.elapsed)
+				for status in remaining.statuses.get_active_statuses(): print("Playable failure status: ", status.status_data.status_id, " remaining=", status.remaining_duration, " definition_duration=", status.status_data.duration, " policy=", status.status_data.duration_policy)
 	_check(won and scene.flow.death_count == 34 and damage_to_boss >= 1167, "原悟空属性、真实Core普攻与GAS伤害完成32小怪/容器/Boss/出口：状态%d区域%d死亡%d生命%d Boss伤害%d" % [scene.flow.state,scene.flow.current_region_index+1,scene.flow.death_count,player.attributes.get_vital_value(&"health"),damage_to_boss])
 	if won: print("PASS playable first level: original level1 Wukong, hp275/atk26, actual combo only; 34 targets, Boss damage %d, remaining HP %d" % [damage_to_boss,player.attributes.get_vital_value(&"health")])
 #endregion

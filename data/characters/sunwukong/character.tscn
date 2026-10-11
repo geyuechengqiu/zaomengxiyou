@@ -6,7 +6,7 @@
 [ext_resource type="Resource" uid="uid://c0281s88wiopx" path="res://data/inventory/110101002.tres" id="bag_helmet"]
 [ext_resource type="Resource" uid="uid://hj0mcqt6mv78" path="res://data/inventory/110101003.tres" id="bag_weapon"]
 [ext_resource type="Script" uid="uid://cxrmihsy5kb06" path="res://addons/battle_foundation/runtime/battle_action_state_2d.gd" id="component_ActionState"]
-[ext_resource type="Script" uid="uid://vosygjd4cpv7" path="res://addons/battle_foundation/runtime/battle_combo_state.gd" id="component_ComboState"]
+[ext_resource type="Script" uid="uid://vosygjd4cpv7" path="res://addons/battle_foundation/runtime/BattleComboState.cs" id="component_ComboState"]
 [ext_resource type="Script" uid="uid://dw6pbx6ug7ud7" path="res://addons/battle_foundation/combat/battle_damage_rules_component.gd" id="component_DamageRules"]
 [ext_resource type="Script" uid="uid://n8p5beakef7b" path="res://addons/gameplay_abiltiy_system/scripts/components/gameplay_ability_component.gd" id="component_GameplayAbilityComponent"]
 [ext_resource type="Script" uid="uid://b6hkniyhlhrsf" path="res://addons/gameplay_abiltiy_system/scripts/components/gameplay_status_component.gd" id="component_GameplayStatusComponent"]

@@ -109,7 +109,7 @@ skeleton_file_res = ExtResource("skeleton")
     # BuildAnimator的保护动作只播放一次；不能继承旧临时场景的循环标记。
     looped = [a for a,c in clips.items() if a != 'protect' and prop(c, 'loop_mode','0') != '0']
     write(folder/'animation.tres', f'''[gd_resource type="Resource" script_class="CharacterAnimationProfile" format=3]
-[ext_resource type="Script" path="res://addons/battle_foundation/animation/character_animation_profile.gd" id="script"]
+[ext_resource type="Script" path="res://addons/battle_foundation/animation/CharacterAnimationProfile.cs" id="script"]
 [ext_resource type="SpineSkeletonDataResource" path="res://assets/monsters/{name}/spinedata.tres" id="skeleton"]
 [resource]
 script = ExtResource("script")

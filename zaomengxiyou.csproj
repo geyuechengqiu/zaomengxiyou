@@ -1,0 +1,25 @@
+<Project Sdk="Godot.NET.Sdk/4.7.2">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <EnableDynamicLoading>true</EnableDynamicLoading>
+    <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
+    <RootNamespace>ZaomengXiyou</RootNamespace>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'ExportDebug' Or '$(Configuration)' == 'ExportRelease'">
+    <PublishAot>true</PublishAot>
+    <NativeLib>Shared</NativeLib>
+    <SelfContained>true</SelfContained>
+    <EnableDynamicLoading>false</EnableDynamicLoading>
+    <IlcOptimizationPreference>Speed</IlcOptimizationPreference>
+    <TrimmerSingleWarn>false</TrimmerSingleWarn>
+  </PropertyGroup>
+  <ItemGroup Condition="'$(PublishAot)' == 'true'">
+    <TrimmerRootAssembly Include="GodotSharp" />
+    <TrimmerRootAssembly Include="$(AssemblyName)" />
+  </ItemGroup>
+  <!-- Local diagnostic/build projects must not become gameplay scripts. -->
+  <ItemGroup>
+    <Compile Remove=".cleanup-backup/**/*.cs;tools/csharp/probes/**/*.cs" />
+  </ItemGroup>
+</Project>

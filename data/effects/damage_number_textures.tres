@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="BattleDamageNumberLibrary" format=3 uid="uid://caeeleqbpx4o7"]
 
 [ext_resource type="Texture2D" uid="uid://qnudjg0vhydj" path="res://assets/effects/damage_numbers/atlas.png" id="atlas"]
-[ext_resource type="Script" uid="uid://b7aqhipkhxuk1" path="res://addons/battle_foundation/presentation/battle_damage_number_library.gd" id="script"]
+[ext_resource type="Script" uid="uid://b7aqhipkhxuk1" path="res://addons/battle_foundation/presentation/BattleDamageNumberLibrary.cs" id="script"]
 
 [sub_resource type="AtlasTexture" id="t93"]
 atlas = ExtResource("atlas")

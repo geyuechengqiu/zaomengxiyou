@@ -23,6 +23,10 @@ def ext(path, name):
     return f'[ext_resource type="Script" path="res://{path}" id="{name}"]'
 
 def write(name, content):
+    # Store the policy explicitly: export customization may discard implicit Resource defaults.
+    declaration = '[ext_resource type="Resource" path="res://data/buffs/natural_duration.tres" id="natural_duration"]\n'
+    content = content.replace('[ext_resource', declaration + '[ext_resource', 1)
+    content = content.replace('script = ExtResource("status")', 'script = ExtResource("status")\nduration_policy = ExtResource("natural_duration")')
     (directory / f"{name}.tres").write_text(content + "\n", encoding="utf-8")
 
 def number(row, key):
@@ -123,6 +127,8 @@ for name, event, role, recipient, child in [
 
 manifest = json.loads((ROOT / "data/battle2d/hit_reaction/manifest.json").read_text(encoding="utf-8"))
 for file in directory.glob("*.tres"):
+    if 'script_class="GameplayStatusData"' not in file.read_text(encoding="utf-8"):
+        continue
     manifest["definitions"]["statuses"][file.stem] = f"res://data/buffs/{file.name}"
 target = ROOT / "data/battle2d/buffs"
 target.mkdir(parents=True, exist_ok=True)

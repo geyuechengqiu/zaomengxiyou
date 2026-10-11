@@ -1,5 +1,5 @@
 [gd_resource type="Resource" script_class="CharacterAnimationProfile" format=3]
-[ext_resource type="Script" path="res://addons/battle_foundation/animation/character_animation_profile.gd" id="script"]
+[ext_resource type="Script" path="res://addons/battle_foundation/animation/CharacterAnimationProfile.cs" id="script"]
 [ext_resource type="SpineSkeletonDataResource" path="res://assets/characters/sunwukong/animation/sunwukong_spinedata.tres" id="data"]
 
 [resource]

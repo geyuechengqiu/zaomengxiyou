@@ -91,7 +91,7 @@ func get_progression_error() -> String:
 		if not plan_map.has(id) or not plan_map[id].is_boss or not plan_map[id].participates_in_clear: return "必需Boss出生计划无效"
 	return ""
 
-func _conditions_valid(ids: Array[StringName]) -> bool:
+func _conditions_valid(ids: Array) -> bool:
 	for id in ids:
 		if id.is_empty() or not condition_ids.has(id): return false
 	return true

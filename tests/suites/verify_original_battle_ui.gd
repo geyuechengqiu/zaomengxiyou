@@ -170,7 +170,7 @@ func verify_ui() -> void:
 	player.statuses.remove_status(status_data.status_id)
 	check(not status_slot.visible and status_slot.get_node("Icon").texture == null, "状态移除清空图标，不留下旧图")
 	hud.set_inventory_open(true)
-	var elapsed := session.clock.elapsed
+	var elapsed: float = session.clock.elapsed
 	await tick(10)
 	check(session.clock.paused and session.clock.elapsed == elapsed and not player.operations.controller.has_control(), "背包暂停战斗并释放玩家控制权")
 	hud.set_inventory_open(false)

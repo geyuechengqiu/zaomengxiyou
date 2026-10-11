@@ -168,7 +168,7 @@ func _start_plans() -> void:
 	for instance: BattleSpawnPlanInstance in plans.values():
 		if state != State.RUNNING: return
 		if instance.started: continue
-		var cfg := instance.definition
+		var cfg: BattleSpawnPlanDefinition = instance.definition
 		var wave: BattleWaveInstance = _plan_waves[cfg.plan_id]
 		if not wave.started or not _conditions_met(cfg.required_conditions): continue
 		var due := maxf(wave.started_at, _conditions_time(cfg.required_conditions))
@@ -205,7 +205,7 @@ func _refresh_waves() -> void:
 			if state != State.RUNNING: return
 		if instance.completed: continue
 		var complete := true
-		var complete_at := instance.started_at
+		var complete_at: float = instance.started_at
 		for id in instance.definition.plan_ids:
 			var plan: BattleSpawnPlanInstance = plans[id]
 			if plan.definition.participates_in_clear:
@@ -217,8 +217,8 @@ func _refresh_waves() -> void:
 			_emit(&"battle.wave.completed", {"wave_id": instance.definition.wave_id, "region_id": instance.definition.region_id})
 
 func _spawn_next(instance: BattleSpawnPlanInstance) -> void:
-	var cfg := instance.definition
-	var due := instance.next_due
+	var cfg: BattleSpawnPlanDefinition = instance.definition
+	var due: float = instance.next_due
 	var point: BattleSpawnPoint2D = _points[cfg.spawn_point_id]
 	var actor := _session.spawn_entity_2d("monsters", cfg.monster_ids[instance.created], point.sample_position(_session.random), &"", true)
 	if state != State.RUNNING: return
@@ -257,7 +257,7 @@ func _level_conditions_met() -> bool:
 		if not (plans[id] as BattleSpawnPlanInstance).all_dead(): return false
 	return true
 
-func _conditions_met(ids: Array[StringName]) -> bool:
+func _conditions_met(ids: Array) -> bool:
 	for id in ids:
 		if not conditions.get(id, false): return false
 	return true
@@ -270,7 +270,7 @@ func set_condition(id: StringName, value: bool = true) -> bool:
 	_emit(&"battle.level.condition_changed", {"condition_id": id, "value": value})
 	return true
 
-func _conditions_time(ids: Array[StringName]) -> float:
+func _conditions_time(ids: Array) -> float:
 	var result := 0.0
 	for id in ids: result = maxf(result, _condition_times.get(id, 0.0))
 	return result
@@ -283,7 +283,7 @@ func get_region(id: StringName) -> BattleRegionInstance:
 func request_exit(actor: BattleEntity2D, automatic: bool = false) -> bool:
 	if state != State.RUNNING or actor != _player or _session.is_simulation_blocked() or not actor.is_alive(): return false
 	var region := regions[current_region_index]
-	var exit_rect := region.definition.exit_rect
+	var exit_rect: Rect2 = region.definition.exit_rect
 	if automatic and region.definition.automatic_exit and current_region_index < regions.size()-1: exit_rect = region.definition.get_automatic_exit_rect()
 	if region.exited or not region.exit_open or not exit_rect.has_point(actor.global_position): return false
 	if current_region_index == regions.size() - 1:
@@ -321,7 +321,7 @@ func _refresh_camera(initial: bool = false) -> void:
 func _sync_camera_lock() -> void:
 	if regions.is_empty() or not is_instance_valid(_player): return
 	var region := regions[current_region_index]
-	var locked := state == State.RUNNING and region.entered and not region.completed
+	var locked: bool = state == State.RUNNING and region.entered and not region.completed
 	var rig := get_node_or_null(camera_rig_path) as BattleCameraRig2D
 	if rig != null:
 		# 先同步战斗镜头，再用同一画面确定活动边界。

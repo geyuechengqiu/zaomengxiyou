@@ -145,7 +145,7 @@ func _resolve_application(info: DamageInfo, target: Node, notify_received: Calla
 	## 原版吸血发生在盾前，使用这一阶段数值；不是实际扣血。
 	info.lifesteal_basis = maxf(0.0, info.normal_damage + info.true_damage)
 	var life_steal := ar.get_number(&"lifeStealRatio") * info.lifesteal_basis
-	var life_cap := ar.get_number(&"lifeStealCap", INF)
+	var life_cap := ar.get_number_or(&"lifeStealCap", INF)
 	if is_finite(life_cap):
 		life_steal = minf(life_steal, maxf(0.0, life_cap * float(ctx.get("lifesteal_skill_multiplier", 1.0))))
 	info.lifesteal_requested = life_steal
@@ -160,7 +160,7 @@ func _resolve_application(info: DamageInfo, target: Node, notify_received: Calla
 	_hook(&"lifesteal", ar, tr, info, target, ctx)
 	info.normal_damage += ar.get_number(&"extraDamage")
 	_hook(&"extra_damage", ar, tr, info, target, ctx)
-	info.normal_damage *= ar.get_number(&"hpDamageMultiplier", 1.0) * tr.get_number(&"hpHurtMultiplier", 1.0)
+	info.normal_damage *= ar.get_number_or(&"hpDamageMultiplier", 1.0) * tr.get_number_or(&"hpHurtMultiplier", 1.0)
 	_hook(&"hp_ratio", ar, tr, info, target, ctx)
 	_hook(&"damage_transfer", ar, tr, info, target, ctx)
 	if tr.has_flag(&"no_damage"):
@@ -171,7 +171,7 @@ func _resolve_application(info: DamageInfo, target: Node, notify_received: Calla
 	info.shield_absorbed = tr.absorb_normal(maxf(0.0, info.normal_damage))
 	info.normal_damage -= info.shield_absorbed
 	_hook(&"shields", ar, tr, info, target, ctx)
-	var block := tr.get_number(&"subDamage", 0.0)
+	var block := tr.get_number_or(&"subDamage", 0.0)
 	if block > 0.0 and (tr.has_flag(&"block_omnidirectional") or _is_front_hit(attacker, target, ctx)):
 		info.normal_damage *= block
 		info.true_damage *= block
@@ -189,7 +189,7 @@ func _resolve_application(info: DamageInfo, target: Node, notify_received: Calla
 			info.normal_damage *= 2.0
 			info.true_damage *= 2.0
 	_hook(&"special_double", ar, tr, info, target, ctx)
-	var cap := tr.get_number(&"bossDamageCap", INF)
+	var cap := tr.get_number_or(&"bossDamageCap", INF)
 	if is_finite(cap):
 		info.normal_damage = minf(info.normal_damage, cap)
 	_hook(&"boss_cap", ar, tr, info, target, ctx)
@@ -201,7 +201,7 @@ func _resolve_application(info: DamageInfo, target: Node, notify_received: Calla
 	_hook(&"last_damage", ar, tr, info, target, ctx)
 	if tr.has_flag(&"damageToHealing"):
 		var health: HealthVital = GameplayAbilitySystem.get_component_by_interface(target, "GameplayVitalAttributeComponent").get_vital(&"health")
-		health.heal(ceilf(maxf(0.0, info.normal_damage) * tr.get_number(&"healingRatio", 1.0)))
+		health.heal(ceilf(maxf(0.0, info.normal_damage) * tr.get_number_or(&"healingRatio", 1.0)))
 		info.normal_damage = 0.0
 	_hook(&"damage_to_healing", ar, tr, info, target, ctx)
 	## 纯真实分支去掉原版中途被重新补到1的普通尾数。
@@ -301,12 +301,12 @@ func _is_front_hit(attacker: Node, target: Node, ctx: Dictionary) -> bool:
 func _lost_hp_bonus(rules: BattleDamageRules, attacker: Dictionary) -> Dictionary:
 	var lost := rules.get_number(&"totalLoastHpPercent")
 	var custom: Dictionary = _skills.get("1301110", {}).get("custom", {})
-	var k := rules.get_number(&"passive_k", float(custom.get("k", 111.0)))
-	var y := rules.get_number(&"passive_y", float(custom.get("y", 111.0)))
-	var z := rules.get_number(&"passive_z", float(custom.get("z", 111.0)))
-	var limit := rules.get_number(&"passive_MAX", float(custom.get("MAX", 0.35)))
+	var k := rules.get_number_or(&"passive_k", float(custom.get("k", 111.0)))
+	var y := rules.get_number_or(&"passive_y", float(custom.get("y", 111.0)))
+	var z := rules.get_number_or(&"passive_z", float(custom.get("z", 111.0)))
+	var limit := rules.get_number_or(&"passive_MAX", float(custom.get("MAX", 0.35)))
 	var critical := minf(maxf(k * lost / (y + lost) + z, z), limit)
-	var n := rules.get_number(&"passive_n", float(custom.get("n", 111.0)))
-	var damage: float = minf(lost / rules.get_number(&"passive_c", float(custom.get("c", 111.0))) * n, n) * float(attacker.hp_ratio) / (float(attacker.hp_ratio) + rules.get_number(&"passive_a", float(custom.get("a", 111.0)))) + rules.get_number(&"passive_b", float(custom.get("b", 111.0)))
+	var n := rules.get_number_or(&"passive_n", float(custom.get("n", 111.0)))
+	var damage: float = minf(lost / rules.get_number_or(&"passive_c", float(custom.get("c", 111.0))) * n, n) * float(attacker.hp_ratio) / (float(attacker.hp_ratio) + rules.get_number_or(&"passive_a", float(custom.get("a", 111.0)))) + rules.get_number_or(&"passive_b", float(custom.get("b", 111.0)))
 	return {"critical": critical, "damage": damage}
 #endregion

@@ -1,5 +1,5 @@
 [gd_resource type="Resource" script_class="BattleEntityDefinition" format=3]
-[ext_resource type="Script" path="res://addons/battle_foundation/definitions/battle_entity_definition.gd" id="script"]
+[ext_resource type="Script" path="res://addons/battle_foundation/definitions/BattleEntityDefinition.cs" id="script"]
 [ext_resource type="Script" path="res://addons/gameplay_abiltiy_system/scripts/attributes/vitals/gameplay_vital.gd" id="vital_type"]
 [ext_resource type="Resource" path="res://data/monsters/jushi_lingjun/attributes.tres" id="attributes"]
 [ext_resource type="Resource" path="res://data/attribute/vitals/health.tres" id="health"]

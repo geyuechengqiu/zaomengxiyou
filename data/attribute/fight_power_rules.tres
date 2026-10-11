@@ -1,5 +1,5 @@
 [gd_resource type="Resource" script_class="BattleFightPowerRules" format=3]
-[ext_resource type="Script" path="res://addons/battle_foundation/attributes/battle_fight_power_rules.gd" id="script"]
+[ext_resource type="Script" path="res://addons/battle_foundation/attributes/BattleFightPowerRules.cs" id="script"]
 [ext_resource type="JSON" path="res://data/ui/fight_power_weights.json" id="source"]
 [resource]
 script = ExtResource("script")

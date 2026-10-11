@@ -260,7 +260,7 @@ func _verify_locked_motion() -> void:
 	# 上一验收已通过真实出生/死亡进入第二区；这里覆盖运动的不同入口。
 	session.camera_rig.advance_camera(10)
 	flow._sync_camera_lock()
-	var bounds := flow.regions[1].definition.bounds
+	var bounds: Rect2 = flow.regions[1].definition.bounds
 	var limits := player.motion.horizontal_bounds
 	var visible := session.camera_rig.get_combat_horizontal_bounds()
 	_check(player.motion.horizontal_bounds_active and limits.is_equal_approx(Vector2(visible.x+22,visible.y-22)) and limits.y < bounds.end.x-22, "新区限制取锁定画面与区域的交集，并包含玩家碰撞体半径")

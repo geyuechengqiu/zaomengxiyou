@@ -64,7 +64,10 @@ func initialize_from_definition(data: BattleEntityDefinition) -> void:
 				local.scalable_attributes.erase(attribute)
 				attribute.scalable_value = null
 		sets.append(local)
-	initialize(sets, data.vitals)
+	# C#定义保存Resource列表；在第三方GAS边界恢复其脚本元素类型。
+	var vital_definitions: Array[GameplayVital] = []
+	vital_definitions.assign(data.vitals)
+	initialize(sets, vital_definitions)
 	_initial_base_values.clear()
 	for id in _attributes:
 		_initial_base_values[id] = get_attribute(id).base_value
@@ -134,7 +137,7 @@ func get_snapshot() -> Dictionary:
 func get_fight_power_breakdown() -> Dictionary:
 	if fight_power_rules == null: return {"total": 0}
 	var attributes := {}
-	for id: StringName in BattleFightPowerRules.ATTRIBUTES:
+	for id: StringName in fight_power_rules.get_attribute_ids():
 		attributes[id] = get_layer_value(id, false, false)
 	return fight_power_rules.get_breakdown(attributes, fight_power_correction)
 
@@ -231,7 +234,7 @@ func replace_source(source: StringName, modifiers: Array[GameplayAttributeModifi
 func set_equipment(slot: StringName, definition: BattleEquipmentDefinition) -> void:
 	var mods: Array[GameplayAttributeModifier] = []
 	if definition != null:
-		mods = definition.attribute_modifiers
+		mods.assign(definition.attribute_modifiers)
 	replace_source(StringName("equipment." + String(slot)), mods)
 
 func bind_inventory(inventory: C_Inventory) -> void:
@@ -302,7 +305,7 @@ func remove_modifiers_by_source(source: StringName) -> void:
 
 ## 原始属性小数变化或被临时覆盖时，整数最终值可能不变，仍需通知战力。
 func _mark_power_change(id: StringName, source: StringName = &"") -> void:
-	if fight_power_rules == null or not BattleFightPowerRules.ATTRIBUTES.has(id): return
+	if fight_power_rules == null or not fight_power_rules.has_attribute(id): return
 	if source.is_empty() or String(source).begins_with("growth.") or String(source).begins_with("equipment."):
 		_pending_power_snapshot = true
 

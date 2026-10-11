@@ -87,7 +87,7 @@ func _ready() -> void:
 	nested_trigger = true
 	settle(player,target,1)
 	CoreSystem.event_bus.event_pushed.disconnect(_nested_hit)
-	check(tracker.get_count(player.entity_id) == 5 and tracker._pending_settlements.is_empty(), "有效命中回调先完成次生结算时，外层攻击仍计数且序号间隙及时清理")
+	check(tracker.get_count(player.entity_id) == 5 and tracker.get_pending_settlement_count() == 0, "有效命中回调先完成次生结算时，外层攻击仍计数且序号间隙及时清理")
 	tracker.reset_chain(player.entity_id)
 	for index in range(12): settle(player,target,1)
 	check(view.displayed_count == 12 and view.get_node("Digit0").texture == view.digit_textures[2] and view.get_node("Digit1").texture == view.digit_textures[1] and view.get_node("Digit1").position.x == 96, "两位计数按原48像素间距右对齐")
@@ -124,7 +124,7 @@ func _ready() -> void:
 	settle(player,target,1)
 	verify_empty_slots()
 	session.clear_battle()
-	check(not view.visible and tracker._roles.is_empty() and tracker._owners.is_empty() and tracker._pending_settlements.is_empty(), "离开关卡清理所有计数和归属")
+	check(not view.visible and tracker.get_registered_role_count() == 0 and tracker.get_hit_owner_count() == 0 and tracker.get_pending_settlement_count() == 0, "离开关卡清理所有计数和归属")
 	CoreSystem.event_bus.event_pushed.disconnect(_event)
 	scene.free()
 	await get_tree().process_frame

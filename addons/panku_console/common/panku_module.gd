@@ -95,12 +95,12 @@ func _init_module():
 	var env_script_path = module_script_dir + "/env.gd"
 	var opt_script_path = module_script_dir + "/opt.gd"
 
-	if FileAccess.file_exists(env_script_path):
+	if ResourceLoader.exists(env_script_path):
 		_env = load(env_script_path).new()
 		_env._module = self
 		core.gd_exprenv.register_env(get_module_name(), _env)
 
-	if FileAccess.file_exists(opt_script_path):
+	if ResourceLoader.exists(opt_script_path):
 		#print(opt_script_path)
 		_opt = load(opt_script_path).new() as ModuleOptions
 		_opt._module = self

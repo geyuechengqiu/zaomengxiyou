@@ -154,7 +154,7 @@ func _cancel_lead(reason: StringName) -> void:
 	lead_remaining = 0
 	actor.publish_battle_event(&"battle.boss.announcement_cancelled", {"request_id": request_serial, "reason": reason})
 
-func _conditions_met(ids: Array[StringName]) -> bool:
+func _conditions_met(ids: Array) -> bool:
 	if ids.is_empty(): return true
 	var level := actor.session.level_instance
 	if level == null: return false

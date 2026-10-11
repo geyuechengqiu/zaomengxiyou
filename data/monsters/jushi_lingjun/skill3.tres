@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://addons/gameplay_abiltiy_system/scripts/abilities/features/cooldown_feature.gd" id="cooldown"]
 [ext_resource type="Script" path="res://addons/battle_foundation/gas/battle_frame_timeline_feature.gd" id="timeline"]
 [ext_resource type="Script" path="res://addons/battle_foundation/definitions/battle_attack_segment.gd" id="segment"]
-[ext_resource type="Script" path="res://addons/battle_foundation/definitions/battle_frame_event.gd" id="event"]
+[ext_resource type="Script" path="res://addons/battle_foundation/definitions/BattleFrameEvent.cs" id="event"]
 [sub_resource type="Resource" id="Cooldown"]
 script = ExtResource("cooldown")
 cooldown_duration = 10.0

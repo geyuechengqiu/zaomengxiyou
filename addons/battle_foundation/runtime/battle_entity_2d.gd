@@ -133,7 +133,8 @@ func _ready() -> void:
 	if wushuang != null: wushuang.bind(self)
 	assert(reaction_profile != null and reaction_profile.is_valid(), "目标受击反应配置无效")
 	reactions.bind(self)
-	assert(protection.configure(self, protection_profile), protection.last_error)
+	var protection_configured: bool = protection.configure(self, protection_profile)
+	assert(protection_configured, protection.last_error)
 	combo.definition = action_profile.combo
 	assert(combo.definition == null or combo.definition.is_valid(), "连击定义无效")
 	animation = get_node_or_null(animation_path) as CharacterAnimationAdapter
@@ -489,8 +490,8 @@ func _advance_combo() -> void:
 	var skill := abilities.get_ability_instance(combo.get_step().ability_id)
 	if skill != null and skill.is_active:
 		return
-	var next := combo.index + 1
-	var queued := combo.queued_next
+	var next: int = combo.index + 1
+	var queued: bool = combo.queued_next
 	combo.cancel()
 	_active_skill_id = &""
 	if queued and _start_combo_step(next, true):
@@ -539,7 +540,7 @@ func receive_damage_info(info: DamageInfo, interrupt_kind: StringName = &"normal
 			if policy.protection:
 				var multiplier := 1.0
 				if info.instigator is BattleEntity2D:
-					multiplier = info.instigator.damage_rules.get_number(&"protectionMultiplier", 1.0)
+					multiplier = info.instigator.damage_rules.get_number_or(&"protectionMultiplier", 1.0)
 				var protect_result := protection.register_hit(hit_context, info.actual_hp_loss, attributes.get_value(&"hpMax"), multiplier)
 				effects["protection_increment"] = protect_result.increment
 			# 触发保护的本次命中不能再用普通硬直覆盖 PROTECT。
