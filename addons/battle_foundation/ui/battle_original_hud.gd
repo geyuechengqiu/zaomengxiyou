@@ -56,8 +56,8 @@ func bind_actor(owner_actor: BattleEntity2D) -> void:
 			slot.get_node("Icon").texture = ability.get_definition().icon
 			for feature in ability.get_definition().features:
 				if feature is CooldownFeature: cooldown = feature; break
-			slot.mouse_entered.connect(_show_skill_tip.bind(index))
-			slot.mouse_exited.connect(func(): $SkillTooltip.hide())
+		slot.mouse_entered.connect(_show_skill_tip.bind(index))
+		slot.mouse_exited.connect(func(): $SkillTooltip.hide())
 		_cooldowns.append(cooldown)
 	if actor.wushuang != null and actor.wushuang.rage != null:
 		actor.wushuang.rage.value_changed.connect(_on_rage_changed)
@@ -146,6 +146,9 @@ func open_module(module: StringName) -> void:
 		return
 	set_inventory_open(false)
 	set_module_open(false)
+	if module == &"skill":
+		$SkillPanel.set_open(true)
+		return
 	if module == &"systemSet":
 		settings_requested.emit()
 		return
@@ -154,13 +157,6 @@ func open_module(module: StringName) -> void:
 		return
 	var lines: Array[String] = []
 	match module:
-		&"skill":
-			$ModulePanel/Title.text = "技能"
-			for index in range(_abilities.size()):
-				var ability := _abilities[index]
-				if ability == null: continue
-				var remaining := _cooldowns[index].get_cooldown_remaining(ability) if _cooldowns[index] != null else 0.0
-				lines.append("%s　按键：%s　冷却：%d秒" % [ability.get_definition().ability_name, get_intent_key(StringName("skill_%d" % (index + 1))), ceili(remaining)])
 		&"heartMedical":
 			$ModulePanel/Title.text = "心法"
 			lines.append("尚未接入心法养成。当前生效的战斗效果：")
@@ -177,6 +173,7 @@ func open_module(module: StringName) -> void:
 	set_module_open(true)
 
 func set_module_open(open: bool) -> void:
+	if not open: $SkillPanel.set_open(false)
 	if actor == null or open == $ModulePanel.visible: return
 	actor.operations.set_control_blocked(&"battle_module", open)
 	$SkillTooltip.hide()
@@ -184,7 +181,7 @@ func set_module_open(open: bool) -> void:
 	module_changed.emit(open)
 
 func is_module_open() -> bool:
-	return $ModulePanel.visible
+	return $ModulePanel.visible or $SkillPanel.visible
 
 func refresh_level_time() -> void:
 	if session == null: return

@@ -1,0 +1,16 @@
+[remap]
+
+importer="spine.atlas"
+type="SpineAtlasResource"
+uid="uid://depiqbuj62o86"
+path="res://.godot/imported/effect.atlas-7462f4eb95413825abab195446285118.spatlas"
+
+[deps]
+
+source_file="res://assets/effects/mihouwang/skill2/effect.atlas"
+dest_files=["res://.godot/imported/effect.atlas-7462f4eb95413825abab195446285118.spatlas"]
+
+[params]
+
+normal_map_prefix="n"
+specular_map_prefix="s"

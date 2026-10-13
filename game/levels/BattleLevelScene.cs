@@ -24,6 +24,14 @@ public partial class BattleLevelScene : Node2D
 
     public override void _EnterTree()
     {
+        if (StageLoadingScreen.LoadingStage)
+        {
+            GetNode("BattleSession").Get("clock").AsGodotObject().Set("paused", true);
+            // Allocate common feedback and number rows behind the loading screen,
+            // before their Ready methods, rather than on the first crowded hit.
+            GetNode("BattleSession/BattlePresentation").Set("prewarm_feedback_count", 8);
+            GetNode("BattleSession/BattlePresentation/DamageNumbers/Rows").Set("prewarm_count", 128);
+        }
         // Configure before the audio component's Ready/prewarm. Nested overrides
         // inside inherited PackedScenes are otherwise lost by binary scene export.
         if (audio_catalog != null)
@@ -40,17 +48,21 @@ public partial class BattleLevelScene : Node2D
         info = GetNode<Label>("HUD/Panel/Column/Info");
         message = GetNode<Label>("HUD/Panel/Column/Message");
         original_hud = GetNode<Control>("HUD/BattleHUD");
-        Operations.Set("enabled", enable_player_controls);
+        GetNode<UiModalManager>("/root/UiModalManager").RegisterBranch(original_hud);
+        Operations.Set("enabled", enable_player_controls && !StageLoadingScreen.LoadingStage);
         menu.Call("bind_controller", Operations.Get("controller"));
         if (!session.Call("register_scene_level", level_id, GetNode("BattleSession/Actors")).AsBool())
             throw new InvalidOperationException(session.Get("last_error").AsString());
+        var skills = player.GetNode<BattleSkillLoadout>("SkillLoadout");
+        skills.Initialize();
         original_hud.Call("bind_actor", player);
+        original_hud.GetNode<OriginalSkillPanel>("SkillPanel").Bind(skills);
         _menuCallback = Callable.From<bool>(RefreshMenuPause);
         original_hud.Connect("inventory_changed", _menuCallback);
         original_hud.Connect("module_changed", _menuCallback);
         original_hud.Connect("settings_requested", Callable.From(() => menu.Call("set_open", true)));
         menu.Connect("menu_changed", _menuCallback);
-        GetNode<Button>("HUD/Restart").Pressed += () => GetTree().ReloadCurrentScene();
+        GetNode<Button>("HUD/Restart").Pressed += RestartLevel;
         _eventBus = GetNode("/root/CoreSystem").Get("event_bus").As<Node>();
         _eventCallback = Callable.From<string, Array>(OnBattleEvent);
         _eventBus.Connect("event_pushed", _eventCallback);
@@ -78,6 +90,7 @@ public partial class BattleLevelScene : Node2D
         else message.Text = "击败区域内的敌人，继续向右前进。";
     }
 
+    protected virtual void RestartLevel() => GetTree().ReloadCurrentScene();
     private void RefreshMenuPause(bool open) => session.Call("set_paused", menu.Visible || Inventory.Visible || original_hud.Call("is_module_open").AsBool());
 
     public override void _UnhandledInput(InputEvent @event)

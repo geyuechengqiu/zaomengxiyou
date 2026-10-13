@@ -1,0 +1,1494 @@
+{
+  "source_build": "zmISAV VTest",
+  "source_level": {
+    "id": "1-2",
+    "scene_frame": 5,
+    "mode": "pve",
+    "objects": [
+      {
+        "instance": "bgContainer",
+        "character_id": 175,
+        "classes": [],
+        "x": -30.0,
+        "y": 0.0,
+        "scale_x": 1.0,
+        "scale_y": 1.0,
+        "properties": {}
+      },
+      {
+        "instance": null,
+        "character_id": 218,
+        "classes": [],
+        "x": -2138.0,
+        "y": -12.5,
+        "scale_x": 1.0,
+        "scale_y": 1.0,
+        "properties": {}
+      },
+      {
+        "instance": null,
+        "character_id": 180,
+        "classes": [],
+        "x": 1120.85,
+        "y": 362.1,
+        "scale_x": 0.53685,
+        "scale_y": 1.0,
+        "properties": {}
+      },
+      {
+        "instance": null,
+        "character_id": 225,
+        "classes": [],
+        "x": 3804.2,
+        "y": 589.15,
+        "scale_x": 1.0,
+        "scale_y": 1.0,
+        "properties": {}
+      },
+      {
+        "instance": null,
+        "character_id": 225,
+        "classes": [],
+        "x": 2676.85,
+        "y": 589.5,
+        "scale_x": 1.0,
+        "scale_y": 1.0,
+        "properties": {}
+      },
+      {
+        "instance": null,
+        "character_id": 227,
+        "classes": [],
+        "x": 0.0,
+        "y": 0.0,
+        "scale_x": 1.0,
+        "scale_y": 1.0,
+        "properties": {}
+      },
+      {
+        "instance": null,
+        "character_id": 180,
+        "classes": [],
+        "x": 1469.8,
+        "y": 362.1,
+        "scale_x": 0.54351807,
+        "scale_y": 1.0,
+        "properties": {}
+      },
+      {
+        "instance": null,
+        "character_id": 218,
+        "classes": [],
+        "x": -1258.15,
+        "y": -64.1,
+        "scale_x": 1.0,
+        "scale_y": 1.0,
+        "properties": {}
+      },
+      {
+        "instance": null,
+        "character_id": 180,
+        "classes": [],
+        "x": 2000.7,
+        "y": 310.5,
+        "scale_x": 0.54351807,
+        "scale_y": 1.0,
+        "properties": {}
+      },
+      {
+        "instance": null,
+        "character_id": 218,
+        "classes": [],
+        "x": -1059.5,
+        "y": -188.3,
+        "scale_x": 1.0,
+        "scale_y": 1.0,
+        "properties": {}
+      },
+      {
+        "instance": null,
+        "character_id": 180,
+        "classes": [],
+        "x": 2199.35,
+        "y": 186.3,
+        "scale_x": 0.54351807,
+        "scale_y": 1.0,
+        "properties": {}
+      },
+      {
+        "instance": null,
+        "character_id": 218,
+        "classes": [],
+        "x": -859.05,
+        "y": -17.1,
+        "scale_x": 1.0,
+        "scale_y": 1.0,
+        "properties": {}
+      },
+      {
+        "instance": null,
+        "character_id": 180,
+        "classes": [],
+        "x": 2399.8,
+        "y": 357.5,
+        "scale_x": 0.54351807,
+        "scale_y": 1.0,
+        "properties": {}
+      },
+      {
+        "instance": null,
+        "character_id": 218,
+        "classes": [],
+        "x": 0.0,
+        "y": 0.0,
+        "scale_x": 1.0,
+        "scale_y": 1.0,
+        "properties": {}
+      },
+      {
+        "instance": null,
+        "character_id": 180,
+        "classes": [],
+        "x": 3258.85,
+        "y": 374.6,
+        "scale_x": 0.54351807,
+        "scale_y": 1.0,
+        "properties": {}
+      },
+      {
+        "instance": null,
+        "character_id": 184,
+        "classes": [],
+        "x": 515.3,
+        "y": 457.15,
+        "scale_x": 0.7297363,
+        "scale_y": 0.33332825,
+        "properties": {}
+      },
+      {
+        "instance": null,
+        "character_id": 185,
+        "classes": [
+          "slopeObs"
+        ],
+        "x": 380.95,
+        "y": 488.6,
+        "scale_x": 0.23931885,
+        "scale_y": 0.70710754,
+        "properties": {}
+      },
+      {
+        "instance": null,
+        "character_id": 185,
+        "classes": [
+          "slopeObs"
+        ],
+        "x": 650.45,
+        "y": 488.6,
+        "scale_x": 0.23931885,
+        "scale_y": 0.7070923,
+        "properties": {}
+      },
+      {
+        "instance": null,
+        "character_id": 184,
+        "classes": [],
+        "x": 1800.1,
+        "y": 508.55,
+        "scale_x": 0.56791687,
+        "scale_y": 3.1212158,
+        "properties": {}
+      },
+      {
+        "instance": null,
+        "character_id": 180,
+        "classes": [],
+        "x": 2147.85,
+        "y": 580.0,
+        "scale_x": 1.7531738,
+        "scale_y": 1.0,
+        "properties": {}
+      },
+      {
+        "instance": null,
+        "character_id": 229,
+        "classes": [],
+        "x": 2154.2,
+        "y": 614.55,
+        "scale_x": 1.6078186,
+        "scale_y": 0.47192383,
+        "properties": {}
+      },
+      {
+        "instance": null,
+        "character_id": 184,
+        "classes": [],
+        "x": 856.2,
+        "y": 527.4,
+        "scale_x": 5.782837,
+        "scale_y": 0.3030243,
+        "properties": {}
+      },
+      {
+        "instance": null,
+        "character_id": 184,
+        "classes": [],
+        "x": 28.0,
+        "y": 14.55,
+        "scale_x": 0.20280457,
+        "scale_y": 15.1515045,
+        "properties": {}
+      },
+      {
+        "instance": null,
+        "character_id": 184,
+        "classes": [],
+        "x": 2767.3,
+        "y": 527.25,
+        "scale_x": 2.3951416,
+        "scale_y": 0.3030243,
+        "properties": {}
+      },
+      {
+        "instance": null,
+        "character_id": 184,
+        "classes": [],
+        "x": 4111.55,
+        "y": 527.25,
+        "scale_x": 4.5483856,
+        "scale_y": 0.3030243,
+        "properties": {}
+      },
+      {
+        "instance": null,
+        "character_id": 184,
+        "classes": [],
+        "x": 4708.3,
+        "y": 18.0,
+        "scale_x": 0.20280457,
+        "scale_y": 15.1515045,
+        "properties": {}
+      },
+      {
+        "instance": null,
+        "character_id": 186,
+        "classes": [],
+        "x": 1918.7,
+        "y": 243.0,
+        "scale_x": 0.0,
+        "scale_y": 0.0,
+        "properties": {}
+      },
+      {
+        "instance": null,
+        "character_id": 186,
+        "classes": [],
+        "x": 2284.3,
+        "y": 106.15,
+        "scale_x": 0.0,
+        "scale_y": 0.0,
+        "properties": {}
+      },
+      {
+        "instance": null,
+        "character_id": 186,
+        "classes": [],
+        "x": 1877.65,
+        "y": 335.1,
+        "scale_x": 0.0,
+        "scale_y": 0.0,
+        "properties": {}
+      },
+      {
+        "instance": null,
+        "character_id": 186,
+        "classes": [],
+        "x": 2117.35,
+        "y": 106.15,
+        "scale_x": 0.0,
+        "scale_y": 0.0,
+        "properties": {}
+      },
+      {
+        "instance": null,
+        "character_id": 186,
+        "classes": [],
+        "x": 2314.75,
+        "y": 288.15,
+        "scale_x": 0.0,
+        "scale_y": 0.0,
+        "properties": {}
+      },
+      {
+        "instance": null,
+        "character_id": 186,
+        "classes": [],
+        "x": 2488.85,
+        "y": 292.5,
+        "scale_x": 0.0,
+        "scale_y": 0.0,
+        "properties": {}
+      },
+      {
+        "instance": null,
+        "character_id": 186,
+        "classes": [],
+        "x": 3169.8,
+        "y": 302.5,
+        "scale_x": 0.0,
+        "scale_y": 0.0,
+        "properties": {}
+      },
+      {
+        "instance": null,
+        "character_id": 186,
+        "classes": [],
+        "x": 3347.9,
+        "y": 307.5,
+        "scale_x": 0.0,
+        "scale_y": 0.0,
+        "properties": {}
+      },
+      {
+        "instance": null,
+        "character_id": 186,
+        "classes": [],
+        "x": 3129.3,
+        "y": 464.55,
+        "scale_x": 0.0,
+        "scale_y": 0.0,
+        "properties": {}
+      },
+      {
+        "instance": null,
+        "character_id": 186,
+        "classes": [],
+        "x": 3430.9,
+        "y": 464.55,
+        "scale_x": 0.0,
+        "scale_y": 0.0,
+        "properties": {}
+      },
+      {
+        "instance": null,
+        "character_id": 230,
+        "classes": [],
+        "x": 2421.25,
+        "y": 457.15,
+        "scale_x": 1.5258789e-05,
+        "scale_y": 6.1035156e-05,
+        "properties": {}
+      },
+      {
+        "instance": null,
+        "character_id": 186,
+        "classes": [],
+        "x": 2405.8,
+        "y": 459.95,
+        "scale_x": 0.0,
+        "scale_y": 0.0,
+        "properties": {}
+      },
+      {
+        "instance": null,
+        "character_id": 230,
+        "classes": [],
+        "x": 2309.25,
+        "y": 274.95,
+        "scale_x": 1.5258789e-05,
+        "scale_y": 6.1035156e-05,
+        "properties": {}
+      },
+      {
+        "instance": null,
+        "character_id": 230,
+        "classes": [],
+        "x": 2094.25,
+        "y": 235.7,
+        "scale_x": 1.5258789e-05,
+        "scale_y": 6.1035156e-05,
+        "properties": {}
+      },
+      {
+        "instance": null,
+        "character_id": 230,
+        "classes": [],
+        "x": 1888.3,
+        "y": 329.3,
+        "scale_x": 1.5258789e-05,
+        "scale_y": 6.1035156e-05,
+        "properties": {}
+      },
+      {
+        "instance": null,
+        "character_id": 186,
+        "classes": [],
+        "x": 2084.6,
+        "y": 240.0,
+        "scale_x": 0.0,
+        "scale_y": 0.0,
+        "properties": {}
+      },
+      {
+        "instance": null,
+        "character_id": 184,
+        "classes": [],
+        "x": 2159.15,
+        "y": 664.0,
+        "scale_x": 1.9526978,
+        "scale_y": 1.0,
+        "properties": {}
+      },
+      {
+        "instance": null,
+        "character_id": 184,
+        "classes": [],
+        "x": 2433.85,
+        "y": 602.05,
+        "scale_x": 0.15541077,
+        "scale_y": 2.1363525,
+        "properties": {}
+      },
+      {
+        "instance": null,
+        "character_id": 184,
+        "classes": [],
+        "x": 3278.75,
+        "y": 611.6,
+        "scale_x": 1.0506592,
+        "scale_y": 1.0,
+        "properties": {}
+      },
+      {
+        "instance": null,
+        "character_id": 184,
+        "classes": [],
+        "x": 3111.25,
+        "y": 564.55,
+        "scale_x": 0.081085205,
+        "scale_y": 1.0,
+        "properties": {}
+      },
+      {
+        "instance": null,
+        "character_id": 184,
+        "classes": [],
+        "x": 3446.25,
+        "y": 567.95,
+        "scale_x": 0.081085205,
+        "scale_y": 1.0,
+        "properties": {}
+      },
+      {
+        "instance": null,
+        "character_id": 184,
+        "classes": [],
+        "x": 1870.15,
+        "y": 633.95,
+        "scale_x": 0.081085205,
+        "scale_y": 1.0,
+        "properties": {}
+      },
+      {
+        "instance": "__id0_",
+        "character_id": 188,
+        "classes": [
+          "export.StopPoint"
+        ],
+        "x": 1004.4,
+        "y": 374.25,
+        "scale_x": 1.1534119,
+        "scale_y": 1.0,
+        "properties": {
+          "betweenRandL": 1150,
+          "idx": 0,
+          "isBoss": false
+        }
+      },
+      {
+        "instance": "__id1_",
+        "character_id": 192,
+        "classes": [
+          "base.MonsterAppearPoint"
+        ],
+        "x": 1028.95,
+        "y": 437.55,
+        "scale_x": 1.1534119,
+        "scale_y": 1.0,
+        "properties": {
+          "delay": 2,
+          "enemyType": 2,
+          "interval": 1,
+          "isRandom": false,
+          "stopPointIdx": 0,
+          "totalNum": 2
+        }
+      },
+      {
+        "instance": "__id2_",
+        "character_id": 192,
+        "classes": [
+          "base.MonsterAppearPoint"
+        ],
+        "x": 1109.9,
+        "y": 18.1,
+        "scale_x": 1.1534119,
+        "scale_y": 1.0,
+        "properties": {
+          "delay": 5,
+          "enemyType": 2,
+          "interval": 1,
+          "isRandom": false,
+          "stopPointIdx": 1,
+          "totalNum": 3
+        }
+      },
+      {
+        "instance": "__id19_",
+        "character_id": 188,
+        "classes": [
+          "export.StopPoint"
+        ],
+        "x": 1994.65,
+        "y": 356.5,
+        "scale_x": 1.0,
+        "scale_y": 1.0,
+        "properties": {
+          "betweenRandL": 1150,
+          "idx": 1,
+          "isBoss": false
+        }
+      },
+      {
+        "instance": "__id20_",
+        "character_id": 188,
+        "classes": [
+          "export.StopPoint"
+        ],
+        "x": 2768.85,
+        "y": 376.6,
+        "scale_x": 1.0,
+        "scale_y": 1.0,
+        "properties": {
+          "betweenRandL": 1150,
+          "idx": 2,
+          "isBoss": false
+        }
+      },
+      {
+        "instance": "__id3_",
+        "character_id": 192,
+        "classes": [
+          "base.MonsterAppearPoint"
+        ],
+        "x": 2641.65,
+        "y": 391.1,
+        "scale_x": 1.1534119,
+        "scale_y": 1.0,
+        "properties": {
+          "delay": 3,
+          "enemyType": 2,
+          "interval": 2,
+          "isRandom": false,
+          "stopPointIdx": 3,
+          "totalNum": 4
+        }
+      },
+      {
+        "instance": "__id21_",
+        "character_id": 192,
+        "classes": [
+          "base.MonsterAppearPoint"
+        ],
+        "x": 3812.1,
+        "y": 305.4,
+        "scale_x": 1.1534119,
+        "scale_y": 1.0,
+        "properties": {
+          "delay": 10,
+          "enemyType": 3,
+          "interval": 2,
+          "isRandom": false,
+          "stopPointIdx": 3,
+          "totalNum": 3
+        }
+      },
+      {
+        "instance": "__id22_",
+        "character_id": 192,
+        "classes": [
+          "base.MonsterAppearPoint"
+        ],
+        "x": 3260.5,
+        "y": 302.0,
+        "scale_x": 1.1534119,
+        "scale_y": 1.0,
+        "properties": {
+          "delay": 5,
+          "enemyType": 2,
+          "interval": 1,
+          "isRandom": false,
+          "stopPointIdx": 3,
+          "totalNum": 1
+        }
+      },
+      {
+        "instance": "__id23_",
+        "character_id": 192,
+        "classes": [
+          "base.MonsterAppearPoint"
+        ],
+        "x": 1321.55,
+        "y": 460.95,
+        "scale_x": 1.1534119,
+        "scale_y": 1.0,
+        "properties": {
+          "delay": 1,
+          "enemyType": 1,
+          "interval": 1,
+          "isRandom": false,
+          "stopPointIdx": 1,
+          "totalNum": 5
+        }
+      },
+      {
+        "instance": "__id4_",
+        "character_id": 188,
+        "classes": [
+          "export.StopPoint"
+        ],
+        "x": 3706.2,
+        "y": 390.45,
+        "scale_x": 1.0,
+        "scale_y": 1.0,
+        "properties": {
+          "betweenRandL": 1150,
+          "idx": 3,
+          "isBoss": false
+        }
+      },
+      {
+        "instance": "__id5_",
+        "character_id": 192,
+        "classes": [
+          "base.MonsterAppearPoint"
+        ],
+        "x": 4578.35,
+        "y": 334.8,
+        "scale_x": 1.1534119,
+        "scale_y": 1.0,
+        "properties": {
+          "delay": 4,
+          "enemyType": 4,
+          "interval": 2,
+          "isRandom": false,
+          "stopPointIdx": 4,
+          "totalNum": 1
+        }
+      },
+      {
+        "instance": "__id24_",
+        "character_id": 192,
+        "classes": [
+          "base.MonsterAppearPoint"
+        ],
+        "x": 1997.05,
+        "y": 11.4,
+        "scale_x": 1.1534119,
+        "scale_y": 1.0,
+        "properties": {
+          "delay": 4,
+          "enemyType": 2,
+          "interval": 2,
+          "isRandom": false,
+          "stopPointIdx": 2,
+          "totalNum": 1
+        }
+      },
+      {
+        "instance": "__id25_",
+        "character_id": 192,
+        "classes": [
+          "base.MonsterAppearPoint"
+        ],
+        "x": 2400.1,
+        "y": 15.3,
+        "scale_x": 1.1534119,
+        "scale_y": 1.0,
+        "properties": {
+          "delay": 4,
+          "enemyType": 2,
+          "interval": 2,
+          "isRandom": false,
+          "stopPointIdx": 2,
+          "totalNum": 1
+        }
+      },
+      {
+        "instance": "__id26_",
+        "character_id": 192,
+        "classes": [
+          "base.MonsterAppearPoint"
+        ],
+        "x": 2829.9,
+        "y": 442.1,
+        "scale_x": 1.1534119,
+        "scale_y": 1.0,
+        "properties": {
+          "delay": 1,
+          "enemyType": 3,
+          "interval": 2,
+          "isRandom": false,
+          "stopPointIdx": 2,
+          "totalNum": 5
+        }
+      },
+      {
+        "instance": "__id27_",
+        "character_id": 192,
+        "classes": [
+          "base.MonsterAppearPoint"
+        ],
+        "x": 1066.65,
+        "y": 437.55,
+        "scale_x": 1.1534119,
+        "scale_y": 1.0,
+        "properties": {
+          "delay": 3,
+          "enemyType": 1,
+          "interval": 1,
+          "isRandom": false,
+          "stopPointIdx": 0,
+          "totalNum": 4
+        }
+      },
+      {
+        "instance": "__id28_",
+        "character_id": 192,
+        "classes": [
+          "base.MonsterAppearPoint"
+        ],
+        "x": 1506.25,
+        "y": 20.95,
+        "scale_x": 1.1534119,
+        "scale_y": 1.0,
+        "properties": {
+          "delay": 5,
+          "enemyType": 2,
+          "interval": 1,
+          "isRandom": false,
+          "stopPointIdx": 1,
+          "totalNum": 2
+        }
+      },
+      {
+        "instance": "__id29_",
+        "character_id": 192,
+        "classes": [
+          "base.MonsterAppearPoint"
+        ],
+        "x": 698.35,
+        "y": 305.4,
+        "scale_x": 1.1534119,
+        "scale_y": 1.0,
+        "properties": {
+          "delay": 2,
+          "enemyType": 2,
+          "interval": 1,
+          "isRandom": false,
+          "stopPointIdx": 1,
+          "totalNum": 2
+        }
+      },
+      {
+        "instance": "__id30_",
+        "character_id": 192,
+        "classes": [
+          "base.MonsterAppearPoint"
+        ],
+        "x": 1811.65,
+        "y": 285.15,
+        "scale_x": 1.1534119,
+        "scale_y": 1.0,
+        "properties": {
+          "delay": 2,
+          "enemyType": 2,
+          "interval": 1,
+          "isRandom": false,
+          "stopPointIdx": 1,
+          "totalNum": 3
+        }
+      },
+      {
+        "instance": "__id31_",
+        "character_id": 192,
+        "classes": [
+          "base.MonsterAppearPoint"
+        ],
+        "x": 2188.2,
+        "y": -68.05,
+        "scale_x": 1.1534119,
+        "scale_y": 1.0,
+        "properties": {
+          "delay": 4,
+          "enemyType": 2,
+          "interval": 2,
+          "isRandom": false,
+          "stopPointIdx": 2,
+          "totalNum": 1
+        }
+      },
+      {
+        "instance": "__id32_",
+        "character_id": 192,
+        "classes": [
+          "base.MonsterAppearPoint"
+        ],
+        "x": 2848.15,
+        "y": 332.1,
+        "scale_x": 1.1534119,
+        "scale_y": 1.0,
+        "properties": {
+          "delay": 7,
+          "enemyType": 3,
+          "interval": 2,
+          "isRandom": false,
+          "stopPointIdx": 2,
+          "totalNum": 3
+        }
+      },
+      {
+        "instance": "__id33_",
+        "character_id": 192,
+        "classes": [
+          "base.MonsterAppearPoint"
+        ],
+        "x": 3805.15,
+        "y": 391.1,
+        "scale_x": 1.1534119,
+        "scale_y": 1.0,
+        "properties": {
+          "delay": 3,
+          "enemyType": 2,
+          "interval": 2,
+          "isRandom": false,
+          "stopPointIdx": 3,
+          "totalNum": 4
+        }
+      },
+      {
+        "instance": "__id34_",
+        "character_id": 192,
+        "classes": [
+          "base.MonsterAppearPoint"
+        ],
+        "x": 2629.3,
+        "y": 328.9,
+        "scale_x": 1.1534119,
+        "scale_y": 1.0,
+        "properties": {
+          "delay": 10,
+          "enemyType": 3,
+          "interval": 2,
+          "isRandom": false,
+          "stopPointIdx": 3,
+          "totalNum": 3
+        }
+      },
+      {
+        "instance": "__id6_",
+        "character_id": 188,
+        "classes": [
+          "export.StopPoint"
+        ],
+        "x": 4487.3,
+        "y": 339.0,
+        "scale_x": 1.0,
+        "scale_y": 1.0,
+        "properties": {
+          "betweenRandL": 1150,
+          "idx": 4,
+          "isBoss": false
+        }
+      },
+      {
+        "instance": null,
+        "character_id": 184,
+        "classes": [],
+        "x": 4237.85,
+        "y": 457.15,
+        "scale_x": 0.7297363,
+        "scale_y": 0.33332825,
+        "properties": {}
+      },
+      {
+        "instance": null,
+        "character_id": 185,
+        "classes": [
+          "slopeObs"
+        ],
+        "x": 4103.5,
+        "y": 488.6,
+        "scale_x": 0.23931885,
+        "scale_y": 0.70710754,
+        "properties": {}
+      },
+      {
+        "instance": null,
+        "character_id": 185,
+        "classes": [
+          "slopeObs"
+        ],
+        "x": 4373.0,
+        "y": 488.6,
+        "scale_x": 0.23931885,
+        "scale_y": 0.7070923,
+        "properties": {}
+      },
+      {
+        "instance": null,
+        "character_id": 216,
+        "classes": [],
+        "x": 4230.2,
+        "y": 387.85,
+        "scale_x": 1.0,
+        "scale_y": 1.0,
+        "properties": {}
+      }
+    ],
+    "spawn_plans": [
+      {
+        "instance": "__id1_",
+        "character_id": 192,
+        "classes": [
+          "base.MonsterAppearPoint"
+        ],
+        "x": 1028.95,
+        "y": 437.55,
+        "scale_x": 1.1534119,
+        "scale_y": 1.0,
+        "properties": {
+          "delay": 2,
+          "enemyType": 2,
+          "interval": 1,
+          "isRandom": false,
+          "stopPointIdx": 0,
+          "totalNum": 2
+        }
+      },
+      {
+        "instance": "__id2_",
+        "character_id": 192,
+        "classes": [
+          "base.MonsterAppearPoint"
+        ],
+        "x": 1109.9,
+        "y": 18.1,
+        "scale_x": 1.1534119,
+        "scale_y": 1.0,
+        "properties": {
+          "delay": 5,
+          "enemyType": 2,
+          "interval": 1,
+          "isRandom": false,
+          "stopPointIdx": 1,
+          "totalNum": 3
+        }
+      },
+      {
+        "instance": "__id3_",
+        "character_id": 192,
+        "classes": [
+          "base.MonsterAppearPoint"
+        ],
+        "x": 2641.65,
+        "y": 391.1,
+        "scale_x": 1.1534119,
+        "scale_y": 1.0,
+        "properties": {
+          "delay": 3,
+          "enemyType": 2,
+          "interval": 2,
+          "isRandom": false,
+          "stopPointIdx": 3,
+          "totalNum": 4
+        }
+      },
+      {
+        "instance": "__id21_",
+        "character_id": 192,
+        "classes": [
+          "base.MonsterAppearPoint"
+        ],
+        "x": 3812.1,
+        "y": 305.4,
+        "scale_x": 1.1534119,
+        "scale_y": 1.0,
+        "properties": {
+          "delay": 10,
+          "enemyType": 3,
+          "interval": 2,
+          "isRandom": false,
+          "stopPointIdx": 3,
+          "totalNum": 3
+        }
+      },
+      {
+        "instance": "__id22_",
+        "character_id": 192,
+        "classes": [
+          "base.MonsterAppearPoint"
+        ],
+        "x": 3260.5,
+        "y": 302.0,
+        "scale_x": 1.1534119,
+        "scale_y": 1.0,
+        "properties": {
+          "delay": 5,
+          "enemyType": 2,
+          "interval": 1,
+          "isRandom": false,
+          "stopPointIdx": 3,
+          "totalNum": 1
+        }
+      },
+      {
+        "instance": "__id23_",
+        "character_id": 192,
+        "classes": [
+          "base.MonsterAppearPoint"
+        ],
+        "x": 1321.55,
+        "y": 460.95,
+        "scale_x": 1.1534119,
+        "scale_y": 1.0,
+        "properties": {
+          "delay": 1,
+          "enemyType": 1,
+          "interval": 1,
+          "isRandom": false,
+          "stopPointIdx": 1,
+          "totalNum": 5
+        }
+      },
+      {
+        "instance": "__id5_",
+        "character_id": 192,
+        "classes": [
+          "base.MonsterAppearPoint"
+        ],
+        "x": 4578.35,
+        "y": 334.8,
+        "scale_x": 1.1534119,
+        "scale_y": 1.0,
+        "properties": {
+          "delay": 4,
+          "enemyType": 4,
+          "interval": 2,
+          "isRandom": false,
+          "stopPointIdx": 4,
+          "totalNum": 1
+        }
+      },
+      {
+        "instance": "__id24_",
+        "character_id": 192,
+        "classes": [
+          "base.MonsterAppearPoint"
+        ],
+        "x": 1997.05,
+        "y": 11.4,
+        "scale_x": 1.1534119,
+        "scale_y": 1.0,
+        "properties": {
+          "delay": 4,
+          "enemyType": 2,
+          "interval": 2,
+          "isRandom": false,
+          "stopPointIdx": 2,
+          "totalNum": 1
+        }
+      },
+      {
+        "instance": "__id25_",
+        "character_id": 192,
+        "classes": [
+          "base.MonsterAppearPoint"
+        ],
+        "x": 2400.1,
+        "y": 15.3,
+        "scale_x": 1.1534119,
+        "scale_y": 1.0,
+        "properties": {
+          "delay": 4,
+          "enemyType": 2,
+          "interval": 2,
+          "isRandom": false,
+          "stopPointIdx": 2,
+          "totalNum": 1
+        }
+      },
+      {
+        "instance": "__id26_",
+        "character_id": 192,
+        "classes": [
+          "base.MonsterAppearPoint"
+        ],
+        "x": 2829.9,
+        "y": 442.1,
+        "scale_x": 1.1534119,
+        "scale_y": 1.0,
+        "properties": {
+          "delay": 1,
+          "enemyType": 3,
+          "interval": 2,
+          "isRandom": false,
+          "stopPointIdx": 2,
+          "totalNum": 5
+        }
+      },
+      {
+        "instance": "__id27_",
+        "character_id": 192,
+        "classes": [
+          "base.MonsterAppearPoint"
+        ],
+        "x": 1066.65,
+        "y": 437.55,
+        "scale_x": 1.1534119,
+        "scale_y": 1.0,
+        "properties": {
+          "delay": 3,
+          "enemyType": 1,
+          "interval": 1,
+          "isRandom": false,
+          "stopPointIdx": 0,
+          "totalNum": 4
+        }
+      },
+      {
+        "instance": "__id28_",
+        "character_id": 192,
+        "classes": [
+          "base.MonsterAppearPoint"
+        ],
+        "x": 1506.25,
+        "y": 20.95,
+        "scale_x": 1.1534119,
+        "scale_y": 1.0,
+        "properties": {
+          "delay": 5,
+          "enemyType": 2,
+          "interval": 1,
+          "isRandom": false,
+          "stopPointIdx": 1,
+          "totalNum": 2
+        }
+      },
+      {
+        "instance": "__id29_",
+        "character_id": 192,
+        "classes": [
+          "base.MonsterAppearPoint"
+        ],
+        "x": 698.35,
+        "y": 305.4,
+        "scale_x": 1.1534119,
+        "scale_y": 1.0,
+        "properties": {
+          "delay": 2,
+          "enemyType": 2,
+          "interval": 1,
+          "isRandom": false,
+          "stopPointIdx": 1,
+          "totalNum": 2
+        }
+      },
+      {
+        "instance": "__id30_",
+        "character_id": 192,
+        "classes": [
+          "base.MonsterAppearPoint"
+        ],
+        "x": 1811.65,
+        "y": 285.15,
+        "scale_x": 1.1534119,
+        "scale_y": 1.0,
+        "properties": {
+          "delay": 2,
+          "enemyType": 2,
+          "interval": 1,
+          "isRandom": false,
+          "stopPointIdx": 1,
+          "totalNum": 3
+        }
+      },
+      {
+        "instance": "__id31_",
+        "character_id": 192,
+        "classes": [
+          "base.MonsterAppearPoint"
+        ],
+        "x": 2188.2,
+        "y": -68.05,
+        "scale_x": 1.1534119,
+        "scale_y": 1.0,
+        "properties": {
+          "delay": 4,
+          "enemyType": 2,
+          "interval": 2,
+          "isRandom": false,
+          "stopPointIdx": 2,
+          "totalNum": 1
+        }
+      },
+      {
+        "instance": "__id32_",
+        "character_id": 192,
+        "classes": [
+          "base.MonsterAppearPoint"
+        ],
+        "x": 2848.15,
+        "y": 332.1,
+        "scale_x": 1.1534119,
+        "scale_y": 1.0,
+        "properties": {
+          "delay": 7,
+          "enemyType": 3,
+          "interval": 2,
+          "isRandom": false,
+          "stopPointIdx": 2,
+          "totalNum": 3
+        }
+      },
+      {
+        "instance": "__id33_",
+        "character_id": 192,
+        "classes": [
+          "base.MonsterAppearPoint"
+        ],
+        "x": 3805.15,
+        "y": 391.1,
+        "scale_x": 1.1534119,
+        "scale_y": 1.0,
+        "properties": {
+          "delay": 3,
+          "enemyType": 2,
+          "interval": 2,
+          "isRandom": false,
+          "stopPointIdx": 3,
+          "totalNum": 4
+        }
+      },
+      {
+        "instance": "__id34_",
+        "character_id": 192,
+        "classes": [
+          "base.MonsterAppearPoint"
+        ],
+        "x": 2629.3,
+        "y": 328.9,
+        "scale_x": 1.1534119,
+        "scale_y": 1.0,
+        "properties": {
+          "delay": 10,
+          "enemyType": 3,
+          "interval": 2,
+          "isRandom": false,
+          "stopPointIdx": 3,
+          "totalNum": 3
+        }
+      }
+    ],
+    "stop_points": [
+      {
+        "instance": "__id0_",
+        "character_id": 188,
+        "classes": [
+          "export.StopPoint"
+        ],
+        "x": 1004.4,
+        "y": 374.25,
+        "scale_x": 1.1534119,
+        "scale_y": 1.0,
+        "properties": {
+          "betweenRandL": 1150,
+          "idx": 0,
+          "isBoss": false
+        }
+      },
+      {
+        "instance": "__id19_",
+        "character_id": 188,
+        "classes": [
+          "export.StopPoint"
+        ],
+        "x": 1994.65,
+        "y": 356.5,
+        "scale_x": 1.0,
+        "scale_y": 1.0,
+        "properties": {
+          "betweenRandL": 1150,
+          "idx": 1,
+          "isBoss": false
+        }
+      },
+      {
+        "instance": "__id20_",
+        "character_id": 188,
+        "classes": [
+          "export.StopPoint"
+        ],
+        "x": 2768.85,
+        "y": 376.6,
+        "scale_x": 1.0,
+        "scale_y": 1.0,
+        "properties": {
+          "betweenRandL": 1150,
+          "idx": 2,
+          "isBoss": false
+        }
+      },
+      {
+        "instance": "__id4_",
+        "character_id": 188,
+        "classes": [
+          "export.StopPoint"
+        ],
+        "x": 3706.2,
+        "y": 390.45,
+        "scale_x": 1.0,
+        "scale_y": 1.0,
+        "properties": {
+          "betweenRandL": 1150,
+          "idx": 3,
+          "isBoss": false
+        }
+      },
+      {
+        "instance": "__id6_",
+        "character_id": 188,
+        "classes": [
+          "export.StopPoint"
+        ],
+        "x": 4487.3,
+        "y": 339.0,
+        "scale_x": 1.0,
+        "scale_y": 1.0,
+        "properties": {
+          "betweenRandL": 1150,
+          "idx": 4,
+          "isBoss": false
+        }
+      }
+    ],
+    "hazards": [],
+    "background": {
+      "frame": 6,
+      "labels": [
+        "1-2"
+      ],
+      "placements": [
+        {
+          "instance": null,
+          "character_id": 51,
+          "classes": [],
+          "x": 2340.65,
+          "y": 276.75,
+          "scale_x": 1.0,
+          "scale_y": 1.0
+        }
+      ]
+    },
+    "runtime_stop_points": [
+      {
+        "source_instance": "__id0_",
+        "x": 1004.4,
+        "y": 374.25,
+        "idx": 0,
+        "betweenRandL": 1450,
+        "isBoss": false
+      },
+      {
+        "source_instance": "__id19_",
+        "x": 1994.65,
+        "y": 356.5,
+        "idx": 1,
+        "betweenRandL": 1450,
+        "isBoss": false
+      },
+      {
+        "source_instance": "__id20_",
+        "x": 2768.85,
+        "y": 376.6,
+        "idx": 2,
+        "betweenRandL": 1450,
+        "isBoss": false
+      },
+      {
+        "source_instance": "__id4_",
+        "x": 3706.2,
+        "y": 390.45,
+        "idx": 3,
+        "betweenRandL": 1450,
+        "isBoss": false
+      },
+      {
+        "source_instance": "__id6_",
+        "x": 4487.3,
+        "y": 339.0,
+        "idx": 4,
+        "betweenRandL": 1450,
+        "isBoss": false
+      }
+    ]
+  },
+  "world_scale": 2,
+  "world_offset_y": 200.0,
+  "boss_stat_source": "上古天帝篇/Dungeon/2/Monster/10802",
+  "spawn_seconds_multiplier": 0.8,
+  "maximum_live_monsters": 6,
+  "stat_mapping": {
+    "1": [
+      "little_monkey",
+      "花果山小猴",
+      "jianwu"
+    ],
+    "2": [
+      "mountain_monkey",
+      "花果山山猴",
+      "yushoushi"
+    ],
+    "3": [
+      "gorilla_normal",
+      "水帘洞大猩猩",
+      "jushi_lingjun"
+    ],
+    "4": [
+      "mihou_king",
+      "水帘洞弥猴王",
+      "上古天帝篇/Dungeon/2/Monster/10802"
+    ]
+  },
+  "spawn_world_x": {
+    "shuiliandong_birth_1": 902.3,
+    "shuiliandong_birth_27": 977.7,
+    "shuiliandong_birth_2": 2621.8935,
+    "shuiliandong_birth_23": 2910.8614,
+    "shuiliandong_birth_28": 3163.0342,
+    "shuiliandong_birth_29": 2060.0,
+    "shuiliandong_birth_30": 3580.0,
+    "shuiliandong_birth_24": 3940.0,
+    "shuiliandong_birth_25": 4659.8167,
+    "shuiliandong_birth_26": 5427.4069,
+    "shuiliandong_birth_31": 4281.3794,
+    "shuiliandong_birth_32": 5460.0,
+    "shuiliandong_birth_3": 5835.8708,
+    "shuiliandong_birth_21": 7340.0,
+    "shuiliandong_birth_22": 6631.1464,
+    "shuiliandong_birth_33": 7331.0687,
+    "shuiliandong_birth_34": 5820.0,
+    "shuiliandong_birth_5": 8780.0
+  },
+  "boss_original_name": "彌猴王"
+}

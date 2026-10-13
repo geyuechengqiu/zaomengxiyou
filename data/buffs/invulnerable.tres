@@ -1,21 +1,23 @@
-[gd_resource type="Resource" script_class="GameplayStatusData" format=3]
+[gd_resource type="Resource" script_class="GameplayStatusData" format=3 uid="uid://c8bmpouoam0ik"]
+
+[ext_resource type="Script" uid="uid://cb3e3wuphyka3" path="res://addons/gameplay_abiltiy_system/scripts/effects/gameplay_effect.gd" id="effect_type"]
+[ext_resource type="Script" uid="uid://ctnmjf6pyjfeu" path="res://addons/gameplay_abiltiy_system/scripts/status/features/status_feature.gd" id="feature_type"]
 [ext_resource type="Resource" path="res://data/buffs/natural_duration.tres" id="natural_duration"]
-[ext_resource type="Script" path="res://addons/gameplay_abiltiy_system/scripts/status/gameplay_status_data.gd" id="status"]
-[ext_resource type="Script" path="res://addons/gameplay_abiltiy_system/scripts/effects/gameplay_effect.gd" id="effect_type"]
-[ext_resource type="Script" path="res://addons/gameplay_abiltiy_system/scripts/status/features/status_feature.gd" id="feature_type"]
-[ext_resource type="Script" path="res://addons/battle_foundation/gas/battle_original_status_policy.gd" id="policy"]
+[ext_resource type="Script" uid="uid://cak8ylf2yydp" path="res://addons/battle_foundation/gas/battle_original_status_policy.gd" id="policy"]
+[ext_resource type="Script" uid="uid://8u46anns2vhm" path="res://addons/gameplay_abiltiy_system/scripts/status/gameplay_status_data.gd" id="status"]
+
 [sub_resource type="Resource" id="policy"]
 script = ExtResource("policy")
 replace_rule = 3
+
 [resource]
 script = ExtResource("status")
-duration_policy = ExtResource("natural_duration")
 status_id = &"invulnerable"
 status_display_name = "无敌"
 duration = 2
-stacking_policy = SubResource("policy")
-max_stacks = 1
-stacking_group = &"original.1/"
+duration_policy = ExtResource("natural_duration")
 tags = Array[StringName]([&"status.buff", &"state.invulnerable"])
+stacking_policy = SubResource("policy")
+stacking_group = &"original.1/"
 metadata/original_buff_id = 1000101
 metadata/original_type = 1

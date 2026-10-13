@@ -1,0 +1,16 @@
+atlas.png
+size:386,648
+filter:Linear,Linear
+pma:false
+collisionRect
+bounds:241,0,10,10
+mihouwang_attack1_1_5
+bounds:0,579,245,67
+mihouwang_attack1_1_2
+bounds:0,486,243,91
+mihouwang_attack1_1_7
+bounds:0,172,239,155
+mihouwang_attack1_1_1
+bounds:0,329,213,155
+mihouwang_attack1_1_3
+bounds:0,0,239,170

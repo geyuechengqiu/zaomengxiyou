@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="GameplayAttribute" format=3]
+[ext_resource type="Script" path="res://addons/gameplay_abiltiy_system/scripts/attributes/gameplay_attribute.gd" id="script"]
+[resource]
+script = ExtResource("script")
+attribute_id = &"attackSpeed"
+attribute_display_name = "攻击速度"
+min_value = 0.05
+metadata/category = "movement"
+metadata/unit = "倍率"

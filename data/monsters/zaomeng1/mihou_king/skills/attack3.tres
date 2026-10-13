@@ -1,0 +1,42 @@
+[gd_resource type="Resource" script_class="GameplayAbilityDefinition" format=3 uid="uid://bt34rb1heytxa"]
+
+[ext_resource type="Script" uid="uid://ud4ug2ylqdo2" path="res://addons/battle_foundation/definitions/BattleSkillBranch.cs" id="3_ln8c5"]
+[ext_resource type="Script" uid="uid://dm30yy8ucnbot" path="res://addons/battle_foundation/definitions/BattleFrameEvent.cs" id="4_luygi"]
+[ext_resource type="Script" uid="uid://b1047b2i0w3jx" path="res://addons/battle_foundation/definitions/BattleSkillMotion.cs" id="5_bs8wc"]
+[ext_resource type="Script" uid="uid://cfho6ucrpkdn1" path="res://addons/gameplay_abiltiy_system/scripts/abilities/features/cooldown_feature.gd" id="cooldown"]
+[ext_resource type="Script" uid="uid://bm4h231fb21pv" path="res://addons/gameplay_abiltiy_system/scripts/abilities/gameplay_ability_definition.gd" id="definition"]
+[ext_resource type="Script" uid="uid://cm0x3pewlrveo" path="res://addons/gameplay_abiltiy_system/scripts/abilities/features/gameplay_ability_feature.gd" id="feature"]
+[ext_resource type="Script" uid="uid://ctus3t2tt37o6" path="res://addons/battle_foundation/definitions/battle_attack_segment.gd" id="segment"]
+[ext_resource type="Script" uid="uid://daneexb55k8ae" path="res://addons/battle_foundation/gas/battle_frame_timeline_feature.gd" id="timeline"]
+
+[sub_resource type="Resource" id="Cooldown"]
+script = ExtResource("cooldown")
+cooldown_duration = 2.0
+
+[sub_resource type="Resource" id="Hit"]
+script = ExtResource("segment")
+segment_id = &"attack3"
+start_frame = 2
+end_frame = 9
+action = &"attack3"
+hit_rect = Rect2(-43.333332, -78.333336, 173.33333, 75)
+damage_multiplier = 1.5
+knockback_speed = 220.0
+knockback_duration = 0.2
+hit_stun = 0.25
+reaction_type = "knockback"
+
+[sub_resource type="Resource" id="Timeline"]
+script = ExtResource("timeline")
+source_fps = 48.0
+duration_frames = 14
+attack_segments = Array[ExtResource("segment")]([SubResource("Hit")])
+animation_action = &"attack3"
+commit_resources = true
+effect_tail_frames = 11
+
+[resource]
+script = ExtResource("definition")
+ability_id = &"mihouwang_attack3"
+ability_name = "普攻三"
+features = Array[ExtResource("feature")]([SubResource("Cooldown"), SubResource("Timeline")])

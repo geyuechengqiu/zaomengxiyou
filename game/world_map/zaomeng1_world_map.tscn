@@ -1,0 +1,765 @@
+[gd_scene format=3 uid="uid://cssac1bkh48of"]
+
+[ext_resource type="Texture2D" uid="uid://b84r44jtu7k4n" path="res://assets/ui/zaomeng1/world_map/background.png" id="background"]
+[ext_resource type="Shader" uid="uid://o5cpr21gnlcx" path="res://assets/ui/shaders/map_icon_glow.gdshader" id="glow_shader"]
+[ext_resource type="AudioStream" uid="uid://0vdda1occcx8" path="res://assets/audio/zaomeng1/world_map.mp3" id="music"]
+[ext_resource type="Texture2D" uid="uid://db8j2dg7qn6e1" path="res://assets/ui/original/world_map/btn_sc_0.png" id="r0"]
+[ext_resource type="Texture2D" uid="uid://b6s730obstlt6" path="res://assets/ui/original/world_map/btn_sc_1.png" id="r1"]
+[ext_resource type="Texture2D" uid="uid://k6ia1qgqvym3" path="res://assets/ui/original/world_map/btn_sc_2.png" id="r2"]
+[ext_resource type="Texture2D" uid="uid://dubp6eq6j0p7k" path="res://assets/ui/original/world_map/btn_bb_0.png" id="r3"]
+[ext_resource type="Texture2D" uid="uid://dgeobj7534fc3" path="res://assets/ui/original/world_map/btn_bb_1.png" id="r4"]
+[ext_resource type="Texture2D" uid="uid://ductwb3lym80k" path="res://assets/ui/original/world_map/btn_bb_2.png" id="r5"]
+[ext_resource type="Texture2D" uid="uid://djou3je3butdp" path="res://assets/ui/original/world_map/btn_jn_0.png" id="r6"]
+[ext_resource type="Texture2D" uid="uid://bidqrcjot5cmk" path="res://assets/ui/original/world_map/btn_jn_1.png" id="r7"]
+[ext_resource type="Texture2D" uid="uid://pw0l38f8iqom" path="res://assets/ui/original/world_map/btn_jn_2.png" id="r8"]
+[ext_resource type="Texture2D" uid="uid://dqmeucqddw45l" path="res://assets/ui/original/world_map/btn_xf_0.png" id="r9"]
+[ext_resource type="Texture2D" uid="uid://caad2hdouvngi" path="res://assets/ui/original/world_map/btn_xf_1.png" id="r10"]
+[ext_resource type="Texture2D" uid="uid://cqnbd53433ye2" path="res://assets/ui/original/world_map/btn_xf_2.png" id="r11"]
+[ext_resource type="Texture2D" uid="uid://dbsnrtj73c6oy" path="res://assets/ui/original/world_map/btn_qh_0.png" id="r12"]
+[ext_resource type="Texture2D" uid="uid://vok63mb5vdj6" path="res://assets/ui/original/world_map/btn_qh_1.png" id="r13"]
+[ext_resource type="Texture2D" uid="uid://beipwagb4mxlc" path="res://assets/ui/original/world_map/btn_qh_2.png" id="r14"]
+[ext_resource type="Texture2D" uid="uid://cwq2sk0kk4llb" path="res://assets/ui/original/world_map/btn_rw_0.png" id="r15"]
+[ext_resource type="Texture2D" uid="uid://cuaxv5ytef37b" path="res://assets/ui/original/world_map/btn_rw_1.png" id="r16"]
+[ext_resource type="Texture2D" uid="uid://bi6o5xt4l8avf" path="res://assets/ui/original/world_map/btn_rw_2.png" id="r17"]
+[ext_resource type="Texture2D" uid="uid://bhbajo3a262uh" path="res://assets/ui/original/world_map/btn_fb_0.png" id="r18"]
+[ext_resource type="Texture2D" uid="uid://dwxa3jwrcfp05" path="res://assets/ui/original/world_map/btn_fb_1.png" id="r19"]
+[ext_resource type="Texture2D" uid="uid://t5w2qqsdjn63" path="res://assets/ui/original/world_map/btn_fb_2.png" id="r20"]
+[ext_resource type="Texture2D" uid="uid://b06d3lce7pynx" path="res://assets/ui/original/world_map/btn_lc_0.png" id="r21"]
+[ext_resource type="Texture2D" uid="uid://cvyrar67bocu5" path="res://assets/ui/original/world_map/btn_lc_1.png" id="r22"]
+[ext_resource type="Texture2D" uid="uid://3vptreb67w5x" path="res://assets/ui/original/world_map/btn_lc_2.png" id="r23"]
+[ext_resource type="Texture2D" uid="uid://2gt3lyh1rwud" path="res://assets/ui/original/world_map/btn_cb_0.png" id="r24"]
+[ext_resource type="Texture2D" uid="uid://dak0tyjbvajy5" path="res://assets/ui/original/world_map/btn_cb_1.png" id="r25"]
+[ext_resource type="Texture2D" uid="uid://cbslkecah2kek" path="res://assets/ui/original/world_map/btn_cb_2.png" id="r26"]
+[ext_resource type="Texture2D" uid="uid://tnweyv0fo22k" path="res://assets/ui/original/world_map/fairy_0.png" id="r27"]
+[ext_resource type="Texture2D" uid="uid://bxrxepet5jpxr" path="res://assets/ui/original/world_map/fairy_1.png" id="r28"]
+[ext_resource type="Texture2D" uid="uid://cf2wylmud4ql3" path="res://assets/ui/original/world_map/fairy_2.png" id="r29"]
+[ext_resource type="Texture2D" uid="uid://cl1t1iqd4yc13" path="res://assets/ui/original/world_map/formations_0.png" id="r30"]
+[ext_resource type="Texture2D" uid="uid://cvi7ugt5buwy1" path="res://assets/ui/original/world_map/formations_1.png" id="r31"]
+[ext_resource type="Texture2D" uid="uid://cjmlgu1nbp6wt" path="res://assets/ui/original/world_map/formations_2.png" id="r32"]
+[ext_resource type="Texture2D" uid="uid://buurwoiraq8bl" path="res://assets/ui/original/world_map/halo_0.png" id="r33"]
+[ext_resource type="Texture2D" uid="uid://npi0chgvbvpu" path="res://assets/ui/original/world_map/halo_1.png" id="r34"]
+[ext_resource type="Texture2D" uid="uid://bg0t43o4uy857" path="res://assets/ui/original/world_map/halo_2.png" id="r35"]
+[ext_resource type="Texture2D" uid="uid://dfqfdkvyqlb7n" path="res://assets/ui/original/world_map/createTeam_0.png" id="r36"]
+[ext_resource type="Texture2D" uid="uid://cagq6hcap3ro0" path="res://assets/ui/original/world_map/createTeam_1.png" id="r37"]
+[ext_resource type="Texture2D" uid="uid://42smsh33ttfh" path="res://assets/ui/original/world_map/createTeam_2.png" id="r38"]
+[ext_resource type="Texture2D" uid="uid://qi3ivhbj5hm4" path="res://assets/ui/original/world_map/btn_zc_0.png" id="r39"]
+[ext_resource type="Texture2D" uid="uid://dakpxhovsjdu2" path="res://assets/ui/original/world_map/btn_zc_1.png" id="r40"]
+[ext_resource type="Texture2D" uid="uid://cv83xq88hwbx3" path="res://assets/ui/original/world_map/btn_zc_2.png" id="r41"]
+[ext_resource type="Texture2D" uid="uid://teftnqrtm1ug" path="res://assets/ui/original/world_map/btn_sz_0.png" id="r42"]
+[ext_resource type="Texture2D" uid="uid://dhw8vkrnfhg5y" path="res://assets/ui/original/world_map/btn_sz_1.png" id="r43"]
+[ext_resource type="Texture2D" uid="uid://djwvnskboskbt" path="res://assets/ui/original/world_map/btn_sz_2.png" id="r44"]
+[ext_resource type="Texture2D" uid="uid://dsf4gyuj2hliu" path="res://assets/ui/original/world_map/btn_yj_0.png" id="r45"]
+[ext_resource type="Texture2D" uid="uid://be1bwlw73wxfg" path="res://assets/ui/original/world_map/btn_yj_1.png" id="r46"]
+[ext_resource type="Texture2D" uid="uid://bgiswldfj0iw2" path="res://assets/ui/original/world_map/btn_yj_2.png" id="r47"]
+[ext_resource type="Texture2D" uid="uid://dl752c05x5y1" path="res://assets/ui/original/world_map/btn_qz_0.png" id="r48"]
+[ext_resource type="Texture2D" uid="uid://bp0g01n4c1o2m" path="res://assets/ui/original/world_map/btn_qz_1.png" id="r49"]
+[ext_resource type="Texture2D" uid="uid://dfjxkn0abmefv" path="res://assets/ui/original/world_map/btn_qz_2.png" id="r50"]
+[ext_resource type="Texture2D" uid="uid://brb3y5w5a6vw0" path="res://assets/ui/original/world_map/btn_sj_0.png" id="r51"]
+[ext_resource type="Texture2D" uid="uid://c3n4wp3pqhet2" path="res://assets/ui/original/world_map/btn_sj_1.png" id="r52"]
+[ext_resource type="Texture2D" uid="uid://b23w0dhnjbco2" path="res://assets/ui/original/world_map/btn_sj_2.png" id="r53"]
+[ext_resource type="Texture2D" uid="uid://qir06wl0s0er" path="res://assets/ui/original/world_map/btn_vip_0.png" id="r54"]
+[ext_resource type="Texture2D" uid="uid://c43o032ogcgru" path="res://assets/ui/original/world_map/btn_vip_1.png" id="r55"]
+[ext_resource type="Texture2D" uid="uid://da2r47s6ckq2e" path="res://assets/ui/original/world_map/btn_vip_2.png" id="r56"]
+[ext_resource type="Script" uid="uid://cp8lkcidkxi3c" path="res://addons/battle_foundation/runtime/battle_session.gd" id="r57"]
+[ext_resource type="Script" uid="uid://b37qck53v013e" path="res://addons/battle_foundation/combat/BattleHitComboTracker.cs" id="r58"]
+[ext_resource type="Resource" uid="uid://dw4uvwk6kum1b" path="res://data/inventory/110101001.tres" id="r59"]
+[ext_resource type="Resource" uid="uid://c0281s88wiopx" path="res://data/inventory/110101002.tres" id="r60"]
+[ext_resource type="Resource" uid="uid://hj0mcqt6mv78" path="res://data/inventory/110101003.tres" id="r61"]
+[ext_resource type="Script" uid="uid://2yiyy3ncvy1y" path="res://game/world_map/WorldMapInventoryCatalog.cs" id="r62"]
+[ext_resource type="JSON" path="res://data/campaigns/zaomeng1/inventory_catalog.json" id="r63"]
+[ext_resource type="PackedScene" uid="uid://dvpcce2hna5oc" path="res://data/characters/sunwukong/character.tscn" id="r64"]
+[ext_resource type="PackedScene" path="res://data/ui/battle_hud.tscn" id="r65"]
+[ext_resource type="PackedScene" path="res://addons/battle_foundation/input/battle_operation_menu.tscn" id="r66"]
+[ext_resource type="Theme" uid="uid://dnrv7rdikk2gt" path="res://data/ui/campaign_theme.tres" id="r67"]
+[ext_resource type="Texture2D" uid="uid://bpublcxgnoo0f" path="res://assets/ui/zaomeng1/world_map/stage_1-1_0.png" id="s1_1_0"]
+[ext_resource type="Texture2D" uid="uid://ckol1167ghi41" path="res://assets/ui/zaomeng1/world_map/stage_1-1_1.png" id="s1_1_1"]
+[ext_resource type="Texture2D" uid="uid://d4gvkune562oj" path="res://assets/ui/zaomeng1/world_map/stage_1-2_0.png" id="s1_2_0"]
+[ext_resource type="Texture2D" uid="uid://bd0lgcwglkg04" path="res://assets/ui/zaomeng1/world_map/stage_1-2_1.png" id="s1_2_1"]
+[ext_resource type="Texture2D" uid="uid://8nfm41s5akg5" path="res://assets/ui/zaomeng1/world_map/stage_1-3_0.png" id="s1_3_0"]
+[ext_resource type="Texture2D" uid="uid://gkrvuijvgi4w" path="res://assets/ui/zaomeng1/world_map/stage_1-3_1.png" id="s1_3_1"]
+[ext_resource type="Texture2D" uid="uid://wc83imkxcgax" path="res://assets/ui/zaomeng1/world_map/stage_2-1_0.png" id="s2_1_0"]
+[ext_resource type="Texture2D" uid="uid://bmfqfgq2bop7y" path="res://assets/ui/zaomeng1/world_map/stage_2-1_1.png" id="s2_1_1"]
+[ext_resource type="Texture2D" uid="uid://1uk1spqmtl00" path="res://assets/ui/zaomeng1/world_map/stage_2-2_0.png" id="s2_2_0"]
+[ext_resource type="Texture2D" uid="uid://kcn1ck5cpu3x" path="res://assets/ui/zaomeng1/world_map/stage_2-2_1.png" id="s2_2_1"]
+[ext_resource type="Texture2D" uid="uid://cfvb84rocsv2i" path="res://assets/ui/zaomeng1/world_map/stage_2-3_0.png" id="s2_3_0"]
+[ext_resource type="Texture2D" uid="uid://b83ffaub4l0tb" path="res://assets/ui/zaomeng1/world_map/stage_2-3_1.png" id="s2_3_1"]
+[ext_resource type="Texture2D" uid="uid://c1uddb2be16wp" path="res://assets/ui/zaomeng1/world_map/stage_3-1_0.png" id="s3_1_0"]
+[ext_resource type="Texture2D" uid="uid://beygh4q6dvd68" path="res://assets/ui/zaomeng1/world_map/stage_3-1_1.png" id="s3_1_1"]
+[ext_resource type="Texture2D" uid="uid://dky2ifatiw4qj" path="res://assets/ui/zaomeng1/world_map/stage_3-2_0.png" id="s3_2_0"]
+[ext_resource type="Texture2D" uid="uid://blcvjh8djdwyf" path="res://assets/ui/zaomeng1/world_map/stage_3-2_1.png" id="s3_2_1"]
+[ext_resource type="Texture2D" uid="uid://c1vrnocahhplh" path="res://assets/ui/zaomeng1/world_map/stage_3-3_0.png" id="s3_3_0"]
+[ext_resource type="Texture2D" uid="uid://dno1mkh48v2r5" path="res://assets/ui/zaomeng1/world_map/stage_3-3_1.png" id="s3_3_1"]
+[ext_resource type="Texture2D" uid="uid://dnwadafnbuw56" path="res://assets/ui/zaomeng1/world_map/stage_4-1_0.png" id="s4_1_0"]
+[ext_resource type="Texture2D" uid="uid://dr8rka2bkt5ee" path="res://assets/ui/zaomeng1/world_map/stage_4-1_1.png" id="s4_1_1"]
+[ext_resource type="Script" uid="uid://clcwnhbnluods" path="res://game/world_map/ZaomengOneWorldMap.cs" id="script"]
+[ext_resource type="Texture2D" uid="uid://bq5xy1efha87e" path="res://assets/ui/original/world_map/world_name_frame.png" id="world_name_frame"]
+
+[sub_resource type="ShaderMaterial" id="Glow_Stage_1_1"]
+shader = ExtResource("glow_shader")
+
+[sub_resource type="ShaderMaterial" id="Glow_Stage_1_2"]
+shader = ExtResource("glow_shader")
+
+[sub_resource type="ShaderMaterial" id="Glow_Stage_1_3"]
+shader = ExtResource("glow_shader")
+
+[sub_resource type="ShaderMaterial" id="Glow_Stage_2_1"]
+shader = ExtResource("glow_shader")
+
+[sub_resource type="ShaderMaterial" id="Glow_Stage_2_2"]
+shader = ExtResource("glow_shader")
+
+[sub_resource type="ShaderMaterial" id="Glow_Stage_2_3"]
+shader = ExtResource("glow_shader")
+
+[sub_resource type="ShaderMaterial" id="Glow_Stage_3_1"]
+shader = ExtResource("glow_shader")
+
+[sub_resource type="ShaderMaterial" id="Glow_Stage_3_2"]
+shader = ExtResource("glow_shader")
+
+[sub_resource type="ShaderMaterial" id="Glow_Stage_3_3"]
+shader = ExtResource("glow_shader")
+
+[sub_resource type="ShaderMaterial" id="Glow_Stage_4_1"]
+shader = ExtResource("glow_shader")
+
+[node name="ZaomengOneWorldMap" type="Control" unique_id=2003966888]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("r67")
+script = ExtResource("script")
+
+[node name="Background" type="TextureRect" parent="." unique_id=1903217923]
+layout_mode = 0
+offset_right = 940.0
+offset_bottom = 590.0
+mouse_filter = 2
+texture = ExtResource("background")
+expand_mode = 1
+
+[node name="Stages" type="Control" parent="." unique_id=1677286244]
+anchors_preset = 0
+offset_right = 940.0
+offset_bottom = 590.0
+mouse_filter = 2
+
+[node name="Stage_1_1" type="TextureButton" parent="Stages" unique_id=1447460103]
+layout_mode = 0
+offset_left = 123.5
+offset_top = 52.3
+offset_right = 283.5
+offset_bottom = 226.3
+focus_mode = 0
+texture_normal = ExtResource("s1_1_0")
+texture_pressed = ExtResource("s1_1_1")
+texture_hover = ExtResource("s1_1_1")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Glow" type="TextureRect" parent="Stages/Stage_1_1" unique_id=1543682889]
+visible = false
+material = SubResource("Glow_Stage_1_1")
+layout_mode = 0
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 172.0
+offset_bottom = 186.0
+mouse_filter = 2
+texture = ExtResource("s1_1_0")
+expand_mode = 1
+
+[node name="Stage_1_2" type="TextureButton" parent="Stages" unique_id=515937212]
+layout_mode = 0
+offset_left = 247.65
+offset_top = 73.85
+offset_right = 424.65
+offset_bottom = 211.85
+focus_mode = 0
+texture_normal = ExtResource("s1_2_0")
+texture_pressed = ExtResource("s1_2_1")
+texture_hover = ExtResource("s1_2_1")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Glow" type="TextureRect" parent="Stages/Stage_1_2" unique_id=364196977]
+visible = false
+material = SubResource("Glow_Stage_1_2")
+layout_mode = 0
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 189.0
+offset_bottom = 150.0
+mouse_filter = 2
+texture = ExtResource("s1_2_0")
+expand_mode = 1
+
+[node name="Stage_1_3" type="TextureButton" parent="Stages" unique_id=1512993319]
+layout_mode = 0
+offset_left = 466.2
+offset_top = -11.55
+offset_right = 628.2
+offset_bottom = 151.45
+focus_mode = 0
+texture_normal = ExtResource("s1_3_0")
+texture_pressed = ExtResource("s1_3_1")
+texture_hover = ExtResource("s1_3_1")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Glow" type="TextureRect" parent="Stages/Stage_1_3" unique_id=1522959935]
+visible = false
+material = SubResource("Glow_Stage_1_3")
+layout_mode = 0
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 174.0
+offset_bottom = 175.0
+mouse_filter = 2
+texture = ExtResource("s1_3_0")
+expand_mode = 1
+
+[node name="Stage_2_1" type="TextureButton" parent="Stages" unique_id=1411286129]
+layout_mode = 0
+offset_left = 615.5
+offset_top = 22.15
+offset_right = 765.5
+offset_bottom = 117.15
+focus_mode = 0
+texture_normal = ExtResource("s2_1_0")
+texture_pressed = ExtResource("s2_1_1")
+texture_hover = ExtResource("s2_1_1")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Glow" type="TextureRect" parent="Stages/Stage_2_1" unique_id=1625780182]
+visible = false
+material = SubResource("Glow_Stage_2_1")
+layout_mode = 0
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 162.0
+offset_bottom = 107.0
+mouse_filter = 2
+texture = ExtResource("s2_1_0")
+expand_mode = 1
+
+[node name="Stage_2_2" type="TextureButton" parent="Stages" unique_id=556230949]
+layout_mode = 0
+offset_left = 565.45
+offset_top = 206.1
+offset_right = 718.45
+offset_bottom = 314.1
+focus_mode = 0
+texture_normal = ExtResource("s2_2_0")
+texture_pressed = ExtResource("s2_2_1")
+texture_hover = ExtResource("s2_2_1")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Glow" type="TextureRect" parent="Stages/Stage_2_2" unique_id=1046907498]
+visible = false
+material = SubResource("Glow_Stage_2_2")
+layout_mode = 0
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 165.0
+offset_bottom = 120.0
+mouse_filter = 2
+texture = ExtResource("s2_2_0")
+expand_mode = 1
+
+[node name="Stage_2_3" type="TextureButton" parent="Stages" unique_id=156623622]
+layout_mode = 0
+offset_left = 689.9
+offset_top = 71.45
+offset_right = 911.9
+offset_bottom = 190.45
+focus_mode = 0
+texture_normal = ExtResource("s2_3_0")
+texture_pressed = ExtResource("s2_3_1")
+texture_hover = ExtResource("s2_3_1")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Glow" type="TextureRect" parent="Stages/Stage_2_3" unique_id=1383981293]
+visible = false
+material = SubResource("Glow_Stage_2_3")
+layout_mode = 0
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 234.0
+offset_bottom = 131.0
+mouse_filter = 2
+texture = ExtResource("s2_3_0")
+expand_mode = 1
+
+[node name="Stage_3_1" type="TextureButton" parent="Stages" unique_id=1964428257]
+layout_mode = 0
+offset_left = 336.05
+offset_top = 239.95
+offset_right = 634.0
+offset_bottom = 511.35
+focus_mode = 0
+texture_normal = ExtResource("s3_1_0")
+texture_pressed = ExtResource("s3_1_1")
+texture_hover = ExtResource("s3_1_1")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Glow" type="TextureRect" parent="Stages/Stage_3_1" unique_id=1598851220]
+visible = false
+material = SubResource("Glow_Stage_3_1")
+layout_mode = 0
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 309.95
+offset_bottom = 283.4
+mouse_filter = 2
+texture = ExtResource("s3_1_0")
+expand_mode = 1
+
+[node name="Stage_3_2" type="TextureButton" parent="Stages" unique_id=119165533]
+layout_mode = 0
+offset_left = 252.3
+offset_top = 322.3
+offset_right = 954.15
+offset_bottom = 546.45
+focus_mode = 0
+texture_normal = ExtResource("s3_2_0")
+texture_pressed = ExtResource("s3_2_1")
+texture_hover = ExtResource("s3_2_1")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Glow" type="TextureRect" parent="Stages/Stage_3_2" unique_id=1051870294]
+visible = false
+material = SubResource("Glow_Stage_3_2")
+layout_mode = 0
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 713.85
+offset_bottom = 236.15
+mouse_filter = 2
+texture = ExtResource("s3_2_0")
+expand_mode = 1
+
+[node name="Stage_3_3" type="TextureButton" parent="Stages" unique_id=1736597666]
+layout_mode = 0
+offset_left = 585.5
+offset_top = 419.65305
+offset_right = 960.75
+offset_bottom = 579.5293
+focus_mode = 0
+texture_normal = ExtResource("s3_3_0")
+texture_pressed = ExtResource("s3_3_1")
+texture_hover = ExtResource("s3_3_1")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Glow" type="TextureRect" parent="Stages/Stage_3_3" unique_id=919161961]
+visible = false
+material = SubResource("Glow_Stage_3_3")
+layout_mode = 0
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 387.25
+offset_bottom = 171.87628
+mouse_filter = 2
+texture = ExtResource("s3_3_0")
+expand_mode = 1
+
+[node name="Stage_4_1" type="TextureButton" parent="Stages" unique_id=863692150]
+layout_mode = 0
+offset_left = 210.5
+offset_top = 344.05
+offset_right = 362.5
+offset_bottom = 445.05
+focus_mode = 0
+texture_normal = ExtResource("s4_1_0")
+texture_pressed = ExtResource("s4_1_1")
+texture_hover = ExtResource("s4_1_1")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Glow" type="TextureRect" parent="Stages/Stage_4_1" unique_id=82554980]
+visible = false
+material = SubResource("Glow_Stage_4_1")
+layout_mode = 0
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 164.0
+offset_bottom = 113.0
+mouse_filter = 2
+texture = ExtResource("s4_1_0")
+expand_mode = 1
+
+[node name="Music" type="AudioStreamPlayer" parent="." unique_id=2027067933]
+stream = ExtResource("music")
+
+[node name="MapNameFrame" type="NinePatchRect" parent="." unique_id=1703670508]
+layout_mode = 0
+offset_left = 747.65
+offset_top = 0.35
+offset_right = 939.65
+offset_bottom = 90.35
+texture = ExtResource("world_name_frame")
+patch_margin_left = 12
+patch_margin_right = 75
+
+[node name="MapName" type="Label" parent="." unique_id=1009706549]
+layout_mode = 0
+offset_left = 753.0
+offset_right = 938.0
+offset_bottom = 23.0
+theme_override_colors/font_color = Color(1, 0.96, 0.76, 1)
+theme_override_colors/font_outline_color = Color(0.13, 0.26, 0.22, 1)
+theme_override_constants/outline_size = 1
+theme_override_font_sizes/font_size = 14
+text = "东胜神洲（七魔王）"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Chrome" type="Control" parent="." unique_id=1832038302]
+anchors_preset = 0
+offset_right = 940.0
+offset_bottom = 590.0
+mouse_filter = 2
+
+[node name="btn_sc" type="TextureButton" parent="Chrome" unique_id=2049473417]
+layout_mode = 0
+offset_left = 4.35
+offset_top = 495.95
+offset_right = 90.35
+offset_bottom = 585.95
+focus_mode = 0
+texture_normal = ExtResource("r0")
+texture_pressed = ExtResource("r2")
+texture_hover = ExtResource("r1")
+ignore_texture_size = true
+stretch_mode = 0
+metadata/feature = &"btn_sc"
+
+[node name="btn_bb" type="TextureButton" parent="Chrome" unique_id=1587555074]
+layout_mode = 0
+offset_left = 96.0
+offset_top = 522.3
+offset_right = 156.0
+offset_bottom = 586.3
+focus_mode = 0
+texture_normal = ExtResource("r3")
+texture_pressed = ExtResource("r5")
+texture_hover = ExtResource("r4")
+ignore_texture_size = true
+stretch_mode = 0
+metadata/feature = &"btn_bb"
+
+[node name="btn_jn" type="TextureButton" parent="Chrome" unique_id=131780312]
+layout_mode = 0
+offset_left = 161.7
+offset_top = 522.3
+offset_right = 221.7
+offset_bottom = 586.3
+focus_mode = 0
+texture_normal = ExtResource("r6")
+texture_pressed = ExtResource("r8")
+texture_hover = ExtResource("r7")
+ignore_texture_size = true
+stretch_mode = 0
+metadata/feature = &"btn_jn"
+
+[node name="btn_xf" type="TextureButton" parent="Chrome" unique_id=1571168794]
+layout_mode = 0
+offset_left = 227.4
+offset_top = 522.3
+offset_right = 287.4
+offset_bottom = 586.3
+focus_mode = 0
+texture_normal = ExtResource("r9")
+texture_pressed = ExtResource("r11")
+texture_hover = ExtResource("r10")
+ignore_texture_size = true
+stretch_mode = 0
+metadata/feature = &"btn_xf"
+
+[node name="btn_qh" type="TextureButton" parent="Chrome" unique_id=418416472]
+layout_mode = 0
+offset_left = 293.1
+offset_top = 522.3
+offset_right = 353.1
+offset_bottom = 586.3
+focus_mode = 0
+texture_normal = ExtResource("r12")
+texture_pressed = ExtResource("r14")
+texture_hover = ExtResource("r13")
+ignore_texture_size = true
+stretch_mode = 0
+metadata/feature = &"btn_qh"
+
+[node name="btn_rw" type="TextureButton" parent="Chrome" unique_id=1321827184]
+layout_mode = 0
+offset_left = 356.2
+offset_top = 523.3
+offset_right = 416.2
+offset_bottom = 587.3
+focus_mode = 0
+texture_normal = ExtResource("r15")
+texture_pressed = ExtResource("r17")
+texture_hover = ExtResource("r16")
+ignore_texture_size = true
+stretch_mode = 0
+metadata/feature = &"btn_rw"
+
+[node name="btn_fb" type="TextureButton" parent="Chrome" unique_id=1921626831]
+layout_mode = 0
+offset_left = 421.8
+offset_top = 522.3
+offset_right = 481.8
+offset_bottom = 586.3
+focus_mode = 0
+texture_normal = ExtResource("r18")
+texture_pressed = ExtResource("r20")
+texture_hover = ExtResource("r19")
+ignore_texture_size = true
+stretch_mode = 0
+metadata/feature = &"btn_fb"
+
+[node name="btn_lc" type="TextureButton" parent="Chrome" unique_id=2084828625]
+layout_mode = 0
+offset_left = 489.5
+offset_top = 522.3
+offset_right = 549.5
+offset_bottom = 586.3
+focus_mode = 0
+texture_normal = ExtResource("r21")
+texture_pressed = ExtResource("r23")
+texture_hover = ExtResource("r22")
+ignore_texture_size = true
+stretch_mode = 0
+metadata/feature = &"btn_lc"
+
+[node name="btn_cb" type="TextureButton" parent="Chrome" unique_id=2106958711]
+layout_mode = 0
+offset_left = 555.95
+offset_top = 522.3
+offset_right = 615.95
+offset_bottom = 586.3
+focus_mode = 0
+texture_normal = ExtResource("r24")
+texture_pressed = ExtResource("r26")
+texture_hover = ExtResource("r25")
+ignore_texture_size = true
+stretch_mode = 0
+metadata/feature = &"btn_cb"
+
+[node name="fairy" type="TextureButton" parent="Chrome" unique_id=1631470284]
+layout_mode = 0
+offset_left = 621.65
+offset_top = 522.3
+offset_right = 681.65
+offset_bottom = 586.3
+focus_mode = 0
+texture_normal = ExtResource("r27")
+texture_pressed = ExtResource("r29")
+texture_hover = ExtResource("r28")
+ignore_texture_size = true
+stretch_mode = 0
+metadata/feature = &"fairy"
+
+[node name="formations" type="TextureButton" parent="Chrome" unique_id=1006969190]
+layout_mode = 0
+offset_left = 688.8
+offset_top = 521.95
+offset_right = 748.8
+offset_bottom = 585.95
+focus_mode = 0
+texture_normal = ExtResource("r30")
+texture_pressed = ExtResource("r32")
+texture_hover = ExtResource("r31")
+ignore_texture_size = true
+stretch_mode = 0
+metadata/feature = &"formations"
+
+[node name="halo" type="TextureButton" parent="Chrome" unique_id=1595687969]
+layout_mode = 0
+offset_left = 757.2
+offset_top = 521.15
+offset_right = 817.2
+offset_bottom = 585.3
+focus_mode = 0
+texture_normal = ExtResource("r33")
+texture_pressed = ExtResource("r35")
+texture_hover = ExtResource("r34")
+ignore_texture_size = true
+stretch_mode = 0
+metadata/feature = &"halo"
+
+[node name="createTeam" type="TextureButton" parent="Chrome" unique_id=1464415880]
+layout_mode = 0
+offset_left = 849.3
+offset_top = 495.95
+offset_right = 935.3
+offset_bottom = 585.95
+focus_mode = 0
+texture_normal = ExtResource("r36")
+texture_pressed = ExtResource("r38")
+texture_hover = ExtResource("r37")
+ignore_texture_size = true
+stretch_mode = 0
+metadata/feature = &"createTeam"
+
+[node name="btn_zc" type="TextureButton" parent="Chrome" unique_id=1572304041]
+layout_mode = 0
+offset_left = 880.6
+offset_top = 27.3
+offset_right = 938.6
+offset_bottom = 85.3
+focus_mode = 0
+texture_normal = ExtResource("r39")
+texture_pressed = ExtResource("r41")
+texture_hover = ExtResource("r40")
+ignore_texture_size = true
+stretch_mode = 0
+metadata/feature = &"btn_zc"
+
+[node name="btn_sz" type="TextureButton" parent="Chrome" unique_id=31044345]
+layout_mode = 0
+offset_left = 897.9
+offset_top = 188.35
+offset_right = 936.3
+offset_bottom = 230.6
+focus_mode = 0
+texture_normal = ExtResource("r42")
+texture_pressed = ExtResource("r44")
+texture_hover = ExtResource("r43")
+ignore_texture_size = true
+stretch_mode = 0
+metadata/feature = &"btn_sz"
+
+[node name="btn_yj" type="TextureButton" parent="Chrome" unique_id=2129159644]
+layout_mode = 0
+offset_left = 898.3
+offset_top = 230.85
+offset_right = 936.3
+offset_bottom = 272.85
+focus_mode = 0
+texture_normal = ExtResource("r45")
+texture_pressed = ExtResource("r47")
+texture_hover = ExtResource("r46")
+ignore_texture_size = true
+stretch_mode = 0
+metadata/feature = &"btn_yj"
+
+[node name="btn_qz" type="TextureButton" parent="Chrome" unique_id=279268405]
+layout_mode = 0
+offset_left = 898.3
+offset_top = 273.35
+offset_right = 936.3
+offset_bottom = 315.35
+focus_mode = 0
+texture_normal = ExtResource("r48")
+texture_pressed = ExtResource("r50")
+texture_hover = ExtResource("r49")
+ignore_texture_size = true
+stretch_mode = 0
+metadata/feature = &"btn_qz"
+
+[node name="btn_sj" type="TextureButton" parent="Chrome" unique_id=315056710]
+layout_mode = 0
+offset_left = 898.3
+offset_top = 145.85
+offset_right = 936.3
+offset_bottom = 187.85
+focus_mode = 0
+texture_normal = ExtResource("r51")
+texture_pressed = ExtResource("r53")
+texture_hover = ExtResource("r52")
+ignore_texture_size = true
+stretch_mode = 0
+metadata/feature = &"btn_sj"
+
+[node name="btn_vip" type="TextureButton" parent="Chrome" unique_id=1564205280]
+layout_mode = 0
+offset_left = 843.3
+offset_top = 85.85
+offset_right = 936.3
+offset_bottom = 125.85
+focus_mode = 0
+texture_normal = ExtResource("r54")
+texture_pressed = ExtResource("r56")
+texture_hover = ExtResource("r55")
+ignore_texture_size = true
+stretch_mode = 0
+metadata/feature = &"btn_vip"
+
+[node name="CharacterSession" type="Node3D" parent="." unique_id=26347619]
+script = ExtResource("r57")
+scene_manifest_path = "res://data/levels/biyujing/progression/manifest.json"
+scene_seed = 12001
+
+[node name="HitComboTracker" type="Node" parent="CharacterSession" unique_id=1162774972]
+script = ExtResource("r58")
+
+[node name="Loot" type="Node" parent="CharacterSession" unique_id=380918490]
+script = ExtResource("r62")
+rules = ExtResource("r63")
+item_definitions = Array[Resource]([ExtResource("r59"), ExtResource("r60"), ExtResource("r61")])
+
+[node name="SunWukong" parent="CharacterSession" unique_id=1158068873 instance=ExtResource("r64")]
+visible = false
+scene_definition_id = &"孙悟空"
+scene_session_path = NodePath("..")
+
+[node name="HUD" parent="." unique_id=1749955029 instance=ExtResource("r65")]
+layout_mode = 1
+
+[node name="Settings" parent="." unique_id=954441122 instance=ExtResource("r66")]
+anchors_preset = 0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 940.0
+offset_bottom = 590.0
+
+[node name="Notice" type="Control" parent="." unique_id=1853439980]
+visible = false
+anchors_preset = 0
+offset_right = 940.0
+offset_bottom = 590.0
+mouse_filter = 2
+metadata/ui_modal = true
+
+[node name="InputBarrier" type="Control" parent="Notice" unique_id=1570376459]
+anchors_preset = 0
+offset_right = 940.0
+offset_bottom = 590.0
+
+[node name="Panel" type="Panel" parent="Notice" unique_id=477820982]
+layout_mode = 0
+offset_left = 290.0
+offset_top = 220.0
+offset_right = 650.0
+offset_bottom = 380.0
+theme = ExtResource("r67")
+
+[node name="Text" type="Label" parent="Notice/Panel" unique_id=111292236]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 18.0
+offset_right = 340.0
+offset_bottom = 82.0
+theme_override_font_sizes/font_size = 18
+text = "该功能暂未开放"
+horizontal_alignment = 1
+
+[node name="OK" type="Button" parent="Notice" unique_id=1348570140]
+layout_mode = 0
+offset_left = 420.0
+offset_top = 315.0
+offset_right = 520.0
+offset_bottom = 351.0
+theme = ExtResource("r67")
+text = "确定"

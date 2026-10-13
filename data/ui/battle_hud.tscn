@@ -1,4 +1,5 @@
 [gd_scene format=3]
+[ext_resource type="PackedScene" path="res://data/ui/skills.tscn" id="skill_panel"]
 [ext_resource type="PackedScene" path="res://data/ui/hit_combo.tscn" id="hit_combo"]
 [ext_resource type="FontFile" path="res://assets/ui/boss/count.ttf" id="R1"]
 [ext_resource type="FontFile" path="res://addons/simple_inventory/assets/fonts/SourceHanSansSC-Regular-2.otf" id="R2"]
@@ -1702,6 +1703,13 @@ offset_bottom = 465
 visible = false
 z_index = 40
 mouse_filter = 0
+metadata/ui_modal = true
+[node name="ModalBarrier" type="Control" parent="ModulePanel"]
+offset_left = -220.0
+offset_top = -115.0
+offset_right = 720.0
+offset_bottom = 475.0
+mouse_filter = 0
 [node name="Background" type="NinePatchRect" parent="ModulePanel"]
 offset_left = 0
 offset_top = 0
@@ -1753,3 +1761,5 @@ mouse_filter = 2
 process_mode = 3
 z_index = 100
 script = ExtResource("pickup_feedback")
+
+[node name="SkillPanel" parent="." instance=ExtResource("skill_panel")]

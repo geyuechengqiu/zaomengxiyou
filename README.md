@@ -4,15 +4,19 @@
 
 本机已安装系统 .NET 8 SDK 8.0.425，可直接用配套 Godot 打开项目并使用 F5/F6。安装前已打开的编辑器需退出并重新打开。也可使用 [open_editor.cmd](open_editor.cmd)，它会先构建并启用项目便携 SDK。
 
-已接入匹配的 Spine/.NET Windows 模板并运行 NativeAOT 关卡包。执行 `./tools/csharp/export_native.ps1` 生成正式包。当前31个脚本已迁移，完整C#迁移仍在进行；原生编译与原生运行验证均已完成。
+已接入匹配的 Spine/.NET Windows 模板并运行 NativeAOT 关卡包。执行 `./tools/csharp/export_native.ps1` 生成正式包。完整C#迁移仍在进行；新增关卡、选关、角色存档和造1 Boss 专属逻辑使用 C#。
 
-正式入口为 [碧玉径](game/levels/biyujing.tscn)，按 F5 运行。需要带 **Spine 4.3 模块**的 Godot；本机引擎为 Godot 4.7.2。逻辑视口为原版 940×590，战斗世界使用 2 倍素材坐标。
+正式入口为 [造1大地图](game/world_map/zaomeng1_world_map.tscn)，按 F5 运行。原版十个选关点配合造5返回图标、字体和按钮，点击直接进关，最新可挑战关卡使用造1原版发光；目前制作完成花果山、水帘洞。花果山最终出口确认胜利后解锁水帘洞，其余地图点保留位置，尚未制作时不能进入。大地图按钮可进入 [碧玉径](game/levels/biyujing.tscn)。需要带 **Spine 4.3 模块**的 Godot；本机引擎为 Godot 4.7.2。逻辑视口为原版 940×590，战斗世界使用 2 倍素材坐标。[选关与存档配置](data/campaigns/zaomeng1/README.md)。
 
 新增 [造梦西游1第一关花果山](game/levels/huaguoshan.tscn)，打开场景按 F6。原山景、森林、坡地和平台构成连续地图，五区域14个计划共33个敌人；三个怪物外观使用原图转 Spine，属性沿用碧玉径，技能时序、逐帧攻击框及击退采用造1，普攻统一1倍。单人活怪上限6，复用战斗 UI、背包、掉落、镜头和通关。详见 [花果山配置与来源](data/levels/huaguoshan/README.md)。
 
-当前关卡包含孙悟空、五个连续区域、32 个普通怪物、复苏容器和玉石琵琶精 Boss。地图、角色组件、出生点、出口、镜头和战斗 UI 均预置，怪物按原版波次与出生依赖生成。技能、属性、Buff、掉落、装备成长和表现通过现有插件协同。
+新增 [造梦西游1第二关水帘洞](game/levels/shuiliandong.tscn)：原背景、地形、水面与五个单向平台，五区域18个出生计划共48个敌人，Boss 弥猴王使用原生 Spine、原三技能和逐帧弹道。普通怪属性沿用碧玉径，猕猴王属性改用上古天帝篇第二关九头雉鸡精；技能倍率、时间、击退和免疫采用造1相对规则，Boss 登场音乐与碧玉径一致。两关复用战斗、掉落与背包；返回地图、重开、通关后保存等级、经验、灵魂、昵称及装备实例。通关判定随 `FinalExit/Gateway` 的移动同步。[水帘洞配置与来源](data/levels/shuiliandong/README.md)。
+
+碧玉径包含孙悟空、五个连续区域、32 个普通怪物、复苏容器和玉石琵琶精 Boss。地图、角色组件、出生点、出口、镜头和战斗 UI 均预置，怪物按原版波次与出生依赖生成。技能、属性、Buff、掉落、装备成长和表现通过现有插件协同。
 
 已接入 [原版战斗连击及显示](addons/battle_foundation/combat/hit-combo.md)：按角色有效伤害结算累计，连续1.5秒未命中后结束；共享HUD使用原版数字与“连击”贴图，保留角色及本关最高连击。
+
+已接入 [上古天帝篇原版技能面板与装配](data/characters/sunwukong/skills/README.md)：四个转职前主动技能、升级与连续升级、五主动槽及被动/无双/道具槽、改键与跨关存档；重击使普攻末击必定暴击。火魔斩当前未学习，默认第五槽为空，转职与秘技保留原版入口。
 
 ## 目录与配置入口
 
@@ -23,6 +27,7 @@
 | 目录 | 内容 |
 | --- | --- |
 | `game/levels/` | 正式可玩关卡 |
+| `game/world_map/`、`game/campaign/`、`data/campaigns/` | 造1大地图、顺序解锁、角色跨关存档 |
 | [data/characters/sunwukong](data/characters/sunwukong/README.md) | 悟空定义、属性、输入、技能、角色和动画场景 |
 | `assets/characters/sunwukong/animation/`、`audio/` | 悟空骨架、图片、攻击特效和动作音效 |
 | [data/monsters](data/monsters/README.md)、`assets/monsters/` | 各怪物属性、AI、技能、Spine 和原版素材 |
@@ -73,4 +78,4 @@ GAS 已统一接入 Core 事件总线。[系统重叠比较](docs/plugin-overlap
 & '<Godot.exe>' --headless --path . res://tools/performance/benchmark_monster_spawn.tscn
 ```
 
-默认执行当前 13 套验证，日志与截图保存在 Git/Godot 忽略的 `.cleanup-backup`。Windows 子窗口配置辅助工具位于 `tools/window_mode_helper/`。
+默认执行当前 25 套验证，日志与截图保存在 Git/Godot 忽略的 `.cleanup-backup`。新增水帘洞地形往返与三技能实战、完整波次、选关存档及真实按钮场景切换验证。Windows 子窗口配置辅助工具位于 `tools/window_mode_helper/`。

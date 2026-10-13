@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="CharacterAnimationProfile" format=3]
+[ext_resource type="Script" path="res://addons/battle_foundation/animation/CharacterAnimationProfile.cs" id="script"]
+[ext_resource type="SpineSkeletonDataResource" path="res://assets/monsters/zaomeng1/mihou_king/spinedata.tres" id="skeleton"]
+[resource]
+script = ExtResource("script")
+skeleton_data = ExtResource("skeleton")
+source_fps = 60.0
+display_scale = 3.0
+animations = Dictionary[StringName, StringName]({&"idle": &"idle", &"run": &"run", &"runattack": &"runattack", &"attack1": &"attack1", &"attack2": &"attack2", &"attack3": &"attack3", &"attack4": &"attack4", &"skill1": &"skill1", &"passiveskill1": &"passiveskill1", &"skill3": &"skill3", &"skill2": &"skill2", &"hurt": &"hurt", &"jump": &"jump", &"jumpattack": &"jumpattack", &"doublejump": &"doublejump", &"jumpdown": &"jumpdown", &"dead": &"dead", &"ground": &"ground", &"bound": &"bound", &"swimming": &"swimming", &"ride": &"ride", &"move": &"move", &"jump_2": &"jump_2", &"fall": &"fall", &"land": &"land", &"recover": &"recover", &"protect": &"protect", &"death": &"death"})
+looping_actions = Array[StringName]([&"idle", &"move", &"run", &"fall", &"swimming", &"ride"])
+socket_bones = Dictionary[StringName, StringName]({&"root": &"root"})

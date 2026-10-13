@@ -75,6 +75,9 @@ func on_activate(ability: GameplayAbilityInstance, context: Dictionary) -> void:
 func update(ability: GameplayAbilityInstance, delta: float) -> void:
 	if not ability.is_active or delta <= 0.0:
 		return
+	var owner := ability.get_owner_entity()
+	if is_instance_valid(owner) and owner.has_method("get_action_delta"):
+		delta = owner.get_action_delta(ability.get_definition().ability_id, delta)
 	if uses_cast_timeline():
 		_update_segments(ability, delta)
 		return

@@ -1,0 +1,60 @@
+[gd_resource type="Resource" script_class="GameplayAbilityDefinition" format=3 uid="uid://jpe2g4wg0b52"]
+
+[ext_resource type="Script" uid="uid://ud4ug2ylqdo2" path="res://addons/battle_foundation/definitions/BattleSkillBranch.cs" id="3_qfa4d"]
+[ext_resource type="Script" uid="uid://b1047b2i0w3jx" path="res://addons/battle_foundation/definitions/BattleSkillMotion.cs" id="5_0myan"]
+[ext_resource type="Script" uid="uid://bm4h231fb21pv" path="res://addons/gameplay_abiltiy_system/scripts/abilities/gameplay_ability_definition.gd" id="definition"]
+[ext_resource type="Script" uid="uid://dm30yy8ucnbot" path="res://addons/battle_foundation/definitions/BattleFrameEvent.cs" id="event"]
+[ext_resource type="Script" uid="uid://cm0x3pewlrveo" path="res://addons/gameplay_abiltiy_system/scripts/abilities/features/gameplay_ability_feature.gd" id="feature"]
+[ext_resource type="Script" uid="uid://ctus3t2tt37o6" path="res://addons/battle_foundation/definitions/battle_attack_segment.gd" id="segment"]
+[ext_resource type="Script" uid="uid://daneexb55k8ae" path="res://addons/battle_foundation/gas/battle_frame_timeline_feature.gd" id="timeline"]
+
+[sub_resource type="Resource" id="Hit0"]
+script = ExtResource("segment")
+segment_id = &"hit1_0"
+start_frame = 2
+end_frame = 17
+hit_rect = Rect2(-54.995613, -131.36253, 180.69122, 130.92508)
+hit_rect_frames = Dictionary[int, Rect2]({
+2: Rect2(-54.995613, -131.36253, 180.69122, 130.92508),
+3: Rect2(-54.995613, -131.36253, 180.69122, 130.92508),
+4: Rect2(-44.719166, -65.58351, 172.03833, 48.967026),
+5: Rect2(-44.719166, -65.58351, 172.03833, 48.967026),
+6: Rect2(-44.719166, -65.58351, 172.03833, 48.967026),
+7: Rect2(-44.719166, -65.58351, 172.03833, 48.967026),
+8: Rect2(-44.719166, -65.58351, 172.03833, 48.967026),
+9: Rect2(-44.719166, -65.58351, 172.03833, 48.967026),
+10: Rect2(-44.719166, -65.58351, 172.03833, 48.967026),
+11: Rect2(-44.719166, -65.58351, 172.03833, 48.967026),
+12: Rect2(-44.719166, -65.58351, 172.03833, 48.967026),
+13: Rect2(-44.719166, -65.58351, 172.03833, 48.967026),
+14: Rect2(-44.719166, -65.58351, 172.03833, 48.967026),
+15: Rect2(-44.719166, -65.58351, 172.03833, 48.967026),
+16: Rect2(-44.719166, -65.58351, 172.03833, 48.967026)
+})
+hit_interval = 0.13333333333333333
+maximum_hits = 2
+knockback_speed = 360.0
+knockback_duration = 0.5
+launch_speed = 300.0
+reset_vertical_velocity = true
+reaction_gravity = 2700.0
+hit_stun = 0.5
+reaction_type = "launch"
+protection_parameters = {
+"isProtectPointAdd": 1,
+"protectPoint": 3334,
+"protectPointB": 3334
+}
+
+[sub_resource type="Resource" id="Timeline"]
+script = ExtResource("timeline")
+duration_frames = 17
+attack_segments = Array[ExtResource("segment")]([SubResource("Hit0")])
+commit_resources = true
+
+[resource]
+script = ExtResource("definition")
+ability_id = &"zaomeng1_mihou_king_hit1"
+ability_name = "弥猴王 · hit1"
+features = Array[ExtResource("feature")]([SubResource("Timeline")])
+metadata/zaomeng1_base_power = 30

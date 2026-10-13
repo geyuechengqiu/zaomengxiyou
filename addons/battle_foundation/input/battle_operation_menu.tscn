@@ -1,291 +1,947 @@
 [gd_scene format=3]
-[ext_resource type="Script" path="res://addons/battle_foundation/input/battle_operation_menu.gd" id="script"]
-[ext_resource type="PackedScene" path="res://addons/battle_foundation/audio/battle_audio_settings.tscn" id="audio_settings"]
-[sub_resource type="StyleBoxFlat" id="panel"]
-bg_color = Color(0.09, 0.16, 0.23, 1)
-content_margin_left = 20.0
-content_margin_right = 20.0
-content_margin_top = 16.0
-content_margin_bottom = 16.0
+[ext_resource type="Theme" path="res://data/ui/campaign_theme.tres" id="r0"]
+[ext_resource type="Script" path="res://addons/battle_foundation/ui/OriginalSettingsPanel.cs" id="r1"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/settings/main_0.png" id="r2"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/settings/sound_0.png" id="r3"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/settings/display_frame_0.png" id="r4"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/settings/display_title_0.png" id="r5"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/settings/more_frame_0.png" id="r6"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/settings/button_close_0.png" id="r7"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/settings/button_close_1.png" id="r8"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/settings/button_close_2.png" id="r9"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/settings/button_resume_0.png" id="r10"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/settings/button_resume_1.png" id="r11"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/settings/button_resume_2.png" id="r12"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/settings/button_retry_0.png" id="r13"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/settings/button_retry_1.png" id="r14"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/settings/button_retry_2.png" id="r15"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/settings/button_map_0.png" id="r16"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/settings/button_map_1.png" id="r17"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/settings/button_map_2.png" id="r18"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/settings/button_sound_0.png" id="r19"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/settings/button_sound_1.png" id="r20"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/settings/button_sound_2.png" id="r21"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/settings/button_more_0.png" id="r22"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/settings/button_more_1.png" id="r23"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/settings/button_more_2.png" id="r24"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/settings/button_display_0.png" id="r25"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/settings/button_display_1.png" id="r26"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/settings/button_display_2.png" id="r27"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/settings/button_help_0.png" id="r28"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/settings/button_help_1.png" id="r29"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/settings/button_help_2.png" id="r30"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/settings/button_home_0.png" id="r31"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/settings/button_home_1.png" id="r32"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/settings/button_home_2.png" id="r33"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/settings/close_0.png" id="r34"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/settings/close_1.png" id="r35"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/settings/close_2.png" id="r36"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/settings/slider_track_0.png" id="r37"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/item_sell_check_0.png" id="r38"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/item_sell_check_1.png" id="r39"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/settings/slider_knob_0.png" id="r40"]
+[ext_resource type="PackedScene" path="res://addons/battle_foundation/audio/battle_audio_settings.tscn" id="r41"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/settings/more_pause_0.png" id="r42"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/settings/more_quality_0.png" id="r43"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/settings/more_fireworks_0.png" id="r44"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/settings/more_pickup_0.png" id="r45"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/settings/more_news_0.png" id="r46"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/settings/more_emoji_0.png" id="r47"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/settings/password_0.png" id="r48"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/settings/password_1.png" id="r49"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/settings/password_2.png" id="r50"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/settings/display_count_0.png" id="r51"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/settings/display_less_0.png" id="r52"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/settings/display_less_1.png" id="r53"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/settings/display_less_2.png" id="r54"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/settings/display_more_0.png" id="r55"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/settings/display_more_1.png" id="r56"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/settings/display_more_2.png" id="r57"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/settings/display_row_0.png" id="r58"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/settings/display_teammates_0.png" id="r59"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/settings/display_toggle_0.png" id="r60"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/settings/display_toggle_1.png" id="r61"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/settings/display_toggle_2.png" id="r62"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/settings/display_disciples_0.png" id="r63"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/settings/display_friends_0.png" id="r64"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/settings/display_others_0.png" id="r65"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/settings/display_pvp_0.png" id="r66"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/settings/display_pets_0.png" id="r67"]
+[sub_resource type="StyleBoxEmpty" id="Empty"]
+[sub_resource type="StyleBoxTexture" id="SliderTrack"]
+texture = ExtResource("r37")
+content_margin_top = 7.0
+content_margin_bottom = 7.0
+texture_margin_left = 7.0
+texture_margin_right = 7.0
+[sub_resource type="StyleBoxTexture" id="SliderFill"]
+texture = ExtResource("r37")
+content_margin_top = 7.0
+content_margin_bottom = 7.0
+texture_margin_left = 7.0
+texture_margin_right = 7.0
+modulate_color = Color(0.25,0.75,0.78,1)
 [node name="OperationMenu" type="Control"]
-process_mode = 3
-z_index = 100
-visible = false
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-focus_mode = 2
-script = ExtResource("script")
-[node name="Backdrop" type="ColorRect" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+offset_left = 0
+offset_top = 0
+offset_right = 940
+offset_bottom = 590
 mouse_filter = 2
-color = Color(0.02, 0.04, 0.07, 0.95)
-[node name="Margin" type="MarginContainer" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-theme_override_constants/margin_left = 120
-theme_override_constants/margin_right = 120
-theme_override_constants/margin_top = 24
-theme_override_constants/margin_bottom = 24
-[node name="Panel" type="PanelContainer" parent="Margin"]
-layout_mode = 2
-theme_override_styles/panel = SubResource("panel")
-[node name="Column" type="VBoxContainer" parent="Margin/Panel"]
-layout_mode = 2
-theme_override_constants/separation = 8
-[node name="Title" type="Label" parent="Margin/Panel/Column"]
-layout_mode = 2
-text = "设置 · 声音与按键"
-theme_override_font_sizes/font_size = 24
-[node name="Status" type="Label" parent="Margin/Panel/Column"]
-layout_mode = 2
-custom_minimum_size = Vector2(0, 40)
-autowrap_mode = 3
-theme_override_font_sizes/font_size = 16
-theme_override_colors/font_color = Color(1, 0.83, 0.55, 1)
-[node name="AudioSettings" parent="Margin/Panel/Column" instance=ExtResource("audio_settings")]
-layout_mode = 2
-[node name="Scroll" type="ScrollContainer" parent="Margin/Panel/Column"]
-layout_mode = 2
-size_flags_vertical = 3
-[node name="Rows" type="VBoxContainer" parent="Margin/Panel/Column/Scroll"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_constants/separation = 5
-[node name="move_left" type="HBoxContainer" parent="Margin/Panel/Column/Scroll/Rows"]
-layout_mode = 2
-metadata/intent = &"move_left"
-[node name="Name" type="Label" parent="Margin/Panel/Column/Scroll/Rows/move_left"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "左移"
-[node name="Binding" type="Button" parent="Margin/Panel/Column/Scroll/Rows/move_left"]
-layout_mode = 2
-custom_minimum_size = Vector2(220, 30)
-text = "未绑定"
-[node name="move_right" type="HBoxContainer" parent="Margin/Panel/Column/Scroll/Rows"]
-layout_mode = 2
-metadata/intent = &"move_right"
-[node name="Name" type="Label" parent="Margin/Panel/Column/Scroll/Rows/move_right"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "右移"
-[node name="Binding" type="Button" parent="Margin/Panel/Column/Scroll/Rows/move_right"]
-layout_mode = 2
-custom_minimum_size = Vector2(220, 30)
-text = "未绑定"
-[node name="move_up" type="HBoxContainer" parent="Margin/Panel/Column/Scroll/Rows"]
-layout_mode = 2
-metadata/intent = &"move_up"
-[node name="Name" type="Label" parent="Margin/Panel/Column/Scroll/Rows/move_up"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "上方向"
-[node name="Binding" type="Button" parent="Margin/Panel/Column/Scroll/Rows/move_up"]
-layout_mode = 2
-custom_minimum_size = Vector2(220, 30)
-text = "未绑定"
-[node name="move_down" type="HBoxContainer" parent="Margin/Panel/Column/Scroll/Rows"]
-layout_mode = 2
-metadata/intent = &"move_down"
-[node name="Name" type="Label" parent="Margin/Panel/Column/Scroll/Rows/move_down"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "下方向"
-[node name="Binding" type="Button" parent="Margin/Panel/Column/Scroll/Rows/move_down"]
-layout_mode = 2
-custom_minimum_size = Vector2(220, 30)
-text = "未绑定"
-[node name="run" type="HBoxContainer" parent="Margin/Panel/Column/Scroll/Rows"]
-layout_mode = 2
-metadata/intent = &"run"
-[node name="Name" type="Label" parent="Margin/Panel/Column/Scroll/Rows/run"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "奔跑"
-[node name="Binding" type="Button" parent="Margin/Panel/Column/Scroll/Rows/run"]
-layout_mode = 2
-custom_minimum_size = Vector2(220, 30)
-text = "未绑定"
-[node name="jump" type="HBoxContainer" parent="Margin/Panel/Column/Scroll/Rows"]
-layout_mode = 2
-metadata/intent = &"jump"
-[node name="Name" type="Label" parent="Margin/Panel/Column/Scroll/Rows/jump"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "跳跃"
-[node name="Binding" type="Button" parent="Margin/Panel/Column/Scroll/Rows/jump"]
-layout_mode = 2
-custom_minimum_size = Vector2(220, 30)
-text = "未绑定"
-[node name="attack" type="HBoxContainer" parent="Margin/Panel/Column/Scroll/Rows"]
-layout_mode = 2
-metadata/intent = &"attack"
-[node name="Name" type="Label" parent="Margin/Panel/Column/Scroll/Rows/attack"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "普攻"
-[node name="Binding" type="Button" parent="Margin/Panel/Column/Scroll/Rows/attack"]
-layout_mode = 2
-custom_minimum_size = Vector2(220, 30)
-text = "未绑定"
-[node name="skill_1" type="HBoxContainer" parent="Margin/Panel/Column/Scroll/Rows"]
-layout_mode = 2
-metadata/intent = &"skill_1"
-[node name="Name" type="Label" parent="Margin/Panel/Column/Scroll/Rows/skill_1"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "技能槽 1"
-[node name="Binding" type="Button" parent="Margin/Panel/Column/Scroll/Rows/skill_1"]
-layout_mode = 2
-custom_minimum_size = Vector2(220, 30)
-text = "未绑定"
-[node name="skill_2" type="HBoxContainer" parent="Margin/Panel/Column/Scroll/Rows"]
-layout_mode = 2
-metadata/intent = &"skill_2"
-[node name="Name" type="Label" parent="Margin/Panel/Column/Scroll/Rows/skill_2"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "技能槽 2"
-[node name="Binding" type="Button" parent="Margin/Panel/Column/Scroll/Rows/skill_2"]
-layout_mode = 2
-custom_minimum_size = Vector2(220, 30)
-text = "未绑定"
-[node name="skill_3" type="HBoxContainer" parent="Margin/Panel/Column/Scroll/Rows"]
-layout_mode = 2
-metadata/intent = &"skill_3"
-[node name="Name" type="Label" parent="Margin/Panel/Column/Scroll/Rows/skill_3"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "技能槽 3"
-[node name="Binding" type="Button" parent="Margin/Panel/Column/Scroll/Rows/skill_3"]
-layout_mode = 2
-custom_minimum_size = Vector2(220, 30)
-text = "未绑定"
-[node name="skill_4" type="HBoxContainer" parent="Margin/Panel/Column/Scroll/Rows"]
-layout_mode = 2
-metadata/intent = &"skill_4"
-[node name="Name" type="Label" parent="Margin/Panel/Column/Scroll/Rows/skill_4"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "技能槽 4"
-[node name="Binding" type="Button" parent="Margin/Panel/Column/Scroll/Rows/skill_4"]
-layout_mode = 2
-custom_minimum_size = Vector2(220, 30)
-text = "未绑定"
-[node name="skill_5" type="HBoxContainer" parent="Margin/Panel/Column/Scroll/Rows"]
-layout_mode = 2
-metadata/intent = &"skill_5"
-[node name="Name" type="Label" parent="Margin/Panel/Column/Scroll/Rows/skill_5"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "技能槽 5"
-[node name="Binding" type="Button" parent="Margin/Panel/Column/Scroll/Rows/skill_5"]
-layout_mode = 2
-custom_minimum_size = Vector2(220, 30)
-text = "未绑定"
-[node name="magic_weapon" type="HBoxContainer" parent="Margin/Panel/Column/Scroll/Rows"]
-layout_mode = 2
-metadata/intent = &"magic_weapon"
-[node name="Name" type="Label" parent="Margin/Panel/Column/Scroll/Rows/magic_weapon"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "法宝"
-[node name="Binding" type="Button" parent="Margin/Panel/Column/Scroll/Rows/magic_weapon"]
-layout_mode = 2
-custom_minimum_size = Vector2(220, 30)
-text = "未绑定"
-[node name="wushuang" type="HBoxContainer" parent="Margin/Panel/Column/Scroll/Rows"]
-layout_mode = 2
-metadata/intent = &"wushuang"
-[node name="Name" type="Label" parent="Margin/Panel/Column/Scroll/Rows/wushuang"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "无双"
-[node name="Binding" type="Button" parent="Margin/Panel/Column/Scroll/Rows/wushuang"]
-layout_mode = 2
-custom_minimum_size = Vector2(220, 30)
-text = "未绑定"
-[node name="wing_skill" type="HBoxContainer" parent="Margin/Panel/Column/Scroll/Rows"]
-layout_mode = 2
-metadata/intent = &"wing_skill"
-[node name="Name" type="Label" parent="Margin/Panel/Column/Scroll/Rows/wing_skill"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "翅膀技能"
-[node name="Binding" type="Button" parent="Margin/Panel/Column/Scroll/Rows/wing_skill"]
-layout_mode = 2
-custom_minimum_size = Vector2(220, 30)
-text = "未绑定"
-[node name="ultimate" type="HBoxContainer" parent="Margin/Panel/Column/Scroll/Rows"]
-layout_mode = 2
-metadata/intent = &"ultimate"
-[node name="Name" type="Label" parent="Margin/Panel/Column/Scroll/Rows/ultimate"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "奥义"
-[node name="Binding" type="Button" parent="Margin/Panel/Column/Scroll/Rows/ultimate"]
-layout_mode = 2
-custom_minimum_size = Vector2(220, 30)
-text = "未绑定"
-[node name="item_1" type="HBoxContainer" parent="Margin/Panel/Column/Scroll/Rows"]
-layout_mode = 2
-metadata/intent = &"item_1"
-[node name="Name" type="Label" parent="Margin/Panel/Column/Scroll/Rows/item_1"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "道具 1"
-[node name="Binding" type="Button" parent="Margin/Panel/Column/Scroll/Rows/item_1"]
-layout_mode = 2
-custom_minimum_size = Vector2(220, 30)
-text = "未绑定"
-[node name="item_2" type="HBoxContainer" parent="Margin/Panel/Column/Scroll/Rows"]
-layout_mode = 2
-metadata/intent = &"item_2"
-[node name="Name" type="Label" parent="Margin/Panel/Column/Scroll/Rows/item_2"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "道具 2"
-[node name="Binding" type="Button" parent="Margin/Panel/Column/Scroll/Rows/item_2"]
-layout_mode = 2
-custom_minimum_size = Vector2(220, 30)
-text = "未绑定"
-[node name="pet_toggle" type="HBoxContainer" parent="Margin/Panel/Column/Scroll/Rows"]
-layout_mode = 2
-metadata/intent = &"pet_toggle"
-[node name="Name" type="Label" parent="Margin/Panel/Column/Scroll/Rows/pet_toggle"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "宠物"
-[node name="Binding" type="Button" parent="Margin/Panel/Column/Scroll/Rows/pet_toggle"]
-layout_mode = 2
-custom_minimum_size = Vector2(220, 30)
-text = "未绑定"
-[node name="mount_toggle" type="HBoxContainer" parent="Margin/Panel/Column/Scroll/Rows"]
-layout_mode = 2
-metadata/intent = &"mount_toggle"
-[node name="Name" type="Label" parent="Margin/Panel/Column/Scroll/Rows/mount_toggle"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "坐骑"
-[node name="Binding" type="Button" parent="Margin/Panel/Column/Scroll/Rows/mount_toggle"]
-layout_mode = 2
-custom_minimum_size = Vector2(220, 30)
-text = "未绑定"
-[node name="Buttons" type="HBoxContainer" parent="Margin/Panel/Column"]
-layout_mode = 2
-theme_override_constants/separation = 12
-[node name="Reset" type="Button" parent="Margin/Panel/Column/Buttons"]
-layout_mode = 2
-text = "恢复默认按键"
-[node name="Close" type="Button" parent="Margin/Panel/Column/Buttons"]
-layout_mode = 2
-text = "返回游戏 [Esc]"
+visible = false
+process_mode = 3
+script = ExtResource("r1")
+theme = ExtResource("r0")
+metadata/ui_modal = true
+[node name="InputBarrier" type="Control" parent="."]
+offset_left = 0
+offset_top = 0
+offset_right = 940
+offset_bottom = 590
+mouse_filter = 2
+mouse_filter = 0
+[node name="Shade" type="ColorRect" parent="."]
+offset_left = 0
+offset_top = 0
+offset_right = 940
+offset_bottom = 590
+mouse_filter = 2
+color = Color(0,0,0,0.25)
+[node name="Main" type="Control" parent="."]
+offset_left = 0
+offset_top = 0
+offset_right = 940
+offset_bottom = 590
+mouse_filter = 2
+visible = true
+[node name="Background" type="TextureRect" parent="Main"]
+offset_left = 0
+offset_top = 0
+offset_right = 940
+offset_bottom = 590
+mouse_filter = 2
+texture = ExtResource("r2")
+expand_mode = 1
+[node name="Sound" type="Control" parent="."]
+offset_left = 0
+offset_top = 0
+offset_right = 940
+offset_bottom = 590
+mouse_filter = 2
+visible = false
+[node name="Background" type="TextureRect" parent="Sound"]
+offset_left = 0
+offset_top = 0
+offset_right = 940
+offset_bottom = 590
+mouse_filter = 2
+texture = ExtResource("r3")
+expand_mode = 1
+[node name="Display" type="Control" parent="."]
+offset_left = 0
+offset_top = 0
+offset_right = 940
+offset_bottom = 590
+mouse_filter = 2
+visible = false
+[node name="Background" type="NinePatchRect" parent="Display"]
+offset_left = 303.85
+offset_top = 60
+offset_right = 662.85
+offset_bottom = 515
+mouse_filter = 2
+texture = ExtResource("r4")
+patch_margin_left = 50
+patch_margin_right = 50
+patch_margin_top = 60
+patch_margin_bottom = 35
+[node name="Title" type="TextureRect" parent="Display"]
+offset_left = 356.85
+offset_top = 76.5
+offset_right = 609.85
+offset_bottom = 108.5
+mouse_filter = 2
+texture = ExtResource("r5")
+expand_mode = 1
+[node name="More" type="Control" parent="."]
+offset_left = 0
+offset_top = 0
+offset_right = 940
+offset_bottom = 590
+mouse_filter = 2
+visible = false
+[node name="Background" type="NinePatchRect" parent="More"]
+offset_left = 290.5
+offset_top = 8
+offset_right = 649.5
+offset_bottom = 582
+mouse_filter = 2
+texture = ExtResource("r6")
+patch_margin_left = 50
+patch_margin_right = 50
+patch_margin_top = 70
+patch_margin_bottom = 40
+[node name="Close" type="TextureButton" parent="Main"]
+offset_left = 553.65
+offset_top = 134.7
+offset_right = 586.65
+offset_bottom = 172.7
+focus_mode = 0
+ignore_texture_size = true
+stretch_mode = 0
+texture_normal = ExtResource("r7")
+texture_hover = ExtResource("r8")
+texture_pressed = ExtResource("r9")
+
+[node name="Resume" type="TextureButton" parent="Main"]
+offset_left = 399.0
+offset_top = 182.4
+offset_right = 541.0
+offset_bottom = 218.4
+focus_mode = 0
+ignore_texture_size = true
+stretch_mode = 0
+texture_normal = ExtResource("r10")
+texture_hover = ExtResource("r11")
+texture_pressed = ExtResource("r12")
+
+[node name="Retry" type="TextureButton" parent="Main"]
+offset_left = 251.5
+offset_top = 202.75
+offset_right = 393.5
+offset_bottom = 238.75
+focus_mode = 0
+ignore_texture_size = true
+stretch_mode = 0
+texture_normal = ExtResource("r13")
+texture_hover = ExtResource("r14")
+texture_pressed = ExtResource("r15")
+
+[node name="Map" type="TextureButton" parent="Main"]
+offset_left = 399.0
+offset_top = 225.55
+offset_right = 541.0
+offset_bottom = 261.55
+focus_mode = 0
+ignore_texture_size = true
+stretch_mode = 0
+texture_normal = ExtResource("r16")
+texture_hover = ExtResource("r17")
+texture_pressed = ExtResource("r18")
+
+[node name="Sound" type="TextureButton" parent="Main"]
+offset_left = 399.0
+offset_top = 268.7
+offset_right = 541.0
+offset_bottom = 304.7
+focus_mode = 0
+ignore_texture_size = true
+stretch_mode = 0
+texture_normal = ExtResource("r19")
+texture_hover = ExtResource("r20")
+texture_pressed = ExtResource("r21")
+
+[node name="More" type="TextureButton" parent="Main"]
+offset_left = 399.0
+offset_top = 311.85
+offset_right = 541.0
+offset_bottom = 347.85
+focus_mode = 0
+ignore_texture_size = true
+stretch_mode = 0
+texture_normal = ExtResource("r22")
+texture_hover = ExtResource("r23")
+texture_pressed = ExtResource("r24")
+
+[node name="Display" type="TextureButton" parent="Main"]
+offset_left = 545.45
+offset_top = 225.85
+offset_right = 687.45
+offset_bottom = 261.85
+focus_mode = 0
+ignore_texture_size = true
+stretch_mode = 0
+texture_normal = ExtResource("r25")
+texture_hover = ExtResource("r26")
+texture_pressed = ExtResource("r27")
+
+[node name="Help" type="TextureButton" parent="Main"]
+offset_left = 399.0
+offset_top = 355.0
+offset_right = 541.0
+offset_bottom = 391.0
+focus_mode = 0
+ignore_texture_size = true
+stretch_mode = 0
+texture_normal = ExtResource("r28")
+texture_hover = ExtResource("r29")
+texture_pressed = ExtResource("r30")
+
+[node name="Home" type="TextureButton" parent="Main"]
+offset_left = 399.0
+offset_top = 400.35
+offset_right = 541.0
+offset_bottom = 436.35
+focus_mode = 0
+ignore_texture_size = true
+stretch_mode = 0
+texture_normal = ExtResource("r31")
+texture_hover = ExtResource("r32")
+texture_pressed = ExtResource("r33")
+
+[node name="Close" type="TextureButton" parent="Sound"]
+offset_left = 654.4
+offset_top = 128.75
+offset_right = 687.4
+offset_bottom = 166.75
+focus_mode = 0
+ignore_texture_size = true
+stretch_mode = 0
+texture_normal = ExtResource("r34")
+texture_hover = ExtResource("r35")
+texture_pressed = ExtResource("r36")
+
+[node name="Close" type="TextureButton" parent="Display"]
+offset_left = 612.05
+offset_top = 64.2
+offset_right = 645.05
+offset_bottom = 102.2
+focus_mode = 0
+ignore_texture_size = true
+stretch_mode = 0
+texture_normal = ExtResource("r34")
+texture_hover = ExtResource("r35")
+texture_pressed = ExtResource("r36")
+
+[node name="Close" type="TextureButton" parent="More"]
+offset_left = 618
+offset_top = 10
+offset_right = 651
+offset_bottom = 48
+focus_mode = 0
+ignore_texture_size = true
+stretch_mode = 0
+texture_normal = ExtResource("r34")
+texture_hover = ExtResource("r35")
+texture_pressed = ExtResource("r36")
+
+[node name="MasterMute" type="TextureButton" parent="Sound"]
+offset_left = 419.15
+offset_top = 205.05
+offset_right = 443.15
+offset_bottom = 229.05
+focus_mode = 0
+ignore_texture_size = true
+stretch_mode = 0
+texture_normal = ExtResource("r38")
+texture_hover = ExtResource("r38")
+texture_pressed = ExtResource("r39")
+toggle_mode = true
+[node name="Hit" type="Control" parent="Sound"]
+offset_left = 0
+offset_top = 0
+offset_right = 940
+offset_bottom = 590
+mouse_filter = 2
+
+[node name="Volume" type="HSlider" parent="Sound/Hit"]
+offset_left = 419
+offset_top = 267.75
+offset_right = 615
+offset_bottom = 291.75
+max_value = 100.0
+value = 100.0
+step = 1.0
+focus_mode = 0
+theme_override_styles/slider = SubResource("SliderTrack")
+theme_override_styles/grabber_area = SubResource("SliderFill")
+theme_override_styles/grabber_area_highlight = SubResource("SliderFill")
+theme_override_icons/grabber = ExtResource("r40")
+theme_override_icons/grabber_highlight = ExtResource("r40")
+[node name="Mute" type="TextureButton" parent="Sound/Hit"]
+offset_left = 624
+offset_top = 267.75
+offset_right = 648
+offset_bottom = 291.75
+focus_mode = 0
+ignore_texture_size = true
+stretch_mode = 0
+texture_normal = ExtResource("r38")
+texture_hover = ExtResource("r38")
+texture_pressed = ExtResource("r39")
+toggle_mode = true
+tooltip_text = "静音"
+[node name="Value" type="Label" parent="Sound/Hit"]
+offset_left = 595
+offset_top = 289.75
+offset_right = 643
+offset_bottom = 307.75
+mouse_filter = 2
+text = "100%"
+theme_override_font_sizes/font_size = 12
+visible = false
+[node name="Skill" type="Control" parent="Sound"]
+offset_left = 0
+offset_top = 0
+offset_right = 940
+offset_bottom = 590
+mouse_filter = 2
+
+[node name="Volume" type="HSlider" parent="Sound/Skill"]
+offset_left = 419
+offset_top = 328
+offset_right = 615
+offset_bottom = 352
+max_value = 100.0
+value = 100.0
+step = 1.0
+focus_mode = 0
+theme_override_styles/slider = SubResource("SliderTrack")
+theme_override_styles/grabber_area = SubResource("SliderFill")
+theme_override_styles/grabber_area_highlight = SubResource("SliderFill")
+theme_override_icons/grabber = ExtResource("r40")
+theme_override_icons/grabber_highlight = ExtResource("r40")
+[node name="Mute" type="TextureButton" parent="Sound/Skill"]
+offset_left = 624
+offset_top = 328
+offset_right = 648
+offset_bottom = 352
+focus_mode = 0
+ignore_texture_size = true
+stretch_mode = 0
+texture_normal = ExtResource("r38")
+texture_hover = ExtResource("r38")
+texture_pressed = ExtResource("r39")
+toggle_mode = true
+tooltip_text = "静音"
+[node name="Value" type="Label" parent="Sound/Skill"]
+offset_left = 595
+offset_top = 350
+offset_right = 643
+offset_bottom = 368
+mouse_filter = 2
+text = "100%"
+theme_override_font_sizes/font_size = 12
+visible = false
+[node name="Music" type="Control" parent="Sound"]
+offset_left = 0
+offset_top = 0
+offset_right = 940
+offset_bottom = 590
+mouse_filter = 2
+
+[node name="Volume" type="HSlider" parent="Sound/Music"]
+offset_left = 419
+offset_top = 386.85
+offset_right = 615
+offset_bottom = 410.85
+max_value = 100.0
+value = 100.0
+step = 1.0
+focus_mode = 0
+theme_override_styles/slider = SubResource("SliderTrack")
+theme_override_styles/grabber_area = SubResource("SliderFill")
+theme_override_styles/grabber_area_highlight = SubResource("SliderFill")
+theme_override_icons/grabber = ExtResource("r40")
+theme_override_icons/grabber_highlight = ExtResource("r40")
+[node name="Mute" type="TextureButton" parent="Sound/Music"]
+offset_left = 624
+offset_top = 386.85
+offset_right = 648
+offset_bottom = 410.85
+focus_mode = 0
+ignore_texture_size = true
+stretch_mode = 0
+texture_normal = ExtResource("r38")
+texture_hover = ExtResource("r38")
+texture_pressed = ExtResource("r39")
+toggle_mode = true
+tooltip_text = "静音"
+[node name="Value" type="Label" parent="Sound/Music"]
+offset_left = 595
+offset_top = 408.85
+offset_right = 643
+offset_bottom = 426.85
+mouse_filter = 2
+text = "100%"
+theme_override_font_sizes/font_size = 12
+visible = false
+[node name="Margin" type="Control" parent="."]
+mouse_filter = 2
+visible = false
+[node name="Panel" type="Control" parent="Margin"]
+mouse_filter = 2
+
+[node name="Column" type="Control" parent="Margin/Panel"]
+mouse_filter = 2
+
+[node name="AudioSettings" parent="Margin/Panel/Column" instance=ExtResource("r41")]
+[node name="Options" type="ScrollContainer" parent="More"]
+offset_left = 337.5
+offset_top = 61
+offset_right = 620.5
+offset_bottom = 537
+horizontal_scroll_mode = 0
+[node name="Content" type="Control" parent="More/Options"]
+mouse_filter = 2
+custom_minimum_size = Vector2(265,620)
+[node name="Row0" type="TextureRect" parent="More/Options/Content"]
+offset_left = 0
+offset_top = 0.0
+offset_right = 265
+offset_bottom = 94.0
+mouse_filter = 2
+texture = ExtResource("r42")
+expand_mode = 1
+[node name="Option0_0" type="Button" parent="More/Options/Content"]
+offset_left = 17
+offset_top = 42.0
+offset_right = 98
+offset_bottom = 86.0
+metadata/feature = &"pause_0"
+focus_mode = 0
+theme_override_styles/normal = SubResource("Empty")
+theme_override_styles/hover = SubResource("Empty")
+theme_override_styles/pressed = SubResource("Empty")
+theme_override_styles/focus = SubResource("Empty")
+
+[node name="Option0_1" type="Button" parent="More/Options/Content"]
+offset_left = 101
+offset_top = 42.0
+offset_right = 182
+offset_bottom = 86.0
+metadata/feature = &"pause_1"
+focus_mode = 0
+theme_override_styles/normal = SubResource("Empty")
+theme_override_styles/hover = SubResource("Empty")
+theme_override_styles/pressed = SubResource("Empty")
+theme_override_styles/focus = SubResource("Empty")
+
+[node name="Row1" type="TextureRect" parent="More/Options/Content"]
+offset_left = 0
+offset_top = 95.4
+offset_right = 265
+offset_bottom = 189.4
+mouse_filter = 2
+texture = ExtResource("r43")
+expand_mode = 1
+[node name="Option1_0" type="Button" parent="More/Options/Content"]
+offset_left = 17
+offset_top = 137.4
+offset_right = 98
+offset_bottom = 181.4
+metadata/feature = &"quality_0"
+focus_mode = 0
+theme_override_styles/normal = SubResource("Empty")
+theme_override_styles/hover = SubResource("Empty")
+theme_override_styles/pressed = SubResource("Empty")
+theme_override_styles/focus = SubResource("Empty")
+
+[node name="Option1_1" type="Button" parent="More/Options/Content"]
+offset_left = 101
+offset_top = 137.4
+offset_right = 182
+offset_bottom = 181.4
+metadata/feature = &"quality_1"
+focus_mode = 0
+theme_override_styles/normal = SubResource("Empty")
+theme_override_styles/hover = SubResource("Empty")
+theme_override_styles/pressed = SubResource("Empty")
+theme_override_styles/focus = SubResource("Empty")
+
+[node name="Option1_2" type="Button" parent="More/Options/Content"]
+offset_left = 185
+offset_top = 137.4
+offset_right = 266
+offset_bottom = 181.4
+metadata/feature = &"quality_2"
+focus_mode = 0
+theme_override_styles/normal = SubResource("Empty")
+theme_override_styles/hover = SubResource("Empty")
+theme_override_styles/pressed = SubResource("Empty")
+theme_override_styles/focus = SubResource("Empty")
+
+[node name="Row2" type="TextureRect" parent="More/Options/Content"]
+offset_left = 0
+offset_top = 190.8
+offset_right = 265
+offset_bottom = 284.8
+mouse_filter = 2
+texture = ExtResource("r44")
+expand_mode = 1
+[node name="Option2_0" type="Button" parent="More/Options/Content"]
+offset_left = 17
+offset_top = 232.8
+offset_right = 98
+offset_bottom = 276.8
+metadata/feature = &"fireworks_0"
+focus_mode = 0
+theme_override_styles/normal = SubResource("Empty")
+theme_override_styles/hover = SubResource("Empty")
+theme_override_styles/pressed = SubResource("Empty")
+theme_override_styles/focus = SubResource("Empty")
+
+[node name="Option2_1" type="Button" parent="More/Options/Content"]
+offset_left = 101
+offset_top = 232.8
+offset_right = 182
+offset_bottom = 276.8
+metadata/feature = &"fireworks_1"
+focus_mode = 0
+theme_override_styles/normal = SubResource("Empty")
+theme_override_styles/hover = SubResource("Empty")
+theme_override_styles/pressed = SubResource("Empty")
+theme_override_styles/focus = SubResource("Empty")
+
+[node name="Row3" type="TextureRect" parent="More/Options/Content"]
+offset_left = 0
+offset_top = 286.20000000000005
+offset_right = 265
+offset_bottom = 380.20000000000005
+mouse_filter = 2
+texture = ExtResource("r45")
+expand_mode = 1
+[node name="Option3_0" type="Button" parent="More/Options/Content"]
+offset_left = 17
+offset_top = 328.20000000000005
+offset_right = 98
+offset_bottom = 372.20000000000005
+metadata/feature = &"pickup_0"
+focus_mode = 0
+theme_override_styles/normal = SubResource("Empty")
+theme_override_styles/hover = SubResource("Empty")
+theme_override_styles/pressed = SubResource("Empty")
+theme_override_styles/focus = SubResource("Empty")
+
+[node name="Option3_1" type="Button" parent="More/Options/Content"]
+offset_left = 101
+offset_top = 328.20000000000005
+offset_right = 182
+offset_bottom = 372.20000000000005
+metadata/feature = &"pickup_1"
+focus_mode = 0
+theme_override_styles/normal = SubResource("Empty")
+theme_override_styles/hover = SubResource("Empty")
+theme_override_styles/pressed = SubResource("Empty")
+theme_override_styles/focus = SubResource("Empty")
+
+[node name="Row4" type="TextureRect" parent="More/Options/Content"]
+offset_left = 0
+offset_top = 381.6
+offset_right = 265
+offset_bottom = 475.6
+mouse_filter = 2
+texture = ExtResource("r46")
+expand_mode = 1
+[node name="Option4_0" type="Button" parent="More/Options/Content"]
+offset_left = 17
+offset_top = 423.6
+offset_right = 98
+offset_bottom = 467.6
+metadata/feature = &"news_0"
+focus_mode = 0
+theme_override_styles/normal = SubResource("Empty")
+theme_override_styles/hover = SubResource("Empty")
+theme_override_styles/pressed = SubResource("Empty")
+theme_override_styles/focus = SubResource("Empty")
+
+[node name="Option4_1" type="Button" parent="More/Options/Content"]
+offset_left = 101
+offset_top = 423.6
+offset_right = 182
+offset_bottom = 467.6
+metadata/feature = &"news_1"
+focus_mode = 0
+theme_override_styles/normal = SubResource("Empty")
+theme_override_styles/hover = SubResource("Empty")
+theme_override_styles/pressed = SubResource("Empty")
+theme_override_styles/focus = SubResource("Empty")
+
+[node name="Row5" type="TextureRect" parent="More/Options/Content"]
+offset_left = 0
+offset_top = 477.0
+offset_right = 265
+offset_bottom = 571.0
+mouse_filter = 2
+texture = ExtResource("r47")
+expand_mode = 1
+[node name="Option5_0" type="Button" parent="More/Options/Content"]
+offset_left = 17
+offset_top = 519.0
+offset_right = 98
+offset_bottom = 563.0
+metadata/feature = &"emoji_0"
+focus_mode = 0
+theme_override_styles/normal = SubResource("Empty")
+theme_override_styles/hover = SubResource("Empty")
+theme_override_styles/pressed = SubResource("Empty")
+theme_override_styles/focus = SubResource("Empty")
+
+[node name="Option5_1" type="Button" parent="More/Options/Content"]
+offset_left = 101
+offset_top = 519.0
+offset_right = 182
+offset_bottom = 563.0
+metadata/feature = &"emoji_1"
+focus_mode = 0
+theme_override_styles/normal = SubResource("Empty")
+theme_override_styles/hover = SubResource("Empty")
+theme_override_styles/pressed = SubResource("Empty")
+theme_override_styles/focus = SubResource("Empty")
+
+[node name="Password" type="TextureButton" parent="More/Options/Content"]
+offset_left = 72
+offset_top = 574
+offset_right = 214
+offset_bottom = 610
+focus_mode = 0
+ignore_texture_size = true
+stretch_mode = 0
+texture_normal = ExtResource("r48")
+texture_hover = ExtResource("r49")
+texture_pressed = ExtResource("r50")
+metadata/feature = &"password"
+[node name="Options" type="Control" parent="Display"]
+offset_left = 0
+offset_top = 0
+offset_right = 940
+offset_bottom = 590
+mouse_filter = 2
+
+[node name="PlayerCount" type="TextureRect" parent="Display/Options"]
+offset_left = 353.85
+offset_top = 126
+offset_right = 612.85
+offset_bottom = 177
+mouse_filter = 2
+texture = ExtResource("r51")
+expand_mode = 1
+[node name="Less" type="TextureButton" parent="Display/Options"]
+offset_left = 500.7
+offset_top = 139.55
+offset_right = 524.7
+offset_bottom = 163.55
+focus_mode = 0
+ignore_texture_size = true
+stretch_mode = 0
+texture_normal = ExtResource("r52")
+texture_hover = ExtResource("r53")
+texture_pressed = ExtResource("r54")
+metadata/feature = &"players"
+[node name="More" type="TextureButton" parent="Display/Options"]
+offset_left = 580.45
+offset_top = 139.55
+offset_right = 604.45
+offset_bottom = 163.55
+focus_mode = 0
+ignore_texture_size = true
+stretch_mode = 0
+texture_normal = ExtResource("r55")
+texture_hover = ExtResource("r56")
+texture_pressed = ExtResource("r57")
+metadata/feature = &"players"
+[node name="Row0" type="TextureRect" parent="Display/Options"]
+offset_left = 353.85
+offset_top = 177
+offset_right = 612.85
+offset_bottom = 228
+mouse_filter = 2
+texture = ExtResource("r58")
+expand_mode = 1
+[node name="Name0" type="TextureRect" parent="Display/Options"]
+offset_left = 362.85
+offset_top = 191.95
+offset_right = 494.85
+offset_bottom = 213.95
+mouse_filter = 2
+texture = ExtResource("r59")
+expand_mode = 1
+[node name="Option0" type="TextureButton" parent="Display/Options"]
+offset_left = 503.55
+offset_top = 193
+offset_right = 582.8
+offset_bottom = 218.15
+focus_mode = 0
+ignore_texture_size = true
+stretch_mode = 0
+texture_normal = ExtResource("r60")
+texture_hover = ExtResource("r61")
+texture_pressed = ExtResource("r62")
+metadata/feature = &"teammates"
+[node name="Row1" type="TextureRect" parent="Display/Options"]
+offset_left = 353.85
+offset_top = 228
+offset_right = 612.85
+offset_bottom = 279
+mouse_filter = 2
+texture = ExtResource("r58")
+expand_mode = 1
+[node name="Name1" type="TextureRect" parent="Display/Options"]
+offset_left = 362.85
+offset_top = 242.95
+offset_right = 494.85
+offset_bottom = 264.95
+mouse_filter = 2
+texture = ExtResource("r63")
+expand_mode = 1
+[node name="Option1" type="TextureButton" parent="Display/Options"]
+offset_left = 503.55
+offset_top = 244
+offset_right = 582.8
+offset_bottom = 269.15
+focus_mode = 0
+ignore_texture_size = true
+stretch_mode = 0
+texture_normal = ExtResource("r60")
+texture_hover = ExtResource("r61")
+texture_pressed = ExtResource("r62")
+metadata/feature = &"disciples"
+[node name="Row2" type="TextureRect" parent="Display/Options"]
+offset_left = 353.85
+offset_top = 279
+offset_right = 612.85
+offset_bottom = 330
+mouse_filter = 2
+texture = ExtResource("r58")
+expand_mode = 1
+[node name="Name2" type="TextureRect" parent="Display/Options"]
+offset_left = 362.85
+offset_top = 293.95
+offset_right = 494.85
+offset_bottom = 315.95
+mouse_filter = 2
+texture = ExtResource("r64")
+expand_mode = 1
+[node name="Option2" type="TextureButton" parent="Display/Options"]
+offset_left = 503.55
+offset_top = 295
+offset_right = 582.8
+offset_bottom = 320.15
+focus_mode = 0
+ignore_texture_size = true
+stretch_mode = 0
+texture_normal = ExtResource("r60")
+texture_hover = ExtResource("r61")
+texture_pressed = ExtResource("r62")
+metadata/feature = &"friends"
+[node name="Row3" type="TextureRect" parent="Display/Options"]
+offset_left = 353.85
+offset_top = 330
+offset_right = 612.85
+offset_bottom = 381
+mouse_filter = 2
+texture = ExtResource("r58")
+expand_mode = 1
+[node name="Name3" type="TextureRect" parent="Display/Options"]
+offset_left = 362.85
+offset_top = 344.95
+offset_right = 494.85
+offset_bottom = 366.95
+mouse_filter = 2
+texture = ExtResource("r65")
+expand_mode = 1
+[node name="Option3" type="TextureButton" parent="Display/Options"]
+offset_left = 503.55
+offset_top = 346
+offset_right = 582.8
+offset_bottom = 371.15
+focus_mode = 0
+ignore_texture_size = true
+stretch_mode = 0
+texture_normal = ExtResource("r60")
+texture_hover = ExtResource("r61")
+texture_pressed = ExtResource("r62")
+metadata/feature = &"others"
+[node name="Row4" type="TextureRect" parent="Display/Options"]
+offset_left = 353.85
+offset_top = 381
+offset_right = 612.85
+offset_bottom = 432
+mouse_filter = 2
+texture = ExtResource("r58")
+expand_mode = 1
+[node name="Name4" type="TextureRect" parent="Display/Options"]
+offset_left = 362.85
+offset_top = 395.95
+offset_right = 494.85
+offset_bottom = 417.95
+mouse_filter = 2
+texture = ExtResource("r66")
+expand_mode = 1
+[node name="Option4" type="TextureButton" parent="Display/Options"]
+offset_left = 503.55
+offset_top = 397
+offset_right = 582.8
+offset_bottom = 422.15
+focus_mode = 0
+ignore_texture_size = true
+stretch_mode = 0
+texture_normal = ExtResource("r60")
+texture_hover = ExtResource("r61")
+texture_pressed = ExtResource("r62")
+metadata/feature = &"pvp"
+[node name="Row5" type="TextureRect" parent="Display/Options"]
+offset_left = 353.85
+offset_top = 432
+offset_right = 612.85
+offset_bottom = 483
+mouse_filter = 2
+texture = ExtResource("r58")
+expand_mode = 1
+[node name="Name5" type="TextureRect" parent="Display/Options"]
+offset_left = 362.85
+offset_top = 446.95
+offset_right = 494.85
+offset_bottom = 468.95
+mouse_filter = 2
+texture = ExtResource("r67")
+expand_mode = 1
+[node name="Option5" type="TextureButton" parent="Display/Options"]
+offset_left = 503.55
+offset_top = 448
+offset_right = 582.8
+offset_bottom = 473.15
+focus_mode = 0
+ignore_texture_size = true
+stretch_mode = 0
+texture_normal = ExtResource("r60")
+texture_hover = ExtResource("r61")
+texture_pressed = ExtResource("r62")
+metadata/feature = &"pets"
+[node name="Notice" type="Control" parent="."]
+offset_left = 0
+offset_top = 0
+offset_right = 940
+offset_bottom = 590
+mouse_filter = 2
+visible = false
+metadata/ui_modal = true
+
+[node name="InputBarrier" type="Control" parent="Notice"]
+offset_left = 0
+offset_top = 0
+offset_right = 940
+offset_bottom = 590
+mouse_filter = 2
+mouse_filter = 0
+[node name="Panel" type="Panel" parent="Notice"]
+offset_left = 300
+offset_top = 200
+offset_right = 640
+offset_bottom = 370
+
+[node name="Text" type="Label" parent="Notice/Panel"]
+offset_left = 20
+offset_top = 22
+offset_right = 320
+offset_bottom = 77
+mouse_filter = 2
+text = "该功能暂未开放"
+theme_override_font_sizes/font_size = 18
+horizontal_alignment = 1
+[node name="OK" type="Button" parent="Notice"]
+offset_left = 425
+offset_top = 310
+offset_right = 515
+offset_bottom = 342
+text = "确定"
+focus_mode = 0

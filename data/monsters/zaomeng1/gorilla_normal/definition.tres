@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="BattleEntityDefinition" format=3]
+[ext_resource type="Script" path="res://addons/battle_foundation/definitions/BattleEntityDefinition.cs" id="script"]
+[ext_resource type="Script" path="res://addons/gameplay_abiltiy_system/scripts/attributes/vitals/gameplay_vital.gd" id="vital_type"]
+[ext_resource type="Resource" path="res://data/monsters/jushi_lingjun/attributes.tres" id="attributes"]
+[ext_resource type="Resource" path="res://data/attribute/vitals/health.tres" id="health"]
+[ext_resource type="PackedScene" path="res://data/monsters/zaomeng1/gorilla_normal/monster.tscn" id="scene"]
+[resource]
+script = ExtResource("script")
+definition_id = &"水帘洞大猩猩"
+display_name = "大猩猩"
+faction_id = &"enemy"
+scene = ExtResource("scene")
+attribute_set = ExtResource("attributes")
+vitals = Array[ExtResource("vital_type")]([ExtResource("health")])
+initial_level = 3
+ability_ids = Array[StringName]([&"zaomeng1_gorilla_hit1"])
+metadata/original_monster_id = 10101
+metadata/original_resource_id = 11106
+metadata/original_show_appear = 0
+
+metadata/zaomeng1_enemy_type = 3
+metadata/stat_source = "碧玉径/jushi_lingjun"

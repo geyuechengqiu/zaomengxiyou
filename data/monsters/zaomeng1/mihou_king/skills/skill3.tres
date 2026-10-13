@@ -1,0 +1,80 @@
+[gd_resource type="Resource" script_class="GameplayAbilityDefinition" format=3 uid="uid://ode0rob3u5v8"]
+
+[ext_resource type="Script" uid="uid://ud4ug2ylqdo2" path="res://addons/battle_foundation/definitions/BattleSkillBranch.cs" id="3_qrff1"]
+[ext_resource type="Script" uid="uid://b1047b2i0w3jx" path="res://addons/battle_foundation/definitions/BattleSkillMotion.cs" id="5_rx2j1"]
+[ext_resource type="Script" uid="uid://cfho6ucrpkdn1" path="res://addons/gameplay_abiltiy_system/scripts/abilities/features/cooldown_feature.gd" id="cooldown"]
+[ext_resource type="Script" uid="uid://bm4h231fb21pv" path="res://addons/gameplay_abiltiy_system/scripts/abilities/gameplay_ability_definition.gd" id="definition"]
+[ext_resource type="Script" uid="uid://cm0x3pewlrveo" path="res://addons/gameplay_abiltiy_system/scripts/abilities/features/gameplay_ability_feature.gd" id="feature"]
+[ext_resource type="Script" uid="uid://dm30yy8ucnbot" path="res://addons/battle_foundation/definitions/BattleFrameEvent.cs" id="pulse_event"]
+[ext_resource type="Script" uid="uid://ctus3t2tt37o6" path="res://addons/battle_foundation/definitions/battle_attack_segment.gd" id="segment"]
+[ext_resource type="Script" uid="uid://daneexb55k8ae" path="res://addons/battle_foundation/gas/battle_frame_timeline_feature.gd" id="timeline"]
+
+[sub_resource type="Resource" id="Cooldown"]
+script = ExtResource("cooldown")
+cooldown_duration = 10.0
+
+[sub_resource type="Resource" id="Pulse0"]
+script = ExtResource("pulse_event")
+source_frame = 38
+event_id = &"battle.mihouwang.tornado"
+
+[sub_resource type="Resource" id="Pulse1"]
+script = ExtResource("pulse_event")
+source_frame = 62
+event_id = &"battle.mihouwang.tornado"
+
+[sub_resource type="Resource" id="Pulse2"]
+script = ExtResource("pulse_event")
+source_frame = 86
+event_id = &"battle.mihouwang.tornado"
+
+[sub_resource type="Resource" id="Pulse3"]
+script = ExtResource("pulse_event")
+source_frame = 110
+event_id = &"battle.mihouwang.tornado"
+
+[sub_resource type="Resource" id="Pulse4"]
+script = ExtResource("pulse_event")
+source_frame = 134
+event_id = &"battle.mihouwang.tornado"
+
+[sub_resource type="Resource" id="Pulse5"]
+script = ExtResource("pulse_event")
+source_frame = 158
+event_id = &"battle.mihouwang.tornado"
+
+[sub_resource type="Resource" id="Hit"]
+script = ExtResource("segment")
+segment_id = &"skill3"
+start_frame = 38
+end_frame = 190
+action = &"skill3"
+hit_rect = Rect2(-113.333336, -110, 300, 110)
+damage_multiplier = 1.5
+hit_interval = 0.5
+maximum_hits = 6
+knockback_speed = 220.0
+knockback_duration = 0.2
+hit_stun = 0.25
+reaction_type = "knockback"
+
+[sub_resource type="Resource" id="Timeline"]
+script = ExtResource("timeline")
+source_fps = 48.0
+duration_frames = 219
+events = Array[ExtResource("pulse_event")]([SubResource("Pulse0"), SubResource("Pulse1"), SubResource("Pulse2"), SubResource("Pulse3"), SubResource("Pulse4"), SubResource("Pulse5")])
+animation_action = &"skill3"
+action_rules = {
+"jump": false,
+"move": false,
+"super_armor": true,
+"turn": false
+}
+commit_resources = true
+metadata/projectile_segment = SubResource("Hit")
+
+[resource]
+script = ExtResource("definition")
+ability_id = &"mihouwang_skill3"
+ability_name = "飓风强袭"
+features = Array[ExtResource("feature")]([SubResource("Cooldown"), SubResource("Timeline")])

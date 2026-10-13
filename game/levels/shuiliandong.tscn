@@ -1,0 +1,46 @@
+[gd_scene format=3 uid="uid://m554pjuiq0l"]
+
+[ext_resource type="JSON" path="res://data/levels/shuiliandong/audio.json" id="audio"]
+[ext_resource type="PackedScene" path="res://data/templates/battle_level_base.tscn" id="base"]
+[ext_resource type="Script" uid="uid://ddierwgwe1dmw" path="res://addons/battle_foundation/level/BattleSpawnBudget.cs" id="budget"]
+[ext_resource type="JSON" path="res://data/levels/shuiliandong/loot.json" id="loot"]
+[ext_resource type="PackedScene" path="res://data/levels/shuiliandong/map.tscn" id="map"]
+[ext_resource type="PackedScene" path="res://data/ui/campaign_result.tscn" id="result"]
+[ext_resource type="Script" uid="uid://wo3vc7x1aklx" path="res://game/levels/Shuiliandong.cs" id="script"]
+
+[node name="Shuiliandong" unique_id=1497615971 instance=ExtResource("base")]
+script = ExtResource("script")
+level_id = &"水帘洞"
+audio_catalog = ExtResource("audio")
+
+[node name="BattleSession" parent="." index="1" unique_id=990126792]
+scene_manifest_path = "res://data/levels/shuiliandong/manifest.json"
+scene_seed = 102
+
+[node name="Loot" parent="BattleSession" index="3"]
+rules = ExtResource("loot")
+
+[node name="SpawnBudget" type="Node" parent="BattleSession/LevelInstance" parent_id_path=PackedInt32Array(488341896) index="0" unique_id=1824391678]
+script = ExtResource("budget")
+
+[node name="Actors" parent="BattleSession" index="5" unique_id=587668075 instance=ExtResource("map")]
+
+[node name="FinalExit" parent="BattleSession/Actors" index="7"]
+position = Vector2(8474, 1077)
+
+[node name="Gateway" parent="BattleSession/Actors/FinalExit" index="0"]
+visible = true
+
+[node name="OperationMenu" parent="HUD" parent_id_path=PackedInt32Array(1387049266) index="3" unique_id=291950319]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 940.0
+offset_bottom = 590.0
+
+[node name="CampaignResult" parent="HUD" parent_id_path=PackedInt32Array(1387049266) index="5" unique_id=138207863 instance=ExtResource("result")]
+layout_mode = 3
+anchors_preset = 0
+
+[editable path="BattleSession/Actors"]

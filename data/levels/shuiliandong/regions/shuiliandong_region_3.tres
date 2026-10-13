@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="BattleRegionDefinition" format=3]
+[ext_resource type="Script" path="res://addons/battle_foundation/level/BattleRegionDefinition.cs" id="script"]
+[resource]
+script = ExtResource("script")
+region_id = &"shuiliandong_region_3"
+display_name = "水帘洞 · 区域3"
+bounds = Rect2(3760,0,1880,1400)
+entry_rect = Rect2(3880,0,160,1600.0)
+exit_rect = Rect2(5544,0,96,1600.0)
+wave_ids = Array[StringName]([&"shuiliandong_region_3_wave"])
+automatic_exit = true
+camera_transition_margin = 840.0
+metadata/original_stop_x = 2768.85

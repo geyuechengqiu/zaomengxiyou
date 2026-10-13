@@ -1,0 +1,1072 @@
+[gd_scene format=3 uid="uid://djancibxvvy6d"]
+[ext_resource type="Script" path="res://addons/battle_foundation/animation/spine_animation_adapter.gd" id="adapter"]
+[ext_resource type="Resource" path="res://data/monsters/zaomeng1/mihou_king/animation.tres" id="profile"]
+[ext_resource type="SpineSkeletonDataResource" path="res://assets/monsters/zaomeng1/mihou_king/spinedata.tres" id="spine"]
+[ext_resource type="Script" path="res://addons/battle_foundation/movement/battle_hitbox_2d.gd" id="hitbox"]
+[ext_resource type="PackedScene" path="res://data/monsters/zaomeng1/mihou_king/attack_ranges.tscn" id="ranges"]
+[ext_resource type="PackedScene" path="res://data/effects/super_armor/outline.tscn" id="armor_outline"]
+[ext_resource type="PackedScene" path="res://data/monsters/zaomeng1/mihou_king/effects.tscn" id="mihouwang_effects"]
+[sub_resource type="Animation" id="Native_idle"]
+length = 1.4166666666666667
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:animation_name")
+tracks/0/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": ["idle"]}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:loop")
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [false]}
+[sub_resource type="Animation" id="Native_idle_looped"]
+length = 1.4166666666666667
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:animation_name")
+tracks/0/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": ["idle"]}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:loop")
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [true]}
+[sub_resource type="Animation" id="Master_idle"]
+length = 1.4166666666666667
+loop_mode = 1
+tracks/0/type = "animation"
+tracks/0/path = NodePath("SpineVisual/SpineAnimationTrack/SpineVisual Track 0")
+tracks/0/keys = {"times": PackedFloat32Array(0), "clips": PackedStringArray("idle_looped")}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AttackRanges:preview_action")
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [&"idle"]}
+tracks/2/type = "value"
+tracks/2/path = NodePath("AttackRanges:preview_time")
+tracks/2/keys = {"times": PackedFloat32Array(0,1.4166666666666667), "transitions": PackedFloat32Array(1,1), "update": 0, "values": [0.0,1.4166666666666667]}
+tracks/3/type = "value"
+tracks/3/path = NodePath("AttackEffects:preview_action")
+tracks/3/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [&"idle"]}
+tracks/4/type = "value"
+tracks/4/path = NodePath("AttackEffects:preview_time")
+tracks/4/keys = {"times": PackedFloat32Array(0,1.4166666666666667), "transitions": PackedFloat32Array(1,1), "update": 0, "values": [0.0,1.4166666666666667]}
+
+[sub_resource type="Animation" id="Native_run"]
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:animation_name")
+tracks/0/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": ["run"]}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:loop")
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [false]}
+[sub_resource type="Animation" id="Native_run_looped"]
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:animation_name")
+tracks/0/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": ["run"]}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:loop")
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [true]}
+[sub_resource type="Animation" id="Master_run"]
+length = 0.6
+loop_mode = 1
+tracks/0/type = "animation"
+tracks/0/path = NodePath("SpineVisual/SpineAnimationTrack/SpineVisual Track 0")
+tracks/0/keys = {"times": PackedFloat32Array(0), "clips": PackedStringArray("run_looped")}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AttackRanges:preview_action")
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [&"run"]}
+tracks/2/type = "value"
+tracks/2/path = NodePath("AttackRanges:preview_time")
+tracks/2/keys = {"times": PackedFloat32Array(0,0.6), "transitions": PackedFloat32Array(1,1), "update": 0, "values": [0.0,0.6]}
+tracks/3/type = "value"
+tracks/3/path = NodePath("AttackEffects:preview_action")
+tracks/3/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [&"run"]}
+tracks/4/type = "value"
+tracks/4/path = NodePath("AttackEffects:preview_time")
+tracks/4/keys = {"times": PackedFloat32Array(0,0.6), "transitions": PackedFloat32Array(1,1), "update": 0, "values": [0.0,0.6]}
+
+[sub_resource type="Animation" id="Native_runattack"]
+length = 0.65
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:animation_name")
+tracks/0/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": ["runattack"]}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:loop")
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [false]}
+[sub_resource type="Animation" id="Native_runattack_looped"]
+length = 0.65
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:animation_name")
+tracks/0/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": ["runattack"]}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:loop")
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [true]}
+[sub_resource type="Animation" id="Master_runattack"]
+length = 0.65
+loop_mode = 0
+tracks/0/type = "animation"
+tracks/0/path = NodePath("SpineVisual/SpineAnimationTrack/SpineVisual Track 0")
+tracks/0/keys = {"times": PackedFloat32Array(0), "clips": PackedStringArray("runattack")}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AttackRanges:preview_action")
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [&"runattack"]}
+tracks/2/type = "value"
+tracks/2/path = NodePath("AttackRanges:preview_time")
+tracks/2/keys = {"times": PackedFloat32Array(0,0.65), "transitions": PackedFloat32Array(1,1), "update": 0, "values": [0.0,0.65]}
+tracks/3/type = "value"
+tracks/3/path = NodePath("AttackEffects:preview_action")
+tracks/3/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [&"runattack"]}
+tracks/4/type = "value"
+tracks/4/path = NodePath("AttackEffects:preview_time")
+tracks/4/keys = {"times": PackedFloat32Array(0,0.65), "transitions": PackedFloat32Array(1,1), "update": 0, "values": [0.0,0.65]}
+
+[sub_resource type="Animation" id="Native_attack1"]
+length = 0.31666666666666665
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:animation_name")
+tracks/0/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": ["attack1"]}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:loop")
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [false]}
+[sub_resource type="Animation" id="Native_attack1_looped"]
+length = 0.31666666666666665
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:animation_name")
+tracks/0/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": ["attack1"]}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:loop")
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [true]}
+[sub_resource type="Animation" id="Master_attack1"]
+length = 0.31666666666666665
+loop_mode = 0
+tracks/0/type = "animation"
+tracks/0/path = NodePath("SpineVisual/SpineAnimationTrack/SpineVisual Track 0")
+tracks/0/keys = {"times": PackedFloat32Array(0), "clips": PackedStringArray("attack1")}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AttackRanges:preview_action")
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [&"attack1"]}
+tracks/2/type = "value"
+tracks/2/path = NodePath("AttackRanges:preview_time")
+tracks/2/keys = {"times": PackedFloat32Array(0,0.31666666666666665), "transitions": PackedFloat32Array(1,1), "update": 0, "values": [0.0,0.31666666666666665]}
+tracks/3/type = "value"
+tracks/3/path = NodePath("AttackEffects:preview_action")
+tracks/3/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [&"attack1"]}
+tracks/4/type = "value"
+tracks/4/path = NodePath("AttackEffects:preview_time")
+tracks/4/keys = {"times": PackedFloat32Array(0,0.31666666666666665), "transitions": PackedFloat32Array(1,1), "update": 0, "values": [0.0,0.31666666666666665]}
+tracks/5/type = "value"
+tracks/5/path = NodePath("AttackEffects/attack1:visible")
+tracks/5/keys = {"times": PackedFloat32Array(0,0.06666666666666667,0.35), "transitions": PackedFloat32Array(1,1,1), "update": 1, "values": [false,true,false]}
+tracks/6/type = "animation"
+tracks/6/path = NodePath("AttackEffects/attack1/SpineAnimationTrack/AnimationPlayer")
+tracks/6/keys = {"times": PackedFloat32Array(0,0.06666666666666667,0.35), "clips": PackedStringArray("RESET","build","RESET")}
+
+[sub_resource type="Animation" id="Native_attack2"]
+length = 0.35
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:animation_name")
+tracks/0/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": ["attack2"]}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:loop")
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [false]}
+[sub_resource type="Animation" id="Native_attack2_looped"]
+length = 0.35
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:animation_name")
+tracks/0/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": ["attack2"]}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:loop")
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [true]}
+[sub_resource type="Animation" id="Master_attack2"]
+length = 0.35
+loop_mode = 0
+tracks/0/type = "animation"
+tracks/0/path = NodePath("SpineVisual/SpineAnimationTrack/SpineVisual Track 0")
+tracks/0/keys = {"times": PackedFloat32Array(0), "clips": PackedStringArray("attack2")}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AttackRanges:preview_action")
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [&"attack2"]}
+tracks/2/type = "value"
+tracks/2/path = NodePath("AttackRanges:preview_time")
+tracks/2/keys = {"times": PackedFloat32Array(0,0.35), "transitions": PackedFloat32Array(1,1), "update": 0, "values": [0.0,0.35]}
+tracks/3/type = "value"
+tracks/3/path = NodePath("AttackEffects:preview_action")
+tracks/3/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [&"attack2"]}
+tracks/4/type = "value"
+tracks/4/path = NodePath("AttackEffects:preview_time")
+tracks/4/keys = {"times": PackedFloat32Array(0,0.35), "transitions": PackedFloat32Array(1,1), "update": 0, "values": [0.0,0.35]}
+tracks/5/type = "value"
+tracks/5/path = NodePath("AttackEffects/attack2:visible")
+tracks/5/keys = {"times": PackedFloat32Array(0,0.06666666666666667,0.5166666666666667), "transitions": PackedFloat32Array(1,1,1), "update": 1, "values": [false,true,false]}
+tracks/6/type = "animation"
+tracks/6/path = NodePath("AttackEffects/attack2/SpineAnimationTrack/AnimationPlayer")
+tracks/6/keys = {"times": PackedFloat32Array(0,0.06666666666666667,0.5166666666666667), "clips": PackedStringArray("RESET","build","RESET")}
+
+[sub_resource type="Animation" id="Native_attack3"]
+length = 0.23333333333333334
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:animation_name")
+tracks/0/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": ["attack3"]}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:loop")
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [false]}
+[sub_resource type="Animation" id="Native_attack3_looped"]
+length = 0.23333333333333334
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:animation_name")
+tracks/0/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": ["attack3"]}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:loop")
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [true]}
+[sub_resource type="Animation" id="Master_attack3"]
+length = 0.23333333333333334
+loop_mode = 0
+tracks/0/type = "animation"
+tracks/0/path = NodePath("SpineVisual/SpineAnimationTrack/SpineVisual Track 0")
+tracks/0/keys = {"times": PackedFloat32Array(0), "clips": PackedStringArray("attack3")}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AttackRanges:preview_action")
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [&"attack3"]}
+tracks/2/type = "value"
+tracks/2/path = NodePath("AttackRanges:preview_time")
+tracks/2/keys = {"times": PackedFloat32Array(0,0.23333333333333334), "transitions": PackedFloat32Array(1,1), "update": 0, "values": [0.0,0.23333333333333334]}
+tracks/3/type = "value"
+tracks/3/path = NodePath("AttackEffects:preview_action")
+tracks/3/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [&"attack3"]}
+tracks/4/type = "value"
+tracks/4/path = NodePath("AttackEffects:preview_time")
+tracks/4/keys = {"times": PackedFloat32Array(0,0.23333333333333334), "transitions": PackedFloat32Array(1,1), "update": 0, "values": [0.0,0.23333333333333334]}
+tracks/5/type = "value"
+tracks/5/path = NodePath("AttackEffects/attack3:visible")
+tracks/5/keys = {"times": PackedFloat32Array(0,0.03333333333333333,0.4166666666666667), "transitions": PackedFloat32Array(1,1,1), "update": 1, "values": [false,true,false]}
+tracks/6/type = "animation"
+tracks/6/path = NodePath("AttackEffects/attack3/SpineAnimationTrack/AnimationPlayer")
+tracks/6/keys = {"times": PackedFloat32Array(0,0.03333333333333333,0.4166666666666667), "clips": PackedStringArray("RESET","build","RESET")}
+
+[sub_resource type="Animation" id="Native_attack4"]
+length = 0.7
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:animation_name")
+tracks/0/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": ["attack4"]}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:loop")
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [false]}
+[sub_resource type="Animation" id="Native_attack4_looped"]
+length = 0.7
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:animation_name")
+tracks/0/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": ["attack4"]}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:loop")
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [true]}
+[sub_resource type="Animation" id="Master_attack4"]
+length = 0.7
+loop_mode = 0
+tracks/0/type = "animation"
+tracks/0/path = NodePath("SpineVisual/SpineAnimationTrack/SpineVisual Track 0")
+tracks/0/keys = {"times": PackedFloat32Array(0), "clips": PackedStringArray("attack4")}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AttackRanges:preview_action")
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [&"attack4"]}
+tracks/2/type = "value"
+tracks/2/path = NodePath("AttackRanges:preview_time")
+tracks/2/keys = {"times": PackedFloat32Array(0,0.7), "transitions": PackedFloat32Array(1,1), "update": 0, "values": [0.0,0.7]}
+tracks/3/type = "value"
+tracks/3/path = NodePath("AttackEffects:preview_action")
+tracks/3/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [&"attack4"]}
+tracks/4/type = "value"
+tracks/4/path = NodePath("AttackEffects:preview_time")
+tracks/4/keys = {"times": PackedFloat32Array(0,0.7), "transitions": PackedFloat32Array(1,1), "update": 0, "values": [0.0,0.7]}
+tracks/5/type = "value"
+tracks/5/path = NodePath("AttackEffects/attack4:visible")
+tracks/5/keys = {"times": PackedFloat32Array(0,0.36666666666666664,0.8333333333333333), "transitions": PackedFloat32Array(1,1,1), "update": 1, "values": [false,true,false]}
+tracks/6/type = "animation"
+tracks/6/path = NodePath("AttackEffects/attack4/SpineAnimationTrack/AnimationPlayer")
+tracks/6/keys = {"times": PackedFloat32Array(0,0.36666666666666664,0.8333333333333333), "clips": PackedStringArray("RESET","build","RESET")}
+
+[sub_resource type="Animation" id="Native_skill1"]
+length = 0.85
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:animation_name")
+tracks/0/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": ["skill1"]}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:loop")
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [false]}
+[sub_resource type="Animation" id="Native_skill1_looped"]
+length = 0.85
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:animation_name")
+tracks/0/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": ["skill1"]}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:loop")
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [true]}
+[sub_resource type="Animation" id="Master_skill1"]
+length = 0.85
+loop_mode = 0
+tracks/0/type = "animation"
+tracks/0/path = NodePath("SpineVisual/SpineAnimationTrack/SpineVisual Track 0")
+tracks/0/keys = {"times": PackedFloat32Array(0), "clips": PackedStringArray("skill1")}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AttackRanges:preview_action")
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [&"skill1"]}
+tracks/2/type = "value"
+tracks/2/path = NodePath("AttackRanges:preview_time")
+tracks/2/keys = {"times": PackedFloat32Array(0,0.85), "transitions": PackedFloat32Array(1,1), "update": 0, "values": [0.0,0.85]}
+tracks/3/type = "value"
+tracks/3/path = NodePath("AttackEffects:preview_action")
+tracks/3/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [&"skill1"]}
+tracks/4/type = "value"
+tracks/4/path = NodePath("AttackEffects:preview_time")
+tracks/4/keys = {"times": PackedFloat32Array(0,0.85), "transitions": PackedFloat32Array(1,1), "update": 0, "values": [0.0,0.85]}
+
+[sub_resource type="Animation" id="Native_passiveskill1"]
+length = 0.5833333333333334
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:animation_name")
+tracks/0/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": ["passiveskill1"]}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:loop")
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [false]}
+[sub_resource type="Animation" id="Native_passiveskill1_looped"]
+length = 0.5833333333333334
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:animation_name")
+tracks/0/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": ["passiveskill1"]}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:loop")
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [true]}
+[sub_resource type="Animation" id="Master_passiveskill1"]
+length = 0.5833333333333334
+loop_mode = 0
+tracks/0/type = "animation"
+tracks/0/path = NodePath("SpineVisual/SpineAnimationTrack/SpineVisual Track 0")
+tracks/0/keys = {"times": PackedFloat32Array(0), "clips": PackedStringArray("passiveskill1")}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AttackRanges:preview_action")
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [&"passiveskill1"]}
+tracks/2/type = "value"
+tracks/2/path = NodePath("AttackRanges:preview_time")
+tracks/2/keys = {"times": PackedFloat32Array(0,0.5833333333333334), "transitions": PackedFloat32Array(1,1), "update": 0, "values": [0.0,0.5833333333333334]}
+tracks/3/type = "value"
+tracks/3/path = NodePath("AttackEffects:preview_action")
+tracks/3/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [&"passiveskill1"]}
+tracks/4/type = "value"
+tracks/4/path = NodePath("AttackEffects:preview_time")
+tracks/4/keys = {"times": PackedFloat32Array(0,0.5833333333333334), "transitions": PackedFloat32Array(1,1), "update": 0, "values": [0.0,0.5833333333333334]}
+
+[sub_resource type="Animation" id="Native_skill3"]
+length = 3.65
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:animation_name")
+tracks/0/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": ["skill3"]}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:loop")
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [false]}
+[sub_resource type="Animation" id="Native_skill3_looped"]
+length = 3.65
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:animation_name")
+tracks/0/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": ["skill3"]}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:loop")
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [true]}
+[sub_resource type="Animation" id="Master_skill3"]
+length = 3.65
+loop_mode = 0
+tracks/0/type = "animation"
+tracks/0/path = NodePath("SpineVisual/SpineAnimationTrack/SpineVisual Track 0")
+tracks/0/keys = {"times": PackedFloat32Array(0), "clips": PackedStringArray("skill3")}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AttackRanges:preview_action")
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [&"skill3"]}
+tracks/2/type = "value"
+tracks/2/path = NodePath("AttackRanges:preview_time")
+tracks/2/keys = {"times": PackedFloat32Array(0,3.65), "transitions": PackedFloat32Array(1,1), "update": 0, "values": [0.0,3.65]}
+tracks/3/type = "value"
+tracks/3/path = NodePath("AttackEffects:preview_action")
+tracks/3/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [&"skill3"]}
+tracks/4/type = "value"
+tracks/4/path = NodePath("AttackEffects:preview_time")
+tracks/4/keys = {"times": PackedFloat32Array(0,3.65), "transitions": PackedFloat32Array(1,1), "update": 0, "values": [0.0,3.65]}
+tracks/5/type = "value"
+tracks/5/path = NodePath("AttackEffects/skill3:visible")
+tracks/5/keys = {"times": PackedFloat32Array(0,3.6333333333333333), "transitions": PackedFloat32Array(1,1), "update": 1, "values": [true,false]}
+tracks/6/type = "animation"
+tracks/6/path = NodePath("AttackEffects/skill3/SpineAnimationTrack/AnimationPlayer")
+tracks/6/keys = {"times": PackedFloat32Array(0,3.6333333333333333), "clips": PackedStringArray("build","RESET")}
+
+[sub_resource type="Animation" id="Native_skill2"]
+length = 0.9833333333333333
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:animation_name")
+tracks/0/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": ["skill2"]}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:loop")
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [false]}
+[sub_resource type="Animation" id="Native_skill2_looped"]
+length = 0.9833333333333333
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:animation_name")
+tracks/0/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": ["skill2"]}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:loop")
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [true]}
+[sub_resource type="Animation" id="Master_skill2"]
+length = 0.9833333333333333
+loop_mode = 0
+tracks/0/type = "animation"
+tracks/0/path = NodePath("SpineVisual/SpineAnimationTrack/SpineVisual Track 0")
+tracks/0/keys = {"times": PackedFloat32Array(0), "clips": PackedStringArray("skill2")}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AttackRanges:preview_action")
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [&"skill2"]}
+tracks/2/type = "value"
+tracks/2/path = NodePath("AttackRanges:preview_time")
+tracks/2/keys = {"times": PackedFloat32Array(0,0.9833333333333333), "transitions": PackedFloat32Array(1,1), "update": 0, "values": [0.0,0.9833333333333333]}
+tracks/3/type = "value"
+tracks/3/path = NodePath("AttackEffects:preview_action")
+tracks/3/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [&"skill2"]}
+tracks/4/type = "value"
+tracks/4/path = NodePath("AttackEffects:preview_time")
+tracks/4/keys = {"times": PackedFloat32Array(0,0.9833333333333333), "transitions": PackedFloat32Array(1,1), "update": 0, "values": [0.0,0.9833333333333333]}
+tracks/5/type = "value"
+tracks/5/path = NodePath("AttackEffects/skill2:visible")
+tracks/5/keys = {"times": PackedFloat32Array(0,0.2,0.6666666666666667), "transitions": PackedFloat32Array(1,1,1), "update": 1, "values": [false,true,false]}
+tracks/6/type = "animation"
+tracks/6/path = NodePath("AttackEffects/skill2/SpineAnimationTrack/AnimationPlayer")
+tracks/6/keys = {"times": PackedFloat32Array(0,0.2,0.6666666666666667), "clips": PackedStringArray("RESET","build","RESET")}
+
+[sub_resource type="Animation" id="Native_hurt"]
+length = 0.23333333333333334
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:animation_name")
+tracks/0/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": ["hurt"]}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:loop")
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [false]}
+[sub_resource type="Animation" id="Native_hurt_looped"]
+length = 0.23333333333333334
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:animation_name")
+tracks/0/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": ["hurt"]}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:loop")
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [true]}
+[sub_resource type="Animation" id="Master_hurt"]
+length = 0.23333333333333334
+loop_mode = 0
+tracks/0/type = "animation"
+tracks/0/path = NodePath("SpineVisual/SpineAnimationTrack/SpineVisual Track 0")
+tracks/0/keys = {"times": PackedFloat32Array(0), "clips": PackedStringArray("hurt")}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AttackRanges:preview_action")
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [&"hurt"]}
+tracks/2/type = "value"
+tracks/2/path = NodePath("AttackRanges:preview_time")
+tracks/2/keys = {"times": PackedFloat32Array(0,0.23333333333333334), "transitions": PackedFloat32Array(1,1), "update": 0, "values": [0.0,0.23333333333333334]}
+tracks/3/type = "value"
+tracks/3/path = NodePath("AttackEffects:preview_action")
+tracks/3/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [&"hurt"]}
+tracks/4/type = "value"
+tracks/4/path = NodePath("AttackEffects:preview_time")
+tracks/4/keys = {"times": PackedFloat32Array(0,0.23333333333333334), "transitions": PackedFloat32Array(1,1), "update": 0, "values": [0.0,0.23333333333333334]}
+
+[sub_resource type="Animation" id="Native_jump"]
+length = 0.15
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:animation_name")
+tracks/0/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": ["jump"]}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:loop")
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [false]}
+[sub_resource type="Animation" id="Native_jump_looped"]
+length = 0.15
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:animation_name")
+tracks/0/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": ["jump"]}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:loop")
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [true]}
+[sub_resource type="Animation" id="Master_jump"]
+length = 0.15
+loop_mode = 0
+tracks/0/type = "animation"
+tracks/0/path = NodePath("SpineVisual/SpineAnimationTrack/SpineVisual Track 0")
+tracks/0/keys = {"times": PackedFloat32Array(0), "clips": PackedStringArray("jump")}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AttackRanges:preview_action")
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [&"jump"]}
+tracks/2/type = "value"
+tracks/2/path = NodePath("AttackRanges:preview_time")
+tracks/2/keys = {"times": PackedFloat32Array(0,0.15), "transitions": PackedFloat32Array(1,1), "update": 0, "values": [0.0,0.15]}
+tracks/3/type = "value"
+tracks/3/path = NodePath("AttackEffects:preview_action")
+tracks/3/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [&"jump"]}
+tracks/4/type = "value"
+tracks/4/path = NodePath("AttackEffects:preview_time")
+tracks/4/keys = {"times": PackedFloat32Array(0,0.15), "transitions": PackedFloat32Array(1,1), "update": 0, "values": [0.0,0.15]}
+
+[sub_resource type="Animation" id="Native_jumpattack"]
+length = 0.3333333333333333
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:animation_name")
+tracks/0/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": ["jumpattack"]}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:loop")
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [false]}
+[sub_resource type="Animation" id="Native_jumpattack_looped"]
+length = 0.3333333333333333
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:animation_name")
+tracks/0/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": ["jumpattack"]}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:loop")
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [true]}
+[sub_resource type="Animation" id="Master_jumpattack"]
+length = 0.3333333333333333
+loop_mode = 0
+tracks/0/type = "animation"
+tracks/0/path = NodePath("SpineVisual/SpineAnimationTrack/SpineVisual Track 0")
+tracks/0/keys = {"times": PackedFloat32Array(0), "clips": PackedStringArray("jumpattack")}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AttackRanges:preview_action")
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [&"jumpattack"]}
+tracks/2/type = "value"
+tracks/2/path = NodePath("AttackRanges:preview_time")
+tracks/2/keys = {"times": PackedFloat32Array(0,0.3333333333333333), "transitions": PackedFloat32Array(1,1), "update": 0, "values": [0.0,0.3333333333333333]}
+tracks/3/type = "value"
+tracks/3/path = NodePath("AttackEffects:preview_action")
+tracks/3/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [&"jumpattack"]}
+tracks/4/type = "value"
+tracks/4/path = NodePath("AttackEffects:preview_time")
+tracks/4/keys = {"times": PackedFloat32Array(0,0.3333333333333333), "transitions": PackedFloat32Array(1,1), "update": 0, "values": [0.0,0.3333333333333333]}
+tracks/5/type = "value"
+tracks/5/path = NodePath("AttackEffects/jumpattack:visible")
+tracks/5/keys = {"times": PackedFloat32Array(0,0.1,0.5166666666666667), "transitions": PackedFloat32Array(1,1,1), "update": 1, "values": [false,true,false]}
+tracks/6/type = "animation"
+tracks/6/path = NodePath("AttackEffects/jumpattack/SpineAnimationTrack/AnimationPlayer")
+tracks/6/keys = {"times": PackedFloat32Array(0,0.1,0.5166666666666667), "clips": PackedStringArray("RESET","build","RESET")}
+
+[sub_resource type="Animation" id="Native_doublejump"]
+length = 0.18333333333333332
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:animation_name")
+tracks/0/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": ["doublejump"]}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:loop")
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [false]}
+[sub_resource type="Animation" id="Native_doublejump_looped"]
+length = 0.18333333333333332
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:animation_name")
+tracks/0/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": ["doublejump"]}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:loop")
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [true]}
+[sub_resource type="Animation" id="Master_doublejump"]
+length = 0.18333333333333332
+loop_mode = 0
+tracks/0/type = "animation"
+tracks/0/path = NodePath("SpineVisual/SpineAnimationTrack/SpineVisual Track 0")
+tracks/0/keys = {"times": PackedFloat32Array(0), "clips": PackedStringArray("doublejump")}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AttackRanges:preview_action")
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [&"doublejump"]}
+tracks/2/type = "value"
+tracks/2/path = NodePath("AttackRanges:preview_time")
+tracks/2/keys = {"times": PackedFloat32Array(0,0.18333333333333332), "transitions": PackedFloat32Array(1,1), "update": 0, "values": [0.0,0.18333333333333332]}
+tracks/3/type = "value"
+tracks/3/path = NodePath("AttackEffects:preview_action")
+tracks/3/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [&"doublejump"]}
+tracks/4/type = "value"
+tracks/4/path = NodePath("AttackEffects:preview_time")
+tracks/4/keys = {"times": PackedFloat32Array(0,0.18333333333333332), "transitions": PackedFloat32Array(1,1), "update": 0, "values": [0.0,0.18333333333333332]}
+
+[sub_resource type="Animation" id="Native_jumpdown"]
+length = 0.13333333333333333
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:animation_name")
+tracks/0/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": ["jumpdown"]}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:loop")
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [false]}
+[sub_resource type="Animation" id="Native_jumpdown_looped"]
+length = 0.13333333333333333
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:animation_name")
+tracks/0/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": ["jumpdown"]}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:loop")
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [true]}
+[sub_resource type="Animation" id="Master_jumpdown"]
+length = 0.13333333333333333
+loop_mode = 0
+tracks/0/type = "animation"
+tracks/0/path = NodePath("SpineVisual/SpineAnimationTrack/SpineVisual Track 0")
+tracks/0/keys = {"times": PackedFloat32Array(0), "clips": PackedStringArray("jumpdown")}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AttackRanges:preview_action")
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [&"jumpdown"]}
+tracks/2/type = "value"
+tracks/2/path = NodePath("AttackRanges:preview_time")
+tracks/2/keys = {"times": PackedFloat32Array(0,0.13333333333333333), "transitions": PackedFloat32Array(1,1), "update": 0, "values": [0.0,0.13333333333333333]}
+tracks/3/type = "value"
+tracks/3/path = NodePath("AttackEffects:preview_action")
+tracks/3/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [&"jumpdown"]}
+tracks/4/type = "value"
+tracks/4/path = NodePath("AttackEffects:preview_time")
+tracks/4/keys = {"times": PackedFloat32Array(0,0.13333333333333333), "transitions": PackedFloat32Array(1,1), "update": 0, "values": [0.0,0.13333333333333333]}
+
+[sub_resource type="Animation" id="Native_dead"]
+length = 0.7166666666666667
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:animation_name")
+tracks/0/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": ["dead"]}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:loop")
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [false]}
+[sub_resource type="Animation" id="Native_dead_looped"]
+length = 0.7166666666666667
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:animation_name")
+tracks/0/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": ["dead"]}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:loop")
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [true]}
+[sub_resource type="Animation" id="Master_dead"]
+length = 0.7166666666666667
+loop_mode = 0
+tracks/0/type = "animation"
+tracks/0/path = NodePath("SpineVisual/SpineAnimationTrack/SpineVisual Track 0")
+tracks/0/keys = {"times": PackedFloat32Array(0), "clips": PackedStringArray("dead")}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AttackRanges:preview_action")
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [&"dead"]}
+tracks/2/type = "value"
+tracks/2/path = NodePath("AttackRanges:preview_time")
+tracks/2/keys = {"times": PackedFloat32Array(0,0.7166666666666667), "transitions": PackedFloat32Array(1,1), "update": 0, "values": [0.0,0.7166666666666667]}
+tracks/3/type = "value"
+tracks/3/path = NodePath("AttackEffects:preview_action")
+tracks/3/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [&"dead"]}
+tracks/4/type = "value"
+tracks/4/path = NodePath("AttackEffects:preview_time")
+tracks/4/keys = {"times": PackedFloat32Array(0,0.7166666666666667), "transitions": PackedFloat32Array(1,1), "update": 0, "values": [0.0,0.7166666666666667]}
+
+[sub_resource type="Animation" id="Native_ground"]
+length = 0.9666666666666667
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:animation_name")
+tracks/0/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": ["ground"]}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:loop")
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [false]}
+[sub_resource type="Animation" id="Native_ground_looped"]
+length = 0.9666666666666667
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:animation_name")
+tracks/0/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": ["ground"]}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:loop")
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [true]}
+[sub_resource type="Animation" id="Master_ground"]
+length = 0.9666666666666667
+loop_mode = 0
+tracks/0/type = "animation"
+tracks/0/path = NodePath("SpineVisual/SpineAnimationTrack/SpineVisual Track 0")
+tracks/0/keys = {"times": PackedFloat32Array(0), "clips": PackedStringArray("ground")}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AttackRanges:preview_action")
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [&"ground"]}
+tracks/2/type = "value"
+tracks/2/path = NodePath("AttackRanges:preview_time")
+tracks/2/keys = {"times": PackedFloat32Array(0,0.9666666666666667), "transitions": PackedFloat32Array(1,1), "update": 0, "values": [0.0,0.9666666666666667]}
+tracks/3/type = "value"
+tracks/3/path = NodePath("AttackEffects:preview_action")
+tracks/3/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [&"ground"]}
+tracks/4/type = "value"
+tracks/4/path = NodePath("AttackEffects:preview_time")
+tracks/4/keys = {"times": PackedFloat32Array(0,0.9666666666666667), "transitions": PackedFloat32Array(1,1), "update": 0, "values": [0.0,0.9666666666666667]}
+
+[sub_resource type="Animation" id="Native_bound"]
+length = 0.3333333333333333
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:animation_name")
+tracks/0/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": ["bound"]}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:loop")
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [false]}
+[sub_resource type="Animation" id="Native_bound_looped"]
+length = 0.3333333333333333
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:animation_name")
+tracks/0/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": ["bound"]}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:loop")
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [true]}
+[sub_resource type="Animation" id="Master_bound"]
+length = 0.3333333333333333
+loop_mode = 0
+tracks/0/type = "animation"
+tracks/0/path = NodePath("SpineVisual/SpineAnimationTrack/SpineVisual Track 0")
+tracks/0/keys = {"times": PackedFloat32Array(0), "clips": PackedStringArray("bound")}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AttackRanges:preview_action")
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [&"bound"]}
+tracks/2/type = "value"
+tracks/2/path = NodePath("AttackRanges:preview_time")
+tracks/2/keys = {"times": PackedFloat32Array(0,0.3333333333333333), "transitions": PackedFloat32Array(1,1), "update": 0, "values": [0.0,0.3333333333333333]}
+tracks/3/type = "value"
+tracks/3/path = NodePath("AttackEffects:preview_action")
+tracks/3/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [&"bound"]}
+tracks/4/type = "value"
+tracks/4/path = NodePath("AttackEffects:preview_time")
+tracks/4/keys = {"times": PackedFloat32Array(0,0.3333333333333333), "transitions": PackedFloat32Array(1,1), "update": 0, "values": [0.0,0.3333333333333333]}
+
+[sub_resource type="Animation" id="Native_swimming"]
+length = 0.31666666666666665
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:animation_name")
+tracks/0/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": ["swimming"]}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:loop")
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [false]}
+[sub_resource type="Animation" id="Native_swimming_looped"]
+length = 0.31666666666666665
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:animation_name")
+tracks/0/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": ["swimming"]}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:loop")
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [true]}
+[sub_resource type="Animation" id="Master_swimming"]
+length = 0.31666666666666665
+loop_mode = 1
+tracks/0/type = "animation"
+tracks/0/path = NodePath("SpineVisual/SpineAnimationTrack/SpineVisual Track 0")
+tracks/0/keys = {"times": PackedFloat32Array(0), "clips": PackedStringArray("swimming_looped")}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AttackRanges:preview_action")
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [&"swimming"]}
+tracks/2/type = "value"
+tracks/2/path = NodePath("AttackRanges:preview_time")
+tracks/2/keys = {"times": PackedFloat32Array(0,0.31666666666666665), "transitions": PackedFloat32Array(1,1), "update": 0, "values": [0.0,0.31666666666666665]}
+tracks/3/type = "value"
+tracks/3/path = NodePath("AttackEffects:preview_action")
+tracks/3/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [&"swimming"]}
+tracks/4/type = "value"
+tracks/4/path = NodePath("AttackEffects:preview_time")
+tracks/4/keys = {"times": PackedFloat32Array(0,0.31666666666666665), "transitions": PackedFloat32Array(1,1), "update": 0, "values": [0.0,0.31666666666666665]}
+
+[sub_resource type="Animation" id="Native_ride"]
+length = 0.6666666666666666
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:animation_name")
+tracks/0/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": ["ride"]}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:loop")
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [false]}
+[sub_resource type="Animation" id="Native_ride_looped"]
+length = 0.6666666666666666
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:animation_name")
+tracks/0/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": ["ride"]}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:loop")
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [true]}
+[sub_resource type="Animation" id="Master_ride"]
+length = 0.6666666666666666
+loop_mode = 1
+tracks/0/type = "animation"
+tracks/0/path = NodePath("SpineVisual/SpineAnimationTrack/SpineVisual Track 0")
+tracks/0/keys = {"times": PackedFloat32Array(0), "clips": PackedStringArray("ride_looped")}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AttackRanges:preview_action")
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [&"ride"]}
+tracks/2/type = "value"
+tracks/2/path = NodePath("AttackRanges:preview_time")
+tracks/2/keys = {"times": PackedFloat32Array(0,0.6666666666666666), "transitions": PackedFloat32Array(1,1), "update": 0, "values": [0.0,0.6666666666666666]}
+tracks/3/type = "value"
+tracks/3/path = NodePath("AttackEffects:preview_action")
+tracks/3/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [&"ride"]}
+tracks/4/type = "value"
+tracks/4/path = NodePath("AttackEffects:preview_time")
+tracks/4/keys = {"times": PackedFloat32Array(0,0.6666666666666666), "transitions": PackedFloat32Array(1,1), "update": 0, "values": [0.0,0.6666666666666666]}
+
+[sub_resource type="Animation" id="Native_move"]
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:animation_name")
+tracks/0/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": ["move"]}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:loop")
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [false]}
+[sub_resource type="Animation" id="Native_move_looped"]
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:animation_name")
+tracks/0/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": ["move"]}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:loop")
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [true]}
+[sub_resource type="Animation" id="Master_move"]
+length = 0.6
+loop_mode = 1
+tracks/0/type = "animation"
+tracks/0/path = NodePath("SpineVisual/SpineAnimationTrack/SpineVisual Track 0")
+tracks/0/keys = {"times": PackedFloat32Array(0), "clips": PackedStringArray("move_looped")}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AttackRanges:preview_action")
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [&"move"]}
+tracks/2/type = "value"
+tracks/2/path = NodePath("AttackRanges:preview_time")
+tracks/2/keys = {"times": PackedFloat32Array(0,0.6), "transitions": PackedFloat32Array(1,1), "update": 0, "values": [0.0,0.6]}
+tracks/3/type = "value"
+tracks/3/path = NodePath("AttackEffects:preview_action")
+tracks/3/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [&"move"]}
+tracks/4/type = "value"
+tracks/4/path = NodePath("AttackEffects:preview_time")
+tracks/4/keys = {"times": PackedFloat32Array(0,0.6), "transitions": PackedFloat32Array(1,1), "update": 0, "values": [0.0,0.6]}
+
+[sub_resource type="Animation" id="Native_jump_2"]
+length = 0.18333333333333332
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:animation_name")
+tracks/0/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": ["jump_2"]}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:loop")
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [false]}
+[sub_resource type="Animation" id="Native_jump_2_looped"]
+length = 0.18333333333333332
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:animation_name")
+tracks/0/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": ["jump_2"]}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:loop")
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [true]}
+[sub_resource type="Animation" id="Master_jump_2"]
+length = 0.18333333333333332
+loop_mode = 0
+tracks/0/type = "animation"
+tracks/0/path = NodePath("SpineVisual/SpineAnimationTrack/SpineVisual Track 0")
+tracks/0/keys = {"times": PackedFloat32Array(0), "clips": PackedStringArray("jump_2")}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AttackRanges:preview_action")
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [&"jump_2"]}
+tracks/2/type = "value"
+tracks/2/path = NodePath("AttackRanges:preview_time")
+tracks/2/keys = {"times": PackedFloat32Array(0,0.18333333333333332), "transitions": PackedFloat32Array(1,1), "update": 0, "values": [0.0,0.18333333333333332]}
+tracks/3/type = "value"
+tracks/3/path = NodePath("AttackEffects:preview_action")
+tracks/3/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [&"jump_2"]}
+tracks/4/type = "value"
+tracks/4/path = NodePath("AttackEffects:preview_time")
+tracks/4/keys = {"times": PackedFloat32Array(0,0.18333333333333332), "transitions": PackedFloat32Array(1,1), "update": 0, "values": [0.0,0.18333333333333332]}
+
+[sub_resource type="Animation" id="Native_fall"]
+length = 0.13333333333333333
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:animation_name")
+tracks/0/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": ["fall"]}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:loop")
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [false]}
+[sub_resource type="Animation" id="Native_fall_looped"]
+length = 0.13333333333333333
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:animation_name")
+tracks/0/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": ["fall"]}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:loop")
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [true]}
+[sub_resource type="Animation" id="Master_fall"]
+length = 0.13333333333333333
+loop_mode = 1
+tracks/0/type = "animation"
+tracks/0/path = NodePath("SpineVisual/SpineAnimationTrack/SpineVisual Track 0")
+tracks/0/keys = {"times": PackedFloat32Array(0), "clips": PackedStringArray("fall_looped")}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AttackRanges:preview_action")
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [&"fall"]}
+tracks/2/type = "value"
+tracks/2/path = NodePath("AttackRanges:preview_time")
+tracks/2/keys = {"times": PackedFloat32Array(0,0.13333333333333333), "transitions": PackedFloat32Array(1,1), "update": 0, "values": [0.0,0.13333333333333333]}
+tracks/3/type = "value"
+tracks/3/path = NodePath("AttackEffects:preview_action")
+tracks/3/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [&"fall"]}
+tracks/4/type = "value"
+tracks/4/path = NodePath("AttackEffects:preview_time")
+tracks/4/keys = {"times": PackedFloat32Array(0,0.13333333333333333), "transitions": PackedFloat32Array(1,1), "update": 0, "values": [0.0,0.13333333333333333]}
+
+[sub_resource type="Animation" id="Native_land"]
+length = 0.9666666666666667
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:animation_name")
+tracks/0/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": ["land"]}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:loop")
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [false]}
+[sub_resource type="Animation" id="Native_land_looped"]
+length = 0.9666666666666667
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:animation_name")
+tracks/0/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": ["land"]}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:loop")
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [true]}
+[sub_resource type="Animation" id="Master_land"]
+length = 0.9666666666666667
+loop_mode = 0
+tracks/0/type = "animation"
+tracks/0/path = NodePath("SpineVisual/SpineAnimationTrack/SpineVisual Track 0")
+tracks/0/keys = {"times": PackedFloat32Array(0), "clips": PackedStringArray("land")}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AttackRanges:preview_action")
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [&"land"]}
+tracks/2/type = "value"
+tracks/2/path = NodePath("AttackRanges:preview_time")
+tracks/2/keys = {"times": PackedFloat32Array(0,0.9666666666666667), "transitions": PackedFloat32Array(1,1), "update": 0, "values": [0.0,0.9666666666666667]}
+tracks/3/type = "value"
+tracks/3/path = NodePath("AttackEffects:preview_action")
+tracks/3/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [&"land"]}
+tracks/4/type = "value"
+tracks/4/path = NodePath("AttackEffects:preview_time")
+tracks/4/keys = {"times": PackedFloat32Array(0,0.9666666666666667), "transitions": PackedFloat32Array(1,1), "update": 0, "values": [0.0,0.9666666666666667]}
+
+[sub_resource type="Animation" id="Native_recover"]
+length = 0.9666666666666667
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:animation_name")
+tracks/0/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": ["recover"]}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:loop")
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [false]}
+[sub_resource type="Animation" id="Native_recover_looped"]
+length = 0.9666666666666667
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:animation_name")
+tracks/0/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": ["recover"]}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:loop")
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [true]}
+[sub_resource type="Animation" id="Master_recover"]
+length = 0.9666666666666667
+loop_mode = 0
+tracks/0/type = "animation"
+tracks/0/path = NodePath("SpineVisual/SpineAnimationTrack/SpineVisual Track 0")
+tracks/0/keys = {"times": PackedFloat32Array(0), "clips": PackedStringArray("recover")}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AttackRanges:preview_action")
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [&"recover"]}
+tracks/2/type = "value"
+tracks/2/path = NodePath("AttackRanges:preview_time")
+tracks/2/keys = {"times": PackedFloat32Array(0,0.9666666666666667), "transitions": PackedFloat32Array(1,1), "update": 0, "values": [0.0,0.9666666666666667]}
+tracks/3/type = "value"
+tracks/3/path = NodePath("AttackEffects:preview_action")
+tracks/3/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [&"recover"]}
+tracks/4/type = "value"
+tracks/4/path = NodePath("AttackEffects:preview_time")
+tracks/4/keys = {"times": PackedFloat32Array(0,0.9666666666666667), "transitions": PackedFloat32Array(1,1), "update": 0, "values": [0.0,0.9666666666666667]}
+
+[sub_resource type="Animation" id="Native_protect"]
+length = 0.5833333333333334
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:animation_name")
+tracks/0/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": ["protect"]}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:loop")
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [false]}
+[sub_resource type="Animation" id="Native_protect_looped"]
+length = 0.5833333333333334
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:animation_name")
+tracks/0/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": ["protect"]}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:loop")
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [true]}
+[sub_resource type="Animation" id="Master_protect"]
+length = 0.5833333333333334
+loop_mode = 0
+tracks/0/type = "animation"
+tracks/0/path = NodePath("SpineVisual/SpineAnimationTrack/SpineVisual Track 0")
+tracks/0/keys = {"times": PackedFloat32Array(0), "clips": PackedStringArray("protect")}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AttackRanges:preview_action")
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [&"protect"]}
+tracks/2/type = "value"
+tracks/2/path = NodePath("AttackRanges:preview_time")
+tracks/2/keys = {"times": PackedFloat32Array(0,0.5833333333333334), "transitions": PackedFloat32Array(1,1), "update": 0, "values": [0.0,0.5833333333333334]}
+tracks/3/type = "value"
+tracks/3/path = NodePath("AttackEffects:preview_action")
+tracks/3/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [&"protect"]}
+tracks/4/type = "value"
+tracks/4/path = NodePath("AttackEffects:preview_time")
+tracks/4/keys = {"times": PackedFloat32Array(0,0.5833333333333334), "transitions": PackedFloat32Array(1,1), "update": 0, "values": [0.0,0.5833333333333334]}
+
+[sub_resource type="Animation" id="Native_death"]
+length = 0.7166666666666667
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:animation_name")
+tracks/0/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": ["death"]}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:loop")
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [false]}
+[sub_resource type="Animation" id="Native_death_looped"]
+length = 0.7166666666666667
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:animation_name")
+tracks/0/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": ["death"]}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:loop")
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [true]}
+[sub_resource type="Animation" id="Master_death"]
+length = 0.7166666666666667
+loop_mode = 0
+tracks/0/type = "animation"
+tracks/0/path = NodePath("SpineVisual/SpineAnimationTrack/SpineVisual Track 0")
+tracks/0/keys = {"times": PackedFloat32Array(0), "clips": PackedStringArray("death")}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AttackRanges:preview_action")
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [&"death"]}
+tracks/2/type = "value"
+tracks/2/path = NodePath("AttackRanges:preview_time")
+tracks/2/keys = {"times": PackedFloat32Array(0,0.7166666666666667), "transitions": PackedFloat32Array(1,1), "update": 0, "values": [0.0,0.7166666666666667]}
+tracks/3/type = "value"
+tracks/3/path = NodePath("AttackEffects:preview_action")
+tracks/3/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [&"death"]}
+tracks/4/type = "value"
+tracks/4/path = NodePath("AttackEffects:preview_time")
+tracks/4/keys = {"times": PackedFloat32Array(0,0.7166666666666667), "transitions": PackedFloat32Array(1,1), "update": 0, "values": [0.0,0.7166666666666667]}
+
+[sub_resource type="AnimationLibrary" id="NativeLibrary"]
+_data = {&"idle": SubResource("Native_idle"), &"idle_looped": SubResource("Native_idle_looped"), &"run": SubResource("Native_run"), &"run_looped": SubResource("Native_run_looped"), &"runattack": SubResource("Native_runattack"), &"runattack_looped": SubResource("Native_runattack_looped"), &"attack1": SubResource("Native_attack1"), &"attack1_looped": SubResource("Native_attack1_looped"), &"attack2": SubResource("Native_attack2"), &"attack2_looped": SubResource("Native_attack2_looped"), &"attack3": SubResource("Native_attack3"), &"attack3_looped": SubResource("Native_attack3_looped"), &"attack4": SubResource("Native_attack4"), &"attack4_looped": SubResource("Native_attack4_looped"), &"skill1": SubResource("Native_skill1"), &"skill1_looped": SubResource("Native_skill1_looped"), &"passiveskill1": SubResource("Native_passiveskill1"), &"passiveskill1_looped": SubResource("Native_passiveskill1_looped"), &"skill3": SubResource("Native_skill3"), &"skill3_looped": SubResource("Native_skill3_looped"), &"skill2": SubResource("Native_skill2"), &"skill2_looped": SubResource("Native_skill2_looped"), &"hurt": SubResource("Native_hurt"), &"hurt_looped": SubResource("Native_hurt_looped"), &"jump": SubResource("Native_jump"), &"jump_looped": SubResource("Native_jump_looped"), &"jumpattack": SubResource("Native_jumpattack"), &"jumpattack_looped": SubResource("Native_jumpattack_looped"), &"doublejump": SubResource("Native_doublejump"), &"doublejump_looped": SubResource("Native_doublejump_looped"), &"jumpdown": SubResource("Native_jumpdown"), &"jumpdown_looped": SubResource("Native_jumpdown_looped"), &"dead": SubResource("Native_dead"), &"dead_looped": SubResource("Native_dead_looped"), &"ground": SubResource("Native_ground"), &"ground_looped": SubResource("Native_ground_looped"), &"bound": SubResource("Native_bound"), &"bound_looped": SubResource("Native_bound_looped"), &"swimming": SubResource("Native_swimming"), &"swimming_looped": SubResource("Native_swimming_looped"), &"ride": SubResource("Native_ride"), &"ride_looped": SubResource("Native_ride_looped"), &"move": SubResource("Native_move"), &"move_looped": SubResource("Native_move_looped"), &"jump_2": SubResource("Native_jump_2"), &"jump_2_looped": SubResource("Native_jump_2_looped"), &"fall": SubResource("Native_fall"), &"fall_looped": SubResource("Native_fall_looped"), &"land": SubResource("Native_land"), &"land_looped": SubResource("Native_land_looped"), &"recover": SubResource("Native_recover"), &"recover_looped": SubResource("Native_recover_looped"), &"protect": SubResource("Native_protect"), &"protect_looped": SubResource("Native_protect_looped"), &"death": SubResource("Native_death"), &"death_looped": SubResource("Native_death_looped")}
+[sub_resource type="AnimationLibrary" id="MasterLibrary"]
+_data = {&"idle": SubResource("Master_idle"), &"run": SubResource("Master_run"), &"runattack": SubResource("Master_runattack"), &"attack1": SubResource("Master_attack1"), &"attack2": SubResource("Master_attack2"), &"attack3": SubResource("Master_attack3"), &"attack4": SubResource("Master_attack4"), &"skill1": SubResource("Master_skill1"), &"passiveskill1": SubResource("Master_passiveskill1"), &"skill3": SubResource("Master_skill3"), &"skill2": SubResource("Master_skill2"), &"hurt": SubResource("Master_hurt"), &"jump": SubResource("Master_jump"), &"jumpattack": SubResource("Master_jumpattack"), &"doublejump": SubResource("Master_doublejump"), &"jumpdown": SubResource("Master_jumpdown"), &"dead": SubResource("Master_dead"), &"ground": SubResource("Master_ground"), &"bound": SubResource("Master_bound"), &"swimming": SubResource("Master_swimming"), &"ride": SubResource("Master_ride"), &"move": SubResource("Master_move"), &"jump_2": SubResource("Master_jump_2"), &"fall": SubResource("Master_fall"), &"land": SubResource("Master_land"), &"recover": SubResource("Master_recover"), &"protect": SubResource("Master_protect"), &"death": SubResource("Master_death")}
+[sub_resource type="RectangleShape2D" id="HitShape"]
+resource_local_to_scene = true
+size = Vector2(1,1)
+[node name="AnimationAdapter" type="Node2D"]
+script = ExtResource("adapter")
+profile = ExtResource("profile")
+[node name="SuperArmorEffect" parent="." instance=ExtResource("armor_outline")]
+[node name="Body" parent="SuperArmorEffect/Capture" index="0"]
+skeleton_data_res = ExtResource("spine")
+[node name="SpineVisual" type="SpineSprite" parent="."]
+scale = Vector2(3,3)
+skeleton_data_res = ExtResource("spine")
+preview_skin = "基础"
+preview_animation = "idle"
+preview_frame = false
+[node name="SpineAnimationTrack" type="SpineAnimationTrack" parent="SpineVisual"]
+mix_duration = 0.0
+[node name="SpineVisual Track 0" type="AnimationPlayer" parent="SpineVisual/SpineAnimationTrack"]
+libraries/ = SubResource("NativeLibrary")
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries/ = SubResource("MasterLibrary")
+[node name="AttackHitbox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 0
+monitoring = false
+monitorable = false
+script = ExtResource("hitbox")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackHitbox"]
+shape = SubResource("HitShape")
+disabled = true
+[node name="AttackRanges" parent="." instance=ExtResource("ranges")]
+[node name="AttackEffects" parent="." instance=ExtResource("mihouwang_effects")]
+
+[editable path="AttackEffects"]
+
+[editable path="AttackRanges"]
+
+[editable path="SuperArmorEffect"]

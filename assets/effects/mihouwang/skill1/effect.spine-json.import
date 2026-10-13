@@ -1,0 +1,13 @@
+[remap]
+
+importer="spine.json"
+type="SpineSkeletonFileResource"
+uid="uid://c5ybjj6608f7a"
+path="res://.godot/imported/effect.spine-json-a31f1e11f10d5844c75d4e6de6b1ee50.spjson"
+
+[deps]
+
+source_file="res://assets/effects/mihouwang/skill1/effect.spine-json"
+dest_files=["res://.godot/imported/effect.spine-json-a31f1e11f10d5844c75d4e6de6b1ee50.spjson"]
+
+[params]

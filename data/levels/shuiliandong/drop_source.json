@@ -1,0 +1,54 @@
+{
+  "source": "cg1_20260921_1.swf",
+  "Dungeon": {
+    "id": 2,
+    "mapURL": "No_1-2_V93",
+    "monsterID": "9000;10102;10202;10302;10902;11002;10802;11301",
+    "dropId": "1003;3,4;3,4;3,4;-1;-1;1002;148"
+  },
+  "boss_monster_id": 10802,
+  "boss_drop_ids": [
+    "1002"
+  ],
+  "Drop": {
+    "1002": {
+      "describe": "邀月廊BOSS",
+      "featherProbability": "1",
+      "chapterRoleEXP": 0,
+      "equip_7": "110107002",
+      "formationFlagProbability": "-1",
+      "petEXP": "76",
+      "equip_5": "110105002",
+      "formationFlagMaxNum": 0,
+      "fairyMoney": 0,
+      "equProbability": "1",
+      "runeMaxNum": 0,
+      "equip_4": "110104002",
+      "runeProbability": "-1",
+      "spirit": "65",
+      "formationFlagId": "-1",
+      "studentMoney": 0,
+      "teacherMoney": 0,
+      "equip_3": "110103002",
+      "featherMaxNum": "0",
+      "exp": "76",
+      "equip_2": "110102002",
+      "itemId": "-1",
+      "itemMaxNum": 1,
+      "runeId": "-1",
+      "equip_6": "110106002",
+      "equip_8": "110108002",
+      "type": 1,
+      "equip_1": "110101002",
+      "id": 1002,
+      "featherId": "-1",
+      "itemProbability": "-1",
+      "equMaxNum": "1"
+    }
+  },
+  "ordinary_gorilla_drop_ids": [
+    "1",
+    "2"
+  ],
+  "added_items": {}
+}

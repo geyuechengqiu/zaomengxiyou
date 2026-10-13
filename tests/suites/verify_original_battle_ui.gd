@@ -50,7 +50,7 @@ func verify_inventory() -> void:
 	var bag := player.inventory as OriginalInventory
 	check(bag != null and bag.get_bag_items("equipment").size() == 3, "原版起始装备各有独立物品实例")
 	var original := load("res://data/inventory/110101003.tres") as Equip
-	var weapon := bag.get_bag_items("equipment")[2] as Equip
+	var weapon := bag.get_owned_item(load("res://data/inventory/110101003.tres")) as Equip
 	check(weapon.item_id == &"110101003" and weapon != original, "原装备ID和定义/运行实例分离")
 	check(bag.get_page_count("equipment") == 2 and hud.inventory_view.get_node("Grid").get_child_count() == 25, "原版25格分页与下一页锁格")
 	var before := player.attributes.get_value(&"atk")
@@ -198,7 +198,7 @@ func verify_inventory_details() -> void:
 	check(glow.active and glow.player.get_animation(&"bag_glow").track_get_key_count(0) == 30, "开包播放原30帧光效")
 	glow.advance_effect(1.2)
 	check(glow.active and glow.visible, "背包光效跨周期继续循环")
-	var weapon := bag.get_bag_items("equipment")[2] as Equip
+	var weapon := bag.get_owned_item(load("res://data/inventory/110101003.tres")) as Equip
 	var host := view.get_node("Grid/Slot2") as Control
 	view._show_item_tip(weapon, host, false)
 	var tooltip := view.get_node("Tooltip") as OriginalInventoryTooltip
@@ -208,7 +208,9 @@ func verify_inventory_details() -> void:
 	check(not view.get_node("ComparisonTooltip").visible, "未装备时布局单卡，无类型推断错误")
 	bag.equip_item(weapon)
 	bag.add_item(load("res://data/inventory/110101003.tres"))
-	var spare := bag.get_bag_items("equipment")[2]
+	var spare: Item
+	for candidate in bag.get_bag_items("equipment"):
+		if candidate.item_id == &"110101003": spare = candidate; break
 	view._show_item_tip(spare, host, false)
 	check(view.get_node("ComparisonTooltip").visible and view.get_node("ComparisonTooltip/Equipped").visible, "同部位装备显示对比与装备中标记")
 	check(is_equal_approx(tooltip.position.x-view.get_node("ComparisonTooltip").position.x, 257), "两装备卡按原间距排列")

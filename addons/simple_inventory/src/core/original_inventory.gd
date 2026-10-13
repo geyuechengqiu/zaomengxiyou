@@ -30,6 +30,8 @@ var _serial: int = 0
 var _aliases: Dictionary = {}
 const PAGE_SIZE := 25
 const MAX_BAG_CAPACITY := 500
+const BAG_POLICY := preload("res://addons/simple_inventory/src/core/InventoryBagPolicy.cs")
+var _bag_policy = BAG_POLICY.new()
 
 func _ready() -> void:
 	set_display_name(display_name)
@@ -60,12 +62,7 @@ func get_bag_items(key: String) -> Array[Item]:
 	var result: Array[Item] = []
 	for item in items:
 		if item != null and get_bag_key(item) == key: result.append(item)
-	result.sort_custom(func(a: Item, b: Item):
-		var aq := int(a.original_data.get("quality", 0))
-		var bq := int(b.original_data.get("quality", 0))
-		if aq != bq: return aq > bq
-		if a.item_id != b.item_id: return String(a.item_id).naturalnocasecmp_to(String(b.item_id)) < 0
-		return a.runtime_id < b.runtime_id)
+	result.assign(_bag_policy.sort_items(result))
 	return result
 
 func get_page_count(key: String) -> int:

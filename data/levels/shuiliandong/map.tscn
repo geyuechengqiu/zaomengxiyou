@@ -1,0 +1,338 @@
+[gd_scene format=3]
+[ext_resource type="PackedScene" path="res://addons/battle_foundation/level/battle_map_template_2d.tscn" id="template"]
+[ext_resource type="PackedScene" path="res://data/levels/shuiliandong/visual.tscn" id="visual"]
+[ext_resource type="PackedScene" path="res://data/characters/sunwukong/character.tscn" id="player"]
+[ext_resource type="Script" path="res://addons/battle_foundation/level/battle_spawn_point_2d.gd" id="point"]
+[ext_resource type="Script" path="res://addons/battle_foundation/level/battle_region_gate_2d.gd" id="gate"]
+[ext_resource type="PackedScene" path="res://data/ui/gateway.tscn" id="gateway"]
+[ext_resource type="Script" path="res://addons/battle_foundation/level/BattleFinalExit2D.cs" id="exit_anchor"]
+[ext_resource type="Script" path="res://addons/battle_foundation/level/BattleLevelPreview2D.cs" id="preview"]
+[ext_resource type="FontFile" path="res://assets/ui/original/ui_font.ttf" id="preview_font"]
+[ext_resource type="Resource" path="res://data/levels/shuiliandong/regions/shuiliandong_region_1.tres" id="shuiliandong_region_1"]
+[ext_resource type="Resource" path="res://data/levels/shuiliandong/regions/shuiliandong_region_2.tres" id="shuiliandong_region_2"]
+[ext_resource type="Resource" path="res://data/levels/shuiliandong/regions/shuiliandong_region_3.tres" id="shuiliandong_region_3"]
+[ext_resource type="Resource" path="res://data/levels/shuiliandong/regions/shuiliandong_region_4.tres" id="shuiliandong_region_4"]
+[ext_resource type="Resource" path="res://data/levels/shuiliandong/regions/shuiliandong_region_5.tres" id="shuiliandong_region_5"]
+[ext_resource type="Resource" path="res://data/levels/shuiliandong/plans/shuiliandong_birth_1.tres" id="shuiliandong_birth_1"]
+[ext_resource type="Resource" path="res://data/levels/shuiliandong/plans/shuiliandong_birth_2.tres" id="shuiliandong_birth_2"]
+[ext_resource type="Resource" path="res://data/levels/shuiliandong/plans/shuiliandong_birth_3.tres" id="shuiliandong_birth_3"]
+[ext_resource type="Resource" path="res://data/levels/shuiliandong/plans/shuiliandong_birth_21.tres" id="shuiliandong_birth_21"]
+[ext_resource type="Resource" path="res://data/levels/shuiliandong/plans/shuiliandong_birth_22.tres" id="shuiliandong_birth_22"]
+[ext_resource type="Resource" path="res://data/levels/shuiliandong/plans/shuiliandong_birth_23.tres" id="shuiliandong_birth_23"]
+[ext_resource type="Resource" path="res://data/levels/shuiliandong/plans/shuiliandong_birth_5.tres" id="shuiliandong_birth_5"]
+[ext_resource type="Resource" path="res://data/levels/shuiliandong/plans/shuiliandong_birth_24.tres" id="shuiliandong_birth_24"]
+[ext_resource type="Resource" path="res://data/levels/shuiliandong/plans/shuiliandong_birth_25.tres" id="shuiliandong_birth_25"]
+[ext_resource type="Resource" path="res://data/levels/shuiliandong/plans/shuiliandong_birth_26.tres" id="shuiliandong_birth_26"]
+[ext_resource type="Resource" path="res://data/levels/shuiliandong/plans/shuiliandong_birth_27.tres" id="shuiliandong_birth_27"]
+[ext_resource type="Resource" path="res://data/levels/shuiliandong/plans/shuiliandong_birth_28.tres" id="shuiliandong_birth_28"]
+[ext_resource type="Resource" path="res://data/levels/shuiliandong/plans/shuiliandong_birth_29.tres" id="shuiliandong_birth_29"]
+[ext_resource type="Resource" path="res://data/levels/shuiliandong/plans/shuiliandong_birth_30.tres" id="shuiliandong_birth_30"]
+[ext_resource type="Resource" path="res://data/levels/shuiliandong/plans/shuiliandong_birth_31.tres" id="shuiliandong_birth_31"]
+[ext_resource type="Resource" path="res://data/levels/shuiliandong/plans/shuiliandong_birth_32.tres" id="shuiliandong_birth_32"]
+[ext_resource type="Resource" path="res://data/levels/shuiliandong/plans/shuiliandong_birth_33.tres" id="shuiliandong_birth_33"]
+[ext_resource type="Resource" path="res://data/levels/shuiliandong/plans/shuiliandong_birth_34.tres" id="shuiliandong_birth_34"]
+[sub_resource type="RectangleShape2D" id="Gate"]
+size = Vector2(20,1600)
+[sub_resource type="RectangleShape2D" id="Shape0"]
+size = Vector2(322.11,40.0)
+[sub_resource type="RectangleShape2D" id="Shape1"]
+size = Vector2(326.110842,40.0)
+[sub_resource type="RectangleShape2D" id="Shape2"]
+size = Vector2(326.110842,40.0)
+[sub_resource type="RectangleShape2D" id="Shape3"]
+size = Vector2(326.110842,40.0)
+[sub_resource type="RectangleShape2D" id="Shape4"]
+size = Vector2(326.110842,40.0)
+[sub_resource type="RectangleShape2D" id="Shape5"]
+size = Vector2(326.110842,40.0)
+[sub_resource type="RectangleShape2D" id="Shape8"]
+size = Vector2(1051.90428,40.0)
+[sub_resource type="RectangleShape2D" id="Shape10"]
+size = Vector2(120.06030544,1999.998594)
+[sub_resource type="RectangleShape2D" id="Shape13"]
+size = Vector2(120.06030544,1999.998594)
+[sub_resource type="RectangleShape2D" id="Shape14"]
+size = Vector2(1155.9970976,132.0)
+[sub_resource type="RectangleShape2D" id="Shape15"]
+size = Vector2(92.00317584,281.99853)
+[sub_resource type="RectangleShape2D" id="Shape16"]
+size = Vector2(621.9902463999999,132.0)
+[sub_resource type="RectangleShape2D" id="Shape17"]
+size = Vector2(48.00244136,132.0)
+[sub_resource type="RectangleShape2D" id="Shape18"]
+size = Vector2(48.00244136,132.0)
+[sub_resource type="RectangleShape2D" id="Shape19"]
+size = Vector2(48.00244136,132.0)
+[sub_resource type="RectangleShape2D" id="Water0"]
+size = Vector2(1024,397.70000000000005)
+[sub_resource type="RectangleShape2D" id="Water1"]
+size = Vector2(604,397.70000000000005)
+[node name="Actors" instance=ExtResource("template")]
+world_bounds = Rect2(0,0,9460,1600.0)
+ground_y = 1234.8
+metadata/world_offset_y = 200.0
+[node name="Terrain" parent="." index="1"]
+position = Vector2(0,200.0)
+[node name="SpawnPoints" parent="." index="2"]
+position = Vector2(0,200.0)
+[node name="Gates" parent="." index="3"]
+position = Vector2(0,200.0)
+[node name="ShuiliandongVisual" parent="Visuals" instance=ExtResource("visual")]
+[node name="Bank0" type="StaticBody2D" parent="Terrain"]
+collision_mask = 2
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Terrain/Bank0"]
+polygon = PackedVector2Array(-36.00,1029.20,672.00,1029.20,812.00,891.20,924.00,887.20,1232.00,887.20,1392.00,1029.20,3408.00,1029.20,3416.00,845.20,3436.00,805.20,3764.00,803.20,3788.00,899.20,3788.00,1500.00,-36.00,1500.00)
+[node name="Bank1" type="StaticBody2D" parent="Terrain"]
+collision_mask = 2
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Terrain/Bank1"]
+polygon = PackedVector2Array(4812.00,1133.20,4816.00,1053.20,4840.00,1029.20,5096.00,1025.20,6228.00,1025.20,6252.00,1049.20,6256.00,1115.20,6256.00,1500.00,4812.00,1500.00)
+[node name="Bank2" type="StaticBody2D" parent="Terrain"]
+collision_mask = 2
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Terrain/Bank2"]
+polygon = PackedVector2Array(6860.00,1133.20,6864.00,1053.20,6888.00,1029.20,8112.00,1029.20,8264.00,887.20,8676.00,885.20,8840.00,1029.20,9408.00,1029.20,9408.00,1500.00,6860.00,1500.00)
+[node name="Obstacle0" type="StaticBody2D" parent="Terrain"]
+position = Vector2(2241.7,724.2)
+collision_mask = 2
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Terrain/Obstacle0"]
+shape = SubResource("Shape0")
+one_way_collision = true
+[node name="Obstacle1" type="StaticBody2D" parent="Terrain"]
+position = Vector2(2939.6,724.2)
+collision_mask = 2
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Terrain/Obstacle1"]
+shape = SubResource("Shape1")
+one_way_collision = true
+[node name="Obstacle2" type="StaticBody2D" parent="Terrain"]
+position = Vector2(4001.4,621.0)
+collision_mask = 2
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Terrain/Obstacle2"]
+shape = SubResource("Shape2")
+one_way_collision = true
+[node name="Obstacle3" type="StaticBody2D" parent="Terrain"]
+position = Vector2(4398.7,372.6)
+collision_mask = 2
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Terrain/Obstacle3"]
+shape = SubResource("Shape3")
+one_way_collision = true
+[node name="Obstacle4" type="StaticBody2D" parent="Terrain"]
+position = Vector2(4799.6,715.0)
+collision_mask = 2
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Terrain/Obstacle4"]
+shape = SubResource("Shape4")
+one_way_collision = true
+[node name="Obstacle5" type="StaticBody2D" parent="Terrain"]
+position = Vector2(6517.7,749.2)
+collision_mask = 2
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Terrain/Obstacle5"]
+shape = SubResource("Shape5")
+one_way_collision = true
+[node name="Obstacle8" type="StaticBody2D" parent="Terrain"]
+position = Vector2(4295.7,1160.0)
+collision_mask = 2
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Terrain/Obstacle8"]
+shape = SubResource("Shape8")
+one_way_collision = true
+[node name="Obstacle10" type="StaticBody2D" parent="Terrain"]
+position = Vector2(56.0,29.1)
+collision_mask = 2
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Terrain/Obstacle10"]
+shape = SubResource("Shape10")
+[node name="Obstacle13" type="StaticBody2D" parent="Terrain"]
+position = Vector2(9416.6,36.0)
+collision_mask = 2
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Terrain/Obstacle13"]
+shape = SubResource("Shape13")
+[node name="Obstacle14" type="StaticBody2D" parent="Terrain"]
+position = Vector2(4318.3,1328.0)
+collision_mask = 2
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Terrain/Obstacle14"]
+shape = SubResource("Shape14")
+[node name="Obstacle15" type="StaticBody2D" parent="Terrain"]
+position = Vector2(4867.7,1204.1)
+collision_mask = 2
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Terrain/Obstacle15"]
+shape = SubResource("Shape15")
+[node name="Obstacle16" type="StaticBody2D" parent="Terrain"]
+position = Vector2(6557.5,1223.2)
+collision_mask = 2
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Terrain/Obstacle16"]
+shape = SubResource("Shape16")
+[node name="Obstacle17" type="StaticBody2D" parent="Terrain"]
+position = Vector2(6222.5,1129.1)
+collision_mask = 2
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Terrain/Obstacle17"]
+shape = SubResource("Shape17")
+[node name="Obstacle18" type="StaticBody2D" parent="Terrain"]
+position = Vector2(6892.5,1135.9)
+collision_mask = 2
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Terrain/Obstacle18"]
+shape = SubResource("Shape18")
+[node name="Obstacle19" type="StaticBody2D" parent="Terrain"]
+position = Vector2(3740.3,1267.9)
+collision_mask = 2
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Terrain/Obstacle19"]
+shape = SubResource("Shape19")
+[node name="SunWukong" parent="." instance=ExtResource("player")]
+position = Vector2(256,1200.0)
+scene_definition_id = &"孙悟空"
+[node name="shuiliandong_birth_1" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(902.3,875.1)
+script = ExtResource("point")
+spawn_point_id = &"shuiliandong_birth_1"
+metadata/original_position = Vector2(2057.9,875.1)
+[node name="shuiliandong_birth_2" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(2621.8935,36.2)
+script = ExtResource("point")
+spawn_point_id = &"shuiliandong_birth_2"
+metadata/original_position = Vector2(2219.8,36.2)
+[node name="shuiliandong_birth_3" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(5835.8708,782.2)
+script = ExtResource("point")
+spawn_point_id = &"shuiliandong_birth_3"
+metadata/original_position = Vector2(5283.3,782.2)
+[node name="shuiliandong_birth_21" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(7340.0,610.8)
+script = ExtResource("point")
+spawn_point_id = &"shuiliandong_birth_21"
+metadata/original_position = Vector2(7624.2,610.8)
+[node name="shuiliandong_birth_22" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(6631.1464,604.0)
+script = ExtResource("point")
+spawn_point_id = &"shuiliandong_birth_22"
+metadata/original_position = Vector2(6521.0,604.0)
+[node name="shuiliandong_birth_23" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(2910.8614,921.9)
+script = ExtResource("point")
+spawn_point_id = &"shuiliandong_birth_23"
+metadata/original_position = Vector2(2643.1,921.9)
+[node name="shuiliandong_birth_5" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(8780.0,669.6)
+script = ExtResource("point")
+spawn_point_id = &"shuiliandong_birth_5"
+metadata/original_position = Vector2(9156.7,669.6)
+[node name="shuiliandong_birth_24" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(3940.0,22.8)
+script = ExtResource("point")
+spawn_point_id = &"shuiliandong_birth_24"
+metadata/original_position = Vector2(3994.1,22.8)
+[node name="shuiliandong_birth_25" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(4659.8167,30.6)
+script = ExtResource("point")
+spawn_point_id = &"shuiliandong_birth_25"
+metadata/original_position = Vector2(4800.2,30.6)
+[node name="shuiliandong_birth_26" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(5427.4069,884.2)
+script = ExtResource("point")
+spawn_point_id = &"shuiliandong_birth_26"
+metadata/original_position = Vector2(5659.8,884.2)
+[node name="shuiliandong_birth_27" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(977.7,875.1)
+script = ExtResource("point")
+spawn_point_id = &"shuiliandong_birth_27"
+metadata/original_position = Vector2(2133.3,875.1)
+[node name="shuiliandong_birth_28" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(3163.0342,41.9)
+script = ExtResource("point")
+spawn_point_id = &"shuiliandong_birth_28"
+metadata/original_position = Vector2(3012.5,41.9)
+[node name="shuiliandong_birth_29" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(2060.0,610.8)
+script = ExtResource("point")
+spawn_point_id = &"shuiliandong_birth_29"
+metadata/original_position = Vector2(1396.7,610.8)
+[node name="shuiliandong_birth_30" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(3580.0,570.3)
+script = ExtResource("point")
+spawn_point_id = &"shuiliandong_birth_30"
+metadata/original_position = Vector2(3623.3,570.3)
+[node name="shuiliandong_birth_31" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(4281.3794,-136.1)
+script = ExtResource("point")
+spawn_point_id = &"shuiliandong_birth_31"
+metadata/original_position = Vector2(4376.4,-136.1)
+[node name="shuiliandong_birth_32" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(5460.0,664.2)
+script = ExtResource("point")
+spawn_point_id = &"shuiliandong_birth_32"
+metadata/original_position = Vector2(5696.3,664.2)
+[node name="shuiliandong_birth_33" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(7331.0687,782.2)
+script = ExtResource("point")
+spawn_point_id = &"shuiliandong_birth_33"
+metadata/original_position = Vector2(7610.3,782.2)
+[node name="shuiliandong_birth_34" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(5820.0,657.8)
+script = ExtResource("point")
+spawn_point_id = &"shuiliandong_birth_34"
+metadata/original_position = Vector2(5258.6,657.8)
+[node name="Gate1" type="StaticBody2D" parent="Gates"]
+position = Vector2(1880,700)
+script = ExtResource("gate")
+region_id = &"shuiliandong_region_1"
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Gates/Gate1"]
+shape = SubResource("Gate")
+[node name="Barrier" type="Polygon2D" parent="Gates/Gate1"]
+visible = false
+[node name="Label" type="Label" parent="Gates/Gate1"]
+visible = false
+[node name="Gate2" type="StaticBody2D" parent="Gates"]
+position = Vector2(3760,700)
+script = ExtResource("gate")
+region_id = &"shuiliandong_region_2"
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Gates/Gate2"]
+shape = SubResource("Gate")
+[node name="Barrier" type="Polygon2D" parent="Gates/Gate2"]
+visible = false
+[node name="Label" type="Label" parent="Gates/Gate2"]
+visible = false
+[node name="Gate3" type="StaticBody2D" parent="Gates"]
+position = Vector2(5640,700)
+script = ExtResource("gate")
+region_id = &"shuiliandong_region_3"
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Gates/Gate3"]
+shape = SubResource("Gate")
+[node name="Barrier" type="Polygon2D" parent="Gates/Gate3"]
+visible = false
+[node name="Label" type="Label" parent="Gates/Gate3"]
+visible = false
+[node name="Gate4" type="StaticBody2D" parent="Gates"]
+position = Vector2(7520,700)
+script = ExtResource("gate")
+region_id = &"shuiliandong_region_4"
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Gates/Gate4"]
+shape = SubResource("Gate")
+[node name="Barrier" type="Polygon2D" parent="Gates/Gate4"]
+visible = false
+[node name="Label" type="Label" parent="Gates/Gate4"]
+visible = false
+[node name="Gate5" type="StaticBody2D" parent="Gates"]
+position = Vector2(9460,700)
+script = ExtResource("gate")
+region_id = &"shuiliandong_region_5"
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Gates/Gate5"]
+shape = SubResource("Gate")
+[node name="Barrier" type="Polygon2D" parent="Gates/Gate5"]
+visible = false
+[node name="Label" type="Label" parent="Gates/Gate5"]
+visible = false
+[node name="FinalExit" type="Marker2D" parent="."]
+position = Vector2(8460.4,1115.0)
+script = ExtResource("exit_anchor")
+[node name="Gateway" parent="FinalExit" instance=ExtResource("gateway")]
+[node name="PlayerBirth" parent="." index="5"]
+position = Vector2(256,1200.0)
+[node name="EditorPreview" type="Node2D" parent="."]
+script = ExtResource("preview")
+regions = Array[Resource]([ExtResource("shuiliandong_region_1"),ExtResource("shuiliandong_region_2"),ExtResource("shuiliandong_region_3"),ExtResource("shuiliandong_region_4"),ExtResource("shuiliandong_region_5")])
+plans = Array[Resource]([ExtResource("shuiliandong_birth_1"),ExtResource("shuiliandong_birth_2"),ExtResource("shuiliandong_birth_3"),ExtResource("shuiliandong_birth_21"),ExtResource("shuiliandong_birth_22"),ExtResource("shuiliandong_birth_23"),ExtResource("shuiliandong_birth_5"),ExtResource("shuiliandong_birth_24"),ExtResource("shuiliandong_birth_25"),ExtResource("shuiliandong_birth_26"),ExtResource("shuiliandong_birth_27"),ExtResource("shuiliandong_birth_28"),ExtResource("shuiliandong_birth_29"),ExtResource("shuiliandong_birth_30"),ExtResource("shuiliandong_birth_31"),ExtResource("shuiliandong_birth_32"),ExtResource("shuiliandong_birth_33"),ExtResource("shuiliandong_birth_34")])
+label_font = ExtResource("preview_font")
+[node name="WaterSupport0" type="StaticBody2D" parent="Terrain"]
+position = Vector2(4300.0,1301.15)
+collision_mask = 2
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Terrain/WaterSupport0"]
+shape = SubResource("Water0")
+[node name="WaterSupport1" type="StaticBody2D" parent="Terrain"]
+position = Vector2(6558.0,1301.15)
+collision_mask = 2
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Terrain/WaterSupport1"]
+shape = SubResource("Water1")

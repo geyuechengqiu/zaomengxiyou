@@ -1,0 +1,21 @@
+{
+  "titles": [
+    "狂风出击",
+    "疾风突袭",
+    "飓风强袭"
+  ],
+  "size": [
+    320,
+    65
+  ],
+  "portrait_box": [
+    27,
+    9,
+    106,
+    52
+  ],
+  "template": "造梦西游5 icon/skill/dialog/2002010.png",
+  "portrait_sha256": "27437b9af8f1568e4bdcc2a8538c0d1eec7431bb721d4a951b92cb26f4c4c639",
+  "template_sha256": "fb0aa3235a4104bc65062898b8fe92919cf7122c244ff83260a7735c88aa3ff1",
+  "font": "res://assets/ui/fonts/huakang_haibao_w12.ttf"
+}

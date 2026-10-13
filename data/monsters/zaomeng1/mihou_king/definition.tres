@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="BattleEntityDefinition" format=3]
+[ext_resource type="Script" path="res://addons/battle_foundation/definitions/BattleEntityDefinition.cs" id="script"]
+[ext_resource type="Script" path="res://addons/gameplay_abiltiy_system/scripts/attributes/vitals/gameplay_vital.gd" id="vital_type"]
+[ext_resource type="Resource" path="res://data/monsters/zaomeng1/mihou_king/attributes.tres" id="attributes"]
+[ext_resource type="Resource" path="res://data/attribute/vitals/health.tres" id="health"]
+[ext_resource type="PackedScene" path="res://data/monsters/zaomeng1/mihou_king/monster.tscn" id="scene"]
+[resource]
+script = ExtResource("script")
+definition_id = &"水帘洞弥猴王"
+display_name = "弥猴王"
+faction_id = &"enemy"
+scene = ExtResource("scene")
+attribute_set = ExtResource("attributes")
+vitals = Array[ExtResource("vital_type")]([ExtResource("health")])
+initial_level = 5
+ability_ids = Array[StringName]([&"mihouwang_attack1", &"mihouwang_attack2", &"mihouwang_attack3", &"mihouwang_attack4", &"mihouwang_skill1", &"mihouwang_skill2", &"mihouwang_skill3"])
+metadata/original_monster_id = 10802
+metadata/original_resource_id = 11106
+metadata/original_show_appear = 0
+
+metadata/zaomeng1_enemy_type = 4
+metadata/stat_source = "上古天帝篇/Dungeon/2/Monster/10802"

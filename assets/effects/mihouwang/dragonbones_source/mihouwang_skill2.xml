@@ -1,0 +1,61 @@
+<skeleton name="mihouwang_skill2" frameRate="60" version="2.2">
+ <armatures>
+  <armature name="mihouwang_skill2">
+   <b name="add1" x="-71.3" y="-67.75" kX="180" kY="180" cX="0.9" cY="0.9" pX="6.95" pY="5.6" z="0">
+    <d name="mihouwang_skill2_1_3" isArmature="1"/>
+   </b>
+   <b name="collision" x="19.45" y="-64.1" kX="0" kY="0" cX="25.9" cY="11.13" pX="5.05" pY="4.85" z="1">
+    <d name="collisionRect" pX="0" pY="0"/>
+   </b>
+  </armature>
+  <armature name="mihouwang_skill2_1_3">
+   <b name="2" x="-66.95" y="-3.8" kX="0" kY="0" cX="1" cY="1" pX="128.5" pY="57" z="0">
+    <d name="mihouwang_skill2_1_6" pX="0" pY="0"/>
+   </b>
+   <b name="add1" x="-72" y="-0.8" kX="0" kY="0" cX="1" cY="1" pX="0" pY="0" z="1">
+    <d name="mihouwang_skill2_1_4" pX="185.5" pY="65.5"/>
+    <d name="mihouwang_skill2_1_8" pX="0" pY="0"/>
+    <d name="mihouwang_skill2_1_9" pX="0" pY="0"/>
+    <d name="mihouwang_skill2_1_10" pX="0" pY="0"/>
+   </b>
+  </armature>
+ </armatures>
+ <animations>
+  <animation name="mihouwang_skill2_1_3">
+   <mov name="idle" dr="4" to="0" drTW="4" twE="NaN" lp="1">
+    <b name="2" sc="1" dl="0">
+     <f x="-66.95" y="-3.8" cocos2d_x="-195.45" cocos2d_y="-60.8" kX="0" kY="0" cX="1" cY="1" pX="128.5" pY="57" z="0" dI="0" twE="NaN" tweenFrame="0" dr="1"/>
+     <f x="-66.95" y="-3.05" cocos2d_x="-195.45" cocos2d_y="53.55" kX="180" kY="0" cX="1" cY="0.99" pX="128.5" pY="57" z="0" dI="0" twE="NaN" tweenFrame="0" dr="1"/>
+     <f x="-66.95" y="-3.8" cocos2d_x="-195.45" cocos2d_y="-60.8" kX="0" kY="0" cX="1" cY="1" pX="128.5" pY="57" z="0" dI="0" twE="NaN" tweenFrame="0" dr="1"/>
+     <f x="-66.95" y="-3.05" cocos2d_x="-195.45" cocos2d_y="53.55" kX="180" kY="0" cX="1" cY="0.99" pX="128.5" pY="57" z="0" dI="0" twE="NaN" tweenFrame="0" dr="1"/>
+    </b>
+    <b name="add1" sc="1" dl="0">
+     <f x="-72" y="-0.8" cocos2d_x="-72" cocos2d_y="-0.8" kX="0" kY="0" cX="1" cY="1" pX="0" pY="0" z="1" dI="0" twE="NaN" tweenFrame="0" dr="1"/>
+     <f x="-68" y="4.2" cocos2d_x="-254.5" cocos2d_y="-61.3" kX="0" kY="0" cX="1" cY="1" pX="186.5" pY="65.5" z="1" dI="1" twE="NaN" tweenFrame="0" dr="1"/>
+     <f x="-90" y="2.2" cocos2d_x="-259.5" cocos2d_y="-65.3" kX="0" kY="0" cX="1" cY="1" pX="169.5" pY="67.5" z="1" dI="2" twE="NaN" tweenFrame="0" dr="1"/>
+     <f x="-73" y="-0.8" cocos2d_x="-258.5" cocos2d_y="-63.3" kX="0" kY="0" cX="1" cY="1" pX="185.5" pY="62.5" z="1" dI="3" twE="NaN" tweenFrame="0" dr="1"/>
+    </b>
+   </mov>
+  </animation>
+  <animation name="mihouwang_skill2">
+   <mov name="build" dr="28" to="0" drTW="28" twE="NaN" lp="1">
+    <b name="add1" sc="1" dl="0">
+     <f x="-71.3" y="-67.75" cocos2d_x="-65" cocos2d_y="-62.7" kX="180" kY="180" cX="0.9" cY="0.9" pX="6.95" pY="5.6" z="0" dI="0" mov="idle" twE="NaN" tweenFrame="0" dr="28"/>
+    </b>
+    <b name="collision" sc="1" dl="0">
+     <f x="19.45" y="-64.1" cocos2d_x="-111.3" cocos2d_y="-118.1" kX="0" kY="0" cX="25.9" cY="11.13" pX="5.05" pY="4.85" z="1" dI="0" twE="NaN" tweenFrame="0" dr="28">
+      <colorTransform a="0" r="0" g="0" b="0" aM="0" rM="100" gM="100" bM="100"/>
+     </f>
+    </b>
+   </mov>
+  </animation>
+ </animations>
+ <TextureAtlas name="mihouwang_skill2" width="467" height="646">
+  <SubTexture name="mihouwang_skill2_1_10" width="371" height="125" cocos2d_pX="0" cocos2d_pY="0" x="0" y="266"/>
+  <SubTexture name="mihouwang_skill2_1_9" width="339" height="135" cocos2d_pX="0" cocos2d_pY="0" x="0" y="393"/>
+  <SubTexture name="mihouwang_skill2_1_8" width="373" height="131" cocos2d_pX="0" cocos2d_pY="0" x="0" y="0"/>
+  <SubTexture name="mihouwang_skill2_1_4" width="371" height="131" cocos2d_pX="185.5" cocos2d_pY="65.5" x="0" y="133"/>
+  <SubTexture name="mihouwang_skill2_1_6" width="257" height="114" cocos2d_pX="0" cocos2d_pY="0" x="0" y="530"/>
+  <SubTexture name="collisionRect" width="10" height="10" cocos2d_pX="0" cocos2d_pY="0" x="375" y="0"/>
+ </TextureAtlas>
+</skeleton>

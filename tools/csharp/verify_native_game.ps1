@@ -22,7 +22,7 @@ try {
         $env:LOCALAPPDATA = $env:APPDATA
         New-Item -ItemType Directory -Force -Path $env:APPDATA | Out-Null
         $taskFrames = if ($taskSuite -eq 'main_level') { 300 } else { 12000 }
-        $taskArguments = @('--headless', '--max-fps', '600', '--fixed-fps', '60', '--quit-after', "$taskFrames", '--log-file', ('"' + $taskPrefix + '.log"'))
+        $taskArguments = @('--headless', '--audio-driver', 'Dummy', '--max-fps', '600', '--fixed-fps', '60', '--quit-after', "$taskFrames", '--log-file', ('"' + $taskPrefix + '.log"'))
         if ($taskSuite -ne 'main_level') { $taskArguments += @('--', ('--verify-suite=' + $taskSuite)) }
         $taskProcess = Start-Process -FilePath $Game -ArgumentList $taskArguments -WorkingDirectory (Split-Path $Game) -WindowStyle Hidden -RedirectStandardOutput ($taskPrefix + '.out') -RedirectStandardError ($taskPrefix + '.err') -PassThru
         $taskDeadline = [DateTime]::UtcNow.AddSeconds($TimeoutSeconds)
@@ -37,7 +37,7 @@ try {
             $taskOutput -split "`n" | Select-Object -Last 60 | Write-Output
             throw "NativeAOT suite failed: $taskSuite (exit $($taskProcess.ExitCode))"
         }
-        if ($taskSuite -eq 'main_level') { Write-Output 'PASS NativeAOT main level: 300 frames, authored player/monsters/UI/audio, clean exit' }
+        if ($taskSuite -eq 'main_level') { Write-Output 'PASS NativeAOT main scene: 300 frames, world map/UI/audio, clean exit' }
         else { $taskOutput -split "`n" | Where-Object { $_ -match '^PASS' } | Write-Output }
     }
 } finally {

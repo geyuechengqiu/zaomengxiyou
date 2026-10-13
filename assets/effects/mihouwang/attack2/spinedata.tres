@@ -1,0 +1,6 @@
+[gd_resource type="SpineSkeletonDataResource" format=3]
+[ext_resource type="SpineAtlasResource" path="res://assets/effects/mihouwang/attack2/effect.atlas" id="atlas"]
+[ext_resource type="SpineSkeletonFileResource" path="res://assets/effects/mihouwang/attack2/effect.spine-json" id="skeleton"]
+[resource]
+atlas_res = ExtResource("atlas")
+skeleton_file_res = ExtResource("skeleton")

@@ -1,0 +1,47 @@
+<skeleton name="mihouwang_attack4" frameRate="60" version="2.2">
+ <armatures>
+  <armature name="mihouwang_attack4">
+   <b name="asdasd" x="62.1" y="-76.7" kX="51.02" kY="17.56" cX="1.86" cY="1.6" pX="114.5" pY="110" z="0">
+    <d name="mihouwang_attack4_1_3" pX="0" pY="0"/>
+    <d name="mihouwang_attack4_1_1" pX="0" pY="0"/>
+    <d name="mihouwang_attack4_1_7" pX="0" pY="0"/>
+    <d name="mihouwang_attack4_1_2" pX="0" pY="0"/>
+    <d name="mihouwang_attack4_1_5" pX="0" pY="0"/>
+   </b>
+   <b name="collision" x="67.5" y="-89.25" kX="0" kY="0" cX="38" cY="21.46" pX="5" pY="5.05" z="1">
+    <d name="collisionRect" pX="0" pY="0"/>
+   </b>
+  </armature>
+ </armatures>
+ <animations>
+  <animation name="mihouwang_attack4">
+   <mov name="build" dr="28" to="0" drTW="28" twE="NaN" lp="1">
+    <b name="asdasd" sc="1" dl="0">
+     <f x="62.1" y="-76.7" cocos2d_x="-4.2" cocos2d_y="-251.75" kX="51.02" kY="17.56" cX="1.86" cY="1.6" pX="114.5" pY="110" z="0" dI="0" twE="NaN" tweenFrame="0" dr="2"/>
+     <f x="74.25" y="-76.3" cocos2d_x="23.9" cocos2d_y="-218.3" kX="51.02" kY="17.56" cX="1.86" cY="1.6" pX="91.5" pY="90" z="0" dI="1" twE="NaN" tweenFrame="0" dr="2"/>
+     <f x="74.25" y="-76.3" cocos2d_x="23.9" cocos2d_y="-218.3" kX="51.02" kY="17.56" cX="1.86" cY="1.6" pX="91.5" pY="90" z="0" dI="2" twE="NaN" tweenFrame="0" dr="2"/>
+     <f x="74.25" y="-76.3" cocos2d_x="23.9" cocos2d_y="-218.3" kX="51.02" kY="17.56" cX="1.86" cY="1.6" pX="91.5" pY="90" z="0" dI="3" twE="NaN" tweenFrame="0" dr="2"/>
+     <f x="74.25" y="-76.3" cocos2d_x="23.9" cocos2d_y="-218.3" kX="51.02" kY="17.56" cX="1.86" cY="1.6" pX="91.5" pY="90" z="0" dI="4" twE="NaN" tweenFrame="0" dr="2"/>
+     <f dr="18" dI="-1"/>
+    </b>
+    <b name="collision" sc="1" dl="0">
+     <f x="67.5" y="-89.25" cocos2d_x="-122.5" cocos2d_y="-197.6" kX="0" kY="0" cX="38" cY="21.46" pX="5" pY="5.05" z="1" dI="0" twE="NaN" tweenFrame="0" dr="5">
+      <colorTransform a="0" r="0" g="0" b="0" aM="0" rM="100" gM="100" bM="100"/>
+     </f>
+     <f x="67.5" y="-39.3" cocos2d_x="-122.5" cocos2d_y="-96.75" kX="0" kY="0" cX="38" cY="11.37" pX="5" pY="5.05" z="1" dI="0" twE="NaN" tweenFrame="0" dr="4">
+      <colorTransform a="0" r="0" g="0" b="0" aM="0" rM="100" gM="100" bM="100"/>
+     </f>
+     <f dr="19" dI="-1"/>
+    </b>
+   </mov>
+  </animation>
+ </animations>
+ <TextureAtlas name="mihouwang_attack4" width="426" height="546">
+  <SubTexture name="collisionRect" width="10" height="10" cocos2d_pX="0" cocos2d_pY="0" x="185" y="222"/>
+  <SubTexture name="mihouwang_attack4_1_5" width="183" height="180" cocos2d_pX="0" cocos2d_pY="0" x="0" y="222"/>
+  <SubTexture name="mihouwang_attack4_1_2" width="183" height="180" cocos2d_pX="0" cocos2d_pY="0" x="185" y="364"/>
+  <SubTexture name="mihouwang_attack4_1_7" width="183" height="180" cocos2d_pX="0" cocos2d_pY="0" x="231" y="0"/>
+  <SubTexture name="mihouwang_attack4_1_1" width="183" height="180" cocos2d_pX="0" cocos2d_pY="0" x="231" y="182"/>
+  <SubTexture name="mihouwang_attack4_1_3" width="229" height="220" cocos2d_pX="0" cocos2d_pY="0" x="0" y="0"/>
+ </TextureAtlas>
+</skeleton>

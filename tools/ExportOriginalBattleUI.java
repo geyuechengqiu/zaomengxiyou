@@ -52,6 +52,8 @@ class ExportOriginalBattleUI {
   }
   Set<String> requests=new HashSet<>(Arrays.asList(requested.split(",")));
   boolean backgrounds=args.length>3 && args[3].equals("background");
+  boolean clean=args.length>3 && args[3].equals("clean");
+  boolean unlit=args.length>3 && args[3].equals("unlit");
   AbortRetryIgnoreHandler h=new AbortRetryIgnoreHandler(){public int handle(Throwable e){throw new RuntimeException(e);}public AbortRetryIgnoreHandler getNewInstance(){return this;}};
   for(CharacterTag c:swf.getCharacters().values()) {
    Set<String> names=new TreeSet<>(c.getClassNames());
@@ -64,6 +66,21 @@ class ExportOriginalBattleUI {
    visited.clear();
    inspect(c.getCharacterId(),"",4);
    Path folder=Path.of(args[1],target.replace("#","id-"));Files.createDirectories(folder);
+   if(unlit && c instanceof DefineSpriteTag) {
+    DefineSpriteTag sprite=(DefineSpriteTag)c;
+    Set<Tag> remove=new HashSet<>();
+    for(int f=0;f<sprite.frameCount;f++)
+     for(DepthState d:sprite.getTimeline().getFrame(f).layers.values())
+      if("light".equals(d.instanceName)) remove.add(d.placeObjectTag);
+    for(Tag tag:remove) sprite.removeTag(tag);
+    sprite.resetTimeline();
+   }
+   if(clean && c instanceof DefineSpriteTag) {
+    DefineSpriteTag sprite=(DefineSpriteTag)c;
+    for(DepthState d:new ArrayList<>(sprite.getTimeline().getFrame(0).layers.values()))
+     if(d.instanceName!=null) sprite.removeTag(d.placeObjectTag);
+    sprite.resetTimeline();
+   }
    if(backgrounds && c instanceof DefineSpriteTag) {
     DefineSpriteTag sprite=(DefineSpriteTag)c;
     for(DepthState d:sprite.getTimeline().getFrame(0).layers.values()) {

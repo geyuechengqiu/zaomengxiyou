@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="BattleSpawnPlanDefinition" format=3]
+[ext_resource type="Script" path="res://addons/battle_foundation/level/BattleSpawnPlanDefinition.cs" id="script"]
+[resource]
+script = ExtResource("script")
+plan_id = &"shuiliandong_birth_29"
+spawn_point_id = &"shuiliandong_birth_29"
+monster_ids = Array[StringName]([&"花果山山猴",&"花果山山猴"])
+delay_seconds = 1.6
+interval_seconds = 0.8
+facing = -1
+is_boss = false
+metadata/original_delay = 2
+metadata/original_interval = 1
+metadata/original_stop_point_idx = 1

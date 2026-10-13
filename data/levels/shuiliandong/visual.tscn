@@ -1,0 +1,83 @@
+[gd_scene format=3 uid="uid://dfybdrjoia3m1"]
+
+[ext_resource type="Texture2D" uid="uid://u7e24smabsdb" path="res://assets/maps/shuiliandong/cave.png" id="cave"]
+[ext_resource type="Texture2D" uid="uid://cr4nn41es1ng1" path="res://assets/maps/huaguoshan/far.png" id="far"]
+[ext_resource type="Texture2D" uid="uid://t3ue7jas507e" path="res://assets/maps/shuiliandong/ground.png" id="ground"]
+[ext_resource type="Texture2D" uid="uid://cs3asbawvx507" path="res://assets/maps/shuiliandong/platform.png" id="platform"]
+[ext_resource type="PackedScene" path="res://addons/battle_foundation/level/battle_map_visual_template_2d.tscn" id="template"]
+[ext_resource type="Texture2D" uid="uid://bkgaas6nr3h2e" path="res://assets/maps/shuiliandong/water.png" id="water"]
+
+[node name="ShuiliandongVisual" unique_id=446197885 instance=ExtResource("template")]
+
+[node name="FarBackground" parent="." index="0"]
+scroll_scale = Vector2(0.1295, 1)
+
+[node name="Mountains" type="Sprite2D" parent="FarBackground" index="0" unique_id=1269521924]
+scale = Vector2(2, 2)
+texture = ExtResource("far")
+centered = false
+
+[node name="MiddleBackground" parent="." index="1"]
+scroll_scale = Vector2(1, 1)
+scroll_offset = Vector2(3, 129)
+
+[node name="Cave" type="Sprite2D" parent="MiddleBackground" index="0" unique_id=997922801]
+position = Vector2(-490, 212)
+scale = Vector2(2, 2)
+texture = ExtResource("cave")
+centered = false
+
+[node name="GroundArtwork" parent="." index="3"]
+position = Vector2(0, 200)
+
+[node name="Ground" type="Sprite2D" parent="GroundArtwork" index="0" unique_id=1470196348]
+position = Vector2(-36, 693.2)
+scale = Vector2(2, 2)
+texture = ExtResource("ground")
+centered = false
+
+[node name="Artwork0" type="Sprite2D" parent="GroundArtwork" index="1" unique_id=1891383148]
+position = Vector2(2062.7, 693.2)
+scale = Vector2(2, 2)
+texture = ExtResource("platform")
+centered = false
+
+[node name="Artwork3" type="Sprite2D" parent="GroundArtwork" index="2" unique_id=1013231890]
+position = Vector2(3822.4, 590)
+scale = Vector2(2, 2)
+texture = ExtResource("platform")
+centered = false
+
+[node name="Artwork4" type="Sprite2D" parent="GroundArtwork" index="3" unique_id=1569816296]
+position = Vector2(4219.7, 341.6)
+scale = Vector2(2, 2)
+texture = ExtResource("platform")
+centered = false
+
+[node name="Artwork5" type="Sprite2D" parent="GroundArtwork" index="4" unique_id=1799583028]
+position = Vector2(4620.6, 684)
+scale = Vector2(2, 2)
+texture = ExtResource("platform")
+centered = false
+
+[node name="Artwork6" type="Sprite2D" parent="GroundArtwork" index="5" unique_id=952328767]
+position = Vector2(6338.7, 718.2)
+scale = Vector2(2, 2)
+texture = ExtResource("platform")
+centered = false
+
+[node name="ForegroundOccluders" parent="." index="4"]
+z_index = -11
+position = Vector2(0, 200)
+
+[node name="Artwork1" type="Sprite2D" parent="ForegroundOccluders" index="0" unique_id=231184634]
+position = Vector2(3906.7, 1094.3)
+scale = Vector2(2, 2)
+texture = ExtResource("water")
+centered = false
+
+[node name="Artwork2" type="Sprite2D" parent="ForegroundOccluders" index="1" unique_id=1674576585]
+position = Vector2(1652, 1095)
+scale = Vector2(2, 2)
+texture = ExtResource("water")
+centered = false

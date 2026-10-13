@@ -34,7 +34,7 @@ func _ready() -> void:
 	hud.get_node("BattleTools/BagButton").pressed.emit()
 	check(hud.inventory_view.visible and session.clock.paused and not hud.is_module_open(), "点击原背包入口打开背包并暂停")
 	hud.get_node("BattleTools/SkillButton").pressed.emit()
-	check(not hud.inventory_view.visible and hud.is_module_open() and session.clock.paused and hud.get_node("ModulePanel/Text").text.contains("火"), "技能入口读取已装备GAS技能，只保留一个模块")
+	check(not hud.inventory_view.visible and hud.is_module_open() and session.clock.paused and hud.get_node("SkillPanel/Main/Rows/S1101030/Name").text.contains("火"), "技能入口打开原版技能面板，只保留一个模块")
 	hud.get_node("BattleTools/SettingsButton").pressed.emit()
 	check(scene.menu.visible and not hud.is_module_open() and session.clock.paused, "设置入口接入真实改键菜单")
 	scene.menu.set_open(false)

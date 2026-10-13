@@ -1,0 +1,3011 @@
+[gd_scene format=3]
+[ext_resource type="Script" path="res://addons/battle_foundation/ui/OriginalSkillPanel.cs" id="R0"]
+[ext_resource type="FontFile" path="res://assets/ui/original/ui_font.ttf" id="R1"]
+[ext_resource type="Texture2D" path="res://assets/ui/skills/main.png" id="R2"]
+[ext_resource type="Texture2D" path="res://assets/ui/skills/close_0.png" id="R3"]
+[ext_resource type="Texture2D" path="res://assets/ui/skills/close_1.png" id="R4"]
+[ext_resource type="Texture2D" path="res://assets/ui/skills/close_2.png" id="R5"]
+[ext_resource type="Texture2D" path="res://assets/ui/skills/active_tab_0.png" id="R6"]
+[ext_resource type="Texture2D" path="res://assets/ui/skills/active_tab_1.png" id="R7"]
+[ext_resource type="Texture2D" path="res://assets/ui/skills/active_tab_2.png" id="R8"]
+[ext_resource type="Texture2D" path="res://assets/ui/skills/special_tab_0.png" id="R9"]
+[ext_resource type="Texture2D" path="res://assets/ui/skills/special_tab_1.png" id="R10"]
+[ext_resource type="Texture2D" path="res://assets/ui/skills/special_tab_2.png" id="R11"]
+[ext_resource type="Texture2D" path="res://assets/ui/skills/secret_tab_0.png" id="R12"]
+[ext_resource type="Texture2D" path="res://assets/ui/skills/secret_tab_1.png" id="R13"]
+[ext_resource type="Texture2D" path="res://assets/ui/skills/secret_tab_2.png" id="R14"]
+[ext_resource type="Texture2D" path="res://assets/ui/skills/keyboard_button_0.png" id="R15"]
+[ext_resource type="Texture2D" path="res://assets/ui/skills/keyboard_button_1.png" id="R16"]
+[ext_resource type="Texture2D" path="res://assets/ui/skills/keyboard_button_2.png" id="R17"]
+[ext_resource type="Texture2D" path="res://assets/ui/skills/job_0.png" id="R18"]
+[ext_resource type="Texture2D" path="res://assets/ui/skills/job_1.png" id="R19"]
+[ext_resource type="Texture2D" path="res://assets/ui/skills/job_2.png" id="R20"]
+[ext_resource type="Texture2D" path="res://assets/ui/skills/reset_0.png" id="R21"]
+[ext_resource type="Texture2D" path="res://assets/ui/skills/reset_1.png" id="R22"]
+[ext_resource type="Texture2D" path="res://assets/ui/skills/reset_2.png" id="R23"]
+[ext_resource type="Texture2D" path="res://assets/ui/skills/help_0.png" id="R24"]
+[ext_resource type="Texture2D" path="res://assets/ui/skills/help_1.png" id="R25"]
+[ext_resource type="Texture2D" path="res://assets/ui/skills/help_2.png" id="R26"]
+[ext_resource type="Texture2D" path="res://assets/ui/skills/active_sections.png" id="R27"]
+[ext_resource type="Texture2D" path="res://assets/ui/skills/special_sections.png" id="R28"]
+[ext_resource type="Texture2D" path="res://assets/ui/skills/row.png" id="R29"]
+[ext_resource type="Texture2D" path="res://assets/ui/skills/skill_main.png" id="R30"]
+[ext_resource type="Texture2D" path="res://assets/ui/skills/1101010.png" id="R31"]
+[ext_resource type="Texture2D" path="res://assets/ui/skills/learn_button_0.png" id="R32"]
+[ext_resource type="Texture2D" path="res://assets/ui/skills/learn_button_1.png" id="R33"]
+[ext_resource type="Texture2D" path="res://assets/ui/skills/learn_button_2.png" id="R34"]
+[ext_resource type="Texture2D" path="res://assets/ui/skills/learn_glow_0.png" id="R35"]
+[ext_resource type="Texture2D" path="res://assets/ui/skills/learn_glow_1.png" id="R36"]
+[ext_resource type="Texture2D" path="res://assets/ui/skills/learn_glow_2.png" id="R37"]
+[ext_resource type="Texture2D" path="res://assets/ui/skills/learn_glow_3.png" id="R38"]
+[ext_resource type="Texture2D" path="res://assets/ui/skills/learn_glow_4.png" id="R39"]
+[ext_resource type="Texture2D" path="res://assets/ui/skills/learn_glow_5.png" id="R40"]
+[ext_resource type="Texture2D" path="res://assets/ui/skills/learn_glow_6.png" id="R41"]
+[ext_resource type="Texture2D" path="res://assets/ui/skills/learn_glow_7.png" id="R42"]
+[ext_resource type="Texture2D" path="res://assets/ui/skills/learn_glow_8.png" id="R43"]
+[ext_resource type="Texture2D" path="res://assets/ui/skills/learn_glow_9.png" id="R44"]
+[ext_resource type="Texture2D" path="res://assets/ui/skills/learn_glow_10.png" id="R45"]
+[ext_resource type="Texture2D" path="res://assets/ui/skills/learn_glow_11.png" id="R46"]
+[ext_resource type="Texture2D" path="res://assets/ui/skills/learn_glow_12.png" id="R47"]
+[ext_resource type="Texture2D" path="res://assets/ui/skills/learn_glow_13.png" id="R48"]
+[ext_resource type="Texture2D" path="res://assets/ui/skills/learn_glow_14.png" id="R49"]
+[ext_resource type="Texture2D" path="res://assets/ui/skills/learn_glow_15.png" id="R50"]
+[ext_resource type="Texture2D" path="res://assets/ui/skills/learn_glow_16.png" id="R51"]
+[ext_resource type="Texture2D" path="res://assets/ui/skills/learn_glow_17.png" id="R52"]
+[ext_resource type="Texture2D" path="res://assets/ui/skills/skill_more_0.png" id="R53"]
+[ext_resource type="Texture2D" path="res://assets/ui/skills/skill_more_1.png" id="R54"]
+[ext_resource type="Texture2D" path="res://assets/ui/skills/skill_more_2.png" id="R55"]
+[ext_resource type="Texture2D" path="res://assets/ui/skills/1101020.png" id="R56"]
+[ext_resource type="Texture2D" path="res://assets/ui/skills/fire_element.png" id="R57"]
+[ext_resource type="Texture2D" path="res://assets/ui/skills/1101030.png" id="R58"]
+[ext_resource type="Texture2D" path="res://assets/ui/skills/1101040.png" id="R59"]
+[ext_resource type="Texture2D" path="res://assets/ui/skills/1101070.png" id="R60"]
+[ext_resource type="Texture2D" path="res://assets/ui/skills/1101080.png" id="R61"]
+[ext_resource type="Texture2D" path="res://assets/ui/skills/skill_passive.png" id="R62"]
+[ext_resource type="Texture2D" path="res://assets/ui/skills/1301010.png" id="R63"]
+[ext_resource type="Texture2D" path="res://assets/ui/skills/skill_peerless.png" id="R64"]
+[ext_resource type="Texture2D" path="res://assets/ui/skills/1201010.png" id="R65"]
+[ext_resource type="Texture2D" path="res://assets/ui/skills/keyboard.png" id="R66"]
+[ext_resource type="Texture2D" path="res://assets/ui/skills/keyboard_title.png" id="R67"]
+[ext_resource type="Texture2D" path="res://assets/ui/skills/items_tab_0.png" id="R68"]
+[ext_resource type="Texture2D" path="res://assets/ui/skills/items_tab_1.png" id="R69"]
+[ext_resource type="Texture2D" path="res://assets/ui/skills/items_tab_2.png" id="R70"]
+[ext_resource type="Texture2D" path="res://assets/ui/skills/monsters_tab_0.png" id="R71"]
+[ext_resource type="Texture2D" path="res://assets/ui/skills/monsters_tab_1.png" id="R72"]
+[ext_resource type="Texture2D" path="res://assets/ui/skills/monsters_tab_2.png" id="R73"]
+[ext_resource type="Texture2D" path="res://assets/ui/skills/emotes_tab_0.png" id="R74"]
+[ext_resource type="Texture2D" path="res://assets/ui/skills/emotes_tab_1.png" id="R75"]
+[ext_resource type="Texture2D" path="res://assets/ui/skills/emotes_tab_2.png" id="R76"]
+[ext_resource type="Texture2D" path="res://assets/ui/skills/skill_prop.png" id="R77"]
+[ext_resource type="Texture2D" path="res://assets/ui/skills/upgrade.png" id="R78"]
+[ext_resource type="Texture2D" path="res://assets/ui/skills/upgrade_button_0.png" id="R79"]
+[ext_resource type="Texture2D" path="res://assets/ui/skills/upgrade_button_1.png" id="R80"]
+[ext_resource type="Texture2D" path="res://assets/ui/skills/upgrade_button_2.png" id="R81"]
+[ext_resource type="Texture2D" path="res://assets/ui/skills/batch_0.png" id="R82"]
+[ext_resource type="Texture2D" path="res://assets/ui/skills/batch_1.png" id="R83"]
+[ext_resource type="Texture2D" path="res://assets/ui/skills/batch_2.png" id="R84"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/tips_background.png" id="R85"]
+
+[ext_resource type="Texture2D" path="res://assets/ui/original/slot_0.png" id="keyboard_detail_slot"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/bag_page_0.png" id="keyboard_detail_page0"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/bag_page_1.png" id="keyboard_detail_page1"]
+[ext_resource type="Texture2D" path="res://assets/ui/original/bag_page_2.png" id="keyboard_detail_page2"]
+[sub_resource type="SpriteFrames" id="Glow1101010"]
+animations = [{"frames": [{"duration": 1.0, "texture": ExtResource("R35")}, {"duration": 1.0, "texture": ExtResource("R36")}, {"duration": 1.0, "texture": ExtResource("R37")}, {"duration": 1.0, "texture": ExtResource("R38")}, {"duration": 1.0, "texture": ExtResource("R39")}, {"duration": 1.0, "texture": ExtResource("R40")}, {"duration": 1.0, "texture": ExtResource("R41")}, {"duration": 1.0, "texture": ExtResource("R42")}, {"duration": 1.0, "texture": ExtResource("R43")}, {"duration": 1.0, "texture": ExtResource("R44")}, {"duration": 1.0, "texture": ExtResource("R45")}, {"duration": 1.0, "texture": ExtResource("R46")}, {"duration": 1.0, "texture": ExtResource("R47")}, {"duration": 1.0, "texture": ExtResource("R48")}, {"duration": 1.0, "texture": ExtResource("R49")}, {"duration": 1.0, "texture": ExtResource("R50")}, {"duration": 1.0, "texture": ExtResource("R51")}, {"duration": 1.0, "texture": ExtResource("R52")}], "loop": true, "name": &"default", "speed": 30.0}]
+[sub_resource type="SpriteFrames" id="Glow1101020"]
+animations = [{"frames": [{"duration": 1.0, "texture": ExtResource("R35")}, {"duration": 1.0, "texture": ExtResource("R36")}, {"duration": 1.0, "texture": ExtResource("R37")}, {"duration": 1.0, "texture": ExtResource("R38")}, {"duration": 1.0, "texture": ExtResource("R39")}, {"duration": 1.0, "texture": ExtResource("R40")}, {"duration": 1.0, "texture": ExtResource("R41")}, {"duration": 1.0, "texture": ExtResource("R42")}, {"duration": 1.0, "texture": ExtResource("R43")}, {"duration": 1.0, "texture": ExtResource("R44")}, {"duration": 1.0, "texture": ExtResource("R45")}, {"duration": 1.0, "texture": ExtResource("R46")}, {"duration": 1.0, "texture": ExtResource("R47")}, {"duration": 1.0, "texture": ExtResource("R48")}, {"duration": 1.0, "texture": ExtResource("R49")}, {"duration": 1.0, "texture": ExtResource("R50")}, {"duration": 1.0, "texture": ExtResource("R51")}, {"duration": 1.0, "texture": ExtResource("R52")}], "loop": true, "name": &"default", "speed": 30.0}]
+[sub_resource type="SpriteFrames" id="Glow1101030"]
+animations = [{"frames": [{"duration": 1.0, "texture": ExtResource("R35")}, {"duration": 1.0, "texture": ExtResource("R36")}, {"duration": 1.0, "texture": ExtResource("R37")}, {"duration": 1.0, "texture": ExtResource("R38")}, {"duration": 1.0, "texture": ExtResource("R39")}, {"duration": 1.0, "texture": ExtResource("R40")}, {"duration": 1.0, "texture": ExtResource("R41")}, {"duration": 1.0, "texture": ExtResource("R42")}, {"duration": 1.0, "texture": ExtResource("R43")}, {"duration": 1.0, "texture": ExtResource("R44")}, {"duration": 1.0, "texture": ExtResource("R45")}, {"duration": 1.0, "texture": ExtResource("R46")}, {"duration": 1.0, "texture": ExtResource("R47")}, {"duration": 1.0, "texture": ExtResource("R48")}, {"duration": 1.0, "texture": ExtResource("R49")}, {"duration": 1.0, "texture": ExtResource("R50")}, {"duration": 1.0, "texture": ExtResource("R51")}, {"duration": 1.0, "texture": ExtResource("R52")}], "loop": true, "name": &"default", "speed": 30.0}]
+[sub_resource type="SpriteFrames" id="Glow1101040"]
+animations = [{"frames": [{"duration": 1.0, "texture": ExtResource("R35")}, {"duration": 1.0, "texture": ExtResource("R36")}, {"duration": 1.0, "texture": ExtResource("R37")}, {"duration": 1.0, "texture": ExtResource("R38")}, {"duration": 1.0, "texture": ExtResource("R39")}, {"duration": 1.0, "texture": ExtResource("R40")}, {"duration": 1.0, "texture": ExtResource("R41")}, {"duration": 1.0, "texture": ExtResource("R42")}, {"duration": 1.0, "texture": ExtResource("R43")}, {"duration": 1.0, "texture": ExtResource("R44")}, {"duration": 1.0, "texture": ExtResource("R45")}, {"duration": 1.0, "texture": ExtResource("R46")}, {"duration": 1.0, "texture": ExtResource("R47")}, {"duration": 1.0, "texture": ExtResource("R48")}, {"duration": 1.0, "texture": ExtResource("R49")}, {"duration": 1.0, "texture": ExtResource("R50")}, {"duration": 1.0, "texture": ExtResource("R51")}, {"duration": 1.0, "texture": ExtResource("R52")}], "loop": true, "name": &"default", "speed": 30.0}]
+[sub_resource type="SpriteFrames" id="Glow1101070"]
+animations = [{"frames": [{"duration": 1.0, "texture": ExtResource("R35")}, {"duration": 1.0, "texture": ExtResource("R36")}, {"duration": 1.0, "texture": ExtResource("R37")}, {"duration": 1.0, "texture": ExtResource("R38")}, {"duration": 1.0, "texture": ExtResource("R39")}, {"duration": 1.0, "texture": ExtResource("R40")}, {"duration": 1.0, "texture": ExtResource("R41")}, {"duration": 1.0, "texture": ExtResource("R42")}, {"duration": 1.0, "texture": ExtResource("R43")}, {"duration": 1.0, "texture": ExtResource("R44")}, {"duration": 1.0, "texture": ExtResource("R45")}, {"duration": 1.0, "texture": ExtResource("R46")}, {"duration": 1.0, "texture": ExtResource("R47")}, {"duration": 1.0, "texture": ExtResource("R48")}, {"duration": 1.0, "texture": ExtResource("R49")}, {"duration": 1.0, "texture": ExtResource("R50")}, {"duration": 1.0, "texture": ExtResource("R51")}, {"duration": 1.0, "texture": ExtResource("R52")}], "loop": true, "name": &"default", "speed": 30.0}]
+[sub_resource type="SpriteFrames" id="Glow1101080"]
+animations = [{"frames": [{"duration": 1.0, "texture": ExtResource("R35")}, {"duration": 1.0, "texture": ExtResource("R36")}, {"duration": 1.0, "texture": ExtResource("R37")}, {"duration": 1.0, "texture": ExtResource("R38")}, {"duration": 1.0, "texture": ExtResource("R39")}, {"duration": 1.0, "texture": ExtResource("R40")}, {"duration": 1.0, "texture": ExtResource("R41")}, {"duration": 1.0, "texture": ExtResource("R42")}, {"duration": 1.0, "texture": ExtResource("R43")}, {"duration": 1.0, "texture": ExtResource("R44")}, {"duration": 1.0, "texture": ExtResource("R45")}, {"duration": 1.0, "texture": ExtResource("R46")}, {"duration": 1.0, "texture": ExtResource("R47")}, {"duration": 1.0, "texture": ExtResource("R48")}, {"duration": 1.0, "texture": ExtResource("R49")}, {"duration": 1.0, "texture": ExtResource("R50")}, {"duration": 1.0, "texture": ExtResource("R51")}, {"duration": 1.0, "texture": ExtResource("R52")}], "loop": true, "name": &"default", "speed": 30.0}]
+[sub_resource type="StyleBoxTexture" id="popup"]
+texture = ExtResource("R85")
+texture_margin_left = 8.0
+texture_margin_top = 8.0
+texture_margin_right = 8.0
+texture_margin_bottom = 8.0
+
+[sub_resource type="StyleBoxTexture" id="SkillTooltipStyle"]
+texture = ExtResource("R85")
+texture_margin_left = 25.0
+texture_margin_top = 20.0
+texture_margin_right = 25.0
+texture_margin_bottom = 20.0
+
+[node name="SkillPanel" type="Control"]
+visible = false
+process_mode = 3
+z_index = 150
+layout_mode = 0
+offset_right = 940.0
+offset_bottom = 590.0
+mouse_filter = 0
+script = ExtResource("R0")
+metadata/ui_modal = true
+[node name="ModalBarrier" type="Control" parent="."]
+offset_left = 0
+offset_top = 0
+offset_right = 940
+offset_bottom = 590
+mouse_filter = 0
+
+[node name="Main" type="Control" parent="."]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 940.0
+offset_bottom = 590.0
+mouse_filter = 2
+
+[node name="Background" type="TextureRect" parent="Main"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 940.0
+offset_bottom = 590.0
+mouse_filter = 2
+texture = ExtResource("R2")
+expand_mode = 1
+stretch_mode = 0
+
+[node name="Close" type="TextureButton" parent="Main"]
+layout_mode = 0
+offset_left = 896.45
+offset_top = 18.35
+offset_right = 929.45
+offset_bottom = 56.35
+mouse_filter = 0
+ignore_texture_size = true
+stretch_mode = 0
+texture_normal = ExtResource("R3")
+texture_hover = ExtResource("R4")
+texture_pressed = ExtResource("R5")
+
+[node name="ActiveTab" type="TextureButton" parent="Main"]
+layout_mode = 0
+offset_left = 96.35
+offset_top = 29.85
+offset_right = 208.35
+offset_bottom = 76.85
+mouse_filter = 0
+ignore_texture_size = true
+stretch_mode = 0
+texture_normal = ExtResource("R6")
+texture_hover = ExtResource("R7")
+texture_pressed = ExtResource("R8")
+
+[node name="SpecialTab" type="TextureButton" parent="Main"]
+layout_mode = 0
+offset_left = 212.3
+offset_top = 29.85
+offset_right = 324.3
+offset_bottom = 76.85
+mouse_filter = 0
+ignore_texture_size = true
+stretch_mode = 0
+texture_normal = ExtResource("R9")
+texture_hover = ExtResource("R10")
+texture_pressed = ExtResource("R11")
+
+[node name="SecretTab" type="TextureButton" parent="Main"]
+layout_mode = 0
+offset_left = 328.25
+offset_top = 29.85
+offset_right = 440.25
+offset_bottom = 76.85
+mouse_filter = 0
+ignore_texture_size = true
+stretch_mode = 0
+texture_normal = ExtResource("R12")
+texture_hover = ExtResource("R13")
+texture_pressed = ExtResource("R14")
+
+[node name="Keyboard" type="TextureButton" parent="Main"]
+layout_mode = 0
+offset_left = 741.3
+offset_top = 19.0
+offset_right = 841.3
+offset_bottom = 55.0
+mouse_filter = 0
+ignore_texture_size = true
+stretch_mode = 0
+texture_normal = ExtResource("R15")
+texture_hover = ExtResource("R16")
+texture_pressed = ExtResource("R17")
+
+[node name="Job" type="TextureButton" parent="Main"]
+layout_mode = 0
+offset_left = 478.6
+offset_top = 14.35
+offset_right = 550.6
+offset_bottom = 74.35
+mouse_filter = 0
+ignore_texture_size = true
+stretch_mode = 0
+texture_normal = ExtResource("R18")
+texture_hover = ExtResource("R19")
+texture_pressed = ExtResource("R20")
+
+[node name="Reset" type="TextureButton" parent="Main"]
+layout_mode = 0
+offset_left = 547.95
+offset_top = 14.35
+offset_right = 619.95
+offset_bottom = 74.35
+mouse_filter = 0
+ignore_texture_size = true
+stretch_mode = 0
+texture_normal = ExtResource("R21")
+texture_hover = ExtResource("R22")
+texture_pressed = ExtResource("R23")
+
+[node name="Help" type="TextureButton" parent="Main"]
+layout_mode = 0
+offset_left = 851.0
+offset_top = 18.35
+offset_right = 888.0
+offset_bottom = 55.35
+mouse_filter = 0
+ignore_texture_size = true
+stretch_mode = 0
+texture_normal = ExtResource("R24")
+texture_hover = ExtResource("R25")
+texture_pressed = ExtResource("R26")
+
+[node name="ActiveSections" type="TextureRect" parent="Main"]
+layout_mode = 0
+offset_left = 94.0
+offset_top = 88.35
+offset_right = 906.8
+offset_bottom = 555.3
+mouse_filter = 2
+texture = ExtResource("R27")
+expand_mode = 1
+stretch_mode = 0
+
+[node name="SpecialSections" type="TextureRect" parent="Main"]
+layout_mode = 0
+offset_left = 94.0
+offset_top = 88.35
+offset_right = 540.05
+offset_bottom = 433.35
+mouse_filter = 2
+texture = ExtResource("R28")
+expand_mode = 1
+stretch_mode = 0
+
+[node name="Rows" type="Control" parent="Main"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 940.0
+offset_bottom = 590.0
+mouse_filter = 2
+
+[node name="S1101010" type="Control" parent="Main/Rows"]
+layout_mode = 0
+offset_left = 126.0
+offset_top = 87.0
+offset_right = 503.0
+offset_bottom = 206.0
+mouse_filter = 1
+
+[node name="Background" type="TextureRect" parent="Main/Rows/S1101010"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 377.0
+offset_bottom = 113.0
+mouse_filter = 2
+texture = ExtResource("R29")
+expand_mode = 1
+stretch_mode = 0
+
+[node name="Frame" type="TextureRect" parent="Main/Rows/S1101010"]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 5.0
+offset_right = 89.0
+offset_bottom = 79.0
+mouse_filter = 2
+texture = ExtResource("R30")
+expand_mode = 1
+stretch_mode = 0
+
+[node name="Icon" type="TextureRect" parent="Main/Rows/S1101010"]
+layout_mode = 0
+offset_left = 23.0
+offset_top = 15.0
+offset_right = 77.0
+offset_bottom = 69.0
+mouse_filter = 2
+texture = ExtResource("R31")
+expand_mode = 1
+stretch_mode = 0
+
+[node name="Name" type="Label" parent="Main/Rows/S1101010"]
+layout_mode = 0
+offset_left = 117.0
+offset_top = 8.0
+offset_right = 277.0
+offset_bottom = 33.0
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("R1")
+theme_override_font_sizes/font_size = 18
+theme_override_colors/font_color = Color(0,0,0,1)
+text = "升龙斩"
+
+[node name="Level" type="Label" parent="Main/Rows/S1101010"]
+layout_mode = 0
+offset_left = 275.0
+offset_top = 8.0
+offset_right = 370.0
+offset_bottom = 33.0
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("R1")
+theme_override_font_sizes/font_size = 18
+theme_override_colors/font_color = Color(0.75,0,0,1)
+text = ""
+
+[node name="Description" type="Label" parent="Main/Rows/S1101010"]
+layout_mode = 0
+offset_left = 104.0
+offset_top = 38.0
+offset_right = 369.0
+offset_bottom = 113.0
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("R1")
+theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(0.37, 0.12, 0.02, 1)
+text = "将怪物挑打到空中"
+autowrap_mode = 2
+
+[node name="Upgrade" type="TextureButton" parent="Main/Rows/S1101010"]
+layout_mode = 0
+offset_left = 18.55
+offset_top = 80.5
+offset_right = 82.55
+offset_bottom = 106.5
+mouse_filter = 0
+ignore_texture_size = true
+stretch_mode = 0
+texture_normal = ExtResource("R32")
+texture_hover = ExtResource("R33")
+texture_pressed = ExtResource("R34")
+
+[node name="LearnGlow" type="AnimatedSprite2D" parent="Main/Rows/S1101010"]
+visible = false
+position = Vector2(9.05,71.2)
+sprite_frames = SubResource("Glow1101010")
+autoplay = "default"
+centered = false
+
+[node name="Locked" type="Label" parent="Main/Rows/S1101010"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 85.0
+offset_right = 98.0
+offset_bottom = 113.0
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("R1")
+theme_override_font_sizes/font_size = 12
+theme_override_colors/font_color = Color(0.37, 0.12, 0.02, 1)
+text = "转职后解锁"
+
+[node name="Secrets" type="TextureButton" parent="Main/Rows/S1101010"]
+layout_mode = 0
+offset_left = 343.2
+offset_top = 7.75
+offset_right = 365.2
+offset_bottom = 29.75
+mouse_filter = 0
+ignore_texture_size = true
+stretch_mode = 0
+texture_normal = ExtResource("R53")
+texture_hover = ExtResource("R54")
+texture_pressed = ExtResource("R55")
+
+[node name="S1101020" type="Control" parent="Main/Rows"]
+layout_mode = 0
+offset_left = 126.0
+offset_top = 209.0
+offset_right = 503.0
+offset_bottom = 328.0
+mouse_filter = 1
+
+[node name="Background" type="TextureRect" parent="Main/Rows/S1101020"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 377.0
+offset_bottom = 113.0
+mouse_filter = 2
+texture = ExtResource("R29")
+expand_mode = 1
+stretch_mode = 0
+
+[node name="Frame" type="TextureRect" parent="Main/Rows/S1101020"]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 5.0
+offset_right = 89.0
+offset_bottom = 79.0
+mouse_filter = 2
+texture = ExtResource("R30")
+expand_mode = 1
+stretch_mode = 0
+
+[node name="Icon" type="TextureRect" parent="Main/Rows/S1101020"]
+layout_mode = 0
+offset_left = 23.0
+offset_top = 15.0
+offset_right = 77.0
+offset_bottom = 69.0
+mouse_filter = 2
+texture = ExtResource("R56")
+expand_mode = 1
+stretch_mode = 0
+
+[node name="Element" type="TextureRect" parent="Main/Rows/S1101020"]
+layout_mode = 0
+offset_left = 91.0
+offset_top = 7.0
+offset_right = 113.0
+offset_bottom = 29.0
+mouse_filter = 2
+texture = ExtResource("R57")
+expand_mode = 1
+stretch_mode = 0
+
+[node name="Name" type="Label" parent="Main/Rows/S1101020"]
+layout_mode = 0
+offset_left = 117.0
+offset_top = 8.0
+offset_right = 277.0
+offset_bottom = 33.0
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("R1")
+theme_override_font_sizes/font_size = 18
+theme_override_colors/font_color = Color(0,0,0,1)
+text = "烈焰闪"
+
+[node name="Level" type="Label" parent="Main/Rows/S1101020"]
+layout_mode = 0
+offset_left = 275.0
+offset_top = 8.0
+offset_right = 370.0
+offset_bottom = 33.0
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("R1")
+theme_override_font_sizes/font_size = 18
+theme_override_colors/font_color = Color(0.75,0,0,1)
+text = ""
+
+[node name="Description" type="Label" parent="Main/Rows/S1101020"]
+layout_mode = 0
+offset_left = 104.0
+offset_top = 38.0
+offset_right = 369.0
+offset_bottom = 113.0
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("R1")
+theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(0.37, 0.12, 0.02, 1)
+text = "快速向前冲去，对经过的怪物造成伤害"
+autowrap_mode = 2
+
+[node name="Upgrade" type="TextureButton" parent="Main/Rows/S1101020"]
+layout_mode = 0
+offset_left = 18.55
+offset_top = 80.5
+offset_right = 82.55
+offset_bottom = 106.5
+mouse_filter = 0
+ignore_texture_size = true
+stretch_mode = 0
+texture_normal = ExtResource("R32")
+texture_hover = ExtResource("R33")
+texture_pressed = ExtResource("R34")
+
+[node name="LearnGlow" type="AnimatedSprite2D" parent="Main/Rows/S1101020"]
+visible = false
+position = Vector2(9.05,71.2)
+sprite_frames = SubResource("Glow1101020")
+autoplay = "default"
+centered = false
+
+[node name="Locked" type="Label" parent="Main/Rows/S1101020"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 85.0
+offset_right = 98.0
+offset_bottom = 113.0
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("R1")
+theme_override_font_sizes/font_size = 12
+theme_override_colors/font_color = Color(0.37, 0.12, 0.02, 1)
+text = "转职后解锁"
+
+[node name="Secrets" type="TextureButton" parent="Main/Rows/S1101020"]
+layout_mode = 0
+offset_left = 343.2
+offset_top = 7.75
+offset_right = 365.2
+offset_bottom = 29.75
+mouse_filter = 0
+ignore_texture_size = true
+stretch_mode = 0
+texture_normal = ExtResource("R53")
+texture_hover = ExtResource("R54")
+texture_pressed = ExtResource("R55")
+
+[node name="S1101030" type="Control" parent="Main/Rows"]
+layout_mode = 0
+offset_left = 126.0
+offset_top = 331.0
+offset_right = 503.0
+offset_bottom = 450.0
+mouse_filter = 1
+
+[node name="Background" type="TextureRect" parent="Main/Rows/S1101030"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 377.0
+offset_bottom = 113.0
+mouse_filter = 2
+texture = ExtResource("R29")
+expand_mode = 1
+stretch_mode = 0
+
+[node name="Frame" type="TextureRect" parent="Main/Rows/S1101030"]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 5.0
+offset_right = 89.0
+offset_bottom = 79.0
+mouse_filter = 2
+texture = ExtResource("R30")
+expand_mode = 1
+stretch_mode = 0
+
+[node name="Icon" type="TextureRect" parent="Main/Rows/S1101030"]
+layout_mode = 0
+offset_left = 23.0
+offset_top = 15.0
+offset_right = 77.0
+offset_bottom = 69.0
+mouse_filter = 2
+texture = ExtResource("R58")
+expand_mode = 1
+stretch_mode = 0
+
+[node name="Element" type="TextureRect" parent="Main/Rows/S1101030"]
+layout_mode = 0
+offset_left = 91.0
+offset_top = 7.0
+offset_right = 113.0
+offset_bottom = 29.0
+mouse_filter = 2
+texture = ExtResource("R57")
+expand_mode = 1
+stretch_mode = 0
+
+[node name="Name" type="Label" parent="Main/Rows/S1101030"]
+layout_mode = 0
+offset_left = 117.0
+offset_top = 8.0
+offset_right = 277.0
+offset_bottom = 33.0
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("R1")
+theme_override_font_sizes/font_size = 18
+theme_override_colors/font_color = Color(0,0,0,1)
+text = "火眼金睛"
+
+[node name="Level" type="Label" parent="Main/Rows/S1101030"]
+layout_mode = 0
+offset_left = 275.0
+offset_top = 8.0
+offset_right = 370.0
+offset_bottom = 33.0
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("R1")
+theme_override_font_sizes/font_size = 18
+theme_override_colors/font_color = Color(0.75,0,0,1)
+text = ""
+
+[node name="Description" type="Label" parent="Main/Rows/S1101030"]
+layout_mode = 0
+offset_left = 104.0
+offset_top = 38.0
+offset_right = 369.0
+offset_bottom = 113.0
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("R1")
+theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(0.37, 0.12, 0.02, 1)
+text = "眼睛向前方射出一道火光（可按上下键调整方向）"
+autowrap_mode = 2
+
+[node name="Upgrade" type="TextureButton" parent="Main/Rows/S1101030"]
+layout_mode = 0
+offset_left = 18.55
+offset_top = 80.5
+offset_right = 82.55
+offset_bottom = 106.5
+mouse_filter = 0
+ignore_texture_size = true
+stretch_mode = 0
+texture_normal = ExtResource("R32")
+texture_hover = ExtResource("R33")
+texture_pressed = ExtResource("R34")
+
+[node name="LearnGlow" type="AnimatedSprite2D" parent="Main/Rows/S1101030"]
+visible = false
+position = Vector2(9.05,71.2)
+sprite_frames = SubResource("Glow1101030")
+autoplay = "default"
+centered = false
+
+[node name="Locked" type="Label" parent="Main/Rows/S1101030"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 85.0
+offset_right = 98.0
+offset_bottom = 113.0
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("R1")
+theme_override_font_sizes/font_size = 12
+theme_override_colors/font_color = Color(0.37, 0.12, 0.02, 1)
+text = "转职后解锁"
+
+[node name="Secrets" type="TextureButton" parent="Main/Rows/S1101030"]
+layout_mode = 0
+offset_left = 343.2
+offset_top = 7.75
+offset_right = 365.2
+offset_bottom = 29.75
+mouse_filter = 0
+ignore_texture_size = true
+stretch_mode = 0
+texture_normal = ExtResource("R53")
+texture_hover = ExtResource("R54")
+texture_pressed = ExtResource("R55")
+
+[node name="S1101040" type="Control" parent="Main/Rows"]
+layout_mode = 0
+offset_left = 126.0
+offset_top = 453.0
+offset_right = 503.0
+offset_bottom = 572.0
+mouse_filter = 1
+
+[node name="Background" type="TextureRect" parent="Main/Rows/S1101040"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 377.0
+offset_bottom = 113.0
+mouse_filter = 2
+texture = ExtResource("R29")
+expand_mode = 1
+stretch_mode = 0
+
+[node name="Frame" type="TextureRect" parent="Main/Rows/S1101040"]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 5.0
+offset_right = 89.0
+offset_bottom = 79.0
+mouse_filter = 2
+texture = ExtResource("R30")
+expand_mode = 1
+stretch_mode = 0
+
+[node name="Icon" type="TextureRect" parent="Main/Rows/S1101040"]
+layout_mode = 0
+offset_left = 23.0
+offset_top = 15.0
+offset_right = 77.0
+offset_bottom = 69.0
+mouse_filter = 2
+texture = ExtResource("R59")
+expand_mode = 1
+stretch_mode = 0
+
+[node name="Element" type="TextureRect" parent="Main/Rows/S1101040"]
+layout_mode = 0
+offset_left = 91.0
+offset_top = 7.0
+offset_right = 113.0
+offset_bottom = 29.0
+mouse_filter = 2
+texture = ExtResource("R57")
+expand_mode = 1
+stretch_mode = 0
+
+[node name="Name" type="Label" parent="Main/Rows/S1101040"]
+layout_mode = 0
+offset_left = 117.0
+offset_top = 8.0
+offset_right = 277.0
+offset_bottom = 33.0
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("R1")
+theme_override_font_sizes/font_size = 18
+theme_override_colors/font_color = Color(0,0,0,1)
+text = "烈焰风暴"
+
+[node name="Level" type="Label" parent="Main/Rows/S1101040"]
+layout_mode = 0
+offset_left = 275.0
+offset_top = 8.0
+offset_right = 370.0
+offset_bottom = 33.0
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("R1")
+theme_override_font_sizes/font_size = 18
+theme_override_colors/font_color = Color(0.75,0,0,1)
+text = ""
+
+[node name="Description" type="Label" parent="Main/Rows/S1101040"]
+layout_mode = 0
+offset_left = 104.0
+offset_top = 38.0
+offset_right = 369.0
+offset_bottom = 113.0
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("R1")
+theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(0.37, 0.12, 0.02, 1)
+text = "将棍子举过头顶，大幅旋转，再次按技能键顺势往前追加一记重劈。"
+autowrap_mode = 2
+
+[node name="Upgrade" type="TextureButton" parent="Main/Rows/S1101040"]
+layout_mode = 0
+offset_left = 18.55
+offset_top = 80.5
+offset_right = 82.55
+offset_bottom = 106.5
+mouse_filter = 0
+ignore_texture_size = true
+stretch_mode = 0
+texture_normal = ExtResource("R32")
+texture_hover = ExtResource("R33")
+texture_pressed = ExtResource("R34")
+
+[node name="LearnGlow" type="AnimatedSprite2D" parent="Main/Rows/S1101040"]
+visible = false
+position = Vector2(9.05,71.2)
+sprite_frames = SubResource("Glow1101040")
+autoplay = "default"
+centered = false
+
+[node name="Locked" type="Label" parent="Main/Rows/S1101040"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 85.0
+offset_right = 98.0
+offset_bottom = 113.0
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("R1")
+theme_override_font_sizes/font_size = 12
+theme_override_colors/font_color = Color(0.37, 0.12, 0.02, 1)
+text = "转职后解锁"
+
+[node name="Secrets" type="TextureButton" parent="Main/Rows/S1101040"]
+layout_mode = 0
+offset_left = 343.2
+offset_top = 7.75
+offset_right = 365.2
+offset_bottom = 29.75
+mouse_filter = 0
+ignore_texture_size = true
+stretch_mode = 0
+texture_normal = ExtResource("R53")
+texture_hover = ExtResource("R54")
+texture_pressed = ExtResource("R55")
+
+[node name="S1101070" type="Control" parent="Main/Rows"]
+layout_mode = 0
+offset_left = 538.0
+offset_top = 87.0
+offset_right = 915.0
+offset_bottom = 206.0
+mouse_filter = 1
+
+[node name="Background" type="TextureRect" parent="Main/Rows/S1101070"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 377.0
+offset_bottom = 113.0
+mouse_filter = 2
+texture = ExtResource("R29")
+expand_mode = 1
+stretch_mode = 0
+
+[node name="Frame" type="TextureRect" parent="Main/Rows/S1101070"]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 5.0
+offset_right = 89.0
+offset_bottom = 79.0
+mouse_filter = 2
+texture = ExtResource("R30")
+expand_mode = 1
+stretch_mode = 0
+
+[node name="Icon" type="TextureRect" parent="Main/Rows/S1101070"]
+layout_mode = 0
+offset_left = 23.0
+offset_top = 15.0
+offset_right = 77.0
+offset_bottom = 69.0
+mouse_filter = 2
+texture = ExtResource("R60")
+expand_mode = 1
+stretch_mode = 0
+
+[node name="Name" type="Label" parent="Main/Rows/S1101070"]
+layout_mode = 0
+offset_left = 117.0
+offset_top = 8.0
+offset_right = 277.0
+offset_bottom = 33.0
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("R1")
+theme_override_font_sizes/font_size = 18
+theme_override_colors/font_color = Color(0,0,0,1)
+text = "身外身"
+
+[node name="Level" type="Label" parent="Main/Rows/S1101070"]
+layout_mode = 0
+offset_left = 275.0
+offset_top = 8.0
+offset_right = 370.0
+offset_bottom = 33.0
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("R1")
+theme_override_font_sizes/font_size = 18
+theme_override_colors/font_color = Color(0.75,0,0,1)
+text = ""
+
+[node name="Description" type="Label" parent="Main/Rows/S1101070"]
+layout_mode = 0
+offset_left = 104.0
+offset_top = 38.0
+offset_right = 369.0
+offset_bottom = 113.0
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("R1")
+theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(0.37, 0.12, 0.02, 1)
+text = "使用毫毛在前方敌人身后创造一个分身"
+autowrap_mode = 2
+
+[node name="Upgrade" type="TextureButton" parent="Main/Rows/S1101070"]
+layout_mode = 0
+offset_left = 18.55
+offset_top = 80.5
+offset_right = 82.55
+offset_bottom = 106.5
+mouse_filter = 0
+ignore_texture_size = true
+stretch_mode = 0
+texture_normal = ExtResource("R32")
+texture_hover = ExtResource("R33")
+texture_pressed = ExtResource("R34")
+
+[node name="LearnGlow" type="AnimatedSprite2D" parent="Main/Rows/S1101070"]
+visible = false
+position = Vector2(9.05,71.2)
+sprite_frames = SubResource("Glow1101070")
+autoplay = "default"
+centered = false
+
+[node name="Locked" type="Label" parent="Main/Rows/S1101070"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 85.0
+offset_right = 98.0
+offset_bottom = 113.0
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("R1")
+theme_override_font_sizes/font_size = 12
+theme_override_colors/font_color = Color(0.37, 0.12, 0.02, 1)
+text = "转职后解锁"
+
+[node name="Secrets" type="TextureButton" parent="Main/Rows/S1101070"]
+layout_mode = 0
+offset_left = 343.2
+offset_top = 7.75
+offset_right = 365.2
+offset_bottom = 29.75
+mouse_filter = 0
+ignore_texture_size = true
+stretch_mode = 0
+texture_normal = ExtResource("R53")
+texture_hover = ExtResource("R54")
+texture_pressed = ExtResource("R55")
+
+[node name="S1101080" type="Control" parent="Main/Rows"]
+layout_mode = 0
+offset_left = 538.0
+offset_top = 209.0
+offset_right = 915.0
+offset_bottom = 328.0
+mouse_filter = 1
+
+[node name="Background" type="TextureRect" parent="Main/Rows/S1101080"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 377.0
+offset_bottom = 113.0
+mouse_filter = 2
+texture = ExtResource("R29")
+expand_mode = 1
+stretch_mode = 0
+
+[node name="Frame" type="TextureRect" parent="Main/Rows/S1101080"]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 5.0
+offset_right = 89.0
+offset_bottom = 79.0
+mouse_filter = 2
+texture = ExtResource("R30")
+expand_mode = 1
+stretch_mode = 0
+
+[node name="Icon" type="TextureRect" parent="Main/Rows/S1101080"]
+layout_mode = 0
+offset_left = 23.0
+offset_top = 15.0
+offset_right = 77.0
+offset_bottom = 69.0
+mouse_filter = 2
+texture = ExtResource("R61")
+expand_mode = 1
+stretch_mode = 0
+
+[node name="Name" type="Label" parent="Main/Rows/S1101080"]
+layout_mode = 0
+offset_left = 117.0
+offset_top = 8.0
+offset_right = 277.0
+offset_bottom = 33.0
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("R1")
+theme_override_font_sizes/font_size = 18
+theme_override_colors/font_color = Color(0,0,0,1)
+text = "火魔斩"
+
+[node name="Level" type="Label" parent="Main/Rows/S1101080"]
+layout_mode = 0
+offset_left = 275.0
+offset_top = 8.0
+offset_right = 370.0
+offset_bottom = 33.0
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("R1")
+theme_override_font_sizes/font_size = 18
+theme_override_colors/font_color = Color(0.75,0,0,1)
+text = ""
+
+[node name="Description" type="Label" parent="Main/Rows/S1101080"]
+layout_mode = 0
+offset_left = 104.0
+offset_top = 38.0
+offset_right = 369.0
+offset_bottom = 113.0
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("R1")
+theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(0.37, 0.12, 0.02, 1)
+text = "冲向空中释放火魔连斩，落地后为最后一斩，造成极高伤害"
+autowrap_mode = 2
+
+[node name="Upgrade" type="TextureButton" parent="Main/Rows/S1101080"]
+layout_mode = 0
+offset_left = 18.55
+offset_top = 80.5
+offset_right = 82.55
+offset_bottom = 106.5
+mouse_filter = 0
+ignore_texture_size = true
+stretch_mode = 0
+texture_normal = ExtResource("R32")
+texture_hover = ExtResource("R33")
+texture_pressed = ExtResource("R34")
+
+[node name="LearnGlow" type="AnimatedSprite2D" parent="Main/Rows/S1101080"]
+visible = false
+position = Vector2(9.05,71.2)
+sprite_frames = SubResource("Glow1101080")
+autoplay = "default"
+centered = false
+
+[node name="Locked" type="Label" parent="Main/Rows/S1101080"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 85.0
+offset_right = 98.0
+offset_bottom = 113.0
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("R1")
+theme_override_font_sizes/font_size = 12
+theme_override_colors/font_color = Color(0.37, 0.12, 0.02, 1)
+text = "转职后解锁"
+
+[node name="Secrets" type="TextureButton" parent="Main/Rows/S1101080"]
+layout_mode = 0
+offset_left = 343.2
+offset_top = 7.75
+offset_right = 365.2
+offset_bottom = 29.75
+mouse_filter = 0
+ignore_texture_size = true
+stretch_mode = 0
+texture_normal = ExtResource("R53")
+texture_hover = ExtResource("R54")
+texture_pressed = ExtResource("R55")
+
+[node name="S1301010" type="Control" parent="Main/Rows"]
+layout_mode = 0
+offset_left = 126.0
+offset_top = 87.0
+offset_right = 503.0
+offset_bottom = 206.0
+mouse_filter = 1
+
+[node name="Background" type="TextureRect" parent="Main/Rows/S1301010"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 377.0
+offset_bottom = 113.0
+mouse_filter = 2
+texture = ExtResource("R29")
+expand_mode = 1
+stretch_mode = 0
+
+[node name="Frame" type="TextureRect" parent="Main/Rows/S1301010"]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 5.0
+offset_right = 89.0
+offset_bottom = 79.0
+mouse_filter = 2
+texture = ExtResource("R62")
+expand_mode = 1
+stretch_mode = 0
+
+[node name="Icon" type="TextureRect" parent="Main/Rows/S1301010"]
+layout_mode = 0
+offset_left = 23.0
+offset_top = 15.0
+offset_right = 77.0
+offset_bottom = 69.0
+mouse_filter = 2
+texture = ExtResource("R63")
+expand_mode = 1
+stretch_mode = 0
+
+[node name="Name" type="Label" parent="Main/Rows/S1301010"]
+layout_mode = 0
+offset_left = 117.0
+offset_top = 8.0
+offset_right = 277.0
+offset_bottom = 33.0
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("R1")
+theme_override_font_sizes/font_size = 18
+theme_override_colors/font_color = Color(0,0,0,1)
+text = "重击"
+
+[node name="Level" type="Label" parent="Main/Rows/S1301010"]
+layout_mode = 0
+offset_left = 275.0
+offset_top = 8.0
+offset_right = 370.0
+offset_bottom = 33.0
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("R1")
+theme_override_font_sizes/font_size = 18
+theme_override_colors/font_color = Color(0.75,0,0,1)
+text = ""
+
+[node name="Description" type="Label" parent="Main/Rows/S1301010"]
+layout_mode = 0
+offset_left = 104.0
+offset_top = 38.0
+offset_right = 369.0
+offset_bottom = 113.0
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("R1")
+theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(0.37, 0.12, 0.02, 1)
+text = "普通攻击的最后一击必定暴击"
+autowrap_mode = 2
+
+[node name="S1201010" type="Control" parent="Main/Rows"]
+layout_mode = 0
+offset_left = 538.0
+offset_top = 87.0
+offset_right = 915.0
+offset_bottom = 206.0
+mouse_filter = 1
+
+[node name="Background" type="TextureRect" parent="Main/Rows/S1201010"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 377.0
+offset_bottom = 113.0
+mouse_filter = 2
+texture = ExtResource("R29")
+expand_mode = 1
+stretch_mode = 0
+
+[node name="Frame" type="TextureRect" parent="Main/Rows/S1201010"]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 5.0
+offset_right = 89.0
+offset_bottom = 79.0
+mouse_filter = 2
+texture = ExtResource("R64")
+expand_mode = 1
+stretch_mode = 0
+
+[node name="Icon" type="TextureRect" parent="Main/Rows/S1201010"]
+layout_mode = 0
+offset_left = 23.0
+offset_top = 15.0
+offset_right = 77.0
+offset_bottom = 69.0
+mouse_filter = 2
+texture = ExtResource("R65")
+expand_mode = 1
+stretch_mode = 0
+
+[node name="Name" type="Label" parent="Main/Rows/S1201010"]
+layout_mode = 0
+offset_left = 117.0
+offset_top = 8.0
+offset_right = 277.0
+offset_bottom = 33.0
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("R1")
+theme_override_font_sizes/font_size = 18
+theme_override_colors/font_color = Color(0,0,0,1)
+text = "悟空无双"
+
+[node name="Level" type="Label" parent="Main/Rows/S1201010"]
+layout_mode = 0
+offset_left = 275.0
+offset_top = 8.0
+offset_right = 370.0
+offset_bottom = 33.0
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("R1")
+theme_override_font_sizes/font_size = 18
+theme_override_colors/font_color = Color(0.75,0,0,1)
+text = ""
+
+[node name="Description" type="Label" parent="Main/Rows/S1201010"]
+layout_mode = 0
+offset_left = 104.0
+offset_top = 38.0
+offset_right = 369.0
+offset_bottom = 113.0
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("R1")
+theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(0.37, 0.12, 0.02, 1)
+text = "伤害、暴击、移速提升"
+autowrap_mode = 2
+
+[node name="Keyboard" type="Control" parent="."]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 940.0
+offset_bottom = 590.0
+mouse_filter = 2
+visible = false
+metadata/ui_modal = true
+
+[node name="ModalBarrier" type="Control" parent="Keyboard"]
+offset_left = 0
+offset_top = 0
+offset_right = 940
+offset_bottom = 590
+mouse_filter = 0
+
+[node name="Background" type="TextureRect" parent="Keyboard"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 940.0
+offset_bottom = 590.0
+mouse_filter = 2
+texture = ExtResource("R66")
+expand_mode = 1
+stretch_mode = 0
+
+[node name="Title" type="TextureRect" parent="Keyboard"]
+layout_mode = 0
+offset_left = 378.55
+offset_top = 25.0
+offset_right = 558.55
+offset_bottom = 53.0
+mouse_filter = 2
+texture = ExtResource("R67")
+expand_mode = 1
+stretch_mode = 0
+
+[node name="Close" type="TextureButton" parent="Keyboard"]
+layout_mode = 0
+offset_left = 833.6
+offset_top = 16.0
+offset_right = 866.6
+offset_bottom = 54.0
+mouse_filter = 0
+ignore_texture_size = true
+stretch_mode = 0
+texture_normal = ExtResource("R3")
+texture_hover = ExtResource("R4")
+texture_pressed = ExtResource("R5")
+
+[node name="itemsTab" type="TextureButton" parent="Keyboard"]
+layout_mode = 0
+offset_left = 580.4
+offset_top = 62.75
+offset_right = 666.6999999999999
+offset_bottom = 94.75
+mouse_filter = 0
+ignore_texture_size = true
+stretch_mode = 0
+texture_normal = ExtResource("R68")
+texture_hover = ExtResource("R69")
+texture_pressed = ExtResource("R70")
+
+[node name="monstersTab" type="TextureButton" parent="Keyboard"]
+layout_mode = 0
+offset_left = 660.6
+offset_top = 62.75
+offset_right = 746.9
+offset_bottom = 94.75
+mouse_filter = 0
+ignore_texture_size = true
+stretch_mode = 0
+texture_normal = ExtResource("R71")
+texture_hover = ExtResource("R72")
+texture_pressed = ExtResource("R73")
+
+[node name="emotesTab" type="TextureButton" parent="Keyboard"]
+layout_mode = 0
+offset_left = 740.8
+offset_top = 62.75
+offset_right = 827.0999999999999
+offset_bottom = 94.75
+mouse_filter = 0
+ignore_texture_size = true
+stretch_mode = 0
+texture_normal = ExtResource("R74")
+texture_hover = ExtResource("R75")
+texture_pressed = ExtResource("R76")
+
+[node name="Tip" type="Label" parent="Keyboard"]
+offset_left = 93.0
+offset_top = 533.0
+offset_right = 847.0
+offset_bottom = 558.0
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("R1")
+theme_override_font_sizes/font_size = 18
+theme_override_colors/font_color = Color(0.372549,0.117647,0.019608,1)
+text = "拖动技能或道具图标可携带至副本使用；每次可携带1种妖王助阵"
+
+[node name="Stock1101010" type="Control" parent="Keyboard"]
+layout_mode = 0
+offset_left = 127.0
+offset_top = 71.0
+offset_right = 205.0
+offset_bottom = 145.0
+mouse_filter = 0
+
+[node name="Background" type="TextureRect" parent="Keyboard/Stock1101010"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 78.0
+offset_bottom = 74.0
+mouse_filter = 2
+texture = ExtResource("R30")
+expand_mode = 1
+stretch_mode = 0
+
+[node name="Icon" type="TextureRect" parent="Keyboard/Stock1101010"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 10.0
+offset_right = 66.0
+offset_bottom = 64.0
+mouse_filter = 2
+texture = ExtResource("R31")
+expand_mode = 1
+stretch_mode = 0
+
+[node name="Stock1101020" type="Control" parent="Keyboard"]
+layout_mode = 0
+offset_left = 210.0
+offset_top = 71.0
+offset_right = 288.0
+offset_bottom = 145.0
+mouse_filter = 0
+
+[node name="Background" type="TextureRect" parent="Keyboard/Stock1101020"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 78.0
+offset_bottom = 74.0
+mouse_filter = 2
+texture = ExtResource("R30")
+expand_mode = 1
+stretch_mode = 0
+
+[node name="Icon" type="TextureRect" parent="Keyboard/Stock1101020"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 10.0
+offset_right = 66.0
+offset_bottom = 64.0
+mouse_filter = 2
+texture = ExtResource("R56")
+expand_mode = 1
+stretch_mode = 0
+
+[node name="Stock1101030" type="Control" parent="Keyboard"]
+layout_mode = 0
+offset_left = 293.0
+offset_top = 71.0
+offset_right = 371.0
+offset_bottom = 145.0
+mouse_filter = 0
+
+[node name="Background" type="TextureRect" parent="Keyboard/Stock1101030"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 78.0
+offset_bottom = 74.0
+mouse_filter = 2
+texture = ExtResource("R30")
+expand_mode = 1
+stretch_mode = 0
+
+[node name="Icon" type="TextureRect" parent="Keyboard/Stock1101030"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 10.0
+offset_right = 66.0
+offset_bottom = 64.0
+mouse_filter = 2
+texture = ExtResource("R58")
+expand_mode = 1
+stretch_mode = 0
+
+[node name="Stock1101040" type="Control" parent="Keyboard"]
+layout_mode = 0
+offset_left = 376.0
+offset_top = 71.0
+offset_right = 454.0
+offset_bottom = 145.0
+mouse_filter = 0
+
+[node name="Background" type="TextureRect" parent="Keyboard/Stock1101040"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 78.0
+offset_bottom = 74.0
+mouse_filter = 2
+texture = ExtResource("R30")
+expand_mode = 1
+stretch_mode = 0
+
+[node name="Icon" type="TextureRect" parent="Keyboard/Stock1101040"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 10.0
+offset_right = 66.0
+offset_bottom = 64.0
+mouse_filter = 2
+texture = ExtResource("R59")
+expand_mode = 1
+stretch_mode = 0
+
+[node name="Stock1301010" type="Control" parent="Keyboard"]
+layout_mode = 0
+offset_left = 127.0
+offset_top = 236.0
+offset_right = 205.0
+offset_bottom = 310.0
+mouse_filter = 0
+
+[node name="Background" type="TextureRect" parent="Keyboard/Stock1301010"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 78.0
+offset_bottom = 74.0
+mouse_filter = 2
+texture = ExtResource("R62")
+expand_mode = 1
+stretch_mode = 0
+
+[node name="Icon" type="TextureRect" parent="Keyboard/Stock1301010"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 10.0
+offset_right = 66.0
+offset_bottom = 64.0
+mouse_filter = 2
+texture = ExtResource("R63")
+expand_mode = 1
+stretch_mode = 0
+
+[node name="Stock1201010" type="Control" parent="Keyboard"]
+layout_mode = 0
+offset_left = 127.0
+offset_top = 325.0
+offset_right = 205.0
+offset_bottom = 399.0
+mouse_filter = 0
+
+[node name="Background" type="TextureRect" parent="Keyboard/Stock1201010"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 78.0
+offset_bottom = 74.0
+mouse_filter = 2
+texture = ExtResource("R64")
+expand_mode = 1
+stretch_mode = 0
+
+[node name="Icon" type="TextureRect" parent="Keyboard/Stock1201010"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 10.0
+offset_right = 66.0
+offset_bottom = 64.0
+mouse_filter = 2
+texture = ExtResource("R65")
+expand_mode = 1
+stretch_mode = 0
+
+[node name="active0" type="Control" parent="Keyboard"]
+layout_mode = 0
+offset_left = 94.0
+offset_top = 442.0
+offset_right = 172.0
+offset_bottom = 516.0
+mouse_filter = 0
+
+[node name="Background" type="TextureRect" parent="Keyboard/active0"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 78.0
+offset_bottom = 74.0
+mouse_filter = 2
+texture = ExtResource("R30")
+expand_mode = 1
+stretch_mode = 0
+
+[node name="Icon" type="TextureRect" parent="Keyboard/active0"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 10.0
+offset_right = 66.0
+offset_bottom = 64.0
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 0
+
+[node name="Key" type="Label" parent="Keyboard/active0"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 67.0
+offset_right = 78.0
+offset_bottom = 89.0
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("R1")
+theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(1,1,1,1)
+text = ""
+horizontal_alignment = 1
+theme_override_colors/font_outline_color = Color(0,0,0,1)
+theme_override_constants/outline_size = 2
+
+[node name="active1" type="Control" parent="Keyboard"]
+layout_mode = 0
+offset_left = 172.0
+offset_top = 442.0
+offset_right = 250.0
+offset_bottom = 516.0
+mouse_filter = 0
+
+[node name="Background" type="TextureRect" parent="Keyboard/active1"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 78.0
+offset_bottom = 74.0
+mouse_filter = 2
+texture = ExtResource("R30")
+expand_mode = 1
+stretch_mode = 0
+
+[node name="Icon" type="TextureRect" parent="Keyboard/active1"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 10.0
+offset_right = 66.0
+offset_bottom = 64.0
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 0
+
+[node name="Key" type="Label" parent="Keyboard/active1"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 67.0
+offset_right = 78.0
+offset_bottom = 89.0
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("R1")
+theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(1,1,1,1)
+text = ""
+horizontal_alignment = 1
+theme_override_colors/font_outline_color = Color(0,0,0,1)
+theme_override_constants/outline_size = 2
+
+[node name="active2" type="Control" parent="Keyboard"]
+layout_mode = 0
+offset_left = 250.0
+offset_top = 442.0
+offset_right = 328.0
+offset_bottom = 516.0
+mouse_filter = 0
+
+[node name="Background" type="TextureRect" parent="Keyboard/active2"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 78.0
+offset_bottom = 74.0
+mouse_filter = 2
+texture = ExtResource("R30")
+expand_mode = 1
+stretch_mode = 0
+
+[node name="Icon" type="TextureRect" parent="Keyboard/active2"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 10.0
+offset_right = 66.0
+offset_bottom = 64.0
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 0
+
+[node name="Key" type="Label" parent="Keyboard/active2"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 67.0
+offset_right = 78.0
+offset_bottom = 89.0
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("R1")
+theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(1,1,1,1)
+text = ""
+horizontal_alignment = 1
+theme_override_colors/font_outline_color = Color(0,0,0,1)
+theme_override_constants/outline_size = 2
+
+[node name="active3" type="Control" parent="Keyboard"]
+layout_mode = 0
+offset_left = 328.0
+offset_top = 442.0
+offset_right = 406.0
+offset_bottom = 516.0
+mouse_filter = 0
+
+[node name="Background" type="TextureRect" parent="Keyboard/active3"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 78.0
+offset_bottom = 74.0
+mouse_filter = 2
+texture = ExtResource("R30")
+expand_mode = 1
+stretch_mode = 0
+
+[node name="Icon" type="TextureRect" parent="Keyboard/active3"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 10.0
+offset_right = 66.0
+offset_bottom = 64.0
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 0
+
+[node name="Key" type="Label" parent="Keyboard/active3"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 67.0
+offset_right = 78.0
+offset_bottom = 89.0
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("R1")
+theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(1,1,1,1)
+text = ""
+horizontal_alignment = 1
+theme_override_colors/font_outline_color = Color(0,0,0,1)
+theme_override_constants/outline_size = 2
+
+[node name="active4" type="Control" parent="Keyboard"]
+layout_mode = 0
+offset_left = 406.0
+offset_top = 442.0
+offset_right = 484.0
+offset_bottom = 516.0
+mouse_filter = 0
+
+[node name="Background" type="TextureRect" parent="Keyboard/active4"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 78.0
+offset_bottom = 74.0
+mouse_filter = 2
+texture = ExtResource("R30")
+expand_mode = 1
+stretch_mode = 0
+
+[node name="Icon" type="TextureRect" parent="Keyboard/active4"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 10.0
+offset_right = 66.0
+offset_bottom = 64.0
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 0
+
+[node name="Key" type="Label" parent="Keyboard/active4"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 67.0
+offset_right = 78.0
+offset_bottom = 89.0
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("R1")
+theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(1,1,1,1)
+text = ""
+horizontal_alignment = 1
+theme_override_colors/font_outline_color = Color(0,0,0,1)
+theme_override_constants/outline_size = 2
+
+[node name="passive0" type="Control" parent="Keyboard"]
+layout_mode = 0
+offset_left = 503.0
+offset_top = 442.0
+offset_right = 581.0
+offset_bottom = 516.0
+mouse_filter = 0
+
+[node name="Background" type="TextureRect" parent="Keyboard/passive0"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 78.0
+offset_bottom = 74.0
+mouse_filter = 2
+texture = ExtResource("R62")
+expand_mode = 1
+stretch_mode = 0
+
+[node name="Icon" type="TextureRect" parent="Keyboard/passive0"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 10.0
+offset_right = 66.0
+offset_bottom = 64.0
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 0
+
+[node name="Key" type="Label" parent="Keyboard/passive0"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 67.0
+offset_right = 78.0
+offset_bottom = 89.0
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("R1")
+theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(1,1,1,1)
+text = ""
+horizontal_alignment = 1
+theme_override_colors/font_outline_color = Color(0,0,0,1)
+theme_override_constants/outline_size = 2
+
+[node name="peerless0" type="Control" parent="Keyboard"]
+layout_mode = 0
+offset_left = 593.0
+offset_top = 442.0
+offset_right = 671.0
+offset_bottom = 516.0
+mouse_filter = 0
+
+[node name="Background" type="TextureRect" parent="Keyboard/peerless0"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 78.0
+offset_bottom = 74.0
+mouse_filter = 2
+texture = ExtResource("R64")
+expand_mode = 1
+stretch_mode = 0
+
+[node name="Icon" type="TextureRect" parent="Keyboard/peerless0"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 10.0
+offset_right = 66.0
+offset_bottom = 64.0
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 0
+
+[node name="Key" type="Label" parent="Keyboard/peerless0"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 67.0
+offset_right = 78.0
+offset_bottom = 89.0
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("R1")
+theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(1,1,1,1)
+text = ""
+horizontal_alignment = 1
+theme_override_colors/font_outline_color = Color(0,0,0,1)
+theme_override_constants/outline_size = 2
+
+[node name="item0" type="Control" parent="Keyboard"]
+layout_mode = 0
+offset_left = 684.0
+offset_top = 442.0
+offset_right = 762.0
+offset_bottom = 516.0
+mouse_filter = 0
+
+[node name="Background" type="TextureRect" parent="Keyboard/item0"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 78.0
+offset_bottom = 74.0
+mouse_filter = 2
+texture = ExtResource("R77")
+expand_mode = 1
+stretch_mode = 0
+
+[node name="Icon" type="TextureRect" parent="Keyboard/item0"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 10.0
+offset_right = 66.0
+offset_bottom = 64.0
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 0
+
+[node name="Key" type="Label" parent="Keyboard/item0"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 67.0
+offset_right = 78.0
+offset_bottom = 89.0
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("R1")
+theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(1,1,1,1)
+text = ""
+horizontal_alignment = 1
+theme_override_colors/font_outline_color = Color(0,0,0,1)
+theme_override_constants/outline_size = 2
+
+[node name="item1" type="Control" parent="Keyboard"]
+layout_mode = 0
+offset_left = 762.0
+offset_top = 442.0
+offset_right = 840.0
+offset_bottom = 516.0
+mouse_filter = 0
+
+[node name="Background" type="TextureRect" parent="Keyboard/item1"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 78.0
+offset_bottom = 74.0
+mouse_filter = 2
+texture = ExtResource("R77")
+expand_mode = 1
+stretch_mode = 0
+
+[node name="Icon" type="TextureRect" parent="Keyboard/item1"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 10.0
+offset_right = 66.0
+offset_bottom = 64.0
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 0
+
+[node name="Key" type="Label" parent="Keyboard/item1"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 67.0
+offset_right = 78.0
+offset_bottom = 89.0
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("R1")
+theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(1,1,1,1)
+text = ""
+horizontal_alignment = 1
+theme_override_colors/font_outline_color = Color(0,0,0,1)
+theme_override_constants/outline_size = 2
+
+[node name="Item0" type="Control" parent="Keyboard"]
+layout_mode = 0
+offset_left = 581.0
+offset_top = 101.0
+offset_right = 635.0
+offset_bottom = 155.0
+mouse_filter = 0
+
+[node name="Background" type="TextureRect" parent="Keyboard/Item0"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 54.0
+offset_bottom = 54.0
+mouse_filter = 2
+texture = ExtResource("keyboard_detail_slot")
+expand_mode = 1
+stretch_mode = 0
+
+[node name="Icon" type="TextureRect" parent="Keyboard/Item0"]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 49.0
+offset_bottom = 49.0
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 0
+
+[node name="Count" type="Label" parent="Keyboard/Item0"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 35.0
+offset_right = 50.0
+offset_bottom = 54.0
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("R1")
+theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(1,1,1,1)
+text = ""
+
+horizontal_alignment = 2
+
+[node name="Item1" type="Control" parent="Keyboard"]
+layout_mode = 0
+offset_left = 640.0
+offset_top = 101.0
+offset_right = 694.0
+offset_bottom = 155.0
+mouse_filter = 0
+
+[node name="Background" type="TextureRect" parent="Keyboard/Item1"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 54.0
+offset_bottom = 54.0
+mouse_filter = 2
+texture = ExtResource("keyboard_detail_slot")
+expand_mode = 1
+stretch_mode = 0
+
+[node name="Icon" type="TextureRect" parent="Keyboard/Item1"]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 49.0
+offset_bottom = 49.0
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 0
+
+[node name="Count" type="Label" parent="Keyboard/Item1"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 35.0
+offset_right = 50.0
+offset_bottom = 54.0
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("R1")
+theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(1,1,1,1)
+text = ""
+
+horizontal_alignment = 2
+
+[node name="Item2" type="Control" parent="Keyboard"]
+layout_mode = 0
+offset_left = 699.0
+offset_top = 101.0
+offset_right = 753.0
+offset_bottom = 155.0
+mouse_filter = 0
+
+[node name="Background" type="TextureRect" parent="Keyboard/Item2"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 54.0
+offset_bottom = 54.0
+mouse_filter = 2
+texture = ExtResource("keyboard_detail_slot")
+expand_mode = 1
+stretch_mode = 0
+
+[node name="Icon" type="TextureRect" parent="Keyboard/Item2"]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 49.0
+offset_bottom = 49.0
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 0
+
+[node name="Count" type="Label" parent="Keyboard/Item2"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 35.0
+offset_right = 50.0
+offset_bottom = 54.0
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("R1")
+theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(1,1,1,1)
+text = ""
+
+horizontal_alignment = 2
+
+[node name="Item3" type="Control" parent="Keyboard"]
+layout_mode = 0
+offset_left = 758.0
+offset_top = 101.0
+offset_right = 812.0
+offset_bottom = 155.0
+mouse_filter = 0
+
+[node name="Background" type="TextureRect" parent="Keyboard/Item3"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 54.0
+offset_bottom = 54.0
+mouse_filter = 2
+texture = ExtResource("keyboard_detail_slot")
+expand_mode = 1
+stretch_mode = 0
+
+[node name="Icon" type="TextureRect" parent="Keyboard/Item3"]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 49.0
+offset_bottom = 49.0
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 0
+
+[node name="Count" type="Label" parent="Keyboard/Item3"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 35.0
+offset_right = 50.0
+offset_bottom = 54.0
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("R1")
+theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(1,1,1,1)
+text = ""
+
+horizontal_alignment = 2
+
+[node name="Item4" type="Control" parent="Keyboard"]
+layout_mode = 0
+offset_left = 581.0
+offset_top = 160.0
+offset_right = 635.0
+offset_bottom = 214.0
+mouse_filter = 0
+
+[node name="Background" type="TextureRect" parent="Keyboard/Item4"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 54.0
+offset_bottom = 54.0
+mouse_filter = 2
+texture = ExtResource("keyboard_detail_slot")
+expand_mode = 1
+stretch_mode = 0
+
+[node name="Icon" type="TextureRect" parent="Keyboard/Item4"]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 49.0
+offset_bottom = 49.0
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 0
+
+[node name="Count" type="Label" parent="Keyboard/Item4"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 35.0
+offset_right = 50.0
+offset_bottom = 54.0
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("R1")
+theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(1,1,1,1)
+text = ""
+
+horizontal_alignment = 2
+
+[node name="Item5" type="Control" parent="Keyboard"]
+layout_mode = 0
+offset_left = 640.0
+offset_top = 160.0
+offset_right = 694.0
+offset_bottom = 214.0
+mouse_filter = 0
+
+[node name="Background" type="TextureRect" parent="Keyboard/Item5"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 54.0
+offset_bottom = 54.0
+mouse_filter = 2
+texture = ExtResource("keyboard_detail_slot")
+expand_mode = 1
+stretch_mode = 0
+
+[node name="Icon" type="TextureRect" parent="Keyboard/Item5"]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 49.0
+offset_bottom = 49.0
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 0
+
+[node name="Count" type="Label" parent="Keyboard/Item5"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 35.0
+offset_right = 50.0
+offset_bottom = 54.0
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("R1")
+theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(1,1,1,1)
+text = ""
+
+horizontal_alignment = 2
+
+[node name="Item6" type="Control" parent="Keyboard"]
+layout_mode = 0
+offset_left = 699.0
+offset_top = 160.0
+offset_right = 753.0
+offset_bottom = 214.0
+mouse_filter = 0
+
+[node name="Background" type="TextureRect" parent="Keyboard/Item6"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 54.0
+offset_bottom = 54.0
+mouse_filter = 2
+texture = ExtResource("keyboard_detail_slot")
+expand_mode = 1
+stretch_mode = 0
+
+[node name="Icon" type="TextureRect" parent="Keyboard/Item6"]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 49.0
+offset_bottom = 49.0
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 0
+
+[node name="Count" type="Label" parent="Keyboard/Item6"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 35.0
+offset_right = 50.0
+offset_bottom = 54.0
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("R1")
+theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(1,1,1,1)
+text = ""
+
+horizontal_alignment = 2
+
+[node name="Item7" type="Control" parent="Keyboard"]
+layout_mode = 0
+offset_left = 758.0
+offset_top = 160.0
+offset_right = 812.0
+offset_bottom = 214.0
+mouse_filter = 0
+
+[node name="Background" type="TextureRect" parent="Keyboard/Item7"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 54.0
+offset_bottom = 54.0
+mouse_filter = 2
+texture = ExtResource("keyboard_detail_slot")
+expand_mode = 1
+stretch_mode = 0
+
+[node name="Icon" type="TextureRect" parent="Keyboard/Item7"]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 49.0
+offset_bottom = 49.0
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 0
+
+[node name="Count" type="Label" parent="Keyboard/Item7"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 35.0
+offset_right = 50.0
+offset_bottom = 54.0
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("R1")
+theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(1,1,1,1)
+text = ""
+
+horizontal_alignment = 2
+
+[node name="Item8" type="Control" parent="Keyboard"]
+layout_mode = 0
+offset_left = 581.0
+offset_top = 219.0
+offset_right = 635.0
+offset_bottom = 273.0
+mouse_filter = 0
+
+[node name="Background" type="TextureRect" parent="Keyboard/Item8"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 54.0
+offset_bottom = 54.0
+mouse_filter = 2
+texture = ExtResource("keyboard_detail_slot")
+expand_mode = 1
+stretch_mode = 0
+
+[node name="Icon" type="TextureRect" parent="Keyboard/Item8"]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 49.0
+offset_bottom = 49.0
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 0
+
+[node name="Count" type="Label" parent="Keyboard/Item8"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 35.0
+offset_right = 50.0
+offset_bottom = 54.0
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("R1")
+theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(1,1,1,1)
+text = ""
+
+horizontal_alignment = 2
+
+[node name="Item9" type="Control" parent="Keyboard"]
+layout_mode = 0
+offset_left = 640.0
+offset_top = 219.0
+offset_right = 694.0
+offset_bottom = 273.0
+mouse_filter = 0
+
+[node name="Background" type="TextureRect" parent="Keyboard/Item9"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 54.0
+offset_bottom = 54.0
+mouse_filter = 2
+texture = ExtResource("keyboard_detail_slot")
+expand_mode = 1
+stretch_mode = 0
+
+[node name="Icon" type="TextureRect" parent="Keyboard/Item9"]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 49.0
+offset_bottom = 49.0
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 0
+
+[node name="Count" type="Label" parent="Keyboard/Item9"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 35.0
+offset_right = 50.0
+offset_bottom = 54.0
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("R1")
+theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(1,1,1,1)
+text = ""
+
+horizontal_alignment = 2
+
+[node name="Item10" type="Control" parent="Keyboard"]
+layout_mode = 0
+offset_left = 699.0
+offset_top = 219.0
+offset_right = 753.0
+offset_bottom = 273.0
+mouse_filter = 0
+
+[node name="Background" type="TextureRect" parent="Keyboard/Item10"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 54.0
+offset_bottom = 54.0
+mouse_filter = 2
+texture = ExtResource("keyboard_detail_slot")
+expand_mode = 1
+stretch_mode = 0
+
+[node name="Icon" type="TextureRect" parent="Keyboard/Item10"]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 49.0
+offset_bottom = 49.0
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 0
+
+[node name="Count" type="Label" parent="Keyboard/Item10"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 35.0
+offset_right = 50.0
+offset_bottom = 54.0
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("R1")
+theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(1,1,1,1)
+text = ""
+
+horizontal_alignment = 2
+
+[node name="Item11" type="Control" parent="Keyboard"]
+layout_mode = 0
+offset_left = 758.0
+offset_top = 219.0
+offset_right = 812.0
+offset_bottom = 273.0
+mouse_filter = 0
+
+[node name="Background" type="TextureRect" parent="Keyboard/Item11"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 54.0
+offset_bottom = 54.0
+mouse_filter = 2
+texture = ExtResource("keyboard_detail_slot")
+expand_mode = 1
+stretch_mode = 0
+
+[node name="Icon" type="TextureRect" parent="Keyboard/Item11"]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 49.0
+offset_bottom = 49.0
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 0
+
+[node name="Count" type="Label" parent="Keyboard/Item11"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 35.0
+offset_right = 50.0
+offset_bottom = 54.0
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("R1")
+theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(1,1,1,1)
+text = ""
+
+horizontal_alignment = 2
+
+[node name="Item12" type="Control" parent="Keyboard"]
+layout_mode = 0
+offset_left = 581.0
+offset_top = 278.0
+offset_right = 635.0
+offset_bottom = 332.0
+mouse_filter = 0
+
+[node name="Background" type="TextureRect" parent="Keyboard/Item12"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 54.0
+offset_bottom = 54.0
+mouse_filter = 2
+texture = ExtResource("keyboard_detail_slot")
+expand_mode = 1
+stretch_mode = 0
+
+[node name="Icon" type="TextureRect" parent="Keyboard/Item12"]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 49.0
+offset_bottom = 49.0
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 0
+
+[node name="Count" type="Label" parent="Keyboard/Item12"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 35.0
+offset_right = 50.0
+offset_bottom = 54.0
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("R1")
+theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(1,1,1,1)
+text = ""
+
+horizontal_alignment = 2
+
+[node name="Item13" type="Control" parent="Keyboard"]
+layout_mode = 0
+offset_left = 640.0
+offset_top = 278.0
+offset_right = 694.0
+offset_bottom = 332.0
+mouse_filter = 0
+
+[node name="Background" type="TextureRect" parent="Keyboard/Item13"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 54.0
+offset_bottom = 54.0
+mouse_filter = 2
+texture = ExtResource("keyboard_detail_slot")
+expand_mode = 1
+stretch_mode = 0
+
+[node name="Icon" type="TextureRect" parent="Keyboard/Item13"]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 49.0
+offset_bottom = 49.0
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 0
+
+[node name="Count" type="Label" parent="Keyboard/Item13"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 35.0
+offset_right = 50.0
+offset_bottom = 54.0
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("R1")
+theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(1,1,1,1)
+text = ""
+
+horizontal_alignment = 2
+
+[node name="Item14" type="Control" parent="Keyboard"]
+layout_mode = 0
+offset_left = 699.0
+offset_top = 278.0
+offset_right = 753.0
+offset_bottom = 332.0
+mouse_filter = 0
+
+[node name="Background" type="TextureRect" parent="Keyboard/Item14"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 54.0
+offset_bottom = 54.0
+mouse_filter = 2
+texture = ExtResource("keyboard_detail_slot")
+expand_mode = 1
+stretch_mode = 0
+
+[node name="Icon" type="TextureRect" parent="Keyboard/Item14"]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 49.0
+offset_bottom = 49.0
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 0
+
+[node name="Count" type="Label" parent="Keyboard/Item14"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 35.0
+offset_right = 50.0
+offset_bottom = 54.0
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("R1")
+theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(1,1,1,1)
+text = ""
+
+horizontal_alignment = 2
+
+[node name="Item15" type="Control" parent="Keyboard"]
+layout_mode = 0
+offset_left = 758.0
+offset_top = 278.0
+offset_right = 812.0
+offset_bottom = 332.0
+mouse_filter = 0
+
+[node name="Background" type="TextureRect" parent="Keyboard/Item15"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 54.0
+offset_bottom = 54.0
+mouse_filter = 2
+texture = ExtResource("keyboard_detail_slot")
+expand_mode = 1
+stretch_mode = 0
+
+[node name="Icon" type="TextureRect" parent="Keyboard/Item15"]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 49.0
+offset_bottom = 49.0
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 0
+
+[node name="Count" type="Label" parent="Keyboard/Item15"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 35.0
+offset_right = 50.0
+offset_bottom = 54.0
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("R1")
+theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(1,1,1,1)
+text = ""
+
+horizontal_alignment = 2
+
+[node name="Upgrade" type="Control" parent="."]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 940.0
+offset_bottom = 590.0
+mouse_filter = 0
+visible = false
+metadata/ui_modal = true
+
+[node name="ModalBarrier" type="Control" parent="Upgrade"]
+offset_left = 0
+offset_top = 0
+offset_right = 940
+offset_bottom = 590
+mouse_filter = 0
+
+[node name="Background" type="TextureRect" parent="Upgrade"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 940.0
+offset_bottom = 590.0
+mouse_filter = 2
+texture = ExtResource("R78")
+expand_mode = 1
+stretch_mode = 0
+
+[node name="Close" type="TextureButton" parent="Upgrade"]
+layout_mode = 0
+offset_left = 691.15
+offset_top = 41.5
+offset_right = 724.15
+offset_bottom = 79.5
+mouse_filter = 0
+ignore_texture_size = true
+stretch_mode = 0
+texture_normal = ExtResource("R3")
+texture_hover = ExtResource("R4")
+texture_pressed = ExtResource("R5")
+
+[node name="Icon" type="TextureRect" parent="Upgrade"]
+layout_mode = 0
+offset_left = 431.0
+offset_top = 120.0
+offset_right = 509.0
+offset_bottom = 198.0
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 0
+
+[node name="Name" type="Label" parent="Upgrade"]
+layout_mode = 0
+offset_left = 300.0
+offset_top = 223.0
+offset_right = 640.0
+offset_bottom = 250.0
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("R1")
+theme_override_font_sizes/font_size = 20
+theme_override_colors/font_color = Color(0,0,0,1)
+text = ""
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Requirements" type="Label" parent="Upgrade"]
+layout_mode = 0
+offset_left = 230.0
+offset_top = 252.0
+offset_right = 710.0
+offset_bottom = 279.0
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("R1")
+theme_override_font_sizes/font_size = 18
+theme_override_colors/font_color = Color(0.75,0,0,1)
+text = ""
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Cost" type="Label" parent="Upgrade"]
+layout_mode = 0
+offset_left = 230.0
+offset_top = 278.0
+offset_right = 710.0
+offset_bottom = 305.0
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("R1")
+theme_override_font_sizes/font_size = 18
+theme_override_colors/font_color = Color(0.75,0,0,1)
+text = ""
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Description" type="Label" parent="Upgrade"]
+layout_mode = 0
+offset_left = 230.0
+offset_top = 304.0
+offset_right = 710.0
+offset_bottom = 356.0
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("R1")
+theme_override_font_sizes/font_size = 16
+theme_override_colors/font_color = Color(0.37,0.12,0.02,1)
+text = ""
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Growth" type="Label" parent="Upgrade"]
+layout_mode = 0
+offset_left = 250.0
+offset_top = 369.0
+offset_right = 690.0
+offset_bottom = 391.0
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("R1")
+theme_override_font_sizes/font_size = 16
+theme_override_colors/font_color = Color(0.37,0.12,0.02,1)
+text = ""
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="MP" type="Label" parent="Upgrade"]
+layout_mode = 0
+offset_left = 275.0
+offset_top = 390.0
+offset_right = 665.0
+offset_bottom = 415.0
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("R1")
+theme_override_font_sizes/font_size = 16
+theme_override_colors/font_color = Color(0.37,0.12,0.02,1)
+text = ""
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Cooldown" type="Label" parent="Upgrade"]
+layout_mode = 0
+offset_left = 275.0
+offset_top = 414.0
+offset_right = 665.0
+offset_bottom = 439.0
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("R1")
+theme_override_font_sizes/font_size = 16
+theme_override_colors/font_color = Color(0.37,0.12,0.02,1)
+text = ""
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Spirit" type="Label" parent="Upgrade"]
+layout_mode = 0
+offset_left = 237.0
+offset_top = 505.0
+offset_right = 567.0
+offset_bottom = 531.0
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("R1")
+theme_override_font_sizes/font_size = 16
+theme_override_colors/font_color = Color(0.37,0.12,0.02,1)
+text = ""
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Submit" type="TextureButton" parent="Upgrade"]
+layout_mode = 0
+offset_left = 420.0
+offset_top = 450.1
+offset_right = 520.0
+offset_bottom = 486.1
+mouse_filter = 0
+ignore_texture_size = true
+stretch_mode = 0
+texture_normal = ExtResource("R79")
+texture_hover = ExtResource("R80")
+texture_pressed = ExtResource("R81")
+
+[node name="Batch" type="TextureButton" parent="Upgrade"]
+layout_mode = 0
+offset_left = 558.85
+offset_top = 450.1
+offset_right = 658.85
+offset_bottom = 486.1
+mouse_filter = 0
+ignore_texture_size = true
+stretch_mode = 0
+texture_normal = ExtResource("R82")
+texture_hover = ExtResource("R83")
+texture_pressed = ExtResource("R84")
+
+[node name="Notice" type="Control" parent="."]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 940.0
+offset_bottom = 590.0
+mouse_filter = 0
+visible = false
+metadata/ui_modal = true
+
+[node name="ModalBarrier" type="Control" parent="Notice"]
+offset_left = 0
+offset_top = 0
+offset_right = 940
+offset_bottom = 590
+mouse_filter = 0
+
+[node name="Dim" type="ColorRect" parent="Notice"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 940.0
+offset_bottom = 590.0
+mouse_filter = 2
+color = Color(0,0,0,0.3)
+
+[node name="Panel" type="Panel" parent="Notice"]
+layout_mode = 0
+offset_left = 265.0
+offset_top = 240.0
+offset_right = 675.0
+offset_bottom = 340.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("popup")
+
+[node name="Text" type="Label" parent="Notice"]
+layout_mode = 0
+offset_left = 280.0
+offset_top = 252.0
+offset_right = 660.0
+offset_bottom = 304.0
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("R1")
+theme_override_font_sizes/font_size = 17
+theme_override_colors/font_color = Color(0.37, 0.12, 0.02, 1)
+text = ""
+autowrap_mode = 2
+horizontal_alignment = 1
+
+[node name="OK" type="Button" parent="Notice"]
+layout_mode = 0
+offset_left = 430.0
+offset_top = 308.0
+offset_right = 510.0
+offset_bottom = 335.0
+mouse_filter = 0
+text = "确定"
+theme_override_fonts/font = ExtResource("R1")
+theme_override_font_sizes/font_size = 15
+
+[node name="Tooltip" type="Panel" parent="."]
+z_as_relative = false
+z_index = 151
+layout_mode = 0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 290.0
+offset_bottom = 90.0
+mouse_filter = 2
+visible = false
+theme_override_styles/panel = SubResource("SkillTooltipStyle")
+
+[node name="DragIcon" type="TextureRect" parent="."]
+z_as_relative = false
+z_index = 152
+layout_mode = 0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 44.0
+offset_bottom = 44.0
+mouse_filter = 2
+visible = false
+expand_mode = 1
+stretch_mode = 0
+
+[node name="Pages" type="Control" parent="Keyboard"]
+visible = false
+offset_left = 580.0
+offset_top = 360.0
+offset_right = 830.0
+offset_bottom = 392.0
+mouse_filter = 2
+
+[node name="Page0" type="TextureButton" parent="Keyboard/Pages"]
+visible = false
+offset_right = 32.0
+offset_bottom = 32.0
+focus_mode = 0
+ignore_texture_size = true
+stretch_mode = 0
+texture_normal = ExtResource("keyboard_detail_page0")
+texture_hover = ExtResource("keyboard_detail_page1")
+texture_pressed = ExtResource("keyboard_detail_page2")
+
+[node name="Text" type="Label" parent="Keyboard/Pages/Page0"]
+offset_top = 4.0
+offset_right = 32.0
+offset_bottom = 26.0
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("R1")
+theme_override_font_sizes/font_size = 16
+theme_override_colors/font_color = Color(0.372549,0.117647,0.019608,1)
+horizontal_alignment = 1
+text = "1"
+
+[node name="Page1" type="TextureButton" parent="Keyboard/Pages"]
+visible = false
+offset_right = 32.0
+offset_bottom = 32.0
+focus_mode = 0
+ignore_texture_size = true
+stretch_mode = 0
+texture_normal = ExtResource("keyboard_detail_page0")
+texture_hover = ExtResource("keyboard_detail_page1")
+texture_pressed = ExtResource("keyboard_detail_page2")
+
+[node name="Text" type="Label" parent="Keyboard/Pages/Page1"]
+offset_top = 4.0
+offset_right = 32.0
+offset_bottom = 26.0
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("R1")
+theme_override_font_sizes/font_size = 16
+theme_override_colors/font_color = Color(0.372549,0.117647,0.019608,1)
+horizontal_alignment = 1
+text = "2"
+
+[node name="Page2" type="TextureButton" parent="Keyboard/Pages"]
+visible = false
+offset_right = 32.0
+offset_bottom = 32.0
+focus_mode = 0
+ignore_texture_size = true
+stretch_mode = 0
+texture_normal = ExtResource("keyboard_detail_page0")
+texture_hover = ExtResource("keyboard_detail_page1")
+texture_pressed = ExtResource("keyboard_detail_page2")
+
+[node name="Text" type="Label" parent="Keyboard/Pages/Page2"]
+offset_top = 4.0
+offset_right = 32.0
+offset_bottom = 26.0
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("R1")
+theme_override_font_sizes/font_size = 16
+theme_override_colors/font_color = Color(0.372549,0.117647,0.019608,1)
+horizontal_alignment = 1
+text = "3"
+
+[node name="Page3" type="TextureButton" parent="Keyboard/Pages"]
+visible = false
+offset_right = 32.0
+offset_bottom = 32.0
+focus_mode = 0
+ignore_texture_size = true
+stretch_mode = 0
+texture_normal = ExtResource("keyboard_detail_page0")
+texture_hover = ExtResource("keyboard_detail_page1")
+texture_pressed = ExtResource("keyboard_detail_page2")
+
+[node name="Text" type="Label" parent="Keyboard/Pages/Page3"]
+offset_top = 4.0
+offset_right = 32.0
+offset_bottom = 26.0
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("R1")
+theme_override_font_sizes/font_size = 16
+theme_override_colors/font_color = Color(0.372549,0.117647,0.019608,1)
+horizontal_alignment = 1
+text = "4"
+
+[node name="Page4" type="TextureButton" parent="Keyboard/Pages"]
+visible = false
+offset_right = 32.0
+offset_bottom = 32.0
+focus_mode = 0
+ignore_texture_size = true
+stretch_mode = 0
+texture_normal = ExtResource("keyboard_detail_page0")
+texture_hover = ExtResource("keyboard_detail_page1")
+texture_pressed = ExtResource("keyboard_detail_page2")
+
+[node name="Text" type="Label" parent="Keyboard/Pages/Page4"]
+offset_top = 4.0
+offset_right = 32.0
+offset_bottom = 26.0
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("R1")
+theme_override_font_sizes/font_size = 16
+theme_override_colors/font_color = Color(0.372549,0.117647,0.019608,1)
+horizontal_alignment = 1
+text = "5"
+
+[node name="Name" type="Label" parent="Tooltip"]
+offset_left = 20.0
+offset_top = 15.0
+offset_right = 270.0
+offset_bottom = 41.0
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("R1")
+theme_override_font_sizes/font_size = 18
+theme_override_colors/font_color = Color(0,0,0,1)
+text = ""
+autowrap_mode = 2
+theme_override_constants/line_spacing = 4
+
+[node name="Stats" type="Label" parent="Tooltip"]
+offset_left = 20.0
+offset_top = 45.0
+offset_right = 280.0
+offset_bottom = 120.0
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("R1")
+theme_override_font_sizes/font_size = 16
+theme_override_colors/font_color = Color(0.372549,0.117647,0.019608,1)
+text = ""
+autowrap_mode = 2
+theme_override_constants/line_spacing = 4
+
+[node name="Text" type="Label" parent="Tooltip"]
+offset_left = 20.0
+offset_top = 50.0
+offset_right = 280.0
+offset_bottom = 70.0
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("R1")
+theme_override_font_sizes/font_size = 16
+theme_override_colors/font_color = Color(0.372549,0.117647,0.019608,1)
+text = ""
+autowrap_mode = 2
+theme_override_constants/line_spacing = 4

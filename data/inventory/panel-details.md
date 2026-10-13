@@ -34,3 +34,9 @@ python tools/refine_inventory_details.py --original-root D:/UserData/Downloads/g
 `--author-only` 使用已有素材重新生成细节节点。基础UI生成器会通过 `refine_original_inventory_ui.py` 接回此步骤；手工修改生成器负责的节点后，应同步到生成脚本或另建业务场景，避免重导出覆盖布局。
 
 重新生成基础/细节场景后，运行 `python tools/author_stage_fourteen.py` 应用昵称输入及移除旧成长菜单的补丁。
+
+随后运行 `python tools/refine_inventory_transactions.py --original-root D:/UserData/Downloads/game/Speculum-4399-master`，从原 SWF 导出物品出售窗口、数量栏、按钮及品质复选框，并预置最新出售、称号入口和战力提示节点。省略参数可使用已经导出的项目缓存。
+
+`InventoryPresentationController.cs` 管理出售数量校验、多品质一键出售、确认时锁定复查、机器编号和战力明细。首次开包仅为空编号写入 `OS.GetUniqueId()`；已有编号保留，复制始终使用完整编号。称号按钮发出 `TitleRequested` 信号，目前只显示未开放说明，不改变角色属性。`InventoryBagPolicy.cs` 统一按品质降序、类型、物品 ID、实例序号排序；获取物品后各页立即使用该顺序。
+
+锁定标记保存在物品实例，单件与批量出售都通过同一库存出售入口。批量只处理背包中的装备，跳过锁定、已穿戴、不可出售和已有提取记录的装备，预览随库存变化更新。正式关卡把同帧库存/货币/昵称变更合并为一次存档保存。

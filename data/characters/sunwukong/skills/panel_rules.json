@@ -1,0 +1,1826 @@
+{
+  "source": "上古天帝篇 Skill / SkillInit / SkillLev / Role2001; current role grade 0",
+  "skills": [
+    {
+      "id": 1101010,
+      "ability": "sunwukong_skill1",
+      "name": "升龙斩",
+      "description": "将怪物挑打到空中",
+      "upgrade_description": "技能伤害提升",
+      "type": 1,
+      "order": 10,
+      "grade": 0,
+      "available": true,
+      "initial_level": 1,
+      "icon": "res://assets/ui/skills/1101010.png",
+      "mp": [
+        0.0,
+        22.0,
+        44.0,
+        71.0,
+        104.0,
+        140.0,
+        158.0,
+        199.0,
+        244.0,
+        291.0,
+        341.0,
+        393.0,
+        426.0,
+        498.0,
+        575.0,
+        658.0,
+        746.0,
+        840.0,
+        887.0,
+        990.0,
+        1097.0,
+        1211.0,
+        1330.0,
+        1454.0,
+        1515.0,
+        1648.0,
+        1786.0,
+        1930.0,
+        2080.0,
+        2235.0,
+        2385.0,
+        2593.0,
+        2813.0,
+        3045.0,
+        3288.0,
+        3544.0,
+        3669.0,
+        3915.0,
+        4170.0,
+        4435.0,
+        4709.0,
+        4994.0,
+        5149.0,
+        5449.0,
+        5760.0,
+        6081.0,
+        6412.0,
+        6754.0,
+        6942.0,
+        7301.0,
+        7671.0
+      ],
+      "cooldown": [
+        0.0,
+        2.6,
+        2.3,
+        2.1,
+        1.8,
+        1.6,
+        1.4,
+        1.1,
+        0.9,
+        0.9,
+        0.9,
+        0.9,
+        0.9,
+        0.9,
+        0.9,
+        0.9,
+        0.9,
+        0.9,
+        0.9,
+        0.9,
+        0.9,
+        0.9,
+        0.9,
+        0.9,
+        0.9,
+        0.9,
+        0.9,
+        0.9,
+        0.9,
+        0.9,
+        0.9,
+        0.9,
+        0.9,
+        0.9,
+        0.9,
+        0.9,
+        0.9,
+        0.9,
+        0.9,
+        0.9,
+        0.9,
+        0.9,
+        0.9,
+        0.9,
+        0.9,
+        0.9,
+        0.9,
+        0.9,
+        0.9,
+        0.9,
+        0.9
+      ],
+      "levels": [
+        {
+          "level": 1,
+          "role_level": 1,
+          "spirit": 30
+        },
+        {
+          "level": 2,
+          "role_level": 6,
+          "spirit": 75
+        },
+        {
+          "level": 3,
+          "role_level": 11,
+          "spirit": 150
+        },
+        {
+          "level": 4,
+          "role_level": 16,
+          "spirit": 300
+        },
+        {
+          "level": 5,
+          "role_level": 21,
+          "spirit": 590
+        },
+        {
+          "level": 6,
+          "role_level": 26,
+          "spirit": 1200
+        },
+        {
+          "level": 7,
+          "role_level": 31,
+          "spirit": 2400
+        },
+        {
+          "level": 8,
+          "role_level": 36,
+          "spirit": 4900
+        },
+        {
+          "level": 9,
+          "role_level": 41,
+          "spirit": 9000
+        },
+        {
+          "level": 10,
+          "role_level": 46,
+          "spirit": 16000
+        },
+        {
+          "level": 11,
+          "role_level": 51,
+          "spirit": 27000
+        },
+        {
+          "level": 12,
+          "role_level": 56,
+          "spirit": 44000
+        },
+        {
+          "level": 13,
+          "role_level": 61,
+          "spirit": 70000
+        },
+        {
+          "level": 14,
+          "role_level": 66,
+          "spirit": 110000
+        },
+        {
+          "level": 15,
+          "role_level": 71,
+          "spirit": 170000
+        },
+        {
+          "level": 16,
+          "role_level": 76,
+          "spirit": 270000
+        },
+        {
+          "level": 17,
+          "role_level": 81,
+          "spirit": 420000
+        },
+        {
+          "level": 18,
+          "role_level": 86,
+          "spirit": 640000
+        },
+        {
+          "level": 19,
+          "role_level": 91,
+          "spirit": 970000
+        },
+        {
+          "level": 20,
+          "role_level": 96,
+          "spirit": 1500000
+        },
+        {
+          "level": 21,
+          "role_level": 101,
+          "spirit": 2200000
+        },
+        {
+          "level": 22,
+          "role_level": 106,
+          "spirit": 3300000
+        },
+        {
+          "level": 23,
+          "role_level": 111,
+          "spirit": 5000000
+        },
+        {
+          "level": 24,
+          "role_level": 116,
+          "spirit": 7500000
+        },
+        {
+          "level": 25,
+          "role_level": 121,
+          "spirit": 11000000
+        },
+        {
+          "level": 26,
+          "role_level": 126,
+          "spirit": 16000000
+        },
+        {
+          "level": 27,
+          "role_level": 131,
+          "spirit": 24000000
+        },
+        {
+          "level": 28,
+          "role_level": 136,
+          "spirit": 36000000
+        },
+        {
+          "level": 29,
+          "role_level": 141,
+          "spirit": 53000000
+        },
+        {
+          "level": 30,
+          "role_level": 146,
+          "spirit": 78000000
+        },
+        {
+          "level": 31,
+          "role_level": 151,
+          "spirit": 90000000
+        },
+        {
+          "level": 32,
+          "role_level": 156,
+          "spirit": 112000000
+        },
+        {
+          "level": 33,
+          "role_level": 161,
+          "spirit": 160000000
+        },
+        {
+          "level": 34,
+          "role_level": 166,
+          "spirit": 232000000
+        },
+        {
+          "level": 35,
+          "role_level": 171,
+          "spirit": 280000000
+        }
+      ]
+    },
+    {
+      "id": 1101020,
+      "ability": "sunwukong_skill2",
+      "name": "烈焰闪",
+      "description": "快速向前冲去，对经过的怪物造成伤害",
+      "upgrade_description": "技能伤害提升",
+      "type": 1,
+      "order": 11,
+      "grade": 0,
+      "available": true,
+      "initial_level": 1,
+      "icon": "res://assets/ui/skills/1101020.png",
+      "mp": [
+        0.0,
+        28.0,
+        55.0,
+        89.0,
+        130.0,
+        176.0,
+        198.0,
+        249.0,
+        305.0,
+        364.0,
+        426.0,
+        491.0,
+        533.0,
+        622.0,
+        719.0,
+        822.0,
+        933.0,
+        1050.0,
+        1109.0,
+        1237.0,
+        1372.0,
+        1513.0,
+        1662.0,
+        1818.0,
+        1894.0,
+        2060.0,
+        2233.0,
+        2413.0,
+        2600.0,
+        2793.0,
+        2981.0,
+        3242.0,
+        3517.0,
+        3806.0,
+        4111.0,
+        4430.0,
+        4587.0,
+        4894.0,
+        5213.0,
+        5544.0,
+        5887.0,
+        6242.0,
+        6436.0,
+        6812.0,
+        7200.0,
+        7601.0,
+        8015.0,
+        8443.0,
+        8677.0,
+        9126.0,
+        9589.0
+      ],
+      "cooldown": [
+        0.0,
+        3.4,
+        3.2,
+        3.1,
+        2.9,
+        2.8,
+        2.6,
+        2.5,
+        2.3,
+        2.2,
+        2.0,
+        1.9,
+        1.7,
+        1.6,
+        1.4,
+        1.3,
+        1.1,
+        1.1,
+        1.1,
+        1.1,
+        1.1,
+        1.1,
+        1.1,
+        1.1,
+        1.1,
+        1.1,
+        1.1,
+        1.1,
+        1.1,
+        1.1,
+        1.1,
+        1.1,
+        1.1,
+        1.1,
+        1.1,
+        1.1,
+        1.1,
+        1.1,
+        1.1,
+        1.1,
+        1.1,
+        1.1,
+        1.1,
+        1.1,
+        1.1,
+        1.1,
+        1.1,
+        1.1,
+        1.1,
+        1.1,
+        1.1
+      ],
+      "levels": [
+        {
+          "level": 1,
+          "role_level": 2,
+          "spirit": 45
+        },
+        {
+          "level": 2,
+          "role_level": 7,
+          "spirit": 85
+        },
+        {
+          "level": 3,
+          "role_level": 12,
+          "spirit": 170
+        },
+        {
+          "level": 4,
+          "role_level": 17,
+          "spirit": 350
+        },
+        {
+          "level": 5,
+          "role_level": 22,
+          "spirit": 690
+        },
+        {
+          "level": 6,
+          "role_level": 27,
+          "spirit": 1400
+        },
+        {
+          "level": 7,
+          "role_level": 32,
+          "spirit": 2800
+        },
+        {
+          "level": 8,
+          "role_level": 37,
+          "spirit": 5500
+        },
+        {
+          "level": 9,
+          "role_level": 42,
+          "spirit": 10000
+        },
+        {
+          "level": 10,
+          "role_level": 47,
+          "spirit": 18000
+        },
+        {
+          "level": 11,
+          "role_level": 52,
+          "spirit": 29000
+        },
+        {
+          "level": 12,
+          "role_level": 57,
+          "spirit": 48000
+        },
+        {
+          "level": 13,
+          "role_level": 62,
+          "spirit": 77000
+        },
+        {
+          "level": 14,
+          "role_level": 67,
+          "spirit": 120000
+        },
+        {
+          "level": 15,
+          "role_level": 72,
+          "spirit": 190000
+        },
+        {
+          "level": 16,
+          "role_level": 77,
+          "spirit": 300000
+        },
+        {
+          "level": 17,
+          "role_level": 82,
+          "spirit": 460000
+        },
+        {
+          "level": 18,
+          "role_level": 87,
+          "spirit": 700000
+        },
+        {
+          "level": 19,
+          "role_level": 92,
+          "spirit": 1100000
+        },
+        {
+          "level": 20,
+          "role_level": 97,
+          "spirit": 1600000
+        },
+        {
+          "level": 21,
+          "role_level": 102,
+          "spirit": 2400000
+        },
+        {
+          "level": 22,
+          "role_level": 107,
+          "spirit": 3600000
+        },
+        {
+          "level": 23,
+          "role_level": 112,
+          "spirit": 5400000
+        },
+        {
+          "level": 24,
+          "role_level": 117,
+          "spirit": 8100000
+        },
+        {
+          "level": 25,
+          "role_level": 122,
+          "spirit": 12000000
+        },
+        {
+          "level": 26,
+          "role_level": 127,
+          "spirit": 18000000
+        },
+        {
+          "level": 27,
+          "role_level": 132,
+          "spirit": 26000000
+        },
+        {
+          "level": 28,
+          "role_level": 137,
+          "spirit": 39000000
+        },
+        {
+          "level": 29,
+          "role_level": 142,
+          "spirit": 57000000
+        },
+        {
+          "level": 30,
+          "role_level": 147,
+          "spirit": 85000000
+        },
+        {
+          "level": 31,
+          "role_level": 152,
+          "spirit": 99000000
+        },
+        {
+          "level": 32,
+          "role_level": 157,
+          "spirit": 120000000
+        },
+        {
+          "level": 33,
+          "role_level": 162,
+          "spirit": 176000000
+        },
+        {
+          "level": 34,
+          "role_level": 167,
+          "spirit": 248000000
+        },
+        {
+          "level": 35,
+          "role_level": 172,
+          "spirit": 301000000
+        }
+      ]
+    },
+    {
+      "id": 1101030,
+      "ability": "sunwukong_skill3",
+      "name": "火眼金睛",
+      "description": "眼睛向前方射出一道火光（可按上下键调整方向）",
+      "upgrade_description": "技能伤害提升",
+      "type": 1,
+      "order": 12,
+      "grade": 0,
+      "available": true,
+      "initial_level": 1,
+      "icon": "res://assets/ui/skills/1101030.png",
+      "mp": [
+        0.0,
+        39.0,
+        77.0,
+        125.0,
+        182.0,
+        246.0,
+        277.0,
+        349.0,
+        427.0,
+        510.0,
+        597.0,
+        688.0,
+        746.0,
+        872.0,
+        1007.0,
+        1152.0,
+        1306.0,
+        1470.0,
+        1553.0,
+        1732.0,
+        1921.0,
+        2119.0,
+        2327.0,
+        2545.0,
+        2652.0,
+        2884.0,
+        3126.0,
+        3378.0,
+        3640.0,
+        3911.0,
+        4173.0,
+        4539.0,
+        4924.0,
+        5329.0,
+        5755.0,
+        6202.0,
+        6422.0,
+        6852.0,
+        7298.0,
+        7761.0,
+        8242.0,
+        8739.0,
+        9011.0,
+        9537.0,
+        10080.0,
+        10642.0,
+        11222.0,
+        11820.0,
+        12149.0,
+        12777.0,
+        13425.0
+      ],
+      "cooldown": [
+        0.0,
+        5.1,
+        4.9,
+        4.7,
+        4.5,
+        4.3,
+        4.1,
+        3.9,
+        3.7,
+        3.4,
+        3.2,
+        3.0,
+        2.8,
+        2.6,
+        2.4,
+        2.2,
+        2.0,
+        2.0,
+        2.0,
+        2.0,
+        2.0,
+        2.0,
+        2.0,
+        2.0,
+        2.0,
+        2.0,
+        2.0,
+        2.0,
+        2.0,
+        2.0,
+        2.0,
+        2.0,
+        2.0,
+        2.0,
+        2.0,
+        2.0,
+        2.0,
+        2.0,
+        2.0,
+        2.0,
+        2.0,
+        2.0,
+        2.0,
+        2.0,
+        2.0,
+        2.0,
+        2.0,
+        2.0,
+        2.0,
+        2.0,
+        2.0
+      ],
+      "levels": [
+        {
+          "level": 1,
+          "role_level": 3,
+          "spirit": 50
+        },
+        {
+          "level": 2,
+          "role_level": 8,
+          "spirit": 95
+        },
+        {
+          "level": 3,
+          "role_level": 13,
+          "spirit": 200
+        },
+        {
+          "level": 4,
+          "role_level": 18,
+          "spirit": 390
+        },
+        {
+          "level": 5,
+          "role_level": 23,
+          "spirit": 800
+        },
+        {
+          "level": 6,
+          "role_level": 28,
+          "spirit": 1600
+        },
+        {
+          "level": 7,
+          "role_level": 33,
+          "spirit": 3200
+        },
+        {
+          "level": 8,
+          "role_level": 38,
+          "spirit": 6300
+        },
+        {
+          "level": 9,
+          "role_level": 43,
+          "spirit": 11000
+        },
+        {
+          "level": 10,
+          "role_level": 48,
+          "spirit": 20000
+        },
+        {
+          "level": 11,
+          "role_level": 53,
+          "spirit": 33000
+        },
+        {
+          "level": 12,
+          "role_level": 58,
+          "spirit": 53000
+        },
+        {
+          "level": 13,
+          "role_level": 63,
+          "spirit": 85000
+        },
+        {
+          "level": 14,
+          "role_level": 68,
+          "spirit": 130000
+        },
+        {
+          "level": 15,
+          "role_level": 73,
+          "spirit": 210000
+        },
+        {
+          "level": 16,
+          "role_level": 78,
+          "spirit": 320000
+        },
+        {
+          "level": 17,
+          "role_level": 83,
+          "spirit": 500000
+        },
+        {
+          "level": 18,
+          "role_level": 88,
+          "spirit": 760000
+        },
+        {
+          "level": 19,
+          "role_level": 93,
+          "spirit": 1200000
+        },
+        {
+          "level": 20,
+          "role_level": 98,
+          "spirit": 1700000
+        },
+        {
+          "level": 21,
+          "role_level": 103,
+          "spirit": 2600000
+        },
+        {
+          "level": 22,
+          "role_level": 108,
+          "spirit": 3900000
+        },
+        {
+          "level": 23,
+          "role_level": 113,
+          "spirit": 5900000
+        },
+        {
+          "level": 24,
+          "role_level": 118,
+          "spirit": 8700000
+        },
+        {
+          "level": 25,
+          "role_level": 123,
+          "spirit": 13000000
+        },
+        {
+          "level": 26,
+          "role_level": 128,
+          "spirit": 19000000
+        },
+        {
+          "level": 27,
+          "role_level": 133,
+          "spirit": 28000000
+        },
+        {
+          "level": 28,
+          "role_level": 138,
+          "spirit": 42000000
+        },
+        {
+          "level": 29,
+          "role_level": 143,
+          "spirit": 62000000
+        },
+        {
+          "level": 30,
+          "role_level": 148,
+          "spirit": 91000000
+        },
+        {
+          "level": 31,
+          "role_level": 153,
+          "spirit": 108000000
+        },
+        {
+          "level": 32,
+          "role_level": 158,
+          "spirit": 128000000
+        },
+        {
+          "level": 33,
+          "role_level": 163,
+          "spirit": 184000000
+        },
+        {
+          "level": 34,
+          "role_level": 168,
+          "spirit": 264000000
+        },
+        {
+          "level": 35,
+          "role_level": 173,
+          "spirit": 322000000
+        }
+      ]
+    },
+    {
+      "id": 1101040,
+      "ability": "sunwukong_skill4",
+      "name": "烈焰风暴",
+      "description": "将棍子举过头顶，大幅旋转，再次按技能键顺势往前追加一记重劈。",
+      "upgrade_description": "技能伤害提升",
+      "type": 1,
+      "order": 13,
+      "grade": 0,
+      "available": true,
+      "initial_level": 1,
+      "icon": "res://assets/ui/skills/1101040.png",
+      "mp": [
+        0.0,
+        56.0,
+        111.0,
+        179.0,
+        260.0,
+        352.0,
+        396.0,
+        499.0,
+        611.0,
+        729.0,
+        853.0,
+        983.0,
+        1066.0,
+        1245.0,
+        1438.0,
+        1645.0,
+        1866.0,
+        2101.0,
+        2219.0,
+        2475.0,
+        2744.0,
+        3027.0,
+        3325.0,
+        3636.0,
+        3788.0,
+        4120.0,
+        4466.0,
+        4826.0,
+        5200.0,
+        5587.0,
+        5962.0,
+        6484.0,
+        7034.0,
+        7613.0,
+        8222.0,
+        8860.0,
+        9174.0,
+        9788.0,
+        10426.0,
+        11088.0,
+        11774.0,
+        12485.0,
+        12873.0,
+        13624.0,
+        14400.0,
+        15203.0,
+        16031.0,
+        16886.0,
+        17355.0,
+        18253.0,
+        19179.0
+      ],
+      "cooldown": [
+        0.0,
+        3.7,
+        3.4,
+        3.1,
+        2.8,
+        2.5,
+        2.2,
+        1.9,
+        1.6,
+        1.6,
+        1.6,
+        1.6,
+        1.6,
+        1.6,
+        1.6,
+        1.6,
+        1.6,
+        1.6,
+        1.6,
+        1.6,
+        1.6,
+        1.6,
+        1.6,
+        1.6,
+        1.6,
+        1.6,
+        1.6,
+        1.6,
+        1.6,
+        1.6,
+        1.6,
+        1.6,
+        1.6,
+        1.6,
+        1.6,
+        1.6,
+        1.6,
+        1.6,
+        1.6,
+        1.6,
+        1.6,
+        1.6,
+        1.6,
+        1.6,
+        1.6,
+        1.6,
+        1.6,
+        1.6,
+        1.6,
+        1.6,
+        1.6
+      ],
+      "levels": [
+        {
+          "level": 1,
+          "role_level": 4,
+          "spirit": 55
+        },
+        {
+          "level": 2,
+          "role_level": 9,
+          "spirit": 110
+        },
+        {
+          "level": 3,
+          "role_level": 14,
+          "spirit": 230
+        },
+        {
+          "level": 4,
+          "role_level": 19,
+          "spirit": 450
+        },
+        {
+          "level": 5,
+          "role_level": 24,
+          "spirit": 930
+        },
+        {
+          "level": 6,
+          "role_level": 29,
+          "spirit": 1800
+        },
+        {
+          "level": 7,
+          "role_level": 34,
+          "spirit": 3700
+        },
+        {
+          "level": 8,
+          "role_level": 39,
+          "spirit": 7100
+        },
+        {
+          "level": 9,
+          "role_level": 44,
+          "spirit": 13000
+        },
+        {
+          "level": 10,
+          "role_level": 49,
+          "spirit": 22000
+        },
+        {
+          "level": 11,
+          "role_level": 54,
+          "spirit": 36000
+        },
+        {
+          "level": 12,
+          "role_level": 59,
+          "spirit": 58000
+        },
+        {
+          "level": 13,
+          "role_level": 64,
+          "spirit": 93000
+        },
+        {
+          "level": 14,
+          "role_level": 69,
+          "spirit": 150000
+        },
+        {
+          "level": 15,
+          "role_level": 74,
+          "spirit": 230000
+        },
+        {
+          "level": 16,
+          "role_level": 79,
+          "spirit": 350000
+        },
+        {
+          "level": 17,
+          "role_level": 84,
+          "spirit": 540000
+        },
+        {
+          "level": 18,
+          "role_level": 89,
+          "spirit": 820000
+        },
+        {
+          "level": 19,
+          "role_level": 94,
+          "spirit": 1200000
+        },
+        {
+          "level": 20,
+          "role_level": 99,
+          "spirit": 1900000
+        },
+        {
+          "level": 21,
+          "role_level": 104,
+          "spirit": 2800000
+        },
+        {
+          "level": 22,
+          "role_level": 109,
+          "spirit": 4300000
+        },
+        {
+          "level": 23,
+          "role_level": 114,
+          "spirit": 6400000
+        },
+        {
+          "level": 24,
+          "role_level": 119,
+          "spirit": 9500000
+        },
+        {
+          "level": 25,
+          "role_level": 124,
+          "spirit": 14000000
+        },
+        {
+          "level": 26,
+          "role_level": 129,
+          "spirit": 21000000
+        },
+        {
+          "level": 27,
+          "role_level": 134,
+          "spirit": 31000000
+        },
+        {
+          "level": 28,
+          "role_level": 139,
+          "spirit": 45000000
+        },
+        {
+          "level": 29,
+          "role_level": 144,
+          "spirit": 67000000
+        },
+        {
+          "level": 30,
+          "role_level": 149,
+          "spirit": 99000000
+        },
+        {
+          "level": 31,
+          "role_level": 154,
+          "spirit": 108000000
+        },
+        {
+          "level": 32,
+          "role_level": 159,
+          "spirit": 144000000
+        },
+        {
+          "level": 33,
+          "role_level": 164,
+          "spirit": 200000000
+        },
+        {
+          "level": 34,
+          "role_level": 169,
+          "spirit": 280000000
+        },
+        {
+          "level": 35,
+          "role_level": 174,
+          "spirit": 350000000
+        }
+      ]
+    },
+    {
+      "id": 1101070,
+      "ability": "sunwukong_skill7",
+      "name": "身外身",
+      "description": "使用毫毛在前方敌人身后创造一个分身",
+      "upgrade_description": "技能伤害提升",
+      "type": 1,
+      "order": 14,
+      "grade": 1,
+      "available": false,
+      "initial_level": 0,
+      "icon": "res://assets/ui/skills/1101070.png",
+      "mp": [
+        0.0,
+        39.0,
+        77.0,
+        125.0,
+        182.0,
+        246.0,
+        277.0,
+        349.0,
+        427.0,
+        510.0,
+        597.0,
+        688.0,
+        746.0,
+        872.0,
+        1007.0,
+        1152.0,
+        1306.0,
+        1470.0,
+        1553.0,
+        1732.0,
+        1921.0,
+        2119.0,
+        2327.0,
+        2545.0,
+        2652.0,
+        2884.0,
+        3126.0,
+        3378.0,
+        3640.0,
+        3911.0,
+        4173.0,
+        4539.0,
+        4924.0,
+        5329.0,
+        5755.0,
+        6202.0,
+        6422.0,
+        6852.0,
+        7298.0,
+        7761.0,
+        8242.0,
+        8739.0,
+        9011.0,
+        9537.0,
+        10080.0,
+        10642.0,
+        11222.0,
+        11820.0,
+        12149.0,
+        12777.0,
+        13425.0
+      ],
+      "cooldown": [
+        0.0,
+        4.0,
+        3.8,
+        3.6,
+        3.4,
+        3.2,
+        2.9,
+        2.7,
+        2.5,
+        2.3,
+        2.1,
+        1.9,
+        1.7,
+        1.5,
+        1.3,
+        1.1,
+        0.8,
+        0.8,
+        0.8,
+        0.8,
+        0.8,
+        0.8,
+        0.8,
+        0.8,
+        0.8,
+        0.8,
+        0.8,
+        0.8,
+        0.8,
+        0.8,
+        0.8,
+        0.8,
+        0.8,
+        0.8,
+        0.8,
+        0.8,
+        0.8,
+        0.8,
+        0.8,
+        0.8,
+        0.8,
+        0.8,
+        0.8,
+        0.8,
+        0.8,
+        0.8,
+        0.8,
+        0.8,
+        0.8,
+        0.8,
+        0.8
+      ],
+      "levels": [
+        {
+          "level": 1,
+          "role_level": 3,
+          "spirit": 50
+        },
+        {
+          "level": 2,
+          "role_level": 8,
+          "spirit": 95
+        },
+        {
+          "level": 3,
+          "role_level": 13,
+          "spirit": 200
+        },
+        {
+          "level": 4,
+          "role_level": 18,
+          "spirit": 390
+        },
+        {
+          "level": 5,
+          "role_level": 23,
+          "spirit": 800
+        },
+        {
+          "level": 6,
+          "role_level": 28,
+          "spirit": 1600
+        },
+        {
+          "level": 7,
+          "role_level": 33,
+          "spirit": 3200
+        },
+        {
+          "level": 8,
+          "role_level": 38,
+          "spirit": 6300
+        },
+        {
+          "level": 9,
+          "role_level": 43,
+          "spirit": 11000
+        },
+        {
+          "level": 10,
+          "role_level": 48,
+          "spirit": 20000
+        },
+        {
+          "level": 11,
+          "role_level": 53,
+          "spirit": 33000
+        },
+        {
+          "level": 12,
+          "role_level": 58,
+          "spirit": 53000
+        },
+        {
+          "level": 13,
+          "role_level": 63,
+          "spirit": 85000
+        },
+        {
+          "level": 14,
+          "role_level": 68,
+          "spirit": 130000
+        },
+        {
+          "level": 15,
+          "role_level": 73,
+          "spirit": 210000
+        },
+        {
+          "level": 16,
+          "role_level": 78,
+          "spirit": 320000
+        },
+        {
+          "level": 17,
+          "role_level": 83,
+          "spirit": 500000
+        },
+        {
+          "level": 18,
+          "role_level": 88,
+          "spirit": 760000
+        },
+        {
+          "level": 19,
+          "role_level": 93,
+          "spirit": 1200000
+        },
+        {
+          "level": 20,
+          "role_level": 98,
+          "spirit": 1700000
+        },
+        {
+          "level": 21,
+          "role_level": 103,
+          "spirit": 2600000
+        },
+        {
+          "level": 22,
+          "role_level": 108,
+          "spirit": 3900000
+        },
+        {
+          "level": 23,
+          "role_level": 113,
+          "spirit": 5900000
+        },
+        {
+          "level": 24,
+          "role_level": 118,
+          "spirit": 8700000
+        },
+        {
+          "level": 25,
+          "role_level": 123,
+          "spirit": 13000000
+        },
+        {
+          "level": 26,
+          "role_level": 128,
+          "spirit": 19000000
+        },
+        {
+          "level": 27,
+          "role_level": 133,
+          "spirit": 28000000
+        },
+        {
+          "level": 28,
+          "role_level": 138,
+          "spirit": 42000000
+        },
+        {
+          "level": 29,
+          "role_level": 143,
+          "spirit": 62000000
+        },
+        {
+          "level": 30,
+          "role_level": 148,
+          "spirit": 91000000
+        },
+        {
+          "level": 31,
+          "role_level": 153,
+          "spirit": 108000000
+        },
+        {
+          "level": 32,
+          "role_level": 158,
+          "spirit": 128000000
+        },
+        {
+          "level": 33,
+          "role_level": 163,
+          "spirit": 184000000
+        },
+        {
+          "level": 34,
+          "role_level": 168,
+          "spirit": 264000000
+        },
+        {
+          "level": 35,
+          "role_level": 173,
+          "spirit": 322000000
+        }
+      ]
+    },
+    {
+      "id": 1101080,
+      "ability": "sunwukong_skill8",
+      "name": "火魔斩",
+      "description": "冲向空中释放火魔连斩，落地后为最后一斩，造成极高伤害",
+      "upgrade_description": "技能伤害提升",
+      "type": 1,
+      "order": 15,
+      "grade": 1,
+      "available": false,
+      "initial_level": 0,
+      "icon": "res://assets/ui/skills/1101080.png",
+      "mp": [
+        0.0,
+        84.0,
+        166.0,
+        269.0,
+        391.0,
+        528.0,
+        595.0,
+        749.0,
+        916.0,
+        1093.0,
+        1280.0,
+        1475.0,
+        1600.0,
+        1868.0,
+        2158.0,
+        2468.0,
+        2800.0,
+        3152.0,
+        3329.0,
+        3712.0,
+        4116.0,
+        4541.0,
+        4987.0,
+        5454.0,
+        5683.0,
+        6181.0,
+        6700.0,
+        7239.0,
+        7800.0,
+        8381.0,
+        8944.0,
+        9727.0,
+        10552.0,
+        11420.0,
+        12333.0,
+        13290.0,
+        13761.0,
+        14682.0,
+        15639.0,
+        16632.0,
+        17661.0,
+        18728.0,
+        19310.0,
+        20436.0,
+        21601.0,
+        22804.0,
+        24047.0,
+        25330.0,
+        26033.0,
+        27380.0,
+        28769.0
+      ],
+      "cooldown": [
+        0.0,
+        6.3,
+        5.7,
+        5.1,
+        4.5,
+        3.9,
+        3.3,
+        2.7,
+        2.1,
+        2.1,
+        2.1,
+        2.1,
+        2.1,
+        2.1,
+        2.1,
+        2.1,
+        2.1,
+        2.1,
+        2.1,
+        2.1,
+        2.1,
+        2.1,
+        2.1,
+        2.1,
+        2.1,
+        2.1,
+        2.1,
+        2.1,
+        2.1,
+        2.1,
+        2.1,
+        2.1,
+        2.1,
+        2.1,
+        2.1,
+        2.1,
+        2.1,
+        2.1,
+        2.1,
+        2.1,
+        2.1,
+        2.1,
+        2.1,
+        2.1,
+        2.1,
+        2.1,
+        2.1,
+        2.1,
+        2.1,
+        2.1,
+        2.1
+      ],
+      "levels": [
+        {
+          "level": 1,
+          "role_level": 5,
+          "spirit": 65
+        },
+        {
+          "level": 2,
+          "role_level": 10,
+          "spirit": 130
+        },
+        {
+          "level": 3,
+          "role_level": 15,
+          "spirit": 270
+        },
+        {
+          "level": 4,
+          "role_level": 20,
+          "spirit": 500
+        },
+        {
+          "level": 5,
+          "role_level": 25,
+          "spirit": 1100
+        },
+        {
+          "level": 6,
+          "role_level": 30,
+          "spirit": 2000
+        },
+        {
+          "level": 7,
+          "role_level": 35,
+          "spirit": 4200
+        },
+        {
+          "level": 8,
+          "role_level": 40,
+          "spirit": 8000
+        },
+        {
+          "level": 9,
+          "role_level": 45,
+          "spirit": 14000
+        },
+        {
+          "level": 10,
+          "role_level": 50,
+          "spirit": 24000
+        },
+        {
+          "level": 11,
+          "role_level": 55,
+          "spirit": 40000
+        },
+        {
+          "level": 12,
+          "role_level": 60,
+          "spirit": 64000
+        },
+        {
+          "level": 13,
+          "role_level": 65,
+          "spirit": 100000
+        },
+        {
+          "level": 14,
+          "role_level": 70,
+          "spirit": 160000
+        },
+        {
+          "level": 15,
+          "role_level": 75,
+          "spirit": 250000
+        },
+        {
+          "level": 16,
+          "role_level": 80,
+          "spirit": 380000
+        },
+        {
+          "level": 17,
+          "role_level": 85,
+          "spirit": 590000
+        },
+        {
+          "level": 18,
+          "role_level": 90,
+          "spirit": 900000
+        },
+        {
+          "level": 19,
+          "role_level": 95,
+          "spirit": 1400000
+        },
+        {
+          "level": 20,
+          "role_level": 100,
+          "spirit": 2000000
+        },
+        {
+          "level": 21,
+          "role_level": 105,
+          "spirit": 3100000
+        },
+        {
+          "level": 22,
+          "role_level": 110,
+          "spirit": 4600000
+        },
+        {
+          "level": 23,
+          "role_level": 115,
+          "spirit": 6900000
+        },
+        {
+          "level": 24,
+          "role_level": 120,
+          "spirit": 10000000
+        },
+        {
+          "level": 25,
+          "role_level": 125,
+          "spirit": 15000000
+        },
+        {
+          "level": 26,
+          "role_level": 130,
+          "spirit": 23000000
+        },
+        {
+          "level": 27,
+          "role_level": 135,
+          "spirit": 33000000
+        },
+        {
+          "level": 28,
+          "role_level": 140,
+          "spirit": 49000000
+        },
+        {
+          "level": 29,
+          "role_level": 145,
+          "spirit": 72000000
+        },
+        {
+          "level": 30,
+          "role_level": 150,
+          "spirit": 110000000
+        },
+        {
+          "level": 31,
+          "role_level": 155,
+          "spirit": 117000000
+        },
+        {
+          "level": 32,
+          "role_level": 160,
+          "spirit": 152000000
+        },
+        {
+          "level": 33,
+          "role_level": 165,
+          "spirit": 216000000
+        },
+        {
+          "level": 34,
+          "role_level": 170,
+          "spirit": 304000000
+        },
+        {
+          "level": 35,
+          "role_level": 175,
+          "spirit": 371000000
+        }
+      ]
+    },
+    {
+      "id": 1301010,
+      "ability": "",
+      "name": "重击",
+      "description": "普通攻击的最后一击必定暴击",
+      "upgrade_description": "技能伤害提升",
+      "type": 2,
+      "order": 20,
+      "grade": 0,
+      "available": true,
+      "initial_level": 1,
+      "icon": "res://assets/ui/skills/1301010.png",
+      "mp": [
+        0.0
+      ],
+      "cooldown": [
+        0.0
+      ],
+      "levels": []
+    },
+    {
+      "id": 1201010,
+      "ability": "sunwukong_wushuang",
+      "name": "悟空无双",
+      "description": "伤害、暴击、移速提升",
+      "upgrade_description": "技能伤害提升",
+      "type": 3,
+      "order": 30,
+      "grade": 0,
+      "available": true,
+      "initial_level": 1,
+      "icon": "res://assets/ui/skills/1201010.png",
+      "mp": [
+        0.0
+      ],
+      "cooldown": [
+        0.0
+      ],
+      "levels": []
+    }
+  ],
+  "evidence": {
+    "archive_sha256": "754e4db204d396151fedd0a510aa80f3283a616b29c4a3483ed1f4deb1c0c8c3",
+    "ui": "skill_20260119_1.swf / keyboardSet_20260413_1.swf",
+    "passive": "BattleModelManager.as: source skill 1001050 + passive 1301010 => critRate=1"
+  }
+}

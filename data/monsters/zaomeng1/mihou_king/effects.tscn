@@ -1,0 +1,224 @@
+[gd_scene format=3]
+[ext_resource type="Script" path="res://addons/battle_foundation/animation/BattleSpineEffectPreview2D.cs" id="preview"]
+[ext_resource type="SpineSkeletonDataResource" path="res://assets/effects/mihouwang/attack1/spinedata.tres" id="attack1"]
+[ext_resource type="SpineSkeletonDataResource" path="res://assets/effects/mihouwang/attack2/spinedata.tres" id="attack2"]
+[ext_resource type="SpineSkeletonDataResource" path="res://assets/effects/mihouwang/attack3/spinedata.tres" id="attack3"]
+[ext_resource type="SpineSkeletonDataResource" path="res://assets/effects/mihouwang/attack4/spinedata.tres" id="attack4"]
+[ext_resource type="SpineSkeletonDataResource" path="res://assets/effects/mihouwang/jumpattack/spinedata.tres" id="jumpattack"]
+[ext_resource type="SpineSkeletonDataResource" path="res://assets/effects/mihouwang/skill2/spinedata.tres" id="skill2"]
+[ext_resource type="SpineSkeletonDataResource" path="res://assets/effects/mihouwang/skill3/spinedata.tres" id="skill3"]
+[sub_resource type="Animation" id="attack1_build"]
+length = 0.2833333333333333
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:animation_name")
+tracks/0/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": ["build"]}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:loop")
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [false]}
+[sub_resource type="Animation" id="attack1_RESET"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:animation_name")
+tracks/0/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [""]}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:loop")
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [false]}
+[sub_resource type="AnimationLibrary" id="attack1"]
+_data = {&"build": SubResource("attack1_build"), &"RESET": SubResource("attack1_RESET")}
+[sub_resource type="Animation" id="attack2_build"]
+length = 0.45
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:animation_name")
+tracks/0/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": ["build"]}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:loop")
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [false]}
+[sub_resource type="Animation" id="attack2_RESET"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:animation_name")
+tracks/0/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [""]}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:loop")
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [false]}
+[sub_resource type="AnimationLibrary" id="attack2"]
+_data = {&"build": SubResource("attack2_build"), &"RESET": SubResource("attack2_RESET")}
+[sub_resource type="Animation" id="attack3_build"]
+length = 0.38333333333333336
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:animation_name")
+tracks/0/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": ["build"]}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:loop")
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [false]}
+[sub_resource type="Animation" id="attack3_RESET"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:animation_name")
+tracks/0/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [""]}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:loop")
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [false]}
+[sub_resource type="AnimationLibrary" id="attack3"]
+_data = {&"build": SubResource("attack3_build"), &"RESET": SubResource("attack3_RESET")}
+[sub_resource type="Animation" id="attack4_build"]
+length = 0.4666666666666667
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:animation_name")
+tracks/0/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": ["build"]}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:loop")
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [false]}
+[sub_resource type="Animation" id="attack4_RESET"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:animation_name")
+tracks/0/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [""]}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:loop")
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [false]}
+[sub_resource type="AnimationLibrary" id="attack4"]
+_data = {&"build": SubResource("attack4_build"), &"RESET": SubResource("attack4_RESET")}
+[sub_resource type="Animation" id="jumpattack_build"]
+length = 0.4166666666666667
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:animation_name")
+tracks/0/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": ["build"]}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:loop")
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [false]}
+[sub_resource type="Animation" id="jumpattack_RESET"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:animation_name")
+tracks/0/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [""]}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:loop")
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [false]}
+[sub_resource type="AnimationLibrary" id="jumpattack"]
+_data = {&"build": SubResource("jumpattack_build"), &"RESET": SubResource("jumpattack_RESET")}
+[sub_resource type="Animation" id="skill2_build"]
+length = 0.4666666666666667
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:animation_name")
+tracks/0/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": ["build"]}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:loop")
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [false]}
+[sub_resource type="Animation" id="skill2_RESET"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:animation_name")
+tracks/0/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [""]}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:loop")
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [false]}
+[sub_resource type="AnimationLibrary" id="skill2"]
+_data = {&"build": SubResource("skill2_build"), &"RESET": SubResource("skill2_RESET")}
+[sub_resource type="Animation" id="skill3_build"]
+length = 3.6333333333333333
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:animation_name")
+tracks/0/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": ["build"]}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:loop")
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [false]}
+[sub_resource type="Animation" id="skill3_RESET"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:animation_name")
+tracks/0/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [""]}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:loop")
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [false]}
+[sub_resource type="AnimationLibrary" id="skill3"]
+_data = {&"build": SubResource("skill3_build"), &"RESET": SubResource("skill3_RESET")}
+[node name="AttackEffects" type="Node2D"]
+process_priority = 100
+z_index = 1
+scale = Vector2(3,3)
+script = ExtResource("preview")
+[node name="attack1" type="SpineSprite" parent="."]
+visible = false
+skeleton_data_res = ExtResource("attack1")
+update_mode = 2
+preview_skin = "default"
+preview_animation = "-- Empty --"
+preview_frame = false
+[node name="SpineAnimationTrack" type="SpineAnimationTrack" parent="attack1"]
+mix_duration = 0.0
+[node name="AnimationPlayer" type="AnimationPlayer" parent="attack1/SpineAnimationTrack"]
+callback_mode_process = 2
+libraries/ = SubResource("attack1")
+[node name="attack2" type="SpineSprite" parent="."]
+visible = false
+skeleton_data_res = ExtResource("attack2")
+update_mode = 2
+preview_skin = "default"
+preview_animation = "-- Empty --"
+preview_frame = false
+[node name="SpineAnimationTrack" type="SpineAnimationTrack" parent="attack2"]
+mix_duration = 0.0
+[node name="AnimationPlayer" type="AnimationPlayer" parent="attack2/SpineAnimationTrack"]
+callback_mode_process = 2
+libraries/ = SubResource("attack2")
+[node name="attack3" type="SpineSprite" parent="."]
+visible = false
+skeleton_data_res = ExtResource("attack3")
+update_mode = 2
+preview_skin = "default"
+preview_animation = "-- Empty --"
+preview_frame = false
+[node name="SpineAnimationTrack" type="SpineAnimationTrack" parent="attack3"]
+mix_duration = 0.0
+[node name="AnimationPlayer" type="AnimationPlayer" parent="attack3/SpineAnimationTrack"]
+callback_mode_process = 2
+libraries/ = SubResource("attack3")
+[node name="attack4" type="SpineSprite" parent="."]
+visible = false
+skeleton_data_res = ExtResource("attack4")
+update_mode = 2
+preview_skin = "default"
+preview_animation = "-- Empty --"
+preview_frame = false
+[node name="SpineAnimationTrack" type="SpineAnimationTrack" parent="attack4"]
+mix_duration = 0.0
+[node name="AnimationPlayer" type="AnimationPlayer" parent="attack4/SpineAnimationTrack"]
+callback_mode_process = 2
+libraries/ = SubResource("attack4")
+[node name="jumpattack" type="SpineSprite" parent="."]
+visible = false
+skeleton_data_res = ExtResource("jumpattack")
+update_mode = 2
+preview_skin = "default"
+preview_animation = "-- Empty --"
+preview_frame = false
+[node name="SpineAnimationTrack" type="SpineAnimationTrack" parent="jumpattack"]
+mix_duration = 0.0
+[node name="AnimationPlayer" type="AnimationPlayer" parent="jumpattack/SpineAnimationTrack"]
+callback_mode_process = 2
+libraries/ = SubResource("jumpattack")
+[node name="skill2" type="SpineSprite" parent="."]
+visible = false
+skeleton_data_res = ExtResource("skill2")
+update_mode = 2
+preview_skin = "default"
+preview_animation = "-- Empty --"
+preview_frame = false
+[node name="SpineAnimationTrack" type="SpineAnimationTrack" parent="skill2"]
+mix_duration = 0.0
+[node name="AnimationPlayer" type="AnimationPlayer" parent="skill2/SpineAnimationTrack"]
+callback_mode_process = 2
+libraries/ = SubResource("skill2")
+[node name="skill3" type="SpineSprite" parent="."]
+visible = false
+skeleton_data_res = ExtResource("skill3")
+update_mode = 2
+preview_skin = "default"
+preview_animation = "-- Empty --"
+preview_frame = false
+[node name="SpineAnimationTrack" type="SpineAnimationTrack" parent="skill3"]
+mix_duration = 0.0
+[node name="AnimationPlayer" type="AnimationPlayer" parent="skill3/SpineAnimationTrack"]
+callback_mode_process = 2
+libraries/ = SubResource("skill3")

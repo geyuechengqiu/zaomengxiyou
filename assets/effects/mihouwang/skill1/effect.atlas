@@ -1,0 +1,16 @@
+atlas.png
+size:422,660
+filter:Linear,Linear
+pma:false
+collisionRect
+bounds:332,0,10,10
+mihouwang_skill1_1_5
+bounds:166,0,164,218
+mihouwang_skill1_1_2
+bounds:0,440,164,218
+mihouwang_skill1_1_7
+bounds:0,0,164,218
+mihouwang_skill1_1_1
+bounds:0,220,164,218
+mihouwang_skill1_1_3
+bounds:166,220,164,218

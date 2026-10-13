@@ -159,13 +159,14 @@ public partial class BattleMotionController2D : Node
     public void clear_impulse() { impulse_speed = impulse_remaining = 0; reaction_gravity = -1; }
     private void Sweep(Vector2 displacement, float floorCos)
     {
+        if (displacement.IsZeroApprox()) return;
         var remaining = displacement;
         for (int i = 0; i < 6; ++i)
         {
             var collision = body.MoveAndCollide(Limit(remaining));
             if (collision == null) break;
             var normal = collision.GetNormal();
-            if (normal.Dot(Vector2.Up) >= floorCos)
+            if (normal.Dot(Vector2.Up) + 0.00001f >= floorCos)
             {
                 grounded = true;
                 // Sliding on a slope must not launch the body when its impulse ends.
@@ -192,6 +193,20 @@ public partial class BattleMotionController2D : Node
         if (grounded && !wasGrounded) { just_landed = true; ++landing_serial; jumps_used = 0; }
         if (grounded) reaction_gravity = -1;
     }
+    private void SnapToFloor(float horizontalTravel, Resource profile, float floorCos)
+    {
+        // Descending ground can move farther down than a fixed 3px probe in one tick.
+        float distance = profile.Get("floor_snap_distance").AsSingle()
+            + Math.Abs(horizontalTravel) * MathF.Tan(profile.Get("maximum_floor_angle").AsSingle());
+        var support = body.MoveAndCollide(Vector2.Down * distance, true);
+        grounded = support != null && support.GetNormal().Dot(Vector2.Up) + 0.00001f >= floorCos;
+        if (!grounded) return;
+        // A grounded, stationary capsule must not repeatedly run margin recovery:
+        // each recovery along a slope normal otherwise nudges it sideways.
+        if (support!.GetTravel().Y > body.SafeMargin + .001f)
+            body.MoveAndCollide(Vector2.Down * distance);
+        body.Velocity = new(body.Velocity.X, 0);
+    }
     public void sweep_skill_displacement(Vector2 displacement, Resource profile)
     {
         if (displacement.IsZeroApprox()) return;
@@ -199,11 +214,7 @@ public partial class BattleMotionController2D : Node
         float floorCos = MathF.Cos(profile.Get("maximum_floor_angle").AsSingle());
         if (displacement.Y < 0) grounded = false;
         Sweep(displacement, floorCos);
-        if (grounded)
-        {
-            var support = body.MoveAndCollide(Vector2.Down * profile.Get("floor_snap_distance").AsSingle(), true);
-            if (support == null || support.GetNormal().Dot(Vector2.Up) < floorCos) grounded = false;
-        }
+        if (wasGrounded && displacement.Y >= 0) SnapToFloor(displacement.X, profile, floorCos);
         Land(wasGrounded);
     }
     public void advance(double delta, double horizontal_speed, Resource profile, double gravity_scale)
@@ -216,7 +227,6 @@ public partial class BattleMotionController2D : Node
         float floorCos = MathF.Cos(profile.Get("maximum_floor_angle").AsSingle());
         double gravity = profile.Get("gravity").AsDouble();
         float maxFall = profile.Get("maximum_fall_speed").AsSingle();
-        float snapDistance = profile.Get("floor_snap_distance").AsSingle();
         for (int tick = 0; tick < count; ++tick)
         {
             RestoreSupports();
@@ -226,18 +236,12 @@ public partial class BattleMotionController2D : Node
             float x = (float)(horizontal_speed + impulse_speed * impulseDelta / dt);
             impulse_remaining = Math.Max(0, impulse_remaining - dt);
             double effectiveGravity = reaction_gravity >= 0 ? reaction_gravity : gravity;
-            body.Velocity = new(x, Math.Min((float)(body.Velocity.Y + effectiveGravity * gravity_scale * dt), maxFall));
+            // Gravity projected along a floor tangent made even idle actors slide.
+            float y = wasGrounded && body.Velocity.Y >= 0 ? 0
+                : Math.Min((float)(body.Velocity.Y + effectiveGravity * gravity_scale * dt), maxFall);
+            body.Velocity = new(x, y);
             Sweep(body.Velocity * (float)dt, floorCos);
-            if (!grounded && wasGrounded && body.Velocity.Y >= 0)
-            {
-                var support = body.MoveAndCollide(Vector2.Down * snapDistance, true);
-                if (support != null && support.GetNormal().Dot(Vector2.Up) >= floorCos)
-                {
-                    body.MoveAndCollide(support.GetTravel());
-                    grounded = true;
-                    body.Velocity = new(body.Velocity.X, 0);
-                }
-            }
+            if (wasGrounded && body.Velocity.Y >= 0) SnapToFloor(x * (float)dt, profile, floorCos);
             Land(wasGrounded);
             RestoreSupports();
         }

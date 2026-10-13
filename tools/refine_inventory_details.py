@@ -122,7 +122,7 @@ def author():
     tip+='[node name="ItemTooltip" type="Control"]\noffset_right = 260\noffset_bottom = 300\nmouse_filter = 2\nscript = ExtResource("script")\n'
     # BasicTips explicitly uses Rectangle(45,30,1,1) on the 75x60 bitmap.
     tip+=node('Background','NinePatchRect','.','layout_mode = 1\nanchors_preset = 15\nanchor_right = 1.0\nanchor_bottom = 1.0\nmouse_filter = 2\ntexture = ExtResource("bg")\npatch_margin_left = 45\npatch_margin_right = 29\npatch_margin_top = 30\npatch_margin_bottom = 29')
-    tip+=label('Name','.',20,15,215,24,'',18,'Color(1,1,1,1)')+'theme_override_colors/font_outline_color = Color(0,0,0,1)\ntheme_override_constants/outline_size = 2\n'
+    tip+=label('Name','.',20,15,215,24,'',18,'Color(1,1,1,1)')+'theme_override_colors/font_outline_color = Color(0,0,0,1)\ntheme_override_constants/outline_size = 2\ntheme_override_colors/font_shadow_color = Color(0,0,0,0.35)\ntheme_override_constants/shadow_offset_x = 0\ntheme_override_constants/shadow_offset_y = 0\ntheme_override_constants/shadow_outline_size = 1\n'
     for id,y in [('quality',40),('type',65),('level',90)]:
         tip+=node(id.capitalize()+'Row','TextureRect','.',rect(13,y,234,23)+f'mouse_filter = 2\ntexture = ExtResource("{id}")\nexpand_mode = 1')
         tip+=label(id.capitalize(),'.',70,y,174,23,'',16,'Color(1,1,1,1)')

@@ -11,14 +11,17 @@ config_version=5
 [application]
 
 config/name="zaomengxiyou"
-run/main_scene="res://game/levels/biyujing.tscn"
+run/main_scene="res://game/world_map/zaomeng1_world_map.tscn"
 config/features=PackedStringArray("4.7", "C#", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
 
+UiModalManager="*res://addons/battle_foundation/ui/UiModalManager.cs"
 CoreSystem="*res://addons/godot_core_system-0.0.4/source/core_system.gd"
+BattleAudioPreferences="*res://addons/battle_foundation/audio/BattleAudioPreferences.cs"
 CoreLifetime="*res://addons/battle_foundation/integration/CoreLifetime.cs"
+ZaomengOneCampaign="*res://game/campaign/ZaomengOneCampaign.cs"
 GameplayAbilitySystem="*uid://u2lf4qtnkmft"
 DamageCalculator="*uid://b2jxgcjagrkdx"
 TagManager="*uid://crdi6238nttlg"

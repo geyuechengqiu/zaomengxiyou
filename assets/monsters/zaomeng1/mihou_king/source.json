@@ -1,0 +1,194 @@
+{
+  "source": "Monster_v1.swf",
+  "symbol": "export.monster.Monster4",
+  "original_labels": {
+    "walk": [
+      {
+        "instance": "body",
+        "character_id": 466,
+        "classes": [],
+        "x": -15.0,
+        "y": 0.0,
+        "scale_x": 1.0,
+        "scale_y": 1.0
+      },
+      {
+        "instance": "colipse",
+        "character_id": 22,
+        "classes": [],
+        "x": 0.7,
+        "y": -0.05,
+        "scale_x": 0.59994507,
+        "scale_y": 1.333313
+      }
+    ],
+    "hit3": [
+      {
+        "instance": "body",
+        "character_id": 471,
+        "classes": [
+          "Monster_fla.元件14ssssss_8"
+        ],
+        "x": 5.9,
+        "y": 1.05,
+        "scale_x": 1.0,
+        "scale_y": 1.0
+      },
+      {
+        "instance": "colipse",
+        "character_id": 22,
+        "classes": [],
+        "x": 0.7,
+        "y": -0.05,
+        "scale_x": 0.59994507,
+        "scale_y": 1.333313
+      }
+    ],
+    "hit2": [
+      {
+        "instance": "body",
+        "character_id": 485,
+        "classes": [
+          "Monster_fla.元件45ssss_9"
+        ],
+        "x": 26.1,
+        "y": -0.3,
+        "scale_x": 1.0,
+        "scale_y": 1.0
+      },
+      {
+        "instance": "colipse",
+        "character_id": 22,
+        "classes": [],
+        "x": 0.7,
+        "y": -0.05,
+        "scale_x": 0.59994507,
+        "scale_y": 1.333313
+      }
+    ],
+    "wait": [
+      {
+        "instance": "body",
+        "character_id": 492,
+        "classes": [],
+        "x": -9.95,
+        "y": -12.25,
+        "scale_x": 1.0,
+        "scale_y": 1.0
+      },
+      {
+        "instance": "colipse",
+        "character_id": 22,
+        "classes": [],
+        "x": 0.7,
+        "y": -0.05,
+        "scale_x": 0.59994507,
+        "scale_y": 1.333313
+      }
+    ],
+    "hurt": [
+      {
+        "instance": "body",
+        "character_id": 495,
+        "classes": [
+          "Monster_fla.受伤_16"
+        ],
+        "x": -31.95,
+        "y": -4.35,
+        "scale_x": 1.0,
+        "scale_y": 1.0
+      },
+      {
+        "instance": "colipse",
+        "character_id": 22,
+        "classes": [],
+        "x": 0.7,
+        "y": -0.05,
+        "scale_x": 0.59994507,
+        "scale_y": 1.333313
+      }
+    ],
+    "hit1": [
+      {
+        "instance": "body",
+        "character_id": 507,
+        "classes": [
+          "Monster_fla.元件3sssss_17"
+        ],
+        "x": 1.05,
+        "y": -4.35,
+        "scale_x": 1.0,
+        "scale_y": 1.0
+      },
+      {
+        "instance": "colipse",
+        "character_id": 22,
+        "classes": [],
+        "x": 0.7,
+        "y": -0.05,
+        "scale_x": 0.59994507,
+        "scale_y": 1.333313
+      }
+    ],
+    "dead": [
+      {
+        "instance": "body",
+        "character_id": 533,
+        "classes": [
+          "Monster_fla.死亡_20"
+        ],
+        "x": -28.95,
+        "y": 4.25,
+        "scale_x": 1.0,
+        "scale_y": 1.0
+      },
+      {
+        "instance": "colipse",
+        "character_id": 22,
+        "classes": [],
+        "x": 0.7,
+        "y": -0.05,
+        "scale_x": 0.59994507,
+        "scale_y": 1.333313
+      }
+    ]
+  },
+  "semantic_actions": {
+    "idle": "wait",
+    "move": "walk",
+    "run": "walk",
+    "jump": "walk",
+    "jump_2": "walk",
+    "fall": "walk",
+    "land": "wait",
+    "hurt": "hurt",
+    "recover": "afterHurt",
+    "protect": "afterHurt",
+    "death": "dead",
+    "attack_1": "hit1",
+    "attack_2": "hit2",
+    "attack_3": "hit3"
+  },
+  "foot_origin": 62.05,
+  "actions": {
+    "idle": 0.5,
+    "move": 0.4,
+    "run": 0.4,
+    "jump": 0.4,
+    "jump_2": 0.4,
+    "fall": 0.4,
+    "land": 0.5,
+    "hurt": 0.36666666666666664,
+    "recover": 0.36666666666666664,
+    "protect": 0.36666666666666664,
+    "death": 0.8333333333333334,
+    "attack_1": 0.5666666666666667,
+    "attack_2": 2.533333333333333,
+    "attack_3": 1.7666666666666666
+  },
+  "attribute_source": "data/monsters/jushi_lingjun/attributes.tres",
+  "source_fps": 24,
+  "loaded_display_fps": 30,
+  "source_facing": -1,
+  "logical_facing": 1
+}

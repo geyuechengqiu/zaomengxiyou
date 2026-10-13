@@ -1,0 +1,57 @@
+{
+  "format": "Spine 4.3 sampled skeletal transforms",
+  "source": "DragonBones 2.2 mihouwang",
+  "fps": 60,
+  "source_actions": {
+    "idle": 1.4166666666666667,
+    "run": 0.6,
+    "runattack": 0.65,
+    "attack1": 0.31666666666666665,
+    "attack2": 0.35,
+    "attack3": 0.23333333333333334,
+    "attack4": 0.7,
+    "skill1": 0.85,
+    "passiveskill1": 0.5833333333333334,
+    "skill3": 3.65,
+    "skill2": 0.9833333333333333,
+    "hurt": 0.23333333333333334,
+    "jump": 0.15,
+    "jumpattack": 0.3333333333333333,
+    "doublejump": 0.18333333333333332,
+    "jumpdown": 0.13333333333333333,
+    "dead": 0.7166666666666667,
+    "ground": 0.9666666666666667,
+    "bound": 0.3333333333333333,
+    "swimming": 0.31666666666666665,
+    "ride": 0.6666666666666666
+  },
+  "gameplay_aliases": {
+    "move": "run",
+    "jump_2": "doublejump",
+    "fall": "jumpdown",
+    "land": "ground",
+    "recover": "ground",
+    "protect": "passiveskill1",
+    "death": "dead"
+  },
+  "gameplay_attack_durations": {
+    "runattack": 0.65,
+    "attack1": 0.31666666666666665,
+    "attack2": 0.35,
+    "attack3": 0.23333333333333334,
+    "attack4": 0.7,
+    "skill1": 0.85,
+    "skill3": 3.65,
+    "skill2": 0.9833333333333333,
+    "jumpattack": 0.3333333333333333
+  },
+  "bones": 59,
+  "regions": 119,
+  "nested_armatures": 3,
+  "display_scale": 3.0,
+  "source_hashes": {
+    "mihouwang.plist": "9018ec41d225b40b4ce5c166464a3a86a2f6ab1e587f6dc843ce4d5b76405e70",
+    "mihouwang.png": "370fc64e08b2455c6a076392e397ce688e9f78b91277bde6a724adc51cb1ec76",
+    "mihouwang.xml": "ef0aeceea787f2980d02623cb8c62f05dad59ee0aed1c93fec340b2db8a97ec4"
+  }
+}

@@ -70,16 +70,19 @@ def monster(kind, symbol, bounds):
         if action == 'wait': foot = max(y+im.height for im,x,y in frames)
     aliases = {'idle':'wait', 'move':'walk', 'run':'walk', 'jump':'walk', 'jump_2':'walk', 'fall':'walk',
                'land':'wait', 'hurt':'hurt', 'recover':'afterHurt', 'protect':'afterHurt', 'death':'dead', 'attack_1':'hit1'}
+    for index in (2, 3):
+        if f'hit{index}' in frame_data: aliases[f'attack_{index}'] = f'hit{index}'
     # Pack deduplicated trimmed source pixels. One constant foot origin across every action.
     regions, attachments, animations, lengths, positions = {}, {}, {}, {}, {}
-    atlas = Image.new('RGBA', (2048,2048))
+    atlas_size = 4096 if kind == 4 else 2048
+    atlas = Image.new('RGBA', (atlas_size,atlas_size))
     x = y = row = 2
     for original, frames in frame_data.items():
         for index,(im,px,py) in enumerate(frames):
             digest = hashlib.sha256(im.tobytes()+str(im.size).encode()).hexdigest()
             if digest not in positions:
-                if x+im.width+2 > 2048: x=2; y+=row+4; row=0
-                if y+im.height+2 > 2048: raise ValueError('Atlas exceeds 2048px')
+                if x+im.width+2 > atlas_size: x=2; y+=row+4; row=0
+                if y+im.height+2 > atlas_size: raise ValueError('Atlas exceeds page size')
                 region = 'region_' + str(len(regions))
                 regions[region] = [x,y,im.width,im.height]
                 atlas.paste(im,(x,y)); positions[digest] = region
@@ -94,8 +97,8 @@ def monster(kind, symbol, bounds):
         animations[action] = {'slots':{'Body':{'attachment':[{'time':round(i/30,9), 'name':original+'_'+str(i)} for i in range(len(frames))]}},
                               'bones':{'root':{'translate':[{'time':duration, 'x':0, 'y':0}]}}}
     asset.mkdir(parents=True, exist_ok=True)
-    atlas.crop((0,0,2048,y+row+2)).save(asset/'atlas.png')
-    write(asset/'monster.atlas', f'atlas.png\nsize:2048,{y+row+2}\nfilter:Linear,Linear\npma:false\n'+''.join(f'{n}\nbounds:{x},{y},{w},{h}\n' for n,(x,y,w,h) in regions.items()))
+    atlas.crop((0,0,atlas_size,y+row+2)).save(asset/'atlas.png')
+    write(asset/'monster.atlas', f'atlas.png\nsize:{atlas_size},{y+row+2}\nfilter:Linear,Linear\npma:false\n'+''.join(f'{n}\nbounds:{x},{y},{w},{h}\n' for n,(x,y,w,h) in regions.items()))
     # ZMX1's source bodies face left; normalize to the project's logical +X attack direction.
     dump(asset/'monster.spine-json', {'skeleton':{'spine':'4.3.00','fps':30,'images':'./'}, 'bones':[{'name':'root'},{'name':'Body','parent':'root','scaleX':-1}],
                                     'slots':[{'name':'Body','bone':'Body'}], 'skins':[{'name':'基础','attachments':{'Body':attachments}}], 'animations':animations})
@@ -141,7 +144,7 @@ socket_bones = Dictionary[StringName, StringName]({{&"root": &"root"}})
     scene = re.sub(r'height = 220.0', f'height = {body_height}', scene).replace('Vector2(0, -110)',f'Vector2(0, {-body_height/2})')
     scene = re.sub(r'size = Vector2\([\d.]+, [\d.]+\)', f'size = Vector2({body_height*.8}, {body_height})',scene, count=1)
     scene = re.sub(r'position = Vector2\(0.0, -[\d.]+\)', f'position = Vector2(0, {-body_height/2})',scene,count=1)
-    if kind == 3:
+    if base == 'jushi_lingjun':
         scene = scene.replace('data/monsters/jushi_lingjun/boss.tres', f'data/monsters/{name}/boss.tres')
         scene = re.sub(r'\[ext_resource[^\n]*id="(?:note|wall)"[^\n]*\]\n', '', scene)
         scene = re.sub(r'\[node name="(?:Note|Wall)\d+"[^\n]*\]\n', '', scene)

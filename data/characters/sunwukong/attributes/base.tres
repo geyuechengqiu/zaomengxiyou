@@ -32,9 +32,13 @@
 
 [ext_resource type="Resource" path="res://data/attribute/xpMax.tres" id="xpMax"]
 
+[ext_resource type="Resource" path="res://data/attribute/attackSpeed.tres" id="attackSpeed"]
+[ext_resource type="Resource" path="res://data/attribute/baseRunSpeed.tres" id="baseRunSpeed"]
 [resource]
 script = ExtResource("script")
 attributes = {
+ExtResource("baseRunSpeed"): 600.0,
+ExtResource("attackSpeed"): 1.0,
 ExtResource("xpMax"): 10000.0,
 ExtResource("atk"): 26.0,
 ExtResource("phyDef"): 5.0,

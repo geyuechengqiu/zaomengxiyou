@@ -3,6 +3,7 @@
 [ext_resource type="JSON" path="res://data/levels/huaguoshan/audio.json" id="audio"]
 [ext_resource type="PackedScene" path="res://data/templates/battle_level_base.tscn" id="base"]
 [ext_resource type="Script" uid="uid://ddierwgwe1dmw" path="res://addons/battle_foundation/level/BattleSpawnBudget.cs" id="budget"]
+[ext_resource type="PackedScene" path="res://data/ui/campaign_result.tscn" id="campaign_result"]
 [ext_resource type="PackedScene" path="res://data/levels/huaguoshan/map.tscn" id="map"]
 [ext_resource type="Script" uid="uid://cdo348vx3asf3" path="res://game/levels/Huaguoshan.cs" id="script"]
 
@@ -38,8 +39,14 @@ position = Vector2(4683, 243)
 [node name="huaguoshan_birth_15" parent="BattleSession/Actors/SpawnPoints" index="11"]
 position = Vector2(5246, 588)
 
+[node name="FinalExit" parent="BattleSession/Actors" index="7"]
+position = Vector2(9194, 873)
+
 [node name="Gateway" parent="BattleSession/Actors/FinalExit" index="0"]
 visible = true
-position = Vector2(-303.2998, -99.29999)
+
+[node name="CampaignResult" parent="HUD" parent_id_path=PackedInt32Array(1387049266) index="5" unique_id=834986158 instance=ExtResource("campaign_result")]
+layout_mode = 3
+anchors_preset = 0
 
 [editable path="BattleSession/Actors"]

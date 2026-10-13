@@ -62,7 +62,7 @@ path=PROJECT/'addons/battle_foundation/boss/battle_boss_feedback_2d.tscn'
 text=path.read_text(encoding='utf8')
 text=re.sub(r'^\[ext_resource .* id="(?:font_name|font_count|protect_border|resist_\w+)"\]\n','',text,flags=re.M)
 text=text.replace('path="res://assets/ui/boss/protect.png"','path="res://assets/ui/boss/protect_fill.png"')
-resources='[ext_resource type="FontFile" path="res://assets/ui/boss/name.ttf" id="font_name"]\n[ext_resource type="FontFile" path="res://assets/ui/boss/count.ttf" id="font_count"]\n'
+resources='[ext_resource type="FontFile" path="res://assets/ui/fonts/huakang_haibao_w12.ttf" id="font_name"]\n[ext_resource type="FontFile" path="res://assets/ui/boss/count.ttf" id="font_count"]\n'
 for key in resists:
     for sign in ['Add','Remove']: resources+=f'[ext_resource type="Texture2D" path="res://assets/ui/boss/resist/{key}{sign}.png" id="resist_{key}{sign}"]\n'
 resources+='[ext_resource type="Texture2D" path="res://assets/ui/boss/protect_background.png" id="protect_border"]\n'

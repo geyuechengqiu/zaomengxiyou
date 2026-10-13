@@ -1,0 +1,6 @@
+{
+  "source": "造梦西游1/Music.swf",
+  "symbol": "begin",
+  "usage": "GMain.showStageMap -> SoundManager.play(begin)",
+  "sha256": "02c43f028d415bb7d4c218007d0aeee71feba5ffbe03281ce499156bc740c61c"
+}

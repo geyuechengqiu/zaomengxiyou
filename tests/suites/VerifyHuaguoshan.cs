@@ -209,6 +209,12 @@ public partial class VerifyHuaguoshan : Node
         if (id != "battle.spawn_plan.spawned") return;
         ++_spawned;
         var actor = _session.Call("get_entity", data["entity_id"]).AsGodotObject();
+        if (actor.Get("definition_id").AsStringName() == "花果山大猩猩")
+        {
+            var audio = _session.Get("audio").AsGodotObject();
+            Check(audio.Get("current_music").AsString() == "boss_01" && audio.Get("music").As<AudioStreamPlayer>().Playing,
+                "大猩猩登场切换并播放碧玉径原版Boss音乐");
+        }
         var region = Regions[_flow.Get("current_region_index").AsInt32()].AsGodotObject().Get("definition").AsGodotObject().Get("bounds").AsRect2();
         var birth = ((Node2D)actor).GlobalPosition;
         Check(birth.X >= region.Position.X + 180 && birth.X <= region.Position.X + 1880 - 180, "怪物出生在战斗视口安全范围 " + birth);

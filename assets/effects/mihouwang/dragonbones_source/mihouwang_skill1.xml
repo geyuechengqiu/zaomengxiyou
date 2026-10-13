@@ -1,0 +1,67 @@
+<skeleton name="mihouwang_skill1" frameRate="60" version="2.2">
+  <armatures>
+    <armature name="mihouwang_skill1">
+      <b name="add1" x="0.35" y="-79.35" kX="0" kY="0" cX="1" cY="1" pX="82" pY="109" z="0">
+        <d name="mihouwang_skill1_1_3" pX="0" pY="0"/>
+        <d name="mihouwang_skill1_1_1" pX="0" pY="0"/>
+        <d name="mihouwang_skill1_1_7" pX="0" pY="0"/>
+        <d name="mihouwang_skill1_1_2" pX="0" pY="0"/>
+        <d name="mihouwang_skill1_1_5" pX="0" pY="0"/>
+      </b>
+      <b name="collision" x="-2.25" y="-84.5" kX="0" kY="0" cX="15.07" cY="20.05" pX="5.05" pY="4.95" z="1">
+        <d name="collisionRect" pX="0" pY="0"/>
+      </b>
+    </armature>
+  </armatures>
+  <animations>
+    <animation name="mihouwang_skill1">
+      <mov name="build" dr="60" to="0" drTW="60" twE="NaN" lp="1">
+        <b name="add1" sc="1" dl="0">
+          <f x="0.35" y="-79.35" cocos2d_x="-81.65" cocos2d_y="-188.35" kX="0" kY="0" cX="1" cY="1" pX="82" pY="109" z="0" dI="0" twE="NaN" tweenFrame="0" dr="2"/>
+          <f x="0.35" y="-79.35" cocos2d_x="-81.65" cocos2d_y="-188.35" kX="0" kY="0" cX="1" cY="1" pX="82" pY="109" z="0" dI="1" twE="NaN" tweenFrame="0" dr="2"/>
+          <f x="0.35" y="-79.35" cocos2d_x="-81.65" cocos2d_y="-188.35" kX="0" kY="0" cX="1" cY="1" pX="82" pY="109" z="0" dI="2" twE="NaN" tweenFrame="0" dr="2"/>
+          <f x="0.35" y="-79.35" cocos2d_x="-81.65" cocos2d_y="-188.35" kX="0" kY="0" cX="1" cY="1" pX="82" pY="109" z="0" dI="3" twE="NaN" tweenFrame="0" dr="2"/>
+          <f x="0.35" y="-79.35" cocos2d_x="-81.65" cocos2d_y="-188.35" kX="0" kY="0" cX="1" cY="1" pX="82" pY="109" z="0" dI="4" twE="NaN" tweenFrame="0" dr="2"/>
+          <f x="0.35" y="-79.35" cocos2d_x="-81.65" cocos2d_y="-188.35" kX="0" kY="0" cX="1" cY="1" pX="82" pY="109" z="0" dI="0" twE="NaN" tweenFrame="0" dr="2"/>
+          <f x="0.35" y="-79.35" cocos2d_x="-81.65" cocos2d_y="-188.35" kX="0" kY="0" cX="1" cY="1" pX="82" pY="109" z="0" dI="1" twE="NaN" tweenFrame="0" dr="2"/>
+          <f x="0.35" y="-79.35" cocos2d_x="-81.65" cocos2d_y="-188.35" kX="0" kY="0" cX="1" cY="1" pX="82" pY="109" z="0" dI="2" twE="NaN" tweenFrame="0" dr="2"/>
+          <f x="0.35" y="-79.35" cocos2d_x="-81.65" cocos2d_y="-188.35" kX="0" kY="0" cX="1" cY="1" pX="82" pY="109" z="0" dI="3" twE="NaN" tweenFrame="0" dr="2"/>
+          <f x="0.35" y="-79.35" cocos2d_x="-81.65" cocos2d_y="-188.35" kX="0" kY="0" cX="1" cY="1" pX="82" pY="109" z="0" dI="4" twE="NaN" tweenFrame="0" dr="2"/>
+          <f x="0.35" y="-79.35" cocos2d_x="-81.65" cocos2d_y="-188.35" kX="0" kY="0" cX="1" cY="1" pX="82" pY="109" z="0" dI="0" twE="NaN" tweenFrame="0" dr="2"/>
+          <f x="0.35" y="-79.35" cocos2d_x="-81.65" cocos2d_y="-188.35" kX="0" kY="0" cX="1" cY="1" pX="82" pY="109" z="0" dI="1" twE="NaN" tweenFrame="0" dr="2"/>
+          <f x="0.35" y="-79.35" cocos2d_x="-81.65" cocos2d_y="-188.35" kX="0" kY="0" cX="1" cY="1" pX="82" pY="109" z="0" dI="2" twE="NaN" tweenFrame="0" dr="2"/>
+          <f x="0.35" y="-79.35" cocos2d_x="-81.65" cocos2d_y="-188.35" kX="0" kY="0" cX="1" cY="1" pX="82" pY="109" z="0" dI="3" twE="NaN" tweenFrame="0" dr="2"/>
+          <f x="0.35" y="-79.35" cocos2d_x="-81.65" cocos2d_y="-188.35" kX="0" kY="0" cX="1" cY="1" pX="82" pY="109" z="0" dI="4" twE="NaN" tweenFrame="0" dr="2"/>
+          <f x="0.35" y="-79.35" cocos2d_x="-81.65" cocos2d_y="-188.35" kX="0" kY="0" cX="1" cY="1" pX="82" pY="109" z="0" dI="0" twE="NaN" tweenFrame="0" dr="2"/>
+          <f x="0.35" y="-79.35" cocos2d_x="-81.65" cocos2d_y="-188.35" kX="0" kY="0" cX="1" cY="1" pX="82" pY="109" z="0" dI="1" twE="NaN" tweenFrame="0" dr="2"/>
+          <f x="0.35" y="-79.35" cocos2d_x="-81.65" cocos2d_y="-188.35" kX="0" kY="0" cX="1" cY="1" pX="82" pY="109" z="0" dI="2" twE="NaN" tweenFrame="0" dr="2"/>
+          <f x="0.35" y="-79.35" cocos2d_x="-81.65" cocos2d_y="-188.35" kX="0" kY="0" cX="1" cY="1" pX="82" pY="109" z="0" dI="3" twE="NaN" tweenFrame="0" dr="2"/>
+          <f x="0.35" y="-79.35" cocos2d_x="-81.65" cocos2d_y="-188.35" kX="0" kY="0" cX="1" cY="1" pX="82" pY="109" z="0" dI="4" twE="NaN" tweenFrame="0" dr="2"/>
+          <f x="0.35" y="-79.35" cocos2d_x="-81.65" cocos2d_y="-188.35" kX="0" kY="0" cX="1" cY="1" pX="82" pY="109" z="0" dI="0" twE="NaN" tweenFrame="0" dr="2"/>
+          <f x="0.35" y="-79.35" cocos2d_x="-81.65" cocos2d_y="-188.35" kX="0" kY="0" cX="1" cY="1" pX="82" pY="109" z="0" dI="1" twE="NaN" tweenFrame="0" dr="2"/>
+          <f x="0.35" y="-79.35" cocos2d_x="-81.65" cocos2d_y="-188.35" kX="0" kY="0" cX="1" cY="1" pX="82" pY="109" z="0" dI="2" twE="NaN" tweenFrame="0" dr="2"/>
+          <f x="0.35" y="-79.35" cocos2d_x="-81.65" cocos2d_y="-188.35" kX="0" kY="0" cX="1" cY="1" pX="82" pY="109" z="0" dI="3" twE="NaN" tweenFrame="0" dr="2"/>
+          <f x="0.35" y="-79.35" cocos2d_x="-81.65" cocos2d_y="-188.35" kX="0" kY="0" cX="1" cY="1" pX="82" pY="109" z="0" dI="4" twE="NaN" tweenFrame="0" dr="2"/>
+          <f x="0.35" y="-79.35" cocos2d_x="-81.65" cocos2d_y="-188.35" kX="0" kY="0" cX="1" cY="1" pX="82" pY="109" z="0" dI="0" twE="NaN" tweenFrame="0" dr="2"/>
+          <f x="0.35" y="-79.35" cocos2d_x="-81.65" cocos2d_y="-188.35" kX="0" kY="0" cX="1" cY="1" pX="82" pY="109" z="0" dI="1" twE="NaN" tweenFrame="0" dr="2"/>
+          <f x="0.35" y="-79.35" cocos2d_x="-81.65" cocos2d_y="-188.35" kX="0" kY="0" cX="1" cY="1" pX="82" pY="109" z="0" dI="2" twE="NaN" tweenFrame="0" dr="2"/>
+          <f x="0.35" y="-79.35" cocos2d_x="-81.65" cocos2d_y="-188.35" kX="0" kY="0" cX="1" cY="1" pX="82" pY="109" z="0" dI="3" twE="NaN" tweenFrame="0" dr="2"/>
+          <f x="0.35" y="-79.35" cocos2d_x="-81.65" cocos2d_y="-188.35" kX="0" kY="0" cX="1" cY="1" pX="82" pY="109" z="0" dI="4" twE="NaN" tweenFrame="0" dr="2"/>
+        </b>
+        <b name="collision" sc="1" dl="0">
+          <f x="-2.25" y="-84.5" cocos2d_x="-78.35" cocos2d_y="-183.75" kX="0" kY="0" cX="15.07" cY="20.05" pX="5.05" pY="4.95" z="1" dI="0" twE="NaN" tweenFrame="0" dr="60">
+            <colorTransform a="0" r="0" g="0" b="0" aM="0" rM="100" gM="100" bM="100"/>
+          </f>
+        </b>
+      </mov>
+    </animation>
+  </animations>
+  <TextureAtlas name="mihouwang_skill1" width="422" height="660">
+    <SubTexture name="collisionRect" width="10" height="10" cocos2d_pX="0" cocos2d_pY="0" x="332" y="0"/>
+    <SubTexture name="mihouwang_skill1_1_5" width="164" height="218" cocos2d_pX="0" cocos2d_pY="0" x="166" y="0"/>
+    <SubTexture name="mihouwang_skill1_1_2" width="164" height="218" cocos2d_pX="0" cocos2d_pY="0" x="0" y="440"/>
+    <SubTexture name="mihouwang_skill1_1_7" width="164" height="218" cocos2d_pX="0" cocos2d_pY="0" x="0" y="0"/>
+    <SubTexture name="mihouwang_skill1_1_1" width="164" height="218" cocos2d_pX="0" cocos2d_pY="0" x="0" y="220"/>
+    <SubTexture name="mihouwang_skill1_1_3" width="164" height="218" cocos2d_pX="0" cocos2d_pY="0" x="166" y="220"/>
+  </TextureAtlas>
+</skeleton>

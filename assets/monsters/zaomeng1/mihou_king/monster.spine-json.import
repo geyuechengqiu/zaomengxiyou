@@ -1,0 +1,13 @@
+[remap]
+
+importer="spine.json"
+type="SpineSkeletonFileResource"
+uid="uid://b2ucsok75lxhh"
+path="res://.godot/imported/monster.spine-json-d312cced917d7030bbed38dedcd8e25e.spjson"
+
+[deps]
+
+source_file="res://assets/monsters/zaomeng1/mihou_king/monster.spine-json"
+dest_files=["res://.godot/imported/monster.spine-json-d312cced917d7030bbed38dedcd8e25e.spjson"]
+
+[params]

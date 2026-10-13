@@ -72,7 +72,7 @@ func _on_action(action: StringName, id: StringName) -> void:
 	var symbol := String(actor.animation.profile.animations.get(action, action))
 	var path := resolve_sound(pack, symbol)
 	if not path.is_empty():
-		var player := play_effect(path)
+		var player := play_effect(path, &"BattleSkill")
 		if player != null: _channels[id] = player
 
 func _on_level_changed(previous: int, next: int, id: StringName) -> void:
@@ -98,9 +98,9 @@ func _stream(path: String) -> AudioStream:
 	return _streams[path] as AudioStream
 
 func play_common(symbol: String) -> AudioStreamPlayer:
-	return play_effect(resolve_sound("hs", symbol))
+	return play_effect(resolve_sound("hs", symbol), &"BattleHit" if symbol == "hit" else &"SFX")
 
-func play_effect(path: String) -> AudioStreamPlayer:
+func play_effect(path: String, bus: StringName = &"BattleSkill") -> AudioStreamPlayer:
 	var stream := _stream(path)
 	if stream == null or _voices.is_empty(): return null
 	var player: AudioStreamPlayer
@@ -114,6 +114,7 @@ func play_effect(path: String) -> AudioStreamPlayer:
 		if _channels[id] == player: _channels.erase(id)
 	player.stop()
 	player.stream = stream
+	player.bus = bus
 	player.volume_db = 0.0
 	player.stream_paused = false
 	player.play()

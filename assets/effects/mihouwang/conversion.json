@@ -1,0 +1,176 @@
+{
+  "format": "Spine 4.3",
+  "effects": {
+    "attack1": {
+      "fps": 60,
+      "actions": {
+        "build": 0.2833333333333333
+      },
+      "bones": 3,
+      "nested_armatures": 0,
+      "regions": 6,
+      "source_hashes": {
+        "xml": "1dd358f202779b14b364b795f3504b0ec6242a2253cc98349c9b8232c5ab5ab1",
+        "plist": "0ce8b4c61a80392572bf03f6f2152b947c9b57cc7498f020ec775437c58bb038",
+        "png": "c97c75825c7aa16a4a8fb561b82430100220fb5e154a5d9b9465c5cfe2b10e3b"
+      },
+      "action": "attack1",
+      "start_frame": 4,
+      "placement": "actor"
+    },
+    "attack2": {
+      "fps": 60,
+      "actions": {
+        "build": 0.45
+      },
+      "bones": 3,
+      "nested_armatures": 0,
+      "regions": 2,
+      "source_hashes": {
+        "xml": "a4a9ae8bd2beb4d86c261ecc4c3df4157d95e7009309b654581304fb14c0e4c1",
+        "plist": "84dddebe7c7ddef81305932e936135bd5b53a464debcec27d6be99f173b18625",
+        "png": "2aa3d0a17c271f9e3b00e8defe10f338b979c112c71cfef4d45e609fb3032d76"
+      },
+      "action": "attack2",
+      "start_frame": 4,
+      "placement": "actor"
+    },
+    "attack3": {
+      "fps": 60,
+      "actions": {
+        "build": 0.38333333333333336
+      },
+      "bones": 6,
+      "nested_armatures": 0,
+      "regions": 9,
+      "source_hashes": {
+        "xml": "700d499bb9ba5c0ccb9eb409bebb275c55ae15526df43927c3dac913fb82c61f",
+        "plist": "2f872c218ee8eeeef66fd5811370ed150c55d06bd19273f2ca5aa4b6c210d712",
+        "png": "ca4bcc3fdf6b6171671d6b1c6186a834498d86823ce04f0dbb90ace2b5fbefae"
+      },
+      "action": "attack3",
+      "start_frame": 2,
+      "placement": "actor"
+    },
+    "attack4": {
+      "fps": 60,
+      "actions": {
+        "build": 0.4666666666666667
+      },
+      "bones": 3,
+      "nested_armatures": 0,
+      "regions": 6,
+      "source_hashes": {
+        "xml": "e255a0250e18e5c28d19c07444cd04d5a9b492da9083da43a58a426800c22bac",
+        "plist": "ac2b31c7ebb3a9e20a3d7ac7a6e705310eeb1b0f4b1f80dd11fdf90fe6c395ab",
+        "png": "91c4f35f08119df186202599af51a3026a1b7cb3dd08b66c43df90f2f204a3c4"
+      },
+      "action": "attack4",
+      "start_frame": 22,
+      "placement": "actor"
+    },
+    "jumpattack": {
+      "fps": 24,
+      "actions": {
+        "build": 0.4166666666666667
+      },
+      "bones": 3,
+      "nested_armatures": 0,
+      "regions": 6,
+      "source_hashes": {
+        "xml": "f266f5dfad1f6e74ed28968e2fbeec40eceeecec6e25c493b6a48e390beca179",
+        "plist": "80ce7418df5d098871bc13b7f93029e0b4e10c2202d79fa96f33bf89b915c25c",
+        "png": "c97c75825c7aa16a4a8fb561b82430100220fb5e154a5d9b9465c5cfe2b10e3b"
+      },
+      "action": "jumpattack",
+      "start_frame": 6,
+      "placement": "actor"
+    },
+    "runattack": {
+      "fps": 24,
+      "actions": {
+        "build": 0.4166666666666667
+      },
+      "bones": 3,
+      "nested_armatures": 0,
+      "regions": 11,
+      "source_hashes": {
+        "xml": "3c3e27977c1cc5039536acf666542f9c3b24fc69909f193384e78805b1d0ce71",
+        "plist": "2e640f92538eb2a86592577557bb092fdfea4fc2c4bcaf445777119c92fa8a28",
+        "png": "b5917ba9bc91cd756f50e2a827daeff6b03160a0d8f8892f343cce3cd9241311"
+      },
+      "action": "runattack",
+      "start_frame": 11,
+      "placement": "projectile"
+    },
+    "runattack1": {
+      "fps": 60,
+      "actions": {
+        "build": 0.4666666666666667
+      },
+      "bones": 3,
+      "nested_armatures": 1,
+      "regions": 8,
+      "source_hashes": {
+        "xml": "74235ef4a18c381d1f77a28e1a7104d62a2cb14104a95703edaa4d89e350da09",
+        "plist": "9e0de7967ace12188f3149f4e4261eef46a9f8cae02fa834ef43a4d724fc0619",
+        "png": "3acf53db7ae8d4301e963bc40e7d78754c6b71e96cd4e57ada77ffe1ea9064f2"
+      },
+      "action": "runattack",
+      "start_frame": 11,
+      "placement": "projectile"
+    },
+    "skill1": {
+      "fps": 60,
+      "actions": {
+        "build": 1.0
+      },
+      "bones": 3,
+      "nested_armatures": 0,
+      "regions": 6,
+      "source_hashes": {
+        "xml": "9632ce05b1ed30053deae1f5cfd79df9a5a455551d4233f47ac8995cd4dcc33d",
+        "plist": "83750c96f6fbcb714c19541b137b46f1cd7b2c24c675bc0fbe9611616ce5f548",
+        "png": "d2ec02b3bcc482dbba90bfcf3f654bc236925bdefd620a678803eb599b03e1b7"
+      },
+      "action": "skill1",
+      "start_frame": 14,
+      "placement": "projectile"
+    },
+    "skill2": {
+      "fps": 60,
+      "actions": {
+        "build": 0.4666666666666667
+      },
+      "bones": 4,
+      "nested_armatures": 1,
+      "regions": 6,
+      "source_hashes": {
+        "xml": "8a25481e22d6b35221d7c9d54b96a81eb4e228eb92df50fc6752b7081c743fc0",
+        "plist": "9021e749ee6e90dbf35596938081beb40234386c60ae8865cd214b09b89dbffc",
+        "png": "ddc4ec8c6159ee5a2d449b31698f3b9eeaaa6ca1c1fddbf3138bdc0caac92464"
+      },
+      "action": "skill2",
+      "start_frame": 12,
+      "placement": "actor"
+    },
+    "skill3": {
+      "fps": 60,
+      "actions": {
+        "build": 3.6333333333333333
+      },
+      "bones": 17,
+      "nested_armatures": 6,
+      "regions": 33,
+      "source_hashes": {
+        "xml": "af98ce6e80856015fe383b0e74cb674e321e6b39560656b68f3694f957b0f452",
+        "plist": "c493aa1b9fb6c6be8c40b7ca8a3ede5a6e572d556bd274bba960b77f753551c7",
+        "png": "4650cd39f5359456cedeea49c373863457d2b47573c07f0234591c46aa0827f8"
+      },
+      "action": "skill3",
+      "start_frame": 0,
+      "placement": "actor"
+    }
+  },
+  "binding_basis": "Initial offsets from character hit markers; skill2 hidden12..39 and skill3 complete build0..218. Saved AnimationPlayer tracks are editable."
+}

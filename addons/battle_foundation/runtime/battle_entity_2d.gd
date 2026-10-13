@@ -1,5 +1,10 @@
 extends CharacterBody2D
 class_name BattleEntity2D
+const PLAYBACK_POLICY = preload("res://addons/battle_foundation/runtime/BattlePlaybackPolicy.cs")
+var _playback_policy = PLAYBACK_POLICY.new()
+
+func get_action_delta(id: StringName, delta: float) -> float:
+	return delta * _playback_policy.attack_rate(self, id)
 #region 实体与战斗状态
 @export var action_profile: BattleActionProfile2D
 @export var animation_path: NodePath = ^"AnimationAdapter"
@@ -272,7 +277,7 @@ func advance_simulation(delta: float) -> void:
 	var step := combo.get_step()
 	if step != null and action_state.elapsed < step.root_motion_frames / step.source_fps:
 		# 帧窗口结束所在 tick 只执行窗口内的技能位移，避免额外多走一整 tick。
-		var active_delta := minf(delta, step.root_motion_frames / step.source_fps - action_state.elapsed)
+		var active_delta := minf(get_action_delta(step.ability_id, delta), step.root_motion_frames / step.source_fps - action_state.elapsed)
 		horizontal += step.root_motion_speed * combo.motion_facing * active_delta / delta
 	motion.advance(delta, horizontal, action_profile, float(action_state.active_rules.get("gravity_scale", 1.0)))
 	action_state.grounded = motion.grounded
@@ -289,9 +294,9 @@ func advance_simulation(delta: float) -> void:
 		publish_battle_event(&"battle.motion.landed", {"landing_serial": motion.landing_serial})
 	## 本 tick 先更新世界位置和姿态，再让 GAS 发送素材帧攻击事件。
 	if attack_instance == null or not attack_instance.active or attack_instance.timeline == null or not attack_instance.timeline.uses_cast_timeline():
-		animation.advance_animation(delta)
+		animation.advance_animation(_playback_policy.animation_delta(self, delta))
 	if attack_instance != null and attack_instance.active and (attack_instance.timeline == null or not attack_instance.timeline.uses_cast_timeline()):
-		attack_instance.elapsed += delta
+		attack_instance.elapsed += get_action_delta(attack_instance.ability_id, delta)
 	abilities.advance_simulation(delta)
 	if ai_controller != null and ai_controller.has_method("advance_post_simulation"): ai_controller.advance_post_simulation(delta)
 	_advance_attack_windows()
@@ -303,7 +308,8 @@ func advance_simulation(delta: float) -> void:
 	var active_skill := abilities.get_ability_instance(_active_skill_id) if not _active_skill_id.is_empty() else null
 	var attack_active := combo.is_active() or (active_skill != null and active_skill.is_active)
 	# 意图决定行走状态，碰撞残余速度和技能位移不代表玩家持续走路。
-	action_state.advance(delta, action_profile, not is_zero_approx(move_axis), running, motion.just_landed, attack_active)
+	var action_delta := get_action_delta(attack_instance.ability_id, delta) if attack_instance != null and attack_instance.active else delta
+	action_state.advance(action_delta, action_profile, not is_zero_approx(move_axis), running, motion.just_landed, attack_active)
 	_advance_combo()
 	_update_animation_command()
 	animation.advance_status_visuals(delta)
