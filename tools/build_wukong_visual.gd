@@ -20,7 +20,7 @@ func _build() -> void:
 	visual.set("profile", profile)
 	var sprite := SpineSprite.new()
 	sprite.name = "SpineVisual"
-	sprite.scale = Vector2.ONE * profile.display_scale
+	sprite.scale = Vector2.ONE * profile.get_visual_scale()
 	sprite.position = profile.skeleton_offset * profile.display_scale
 	sprite.skeleton_data_res = data
 	sprite.set("preview_skin", String(profile.base_skin))
@@ -43,6 +43,7 @@ func _build() -> void:
 	visual.add_child(master)
 	var armor := load("res://data/effects/super_armor/outline.tscn").instantiate()
 	armor.get_node("Capture/Body").skeleton_data_res = data
+	armor.get_node("Capture/Body").scale = Vector2.ONE / profile.skeleton_geometry_scale
 	visual.add_child(armor)
 	_add_hitbox(visual, profile.display_scale)
 	_set_owners(visual, visual)

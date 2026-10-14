@@ -41,6 +41,8 @@ func initialize_adapter() -> bool:
 		return _fail("动作配置与 Spine 原素材帧率不一致")
 	if not is_finite(profile.display_scale) or profile.display_scale <= 0.0:
 		return _fail("显示比例必须是有限正数，镜像通过 set_facing 实现")
+	if not is_finite(profile.skeleton_geometry_scale) or profile.skeleton_geometry_scale <= 0.0:
+		return _fail("骨架资源倍率必须是有限正数")
 	for action in profile.animations:
 		if data.find_animation(String(profile.animations[action])) == null:
 			return _fail("Spine 缺少映射动作：" + String(action))
@@ -337,6 +339,7 @@ func get_socket_global_transform(socket: StringName) -> Transform2D:
 		return global_transform
 	var bone: StringName = profile.socket_bones[socket]
 	var transform := _sprite.get_global_bone_transform(String(bone))
+	transform = profile.compensate_socket_transform(transform)
 	return transform.translated_local(profile.socket_offsets.get(socket, Vector2.ZERO))
 
 func get_draw_order() -> Array[StringName]:

@@ -1,0 +1,57 @@
+{
+  "model": "Real-ESRGAN realesrgan-x4plus-anime",
+  "scale": 4,
+  "spine_version": "4.3.23",
+  "atlas_regions": 1646,
+  "unique_pieces": 1389,
+  "original_atlas_size": [
+    4049,
+    1560
+  ],
+  "hd_atlas_size": [
+    16196,
+    6240
+  ],
+  "alpha": "bicubic from original alpha; neural RGB; premultiplied atlas, straight alpha editable images",
+  "bone_geometry_scale": 4,
+  "render_node_scale": 0.5,
+  "gameplay_source_unit_scale": 2.0,
+  "source_sha256": {
+    "wukong.atlas": "ec7db0eedebee869cae8f33f3a8eb5f96d0252175e997a2becefb907ed0664ac",
+    "wukong.png": "ad5c493328c08d0aa91113ee39286168912aa1d990c4019958ab9b3de425522b",
+    "wukong.skel": "ec2c22a4457d799f337083778d7d45bbcf20539210b3b5a3f02151d975185358"
+  },
+  "output_sha256": {
+    "wukong.png": "33984f6172a19e3a421c6c5695d694942ad3a9be5724d81eba1816f27ae24a55",
+    "wukong.atlas": "454e55ada89d637da905d19d3d15050dbeddc2d684be7a026eed2fdfae5ae55c",
+    "wukong.skel": "d162c407e2d3b836fbe85b78b74e5cda64e0503ed04d9ac5d82a6ad09b2a0b46"
+  },
+  "backup": ".cleanup-backup/spine-hd4x/original",
+  "editable_bundle": ".cleanup-backup/spine-hd4x/editable",
+  "binary_conversion": "33,742 spatial floats changed; unchanged rotation/scaling/time/event/draw-order data",
+  "completed_checks": [
+    "Spine geometry and animation pose data before integration",
+    "C# Debug compilation",
+    "Godot resource import"
+  ],
+  "gameplay_tests": "Not run. Automatic review rejected them because the user previously requested no tests.",
+  "texture_repairs": [
+    {
+      "date": "2026-10-14",
+      "method": "Built-in imagegen; atlas size normalization with original alpha",
+      "fragment": "tools/asset_patches/sunwukong_base_belt.png",
+      "region": "base/zb/yf_20",
+      "shared_skins": [
+        "base",
+        "armor0",
+        "armor0_0"
+      ],
+      "size": [
+        124,
+        32
+      ],
+      "prompt": "Remove pale gray stripes, scribbles and hatch artifacts; restore the original smooth dark charcoal belt, preserving silhouette and transparency.",
+      "backup": ".cleanup-backup/spine-hd4x/belt-fix"
+    }
+  ]
+}

@@ -2,6 +2,42 @@
 
 角色运行组件已预置到物理角色场景，动画适配器与判定框仍在 visual 子树中编辑；详见 [角色组件说明](../components.md)。
 
+## 悟空四倍高清资源
+
+当前 `wukong.png` 的所有图集区域已使用用户提供工具中的 Real-ESRGAN
+`realesrgan-x4plus-anime` 做四倍超分。1,646 个区域对应 1,389 张独立碎图，
+共用图片的区域继续共用同一位置；最终图集由 4049×1560 变为 **16196×6240**。
+保留原旋转、裁切偏移、图集边缘填充及预乘透明格式；独立碎图采用双三次透明通道，
+颜色使用超分模型。图片以无损方式导入，启用 mipmaps，关闭对预乘图集的透明边缘再修复。
+
+`wukong.skel` 保留 Spine 4.3.23、35 根骨骼、34 个槽、206 套皮肤和44段动画。
+骨骼坐标/长度、附件尺寸/偏移、动画位移及位移曲线控制值同步扩大四倍，
+旋转、缩放关键帧、时间、事件和绘制顺序保留。
+
+- `SpineVisual.scale` 从 `Vector2(2, 2)` 改为 `Vector2(0.5, 0.5)`，脚底位置不变。
+- `sunwukong_profile.tres` 的 `display_scale` **仍为 2**，保持技能判定、原特效和快照坐标。
+  新字段 `skeleton_geometry_scale=4` 表示骨架文件的尺寸倍率，
+  `get_visual_scale()` 返回实际身体渲染比例 `display_scale / skeleton_geometry_scale`。
+- 骨骼挂点返回的变换基向量由 C# 配置资源补偿；原挂点位置和调用方偏移保持一致。
+- 无双与霸体快照节点的编辑器初始比例为0.25，运行中仍通过源角色姿态及原单位比例更新。
+- 判定框、移动、碰撞、攻击倍率与技能释放时序没有乘四；攻击特效使用其原来的独立骨架。
+
+原始图集及骨架在项目根目录 `.cleanup-backup/spine-hd4x/original/`，
+原场景与配置在 `original-config/`。要恢复原画，恢复 `wukong.png/.atlas/.skel`、
+`wukong.png.import` 以及这两个角色场景/配置和无双场景，再重新导入资源。
+
+可编辑包位于 `.cleanup-backup/spine-hd4x/editable/`：在匹配版本的 Spine 中导入
+`wukong_hd4x.skel`，其 `images/` 按原名称保存未旋转、还原裁切画布的高清碎图。
+它没有加入游戏资源导入，避免额外加载一份所有碎图。
+
+离线工具为 `tools/upscale_spine_atlas.py` 和 `tools/scale_wukong_spine_binary.mjs`。
+超分工具与官方 Spine 4.3 解析库位于本机工具/缓存目录，不属于游戏运行依赖。
+处理来源、哈希和尺寸见 [处理记录](../../../../assets/characters/sunwukong/animation/hd4x_processing.json)。
+四倍宽高使未压缩纹理像素量增加16倍，mipmaps 还会额外占用纹理内存。
+
+已完成骨架数据/姿态核对、C#编译和Godot资源导入；没有启动游戏进行功能测试。
+游戏验证测试被自动审批拒绝，理由是用户此前要求“不需要测试”。
+
 [sunwukong_visual.tscn](sunwukong_visual.tscn) 保存角色与攻击特效 SpineSprite、SpineAnimationTrack、主与原生子 AnimationPlayer，以及**一个** AttackHitbox / CollisionShape2D。[角色物理场景](../character.tscn) 实例化此表现场景。所有技能、所有命中序号复用同一节点与矩形形状，运行时不创建额外判定框。五段普攻的原版触发帧、特效编辑和跳跃/移速调参见 [孙悟空配置说明](sunwukong-config.md)。
 
 动画结构参考本机 `godot-spine-example/test_sunwukong.tscn`，来源与哈希见 [visual_source_mapping.json](visual_source_mapping.json)。主 AnimationPlayer 的 Animation 类型轨道控制原生子播放器，通过 SpineAnimationTrack 驱动姿态。[Spine 官方说明](https://esotericsoftware.com/spine-godot#SpineAnimationTrack)
