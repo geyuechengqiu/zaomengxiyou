@@ -40,6 +40,7 @@ public partial class VerifyOriginalSkillPanel : Node
         _scene=GD.Load<PackedScene>("res://game/levels/biyujing.tscn").Instantiate<BattleLevelScene>();
         _scene.enable_player_controls=false; AddChild(_scene); _scene.session.SetPhysicsProcess(false); _scene.flow.Call("stop");
         await Frame(); _skills=_scene.player.GetNode<BattleSkillLoadout>("SkillLoadout"); _panel=_scene.original_hud.GetNode<OriginalSkillPanel>("SkillPanel");
+        _panel.Bind(_skills); // Rebinding must not duplicate button or signal handlers.
         GetNode("/root/CoreSystem").Get("operation_manager").AsGodotObject().Get("bindings").AsGodotObject().Call("reset_profile",_skills.Operations.Get("operation_profile"),false);
         var attrs=_scene.player.Get("attributes").AsGodotObject(); var bag=_skills.Inventory;
         Check(_skills.Active.Count==5 && _skills.Active[4]==0,"初始第五槽为空");

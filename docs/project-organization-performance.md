@@ -1,8 +1,8 @@
-# 项目目录与怪物生成优化
+# 项目整理、资源边界与性能
 
 ## 正式入口与资源分类
 
-F5 入口为 [造1大地图](../game/world_map/zaomeng1_world_map.tscn)，顺序解锁花果山、水帘洞；地图按钮保留 [碧玉径](../game/levels/biyujing.tscn) 入口，BattleSystem 默认索引仍指向碧玉径五区域版本。旧平台、木桩、技能、插件演示和旧版首关场景已删除，专门依赖它们的验证/截图脚本同步移除。当前自动验证直接使用最新关卡、可复用模板或功能组件，不再加载演示场景。
+F5 入口为 [造1大地图](../game/world_map/zaomeng1_world_map.tscn)，顺序解锁花果山、水帘洞。完成两关后桃花源成为最新解锁点，尚未制作时不能进入。[碧玉径](../game/levels/biyujing.tscn) 保留为独立关卡，大地图不提供入口；BattleSystem 默认索引仍指向碧玉径五区域版本。旧平台、木桩、技能、插件演示和旧版首关场景已删除，当前没有示例关卡。自动验证直接使用实际关卡、可复用模板或功能组件。
 
 | 目录 | 用途 |
 | --- | --- |
@@ -15,11 +15,38 @@ F5 入口为 [造1大地图](../game/world_map/zaomeng1_world_map.tscn)，顺序
 | `data/attribute/`、`data/buffs/`、`data/damage/` | 共用属性、Buff 与伤害规则 |
 | `data/ui/`、`data/inventory/`、`data/loot/` | 战斗/背包 UI、物品与成长、掉落规则 |
 | `addons/` | 插件实现；业务资源由目录索引配置 |
-| `tests/suites/`、`tools/` | 当前功能验证、离线导出、编辑辅助及性能工具 |
+| `tests/suites/` | 31个功能验证入口，正式导出排除 |
+| `tools/performance/`、`tools/editor/`、`tools/csharp/` | 性能/截图、隔离编辑器辅助、构建与原生导出 |
+| 其余 `tools/` | 保持原路径的离线素材导出、导入与场景制作管线 |
 
 路径和清理清单见 [resource_organization.json](resource_organization.json)。删除文件的本地恢复副本位于 `.cleanup-backup/resource-organization`，目录被 Git 和 Godot 导入忽略，不参与运行和发布。资源的 ID、UID 和原始素材内容保留，序列化路径、索引、工具和文档链接同步更新。
 
-## 已定位的开销
+## 2026-10-13 全项目复查
+
+只读工具 [audit_project.py](../tools/audit_project.py) 检查跟踪及未提交的非忽略资源，包括序列化引用、路径大小写、UID冲突、UID与路径对应关系、孤立脚本UID和示例目录。报告保存到 `.cleanup-backup/project-audit.json`。它不执行全部离线导入器，不能替代 Godot 实际导入和关卡回归。
+
+当前166个场景分为：3个实际关卡、2个游戏界面入口、124个运行/编辑组件、4个复用模板、31个验收入口、2个性能入口。关卡以外的角色、怪物、技能特效、UI和插件面板属于功能组件或验证工具。Panku附带的模块仍作为第三方实现保留。没有发现残留独立示例目录，因此没有删除这些实际依赖。
+
+本次将31个开发工具文件集中到 `tools/performance/` 和 `tools/editor/window_mode_helper/`，同步场景引用、启动脚本与文档；删除5个已无对应脚本、且无人引用的历史UID文件，以及2个依赖已删除演示资源的退役构建/验收脚本。独立编辑器项目位于被 `.gdignore` 隔离的父目录，游戏导入不再报告嵌套 `project.godot`。
+
+- `BattleEntityIteration.cs` 只在成员版本变化时重建有序快照。正常tick不再创建两份实体值数组或逐帧查询输入方法；重入的出生/移除使用独立快照版本。公开 `get_entities()` 仍返回独立数组，但去掉重复复制。120次成员不变的tick验证快照不重建，出生、死亡和弱引用清理继续验证。
+- 加载器缓存资源和已完成的纯动画预热场景；重开同关不重复请求资源或构造预热角色。音频轮询复用请求列表和进度数组。缓存不保存战斗实例、AI状态或随机流，Ready、读档和最终渲染仍在加载界面内完成。
+- 造1重开通过统一加载器。加载控制器中途离场时仅回调一次、恢复暂停状态，并阻止后续协程访问已释放UI。
+- 地图悬浮目标不变时不重复写10个按钮的贴图/显示状态；技能面板通过进程级共享缓存持有固定UI贴图，避免NativeAOT跨关卡GC后的失效句柄；同一角色重复绑定不重复注册升级按钮或事件处理。
+- GAS效果的空自类型数组原先在Debug退出时保留自身脚本及过滤器脚本，造成3个ObjectDB对象和2个资源泄漏。子效果改用Resource容器，消费时继续验证 `GameplayEffect` 类型；堆叠刷新接受同一容器。效果类、序列化字段和行为保持不变。
+- 回归启动器增加每套超时，等待目标Godot进程而非编译服务后代；仍严格检查PASS及脚本/运行错误，游戏测试使用Dummy音频和隔离用户目录。
+
+缓存效果以计数与真实关卡行为验证，不将其表述为已测得的FPS提升。下面的出生耗时表是此前在标明环境下测得的结果，不是本次重构后的新基准。
+
+### 本次验证结果
+
+- 静态审计：4427个文件、2468处序列化引用、166个场景，资源路径、UID及自维护文档链接检查通过；独立示例文件数为0。
+- Debug：全部31套通过；共享UI贴图缓存调整后额外复测C#脚本图、技能面板、世界设置和真实场景切换，均通过。
+- NativeAOT：全部30套游戏功能验证通过，包含碧玉径初始悟空真实五连击通关、两关完整波次、Boss、资源缓存与加载取消。
+- 正式包：主场景300帧运行及干净退出通过；原生PE/无CLR头/JIT禁用检查通过，编辑器Debug程序集已恢复。
+- 编译为0错误，仍有4条第三方Phantom Camera未使用字段警告；本次未更改其实现。
+
+## 既有出生开销与测量
 
 `BattleProtectionSystem.configure()` 原先在每只怪物初始化时重新读取并解析约 2 MB 的 `original_protection.json`，再深复制整套技能字典。对同一主关卡四类怪物各生成 12 次，初始 CPU 微基准的平均出生时间为剑舞 77.91 ms、驭兽使 73.96 ms、容器 75.73 ms、Boss 95.60 ms；资源定义复制只有约 0.4 ms。后续分段采样确认开销主要发生在实体 `_ready`。
 
@@ -48,8 +75,9 @@ F5 入口为 [造1大地图](../game/world_map/zaomeng1_world_map.tscn)，顺序
 
 ```powershell
 ./tools/verify_stage_eight.ps1 -Godot '<带 Spine 的 Godot.exe>'
-& '<Godot.exe>' --headless --path . res://tools/performance/benchmark_monster_spawn.tscn
-& '<Godot.exe>' --path . res://tools/performance/benchmark_monster_spawn.tscn -- --capture
+py tools/audit_project.py --report .cleanup-backup/project-audit.json
+& '<Godot.exe>' --headless --audio-driver Dummy --path . res://tools/performance/benchmark_monster_spawn.tscn
+& '<Godot.exe>' --audio-driver Dummy --path . res://tools/performance/benchmark_monster_spawn.tscn -- --capture
 ```
 
 专项验证覆盖缓存、状态隔离、反馈复用、暂停、真实死亡释放与 Boss/普通怪视图切换；完整首关验证继续检查全部 34 个目标、Boss 技能和通关。日志、性能数据和截图保存到忽略的 `.cleanup-backup`。

@@ -10,6 +10,8 @@ public partial class ZaomengOneWorldMap : Control
     private bool _saveQueued;
     private readonly System.Collections.Generic.List<(TextureButton Button, Texture2D Hover, bool Latest, bool Open)> _stages = new();
     private Vector2 _pointer;
+    private TextureButton? _hovered;
+    private bool _hoverInitialized;
     public override void _Ready()
     {
         _campaign = GetNode<ZaomengOneCampaign>("/root/ZaomengOneCampaign");
@@ -63,6 +65,9 @@ public partial class ZaomengOneWorldMap : Control
         if (UiModalManager.Top == null)
             foreach (var stage in _stages)
                 if (stage.Open && stage.Button.GetGlobalRect().HasPoint(_pointer)) selected = stage.Button;
+        if (_hoverInitialized && selected == _hovered) return;
+        _hoverInitialized = true;
+        _hovered = selected;
         foreach (var stage in _stages)
         {
             bool hovered = stage.Button == selected;

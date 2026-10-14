@@ -1,39 +1,47 @@
-[gd_scene format=3]
-[ext_resource type="Script" path="res://addons/battle_foundation/movement/BattleAttackRangeEditor2D.cs" id="editor"]
-[ext_resource type="Script" path="res://addons/battle_foundation/movement/BattleEditableAttackRange2D.cs" id="range"]
-[ext_resource type="Resource" path="res://data/monsters/zaomeng1/mihou_king/skills/attack1.tres" id="attack1"]
-[ext_resource type="Resource" path="res://data/monsters/zaomeng1/mihou_king/skills/attack2.tres" id="attack2"]
-[ext_resource type="Resource" path="res://data/monsters/zaomeng1/mihou_king/skills/attack3.tres" id="attack3"]
-[ext_resource type="Resource" path="res://data/monsters/zaomeng1/mihou_king/skills/attack4.tres" id="attack4"]
-[ext_resource type="Resource" path="res://data/monsters/zaomeng1/mihou_king/skills/skill1.tres" id="skill1"]
-[ext_resource type="Resource" path="res://data/monsters/zaomeng1/mihou_king/skills/skill2.tres" id="skill2"]
-[ext_resource type="Resource" path="res://data/monsters/zaomeng1/mihou_king/skills/skill3.tres" id="skill3"]
+[gd_scene format=3 uid="uid://bjw82bpveaevu"]
+
+[ext_resource type="Resource" uid="uid://dff23ak65w6j5" path="res://data/monsters/zaomeng1/mihou_king/skills/attack1.tres" id="attack1"]
+[ext_resource type="Resource" uid="uid://cybp1fthq1luo" path="res://data/monsters/zaomeng1/mihou_king/skills/attack2.tres" id="attack2"]
+[ext_resource type="Resource" uid="uid://bt34rb1heytxa" path="res://data/monsters/zaomeng1/mihou_king/skills/attack3.tres" id="attack3"]
+[ext_resource type="Resource" uid="uid://c673dk2vcfxu4" path="res://data/monsters/zaomeng1/mihou_king/skills/attack4.tres" id="attack4"]
+[ext_resource type="Script" uid="uid://cq20gg7xy6oep" path="res://addons/battle_foundation/movement/BattleAttackRangeEditor2D.cs" id="editor"]
+[ext_resource type="Script" uid="uid://f80yeftmstt5" path="res://addons/battle_foundation/movement/BattleEditableAttackRange2D.cs" id="range"]
+[ext_resource type="Resource" uid="uid://dwgb2l3k6cafo" path="res://data/monsters/zaomeng1/mihou_king/skills/skill1.tres" id="skill1"]
+[ext_resource type="Resource" uid="uid://rf5gqcllx4vr" path="res://data/monsters/zaomeng1/mihou_king/skills/skill2.tres" id="skill2"]
+[ext_resource type="Resource" uid="uid://ode0rob3u5v8" path="res://data/monsters/zaomeng1/mihou_king/skills/skill3.tres" id="skill3"]
+
 [sub_resource type="RectangleShape2D" id="attack1"]
 resource_local_to_scene = true
-size = Vector2(450,215)
+size = Vector2(450, 215)
+
 [sub_resource type="RectangleShape2D" id="attack2"]
 resource_local_to_scene = true
-size = Vector2(470,220)
+size = Vector2(470, 220)
+
 [sub_resource type="RectangleShape2D" id="attack3"]
 resource_local_to_scene = true
-size = Vector2(520,225)
+size = Vector2(520, 225)
+
 [sub_resource type="RectangleShape2D" id="attack4"]
 resource_local_to_scene = true
-size = Vector2(800,280)
+size = Vector2(800, 280)
+
 [sub_resource type="RectangleShape2D" id="skill1"]
 resource_local_to_scene = true
 size = Vector2(432, 585)
+
 [sub_resource type="RectangleShape2D" id="skill2"]
 resource_local_to_scene = true
-size = Vector2(850,340)
+size = Vector2(850, 340)
+
 [sub_resource type="RectangleShape2D" id="skill3"]
 resource_local_to_scene = true
-size = Vector2(900,330)
+size = Vector2(900, 330)
 
-
-[node name="AttackRanges" type="Node2D"]
+[node name="AttackRanges" type="Node2D" unique_id=1477033252]
 script = ExtResource("editor")
-[node name="attack1" type="Area2D" parent="."]
+
+[node name="attack1" type="Area2D" parent="." unique_id=637172675]
 collision_layer = 0
 collision_mask = 0
 monitoring = false
@@ -42,11 +50,14 @@ script = ExtResource("range")
 ability_id = &"mihouwang_attack1"
 animation_action = &"attack1"
 skill_definition = ExtResource("attack1")
-[node name="CollisionShape2D" type="CollisionShape2D" parent="attack1"]
-position = Vector2(135.0,-127.5)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="attack1" unique_id=828045481]
+position = Vector2(135, -127.5)
 shape = SubResource("attack1")
 disabled = true
-[node name="attack2" type="Area2D" parent="."]
+
+[node name="attack2" type="Area2D" parent="." unique_id=1040684399]
+visible = false
 collision_layer = 0
 collision_mask = 0
 monitoring = false
@@ -55,11 +66,14 @@ script = ExtResource("range")
 ability_id = &"mihouwang_attack2"
 animation_action = &"attack2"
 skill_definition = ExtResource("attack2")
-[node name="CollisionShape2D" type="CollisionShape2D" parent="attack2"]
-position = Vector2(125.0,-120.0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="attack2" unique_id=1502343935]
+position = Vector2(125, -120)
 shape = SubResource("attack2")
 disabled = true
-[node name="attack3" type="Area2D" parent="."]
+
+[node name="attack3" type="Area2D" parent="." unique_id=1369290532]
+visible = false
 collision_layer = 0
 collision_mask = 0
 monitoring = false
@@ -68,11 +82,14 @@ script = ExtResource("range")
 ability_id = &"mihouwang_attack3"
 animation_action = &"attack3"
 skill_definition = ExtResource("attack3")
-[node name="CollisionShape2D" type="CollisionShape2D" parent="attack3"]
-position = Vector2(130.0,-122.5)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="attack3" unique_id=1785697308]
+position = Vector2(130, -122.5)
 shape = SubResource("attack3")
 disabled = true
-[node name="attack4" type="Area2D" parent="."]
+
+[node name="attack4" type="Area2D" parent="." unique_id=459428076]
+visible = false
 collision_layer = 0
 collision_mask = 0
 monitoring = false
@@ -81,11 +98,14 @@ script = ExtResource("range")
 ability_id = &"mihouwang_attack4"
 animation_action = &"attack4"
 skill_definition = ExtResource("attack4")
-[node name="CollisionShape2D" type="CollisionShape2D" parent="attack4"]
-position = Vector2(140.0,-140.0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="attack4" unique_id=1128412870]
+position = Vector2(140, -140)
 shape = SubResource("attack4")
 disabled = true
-[node name="skill1" type="Area2D" parent="."]
+
+[node name="skill1" type="Area2D" parent="." unique_id=321503406]
+visible = false
 collision_layer = 0
 collision_mask = 0
 monitoring = false
@@ -94,11 +114,14 @@ script = ExtResource("range")
 ability_id = &"mihouwang_skill1"
 animation_action = &"skill1"
 skill_definition = ExtResource("skill1")
-[node name="CollisionShape2D" type="CollisionShape2D" parent="skill1"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="skill1" unique_id=1458557271]
 position = Vector2(0, -250.5)
 shape = SubResource("skill1")
 disabled = true
-[node name="skill2" type="Area2D" parent="."]
+
+[node name="skill2" type="Area2D" parent="." unique_id=211167406]
+visible = false
 collision_layer = 0
 collision_mask = 0
 monitoring = false
@@ -107,11 +130,14 @@ script = ExtResource("range")
 ability_id = &"mihouwang_skill2"
 animation_action = &"skill2"
 skill_definition = ExtResource("skill2")
-[node name="CollisionShape2D" type="CollisionShape2D" parent="skill2"]
-position = Vector2(145.0,-170.0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="skill2" unique_id=506338500]
+position = Vector2(145, -170)
 shape = SubResource("skill2")
 disabled = true
-[node name="skill3" type="Area2D" parent="."]
+
+[node name="skill3" type="Area2D" parent="." unique_id=1579361207]
+visible = false
 collision_layer = 0
 collision_mask = 0
 monitoring = false
@@ -120,7 +146,8 @@ script = ExtResource("range")
 ability_id = &"mihouwang_skill3"
 animation_action = &"skill3"
 skill_definition = ExtResource("skill3")
-[node name="CollisionShape2D" type="CollisionShape2D" parent="skill3"]
-position = Vector2(110.0,-165.0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="skill3" unique_id=1113152475]
+position = Vector2(110, -165)
 shape = SubResource("skill3")
 disabled = true

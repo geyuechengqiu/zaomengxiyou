@@ -1,4 +1,4 @@
 [gd_scene format=3]
-[ext_resource type="Script" path="res://tools/benchmark_feedback_animation.gd" id="script"]
+[ext_resource type="Script" path="res://tools/performance/benchmark_feedback_animation.gd" id="script"]
 [node name="BenchmarkFeedbackAnimation" type="Node"]
 script = ExtResource("script")

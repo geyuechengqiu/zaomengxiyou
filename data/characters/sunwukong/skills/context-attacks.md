@@ -48,7 +48,7 @@
 
 ## 实现与验证
 
-Core 现在包含 17 个动作叶子，新增 RUN_ATTACK / JUMP_ATTACK；[BattleEntity2D](../../../../addons/battle_foundation/runtime/battle_entity_2d.gd) 按当前状态选择技能。第四段的 `try_turn_combo()` 由当前 [Core 叶子](../../../../addons/battle_foundation/runtime/battle_action_leaf_state_2d.gd) 消费方向 PRESSED 意图调用。[BattleComboState](../../../../addons/battle_foundation/runtime/battle_combo_state.gd) 与 [BattleAttackInstance](../../../../addons/battle_foundation/runtime/battle_attack_instance.gd) 分别保存位移朝向和攻击朝向，实例间互不污染。
+Core 现在包含 17 个动作叶子，新增 RUN_ATTACK / JUMP_ATTACK；[BattleEntity2D](../../../../addons/battle_foundation/runtime/battle_entity_2d.gd) 按当前状态选择技能。第四段的 `try_turn_combo()` 由当前 [Core 叶子](../../../../addons/battle_foundation/runtime/battle_action_leaf_state_2d.gd) 消费方向 PRESSED 意图调用。[BattleComboState](../../../../addons/battle_foundation/runtime/BattleComboState.cs) 与 [BattleAttackInstance](../../../../addons/battle_foundation/runtime/battle_attack_instance.gd) 分别保存位移朝向和攻击朝向，实例间互不污染。
 
 离线 [导入工具](../../../../tools/import_wukong_context_attacks.py) 读取 Speculum 原始数据，追加资源索引和语义动画；已有技能资源及已存在的语义动画保留编辑结果。运行游戏无需 Speculum 或 Python。
 

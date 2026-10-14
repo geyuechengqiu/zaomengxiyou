@@ -251,6 +251,22 @@ func verify_rewards_and_pickup() -> void:
 	bag.equip_item(simple_weapon)
 	check(player.animation.get_skin_names().has(&"武器/weapon0"), "原普通行者棒Resource8003映射weapon0，不套用封魔棒weapon1")
 	bag.unequip_item(simple_weapon)
+	# A wide weapon overlaps the player while its center remains outside the old
+	# pickup radius. Test through the actual loot tick, including the miss case.
+	var rectangle := player.get_body_rect_global()
+	loot.spawn_item(&"110001003", player.global_position, player)
+	var item_texture: Texture2D = loot.drops[0].item.pickup_icon
+	if item_texture == null: item_texture = loot.drops[0].item.icon
+	var half_width: float = item_texture.get_width() * loot.source_unit_scale / 2.0
+	var reach: float = loot.pickup_radius * loot.source_unit_scale
+	loot.drops[0].grounded = true
+	loot.drops[0].position = Vector2(rectangle.end.x + reach + half_width + 4, rectangle.get_center().y)
+	await tick(1.0 / 30.0)
+	check(loot.drops.size() == 1, "物品贴图与拾取范围仍有间隙时不远程拾取")
+	loot.drops[0].position = Vector2(rectangle.end.x + reach + half_width - 2, rectangle.get_center().y)
+	check(not rectangle.grow(reach).has_point(loot.drops[0].position), "宽贴图拾取测试覆盖中心仍在旧范围之外")
+	await tick(1.0 / 30.0)
+	check(loot.drops.is_empty(), "武器贴图边缘碰到玩家即可真实自动拾取")
 	loot.spawn_item(&"101002000", player.global_position + Vector2(800, 0), player)
 	for _frame in range(5): await tick(0.2)
 	var grass_found := false

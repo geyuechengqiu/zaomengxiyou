@@ -43,7 +43,7 @@ Boss 死亡事件按实体 ID 去重。斩败完成、离场与会话清理都�
 
 此前 player_frame.png 含不透明黑色条底，绘制在动态填充上方会把红、蓝、黄压暗。现将底图放在第一层，按原 (76,20/34/48) 放条底，填充偏移 (1,1)，再绘制静态标题和原10px数值字体。头像仍采用原中心 (38,40)、半径30与14px等级字体。快捷键由原 keyCodeMc 的坐标复刻，移回图标内；技能图标继续取角色实际技能定义的 Resource.icon3，切换技能时同步。
 
-实际 GPU 验证采样 HP/MP/EXP 填充像素，防止再次出现“配置有颜色、运行画面被底图遮住”。[截图工具](../../tools/capture_original_battle_ui.gd) 另输出 hud-partial（268/275生命、57/100魔法、55/110经验）和 no-mana，覆盖三条颜色、部分填充及原灰度；这些样例只在工具中经属性入口设置，不改变角色初始配置。HUD验收已扩展为56项，同时通过95项Buff与145项操作控制回归。
+实际 GPU 验证采样 HP/MP/EXP 填充像素，防止再次出现“配置有颜色、运行画面被底图遮住”。[截图工具](../../tools/performance/capture_original_battle_ui.gd) 另输出 hud-partial（268/275生命、57/100魔法、55/110经验）和 no-mana，覆盖三条颜色、部分填充及原灰度；这些样例只在工具中经属性入口设置，不改变角色初始配置。HUD验收已扩展为56项，同时通过95项Buff与145项操作控制回归。
 
 ## 背包 UI 与插件规则
 
@@ -87,7 +87,7 @@ python tools/build_original_ui_scenes.py 'D:/UserData/Downloads/game/Speculum-43
 ./tools/verify_stage_eight.ps1 -Godot 'D:/路径/Spine-Godot.exe' -Suites original_battle_ui,original_boss_presentation,boss,level_progression,plugins,attribute_pipeline,stage_one
 ```
 
-真实 GPU 截图脚本 [capture_original_battle_ui.gd](../../tools/capture_original_battle_ui.gd) 输出到忽略的 `.cleanup-backup/battle-ui-*.png`，用于检查颜色、原生 Spine 材质、层级、冷却遮罩、背包外观、播报、斩败和光圈。
+真实 GPU 截图脚本 [capture_original_battle_ui.gd](../../tools/performance/capture_original_battle_ui.gd) 输出到忽略的 `.cleanup-backup/battle-ui-*.png`，用于检查颜色、原生 Spine 材质、层级、冷却遮罩、背包外观、播报、斩败和光圈。
 
 ## 背包截图修复
 

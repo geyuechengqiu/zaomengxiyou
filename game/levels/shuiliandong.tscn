@@ -25,6 +25,9 @@ script = ExtResource("budget")
 
 [node name="Actors" parent="BattleSession" index="5" unique_id=587668075 instance=ExtResource("map")]
 
+[node name="shuiliandong_birth_5" parent="BattleSession/Actors/SpawnPoints" index="6"]
+position = Vector2(8490, 677)
+
 [node name="FinalExit" parent="BattleSession/Actors" index="7"]
 position = Vector2(8474, 1077)
 

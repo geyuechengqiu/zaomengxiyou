@@ -21,7 +21,6 @@ public partial class OriginalSkillPanel : Control
     private readonly List<GodotObject> _items = new();
     private readonly List<(Control Cell, string Group, int Index)> _targets = new();
     private readonly List<(Control Cell, int Id)> _stock = new();
-    private readonly System.Collections.Generic.Dictionary<string, Texture2D> _textures = new();
     private GodotObject? _bindings;
     private Callable _changed, _currency, _inventoryChanged, _attributes, _mapping, _remapFinished, _remapFailed;
     private bool Blocked => GetNode<Control>("Notice").Visible || GetNode<Control>("Upgrade").Visible;
@@ -90,6 +89,7 @@ public partial class OriginalSkillPanel : Control
     private void BindButton(string path, Action action) => GetNode<BaseButton>(path).Pressed += () => { if (path.StartsWith("Notice/") || !GetNode<Control>("Notice").Visible) action(); };
     public void Bind(BattleSkillLoadout loadout)
     {
+        if (Loadout == loadout) { Refresh(); return; }
         Loadout = loadout; Loadout.Initialize(); Loadout.BindHUD(GetParent<Control>());
         _changed = Callable.From(Refresh); Loadout.Connect(BattleSkillLoadout.SignalName.Changed, _changed);
         _currency = Callable.From<long>(_ => { if (Visible) RefreshUpgrade(); }); Loadout.Inventory.Connect("currency_changed", _currency);
@@ -198,8 +198,10 @@ public partial class OriginalSkillPanel : Control
     }
     private int Equipped(string group,int index) => group=="active" ? Loadout.Active[index] : group=="passive" ? Loadout.Passive : group=="peerless" ? Loadout.Peerless : 0;
     private Texture2D Texture(string name)
-    { string path="res://assets/ui/skills/"+name+".png"; if (!_textures.TryGetValue(path,out var image)) _textures[path]=image=GD.Load<Texture2D>(path); return image; }
-    private Texture2D? SkillIcon(int id) => Loadout.Find(id) is {} row && Loadout.Learned(id) ? GD.Load<Texture2D>(row["icon"].AsString()) : null;
+        => TexturePath("res://assets/ui/skills/"+name+".png");
+    private Texture2D TexturePath(string path)
+        => BattleUiTextureCache.Get(path);
+    private Texture2D? SkillIcon(int id) => Loadout.Find(id) is {} row && Loadout.Learned(id) ? TexturePath(row["icon"].AsString()) : null;
     private void SetText(string path,string text) => GetNode<Label>(path).Text=text;
     private static double Sample(Dictionary row,string field,int level)
     { var values=row[field].AsGodotArray(); return values[Math.Clamp(level,0,values.Count-1)].AsDouble(); }
@@ -207,7 +209,7 @@ public partial class OriginalSkillPanel : Control
     {
         if (Loadout==null || !GetNode<Control>("Upgrade").Visible) return;
         var row=Loadout.Find(_upgradeId)!; int level=Loadout.Level(_upgradeId); var next=Loadout.Next(_upgradeId);
-        GetNode<TextureRect>("Upgrade/Icon").Texture=GD.Load<Texture2D>(row["icon"].AsString());
+        GetNode<TextureRect>("Upgrade/Icon").Texture=TexturePath(row["icon"].AsString());
         SetText("Upgrade/Name",row["name"].AsString()+$" Lv.{level}");
         SetText("Upgrade/Requirements",next==null ? "技能已满级" : $"人物等级需达到{next["role_level"].AsInt32()}级");
         SetText("Upgrade/Cost",next==null ? "" : $"消耗灵魂：{next["spirit"].AsInt64()}");
@@ -250,7 +252,7 @@ public partial class OriginalSkillPanel : Control
             var page=GetNode<TextureButton>("Keyboard/Pages/Page"+i); page.Visible=i<shown;
             page.Position=new Vector2((250-shown*34)/2f+i*34,0); page.SetMeta("page_index",start+i);
             page.GetNode<Label>("Text").Text=(start+i+1).ToString();
-            page.TextureNormal=GD.Load<Texture2D>($"res://assets/ui/original/bag_page_{(start+i==_page?2:0)}.png");
+            page.TextureNormal=TexturePath($"res://assets/ui/original/bag_page_{(start+i==_page?2:0)}.png");
         }
         for (int i=0;i<16;++i)
         {
@@ -263,7 +265,7 @@ public partial class OriginalSkillPanel : Control
                 int quality=_items[at].Get("original_data").AsGodotDictionary().GetValueOrDefault("quality",0).AsInt32();
                 skin=Math.Clamp(int.Parse(Math.Abs(quality).ToString()[..1]),0,9)+1;
             }
-            cell.GetNode<TextureRect>("Background").Texture=GD.Load<Texture2D>($"res://assets/ui/original/slot_{skin}.png");
+            cell.GetNode<TextureRect>("Background").Texture=TexturePath($"res://assets/ui/original/slot_{skin}.png");
         }
     }
     private void StockInput(InputEvent e,int id)
@@ -396,7 +398,7 @@ public partial class OriginalSkillPanel : Control
     {
         if (IsInstanceValid(_window)) _window!.FocusExited -= CancelInteraction;
         _window=null;
-        _items.Clear(); _textures.Clear();
+        _items.Clear();
         if (Loadout==null || !IsInstanceValid(Loadout)) return;
         if (Loadout.IsConnected(BattleSkillLoadout.SignalName.Changed,_changed)) Loadout.Disconnect(BattleSkillLoadout.SignalName.Changed,_changed);
         foreach (var (obj,signal,callback) in new[] {( (GodotObject)Loadout.Inventory,"currency_changed",_currency),((GodotObject)Loadout.Inventory,"item_changed",_inventoryChanged),(Loadout.Actor.Get("attributes").AsGodotObject(),"snapshot_changed",_attributes),(_bindings!,"mapping_changed",_mapping),(_bindings!,"remap_finished",_remapFinished),(_bindings!,"remap_failed",_remapFailed)})

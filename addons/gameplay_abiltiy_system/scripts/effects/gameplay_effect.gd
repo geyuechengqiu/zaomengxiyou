@@ -10,7 +10,9 @@ class_name GameplayEffect
 @export var filters: Array[GameplayFilterData] = []  ## 过滤器，如果为空，则不过滤
 ## 仅可撤销的持续效果在叠层时重新应用，瞬时伤害/治疗不会重放。
 @export var reapply_on_stack: bool = false
-@export var sub_effects: Array[GameplayEffect] = []  ## 子效果，支持效果组合
+## Resource avoids an empty self-typed array retaining this script at shutdown.
+## Entries are still validated as GameplayEffect when consumed.
+@export var sub_effects: Array[Resource] = []  ## 子效果，支持效果组合
 
 # --- 标签要求（标签系统集成）---
 @export_group("Tag Requirements")
@@ -103,7 +105,7 @@ func _execute_cue(target: Node, context: Dictionary) -> void:
 func _apply_sub_effects(target: Node, instigator: Node, context: Dictionary) -> void:
 	# 注意：子效果也需要克隆，避免运行时状态共享
 	for effect in sub_effects:
-		if not is_instance_valid(effect):
+		if not is_instance_valid(effect) or not effect is GameplayEffect:
 			continue
 		
 		# 克隆子效果实例
@@ -120,7 +122,7 @@ func _apply_sub_effects(target: Node, instigator: Node, context: Dictionary) -> 
 ## [param] context: 上下文信息
 func _remove_sub_effects(target: Node, instigator: Node, context: Dictionary) -> void:
 	for effect in sub_effects:
-		if not is_instance_valid(effect):
+		if not is_instance_valid(effect) or not effect is GameplayEffect:
 			continue
 		# 克隆子效果实例
 		var sub_effect_inst = effect.duplicate(true) as GameplayEffect

@@ -91,6 +91,7 @@ public partial class VerifyHuaguoshan : Node
         Check(_session.Get("audio").AsGodotObject().Get("current_music").AsString() == "zaomeng1_huaguoshan", "播放源 Music.swf/bg1: " + _session.Get("audio").AsGodotObject().Get("current_music"));
         var gateway = _level.GetNode("BattleSession/Actors/FinalExit/Gateway");
         Check(!gateway.Get("active").AsBool() && !((Node2D)gateway).Visible, "Boss未死时隐藏出口");
+        MapPresentationChecks.Verify(_session, _level.GetNode<Node2D>("BattleSession/Actors/Visuals/HuaguoshanVisual"), "MiddleBackground/Forest", Check);
         var plans = definition.Get("spawn_plans").AsGodotArray();
         int planned = 0;
         foreach (var p in plans) planned += p.AsGodotObject().Get("monster_ids").AsGodotArray().Count;

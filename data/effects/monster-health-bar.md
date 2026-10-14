@@ -72,7 +72,7 @@
 | 静态内存增量 | 10,566,984 B | 9,224,152 B |
 | 每次跳字额外AnimationPlayer节点 | 1 | 0 |
 
-这组实现中，Tween更新耗时约降低47%，创建耗时约降低32%，内存增量约降低13%。这是此前本机微基准，不能推导游戏帧率也提高47%；它未包含数字绘制和贴图切换。当前已完成图集与节点池重构，此表只保留历史参考。完整5轮数据见 [实测JSON](../../addons/battle_foundation/docs/feedback-animation-benchmark.json)，当前 [benchmark_feedback_animation.tscn](../../tools/benchmark_feedback_animation.tscn) 已改为测量真实跳字的缓存复用、曲线推进与内存开销，结果输出到 `.cleanup-backup/feedback-tween-benchmark.json`。历史对比记录不再依赖任何预览场景或AnimationPlayer测试分支。包含GPU绘制及完整帧的当前测试见 [高并发性能说明](damage-number-performance.md)。
+这组实现中，Tween更新耗时约降低47%，创建耗时约降低32%，内存增量约降低13%。这是此前本机微基准，不能推导游戏帧率也提高47%；它未包含数字绘制和贴图切换。当前已完成图集与节点池重构，此表只保留历史参考。完整5轮数据见 [实测JSON](../../addons/battle_foundation/docs/feedback-animation-benchmark.json)，当前 [benchmark_feedback_animation.tscn](../../tools/performance/benchmark_feedback_animation.tscn) 已改为测量真实跳字的缓存复用、曲线推进与内存开销，结果输出到 `.cleanup-backup/feedback-tween-benchmark.json`。历史对比记录不再依赖任何预览场景或AnimationPlayer测试分支。包含GPU绘制及完整帧的当前测试见 [高并发性能说明](damage-number-performance.md)。
 
 ## 验证与重新导出
 
@@ -81,7 +81,7 @@
 ```powershell
 ./tools/verify_stage_eight.ps1 -Godot '<支持Spine的Godot>' -Suites original_feedback,damage_numbers,original_damage,single_attack,wooden_dummy,skill_timeline
 # 动画性能微基准：
-& '<支持Spine的Godot>' --headless --path . res://tools/benchmark_feedback_animation.tscn
+& '<支持Spine的Godot>' --headless --path . res://tools/performance/benchmark_feedback_animation.tscn
 # 无损重新导出原版血条；需要Java17和引用仓库已有JPEXS库：
 python tools/export_original_monster_health_bar.py '<Speculum-4399-master根目录>'
 ```

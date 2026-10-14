@@ -355,6 +355,8 @@ collision_mask = 2
     fill_node = '[node name="GroundContinuation" type="Polygon2D" parent="GroundArtwork"]\nmaterial = SubResource("StoneMaterial")\ntexture = ExtResource("ground")\npolygon = PackedVector2Array('+','.join(f'{x:.2f},{y:.2f}' for x,y in fill)+')\n'
     visual = visual.replace('[node name="Ground" type="Sprite2D" parent="GroundArtwork"]', fill_node+'[node name="Ground" type="Sprite2D" parent="GroundArtwork"]', 1)
     write(MAP/'visual.tscn', visual)
+    from author_map_presentation import author_presentation
+    author_presentation(MAP/'visual.tscn', 'Forest', 490.0)
     scene+='polygon = PackedVector2Array('+','.join(f'{x:.2f},{y:.2f}' for x,y in points)+')\n'
     for i,x in enumerate([-64,9724]):
         scene+=f'[node name="Wall{i}" type="StaticBody2D" parent="Terrain"]\nposition = Vector2({x},640)\ncollision_mask = 2\n[node name="CollisionShape2D" type="CollisionShape2D" parent="Terrain/Wall{i}"]\nshape = SubResource("WallShape")\n'

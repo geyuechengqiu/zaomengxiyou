@@ -1,5 +1,7 @@
 # 阶段 9：受击、击退、浮空与保护条
 
+> 本文保留受击与保护接口的开发记录。旧阶段9木桩演示及其构建脚本已清理；当前运行与调参请使用碧玉径/花果山/水帘洞，以及悟空或猕猴王的实际技能资源，F5为造1大地图。
+
 本阶段复用 GAS 的伤害结果、HealthVital、技能及状态，Core 的动作状态机与事件总线，以及现有扫掠运动控制器。新增独立的目标反应配置与保护条运行系统；不是在伤害公式中直接切换动画。
 
 ## 运行与操作
@@ -31,7 +33,7 @@ F5 运行 [hit_reaction_demo.tscn](../../../game/levels/biyujing.tscn)。A/D 移
 
 ### 霸体、无敌与保护不是同一开关
 
-角色的 `reaction_profile` 是 [BattleHitReactionProfile](../definitions/battle_hit_reaction_profile.gd)：
+角色的 `reaction_profile` 是 [BattleHitReactionProfile](../definitions/BattleHitReactionProfile.cs)：
 
 | 字段 | 含义 |
 | --- | --- |
@@ -93,7 +95,7 @@ F5 运行 [hit_reaction_demo.tscn](../../../game/levels/biyujing.tscn)。A/D 移
 
 LAUNCHED、AIR_HURT、HIT_LAND、KNOCKDOWN、GETUP 默认禁止移动、跳跃、转向和普通攻击。地面硬直计时结束但击退未结束时保留 HURT；跨平台边缘不会提前返回可操控的跳跃。倒地或起身时再次失去支撑会重新进入受击下落。
 
-落地缓冲、倒地、起身时长分别来自目标配置，默认 0.1、0.65、0.35 战斗秒；动作由 Core 计时和实际接触驱动，不等待动画结束信号。木桩新增 [reaction_animations.tres](../../../data/battle2d/dummy/reaction_animations.tres) 的六个可预览动画，AnimationPlayerAdapter 自动查找 `reaction/动作名`。没有这些动作的 Spine 角色暂用 hurt/idle 回退，不改变物理或状态逻辑。
+落地缓冲、倒地、起身时长分别来自目标配置，默认 0.1、0.65、0.35 战斗秒；动作由 Core 计时和实际接触驱动，不等待动画结束信号。木桩新增 [reaction_animations.tres](../../../data/characters/sunwukong/animation/sunwukong_profile.tres) 的六个可预览动画，AnimationPlayerAdapter 自动查找 `reaction/动作名`。没有这些动作的 Spine 角色暂用 hurt/idle 回退，不改变物理或状态逻辑。
 
 ![倒地动画](../docs/stage9-knockdown.png)
 
@@ -101,7 +103,7 @@ LAUNCHED、AIR_HURT、HIT_LAND、KNOCKDOWN、GETUP 默认禁止移动、跳跃�
 
 ### 每个 Boss 的满值与显示
 
-给角色指定 [BattleProtectionProfile](../definitions/battle_protection_profile.gd)，不指定则不启用保护。运行条和次数存在 `actor.protection`，不会写进共享 Resource。
+给角色指定 [BattleProtectionProfile](../definitions/BattleProtectionProfile.cs)，不指定则不启用保护。运行条和次数存在 `actor.protection`，不会写进共享 Resource。
 
 `original_boss_key` 使用“表名/BossID”，避免不同配置表 ID 冲突；`maximum_override=-1` 读取该 Boss 的 protectPoint，正整数覆盖满值。示例的两份资源设置 `resource_local_to_scene=true`，运行调参不会串到另一实例。
 
@@ -149,7 +151,7 @@ Core 新事件：battle.hit.reaction、battle.protection.changed/triggered/ended
 # 一项阶段9验收
 & '<带 Spine 的 Godot 路径>' --headless --path . res://tests/suites/verify_hit_reaction.tscn
 # 阶段9 + 已有战斗、动画、Core/GAS/输入回归，正常退出并检查 PASS/错误日志
-& .\tools\verify_stage_nine.ps1 -Godot '<带 Spine 的 Godot 路径>'
+& .\tools\verify_stage_eight.ps1 -Godot '<带 Spine 的 Godot 路径>'
 ```
 
 验收驱动真实 GAS 施放、Core 叶子、HealthVital 与墙/平台碰撞，检查每 Boss 满值、原版累计/合并/重置、伤害与动作分离、霸体/无敌效果策略、五段差异、超大 delta 双向墙体、平台边缘、完整击飞倒地起身、死亡与多目标受击停顿。场景启动前后检查节点树一致，保护 UI 和动画均预置。

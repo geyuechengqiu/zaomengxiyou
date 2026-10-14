@@ -148,8 +148,10 @@ func add_stack(amount: int = 1, is_refresh_duration: bool = true) -> void:
 	if is_refresh_duration:
 		refresh_duration()
 
-func _refresh_stack_effects(effects: Array[GameplayEffect], context: Dictionary, applying: bool) -> void:
+func _refresh_stack_effects(effects: Array, context: Dictionary, applying: bool) -> void:
 	for effect in effects:
+		if not effect is GameplayEffect:
+			continue
 		if effect.reapply_on_stack:
 			if applying:
 				_apply_effects([effect], context)

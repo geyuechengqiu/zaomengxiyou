@@ -10,6 +10,18 @@ public partial class VerifyCampaignTransitions : Node
 {
     private readonly List<string> _failures=new();
     private int _checks;
+    private StageLoadingScreen? _observedLoading;
+    private int _finalTweenFrames;
+    private bool _finalTweenFrozen = true;
+    public override void _Process(double delta)
+    {
+        if (_observedLoading is not { IsLoading: true, Progress: 100 } loading || loading.DisplayedProgress >= 100) return;
+        ++_finalTweenFrames;
+        if (GetTree().CurrentScene is BattleLevelScene current)
+            _finalTweenFrozen &= loading.GetNode<Control>("Overlay").Visible && GetTree().Paused
+                && current.session.Get("clock").AsGodotObject().Get("paused").AsBool()
+                && !current.player.Get("operations").AsGodotObject().Get("enabled").AsBool();
+    }
     private void Check(bool value,string text){++_checks;if(!value)_failures.Add(text);}
     public override async void _Ready()
     {
@@ -41,6 +53,8 @@ public partial class VerifyCampaignTransitions : Node
         var map=await Scene<ZaomengOneWorldMap>();
         Check(map.GetNode<AudioStreamPlayer>("Music").Stream.ResourcePath == "res://assets/audio/zaomeng1/world_map.mp3" && map.GetNode<AudioStreamPlayer>("Music").Playing,"大地图保留造梦西游1原版音乐");
         var loading=campaign.GetLoadingScreen();
+        ProcessMode = ProcessModeEnum.Always;
+        _observedLoading = loading;
         bool? failed=null;
         var invalid=new Dictionary { ["scene"]="res://game/levels/huaguoshan.tscn", ["loading_manifest"]="res://data/missing-loading-manifest.json", ["loading_audio"]="res://data/levels/huaguoshan/audio.json" };
         Check(loading.Begin(invalid, success=>failed=success),"开始异常资源恢复验证");
@@ -69,6 +83,8 @@ public partial class VerifyCampaignTransitions : Node
         Check(!map.SelectLevel("1-1"),"重复按键只提交一次场景切换");
         var flower=await Scene<Huaguoshan>();flower.enable_player_controls=false;flower.player.Get("operations").As<Node>().Set("enabled",false);flower.session.SetPhysicsProcess(false);
         Check(loading.DisplayedProgress==100 && loading.WarmedVisualCount>=4,"Tween缓动到100%且角色及所有怪物画面已预热后进入关卡");
+        Check(_finalTweenFrames >= 20 && _finalTweenFrozen,"最终缓动保留至少20帧反应时间，100%之前持续遮罩并冻结战斗和输入");
+        Check(loading.ResourceLoads>0 && loading.VisualPreparations>=4,"首次加载真实资源并预热画面");
         Check(loading.GetNode("WarmupViewport/Visuals").GetChildCount()==0,"加载预热节点释放，不残留虚拟怪物或战斗实体");
         Check(flower.GetNode("BattleSession/BattlePresentation/DamageNumbers/Rows").Get("created_count").AsInt32()>=128 && flower.GetNode("BattleSession/BattlePresentation").Get("feedback_created").AsInt32()==8,"战斗数字与反馈对象池在加载界面完成预分配");
         Check(monotonic && frozen && loading.Progress==100 && phases.Count>=8,"实际资源进度单调、包含初始化阶段，完成前冻结战斗和输入");
@@ -109,12 +125,22 @@ public partial class VerifyCampaignTransitions : Node
         map.GetNode<TextureButton>("Stages/Stage_1_2").EmitSignal(Button.SignalName.Pressed);
         var water=await Scene<Shuiliandong>();
         Check(water.player.Get("inventory").As<Node>().Get("display_name").AsString()=="跨关卡悟空"&&water.player.Get("attributes").AsGodotObject().Get("current_level").AsInt32()>=3,"真实水帘洞启动恢复角色数据");
-        ulong old=water.GetInstanceId();water.GetNode<Button>("HUD/Restart").EmitSignal(Button.SignalName.Pressed);await Frames(4);
+        int previousLoads=loading.ResourceLoads, previousVisuals=loading.VisualPreparations;
+        ulong old=water.GetInstanceId();water.GetNode<Button>("HUD/Restart").EmitSignal(Button.SignalName.Pressed);
+        Check(loading.IsLoading && loading.GetNode<Control>("Overlay").Visible,"重开同样进入加载界面");
+        await Frames(4);
         water=await Scene<Shuiliandong>();Check(water.GetInstanceId()!=old,"重开创建独立关卡实例");
         Check(water.player.Get("inventory").As<Node>().Get("display_name").AsString()=="跨关卡悟空","重开保留角色信息");
+        Check(loading.ResourceLoads==previousLoads && loading.VisualPreparations==previousVisuals,"重复进关复用资源和GPU预热缓存，不重复请求或重建预热角色");
         water.menu.Call("set_open",true);
         water.menu.GetNode<BaseButton>("Main/Map").EmitSignal(Button.SignalName.Pressed);
         await Scene<ZaomengOneWorldMap>();Check(!campaign.IsUnlocked("1-3"),"中途返回不解锁第三关");
         loading.PhaseChanged -= OnPhase;
+        _observedLoading = null;
+        int cancelled=0;
+        Check(loading.Begin(campaign.Find("1-1")!, success=>{if(!success)++cancelled;}),"开始加载取消验证");
+        loading.QueueFree();
+        await Frames(4);
+        Check(cancelled==1 && !StageLoadingScreen.LoadingStage && !GetTree().Paused && GetTree().CurrentScene is ZaomengOneWorldMap,"加载中移除控制器仅回调一次，恢复时钟且不访问已释放界面");
     }
 }

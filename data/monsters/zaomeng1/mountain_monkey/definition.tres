@@ -1,9 +1,10 @@
-[gd_resource type="Resource" script_class="BattleEntityDefinition" format=3]
-[ext_resource type="Script" path="res://addons/battle_foundation/definitions/BattleEntityDefinition.cs" id="script"]
-[ext_resource type="Script" path="res://addons/gameplay_abiltiy_system/scripts/attributes/vitals/gameplay_vital.gd" id="vital_type"]
-[ext_resource type="Resource" path="res://data/monsters/yushoushi/attributes.tres" id="attributes"]
+[gd_resource type="Resource" script_class="BattleEntityDefinition" format=3 uid="uid://qdtgd8mf2s6b"]
+
+[ext_resource type="Resource" uid="uid://dsdisvq0m2g87" path="res://data/monsters/yushoushi/attributes.tres" id="attributes"]
 [ext_resource type="Resource" path="res://data/attribute/vitals/health.tres" id="health"]
 [ext_resource type="PackedScene" path="res://data/monsters/zaomeng1/mountain_monkey/monster.tscn" id="scene"]
+[ext_resource type="Script" uid="uid://b4h05prurxqqs" path="res://addons/battle_foundation/definitions/BattleEntityDefinition.cs" id="script"]
+
 [resource]
 script = ExtResource("script")
 definition_id = &"花果山山猴"
@@ -11,12 +12,11 @@ display_name = "山猴"
 faction_id = &"enemy"
 scene = ExtResource("scene")
 attribute_set = ExtResource("attributes")
-vitals = Array[ExtResource("vital_type")]([ExtResource("health")])
 initial_level = 2
+vitals = Array[Resource]([ExtResource("health")])
 ability_ids = Array[StringName]([&"zaomeng1_mountain_monkey_hit1"])
 metadata/original_monster_id = 10201
 metadata/original_resource_id = 11102
 metadata/original_show_appear = 1
-
 metadata/zaomeng1_enemy_type = 2
 metadata/stat_source = "碧玉径/yushoushi"

@@ -69,7 +69,7 @@ Boss必掉封煞甲；普通怪使用原权重抽取行者装备、萝卜/药瓶
 
 补给成功拾取已恢复原版跳字：绿色`bleedNumberAdd`回血、蓝色`mpNumberAdd`回魔，显示Vital按上限裁剪后的实际整数恢复量。复用公共跳字池和原Tween曲线，满值不拾取、不跳字，也不播放成功音效；补给仍不进入背包且不弹问题提示。[音频及补给反馈说明](../../addons/battle_foundation/audio/README.md)。
 
-专项场景：`tests/suites/verify_loot_growth.tscn`。检查定义隔离、跨背包UID、保存快照、成本与装备限制、强化实际伤害、洗练区间、套装增减、皮肤与攻击框、立即经验/灵魂、低帧率飞行、容量失败重试、死亡隐藏与离场清理。已纳入 `tools/verify_stage_eight.ps1` 默认回归；`tools/capture_loot_growth.gd`检查实际GPU画面。
+专项场景：`tests/suites/verify_loot_growth.tscn`。检查定义隔离、跨背包UID、保存快照、成本与装备限制、强化实际伤害、洗练区间、套装增减、皮肤与攻击框、立即经验/灵魂、低帧率飞行、容量失败重试、死亡隐藏与离场清理。已纳入 `tools/verify_stage_eight.ps1` 默认回归；`tools/performance/capture_loot_growth.gd`检查实际GPU画面。
 
 补给与拾取表现修正通过68项loot_growth、42项combat_hud和95项original_battle_ui，共205项检查。GPU检查地面品质光晕、拾取起点/半程、完成清理，退出码0。素材可用 `python tools/export_loot_presentation.py` 从本地原图集重新导出；每帧来源、注册点与SHA256见 `assets/effects/loot_quality/source_mapping.json`。
 

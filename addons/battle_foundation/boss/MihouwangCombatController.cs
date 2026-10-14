@@ -3,9 +3,9 @@ using Godot.Collections;
 using System;
 using Array = Godot.Collections.Array;
 
-/// <summary>Authored tornado pulses and protection casts share the standard damage/action pipeline.</summary>
+/// <summary>Tornado damage pulses and continuous attraction use the battle clock.</summary>
 [GlobalClass]
-public partial class MihouwangCombatController : Node
+public partial class MihouwangCombatController : Node, IBattleCombatStep
 {
     [Export] public Array<Texture2D> skill_announcements { get; set; } = new();
     [Export(PropertyHint.Range, "0,1000,10")] public double attraction_distance { get; set; } = 260;
@@ -20,6 +20,7 @@ public partial class MihouwangCombatController : Node
     private bool _startingProtection;
     private Node _tags = null!;
     private StringName _guardAbility = "", _guardAttack = "";
+    private static readonly StringName NormalHit = "normal";
     private int _guardRequest;
     private BattleHitReactionProfile? _originalReaction, _guardReaction;
     public bool announcement_guard_active { get; private set; }
@@ -215,34 +216,77 @@ public partial class MihouwangCombatController : Node
         var context = segment.Call("get_payload").AsGodotDictionary();
         context.Merge(marker, true);
         int facing = cast.Get("facing").AsInt32();
-        var source = segment.Get("hit_rect").AsRect2();
-        var rect = new Rect2(source.Position * 3, source.Size * 3);
-        if (facing < 0) rect.Position = new Vector2(-rect.End.X, rect.Position.Y);
-        rect = _actor.GlobalTransform * rect;
-        float center = rect.GetCenter().X;
+        var rect = TornadoRect(cast, segment);
         foreach (var value in session.Call("get_entities").AsGodotArray())
         {
             if (!cast.Get("active").AsBool() || !_actor.Call("is_alive").AsBool() || session.Call("is_simulation_blocked").AsBool()) break;
             var target = value.As<Node2D>();
             if (target == _actor || target.IsQueuedForDeletion() || !target.Call("is_alive").AsBool() || target.Call("is_spawning").AsBool()) continue;
             if (!session.Get("factions").AsGodotObject().Call("is_hostile", _actor.Get("faction_id"), target.Get("faction_id")).AsBool()) continue;
-            var points = target.Get("hurtbox").AsGodotObject().Call("get_polygon_global").AsVector2Array();
-            if (points.Length == 0) continue;
-            var bounds = new Rect2(points[0], Vector2.Zero);
-            foreach (var point in points) bounds = bounds.Expand(point);
-            if (!rect.Intersects(bounds)) continue;
+            if (!InTornado(target, rect)) continue;
             double sample = marker["skill_time"].AsDouble();
             var hit = context.Duplicate(true); hit["sample_time"] = sample;
             if (!cast.Call("register_hit", 1, target.Get("entity_id"), hit).AsBool()) continue;
-            float delta = center - target.GlobalPosition.X;
             hit["attack_facing"] = facing;
-            hit["knockback_direction"] = "explicit";
-            hit["knockback_sign"] = delta < 0 ? -1 : 1;
-            hit["knockback_mode"] = "displacement";
-            // Stop at the center instead of ejecting targets through the opposite side.
-            hit["knockback_distance"] = Math.Min(Math.Abs(delta), attraction_distance);
-            hit["knockback_duration"] = attraction_duration;
+            // Damage/stun keep their half-second cadence. Attraction below is
+            // independent, so a hit cannot add a lingering knockback impulse.
+            hit["knockback_speed"] = 0.0;
+            hit["knockback_distance"] = 0.0;
+            hit["knockback_duration"] = 0.0;
             _actor.Call("resolve_attack_hit", target, hit);
+        }
+    }
+
+    private Rect2 TornadoRect(GodotObject cast, Resource segment)
+    {
+        var source = segment.Get("hit_rect").AsRect2();
+        var rect = new Rect2(source.Position * 3, source.Size * 3);
+        if (cast.Get("facing").AsInt32() < 0) rect.Position = new Vector2(-rect.End.X, rect.Position.Y);
+        return _actor.GlobalTransform * rect;
+    }
+
+    private static bool InTornado(Node2D target, Rect2 rect)
+    {
+        var points = target.Get("hurtbox").AsGodotObject().Call("get_polygon_global").AsVector2Array();
+        if (points.Length == 0) return false;
+        var bounds = new Rect2(points[0], Vector2.Zero);
+        foreach (var point in points) bounds = bounds.Expand(point);
+        return rect.Intersects(bounds);
+    }
+
+    public void advance_combat(double delta)
+    {
+        if (delta <= 0 || attraction_distance <= 0 || attraction_duration <= 0 || !_actor.Call("is_alive").AsBool()) return;
+        var session = _actor.Get("session").As<Node>();
+        if (session == null || session.Call("is_simulation_blocked").AsBool()) return;
+        var cast = _actor.Get("attack_instance").AsGodotObject();
+        if (cast == null || !cast.Get("active").AsBool() || cast.Get("ability_id").AsStringName() != "mihouwang_skill3") return;
+        var timeline = cast.Get("timeline").As<Resource>();
+        var segment = timeline.GetMeta("projectile_segment").As<Resource>();
+        double fps = timeline.Get("source_fps").AsDouble(), elapsed = cast.Get("elapsed").AsDouble();
+        double actionDelta = _actor.Call("get_action_delta", cast.Get("ability_id"), delta).AsDouble();
+        // Only the portion inside the authored [start_frame, end_frame) window.
+        double used = Math.Min(elapsed, segment.Get("end_frame").AsDouble() / fps)
+            - Math.Max(elapsed - actionDelta, segment.Get("start_frame").AsDouble() / fps);
+        if (used <= 0) return;
+        var rect = TornadoRect(cast, segment);
+        foreach (var value in session.Call("get_entities").AsGodotArray())
+        {
+            var target = value.As<Node2D>();
+            if (target == _actor || target.IsQueuedForDeletion() || !target.Call("is_alive").AsBool() || target.Call("is_spawning").AsBool()) continue;
+            if (!session.Get("factions").AsGodotObject().Call("is_hostile", _actor.Get("faction_id"), target.Get("faction_id")).AsBool()
+                || !InTornado(target, rect)) continue;
+            var reactions = target.Get("reactions").AsGodotObject();
+            var policy = reactions.Call("get_policy", target).AsGodotDictionary();
+            var profile = target.Get("reaction_profile").As<BattleHitReactionProfile>();
+            if (!policy["displacement"].AsBool()
+                || reactions.Call("is_armored", target).AsBool() && profile.armor_blocks_displacement && profile.armor_blocks_kinds.Contains(NormalHit)) continue;
+            double distance = rect.GetCenter().X - target.GlobalPosition.X;
+            double step = attraction_distance / attraction_duration * used * (1 - profile.knockback_resistance);
+            float x = (float)(Math.Sign(distance) * Math.Min(Math.Abs(distance), step));
+            // A swept displacement respects walls, ground slopes and one-way
+            // platforms. It leaves no force to continue after exiting the area.
+            target.Get("motion").As<BattleMotionController2D>().sweep_skill_displacement(new Vector2(x, 0), target.Get("action_profile").As<Resource>());
         }
     }
 

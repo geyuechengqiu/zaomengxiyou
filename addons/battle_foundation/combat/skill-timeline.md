@@ -1,10 +1,10 @@
-# 阶段 7：技能时间轴、连招与多段攻击
+# 技能时间轴、连招与多段攻击
 
 > 阶段8已为实际场景接入原版伤害策略；本文数值表是显式选择 SimpleDamageLogic 的阶段7验收夹具结果。实际场景按原版浮动、截断、概率与抗性结算；显示统一整数。详见 [原版伤害说明](original-damage.md)。
 
-打开 [skill_timeline_demo.tscn](../../../game/levels/biyujing.tscn)，用现有带 Spine 模块的 Godot 按 **F6**。场景沿用原版 940×590，角色、地形、木桩、GAS 组件、操作控制器、HUD 和技能对象均预置；启动和施放不创建节点。F5 现打开阶段8原版伤害场景。
+当前编辑/运行入口为 [碧玉径](../../../game/levels/biyujing.tscn)、花果山和水帘洞；打开对应关卡按F6，F5为造1大地图。旧阶段7木桩演示已删除，下文的历史数值表只用于说明协议，不作为当前关卡配置。
 
-A/D 移动，K 跳跃，J 三段攻击，Y 技能槽 1，Esc 菜单与改键。第 28—38 素材帧再次按 J 派生单段普攻，可从第 20 帧提前缓存。按钮可取消技能、翻转、移动木桩以打空、增加攻击、暂停或重载场景。两个木桩各有 500 生命、防御 5；三段倍率、反应、消耗和冷却是**阶段 7 测试配置**，不代表原版某个技能。
+默认J为悟空五段普攻，Y/U/I/O/L使用技能装配结果；四个转职前主动技能已接入。实际倍率、MP、CD、攻击窗口和动作取自各技能资源，参见 [悟空技能配置](../../../data/characters/sunwukong/skills/README.md)。
 
 ![预置场景：第三段36.5伤害与原版受击闪光](../docs/skill-timeline-hit.png)
 
@@ -27,7 +27,7 @@ BattleCatalog 为实体复制完整资源图；技能执行不写回上述定义
 
 ## 编辑攻击段
 
-在 [three_hit.tres](../../../data/battle2d/skill_timeline/three_hit.tres) 的 Timeline Feature 中展开 Attack Segments。无需增加攻击 Area2D，每个角色继续只有一个 AttackHitbox / CollisionShape2D，检查各段时临时读取相应资源配置同一个形状。
+在 [猕猴王skill3.tres](../../../data/monsters/zaomeng1/mihou_king/skills/skill3.tres) 的 Timeline Feature 中展开 Attack Segments。无需增加攻击 Area2D，每个角色继续只有一个 AttackHitbox / CollisionShape2D，检查各段时临时读取相应资源配置同一个形状。
 
 | 字段 | 约定 |
 | --- | --- |
@@ -129,18 +129,10 @@ BattleTimelineObject2D 激活已有 Node2D、设置生成位置/速度，手动�
 ## 验收与扩展入口
 
 ```powershell
-& '<带 Spine 模块的 Godot 路径>' --headless --path . res://tests/suites/verify_skill_timeline.tscn
+./tools/verify_stage_eight.ps1 -Godot '<配套 Godot.exe>' -Suites original_skill_panel,mihouwang_skills,huaguoshan_combat
 ```
 
-[verify_skill_timeline.gd](../../../tests/README.md) **117 项检查通过**：三段不同倍率与反应、源帧顺序、低帧率跨全技能、持续间隔/最大次数、晚进入/多目标独立计时、真实技能槽意图与菜单、派生窗口/缓存/控制权释放、同步取消、直接GAS取消/遗忘、死亡清理、完成重入、旧编号回收、资源不足、消耗冷却、暂停/慢动作/停顿、资源图隔离、Buff/保护上下文、霸体与浮空许可、内部小数与整数反馈、高速位移碰撞和动画时钟，并检查启动前后预置节点树一致。阶段4原五连击222项、阶段6单段闭环64项、操作145项、属性链65项与插件/阶段1/Core事件回归通过；D3D12实际场景与SVG已检查。
-
-[真实编辑器预览验收](../../../tools/verify_editor_skill_timeline.gd) **11项通过**，覆盖三段切换、同一形状复用、Inspector矩形实时刷新与数据恢复：
-
-```powershell
-& '<带 Spine 模块的 Godot 路径>' --headless --path . --editor --script res://tools/verify_editor_skill_timeline.gd
-```
-
-编辑器修改技能资源与场景后直接保存。[离线构建工具](../../../tools/build_skill_timeline_scene.mjs) 可重建阶段7基准资源和场景，运行会覆盖本阶段目录及演示场景，日常编辑无需运行它。
+当前回归使用实际角色、技能、矩形与关卡，验证多段命中、时序、派生换槽、保护技能、暂停及生命周期。历史阶段7的117项演示验收和编辑器演示脚本已退役，不再作为启动命令；新的 [技能场景制作工具](../../../tools/author_mihouwang_skills.py) 仅用于离线制作，日常调参直接编辑技能资源或场景矩形。
 
 | 接口 | 用途 |
 | --- | --- |

@@ -214,5 +214,58 @@
     "tools/verify_single_attack_scene.gd.uid"
   ],
   "backup": ".cleanup-backup/resource-organization",
-  "retained_entry": "game/levels/biyujing.tscn"
+  "retained_entry": "game/levels/biyujing.tscn",
+  "maintenance_2026_10_13": {
+    "retained_scene_classes": [
+      "levels",
+      "game_ui",
+      "components",
+      "reusable_templates",
+      "validation",
+      "performance_tools"
+    ],
+    "audit": "tools/audit_project.py",
+    "moves": {
+      "tools/window_mode_helper/configure_editor_window_mode.gd": "tools/editor/window_mode_helper/configure_editor_window_mode.gd",
+      "tools/window_mode_helper/project.godot": "tools/editor/window_mode_helper/project.godot",
+      "tools/benchmark_feedback_animation.gd": "tools/performance/benchmark_feedback_animation.gd",
+      "tools/capture_original_battle_ui.gd.uid": "tools/performance/capture_original_battle_ui.gd.uid",
+      "tools/window_mode_helper/verify_editor_window_mode.gd": "tools/editor/window_mode_helper/verify_editor_window_mode.gd",
+      "tools/capture_audio_supply.gd": "tools/performance/capture_audio_supply.gd",
+      "tools/capture_map_visual.gd": "tools/performance/capture_map_visual.gd",
+      "tools/capture_wukong_beam_alignment.gd": "tools/performance/capture_wukong_beam_alignment.gd",
+      "tools/benchmark_feedback_animation.tscn": "tools/performance/benchmark_feedback_animation.tscn",
+      "tools/capture_level_progression.gd": "tools/performance/capture_level_progression.gd",
+      "tools/window_mode_helper/configure_editor_window_mode.gd.uid": "tools/editor/window_mode_helper/configure_editor_window_mode.gd.uid",
+      "tools/capture_monster_spine.gd.uid": "tools/performance/capture_monster_spine.gd.uid",
+      "tools/capture_loot_growth.gd": "tools/performance/capture_loot_growth.gd",
+      "tools/capture_boss.gd.uid": "tools/performance/capture_boss.gd.uid",
+      "tools/capture_map_visual.gd.uid": "tools/performance/capture_map_visual.gd.uid",
+      "tools/window_mode_helper/verification_plugin.cfg": "tools/editor/window_mode_helper/verification_plugin.cfg",
+      "tools/capture_camera_follow.gd": "tools/performance/capture_camera_follow.gd",
+      "tools/capture_boss.gd": "tools/performance/capture_boss.gd",
+      "tools/capture_wushuang_ui.gd.uid": "tools/performance/capture_wushuang_ui.gd.uid",
+      "tools/capture_original_boss_presentation.gd": "tools/performance/capture_original_boss_presentation.gd",
+      "tools/capture_audio_supply.gd.uid": "tools/performance/capture_audio_supply.gd.uid",
+      "tools/window_mode_helper/verify_editor_window_mode.gd.uid": "tools/editor/window_mode_helper/verify_editor_window_mode.gd.uid",
+      "tools/capture_wukong_beam_alignment.gd.uid": "tools/performance/capture_wukong_beam_alignment.gd.uid",
+      "tools/capture_original_boss_presentation.gd.uid": "tools/performance/capture_original_boss_presentation.gd.uid",
+      "tools/capture_camera_follow.gd.uid": "tools/performance/capture_camera_follow.gd.uid",
+      "tools/capture_loot_growth.gd.uid": "tools/performance/capture_loot_growth.gd.uid",
+      "tools/capture_original_battle_ui.gd": "tools/performance/capture_original_battle_ui.gd",
+      "tools/capture_level_progression.gd.uid": "tools/performance/capture_level_progression.gd.uid",
+      "tools/benchmark_feedback_animation.gd.uid": "tools/performance/benchmark_feedback_animation.gd.uid",
+      "tools/capture_wushuang_ui.gd": "tools/performance/capture_wushuang_ui.gd",
+      "tools/capture_monster_spine.gd": "tools/performance/capture_monster_spine.gd"
+    },
+    "removed": [
+      "tools/configure_editor_window_mode.gd.uid",
+      "tools/verify_editor_window_mode.gd.uid",
+      "addons/godot_core_system-0.0.4/source/trigger_system/trigger.gd.uid",
+      "addons/phantom_camera/panel/editor.gd.uid",
+      "addons/simple_inventory/plugin.uid",
+      "tools/verify_stage_nine.ps1",
+      "tools/build_stage_nine_resources.mjs"
+    ]
+  }
 }

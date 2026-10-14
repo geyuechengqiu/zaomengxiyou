@@ -65,7 +65,7 @@ Godot 4.7.2 自定义Spine构建，Ryzen 9 8940HX，RTX 5060 Laptop GPU，D3D12 
 ```powershell
 & ./tools/verify_stage_eight.ps1 -Godot '<支持Spine的Godot>' -Suites damage_number_pool,damage_numbers,original_feedback,single_attack,original_damage,skill_timeline,wooden_dummy
 & '<支持Spine的Godot>' --path . --max-fps 0 res://tools/benchmark_damage_numbers.tscn -- --report-name=current
-& '<支持Spine的Godot>' --headless --path . res://tools/benchmark_feedback_animation.tscn
+& '<支持Spine的Godot>' --headless --path . res://tools/performance/benchmark_feedback_animation.tscn
 ```
 
 GPU基准将报告和冷/热截图写到 `.cleanup-backup/damage-number-stress-current.*`。最后一条是当前真实跳字的CPU微基准，不包含GPU绘制，不应当作FPS测试。

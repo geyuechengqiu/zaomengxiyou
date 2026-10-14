@@ -8,12 +8,15 @@ using System.Threading.Tasks;
 public partial class StageLoadingScreen : CanvasLayer
 {
     [Signal] public delegate void PhaseChangedEventHandler(string description, double progress);
+    [Export(PropertyHint.Range, "0.3,2,0.05")] public double ProgressTweenSeconds { get; set; } = .8;
     public bool IsLoading { get; private set; }
     public static bool LoadingStage { get; private set; }
     public string LastError { get; private set; } = "";
     public double Progress { get; private set; }
     public double DisplayedProgress { get; private set; }
     public int WarmedVisualCount { get; private set; }
+    public int ResourceLoads { get; private set; }
+    public int VisualPreparations { get; private set; }
     private Tween? _progressTween;
     private Control _view = null!;
     private Label _description = null!, _percent = null!;
@@ -22,7 +25,10 @@ public partial class StageLoadingScreen : CanvasLayer
     // Keep the C# wrappers alive while the shared native resource cache and
     // audio/Spine components still use them. Reuse each path across visits.
     private readonly System.Collections.Generic.Dictionary<string, Resource> _resources = new();
+    private readonly HashSet<string> _preparedVisuals = new();
     private bool _previousPause;
+    private bool _exiting;
+    private Action<bool>? _completion;
 
     public override void _Ready()
     {
@@ -39,14 +45,15 @@ public partial class StageLoadingScreen : CanvasLayer
     {
         if (IsLoading || _view == null || _view.Visible) return false;
         IsLoading = LoadingStage = true; LastError = ""; _previousPause = GetTree().Paused;
+        _completion = completed;
         _view.GetNode<Control>("Dismiss").Hide();
         WarmedVisualCount = 0;
         _view.Show(); SetProgress("准备关卡加载…", 0);
-        LoadLevel(level, completed);
+        LoadLevel(level);
         return true;
     }
 
-    private async void LoadLevel(Dictionary level, Action<bool> completed)
+    private async void LoadLevel(Dictionary level)
     {
         bool success = false;
         try
@@ -77,6 +84,7 @@ public partial class StageLoadingScreen : CanvasLayer
             Error error = GetTree().ChangeSceneToPacked(packed);
             if (error != Error.Ok) throw new InvalidOperationException($"关卡初始化失败：{error}");
             await ToSignal(GetTree(), SceneTree.SignalName.SceneChanged);
+            CheckActive();
             if (GetTree().CurrentScene is not BattleLevelScene battle || !battle.IsNodeReady())
                 throw new InvalidOperationException("关卡初始化未完成");
             SetProgress("准备摄像机、区域出怪和画面显示…", 96);
@@ -87,11 +95,15 @@ public partial class StageLoadingScreen : CanvasLayer
             SetProgress("加载完成，进入关卡", 100);
             if (_progressTween != null && _progressTween.IsRunning())
                 await ToSignal(_progressTween, Tween.SignalName.Finished);
+            CheckActive();
+            // The final frame must visibly show a full bar before gameplay starts.
+            ApplyDisplayedProgress(100);
             await Present();
             battle.session.Call("set_paused", false);
             battle.player.Get("operations").AsGodotObject().Set("enabled", battle.enable_player_controls);
             success = true;
         }
+        catch (OperationCanceledException) when (_exiting) { }
         catch (Exception exception)
         {
             LastError = exception.Message;
@@ -101,11 +113,14 @@ public partial class StageLoadingScreen : CanvasLayer
         }
         finally
         {
-            ClearWarmup();
-            GetTree().Paused = _previousPause;
-            IsLoading = LoadingStage = false;
-            if (success) _view.Hide();
-            completed(success);
+            if (!_exiting)
+            {
+                ClearWarmup();
+                GetTree().Paused = _previousPause;
+                IsLoading = LoadingStage = false;
+                if (success) _view.Hide();
+                Complete(success);
+            }
         }
     }
 
@@ -122,6 +137,11 @@ public partial class StageLoadingScreen : CanvasLayer
         foreach (var scene in scenes.Values)
         {
             SetProgress("预热角色、怪物与技能特效画面…", 85 + 2.0 * done / Math.Max(1, scenes.Count));
+            if (_preparedVisuals.Contains(scene.ResourcePath))
+            {
+                ++WarmedVisualCount; ++done;
+                continue;
+            }
             await Present();
             var visual = scene.Instantiate<Node2D>();
             host.AddChild(visual); visual.Position = new(320, 300);
@@ -141,8 +161,10 @@ public partial class StageLoadingScreen : CanvasLayer
                     await Present();
                 }
                 ++WarmedVisualCount;
+                ++VisualPreparations;
+                _preparedVisuals.Add(scene.ResourcePath);
             }
-            finally { visual.Free(); }
+            finally { if (IsInstanceValid(visual)) visual.Free(); }
             ++done;
         }
         viewport.RenderTargetUpdateMode = SubViewport.UpdateMode.Disabled;
@@ -177,6 +199,8 @@ public partial class StageLoadingScreen : CanvasLayer
     {
         SetProgress(description, start); await Present();
         var pending = new HashSet<string>(paths);
+        pending.RemoveWhere(path => _resources.ContainsKey(path));
+        if (pending.Count == 0) { SetProgress(description, end); return; }
         foreach (string path in pending)
             if (!ResourceLoader.Exists(path)) throw new InvalidOperationException("资源不存在：" + path);
         // Custom Spine/.NET scripted resources construct managed defaults while
@@ -189,34 +213,43 @@ public partial class StageLoadingScreen : CanvasLayer
             {
                 _resources[path] = GD.Load<Resource>(path)
                     ?? throw new InvalidOperationException("资源加载失败：" + path);
+                ++ResourceLoads;
                 SetProgress(description, start + (end - start) * ++done / pending.Count);
                 if (done % 4 == 0) await Present();
             }
             SetProgress(description, end); return;
         }
-        foreach (string path in pending)
+        var requests = new List<string>(pending);
+        foreach (string path in requests)
         {
             Error error = ResourceLoader.LoadThreadedRequest(path);
             if (error != Error.Ok) throw new InvalidOperationException($"无法加载资源：{path} ({error})");
         }
         int count = pending.Count, loaded = 0;
+        using var progress = new Godot.Collections.Array();
         while (pending.Count > 0)
         {
             double partial = 0;
-            foreach (string path in new List<string>(pending))
+            foreach (string path in requests)
             {
-                using var progress = new Godot.Collections.Array();
+                if (!pending.Contains(path)) continue;
+                progress.Clear();
                 var status = ResourceLoader.LoadThreadedGetStatus(path, progress);
                 if (status == ResourceLoader.ThreadLoadStatus.Loaded)
                 {
                     _resources[path] = ResourceLoader.LoadThreadedGet(path); pending.Remove(path); ++loaded;
+                    ++ResourceLoads;
                 }
                 else if (status is ResourceLoader.ThreadLoadStatus.Failed or ResourceLoader.ThreadLoadStatus.InvalidResource)
                     throw new InvalidOperationException("资源加载失败：" + path);
                 else if (progress.Count > 0) partial += progress[0].AsDouble();
             }
             SetProgress(description, start + (end - start) * (loaded + partial) / count);
-            if (pending.Count > 0) await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
+            if (pending.Count > 0)
+            {
+                await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
+                CheckActive();
+            }
         }
         SetProgress(description, end);
     }
@@ -246,21 +279,55 @@ public partial class StageLoadingScreen : CanvasLayer
 
     private async Task Present()
     {
+        CheckActive();
         await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
+        CheckActive();
         if (DisplayServer.GetName() != "headless")
             await ToSignal(RenderingServer.Singleton, RenderingServer.SignalName.FramePostDraw);
+        CheckActive();
+    }
+
+    private void CheckActive()
+    {
+        if (_exiting || !IsInsideTree()) throw new OperationCanceledException();
+    }
+
+    private void Complete(bool success)
+    {
+        var completed = _completion;
+        _completion = null;
+        completed?.Invoke(success);
+    }
+
+    public override void _ExitTree()
+    {
+        _exiting = true;
+        _progressTween?.Kill();
+        if (IsLoading)
+        {
+            GetTree().Paused = _previousPause;
+            IsLoading = LoadingStage = false;
+            Complete(false);
+        }
+        ClearWarmup();
+        _resources.Clear(); _preparedVisuals.Clear();
     }
     private void SetProgress(string text, double progress)
     {
+        double previousTarget = Progress;
         Progress = Math.Max(Progress, progress);
         if (progress == 0) Progress = 0;
         _description.Text = text;
-        _progressTween?.Kill();
-        if (progress == 0) ApplyDisplayedProgress(0);
-        else if (Progress > DisplayedProgress)
+        if (progress == 0)
         {
+            _progressTween?.Kill();
+            ApplyDisplayedProgress(0);
+        }
+        else if (Progress > previousTarget && Progress > DisplayedProgress)
+        {
+            _progressTween?.Kill();
             _progressTween = CreateTween().SetPauseMode(Tween.TweenPauseMode.Process);
-            _progressTween.TweenMethod(Callable.From<double>(ApplyDisplayedProgress), DisplayedProgress, Progress, .22)
+            _progressTween.TweenMethod(Callable.From<double>(ApplyDisplayedProgress), DisplayedProgress, Progress, Math.Clamp(ProgressTweenSeconds, .3, 2))
                 .SetTrans(Tween.TransitionType.Quad).SetEase(Tween.EaseType.Out);
         }
         EmitSignal(SignalName.PhaseChanged, text, Progress);

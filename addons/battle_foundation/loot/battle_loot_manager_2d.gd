@@ -19,6 +19,7 @@ var awarded: Dictionary = {}
 var _pending: Dictionary = {}
 var _monster_ids: Dictionary = {}
 var _accumulator: float = 0.0
+var _pickup_geometry := BattleLootPickupGeometry.new()
 const SOURCE_STEP := 1.0 / 30.0
 
 func _ready() -> void:
@@ -147,7 +148,8 @@ func _advance_source_frame(delta: float) -> void:
 		if not is_instance_valid(player) or not player.is_alive(): continue
 		drop.retry = maxf(0, float(drop.retry) - delta)
 		var auto_pick: bool = int(drop.item.original_data.get("isAutoPick", 0)) != 0 and bool(drop.grounded)
-		var touching := player.get_body_rect_global().grow(pickup_radius * source_unit_scale).has_point(drop.position)
+		var texture: Texture2D = drop.item.pickup_icon if drop.item.pickup_icon != null else drop.item.icon as Texture2D
+		var touching := _pickup_geometry.touches(player.get_body_rect_global(), global_transform, drop.position, texture.get_size() if texture != null else Vector2.ZERO, source_unit_scale, pickup_radius)
 		if drop.retry <= 0 and (auto_pick or touching):
 			if pickup_drop(index, player): continue
 			# 满值补给只做廉价Vital检查，缺值后下一源帧即可拾取；满背包保持1秒重试。

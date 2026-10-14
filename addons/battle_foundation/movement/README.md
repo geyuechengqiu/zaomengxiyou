@@ -19,8 +19,8 @@
 | [BattleActionStateMachine2D](../runtime/battle_action_state_machine_2d.gd) | 继承 Core BaseStateMachine，持有十七种动作状态（含阶段9六种受击/保护状态与跑攻/跳攻）及更新上下文、死亡守卫 |
 | [BattleActionLeafState2D](../runtime/battle_action_leaf_state_2d.gd) | 继承 Core BaseState；进入/退出、计时、状态转换和权限判定 |
 | [BattleActionProfile2D](../definitions/battle_action_profile_2d.gd) | 共享只读重力、跳跃、锁定时间、状态条件表、判定框与连击定义 |
-| [BattleComboDefinition](../definitions/battle_combo_definition.gd) / [BattleAttackStep2D](../definitions/battle_attack_step_2d.gd) | 共享只读五段 ID、动作名、时长、跳取消、霸体、打断强度与技能位移窗口 |
-| [BattleComboState](../runtime/battle_combo_state.gd) | 每实体独立段号、下一段预约和施放序号 |
+| [BattleComboDefinition](../definitions/BattleComboDefinition.cs) / [BattleAttackStep2D](../definitions/BattleAttackStep2D.cs) | 共享只读五段 ID、动作名、时长、跳取消、霸体、打断强度与技能位移窗口 |
+| [BattleComboState](../runtime/BattleComboState.cs) | 每实体独立段号、下一段预约和施放序号 |
 | [BattleAttackInstance](../runtime/battle_attack_instance.gd) | 每次施放独立攻击者、阵营、攻击编号、窗口和每击命中目标集合 |
 | [BattleEntity2D](../runtime/battle_entity_2d.gd) | 将输入、运动、状态、GAS、动画与命中查询联合起来；不写共享配置 |
 

@@ -30,7 +30,7 @@ reaction_type = "knockback"
 script = ExtResource("motion")
 start_frame = 12
 end_frame = 40
-velocity = Vector2(3000, 0)
+velocity = Vector2(2000, 0)
 
 [sub_resource type="Resource" id="Timeline"]
 script = ExtResource("timeline")

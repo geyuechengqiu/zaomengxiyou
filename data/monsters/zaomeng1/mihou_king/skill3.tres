@@ -1,22 +1,25 @@
-[gd_resource type="Resource" script_class="GameplayAbilityDefinition" format=3]
-[ext_resource type="Script" path="res://addons/gameplay_abiltiy_system/scripts/abilities/gameplay_ability_definition.gd" id="definition"]
-[ext_resource type="Script" path="res://addons/gameplay_abiltiy_system/scripts/abilities/features/gameplay_ability_feature.gd" id="feature"]
-[ext_resource type="Script" path="res://addons/battle_foundation/gas/battle_frame_timeline_feature.gd" id="timeline"]
-[ext_resource type="Script" path="res://addons/battle_foundation/definitions/battle_attack_segment.gd" id="segment"]
-[ext_resource type="Script" path="res://addons/battle_foundation/definitions/BattleFrameEvent.cs" id="event"]
+[gd_resource type="Resource" script_class="GameplayAbilityDefinition" format=3 uid="uid://cttnwdkaqsbn1"]
+
+[ext_resource type="Script" uid="uid://ud4ug2ylqdo2" path="res://addons/battle_foundation/definitions/BattleSkillBranch.cs" id="3_gool7"]
+[ext_resource type="Script" uid="uid://b1047b2i0w3jx" path="res://addons/battle_foundation/definitions/BattleSkillMotion.cs" id="5_fwh7d"]
+[ext_resource type="Script" uid="uid://bm4h231fb21pv" path="res://addons/gameplay_abiltiy_system/scripts/abilities/gameplay_ability_definition.gd" id="definition"]
+[ext_resource type="Script" uid="uid://dm30yy8ucnbot" path="res://addons/battle_foundation/definitions/BattleFrameEvent.cs" id="event"]
+[ext_resource type="Script" uid="uid://cm0x3pewlrveo" path="res://addons/gameplay_abiltiy_system/scripts/abilities/features/gameplay_ability_feature.gd" id="feature"]
+[ext_resource type="Script" uid="uid://ctus3t2tt37o6" path="res://addons/battle_foundation/definitions/battle_attack_segment.gd" id="segment"]
+[ext_resource type="Script" uid="uid://daneexb55k8ae" path="res://addons/battle_foundation/gas/battle_frame_timeline_feature.gd" id="timeline"]
+
 [sub_resource type="Resource" id="Projectile"]
 script = ExtResource("event")
 source_frame = 3
 event_id = &"battle.zaomeng1.projectile"
+
 [sub_resource type="Resource" id="Timeline"]
 script = ExtResource("timeline")
-source_fps = 30.0
 duration_frames = 53
+events = Array[ExtResource("event")]([SubResource("Projectile")])
 animation_action = &"attack_3"
 commit_resources = true
-action_rules = {"move": false, "jump": false, "turn": false}
-attack_segments = Array[ExtResource("segment")]([])
-events = Array[ExtResource("event")]([SubResource("Projectile")])
+
 [resource]
 script = ExtResource("definition")
 ability_id = &"zaomeng1_mihou_king_hit3"

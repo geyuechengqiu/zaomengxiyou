@@ -5,9 +5,31 @@
 [ext_resource type="Texture2D" path="res://assets/maps/huaguoshan/platform.png" id="platform"]
 [ext_resource type="Texture2D" path="res://assets/maps/huaguoshan/ground.png" id="ground"]
 [ext_resource type="Shader" path="res://assets/maps/huaguoshan/ground_continuation.gdshader" id="stone_shader"]
+[ext_resource type="Shader" path="res://assets/maps/tree_canopy.gdshader" id="canopy_shader"]
 [sub_resource type="ShaderMaterial" id="StoneMaterial"]
 shader = ExtResource("stone_shader")
+[sub_resource type="ShaderMaterial" id="CanopyMaterial"]
+resource_local_to_scene = true
+shader = ExtResource("canopy_shader")
+shader_parameter/trunk_anchor_y = 490.0
+[sub_resource type="Animation" id="TreeWind"]
+resource_name = "tree_wind"
+length = 6.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/path = NodePath("MiddleBackground/Forest:material:shader_parameter/wind_phase")
+tracks/0/interp = 1
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 6.283185307179586]
+}
+[sub_resource type="AnimationLibrary" id="TreeWindLibrary"]
+_data = { &"tree_wind": SubResource("TreeWind") }
 [node name="HuaguoshanVisual" instance=ExtResource("template")]
+texture_filter = 4
+animated_player_paths = Array[NodePath]([NodePath("TreeWind")])
 [node name="FarBackground" parent="." index="0"]
 scroll_scale = Vector2(0.1295, 1)
 [node name="Mountains" type="Sprite2D" parent="FarBackground"]
@@ -17,6 +39,7 @@ texture = ExtResource("far")
 [node name="MiddleBackground" parent="." index="1"]
 scroll_scale = Vector2(1, 1)
 [node name="Forest" type="Sprite2D" parent="MiddleBackground"]
+material = SubResource("CanopyMaterial")
 position = Vector2(-60, 140)
 scale = Vector2(2, 2)
 centered = false
@@ -45,3 +68,7 @@ position = Vector2(4420.9, 385.0)
 scale = Vector2(2,2)
 centered = false
 texture = ExtResource("platform")
+
+[node name="TreeWind" type="AnimationPlayer" parent="."]
+libraries = { &"": SubResource("TreeWindLibrary") }
+autoplay = "tree_wind"

@@ -9,6 +9,8 @@ var factions := BattleFactions.new()
 var current_level_id: StringName = &""
 var last_error: String = ""
 var _entities: Dictionary = {}
+var _entity_iteration := BattleEntityIteration.new()
+var _entity_revision: int = 0
 var _entity_serial: int = 0
 var _equipment_serial: int = 0
 var _event_sequence: int = 0
@@ -55,6 +57,7 @@ func _exit_tree() -> void:
 	if is_instance_valid(_event_bus) and _event_bus.event_pushed.is_connected(_on_core_event):
 		_event_bus.event_pushed.disconnect(_on_core_event)
 	_event_bus = null
+	_entity_iteration.clear()
 
 func _physics_process(delta: float) -> void:
 	## Engine.time_scale 不由本插件修改，避免再乘一次全局缩放。
@@ -104,6 +107,7 @@ func spawn_entity(category: String, id: StringName, at: Vector3 = Vector3.ZERO, 
 	if not faction_override.is_empty():
 		entity.faction_id = faction_override
 	_entities[runtime_id] = entity
+	_entity_revision += 1
 	entity.tree_exiting.connect(_on_entity_exiting.bind(runtime_id), CONNECT_ONE_SHOT)
 	add_child(entity)
 	publish_event(&"battle.entity_spawned", null, entity, {"definition_id": id, "category": category})
@@ -141,6 +145,7 @@ func spawn_entity_2d(category: String, id: StringName, at: Vector2 = Vector2.ZER
 	if not faction_override.is_empty():
 		entity.faction_id = faction_override
 	_entities[runtime_id] = entity
+	_entity_revision += 1
 	entity.tree_exiting.connect(_on_entity_exiting.bind(runtime_id), CONNECT_ONE_SHOT)
 	add_child(entity)
 	var entered := Time.get_ticks_usec() if profile_spawns else 0
@@ -169,12 +174,13 @@ func register_scene_entity_2d(entity: BattleEntity2D, category: String, id: Stri
 	var runtime_id := StringName("%s/entity/%d" % [battle_id, _entity_serial])
 	entity.initialize_battle(self, runtime_id, data)
 	_entities[runtime_id] = entity
+	_entity_revision += 1
 	entity.tree_exiting.connect(_on_entity_exiting.bind(runtime_id), CONNECT_ONE_SHOT)
 	publish_event(&"battle.entity_spawned", null, entity, {"definition_id": id, "category": category, "scene_authored": true})
 	return true
 
 func get_entities() -> Array:
-	return _entities.values().duplicate()
+	return _entities.values()
 
 func warm_monster_resources() -> void:
 	# 读取预置场景中的保护配置；只预热只读数据，不提前注册/生成战斗实体。
@@ -198,6 +204,7 @@ func despawn_entity(id: StringName) -> void:
 	if presentation != null:
 		presentation.remove_actor(id)
 	_entities.erase(id)
+	_entity_revision += 1
 	entity.queue_free()
 
 func retire_dead_entity(id: StringName) -> void:
@@ -296,16 +303,12 @@ func advance_physics(unscaled_delta: float) -> void:
 		return
 	_advancing = true
 	## 输入识别/缓存使用未缩放时间；动作执行继续只消费 combat delta。
-	for entity in _entities.values():
-		if is_instance_valid(entity) and not entity.is_queued_for_deletion() and entity.has_method("advance_input"):
-			entity.advance_input(unscaled_delta)
+	_entity_iteration.advance_input(_entities, _entity_revision, unscaled_delta)
 	# 命中停顿始终消耗未缩放时间，斩败抽帧只过滤随后真正推进的战斗时间。
 	var filter := presentation.filter_combat_delta if presentation != null else Callable()
 	var delta := clock.advance(unscaled_delta, is_inside_tree() and get_tree().paused, filter)
 	if delta > 0.0:
-		for entity in _entities.values():
-			if is_instance_valid(entity) and not entity.is_queued_for_deletion():
-				entity.advance_simulation(delta)
+		_entity_iteration.advance_simulation(_entities, _entity_revision, delta)
 	if is_instance_valid(_level_root) and _level_root is BattleMap2D:
 		_level_root.advance_visuals(delta)
 	if loot != null: loot.advance_loot(delta)
@@ -349,9 +352,7 @@ func request_hit_stop(seconds: float) -> void:
 
 func _refresh_operation_control() -> void:
 	# 控制权变更立即同步，避免菜单关闭至下一 tick 之间丢失新按下。
-	for entity in _entities.values():
-		if is_instance_valid(entity) and not entity.is_queued_for_deletion() and entity.has_method("advance_input"):
-			entity.advance_input(0.0)
+	_entity_iteration.advance_input(_entities, _entity_revision, 0.0)
 #endregion
 #region Core 战斗事件
 ## 无第二套事件总线；Core 按名订阅仍接收一个 Dictionary，伤害对象保持同步引用。
@@ -396,6 +397,7 @@ func _on_entity_exiting(id: StringName) -> void:
 	if presentation != null:
 		presentation.remove_actor(id)
 	_entities.erase(id)
+	_entity_revision += 1
 #endregion
 
 #region 伤害结果与次生伤害的公共触发入口

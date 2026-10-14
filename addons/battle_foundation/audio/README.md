@@ -36,6 +36,6 @@ python tools/export_supply_numbers.py
 & tools/verify_stage_eight.ps1 -Godot '<带Spine模块的Godot.exe>' -Suites audio,loot_growth,damage_numbers,damage_number_pool,combat_hud,player_operations,boss
 ```
 
-`verify_audio`检查所有原MP3解码、动作音效、200次连续命中仍只有32槽、独立音量/静音与保存恢复、快速切歌、共享流隔离、原音乐触发区、真实补给拾取、实际恢复值、暂停、多会话及离场。`tools/capture_audio_supply.gd`使用真实GPU检查回血/回魔画面及设置布局。
+`verify_audio`检查所有原MP3解码、动作音效、200次连续命中仍只有32槽、独立音量/静音与保存恢复、快速切歌、共享流隔离、原音乐触发区、真实补给拾取、实际恢复值、暂停、多会话及离场。`tools/performance/capture_audio_supply.gd`使用真实GPU检查回血/回魔画面及设置布局。
 
 2026-10-10验证：audio250项、loot_growth68项、damage_numbers79项、damage_number_pool154项、combat_hud42项、player_operations145项、boss97项，共835项检查通过；另通过plugins、core_events、stage_one，共10套回归。原生GPU确认绿色/蓝色恢复数字实际显示，声音设置位于战斗HUD上方，按钮不被遮挡；日志无脚本或运行错误。

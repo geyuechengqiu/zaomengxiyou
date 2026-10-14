@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://ckdgynjs22s7q"]
 
-[ext_resource type="Resource" path="res://data/monsters/zaomeng1/mihou_king/actions.tres" id="actions"]
+[ext_resource type="Resource" uid="uid://dp3q18dgcfafj" path="res://data/monsters/zaomeng1/mihou_king/actions.tres" id="actions"]
 [ext_resource type="Script" uid="uid://biyyrxxwrj6py" path="res://addons/battle_foundation/boss/battle_boss_controller_2d.gd" id="ai"]
 [ext_resource type="Resource" uid="uid://8htpixdtruoh" path="res://data/monsters/zaomeng1/mihou_king/ai.tres" id="ai_profile"]
 [ext_resource type="Resource" uid="uid://dqqngyaxsjlvr" path="res://data/monsters/zaomeng1/mihou_king/boss.tres" id="boss_profile"]
@@ -1717,7 +1717,7 @@ size = Vector2(907, 277)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_81jwi"]
 resource_local_to_scene = true
-size = Vector2(1230.5, 1153)
+size = Vector2(1260.0002, 1153)
 
 [sub_resource type="Animation" id="Animation_2xusj"]
 resource_name = "RESET"
@@ -2404,56 +2404,45 @@ shape = SubResource("RectangleShape2D_yekv4")
 
 [node name="AttackRanges" parent="AnimationAdapter" index="4"]
 preview_action = &"skill3"
-preview_time = 1.0299998998641968
+preview_time = 2.9083568304777145
 
-[node name="attack1" parent="AnimationAdapter/AttackRanges" index="0"]
+[node name="attack1" parent="AnimationAdapter/AttackRanges" index="0" unique_id=637172675]
 visible = false
 
-[node name="CollisionShape2D" parent="AnimationAdapter/AttackRanges/attack1" index="0"]
+[node name="CollisionShape2D" parent="AnimationAdapter/AttackRanges/attack1" index="0" unique_id=828045481]
 position = Vector2(109.5, -232.5)
 shape = SubResource("RectangleShape2D_43xtg")
 
-[node name="attack2" parent="AnimationAdapter/AttackRanges" index="1"]
-visible = false
-
-[node name="CollisionShape2D" parent="AnimationAdapter/AttackRanges/attack2" index="0"]
+[node name="CollisionShape2D" parent="AnimationAdapter/AttackRanges/attack2" index="0" unique_id=1502343935]
 position = Vector2(279.5, -131)
 shape = SubResource("RectangleShape2D_7hx7j")
 
-[node name="attack3" parent="AnimationAdapter/AttackRanges" index="2"]
-visible = false
-
-[node name="CollisionShape2D" parent="AnimationAdapter/AttackRanges/attack3" index="0"]
+[node name="CollisionShape2D" parent="AnimationAdapter/AttackRanges/attack3" index="0" unique_id=1785697308]
 position = Vector2(375, -146.25)
 shape = SubResource("RectangleShape2D_qc516")
 
-[node name="attack4" parent="AnimationAdapter/AttackRanges" index="3"]
-visible = false
-
-[node name="CollisionShape2D" parent="AnimationAdapter/AttackRanges/attack4" index="0"]
+[node name="CollisionShape2D" parent="AnimationAdapter/AttackRanges/attack4" index="0" unique_id=1128412870]
 position = Vector2(212.5, -244)
 shape = SubResource("RectangleShape2D_lh27y")
 
-[node name="skill1" parent="AnimationAdapter/AttackRanges" index="4"]
-visible = false
-
-[node name="CollisionShape2D" parent="AnimationAdapter/AttackRanges/skill1" index="0"]
+[node name="CollisionShape2D" parent="AnimationAdapter/AttackRanges/skill1" index="0" unique_id=1458557271]
 shape = SubResource("RectangleShape2D_683sc")
 
-[node name="skill2" parent="AnimationAdapter/AttackRanges" index="5"]
-visible = false
-
-[node name="CollisionShape2D" parent="AnimationAdapter/AttackRanges/skill2" index="0"]
+[node name="CollisionShape2D" parent="AnimationAdapter/AttackRanges/skill2" index="0" unique_id=506338500]
 position = Vector2(5.5, -205.5)
 shape = SubResource("RectangleShape2D_x3m4s")
 
-[node name="CollisionShape2D" parent="AnimationAdapter/AttackRanges/skill3" index="0"]
-position = Vector2(87.75, -583)
+[node name="skill3" parent="AnimationAdapter/AttackRanges" index="6" unique_id=1579361207]
+visible = true
+
+[node name="CollisionShape2D" parent="AnimationAdapter/AttackRanges/skill3" index="0" unique_id=1113152475]
+position = Vector2(54.999977, -582.9994)
+scale = Vector2(0.99999964, 0.99999964)
 shape = SubResource("RectangleShape2D_81jwi")
 
 [node name="AttackEffects" parent="AnimationAdapter" index="5"]
 preview_action = &"skill3"
-preview_time = 1.0299998998641968
+preview_time = 2.9083568304777145
 
 [node name="attack1" parent="AnimationAdapter/AttackEffects" index="0"]
 preview_time = 0.0
@@ -2579,6 +2568,7 @@ script = ExtResource("object_pool")
 [node name="CombatRules" type="Node" parent="." unique_id=117743473]
 script = ExtResource("combat_rules")
 skill_announcements = Array[Texture2D]([ExtResource("mihou_banner1"), ExtResource("mihou_banner2"), ExtResource("mihou_banner3")])
+attraction_distance = 100.0
 
 [editable path="AnimationAdapter"]
 [editable path="AnimationAdapter/SuperArmorEffect"]

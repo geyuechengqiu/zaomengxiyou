@@ -46,7 +46,7 @@ if ($PersistSingleWindow) {
     $configureLog = Join-Path $taskRoot '.godot/window-mode-configure.log'
     New-Item -ItemType Directory -Path (Split-Path -Parent $configureLog) -Force | Out-Null
     # 辅助工程不加载游戏插件；自检插件仅在显式验证参数下运行。
-    $helperRoot = Join-Path $PSScriptRoot 'window_mode_helper'
+    $helperRoot = Join-Path $PSScriptRoot 'editor/window_mode_helper'
     $configureArguments = @('--headless', '--path', ('"' + $helperRoot + '"'), '--editor', '--single-window',
         '--script', 'res://configure_editor_window_mode.gd', '--quit-after', '1800',
         '--log-file', ('"' + $configureLog + '"'))

@@ -67,7 +67,7 @@ public partial class VerifyMihouwangSkills : Node
         }
         await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
         foreach (var failure in _failures) GD.PushError(failure);
-        if (_failures.Count == 0) GD.Print($"PASS Mihouwang seven skills: {_checks} checks; real cooldowns, damage windows, mirrored dash, 0.5s attraction, protection interruption, armor, icons and release cut-ins");
+        if (_failures.Count == 0) GD.Print($"PASS Mihouwang seven skills: {_checks} checks; real cooldowns, damage windows, mirrored dash, continuous attraction/0.5s damage, protection interruption, armor, icons and release cut-ins");
         GetTree().Quit(_failures.Count == 0 ? 0 : 1);
     }
     private async Task Run()
@@ -145,7 +145,7 @@ public partial class VerifyMihouwangSkills : Node
             }
             Check(Cast(action), "冷却结束可以重放：" + action); await Tick(); _boss.Call("cancel_skill");
         }
-        // 3000px/s, fixed facing and exactly one sweep hit, in both directions.
+        // The authored dash speed may be tuned independently of this behavior.
         foreach (int facing in new[] { 1, -1 })
         {
             await Reset(250, facing);
@@ -156,7 +156,8 @@ public partial class VerifyMihouwangSkills : Node
             await Tick(20);
             Check(Cast("skill2", true), "镜像冲刺起手");
             await Tick(15); float x = _boss.Position.X; await Tick(4);
-            Check(Math.Abs((_boss.Position.X - x) * facing - 200) < 2, $"四帧冲刺位移200世界像素：朝向{facing}，实际{(_boss.Position.X-x)*facing}，位置{_boss.Position}");
+            double expected = Timeline("skill2").Get("motion_windows").AsGodotArray()[0].As<BattleSkillMotion>().velocity.X * 4 / 60;
+            Check(Math.Abs((_boss.Position.X - x) * facing - expected) < 2, $"四帧冲刺位移使用场景配置：朝向{facing}，预期{expected}，实际{(_boss.Position.X-x)*facing}，位置{_boss.Position}");
             var current = _boss.Get("attack_instance").AsGodotObject();
             double time = current.Get("elapsed").AsDouble(); var position = _boss.Position;
             _session.Call("set_paused", true); await Tick(10);
@@ -186,6 +187,7 @@ public partial class VerifyMihouwangSkills : Node
         _player.Position = new Vector2(nearCenter + 60, 1229.2f); _player.Velocity = Vector2.Zero;
         Cast("skill3", true); await Tick(70);
         Check(Math.Abs(_player.Position.X - nearCenter) < 1, "增强吸附在中心停止，不穿过旋风中心");
+        await VerifyContinuousAttraction();
         // Force a full protection bar during another cast and while skill3 is cooling.
         await Tick(660); await Reset(); Check(Cast("skill3"), "保护前先进入旋风冷却"); await Tick(275);
         Check(!Cast("skill3"), "保护前正常释放被冷却挡住");
@@ -243,6 +245,77 @@ public partial class VerifyMihouwangSkills : Node
         var deathRules = _boss.GetNode<MihouwangCombatController>("CombatRules");
         _boss.Call("receive_damage", 1000000.0, _player, new StringName("normal"), 60, new Dictionary());
         Check(!_boss.Call("is_alive").AsBool() && !deathRules.announcement_guard_active, "播报霸体不免疫致死伤害，死亡立即清理");
+    }
+
+    private async Task VerifyContinuousAttraction()
+    {
+        var rules = _boss.GetNode<MihouwangCombatController>("CombatRules");
+        double savedDistance = rules.attraction_distance, savedDuration = rules.attraction_duration;
+        // A slower test force keeps the target away from the center long enough
+        // to observe individual frames between the unchanged damage pulses.
+        rules.attraction_distance = 108; rules.attraction_duration = .3;
+        async Task<float> Start()
+        {
+            await Reset(1000);
+            _boss.Position = new(1800, 1229.2f); _boss.Velocity = Vector2.Zero;
+            _player.Position = new(2900, 1229.2f); _player.Velocity = Vector2.Zero;
+            await Tick(20);
+            float center = (_boss.GlobalTransform * (Timeline("skill3").GetMeta("projectile_segment").As<Resource>().Get("hit_rect").AsRect2().GetCenter() * 3)).X;
+            Check(Cast("skill3", true), "持续吸附测试实际起手");
+            await Tick(50); // First pulse missed; still between damage events.
+            _hits.Clear();
+            return center;
+        }
+        try
+        {
+            foreach (int side in new[] { 1, -1 })
+            {
+                float center = await Start();
+                _player.Position = new(center + side * 320, 1229.2f); _player.Velocity = Vector2.Zero;
+                for (int i = 0; i < 6; ++i)
+                {
+                    float before = Math.Abs(_player.Position.X - center);
+                    await Tick();
+                    Check(Math.Abs(_player.Position.X - center) < before - 5, "伤害间隔内新进入范围的目标每一帧均被向中心牵拉：" + side);
+                }
+                Check(_hits.Count == 0, "持续牵拉不额外触发伤害、命中次数或硬直");
+                var position = _player.Position;
+                _session.Call("set_paused", true); await Tick(10);
+                Check(_player.Position == position, "暂停立即冻结持续吸附");
+                _session.Call("set_paused", false);
+                _player.Position = new(center + 1000, 1229.2f); _player.Velocity = Vector2.Zero;
+                position = _player.Position; await Tick(3);
+                Check(Math.Abs(_player.Position.X - position.X) < .1f && _player.Get("motion").As<BattleMotionController2D>().impulse_remaining == 0, "离开范围立即停止牵拉且没有残留击退力");
+                _player.Position = new(center + side * 300, 1229.2f); _player.Velocity = Vector2.Zero;
+                position = _player.Position; await Tick();
+                Check(Math.Abs(_player.Position.X - center) < Math.Abs(position.X - center) - 5, "重新进入范围当帧恢复吸附，无需等待下一次伤害");
+                _boss.Call("cancel_skill"); position = _player.Position; await Tick(3);
+                Check(Math.Abs(_player.Position.X - position.X) < .1f, "取消技能立即清理吸附");
+            }
+            float total = 0;
+            foreach (int fps in new[] { 60, 30 })
+            {
+                float center = await Start();
+                _player.Position = new(center + 320, 1229.2f); _player.Velocity = Vector2.Zero;
+                float before = _player.Position.X;
+                for (int i = 0; i < fps / 5; ++i)
+                {
+                    await ToSignal(GetTree(), SceneTree.SignalName.PhysicsFrame);
+                    _session.Call("advance_physics", 1.0 / fps);
+                    await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
+                }
+                float travel = before - _player.Position.X;
+                Check(Math.Abs(travel - 72) < .5f, "不同物理帧率的0.2秒牵拉均为72世界像素：" + fps);
+                if (fps == 60) total = travel;
+                else Check(Math.Abs(total - travel) < .5f, "吸附强度与帧率无关");
+            }
+            float lastCenter = await Start();
+            await Tick(190); // Elapsed=4s: the range ended, recovery still plays.
+            _player.Position = new(lastCenter + 300, 1229.2f); _player.Velocity = Vector2.Zero;
+            float afterWindow = _player.Position.X; await Tick(3);
+            Check(Math.Abs(_player.Position.X - afterWindow) < .1f, "旋风判定帧窗口结束即停止吸附，不延长到收招动画");
+        }
+        finally { _boss.Call("cancel_skill"); rules.attraction_distance = savedDistance; rules.attraction_duration = savedDuration; }
     }
 
     private async Task<GodotObject> StartAnnouncement(string action)

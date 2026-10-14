@@ -1,81 +1,107 @@
-# 造梦西游 · Godot 项目
+# 造梦西游 · Godot / C# NativeAOT
 
-此分支正在迁移为 **C# + NativeAOT**：项目逻辑和自维护插件使用 C#，第三方插件保留；编辑器使用 Debug，正式导出使用原生预编译。构建命令、迁移进度和导出模板要求见 [C# / NativeAOT](docs/csharp-nativeaot.md)。
+使用带 **Spine 4.3** 的 **Godot 4.7.2 C#**、.NET 8 和 Windows x64 NativeAOT。编辑器使用 Debug 程序集，正式发布使用原生预编译。新增项目逻辑使用 C#；第三方插件保留原实现，已有 GDScript 通过明确的适配接口接入，完整 C# 迁移仍在进行。
 
-本机已安装系统 .NET 8 SDK 8.0.425，可直接用配套 Godot 打开项目并使用 F5/F6。安装前已打开的编辑器需退出并重新打开。也可使用 [open_editor.cmd](open_editor.cmd)，它会先构建并启用项目便携 SDK。
+## 启动与构建
 
-已接入匹配的 Spine/.NET Windows 模板并运行 NativeAOT 关卡包。执行 `./tools/csharp/export_native.ps1` 生成正式包。完整C#迁移仍在进行；新增关卡、选关、角色存档和造1 Boss 专属逻辑使用 C#。
+```powershell
+# 在项目根目录执行，准备与引擎匹配的绑定并编译 Debug
+./tools/csharp/bootstrap.ps1
 
-正式入口为 [造1大地图](game/world_map/zaomeng1_world_map.tscn)，按 F5 运行。原版十个选关点配合造5返回图标、字体和按钮，点击直接进关，最新可挑战关卡使用造1原版发光；目前制作完成花果山、水帘洞。花果山最终出口确认胜利后解锁水帘洞，其余地图点保留位置，尚未制作时不能进入。大地图按钮可进入 [碧玉径](game/levels/biyujing.tscn)。需要带 **Spine 4.3 模块**的 Godot；本机引擎为 Godot 4.7.2。逻辑视口为原版 940×590，战斗世界使用 2 倍素材坐标。[选关与存档配置](data/campaigns/zaomeng1/README.md)。
+# 打开配套编辑器；也可直接使用根目录 open_editor.cmd
+./tools/csharp/open_editor.ps1
 
-新增 [造梦西游1第一关花果山](game/levels/huaguoshan.tscn)，打开场景按 F6。原山景、森林、坡地和平台构成连续地图，五区域14个计划共33个敌人；三个怪物外观使用原图转 Spine，属性沿用碧玉径，技能时序、逐帧攻击框及击退采用造1，普攻统一1倍。单人活怪上限6，复用战斗 UI、背包、掉落、镜头和通关。详见 [花果山配置与来源](data/levels/huaguoshan/README.md)。
+# 正式 Windows NativeAOT 游戏及启动验证
+./tools/csharp/export_native.ps1
+./tools/csharp/verify_native_game.ps1
+```
 
-新增 [造梦西游1第二关水帘洞](game/levels/shuiliandong.tscn)：原背景、地形、水面与五个单向平台，五区域18个出生计划共48个敌人，Boss 弥猴王使用原生 Spine、原三技能和逐帧弹道。普通怪属性沿用碧玉径，猕猴王属性改用上古天帝篇第二关九头雉鸡精；技能倍率、时间、击退和免疫采用造1相对规则，Boss 登场音乐与碧玉径一致。两关复用战斗、掉落与背包；返回地图、重开、通关后保存等级、经验、灵魂、昵称及装备实例。通关判定随 `FinalExit/Gateway` 的移动同步。[水帘洞配置与来源](data/levels/shuiliandong/README.md)。
+需要 .NET **SDK**，仅安装运行时无法构建。NativeAOT 还需要 Visual Studio C++ Build Tools、Windows SDK 及匹配引擎的 Spine/.NET 导出模板。本机引擎位于 `D:/UserData/Downloads/godot/version/4.7.2 C#/godot-4.3-4.7.2-stable-mono.exe`。其他机器可通过构建脚本的 `-Godot`、`-Dotnet` 参数指定工具链。[工具链、MSBuild 与迁移说明](docs/csharp-nativeaot.md)。
 
-碧玉径包含孙悟空、五个连续区域、32 个普通怪物、复苏容器和玉石琵琶精 Boss。地图、角色组件、出生点、出口、镜头和战斗 UI 均预置，怪物按原版波次与出生依赖生成。技能、属性、Buff、掉落、装备成长和表现通过现有插件协同。
+正式包输出至 `.cleanup-backup/export-nativeaot/`，分发时保留整个目录，包括 EXE、PCK 与原生库。缓存、SDK、构建输出、测试存档和截图不提交 Git。导出后运行 `bootstrap.ps1` 恢复编辑器 Debug 程序集，避免把原生导出 DLL 用于编辑器调试。
 
-已接入 [原版战斗连击及显示](addons/battle_foundation/combat/hit-combo.md)：按角色有效伤害结算累计，连续1.5秒未命中后结束；共享HUD使用原版数字与“连击”贴图，保留角色及本关最高连击。
+## 当前游戏
 
-已接入 [上古天帝篇原版技能面板与装配](data/characters/sunwukong/skills/README.md)：四个转职前主动技能、升级与连续升级、五主动槽及被动/无双/道具槽、改键与跨关存档；重击使普攻末击必定暴击。火魔斩当前未学习，默认第五槽为空，转职与秘技保留原版入口。
+F5 从 [东胜神洲（七魔王）大地图](game/world_map/zaomeng1_world_map.tscn) 启动。大地图保留造1原地图与音乐，使用上古天帝篇的头像、下方功能栏和世界按钮。点击已制作且已解锁的关卡直接加载；只有最新解锁关卡发光，悬浮名称使用原版素材。世界按钮与未实现功能保留接口。碧玉径作为独立关卡保留，大地图不提供入口。
 
-## 目录与配置入口
+| 关卡 | 内容 | 编辑入口 |
+| --- | --- | --- |
+| 花果山 | 五区域、14个出生计划、33个目标，造1猴类怪物及大猩猩 Boss | [huaguoshan.tscn](game/levels/huaguoshan.tscn)、[配置说明](data/levels/huaguoshan/README.md) |
+| 水帘洞 | 五区域、18个出生计划、48个目标，普通大猩猩与七技能猕猴王 | [shuiliandong.tscn](game/levels/shuiliandong.tscn)、[配置说明](data/levels/shuiliandong/README.md) |
+| 碧玉径 | 五个连续区域、出生依赖、普通怪物及 Boss，独立验证关卡 | [biyujing.tscn](game/levels/biyujing.tscn)、[区域配置](data/levels/biyujing/progression/README.md) |
 
-背包战力现使用 [原版战力计算](addons/battle_foundation/attributes/fight-power.md)：十二项长期属性加权、最终取整，参考离线原版不另加职业修正，一级裸装悟空为987，不受临时Buff、受伤或耗蓝影响。
+各关卡也可打开场景按 F6。逻辑视口为 **940×590**，战斗世界采用两倍素材坐标。最终出口确认通关后才解锁下一关，击败 Boss 本身不会直接解锁；完成两关后桃花源发光，但尚未制作，不能进入。[选关与角色存档](data/campaigns/zaomeng1/README.md)。
 
-旧平台、木桩、技能、插件演示及专用脚本、旧版首关均已清理，保留正式关卡、功能组件、基础模板和当前功能验证。目录迁移同步了序列化引用、索引、工具与文档。[目录清单与性能说明](docs/project-organization-performance.md)。
+选关和造1重开均经过 [加载界面](docs/stage_loading.md)，完成资源读取、角色/怪物画面预热、地图初始化、存档恢复和反馈池准备后再恢复输入与时钟。进度、百分比和云彩同步缓动，标题仅显示“造梦西游Online”，右下角发行水印已移除。重复进关复用已加载资源与画面预热结果。
 
-| 目录 | 内容 |
+加载条默认0.8秒缓动，显示到100%并绘制完成后才进入战斗。花果山与水帘洞使用无损地图纹理、缩放采样和轻微树冠锐化，树木风摆跟随战斗时钟；水帘洞末区域镜头限制在原图覆盖内。地面物品按实际拾取贴图矩形与玩家身体相交判定，`BattleSession/Loot` 的 `pickup_radius` 设置额外拾取余量。
+
+## 操作与主要功能
+
+默认 A/D 或方向键移动，双击方向奔跑，K 跳跃，J 普攻，Y/U/I/O/L 为主动技能槽，空格无双，Q/E 为道具槽，B 背包，Esc 设置。在单向平台上按下＋跳跃可向下穿过。按键设置支持拖动装配、已占用槽交换、双击卸下及改键。
+
+- 悟空未转职时使用四个已接入主动技能；火魔斩未学习，默认第五槽为空。技能升级、灵魂消耗、按键装配及重击被动生效；转职、秘技保留入口。[技能配置](data/characters/sunwukong/skills/README.md)。
+- 背包支持原版字体与品质边框、装备比较、穿脱、锁定、自动按品质/类型排序、数量出售与多品质一键出售。锁定及穿戴装备不参与出售；编号首次生成，称号保留接口。[背包配置](data/inventory/panel-details.md)。
+- 原版长期属性计算战力，一级裸装悟空为 **987**；战力悬浮框显示构成。临时 Buff、受伤和耗蓝不改变面板战力。[战力公式](addons/battle_foundation/attributes/fight-power.md)。
+- 猕猴王使用用户提供的 DragonBones 转 Spine 动画、十组特效、四种普攻和狂风出击/疾风突袭/飓风强袭。技能判定范围可在场景中编辑；三技能为霸体，AI提前播报，旋风具有吸附效果。[Boss 目录](data/monsters/zaomeng1/mihou_king/)。
+- 音量、音乐/音效静音、输入和菜单暂停通过统一接口管理；自动化测试传入 `--audio-driver Dummy`，不修改玩家音频偏好，F5/F6 和正式游戏正常使用存档设置。
+
+## 数据在哪里编辑
+
+| 配置 | 位置 |
 | --- | --- |
-| `game/levels/` | 正式可玩关卡 |
-| `game/world_map/`、`game/campaign/`、`data/campaigns/` | 造1大地图、顺序解锁、角色跨关存档 |
-| [data/characters/sunwukong](data/characters/sunwukong/README.md) | 悟空定义、属性、输入、技能、角色和动画场景 |
-| `assets/characters/sunwukong/animation/`、`audio/` | 悟空骨架、图片、攻击特效和动作音效 |
-| [data/monsters](data/monsters/README.md)、`assets/monsters/` | 各怪物属性、AI、技能、Spine 和原版素材 |
-| [data/templates](data/templates/README.md) | 新角色和怪物基础模板 |
-| [data/levels/biyujing/progression](data/levels/biyujing/progression/README.md) | 最新地图、区域、出生计划及索引 |
-| `data/attribute/`、`data/buffs/`、`data/damage/` | 共用属性、状态和伤害规则 |
-| `data/inventory/`、`data/loot/`、`data/ui/` | 物品、成长、掉落与 UI |
-| `addons/` | 插件实现与系统文档 |
-| [tests](tests/README.md)、`tools/` | 当前验证、离线导出、编辑辅助及性能工具 |
-| `docs/reference/zaomeng1/` | 造梦西游1分析、关卡配置和来源导出 |
+| 玩家初始生命、攻击、防御与移动属性 | [base.tres](data/characters/sunwukong/attributes/base.tres)；场景的 `GameplayVitalAttributeComponent → Base Values` 可覆盖 |
+| 玩家等级成长 | [progression.tres](data/characters/sunwukong/attributes/progression.tres) |
+| 攻速与基础奔跑参考速度 | `attackSpeed`、`baseRunSpeed`；普攻动画/命中时序随攻速变化，走跑动画按当前速度与参考速度之比播放 |
+| 跳跃、重力、普攻动作 | [actions.tres](data/characters/sunwukong/actions.tres)、[动画编辑说明](data/characters/sunwukong/animation/README.md) |
+| 悟空技能时间轴、MP/CD/倍率与学习要求 | [skills/](data/characters/sunwukong/skills/)、[panel_rules.json](data/characters/sunwukong/skills/panel_rules.json) |
+| 怪物属性、AI、技能及掉落 | [data/monsters/](data/monsters/README.md)、[data/loot/](data/loot/README.md) |
+| 猕猴王专属属性数值 | [mihouwang_attributes.tres](data/monsters/zaomeng1/mihou_king/mihouwang_attributes.tres)，与参考Boss资源独立 |
+| 猕猴王各技能攻击矩形 | [attack_ranges.tscn](data/monsters/zaomeng1/mihou_king/attack_ranges.tscn)；出生实例、镜像与缩放同步使用这些矩形 |
+| 区域、出怪与通关点预览 | `data/levels/<关卡>/map.tscn`；移动 `FinalExit/Gateway` 同时移动通关光效与判定 |
+| 选关顺序、名称、加载清单 | [world_map.json](data/campaigns/zaomeng1/world_map.json) |
+| 背包、技能和战斗 UI | [data/ui/](data/ui/README.md)；加载界面位于 [stage_loading_screen.tscn](game/loading/stage_loading_screen.tscn) |
 
-角色使用 `孙悟空`、技能使用 `sunwukong_*` 语义 ID，原数字仅用于来源追溯。定义 Resource 保存配置，生命、冷却、状态、强化和随机属性保存在独立运行实例中。
+定义资源保存只读配置，生命、冷却、装备强化和随机属性属于独立运行实例。已有玩家存档会恢复等级、装备及技能，测试属性时请使用隔离测试存档，避免误把读档结果当成初始配置。跳跃实际读取动作配置的 `jump_velocity`、`second_jump_velocity`、`gravity`，属性表 `jumpSpeed1/2` 不是当前运动入口。[详细调参](data/characters/sunwukong/animation/sunwukong-config.md)。
 
-## 操作和角色编辑
+## 目录与维护边界
 
-默认 A/D 或方向键移动，双击方向奔跑，K 跳跃，J 普攻，Y/U/I/O/L 为技能槽，空格无双，B 背包，Esc 设置。设置可改键，独立调整音乐/音效音量与静音；操作意图区分按下、按住和释放，菜单、失焦会处理控制权。
+| 目录 | 职责 |
+| --- | --- |
+| `game/levels/` | 三个实际关卡与入口装配 |
+| `game/world_map/`、`game/campaign/`、`game/loading/` | 地图、通关/存档、加载流程的 C# 业务 |
+| `data/` | 可编辑角色、怪物、地图、技能、属性、物品、掉落与 UI；`templates/` 是可复用组件模板 |
+| `assets/` | 图片、Spine、字体、音频与来源记录 |
+| `addons/battle_foundation/` | 项目战斗整合与 C# 适配，保持第三方接口契约 |
+| 其他 `addons/` | Core、GAS、Inventory、Phantom Camera、Panku、DebugDraw 等基础插件及其必需 UI |
+| `tests/suites/` | 31个当前功能验证入口，不作为游戏关卡发布 |
+| `tools/performance/` | 性能微基准与实际渲染截图工具 |
+| `tools/editor/` | 独立编辑器设置辅助项目，通过 `.gdignore` 隔离游戏导入 |
+| `tools/csharp/`、其余 `tools/` | 构建/导出、只读审计与离线素材导入/场景制作脚本 |
+| `docs/` | 配置、架构、来源与维护记录 |
 
-编辑 [character.tscn](data/characters/sunwukong/character.tscn) 的 `GameplayVitalAttributeComponent → Base Values` 修改悟空初始属性，等级使用 `Initial Level Override`。`atk`、`phyDef`、`hpMax`、`mpMax` 是攻击、防御和生命/魔法上限，当前值由 Vital 管理。基础值与成长分别位于 [base.tres](data/characters/sunwukong/attributes/base.tres)、[progression.tres](data/characters/sunwukong/attributes/progression.tres)。
-
-`walkSpeed`、`runSpeed` 控制移速；跳跃实际读取 [actions.tres](data/characters/sunwukong/actions.tres) 的 `jump_velocity`、`second_jump_velocity` 和 `gravity`，负速度绝对值越大跳得越高。属性表的 `jumpSpeed1/2` 保留原配置，不作为当前运动入口。走下平台保留两次空中跳跃。技能位移读取自己的时间轴。[详细调参](data/characters/sunwukong/animation/sunwukong-config.md)。
-
-在 [sunwukong_visual.tscn](data/characters/sunwukong/animation/sunwukong_visual.tscn) 的主 AnimationPlayer 编辑身体、武器、原版特效与唯一攻击框。五连击、跑攻、跳攻及第四段一次反向转身通过 Core 动作状态机执行；技能使用 GAS 时间轴，区分释放实例、攻击段和命中目标。[动画编辑](data/characters/sunwukong/animation/README.md)、[基础技能](data/characters/sunwukong/skills/README.md)。
-
-## 战斗、背包与关卡
-
-- 基础、成长、装备、临时和最终属性通过统一入口计算，面板与实际伤害同步。[属性系统](addons/battle_foundation/attributes/README.md)。
-- 原版伤害保留命中、暴击、幸运、等级倍率、附伤、抗性、增减伤、真实伤害和护盾的顺序与结果字段。[公式移植](addons/battle_foundation/combat/original-damage.md)。
-- GAS 管理 Buff/被动的叠层、刷新、周期、移除与统一触发，吸血依据实际扣血，反伤限制递归。[Buff/触发](addons/battle_foundation/combat/buffs-triggers.md)。
-- 怪物使用原生 Spine 与可扩展 AI；Boss 复用通用能力，配置专属技能、阶段、播报及对象池。[普通 AI](addons/battle_foundation/ai/README.md)、[Boss](addons/battle_foundation/boss/README.md)。
-- 五区域共用连续地图，通关同时检查出生计划、目标死亡与额外条件，等待后续波次时仍锁定。[关卡](addons/battle_foundation/level/README.md)、[地图模板](addons/battle_foundation/level/map-template.md)。
-- 战斗区域左右镜头均锁定，清屏后恢复已开放区域内的双向跟随，进入新区时平滑过渡并再次锁定；使用 Phantom Camera 和原 30 FPS 的 0.2 插值。[镜头](addons/battle_foundation/camera/README.md)。
-- 公共战斗 HUD、居中 Boss 栏、抗性/保护、原版出场、区域前进动画和斩败独立于角色。[UI](data/ui/README.md)、[Boss 表现](addons/battle_foundation/boss/original-presentation.md)。
-- 背包支持昵称、原图标与品质边框、悬浮说明、装备对比、穿脱、实例成长、套装和外观通知；掉落统一结算灵魂/经验，补给满值不拾取，实际恢复显示绿/蓝跳字。[背包](addons/simple_inventory/README.md)、[掉落](data/loot/README.md)。
-- 原伤害数字使用共享图集和对象池；原版动作、命中、拾取、升级、结果与关卡/Boss 音乐接入 Core，支持音量、静音和持久设置。[音频](addons/battle_foundation/audio/README.md)。
-
-## 插件实现与类图
-
-[Battle Foundation](addons/battle_foundation/README.md) 装配战斗；[GAS](addons/gameplay_abiltiy_system/README.md) 提供技能、属性、Vital、状态和 Effect；[Core](addons/godot_core_system-0.0.4/docs/implementation-analysis.md) 提供总线、状态机、输入、配置、资源和音频；[Inventory](addons/simple_inventory/README.md) 提供物品/装备与背包。Phantom Camera 管理跟随，Panku Console 与 DebugDraw 提供调试入口。
-
-GAS 已统一接入 Core 事件总线。[系统重叠比较](docs/plugin-overlap-analysis.md)、[技能联合类图](addons/battle_foundation/docs/skill-timeline.svg)、[动画/状态类图](addons/battle_foundation/docs/animation-adapter.svg)、[关卡类图](addons/battle_foundation/docs/level-progression.svg)。各插件文档保留独立系统类图和详细实现说明。
+旧平台、木桩、技能和插件示例已清理；当前没有示例关卡。角色、怪物、UI、模板和第三方插件界面是实际运行或编辑依赖，不能按“非关卡场景”直接删除。[完整场景分类与整理说明](docs/project-organization-performance.md)。
 
 ## 性能与验证
 
-保护原表约 2 MB，现于关卡加载时预热、只解析一次，刷怪共享只读规则；生命和保护值仍独立。受击视图默认预热 4 个、缓存上限 8 个空闲实例。死亡动作结束后释放怪物节点，先完成掉落和通关结算；Boss 斩败结束恢复材质后释放。隐藏调试面板不再每帧重建属性快照。[测量与配置](docs/project-organization-performance.md)。
+实体列表仅在出生/移除时重建，正常战斗 tick 复用 C# 快照；公开查询仍返回独立数组。保护原表只解析一次，反馈和伤害数字采用对象池；死亡动作结束后释放实体。重复选关不重复加载资源或构造纯动画预热实例，大地图只在悬浮目标变化时更新材质/贴图，技能面板缓存贴图并避免重复绑定。
 
 ```powershell
-./tools/verify_stage_eight.ps1 -Godot '<带 Spine 的 Godot.exe>'
-& '<Godot.exe>' --headless --path . res://tools/performance/benchmark_monster_spawn.tscn
+# 资源路径、大小写、UID、示例与孤立 UID 审计（Python 3，无额外依赖）
+py tools/audit_project.py --report .cleanup-backup/project-audit.json
+
+# 全部31套静音回归；每套独立进程、隔离用户目录，默认超时240秒
+./tools/verify_stage_eight.ps1 -Godot '<配套 Godot.exe>'
+
+# 指定功能
+./tools/verify_stage_eight.ps1 -Godot '<配套 Godot.exe>' -Suites spawn_performance,campaign_transitions
+
+# 原生验证包
+./tools/csharp/export_native.ps1 -Validation
+./tools/csharp/verify_native_game.ps1 -Suites spawn_performance,campaign_transitions,original_skill_panel
+
+# 实际出生微基准，静音且隔离存档后运行
+& '<Godot.exe>' --headless --audio-driver Dummy --path . res://tools/performance/benchmark_monster_spawn.tscn
 ```
 
-默认执行当前 25 套验证，日志与截图保存在 Git/Godot 忽略的 `.cleanup-backup`。新增水帘洞地形往返与三技能实战、完整波次、选关存档及真实按钮场景切换验证。Windows 子窗口配置辅助工具位于 `tools/window_mode_helper/`。
+静态审计不替代运行测试。回归会检查脚本/运行错误，覆盖三关推进与实战、坡地击退/平台穿透、Boss、属性/战力、背包、技能、UI遮罩、存档及加载失败/取消。性能数据需在相同引擎、渲染模式和设备上比较；缓存次数减少不等于已测得帧率提升。[验证清单](tests/README.md)、[性能与整理记录](docs/project-organization-performance.md)。

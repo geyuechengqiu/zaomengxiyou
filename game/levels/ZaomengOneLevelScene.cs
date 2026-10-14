@@ -62,7 +62,12 @@ public partial class ZaomengOneLevelScene : BattleLevelScene
     }
     protected override void RestartLevel()
     {
-        if (_campaignPlay) Campaign.CaptureCharacter(player);
+        if (_campaignPlay)
+        {
+            Campaign.CaptureCharacter(player);
+            Campaign.Enter(CampaignId);
+            return;
+        }
         base.RestartLevel();
     }
     private void ReturnToMap()

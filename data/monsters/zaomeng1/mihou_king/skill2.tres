@@ -1,21 +1,28 @@
-[gd_resource type="Resource" script_class="GameplayAbilityDefinition" format=3]
-[ext_resource type="Script" path="res://addons/gameplay_abiltiy_system/scripts/abilities/gameplay_ability_definition.gd" id="definition"]
-[ext_resource type="Script" path="res://addons/gameplay_abiltiy_system/scripts/abilities/features/gameplay_ability_feature.gd" id="feature"]
-[ext_resource type="Script" path="res://addons/battle_foundation/gas/battle_frame_timeline_feature.gd" id="timeline"]
-[ext_resource type="Script" path="res://addons/battle_foundation/definitions/battle_attack_segment.gd" id="segment"]
-[ext_resource type="Script" path="res://addons/battle_foundation/definitions/BattleFrameEvent.cs" id="event"]
+[gd_resource type="Resource" script_class="GameplayAbilityDefinition" format=3 uid="uid://bow8py567jmr3"]
+
+[ext_resource type="Script" uid="uid://ud4ug2ylqdo2" path="res://addons/battle_foundation/definitions/BattleSkillBranch.cs" id="3_grbam"]
+[ext_resource type="Script" uid="uid://b1047b2i0w3jx" path="res://addons/battle_foundation/definitions/BattleSkillMotion.cs" id="5_gapll"]
+[ext_resource type="Script" uid="uid://bm4h231fb21pv" path="res://addons/gameplay_abiltiy_system/scripts/abilities/gameplay_ability_definition.gd" id="definition"]
+[ext_resource type="Script" uid="uid://dm30yy8ucnbot" path="res://addons/battle_foundation/definitions/BattleFrameEvent.cs" id="event"]
+[ext_resource type="Script" uid="uid://cm0x3pewlrveo" path="res://addons/gameplay_abiltiy_system/scripts/abilities/features/gameplay_ability_feature.gd" id="feature"]
+[ext_resource type="Script" uid="uid://ctus3t2tt37o6" path="res://addons/battle_foundation/definitions/battle_attack_segment.gd" id="segment"]
+[ext_resource type="Script" uid="uid://daneexb55k8ae" path="res://addons/battle_foundation/gas/battle_frame_timeline_feature.gd" id="timeline"]
+
 [sub_resource type="Resource" id="Hit0"]
 script = ExtResource("segment")
 segment_id = &"hit2_0"
-hit_index = 1
-start_frame = 4
 end_frame = 10
 action = &"attack_2"
-hit_rect = Rect2(-902.950000,-350.350000,1728.000000,384.000000)
-hit_rect_frames = Dictionary[int, Rect2]({4: Rect2(-902.950000,-350.350000,1728.000000,384.000000),5: Rect2(-902.950000,-350.350000,1728.000000,384.000000),6: Rect2(-902.950000,-350.350000,1728.000000,384.000000),7: Rect2(-896.950000,-350.350000,1728.000000,384.000000),8: Rect2(-896.950000,-350.350000,1728.000000,384.000000),9: Rect2(-896.950000,-350.350000,1728.000000,384.000000)})
+hit_rect = Rect2(-902.95, -350.35, 1728, 384)
+hit_rect_frames = Dictionary[int, Rect2]({
+4: Rect2(-902.95, -350.35, 1728, 384),
+5: Rect2(-902.95, -350.35, 1728, 384),
+6: Rect2(-902.95, -350.35, 1728, 384),
+7: Rect2(-896.95, -350.35, 1728, 384),
+8: Rect2(-896.95, -350.35, 1728, 384),
+9: Rect2(-896.95, -350.35, 1728, 384)
+})
 damage_multiplier = 0.6666666666666666
-maximum_hits = 1
-hit_interval = 0.0
 knockback_speed = 120.0
 knockback_duration = 0.5
 launch_speed = 420.0
@@ -23,7 +30,12 @@ reset_vertical_velocity = true
 reaction_gravity = 2700.0
 hit_stun = 0.5
 reaction_type = "launch"
-protection_parameters = {"protectPoint": 3334, "protectPointB": 3334, "isProtectPointAdd": 1}
+protection_parameters = {
+"isProtectPointAdd": 1,
+"protectPoint": 3334,
+"protectPointB": 3334
+}
+
 [sub_resource type="Resource" id="Hit1"]
 script = ExtResource("segment")
 segment_id = &"hit2_1"
@@ -31,11 +43,15 @@ hit_index = 2
 start_frame = 10
 end_frame = 15
 action = &"attack_2"
-hit_rect = Rect2(-896.950000,-350.350000,1728.000000,384.000000)
-hit_rect_frames = Dictionary[int, Rect2]({10: Rect2(-896.950000,-350.350000,1728.000000,384.000000),11: Rect2(-896.950000,-350.350000,1728.000000,384.000000),12: Rect2(-896.950000,-350.350000,1728.000000,384.000000),13: Rect2(-896.950000,-350.350000,1728.000000,384.000000),14: Rect2(-896.950000,-350.350000,1728.000000,384.000000)})
+hit_rect = Rect2(-896.95, -350.35, 1728, 384)
+hit_rect_frames = Dictionary[int, Rect2]({
+10: Rect2(-896.95, -350.35, 1728, 384),
+11: Rect2(-896.95, -350.35, 1728, 384),
+12: Rect2(-896.95, -350.35, 1728, 384),
+13: Rect2(-896.95, -350.35, 1728, 384),
+14: Rect2(-896.95, -350.35, 1728, 384)
+})
 damage_multiplier = 0.6666666666666666
-maximum_hits = 1
-hit_interval = 0.0
 knockback_speed = 120.0
 knockback_duration = 0.5
 launch_speed = 420.0
@@ -43,7 +59,12 @@ reset_vertical_velocity = true
 reaction_gravity = 2700.0
 hit_stun = 0.5
 reaction_type = "launch"
-protection_parameters = {"protectPoint": 3334, "protectPointB": 3334, "isProtectPointAdd": 1}
+protection_parameters = {
+"isProtectPointAdd": 1,
+"protectPoint": 3334,
+"protectPointB": 3334
+}
+
 [sub_resource type="Resource" id="Hit2"]
 script = ExtResource("segment")
 segment_id = &"hit2_2"
@@ -51,11 +72,14 @@ hit_index = 3
 start_frame = 15
 end_frame = 19
 action = &"attack_2"
-hit_rect = Rect2(-896.950000,-507.709375,1728.000000,554.718750)
-hit_rect_frames = Dictionary[int, Rect2]({15: Rect2(-896.950000,-507.709375,1728.000000,554.718750),16: Rect2(-896.950000,-507.709375,1728.000000,554.718750),17: Rect2(-896.950000,-507.709375,1728.000000,554.718750),18: Rect2(-896.950000,-507.709375,1728.000000,554.718750)})
+hit_rect = Rect2(-896.95, -507.70938, 1728, 554.71875)
+hit_rect_frames = Dictionary[int, Rect2]({
+15: Rect2(-896.95, -507.70938, 1728, 554.71875),
+16: Rect2(-896.95, -507.70938, 1728, 554.71875),
+17: Rect2(-896.95, -507.70938, 1728, 554.71875),
+18: Rect2(-896.95, -507.70938, 1728, 554.71875)
+})
 damage_multiplier = 0.6666666666666666
-maximum_hits = 1
-hit_interval = 0.0
 knockback_speed = 120.0
 knockback_duration = 0.5
 launch_speed = 420.0
@@ -63,7 +87,12 @@ reset_vertical_velocity = true
 reaction_gravity = 2700.0
 hit_stun = 0.5
 reaction_type = "launch"
-protection_parameters = {"protectPoint": 3334, "protectPointB": 3334, "isProtectPointAdd": 1}
+protection_parameters = {
+"isProtectPointAdd": 1,
+"protectPoint": 3334,
+"protectPointB": 3334
+}
+
 [sub_resource type="Resource" id="Hit3"]
 script = ExtResource("segment")
 segment_id = &"hit2_3"
@@ -71,11 +100,15 @@ hit_index = 4
 start_frame = 19
 end_frame = 24
 action = &"attack_2"
-hit_rect = Rect2(-896.950000,-584.202539,1728.000000,637.705078)
-hit_rect_frames = Dictionary[int, Rect2]({19: Rect2(-896.950000,-584.202539,1728.000000,637.705078),20: Rect2(-896.950000,-584.202539,1728.000000,637.705078),21: Rect2(-896.950000,-584.202539,1728.000000,637.705078),22: Rect2(-896.950000,-584.202539,1728.000000,637.705078),23: Rect2(-896.950000,-584.202539,1728.000000,637.705078)})
+hit_rect = Rect2(-896.95, -584.2025, 1728, 637.7051)
+hit_rect_frames = Dictionary[int, Rect2]({
+19: Rect2(-896.95, -584.2025, 1728, 637.7051),
+20: Rect2(-896.95, -584.2025, 1728, 637.7051),
+21: Rect2(-896.95, -584.2025, 1728, 637.7051),
+22: Rect2(-896.95, -584.2025, 1728, 637.7051),
+23: Rect2(-896.95, -584.2025, 1728, 637.7051)
+})
 damage_multiplier = 0.6666666666666666
-maximum_hits = 1
-hit_interval = 0.0
 knockback_speed = 120.0
 knockback_duration = 0.5
 launch_speed = 420.0
@@ -83,7 +116,12 @@ reset_vertical_velocity = true
 reaction_gravity = 2700.0
 hit_stun = 0.5
 reaction_type = "launch"
-protection_parameters = {"protectPoint": 3334, "protectPointB": 3334, "isProtectPointAdd": 1}
+protection_parameters = {
+"isProtectPointAdd": 1,
+"protectPoint": 3334,
+"protectPointB": 3334
+}
+
 [sub_resource type="Resource" id="Hit4"]
 script = ExtResource("segment")
 segment_id = &"hit2_4"
@@ -91,11 +129,15 @@ hit_index = 5
 start_frame = 24
 end_frame = 29
 action = &"attack_2"
-hit_rect = Rect2(-896.950000,-671.625391,1728.000000,732.550781)
-hit_rect_frames = Dictionary[int, Rect2]({24: Rect2(-896.950000,-671.625391,1728.000000,732.550781),25: Rect2(-896.950000,-671.625391,1728.000000,732.550781),26: Rect2(-896.950000,-671.625391,1728.000000,732.550781),27: Rect2(-896.950000,-671.625391,1728.000000,732.550781),28: Rect2(-896.950000,-671.625391,1728.000000,732.550781)})
+hit_rect = Rect2(-896.95, -671.62537, 1728, 732.5508)
+hit_rect_frames = Dictionary[int, Rect2]({
+24: Rect2(-896.95, -671.62537, 1728, 732.5508),
+25: Rect2(-896.95, -671.62537, 1728, 732.5508),
+26: Rect2(-896.95, -671.62537, 1728, 732.5508),
+27: Rect2(-896.95, -671.62537, 1728, 732.5508),
+28: Rect2(-896.95, -671.62537, 1728, 732.5508)
+})
 damage_multiplier = 0.6666666666666666
-maximum_hits = 1
-hit_interval = 0.0
 knockback_speed = 120.0
 knockback_duration = 0.5
 launch_speed = 420.0
@@ -103,7 +145,12 @@ reset_vertical_velocity = true
 reaction_gravity = 2700.0
 hit_stun = 0.5
 reaction_type = "launch"
-protection_parameters = {"protectPoint": 3334, "protectPointB": 3334, "isProtectPointAdd": 1}
+protection_parameters = {
+"isProtectPointAdd": 1,
+"protectPoint": 3334,
+"protectPointB": 3334
+}
+
 [sub_resource type="Resource" id="Hit5"]
 script = ExtResource("segment")
 segment_id = &"hit2_5"
@@ -111,11 +158,15 @@ hit_index = 6
 start_frame = 29
 end_frame = 34
 action = &"attack_2"
-hit_rect = Rect2(-896.950000,-880.639062,1728.000000,962.578125)
-hit_rect_frames = Dictionary[int, Rect2]({29: Rect2(-896.950000,-880.639062,1728.000000,962.578125),30: Rect2(-896.950000,-880.639062,1728.000000,962.578125),31: Rect2(-896.950000,-880.639062,1728.000000,962.578125),32: Rect2(-896.950000,-880.639062,1728.000000,962.578125),33: Rect2(-896.950000,-880.639062,1728.000000,962.578125)})
+hit_rect = Rect2(-896.95, -880.63904, 1728, 962.5781)
+hit_rect_frames = Dictionary[int, Rect2]({
+29: Rect2(-896.95, -880.63904, 1728, 962.5781),
+30: Rect2(-896.95, -880.63904, 1728, 962.5781),
+31: Rect2(-896.95, -880.63904, 1728, 962.5781),
+32: Rect2(-896.95, -880.63904, 1728, 962.5781),
+33: Rect2(-896.95, -880.63904, 1728, 962.5781)
+})
 damage_multiplier = 0.6666666666666666
-maximum_hits = 1
-hit_interval = 0.0
 knockback_speed = 120.0
 knockback_duration = 0.5
 launch_speed = 420.0
@@ -123,7 +174,12 @@ reset_vertical_velocity = true
 reaction_gravity = 2700.0
 hit_stun = 0.5
 reaction_type = "launch"
-protection_parameters = {"protectPoint": 3334, "protectPointB": 3334, "isProtectPointAdd": 1}
+protection_parameters = {
+"isProtectPointAdd": 1,
+"protectPoint": 3334,
+"protectPointB": 3334
+}
+
 [sub_resource type="Resource" id="Hit6"]
 script = ExtResource("segment")
 segment_id = &"hit2_6"
@@ -131,11 +187,16 @@ hit_index = 7
 start_frame = 34
 end_frame = 40
 action = &"attack_2"
-hit_rect = Rect2(-1667.367969,-321.521875,3327.770508,767.677734)
-hit_rect_frames = Dictionary[int, Rect2]({34: Rect2(-1667.367969,-321.521875,3327.770508,767.677734),35: Rect2(-1667.367969,-321.521875,3327.770508,767.677734),36: Rect2(-1667.367969,-321.521875,3327.770508,767.677734),37: Rect2(-1667.367969,-321.521875,3327.770508,767.677734),38: Rect2(-1667.367969,-321.521875,3327.770508,767.677734),39: Rect2(-1667.367969,-321.521875,3327.770508,767.677734)})
+hit_rect = Rect2(-1667.3679, -321.52188, 3327.7705, 767.67773)
+hit_rect_frames = Dictionary[int, Rect2]({
+34: Rect2(-1667.3679, -321.52188, 3327.7705, 767.67773),
+35: Rect2(-1667.3679, -321.52188, 3327.7705, 767.67773),
+36: Rect2(-1667.3679, -321.52188, 3327.7705, 767.67773),
+37: Rect2(-1667.3679, -321.52188, 3327.7705, 767.67773),
+38: Rect2(-1667.3679, -321.52188, 3327.7705, 767.67773),
+39: Rect2(-1667.3679, -321.52188, 3327.7705, 767.67773)
+})
 damage_multiplier = 0.6666666666666666
-maximum_hits = 1
-hit_interval = 0.0
 knockback_speed = 120.0
 knockback_duration = 0.5
 launch_speed = 420.0
@@ -143,7 +204,12 @@ reset_vertical_velocity = true
 reaction_gravity = 2700.0
 hit_stun = 0.5
 reaction_type = "launch"
-protection_parameters = {"protectPoint": 3334, "protectPointB": 3334, "isProtectPointAdd": 1}
+protection_parameters = {
+"isProtectPointAdd": 1,
+"protectPoint": 3334,
+"protectPointB": 3334
+}
+
 [sub_resource type="Resource" id="Hit7"]
 script = ExtResource("segment")
 segment_id = &"hit2_7"
@@ -151,11 +217,15 @@ hit_index = 8
 start_frame = 40
 end_frame = 45
 action = &"attack_2"
-hit_rect = Rect2(-1667.367969,-321.521875,3327.770508,767.677734)
-hit_rect_frames = Dictionary[int, Rect2]({40: Rect2(-1667.367969,-321.521875,3327.770508,767.677734),41: Rect2(-1667.367969,-321.521875,3327.770508,767.677734),42: Rect2(-1667.367969,-321.521875,3327.770508,767.677734),43: Rect2(-1667.367969,-321.521875,3327.770508,767.677734),44: Rect2(-1667.367969,-321.521875,3327.770508,767.677734)})
+hit_rect = Rect2(-1667.3679, -321.52188, 3327.7705, 767.67773)
+hit_rect_frames = Dictionary[int, Rect2]({
+40: Rect2(-1667.3679, -321.52188, 3327.7705, 767.67773),
+41: Rect2(-1667.3679, -321.52188, 3327.7705, 767.67773),
+42: Rect2(-1667.3679, -321.52188, 3327.7705, 767.67773),
+43: Rect2(-1667.3679, -321.52188, 3327.7705, 767.67773),
+44: Rect2(-1667.3679, -321.52188, 3327.7705, 767.67773)
+})
 damage_multiplier = 0.6666666666666666
-maximum_hits = 1
-hit_interval = 0.0
 knockback_speed = 120.0
 knockback_duration = 0.5
 launch_speed = 420.0
@@ -163,7 +233,12 @@ reset_vertical_velocity = true
 reaction_gravity = 2700.0
 hit_stun = 0.5
 reaction_type = "launch"
-protection_parameters = {"protectPoint": 3334, "protectPointB": 3334, "isProtectPointAdd": 1}
+protection_parameters = {
+"isProtectPointAdd": 1,
+"protectPoint": 3334,
+"protectPointB": 3334
+}
+
 [sub_resource type="Resource" id="Hit8"]
 script = ExtResource("segment")
 segment_id = &"hit2_8"
@@ -171,11 +246,16 @@ hit_index = 9
 start_frame = 45
 end_frame = 51
 action = &"attack_2"
-hit_rect = Rect2(-1667.367969,-321.521875,3327.770508,767.677734)
-hit_rect_frames = Dictionary[int, Rect2]({45: Rect2(-1667.367969,-321.521875,3327.770508,767.677734),46: Rect2(-1667.367969,-321.521875,3327.770508,767.677734),47: Rect2(-1667.367969,-321.521875,3327.770508,767.677734),48: Rect2(-1667.367969,-321.521875,3327.770508,767.677734),49: Rect2(-1667.367969,-321.521875,3327.770508,767.677734),50: Rect2(-1667.367969,-321.521875,3327.770508,767.677734)})
+hit_rect = Rect2(-1667.3679, -321.52188, 3327.7705, 767.67773)
+hit_rect_frames = Dictionary[int, Rect2]({
+45: Rect2(-1667.3679, -321.52188, 3327.7705, 767.67773),
+46: Rect2(-1667.3679, -321.52188, 3327.7705, 767.67773),
+47: Rect2(-1667.3679, -321.52188, 3327.7705, 767.67773),
+48: Rect2(-1667.3679, -321.52188, 3327.7705, 767.67773),
+49: Rect2(-1667.3679, -321.52188, 3327.7705, 767.67773),
+50: Rect2(-1667.3679, -321.52188, 3327.7705, 767.67773)
+})
 damage_multiplier = 0.6666666666666666
-maximum_hits = 1
-hit_interval = 0.0
 knockback_speed = 120.0
 knockback_duration = 0.5
 launch_speed = 420.0
@@ -183,7 +263,12 @@ reset_vertical_velocity = true
 reaction_gravity = 2700.0
 hit_stun = 0.5
 reaction_type = "launch"
-protection_parameters = {"protectPoint": 3334, "protectPointB": 3334, "isProtectPointAdd": 1}
+protection_parameters = {
+"isProtectPointAdd": 1,
+"protectPoint": 3334,
+"protectPointB": 3334
+}
+
 [sub_resource type="Resource" id="Hit9"]
 script = ExtResource("segment")
 segment_id = &"hit2_9"
@@ -191,11 +276,16 @@ hit_index = 10
 start_frame = 51
 end_frame = 57
 action = &"attack_2"
-hit_rect = Rect2(-1667.367969,-321.521875,3327.770508,767.677734)
-hit_rect_frames = Dictionary[int, Rect2]({51: Rect2(-1667.367969,-321.521875,3327.770508,767.677734),52: Rect2(-1667.367969,-321.521875,3327.770508,767.677734),53: Rect2(-1667.367969,-321.521875,3327.770508,767.677734),54: Rect2(-1667.367969,-321.521875,3327.770508,767.677734),55: Rect2(-1667.367969,-321.521875,3327.770508,767.677734),56: Rect2(-1667.367969,-321.521875,3327.770508,767.677734)})
+hit_rect = Rect2(-1667.3679, -321.52188, 3327.7705, 767.67773)
+hit_rect_frames = Dictionary[int, Rect2]({
+51: Rect2(-1667.3679, -321.52188, 3327.7705, 767.67773),
+52: Rect2(-1667.3679, -321.52188, 3327.7705, 767.67773),
+53: Rect2(-1667.3679, -321.52188, 3327.7705, 767.67773),
+54: Rect2(-1667.3679, -321.52188, 3327.7705, 767.67773),
+55: Rect2(-1667.3679, -321.52188, 3327.7705, 767.67773),
+56: Rect2(-1667.3679, -321.52188, 3327.7705, 767.67773)
+})
 damage_multiplier = 0.6666666666666666
-maximum_hits = 1
-hit_interval = 0.0
 knockback_speed = 120.0
 knockback_duration = 0.5
 launch_speed = 420.0
@@ -203,7 +293,12 @@ reset_vertical_velocity = true
 reaction_gravity = 2700.0
 hit_stun = 0.5
 reaction_type = "launch"
-protection_parameters = {"protectPoint": 3334, "protectPointB": 3334, "isProtectPointAdd": 1}
+protection_parameters = {
+"isProtectPointAdd": 1,
+"protectPoint": 3334,
+"protectPointB": 3334
+}
+
 [sub_resource type="Resource" id="Hit10"]
 script = ExtResource("segment")
 segment_id = &"hit2_10"
@@ -211,11 +306,17 @@ hit_index = 11
 start_frame = 57
 end_frame = 64
 action = &"attack_2"
-hit_rect = Rect2(-1667.367969,-321.521875,3327.770508,767.677734)
-hit_rect_frames = Dictionary[int, Rect2]({57: Rect2(-1667.367969,-321.521875,3327.770508,767.677734),58: Rect2(-1667.367969,-321.521875,3327.770508,767.677734),59: Rect2(-1667.367969,-321.521875,3327.770508,767.677734),60: Rect2(-1667.367969,-321.521875,3327.770508,767.677734),61: Rect2(-1667.367969,-321.521875,3327.770508,767.677734),62: Rect2(-1667.367969,-321.521875,3327.770508,767.677734),63: Rect2(-1667.367969,-321.521875,3327.770508,767.677734)})
+hit_rect = Rect2(-1667.3679, -321.52188, 3327.7705, 767.67773)
+hit_rect_frames = Dictionary[int, Rect2]({
+57: Rect2(-1667.3679, -321.52188, 3327.7705, 767.67773),
+58: Rect2(-1667.3679, -321.52188, 3327.7705, 767.67773),
+59: Rect2(-1667.3679, -321.52188, 3327.7705, 767.67773),
+60: Rect2(-1667.3679, -321.52188, 3327.7705, 767.67773),
+61: Rect2(-1667.3679, -321.52188, 3327.7705, 767.67773),
+62: Rect2(-1667.3679, -321.52188, 3327.7705, 767.67773),
+63: Rect2(-1667.3679, -321.52188, 3327.7705, 767.67773)
+})
 damage_multiplier = 0.6666666666666666
-maximum_hits = 1
-hit_interval = 0.0
 knockback_speed = 120.0
 knockback_duration = 0.5
 launch_speed = 420.0
@@ -223,7 +324,12 @@ reset_vertical_velocity = true
 reaction_gravity = 2700.0
 hit_stun = 0.5
 reaction_type = "launch"
-protection_parameters = {"protectPoint": 3334, "protectPointB": 3334, "isProtectPointAdd": 1}
+protection_parameters = {
+"isProtectPointAdd": 1,
+"protectPoint": 3334,
+"protectPointB": 3334
+}
+
 [sub_resource type="Resource" id="Hit11"]
 script = ExtResource("segment")
 segment_id = &"hit2_11"
@@ -231,11 +337,22 @@ hit_index = 12
 start_frame = 64
 end_frame = 76
 action = &"attack_2"
-hit_rect = Rect2(-1667.367969,-321.521875,3327.770508,767.677734)
-hit_rect_frames = Dictionary[int, Rect2]({64: Rect2(-1667.367969,-321.521875,3327.770508,767.677734),65: Rect2(-1667.367969,-321.521875,3327.770508,767.677734),66: Rect2(-1667.367969,-321.521875,3327.770508,767.677734),67: Rect2(-1667.367969,-321.521875,3327.770508,767.677734),68: Rect2(-1667.367969,-321.521875,3327.770508,767.677734),69: Rect2(-1667.367969,-321.521875,3327.770508,767.677734),70: Rect2(-1667.367969,-321.521875,3327.770508,767.677734),71: Rect2(-1667.367969,-321.521875,3327.770508,767.677734),72: Rect2(-1667.367969,-321.521875,3327.770508,767.677734),73: Rect2(-1667.367969,-321.521875,3327.770508,767.677734),74: Rect2(-1667.367969,-321.521875,3327.770508,767.677734),75: Rect2(-1667.367969,-321.521875,3327.770508,767.677734)})
+hit_rect = Rect2(-1667.3679, -321.52188, 3327.7705, 767.67773)
+hit_rect_frames = Dictionary[int, Rect2]({
+64: Rect2(-1667.3679, -321.52188, 3327.7705, 767.67773),
+65: Rect2(-1667.3679, -321.52188, 3327.7705, 767.67773),
+66: Rect2(-1667.3679, -321.52188, 3327.7705, 767.67773),
+67: Rect2(-1667.3679, -321.52188, 3327.7705, 767.67773),
+68: Rect2(-1667.3679, -321.52188, 3327.7705, 767.67773),
+69: Rect2(-1667.3679, -321.52188, 3327.7705, 767.67773),
+70: Rect2(-1667.3679, -321.52188, 3327.7705, 767.67773),
+71: Rect2(-1667.3679, -321.52188, 3327.7705, 767.67773),
+72: Rect2(-1667.3679, -321.52188, 3327.7705, 767.67773),
+73: Rect2(-1667.3679, -321.52188, 3327.7705, 767.67773),
+74: Rect2(-1667.3679, -321.52188, 3327.7705, 767.67773),
+75: Rect2(-1667.3679, -321.52188, 3327.7705, 767.67773)
+})
 damage_multiplier = 0.6666666666666666
-maximum_hits = 1
-hit_interval = 0.0
 knockback_speed = 120.0
 knockback_duration = 0.5
 launch_speed = 420.0
@@ -243,15 +360,25 @@ reset_vertical_velocity = true
 reaction_gravity = 2700.0
 hit_stun = 0.5
 reaction_type = "launch"
-protection_parameters = {"protectPoint": 3334, "protectPointB": 3334, "isProtectPointAdd": 1}
+protection_parameters = {
+"isProtectPointAdd": 1,
+"protectPoint": 3334,
+"protectPointB": 3334
+}
+
 [sub_resource type="Resource" id="Timeline"]
 script = ExtResource("timeline")
-source_fps = 30.0
 duration_frames = 76
+attack_segments = Array[ExtResource("segment")]([SubResource("Hit0"), SubResource("Hit1"), SubResource("Hit2"), SubResource("Hit3"), SubResource("Hit4"), SubResource("Hit5"), SubResource("Hit6"), SubResource("Hit7"), SubResource("Hit8"), SubResource("Hit9"), SubResource("Hit10"), SubResource("Hit11")])
 animation_action = &"attack_2"
+action_rules = {
+"invulnerable": true,
+"jump": false,
+"move": false,
+"turn": false
+}
 commit_resources = true
-action_rules = {"move": false, "jump": false, "turn": false, "invulnerable": true}
-attack_segments = Array[ExtResource("segment")]([SubResource("Hit0"),SubResource("Hit1"),SubResource("Hit2"),SubResource("Hit3"),SubResource("Hit4"),SubResource("Hit5"),SubResource("Hit6"),SubResource("Hit7"),SubResource("Hit8"),SubResource("Hit9"),SubResource("Hit10"),SubResource("Hit11")])
+
 [resource]
 script = ExtResource("definition")
 ability_id = &"zaomeng1_mihou_king_hit2"

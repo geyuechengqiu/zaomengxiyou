@@ -98,7 +98,7 @@ Boss BGM来自`boss_01.swf`；命中、胜负声音来自原`hs.swf`。Resource/
 & '<带Spine模块的Godot.exe>' --headless --path . res://tests/suites/verify_boss.tscn
 & './tools/verify_stage_eight.ps1' -Godot '<带Spine模块的Godot.exe>'
 # GPU检查不要使用--headless；PNG写入忽略目录.cleanup-backup。
-& '<带Spine模块的Godot.exe>' --path . --script res://tools/capture_boss.gd
+& '<带Spine模块的Godot.exe>' --path . --script res://tools/performance/capture_boss.gd
 ```
 
 原素材再导出需要本机原版仓库、Python、Java及该仓库的FFDec库。若重建阶段12数据，随后再运行阶段13导入，恢复三套Boss技能与索引。导入会覆盖巨石灵君生成资源，日常编辑资源无需重新导入。

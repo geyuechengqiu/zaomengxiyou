@@ -26,6 +26,13 @@ func _ready() -> void:
 	var presentation := session.presentation
 	var baseline := session.get_entities().size()
 	var initial_views := presentation.feedback_created
+	await step(0)
+	var snapshots: int = session._entity_iteration.rebuild_count
+	for tick in range(120): session.advance_physics(0)
+	check(session._entity_iteration.rebuild_count == snapshots,"成员不变时120次tick复用实体快照")
+	var external := session.get_entities()
+	external.clear()
+	check(session.get_entities().size() == baseline,"公开实体查询保持副本，外部清空不影响会话")
 	var samples: Array[float] = []
 	for index in range(20):
 		var start := Time.get_ticks_usec()
@@ -41,6 +48,8 @@ func _ready() -> void:
 	check(presentation.feedback_created == initial_views and presentation.feedback_reused >= 20,"连续出生复用预热反馈，没有反复创建表现节点")
 	var first := session.spawn_entity_2d("monsters",&"剑舞",Vector2(1300,1056))
 	var second := session.spawn_entity_2d("monsters",&"剑舞",Vector2(1350,1056))
+	await step(0)
+	check(session._entity_iteration.rebuild_count > snapshots,"出生后更新实体快照")
 	first.ai_controller.enabled = false
 	second.ai_controller.enabled = false
 	var health := second.attributes.get_vital_value(&"health")

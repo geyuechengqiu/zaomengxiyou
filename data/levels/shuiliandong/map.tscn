@@ -68,7 +68,7 @@ size = Vector2(1024,397.70000000000005)
 [sub_resource type="RectangleShape2D" id="Water1"]
 size = Vector2(604,397.70000000000005)
 [node name="Actors" instance=ExtResource("template")]
-world_bounds = Rect2(0,0,9460,1600.0)
+world_bounds = Rect2(0,0,9400,1600.0)
 ground_y = 1234.8
 metadata/world_offset_y = 200.0
 [node name="Terrain" parent="." index="1"]
@@ -306,7 +306,7 @@ visible = false
 [node name="Label" type="Label" parent="Gates/Gate4"]
 visible = false
 [node name="Gate5" type="StaticBody2D" parent="Gates"]
-position = Vector2(9460,700)
+position = Vector2(9400,700)
 script = ExtResource("gate")
 region_id = &"shuiliandong_region_5"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Gates/Gate5"]

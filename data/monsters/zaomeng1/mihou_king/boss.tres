@@ -50,7 +50,7 @@ script = ExtResource("rule")
 ability_id = &"mihouwang_skill2"
 priority = 1
 cooldown_group = &"skill2"
-group_cooldown = 7.0
+group_cooldown = 10.0
 attack_range = 510.0
 vertical_range = 600.0
 
@@ -59,7 +59,7 @@ script = ExtResource("rule")
 ability_id = &"mihouwang_skill3"
 priority = 1
 cooldown_group = &"skill3"
-group_cooldown = 10.0
+group_cooldown = 15.0
 attack_range = 540.0
 vertical_range = 600.0
 

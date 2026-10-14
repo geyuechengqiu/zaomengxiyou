@@ -69,7 +69,7 @@ Camera2D与PhantomCamera2D的左硬限界始终使用已开放地图的左边界
 
 [verify_camera_follow.tscn](../../../tests/suites/verify_camera_follow.tscn)使用实际主关卡和原插件验证源帧样例、切区画面连续、过渡中回头与完成后返回已清区域、地图左右边界、五区初始定位、上下跟随、15/30/60/120FPS与低帧率、暂停/慢动作/停顿、原地图视差、多会话隔离、死亡和清理。
 
-[verify_level_progression.gd](../../../tests/suites/verify_level_progression.gd)另在实际自动出口资格满足时检查新镜头位置及渲染中心，不仅直接调用镜头组件。[capture_camera_follow.gd](../../../tools/capture_camera_follow.gd)使用实际D3D12、物理跑步和自动过区，保存过区前、进入、过渡及过区后的画面。
+[verify_level_progression.gd](../../../tests/suites/verify_level_progression.gd)另在实际自动出口资格满足时检查新镜头位置及渲染中心，不仅直接调用镜头组件。[capture_camera_follow.gd](../../../tools/performance/capture_camera_follow.gd)使用实际D3D12、物理跑步和自动过区，保存过区前、进入、过渡及过区后的画面。
 
 ```powershell
 & './tools/verify_stage_eight.ps1' -Godot '<带Spine模块的Godot.exe>' -Suites camera_follow,level_progression,map_visual,boss

@@ -15,6 +15,7 @@ public partial class VerifyShuiliandong : Node
     private Callable _callback;
     private int _checks, _spawned, _maximumLive, _bosses, _victories, _bossRewards, _gorillaRewards;
     private bool _checking;
+    private double _configuredBossHp;
     private void Check(bool ok, string text) { ++_checks; if (!ok) _failures.Add(text); }
     private List<Node2D> Living()
     {
@@ -56,6 +57,27 @@ public partial class VerifyShuiliandong : Node
     }
     private async Task Run()
     {
+        var bossDefinition=GD.Load<BattleEntityDefinition>("res://data/monsters/zaomeng1/mihou_king/definition.tres");
+        var dedicated=bossDefinition.attribute_set!;
+        var reference=GD.Load<Resource>("res://data/monsters/zaomeng1/mihou_king/attributes.tres");
+        var otherBoss=GD.Load<Resource>("res://data/monsters/jushi_lingjun/attributes.tres");
+        Check(dedicated.ResourcePath=="res://data/monsters/zaomeng1/mihou_king/mihouwang_attributes.tres" && dedicated!=reference && dedicated!=otherBoss,"猕猴王定义引用独立专属属性资源");
+        var values=dedicated.Get("attributes").AsGodotDictionary();
+        var original=reference.Get("attributes").AsGodotDictionary();
+        bool equal=values.Count==original.Count;
+        foreach(var entry in values) equal &= original.TryGetValue(entry.Key,out var value) && value.AsDouble()==entry.Value.AsDouble();
+        Check(equal,"专属副本保留全部现有数值与抗性");
+        var hpKey=Variant.From(GD.Load<Resource>("res://data/attribute/hpMax.tres"));
+        double hp=values[hpKey].AsDouble(), referenceHp=original[hpKey].AsDouble();
+        _configuredBossHp = hp;
+        var otherValues=otherBoss.Get("attributes").AsGodotDictionary();
+        double otherHp=otherValues[hpKey].AsDouble();
+        try
+        {
+            values[hpKey]=hp+100;
+            Check(original[hpKey].AsDouble()==referenceHp && otherValues[hpKey].AsDouble()==otherHp,"修改猕猴王专属表不污染旧快照或其他Boss");
+        }
+        finally { values[hpKey]=hp; }
         _level = GD.Load<PackedScene>("res://game/levels/shuiliandong.tscn").Instantiate<Shuiliandong>();
         _level.enable_player_controls = false; AddChild(_level);
         _session = _level.session; _flow = _level.flow; _player = _level.player;
@@ -68,6 +90,12 @@ public partial class VerifyShuiliandong : Node
         Check(regions.Count == 5 && _flow.Get("plans").AsGodotDictionary().Count == 18, "水帘洞原版5区域18出生计划");
         Check(_level.GetNode("BattleSession/Actors/SpawnPoints").GetChildCount() == 18, "出生点预置并可预览");
         var map = _level.GetNode<Node2D>("BattleSession/Actors");
+        MapPresentationChecks.Verify(_session, map.GetNode<Node2D>("Visuals/ShuiliandongVisual"), "MiddleBackground/Cave", Check);
+        var groundArt = map.GetNode<Sprite2D>("Visuals/ShuiliandongVisual/GroundArtwork/Ground");
+        float artRight = groundArt.GlobalPosition.X + groundArt.Texture.GetWidth() * groundArt.GlobalScale.X;
+        float mapRight = map.Get("world_bounds").AsRect2().End.X;
+        var lastBounds = regions[4].AsGodotObject().Get("definition").AsGodotObject().Get("bounds").AsRect2();
+        Check(mapRight == 9400 && lastBounds.End.X == mapRight && mapRight < artRight - 4, "末区域、地图和镜头右限界位于原地板纹理覆盖内，留出采样余量");
         Check(map.GetNode<Node2D>("Terrain").Position.Y==200 && map.GetNode<Node2D>("SpawnPoints").Position.Y==200 && map.GetNode<Node2D>("Visuals/ShuiliandongVisual/GroundArtwork").Position.Y==200,"地形、原图和出怪点同步下移");
         var finalPosition=map.GetNode<Node2D>("FinalExit").Position;
         Check(map.GetNode<Node2D>("PlayerBirth").Position.Y==1200 && finalPosition.X>7520 && finalPosition.X<9460 && finalPosition.Y>1000 && finalPosition.Y<1300,"玩家出生同步下移，编辑器可调整的通关锚点位于末区域地形");
@@ -130,6 +158,16 @@ public partial class VerifyShuiliandong : Node
         Check(_session.Get("loot").AsGodotObject().Get("awarded").AsGodotDictionary().Count == 48, "经验灵魂掉落统一发奖");
         Check(_bossRewards==1 && _gorillaRewards>0,"关卡内实际击杀结算新的Boss和普通大猩猩掉落");
         Check(_session.Call("get_entities").AsGodotArray().Count == 1, "死亡节点按时清理");
+        Move(9340, 1200); await Step(120);
+        var camera = _level.GetNode<Camera2D>("Camera2D");
+        float viewRight = camera.GetScreenCenterPosition().X + camera.GetViewportRect().Size.X / camera.Zoom.X / 2;
+        Check(viewRight <= mapRight + .01f && viewRight < artRight - 4, "清屏后走到最右侧，实际镜头仍不会露出地图终末边缘");
+        if (System.Array.Exists(OS.GetCmdlineUserArgs(), a => a == "--capture-shuiliandong"))
+        {
+            await ToSignal(RenderingServer.Singleton, RenderingServer.SignalName.FramePostDraw);
+            using var image = GetViewport().GetTexture().GetImage();
+            image.SavePng(ProjectSettings.GlobalizePath("res://.cleanup-backup/shuiliandong-end.png"));
+        }
     }
     private void OnEvent(string id, Array args)
     {
@@ -166,7 +204,7 @@ public partial class VerifyShuiliandong : Node
         if (uid == "水帘洞弥猴王")
         {
             var attrs = actor.Get("attributes").AsGodotObject();
-            Check(attrs.Get("current_level").AsInt32()==5 && attrs.Call("get_value",new StringName("hpMax")).AsDouble()==1943 && attrs.Call("get_value",new StringName("atk")).AsDouble()==44 && attrs.Call("get_value",new StringName("phyDef")).AsDouble()==8,"第二关九头雉鸡精原始等级与战斗属性");
+            Check(attrs.Get("current_level").AsInt32()==5 && attrs.Call("get_value",new StringName("hpMax")).AsDouble()==_configuredBossHp && attrs.Call("get_value",new StringName("atk")).AsDouble()==44 && attrs.Call("get_value",new StringName("phyDef")).AsDouble()==8,"猕猴王读取专属属性资源的生命配置及初始等级、攻击、防御");
             Check(attrs.Call("get_value",new StringName("reHP")).AsDouble()==2 && attrs.Call("get_value",new StringName("runSpeed")).AsDouble()==300 && attrs.Call("get_value",new StringName("fireResist")).AsDouble()==-20 && attrs.Call("get_value",new StringName("soilResist")).AsDouble()==0,"Boss回血移速采用第二关，抗性使用指定风水20/火-20");
             Check(actor.Get("protection").AsGodotObject().Get("maximum").AsInt32()==25000,"Boss保护满值25000");
             Check(_session.Get("audio").AsGodotObject().Get("current_music").AsString() == "boss_01", "Boss登场使用碧玉径音乐");

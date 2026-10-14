@@ -221,16 +221,16 @@ GAS `BTWait` 已改为累计传入 delta，消除真实毫秒时钟绕过战斗�
 | [BattleSystem](runtime/battle_system.gd) | Autoload：场次 ID、Core 用户选项、创建会话 |
 | [BattleSession](runtime/battle_session.gd) | 固定物理调度、实体注册/销毁、关卡/装备实例、Core 事件 |
 | [BattleCatalog](runtime/battle_catalog.gd) | 原子加载索引、定义/依赖校验、独立定义资源图 |
-| [BattleClock](runtime/battle_clock.gd) | 累计时间、暂停、缩放、停顿和部分 tick |
+| [BattleClock](runtime/BattleClock.cs) | 累计时间、暂停、缩放、停顿和部分 tick |
 | [BattleEntity](runtime/battle_entity.gd) | CharacterBody3D、运行标识与阵营、GAS 三组件、清理 |
-| [BattleFactions](runtime/battle_factions.gd) | 阵营关系查询 |
-| [BattleRandom](runtime/battle_random.gd) | 独立命名流、随机状态快照 |
-| [BattleEquipmentState](runtime/battle_equipment_state.gd) | 装备 ID 和当前耐久 |
-| [BattleEntityDefinition](definitions/battle_entity_definition.gd) | 角色/怪物定义 |
-| [BattleEquipmentDefinition](definitions/battle_equipment_definition.gd) | 装备定义和修改器模板 |
+| [BattleFactions](runtime/BattleFactions.cs) | 阵营关系查询 |
+| [BattleRandom](runtime/BattleRandom.cs) | 独立命名流、随机状态快照 |
+| [BattleEquipmentState](runtime/BattleEquipmentState.cs) | 装备 ID 和当前耐久 |
+| [BattleEntityDefinition](definitions/BattleEntityDefinition.cs) | 角色/怪物定义 |
+| [BattleEquipmentDefinition](definitions/BattleEquipmentDefinition.cs) | 装备定义和修改器模板 |
 | [BattleLevelDefinition](definitions/battle_level_definition.gd) | 关卡定义 |
-| [BattleSpawnDefinition](definitions/battle_spawn_definition.gd) | 出生定义 |
-| [BattleFrameEvent](definitions/battle_frame_event.gd) | 原素材帧、事件名和配置负载 |
+| [BattleSpawnDefinition](definitions/BattleSpawnDefinition.cs) | 出生定义 |
+| [BattleFrameEvent](definitions/BattleFrameEvent.cs) | 原素材帧、事件名和配置负载 |
 | [BattleFrameTimelineFeature](gas/battle_frame_timeline_feature.gd) | GAS 素材帧更新与 Core 事件发布 |
 | [BattleGASBinding](runtime/battle_gas_binding.gd) | 2D/3D 实体共用 GAS 装配和清理 |
 | [BattleEntity2D](runtime/battle_entity_2d.gd) | 横版碰撞、动作命令、GAS 战斗入口、原版攻击镜像 |
@@ -239,13 +239,13 @@ GAS `BTWait` 已改为累计传入 delta，消除真实毫秒时钟绕过战斗�
 | [BattleActionLeafState2D](runtime/battle_action_leaf_state_2d.gd) | Core BaseState 子类、进入/退出、状态计时与转换条件、权限 |
 | [BattleActionProfile2D](definitions/battle_action_profile_2d.gd) | 战斗规则时间、原攻击区域及平台样例运动配置 |
 | [BattleMotionController2D](runtime/BattleMotionController2D.cs) | 速度、扫掠碰撞、地面/墙/顶、跳跃预算 |
-| [BattleComboDefinition](definitions/battle_combo_definition.gd) / [BattleAttackStep2D](definitions/battle_attack_step_2d.gd) | 只读分段技能、时长、权限与位移配置 |
-| [BattleComboState](runtime/battle_combo_state.gd) | 独立连击段号、下一段预约与施放序号 |
+| [BattleComboDefinition](definitions/BattleComboDefinition.cs) / [BattleAttackStep2D](definitions/BattleAttackStep2D.cs) | 只读分段技能、时长、权限与位移配置 |
+| [BattleComboState](runtime/BattleComboState.cs) | 独立连击段号、下一段预约与施放序号 |
 | [BattleAttackInstance](runtime/battle_attack_instance.gd) | 攻击编号、攻击者/阵营、持续窗口与每击目标去重 |
 | [BattleHurtbox2D](movement/battle_hurtbox_2d.gd) | 与移动物理体分开的可编辑受击区域 |
 | [BattlePresentation2D](presentation/battle_presentation_2d.gd) | 公共战斗表现：集中分发命中反馈、全场跳字对象池与统一时钟；[配置说明](presentation/README.md) |
 | [BattleCombatFeedback2D](presentation/battle_combat_feedback_2d.gd) | 战斗场景中每个目标的血条、保护条与受击反馈视图 |
-| [CharacterAnimationProfile](animation/character_animation_profile.gd) | 只读动作映射、皮肤、脚底偏移和语义挂点 |
+| [CharacterAnimationProfile](animation/CharacterAnimationProfile.cs) | 只读动作映射、皮肤、脚底偏移和语义挂点 |
 | [CharacterAnimationAdapter](animation/character_animation_adapter.gd) | 独立抽象动画接口及通知，无战斗规则 |
 | [SpineAnimationAdapter](animation/spine_animation_adapter.gd) | 原生 Spine 手动播放、组合皮肤、镜像、挂点和调试查询 |
 | [plugin.gd](plugin.gd) | 编辑器启用/禁用注册 Autoload |

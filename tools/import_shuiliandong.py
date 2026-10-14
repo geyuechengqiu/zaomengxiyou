@@ -35,7 +35,7 @@ def monsters():
     scene=scene.replace('res://data/monsters/jushi_lingjun/protection.tres','res://data/monsters/zaomeng1/mihou_king/protection.tres')
     write(folder/'monster.tscn',scene)
     definition=(folder/'definition.tres').read_text('utf8').replace('display_name = "水帘洞弥猴王"','display_name = "弥猴王"')
-    definition=definition.replace('res://data/monsters/jushi_lingjun/attributes.tres','res://data/monsters/zaomeng1/mihou_king/attributes.tres').replace('initial_level = 3','initial_level = 5').replace('metadata/stat_source = "碧玉径/jushi_lingjun"','metadata/stat_source = "上古天帝篇/Dungeon/2/Monster/10802"')
+    definition=definition.replace('res://data/monsters/jushi_lingjun/attributes.tres','res://data/monsters/zaomeng1/mihou_king/mihouwang_attributes.tres').replace('initial_level = 3','initial_level = 5').replace('metadata/stat_source = "碧玉径/jushi_lingjun"','metadata/stat_source = "上古天帝篇/Dungeon/2/Monster/10802"')
     definition=definition.replace('metadata/original_monster_id = 10601','metadata/original_monster_id = 10802')
     definition=re.sub(r'ability_ids = .*','ability_ids = Array[StringName]([&"zaomeng1_mihou_king_hit1", &"zaomeng1_mihou_king_hit2", &"zaomeng1_mihou_king_hit3"])',definition)
     write(folder/'definition.tres',definition)
@@ -48,6 +48,12 @@ def monsters():
         return f'ExtResource("{key}"): {value}'
     attributes=re.sub(r'ExtResource\("([^\"]+)"\): -?[\d.]+',attribute,attributes)
     write(folder/'attributes.tres',attributes)
+    # Seed a dedicated numeric resource once; later imports preserve manual tuning.
+    dedicated=folder/'mihouwang_attributes.tres'
+    if not dedicated.exists():
+        independent=re.sub(r' uid="uid://[^\"]+"','',attributes)
+        independent=independent.replace('[resource]','[resource]\nresource_name = "猕猴王专属属性"')
+        write(dedicated,independent)
     protection=(ROOT/'data/monsters/jushi_lingjun/protection.tres').read_text('utf8').replace('Monster/10601','Monster/10802').replace('metadata/original_protect_skill_id = 1900010','metadata/original_protect_skill_id = 2002001')
     write(folder/'protection.tres',protection)
 
@@ -251,7 +257,7 @@ texture = ExtResource("ground")
         for name in names:refs+=f'[ext_resource type="Resource" path="res://data/levels/shuiliandong/{category}/{name}.tres" id="{name}"]\n'
     refs+='[sub_resource type="RectangleShape2D" id="Gate"]\nsize = Vector2(20,1600)\n'
     scene='''[node name="Actors" instance=ExtResource("template")]
-world_bounds = Rect2(0,0,9460,1400)
+world_bounds = Rect2(0,0,9400,1400)
 ground_y = 1034.8
 [node name="ShuiliandongVisual" parent="Visuals" instance=ExtResource("visual")]
 '''
@@ -292,7 +298,7 @@ script = ExtResource("preview")
     # would cancel the requested downward framing. All gameplay anchors move
     # together; the Actors root stays at zero because spawn positions are world
     # coordinates passed into the shared session.
-    scene=scene.replace('world_bounds = Rect2(0,0,9460,1400)',f'world_bounds = Rect2(0,0,9460,{1400+WORLD_OFFSET_Y})')
+    scene=scene.replace('world_bounds = Rect2(0,0,9400,1400)',f'world_bounds = Rect2(0,0,9400,{1400+WORLD_OFFSET_Y})')
     scene=scene.replace('ground_y = 1034.8',f'ground_y = {1034.8+WORLD_OFFSET_Y}')
     scene=scene.replace('[node name="ShuiliandongVisual"',f'metadata/world_offset_y = {WORLD_OFFSET_Y}\n[node name="Terrain" parent="." index="1"]\nposition = Vector2(0,{WORLD_OFFSET_Y})\n[node name="SpawnPoints" parent="." index="2"]\nposition = Vector2(0,{WORLD_OFFSET_Y})\n[node name="Gates" parent="." index="3"]\nposition = Vector2(0,{WORLD_OFFSET_Y})\n[node name="ShuiliandongVisual"',1)
     scene=scene.replace('Vector2(256,1000)',f'Vector2(256,{1000+WORLD_OFFSET_Y})').replace('Vector2(8460.4,915)',f'Vector2(8460.4,{915+WORLD_OFFSET_Y})')
@@ -300,12 +306,14 @@ script = ExtResource("preview")
     visual+=f'[node name="GroundArtwork" parent="." index="3"]\nposition = Vector2(0,{WORLD_OFFSET_Y})\n[node name="ForegroundOccluders" parent="." index="4"]\nposition = Vector2(0,{WORLD_OFFSET_Y})\nz_index = -11\n'
     write(MAP/'map.tscn',refs+scene)
     write(MAP/'visual.tscn',visual)
+    from author_map_presentation import author_presentation
+    author_presentation(MAP/'visual.tscn', 'Cave', 420.0)
 
 def main():
     level=json.loads((ROOT/'docs/reference/zaomeng1/levels.json').read_text('utf8'))['levels'][1]
     from export_shuiliandong_loot import main as export_loot
     export_loot()
-    h.REGIONS=[(i*1880,9460 if i==4 else (i+1)*1880,240 if i==0 else i*1880+120) for i in range(5)]
+    h.REGIONS=[(i*1880,(i+1)*1880,240 if i==0 else i*1880+120) for i in range(5)]
     h.SPAWN_X={};h.MAP=MAP;h.UNITS=UNITS
     for i,(left,right,_) in enumerate(h.REGIONS):
         plans=[p for p in level['spawn_plans'] if p['properties']['stopPointIdx']==i]

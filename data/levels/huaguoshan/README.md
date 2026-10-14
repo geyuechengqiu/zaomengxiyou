@@ -32,6 +32,7 @@
 
 - `map.tscn`：地面、平台、玩家、出生点、区域出口和最终传送门。
 - `visual.tscn`：背景、视差与原素材位置；`assets/maps/huaguoshan/` 保存原图。
+- `MiddleBackground/Forest` 的共享树冠shader材质：`sway_pixels`（默认2源像素）、`trunk_anchor_y`、`sharpness` 调整风摆和轻微锐化；预置 `TreeWind` 为6秒循环，按战斗时钟推进并随暂停冻结。原图无损导入、开启mipmap与线性缩放采样，地板和碰撞保持静止。
 - `definition.tres`、`regions/`、`waves/`、`plans/`：区域与生成规则。
 - `manifest.json`：语义 ID 与定义资源索引。
 - `audio.json`：本关音乐及怪物音效映射，保留公共音效。
